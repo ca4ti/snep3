@@ -1,0 +1,43 @@
+<?php
+$this->headLink()->appendStylesheet($this->baseUrl() . "/css/datepicker.css");
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/prototype-date-extensions.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/datepicker.js", 'text/javascript');
+
+$locale = str_replace("_", "-", Snep_Locale::getInstance()->getLocale());
+if( $locale == "en-US") { $locale = 'en_US'; }
+
+echo $this->form
+
+?>
+
+<script type="text/javascript">
+  new Control.DatePicker('period-initDay', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
+  new Control.DatePicker('period-finalDay', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
+</script>
+
+<script>
+    function blockFields($id, $value) {
+	var form = $('create');
+
+	var radio = 'source[srctype]';
+	var text = 'source-groupSrc';
+
+	if ($id.include('destination')) {
+   	    var radio = 'destination[dsttype]';	
+	    var text  = 'destination-groupDst';
+	}
+
+	if ($value != '') { 
+	    var ns = form.getInputs('radio', radio);
+	    ns.invoke('disable');
+            $(text).disable();
+
+	} else {
+	    var ns = form.getInputs('radio', radio);
+	    ns.invoke('enable');
+            $(text).enable();
+
+	}
+    }
+</script>
+

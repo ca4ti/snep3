@@ -15,8 +15,8 @@ class IndexController extends Zend_Controller_Action {
             $this->_redirect("/installer/");
         } else {
             $systemInfo = array();
-            $uptimeRaw = explode(",", exec("uptime"));
-            $uptimeRaw = substr($uptimeRaw[0], strpos($uptimeRaw[0], "up") + 2);
+            $execUptimeRaw = explode(",", exec("uptime"));
+            $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
 
             if (strpos($uptimeRaw, "min") > 0) {
                 $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "min") + 3);
@@ -25,7 +25,7 @@ class IndexController extends Zend_Controller_Action {
                 $systemInfo['uptime'] = $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
             } else {
                 $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "day")) . $this->view->translate(' dias, ');
-                $uptimeTmp = explode(":", $uptimeRaw[1]);
+                $uptimeTmp = explode(":", $execUptimeRaw[1]);
                 $systemInfo['uptime'].= $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
             }
             $systemInfo['uptime'] = trim($systemInfo['uptime']);
@@ -87,8 +87,8 @@ class IndexController extends Zend_Controller_Action {
 
             // Verify errors
             $this->view->error = false;
-            foreach( $inspect as $log => $message ) {
-                if( $message['error'] == 1 ) {
+            foreach ($inspect as $log => $message) {
+                if ($message['error'] == 1) {
                     $this->view->error = true;
                 }
             }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelo>
+    <elements>
+        <name>
+            <type>text</type>
+            <options>
+                <label>Name</label>
+                <required>true</required>
+                <validators>
+                    <alnum>
+                        <validator>Alnum</validator>
+                        <options>
+                            <allowWhiteSpace>true</allowWhiteSpace>
+                        </options>
+                    </alnum>
+                </validators>
+            </options>
+        </name>
+        <password>
+            <type>Password</type>
+            <options>
+                <label>Password</label>
+            </options>
+        </password>
+        <email>
+            <type>Text</type>
+            <options>
+                <label>Email</label>
+                <required>true</required>
+            </options>
+        </email>
+        <group>
+            <type>select</type>
+            <options>
+                <required>true</required>
+                <label>Group</label>
+            </options>
+        </group>
+    </elements>
+</modelo>
+

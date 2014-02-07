@@ -20,12 +20,6 @@
         <resource id="logs" label="Logs"></resource>
     </group>
 
-    <group id="reports" label="Reports">
-		<resource id="calls-report" label="Calls"></resource>
-       	<resource id="ranking-report" label="Call Ranking"></resource>
-        <resource id="services-report" label="Services Use"></resource>
-    </group>
-
     <group id="manage" label="Manage">
         <resource id="cost-center" label="Cost Center"></resource>
         <resource id="contacts" label="Contacts"></resource>
@@ -38,6 +32,14 @@
         </resource>
         <resource id="conference-rooms" label="Conference Rooms"></resource>
         <resource id="trunks" label="Trunks"></resource>
+        <resource id="users" label="Users"></resource>
+        <resource id="users-groups" label="Users Groups"></resource>
+    </group>
+    
+    <group id="reports" label="Reports">
+		<resource id="calls-report" label="Calls"></resource>
+       	<resource id="ranking-report" label="Call Ranking"></resource>
+        <resource id="services-report" label="Services Use"></resource>
     </group>
 
     <group id="carrier" label="Carrier">

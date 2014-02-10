@@ -266,3 +266,6 @@ INSERT INTO `sounds` VALUES ('queue-thereare.wav','Filas - Sua chamada é a','20
 INSERT INTO `sounds` VALUES ('queue-youarenext.wav','Filas - Sua chamada é a primeira da fila','2008-08-12 08:48:44','AST','');
 
 INSERT INTO peers (name, password,callerid,context,mailbox,qualify,secret,type,allow,fromuser,username,fullcontact,dtmfmode,email,`call-limit`,incominglimit,outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,trunk, `group`, callgroup, time_total, time_chargeby ,accountcode,amaflags,defaultip,host,insecure,language,deny,permit,mask,port,restrictcid,rtptimeout,rtpholdtimeout,musiconhold,regseconds,ipaddr,regexten,cancallforward,setvar,disallow,canreinvite) VALUES ('admin','admin123','Administrador ','default','admin','no','admin123','peer','alaw;ulaw;gsm;g729;','admin','admin','','rfc2833','','0','1','1', 'no', NULL ,'','no', 'R',false,'no','admin','', NULL, 'NULL' ,'','','','dynamic','','pt_BR','','','','','','','','cliente',0,'','','yes','','all','no')
+
+INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
+INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','admin123','',1,now(),now());

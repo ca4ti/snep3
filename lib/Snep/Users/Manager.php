@@ -42,8 +42,6 @@ class Snep_Users_Manager {
 
         $db = Zend_Registry::get('db');
 
-        print_r($user);
-
         $insert_data = array('name' => $user['name'],
             'password' => $user['password'],
             'email' => $user['email'],
@@ -70,6 +68,34 @@ class Snep_Users_Manager {
             } catch (Exception $e) {
                 $db->rollBack();
             }        
+    }
+    
+    /**
+     * addProfile - Adds the id of the profile to the User
+     * @param <array> $data
+     * @return \Exception|boolean
+     */
+    public function addProfile($data) {
+        
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+        $cond = $data['user'];
+        $where = "`users`.`id` = '{$cond}'";
+        
+        try {
+            
+            $value = array("users.profile_id" => (int)$data['profile']);
+            
+            $db->update("users", $value, $where);
+            $db->commit();
+            
+            return true;
+        }
+        catch(Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
     }
     
     /**
@@ -108,6 +134,34 @@ class Snep_Users_Manager {
 
         $db->update("users", $update_data, "id = '{$user['id']}'");
 
+    }
+    
+    /**
+     * addProfile - Adds the id of the profile to the User
+     * @param <array> $data
+     * @return \Exception|boolean
+     */
+    public function addProfileByName($data) {
+        
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+        $cond = $data['box'];
+        $where = "`users`.`name` = '{$cond}'";
+        
+        try {
+            
+            $value = array("users.profile_id" => (int)$data['id']);
+            
+            $db->update("users", $value, $where);
+            $db->commit();
+            
+            return true;
+        }
+        catch(Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
     }
 
 }

@@ -20,29 +20,28 @@
 /**
  * Controller for extension management
  */
-class UsersController extends Zend_Controller_Action {
+class ProfilesController extends Zend_Controller_Action {
 
     /**
-     * List all users
+     * List all profiles
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Users")
+                    $this->view->translate("Profiles")
         ));
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from(array("n" => "users"), array("id as ide", "name as nome", "email", "created", "updated"))
-                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name")
-                ->order('nome');
+                ->from(array("profiles"), array("id", "name", "created", "updated"))
+                ->order('id');
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("n.`$field` like '%$query%'");
+            $select->where("profiles.`$field` like '%$query%'");
         }
 
         $page = $this->_request->getParam('page');
@@ -54,7 +53,7 @@ class UsersController extends Zend_Controller_Action {
         $paginator->setCurrentPageNumber($this->view->page);
         $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
 
-        $this->view->users = $paginator;
+        $this->view->profiles = $paginator;
         $this->view->pages = $paginator->getPages();
         $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
 
@@ -70,57 +69,70 @@ class UsersController extends Zend_Controller_Action {
 
         $this->view->form_filter = $filter;
         $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add User"),
+                "display" => $this->view->translate("Add Profiles"),
                 "css" => "include"));
     }
 
     /**
-     *  Add User
+     *  Add profile
      */
     public function addAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Users"),
+                    $this->view->translate("Profiles"),
                     $this->view->translate("Add")
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/users.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("default/forms/profiles.xml"));
 
-        $profiles = Snep_Profiles_Manager::getAll();
+        try {
 
-        foreach ($profiles as $group) {
-            $allGroups[$group['id']] = $group['name'];
+            $profiles = Snep_Profiles_Manager::getUsersAll();
+        } catch (Exception $e) {
+
+            display_error($LANG['error'] . $e->getMessage(), true);
         }
 
-        if (count($profiles)) {
-            $form->getElement('group')->setMultiOptions($allGroups);
+        $users = array();
+        foreach ($profiles as $key => $val) {
+
+            $users[$val['id']] = $val['nome'] . " - (" . $val['name'] . ")";
         }
+
+        $this->view->objSelectBox = "users";
+
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Users'), $users);
 
         if ($this->_request->getPost()) {
 
             if (empty($_POST['name'])) {
                 $form->getElement('name')->setRequired(true);
             }
-            if (empty($_POST['password'])) {
-                $form->getElement('password')->setRequired(true);
-            }
-
-            if (empty($_POST['email'])) {
-                $form->getElement('email')->setRequired(true);
-            }
 
             $form_isValid = $form->isValid($_POST);
 
-            if (empty($_POST['group'])) {
-                $form->getElement('group')->addError($this->view->translate('No group selected'));
-                $form_isValid = false;
-            }
-
             $dados = $this->_request->getParams();
 
+            $lastId = Snep_Profiles_Manager::lastId();
+
+            $dados['id'] = $lastId + 1;
+
             if ($form_isValid) {
-                Snep_Users_Manager::add($dados);
+                Snep_Profiles_Manager::add($dados);
+
+                if ($dados['box_add']) {
+
+                    foreach ($dados['box_add'] as $id => $users) {
+
+                        $profileGroup = array('user' => $users,
+                            'profile' => $dados['id']);
+
+                        $this->view->extensions = Snep_Users_Manager::addProfile($profileGroup);
+                    }
+                }
+
+
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -129,51 +141,76 @@ class UsersController extends Zend_Controller_Action {
     }
 
     /**
-     * Edit users
+     * Edit profiles
      */
     public function editAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Users"),
+                    $this->view->translate("Profiles"),
                     $this->view->translate("Edit")
         ));
 
+        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
+        $form_xml = new Zend_Config_Xml("default/forms/profiles.xml");
+        $form = new Snep_Form($form_xml);
+
         $id = $this->_request->getParam('id');
 
-        $user = Snep_Users_Manager::get($id);
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/users.xml"));
-
-        $profile = Snep_Profiles_Manager::getAll();
-
-        foreach ($profile as $group) {
-            $allGroups[$group['id']] = $group['name'];
-        }
-
-        $group = $form->getElement('group');
-        $group->setValue($user["profile_id"]);
-
-        $group = $form->getElement('group')->setMultiOptions($allGroups);
-        ( isset($user['group']) ? $group->setValue($user['group']) : null );
+        $profile = Snep_Profiles_Manager::get($id);
 
         $name = $form->getElement('name');
-        ( isset($user['name']) ? $name->setValue($user['name']) : null );
+        ( isset($profile['name']) ? $name->setValue($profile['name']) : null );
 
-        $password = $form->getElement('password');
-        ( isset($user['password']) ? $password->setValue($user['password']) : null );
-        $form->getElement('password')->renderPassword = true;
+        $usersProfiles = array();
 
-        $email = $form->getElement('email');
-        ( isset($user['email']) ? $email->setValue($user['email']) : null );
+        foreach (Snep_Profiles_Manager::getUsersProfiles($id) as $data) {
+
+            $usersProfiles[$data['name']] = "{$data['name']}";
+        }
+
+        $usersAll = array();
+        foreach (Snep_Profiles_Manager::getUsersnotProfile($id) as $data) {
+
+            if (!isset($usersProfiles[$data['name']])) {
+
+                $usersAll[$data['name']] = "{$data['name']}";
+            }
+        }
+
+        $this->view->objSelectBox = "users";
+
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Users'), $usersAll, $usersProfiles);
 
         if ($this->_request->getPost()) {
+
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
-                $dados['created'] = $user['created'];
-                Snep_Users_Manager::edit($dados);
+                $dados['created'] = $profile['created'];
+
+                Snep_Profiles_Manager::edit($dados);
+
+                foreach (Snep_Profiles_Manager::getUsersProfiles($id) as $only) {
+
+                    $profileOnly['box'] = $only['name'];
+                    $profileOnly['id'] = 1;
+
+                    Snep_Users_Manager::addProfileByName($profileOnly);
+                }
+
+                $data = array();
+                $data['id'] = $dados['id'];
+
+                if ($dados['box_add']) {
+
+                    foreach ($dados['box_add'] as $id => $box) {
+                        $data['box'] = $box;
+
+                        $this->view->users = Snep_Users_Manager::addProfileByName($data);
+                    }
+                }
+
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -181,13 +218,15 @@ class UsersController extends Zend_Controller_Action {
     }
 
     /**
-     * Remove a user
+     * Remove a profile
      */
     public function removeAction() {
         $id = $this->_request->getParam('id');
 
-        Snep_Users_Manager::remove($id);
+        Snep_Profiles_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
     }
 
 }
+
+?>

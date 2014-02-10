@@ -20,6 +20,7 @@
             <type>Password</type>
             <options>
                 <label>Password</label>
+                <required>true</required>
             </options>
         </password>
         <email>
@@ -27,6 +28,17 @@
             <options>
                 <label>Email</label>
                 <required>true</required>
+                <validators>
+                    <regex>
+                        <validator>regex</validator>
+                        <options>
+                            <pattern>/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i</pattern>
+                            <messages>
+                                <regexNotMatch>This email is not valid</regexNotMatch>
+                            </messages>
+                        </options>
+                    </regex>
+                </validators>
             </options>
         </email>
         <group>

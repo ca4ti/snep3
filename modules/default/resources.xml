@@ -33,7 +33,7 @@
         <resource id="conference-rooms" label="Conference Rooms"></resource>
         <resource id="trunks" label="Trunks"></resource>
         <resource id="users" label="Users"></resource>
-        <resource id="users-groups" label="Users Groups"></resource>
+        <resource id="profiles" label="Profiles"></resource>
     </group>
     
     <group id="reports" label="Reports">

@@ -43,7 +43,7 @@ class Snep_Users_Manager {
         $db = Zend_Registry::get('db');
 
         $insert_data = array('name' => $user['name'],
-            'password' => $user['password'],
+            'password' => md5($user['password']),
             'email' => $user['email'],
             'profile_id' => $user['group'],
             'created' => date('Y-m-d H:i:s'),

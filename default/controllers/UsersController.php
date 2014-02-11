@@ -173,6 +173,11 @@ class UsersController extends Zend_Controller_Action {
 
             if ($form_isValid) {
                 $dados['created'] = $user['created'];
+                
+                if(strlen($dados['password']) !=32){
+                  $dados['password'] = md5($dados['password']);  
+                }
+                
                 Snep_Users_Manager::edit($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
             }

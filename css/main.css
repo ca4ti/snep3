@@ -220,7 +220,7 @@ button:disabled:hover {
 }
 
 button:hover {
- /*   color: #FDB712; */
+    /*   color: #FDB712; */
 }
 
 /* Formulários */
@@ -229,6 +229,14 @@ button:hover {
     padding-top: 5px;
     height: auto;
     clear: both;
+}
+
+/* Formulários */
+.login_password {
+    text-align: right;
+    padding-top: 1px;
+    height: auto;
+
 }
 
 form fieldset {
@@ -244,11 +252,11 @@ form legend {
     font-size: 14px;
     font-weight: bold;
     color: #E8A916;
-    
+
 }
 
 form dt {
-/*    display: table-cell;*/
+    /*    display: table-cell;*/
     _text-align: right;
     margin-top: 0px;
     padding-right: 5px;
@@ -308,6 +316,13 @@ select
     padding: 4px;
     display: block;
 }
+
+.sucess {
+    border: 1px solid green;
+    background-color: #98FB98;
+    padding: 4px;
+    display: block;
+}
 /* FIM Configuração dos formulários feitos com listas de definição */
 
 .installer_buttons {
@@ -335,7 +350,7 @@ select
     padding: 0;
     list-style: none;
     height: 32px;
-    
+
     font-size: 12px;
     font-weight: bold;
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -346,35 +361,35 @@ select
 }
 
 .navmenu li {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 }
 
 .navmenu ul {
-  border: 0 none;
-  padding: 0;
-  width: 190px;
-  list-style: none;
-  display: none;
-  position: absolute;
-  height: 32px;
+    border: 0 none;
+    padding: 0;
+    width: 190px;
+    list-style: none;
+    display: none;
+    position: absolute;
+    height: 32px;
 }
 
 .navmenu ul:after /*From IE 7 lack of compliance*/{
-  clear: both;
-  display: block;
-  font: 1px/0px serif;
-  content: ".";
-  height: 0;
-  visibility: hidden;
+    clear: both;
+    display: block;
+    font: 1px/0px serif;
+    content: ".";
+    height: 0;
+    visibility: hidden;
 }
 
 .navmenu ul li {
-  width: 160px;
-  float: left; /*For IE 7 lack of compliance*/
-  display: block !important;
-  display: inline; /*For IE*/
+    width: 160px;
+    float: left; /*For IE 7 lack of compliance*/
+    display: block !important;
+    display: inline; /*For IE*/
 }
 
 .navmenu li:first-child a {
@@ -390,40 +405,40 @@ select
 }
 
 .navmenu a {
-  border-right: 1px solid #CCC;
-  border-left: 1px solid #FFF;
-  padding: 0 20px;
-  float: none !important; /*For Opera*/
-  float: left; /*For IE*/
-  display: block;
-  /*background: #EEE;*/
-  color: #666;
-  text-decoration: none;
-  height: 1%; /*For IE*/
-  height: 32px;
-  line-height: 32px;
+    border-right: 1px solid #CCC;
+    border-left: 1px solid #FFF;
+    padding: 0 20px;
+    float: none !important; /*For Opera*/
+    float: left; /*For IE*/
+    display: block;
+    /*background: #EEE;*/
+    color: #666;
+    text-decoration: none;
+    height: 1%; /*For IE*/
+    height: 32px;
+    line-height: 32px;
 }
 
 /* Root Menu Hover Persistence */
 .navmenu a:hover,
 .navmenu li:hover a,
 .navmenu li.iehover a {
-  background: #CCC;
-  border-left: 1px solid #CCC;
-  color: #FFF;
-  z-index: 2;
+    background: #CCC;
+    border-left: 1px solid #CCC;
+    color: #FFF;
+    z-index: 2;
 }
 
 
 /* 2nd Menu */
 .navmenu li:hover li a,
 .navmenu li.iehover li a {
-  float: none;
-  background: #EEE;
-  color: #666;
-  border: 1px solid #FFF;
-  border-left: 1px solid #ccc;
-  z-index: 2;
+    float: none;
+    background: #EEE;
+    color: #666;
+    border: 1px solid #FFF;
+    border-left: 1px solid #ccc;
+    z-index: 2;
 }
 
 /* 2nd Menu Hover Persistence */
@@ -431,16 +446,16 @@ select
 .navmenu li:hover li:hover a,
 .navmenu li.iehover li a:hover,
 .navmenu li.iehover li.iehover a {
-  background: #CCC;
-  color: #FFF;
+    background: #CCC;
+    color: #FFF;
 
 }
 
 /* 3rd Menu */
 .navmenu li:hover li:hover li a,
 .navmenu li.iehover li.iehover li a {
-  background: #EEE;
-  color: #666;
+    background: #EEE;
+    color: #666;
 }
 
 /* 3rd Menu Hover Persistence */
@@ -448,30 +463,30 @@ select
 .navmenu li:hover li:hover li:hover a,
 .navmenu li.iehover li.iehover li a:hover,
 .navmenu li.iehover li.iehover li.iehover a {
-  background: #CCC;
-  color: #FFF;
+    background: #CCC;
+    color: #FFF;
 }
 
 /* 4th Menu */
 .navmenu li:hover li:hover li:hover li a,
 .navmenu li.iehover li.iehover li.iehover li a {
-  background: #EEE;
-  color: #666;
+    background: #EEE;
+    color: #666;
 }
 
 /* 4th Menu Hover */
 .navmenu li:hover li:hover li:hover li a:hover,
 .navmenu li.iehover li.iehover li.iehover li a:hover {
-  background: #CCC;
-  color: #FFF;
+    background: #CCC;
+    color: #FFF;
 }
 
 .navmenu ul ul,
 .navmenu ul ul ul {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 160px;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 160px;
 }
 
 /* Do Not Move - Must Come Before display:block for Gecko */
@@ -479,7 +494,7 @@ select
 .navmenu li:hover ul ul ul,
 .navmenu li.iehover ul ul,
 .navmenu li.iehover ul ul ul {
-  display: none;
+    display: none;
 }
 
 .navmenu li:hover ul,
@@ -488,7 +503,7 @@ select
 .navmenu li.iehover ul,
 .navmenu ul li.iehover ul,
 .navmenu ul ul li.iehover ul {
-  display: block;
+    display: block;
 }
 
 #content .error_box {
@@ -669,16 +684,16 @@ select
     background: url("../imagens/desativar.gif") no-repeat left top;
 }
 #campo {
-   color:  #000000 ;
-   background-color: #fbfbfb ;
-   font-family: Verdana, Arial, Helvetica, sans-serif;
-   font-size: 11px;
-   border-style: solid;
-   border-top-width: 1px;
-   border-right-width: 1px;
-   border-bottom-width: 1px;
-   border-left-width: 1px;
-   border-color: #a4a7ab ;
+    color:  #000000 ;
+    background-color: #fbfbfb ;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border-style: solid;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-color: #a4a7ab ;
 }
 .button_bar {
     text-align: center;
@@ -827,7 +842,7 @@ select
 .snep_form th {
     text-align: left;
     width: 265px;
-    
+
     padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 0px;
@@ -914,4 +929,4 @@ select
     background-position: 0px 1px;
     border: 1px solid #A4A7AB;
     padding-left: 30px;
- }
+}

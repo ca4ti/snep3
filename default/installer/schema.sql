@@ -619,3 +619,16 @@ CREATE TABLE IF NOT EXISTS `binds` (
   CONSTRAINT `binds_peer_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Estrutura da tabela `password_recovery`
+--
+CREATE TABLE IF NOT EXISTS `password_recovery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `code` varchar(45) NOT NULL,
+  `created` datetime NOT NULL,
+  `expiration` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `password_recovery_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

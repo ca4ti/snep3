@@ -1,12 +1,12 @@
-<form  action="<?php echo $this->url(array("controller"=>"auth", "action"=>"login"), null, true); ?>" METHOD="post">
-    <?php if($this->message): ?>
-    <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
+<form  action="<?php echo $this->url(array("controller" => "auth", "action" => "login"), null, true); ?>" METHOD="post">
+    <?php if ($this->message): ?>
+        <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
     <?php endif; ?>
     <dl id="login_form">
-        
+
         <div class="form_element">
-            <dt><?php echo $this->translate("Usuário / Ramal"); ?>:</dt>
-            <dd><input type="text" size="30" id="exten" name="exten"></dd>
+            <dt><?php echo $this->translate("Usuário"); ?>:</dt>
+            <dd><input type="text" size="30" id="exten" name="user"></dd>
         </div>
 
         <div class="form_element">
@@ -16,7 +16,13 @@
 
         <div class="form_element">
             <dt></dt>
-            <dd><input type="submit" value="<?php echo $this->translate("Entrar"); ?>" /></dd>
+            <dd><input type="submit" value="<?php echo $this->translate("Enter"); ?>" /></dd>
         </div>
+        
+        <div class="login_password">
+            <?php echo "<a href=\"{$this->PAGEINFO}\">Esqueceu a senha?<a/>"; ?>
+        </div>
+
     </dl>
 </form>
+

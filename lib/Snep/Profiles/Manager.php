@@ -18,7 +18,7 @@
  */
 
 /**
- * Classe to manager a Profiles.
+ * Class to manager a Profiles.
  *
  * @see Snep_Profiles_Manager
  *
@@ -85,6 +85,24 @@ class Snep_Profiles_Manager {
     }
 
     /**
+     * removePermission - Method to remove permission a profile
+     * @param <int> $id
+     */
+    public function removePermission($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('profiles_permissions', "profile_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
      * get - Method to get a profile by id
      * @param <int> $id
      * @return <Array>
@@ -116,6 +134,21 @@ class Snep_Profiles_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->update("profiles", $update_data, "id = '{$profile['id']}'");
+    }
+
+    /**
+     * migration - Method to migration users for profile default while remove profile 
+     * @param <Array> $member
+     * @param <Array> $id
+     */
+    public function migration($member) {
+
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('profile_id' => 1,
+            'updated' => date('Y-m-d H:i:s'));
+
+        $db->update("users", $update_data, "id = '{$member['id']}'");
     }
 
     /**
@@ -186,12 +219,29 @@ class Snep_Profiles_Manager {
                 ->from('profiles', array(' max( floor( id ) ) as id'))
                 ->limit('1');
 
-
         $stmt = $db->query($select);
         $lastId = $stmt->fetch();
         $return = $lastId['id'];
 
         return $return;
+    }
+
+    /**
+     * getIdPorifile - Get id of profile in users
+     * @param <int> $id
+     * @return <array>
+     */
+    public static function getIdProfile($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('users', array('profile_id'))
+                ->where('users.id = ?', $id);
+
+        $stmt = $db->query($select);
+        $profile = $stmt->fetch();
+        return $profile['profile_id'];
     }
 
 }

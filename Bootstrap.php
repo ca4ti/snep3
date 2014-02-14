@@ -3,50 +3,24 @@
 require_once 'Zend/Session.php';
 require_once 'Zend/Application/Bootstrap/Bootstrap.php';
 require_once 'Snep/Locale.php';
+require_once 'default/model/PermissionPlugin.php';
 
 Zend_Session::start();
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
-
-    /**
-     * Adds user role on Snep Acl and register plugin for permission check before
-     * dispatch.
-     */
-    protected function _initAcl() {
-        $acl = Snep_Acl::getInstance();
-
-        $auth = Zend_Auth::getInstance();
-        if ($auth->hasIdentity()) {
-            $acl->addRole((string) $auth->getIdentity());
-            $role = $auth->getIdentity();
-            if($role == "admin") {
-                $acl->allow("admin");
-            }
-        } else {
-            $role = 'guest';
-        }
-
-        $front = Zend_Controller_Front::getInstance();
-        require_once 'default/model/AclPlugin.php';
-        $front->registerPlugin(new AclPlugin($acl, $role));
-    }
 
     protected function _initRouter() {
         $front_controller = Zend_Controller_Front::getInstance();
         $front_controller->setBaseUrl($_SERVER['SCRIPT_NAME']);
 
         $router = $front_controller->getRouter();
-        $router->addRoute('route_edit',
-                new Zend_Controller_Router_Route('route/edit/:id', array('controller' => 'route', 'action' => 'edit'))
+        $router->addRoute('route_edit', new Zend_Controller_Router_Route('route/edit/:id', array('controller' => 'route', 'action' => 'edit'))
         );
-        $router->addRoute('route_duplicate',
-                new Zend_Controller_Router_Route('route/duplicate/:id', array('controller' => 'route', 'action' => 'duplicate'))
+        $router->addRoute('route_duplicate', new Zend_Controller_Router_Route('route/duplicate/:id', array('controller' => 'route', 'action' => 'duplicate'))
         );
-        $router->addRoute('route_delete',
-                new Zend_Controller_Router_Route('route/delete/:id', array('controller' => 'route', 'action' => 'delete'))
+        $router->addRoute('route_delete', new Zend_Controller_Router_Route('route/delete/:id', array('controller' => 'route', 'action' => 'delete'))
         );
-        $router->addRoute('route_permission',
-                new Zend_Controller_Router_Route('permission/:exten', array('controller' => 'permission', 'action' => 'index'))
+        $router->addRoute('route_permission', new Zend_Controller_Router_Route('permission/:exten', array('controller' => 'permission', 'action' => 'index'))
         );
     }
 
@@ -85,13 +59,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $ccustos = Snep_CentroCustos::getInstance();
 
         $select = $db->select()
-                  ->from('ccustos')
-                  ->order("codigo");
+                ->from('ccustos')
+                ->order("codigo");
 
         $stmt = $db->query($select);
         $result = $stmt->fetchAll();
 
-        foreach($result as $ccusto) {
+        foreach ($result as $ccusto) {
             $ccustos->register(array("codigo" => $ccusto['codigo'], "nome" => $ccusto['nome']));
         }
     }
@@ -105,23 +79,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $stmt = $db->query($select);
         $result = $stmt->fetchAll();
 
-        foreach($result as $queue) {
+        foreach ($result as $queue) {
             $queues->register($queue['name']);
         }
     }
-    
+
     protected function _initLogger() {
         $log = Snep_Logger::getInstance();
-        
+
         $config = Snep_Config::getConfig();
-        
+
         $writer = new Zend_Log_Writer_Stream($config->system->path->log . '/ui.log');
         // Filtramos a 'sujeira' dos logs se não estamos em debug mode.
-        if(!$config->system->debug) {
+        if (!$config->system->debug) {
             $filter = new Zend_Log_Filter_Priority(Zend_Log::WARN);
             $writer->addFilter($filter);
         }
         $log->addWriter($writer);
+    }
+
+    /*
+     * _initPermission - Permissionamento
+     */
+
+    protected function _initPermission() {
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+            $front = Zend_Controller_Front::getInstance();
+            $front->registerPlugin(new Snep_PermissionPlugin());
+        }
     }
 
 }

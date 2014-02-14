@@ -18,7 +18,7 @@
  */
 
 /**
- * Classe to manager a Users.
+ * Class to manager a Users.
  *
  * @see Snep_Users_Manager
  *
@@ -51,72 +51,77 @@ class Snep_Users_Manager {
 
         $db->insert('users', $insert_data);
     }
-    
+
     /**
      * Method to remove a user
      * @param <int> $id
      */
     public function remove($id) {
 
-            $db = Zend_Registry::get('db');
+        $db = Zend_Registry::get('db');
 
-            $db->beginTransaction();
-            $db->delete('users', "id = '$id'");
+        $db->beginTransaction();
+        $db->delete('users', "id = '$id'");
 
-            try {
-                $db->commit();
-            } catch (Exception $e) {
-                $db->rollBack();
-            }        
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
     }
-    
+
+    /**
+     * Method to remove data of user in table password_recovery
+     * @param <int> $id
+     */
+    public function removeRecovery($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('password_recovery', "user_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
     /**
      * addProfile - Adds the id of the profile to the User
      * @param <array> $data
      * @return \Exception|boolean
      */
     public function addProfile($data) {
-        
-        $db = Zend_Registry::get('db');
-        $db->beginTransaction();
-        $cond = $data['user'];
-        $where = "`users`.`id` = '{$cond}'";
-        
-        try {
-            
-            $value = array("users.profile_id" => (int)$data['profile']);
-            
-            $db->update("users", $value, $where);
-            $db->commit();
-            
-            return true;
-        }
-        catch(Exception $e) {
 
-            $db->rollBack();
-            return $e;
-        }
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('profile_id' => $data['profile'],
+            'updated' => date('Y-m-d H:i:s'));
+
+        $db->update("users", $update_data, "id = '{$data['user']}'");
     }
-    
+
     /**
      * Method to get a user by id
      * @param <int> $id
-     * @return <Array>
+     * @return <Array> $users
      */
     public function get($id) {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('users')
-            ->where("users.id = ?", $id);
+                ->from('users')
+                ->where("users.id = ?", $id);
 
         $stmt = $db->query($select);
         $users = $stmt->fetch();
 
         return $users;
     }
-    
+
     /**
      * Method to update a user data
      * @param <Array> $user
@@ -133,35 +138,48 @@ class Snep_Users_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->update("users", $update_data, "id = '{$user['id']}'");
-
     }
-    
+
     /**
-     * addProfile - Adds the id of the profile to the User
+     * addProfileByName - Update profile
      * @param <array> $data
      * @return \Exception|boolean
      */
     public function addProfileByName($data) {
-        
+
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         $cond = $data['box'];
         $where = "`users`.`name` = '{$cond}'";
-        
+
         try {
-            
-            $value = array("users.profile_id" => (int)$data['id']);
-            
+
+            $value = array("users.profile_id" => (int) $data['id']);
+
             $db->update("users", $value, $where);
             $db->commit();
-            
+
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
 
             $db->rollBack();
             return $e;
         }
+    }
+
+    /**
+     * removeProfileByName - Update user for profile default
+     * @param <string> $name
+     * @param <int> $id
+     */
+    public function removeProfileByName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('profile_id' => 1,
+            'updated' => date('Y-m-d H:i:s'));
+
+        $db->update("users", $update_data, "name = '{$name}'");
     }
 
 }

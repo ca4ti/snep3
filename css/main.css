@@ -624,6 +624,20 @@ select
     text-decoration:underline;
     color:#000;
 }
+
+.permissao {
+    padding-left:20px;
+    background: url("../imagens/permitions.png") no-repeat center left;
+    cursor:pointer;
+    font-size: 10px;
+    color: #696969; 
+    text-decoration: none;
+}
+.permissao:hover {
+    text-decoration:underline;
+    color:#000;
+}
+
 .membros {
     padding-left:20px;
     background: url("../imagens/usuario.png") no-repeat center left;

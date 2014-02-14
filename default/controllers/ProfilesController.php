@@ -18,7 +18,13 @@
  */
 
 /**
- * Controller for extension management
+ * Controller of profiles
+ * 
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * 
  */
 class ProfilesController extends Zend_Controller_Action {
 
@@ -90,13 +96,11 @@ class ProfilesController extends Zend_Controller_Action {
 
             $profiles = Snep_Profiles_Manager::getUsersAll();
         } catch (Exception $e) {
-
             display_error($LANG['error'] . $e->getMessage(), true);
         }
 
         $users = array();
         foreach ($profiles as $key => $val) {
-
             $users[$val['id']] = $val['nome'] . " - (" . $val['name'] . ")";
         }
 
@@ -114,24 +118,19 @@ class ProfilesController extends Zend_Controller_Action {
 
             $dados = $this->_request->getParams();
 
-            $lastId = Snep_Profiles_Manager::lastId();
-
-            $dados['id'] = $lastId + 1;
-
             if ($form_isValid) {
                 Snep_Profiles_Manager::add($dados);
+                $lastId = Snep_Profiles_Manager::lastId();
+                $dados['id'] = $lastId;
 
                 if ($dados['box_add']) {
-
                     foreach ($dados['box_add'] as $id => $users) {
 
-                        $profileGroup = array('user' => $users,
-                            'profile' => $dados['id']);
+                        $profileGroup = array('user' => $users, 'profile' => $dados['id']);
 
                         $this->view->extensions = Snep_Users_Manager::addProfile($profileGroup);
                     }
                 }
-
 
                 $this->_redirect($this->getRequest()->getControllerName());
             }
@@ -194,7 +193,7 @@ class ProfilesController extends Zend_Controller_Action {
                 foreach (Snep_Profiles_Manager::getUsersProfiles($id) as $only) {
 
                     $profileOnly['box'] = $only['name'];
-                    $profileOnly['id'] = 1;
+                    $profileOnly['id'] = $dados['id'];
 
                     Snep_Users_Manager::addProfileByName($profileOnly);
                 }
@@ -202,12 +201,19 @@ class ProfilesController extends Zend_Controller_Action {
                 $data = array();
                 $data['id'] = $dados['id'];
 
-                if ($dados['box_add']) {
+                if (isset($dados['box_add'])) {
 
                     foreach ($dados['box_add'] as $id => $box) {
                         $data['box'] = $box;
 
                         $this->view->users = Snep_Users_Manager::addProfileByName($data);
+                    }
+                }
+
+                // Exclui permissão na edição
+                if (isset($dados['box'])) {
+                    foreach ($dados['box'] as $item => $box) {
+                        Snep_Users_Manager::removeProfileByName($box, $data['id']);
                     }
                 }
 
@@ -223,8 +229,148 @@ class ProfilesController extends Zend_Controller_Action {
     public function removeAction() {
         $id = $this->_request->getParam('id');
 
+        $members = Snep_Profiles_Manager::getUsersProfiles($id);
+
+        // migra membros para o profile default
+        foreach ($members as $item => $member) {
+            Snep_Profiles_Manager::migration($member);
+        }
+
+        Snep_Profiles_Manager::removePermission($id);
         Snep_Profiles_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
+    }
+
+    /**
+     *  Add profile
+     */
+    public function permissionAction() {
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Profiles"),
+                    $this->view->translate("Permission")
+        ));
+
+        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
+        $form_xml = new Zend_Config_Xml("default/forms/permission.xml");
+        $form = new Snep_Form($form_xml);
+
+        $id = $this->_request->getParam('id');
+
+        $currentResources = Snep_Permission_Manager::getAllPermissions($id);
+
+        $modules = Snep_Permission_Manager::getAll();
+
+        $resources = array();
+        $selected = array();
+
+        foreach ($modules as $moduleKey => $module) {
+
+            foreach ($module as $controllerKey => $controller) {
+
+                if (isset($controller["write"])) {
+                    $controller["write"] = $controller["read"];
+                }
+                // Modulos de erro e login/logout não são inseridos no banco
+                $valid = true;
+                if ($controllerKey == 'error' || $controllerKey == "auth" || $controllerKey == "installer") {
+                    $valid = false;
+                }
+
+                if ($valid == true) {
+
+                    foreach ($controller as $actionKey => $action) {
+                        $resource = $moduleKey . '_' . $controllerKey . '_' . $actionKey;
+                        $label = Snep_Modules::$modules[$moduleKey]->getName() . " - " . $action;
+
+                        if (substr($label, 0, 7) == 'Default') {
+                            $label = substr_replace($label, '', 0, 10);
+                        }
+
+                        // verifica se arquivo possui opcao de escrita para montar label
+                        if (substr($resource, -5) == 'write') {
+                            $resources[$resource] = $label . " - " . $this->view->translate('write');
+                        } else {
+                            $resources[$resource] = $label . " - " . $this->view->translate('read');
+                        }
+
+                        if (array_search($resource, $currentResources) !== FALSE)
+                            $selected[$resource] = $label;
+                    }
+                }
+            }
+        }
+
+        $questionValid = new Zend_Validate_InArray(array('Yes'));
+        $questionValid->setMessage('Yes is required!');
+
+        $this->view->objSelectBox = "permissions";
+
+        foreach ($selected as $key => $item) {
+
+            if (substr($key, -5) == 'write') {
+                $label = $item . " - " . $this->view->translate('write');
+            } else {
+                $label = $item . " - " . $this->view->translate('read');
+            }
+            $selected[$key] = $label;
+        }
+
+        // verifica itens na edicao
+        foreach ($resources as $cont => $resource) {
+            foreach ($selected as $key => $item) {
+                if ($cont == $key) {
+                    unset($resources[$cont]);
+                }
+            }
+        }
+
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Permission'), $resources, $selected);
+
+        if ($this->getRequest()->getPost()) {
+
+            $form_isValid = $form->isValid($_POST);
+            $dados = $this->_request->getParams();
+
+            $update = array();
+
+            $permissions = Snep_Permission_Manager::getPermissions($id);
+
+            foreach ($resources as $key => $value) {
+
+                if (isset($dados['box_add'])) {
+                    if (array_search($key, $dados['box_add']) !== FALSE) {
+                        $update[$key] = true;
+                    } else {
+                        $update[$key] = false;
+                    }
+                }
+            }
+
+            Snep_Permission_Manager::update($update, $id);
+
+            // Adiciona permissões cadastradas antes da edição
+            if (isset($permissions)) {
+                foreach ($permissions as $item => $permission) {
+
+                    Snep_Permission_Manager::addPermissionOld($permission, $id);
+                }
+            }
+
+            // Exclui permissão na edição
+            if (isset($dados['box'])) {
+                foreach ($dados['box'] as $item => $permission) {
+                    Snep_Permission_Manager::removePermissionOld($permission, $id);
+                }
+            }
+
+            if ($form_isValid) {
+
+                $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
+            }
+        }
+
+        $this->view->form = $form;
     }
 
 }

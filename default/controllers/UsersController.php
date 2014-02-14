@@ -19,6 +19,12 @@
 
 /**
  * Controller for extension management
+ * 
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * 
  */
 class UsersController extends Zend_Controller_Action {
 
@@ -173,11 +179,11 @@ class UsersController extends Zend_Controller_Action {
 
             if ($form_isValid) {
                 $dados['created'] = $user['created'];
-                
-                if(strlen($dados['password']) !=32){
-                  $dados['password'] = md5($dados['password']);  
+
+                if (strlen($dados['password']) != 32) {
+                    $dados['password'] = md5($dados['password']);
                 }
-                
+
                 Snep_Users_Manager::edit($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
             }
@@ -191,6 +197,7 @@ class UsersController extends Zend_Controller_Action {
     public function removeAction() {
         $id = $this->_request->getParam('id');
 
+        Snep_Users_Manager::removeRecovery($id);
         Snep_Users_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
     }

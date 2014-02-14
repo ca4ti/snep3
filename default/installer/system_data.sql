@@ -42,63 +42,6 @@ INSERT INTO `ccustos` VALUES ('5.05','O','Pausa de Agente - Fim','Pausa de Agent
 INSERT INTO `ccustos` VALUES ('5.10','O','Emergencias','Ligacoes para telefones de Emergencia (190, 192, 191, etc)');
 INSERT INTO `ccustos` VALUES ('9','O','Internas','Ligacoes Internas entre Ramais');
 
-INSERT INTO `rotinas` VALUES (81,'Permitir OUVIR gravacoes das chamadas');
-INSERT INTO `rotinas` VALUES (1,'Ver Painel');
-INSERT INTO `rotinas` VALUES (11,'Grupos: Relacao de Grupos');
-INSERT INTO `rotinas` VALUES (12,'Grupos: Cadastro Usuarios (I/A/E)');
-INSERT INTO `rotinas` VALUES (13,'Contas: Cadastro de Contas (I/A/E)');
-INSERT INTO `rotinas` VALUES (14,'Agentes (I,A,E)');
-INSERT INTO `rotinas` VALUES (15,'Ramais: Relacao de Ramais');
-INSERT INTO `rotinas` VALUES (16,'Ramais: Cadastro de Ramais (I/A/E)');
-INSERT INTO `rotinas` VALUES (10,'Cadastros');
-INSERT INTO `rotinas` VALUES (20,'RelatÃ³rios');
-INSERT INTO `rotinas` VALUES (40,'Graficos');
-INSERT INTO `rotinas` VALUES (60,'Configuracoes');
-INSERT INTO `rotinas` VALUES (21,'Relatorio: Registro de Chamadas');
-INSERT INTO `rotinas` VALUES (22,'Relatorio: Registro de Login/Logout de Agentes');
-INSERT INTO `rotinas` VALUES (23,'Relatorio: Faxes Transmitidos');
-INSERT INTO `rotinas` VALUES (24,'Relatorio: Faxes Recebidos');
-INSERT INTO `rotinas` VALUES (41,'Grafico: Registro de Chamadas');
-INSERT INTO `rotinas` VALUES (42,'Grafico: EstatiÂ­sticas de Tempo');
-INSERT INTO `rotinas` VALUES (43,'Grafico: Taxas de Ocupacao');
-INSERT INTO `rotinas` VALUES (61,'Configuracoes: Parametros do Sistema');
-INSERT INTO `rotinas` VALUES (62,'Configuracoes: Manutencao do Sistema');
-INSERT INTO `rotinas` VALUES (63,'Configuracoes: URA');
-INSERT INTO `rotinas` VALUES (99,'Usuarios: Permissao de Acesso');
-INSERT INTO `rotinas` VALUES (25,'Relatorio: Estatisticas do Operador');
-INSERT INTO `rotinas` VALUES (26,'Filas e Agentes');
-INSERT INTO `rotinas` VALUES (27,'Contas: Relacao de Contas');
-INSERT INTO `rotinas` VALUES (28,'Relatorio: Usuarios');
-INSERT INTO `rotinas` VALUES (17,'Ramais: Cadastro de Varios Ramais');
-INSERT INTO `rotinas` VALUES (19,'Filas: Cadastro de Filas (I/A/E)');
-INSERT INTO `rotinas` VALUES (18,'Filas: Relacao de Filas');
-INSERT INTO `rotinas` VALUES (31,'Troncos: Cadastro de Troncos (I/A/E)');
-INSERT INTO `rotinas` VALUES (30,'Troncos: Relacao de Troncos');
-INSERT INTO `rotinas` VALUES (33,'Agentes: Cadastro (I/A/E)');
-INSERT INTO `rotinas` VALUES (32,'Conferencias: Cadastro (I/A/E)');
-INSERT INTO `rotinas` VALUES (35,'Status dos Links');
-INSERT INTO `rotinas` VALUES (37,'Operadoras: Cadastrar Operadoras (I/A/E)');
-INSERT INTO `rotinas` VALUES (38,'Operadoras: Relacao de Operadoras ');
-INSERT INTO `rotinas` VALUES (45,'Tarifas: Cadastrod e Tarifas (I/A/C)');
-INSERT INTO `rotinas` VALUES (46,'Tarifas: Relacao de Tarifas');
-INSERT INTO `rotinas` VALUES (70,'Tarifas');
-INSERT INTO `rotinas` VALUES (47,'Tarifas: Gerar Tarifacao');
-INSERT INTO `rotinas` VALUES (29,'Relatorios: Ranking das Ligacoes');
-INSERT INTO `rotinas` VALUES (48,'Regras de Dialplan: Relacao de Regras');
-INSERT INTO `rotinas` VALUES (49,'Regras de Dialplan: Cadastrar Regras (I/A/C)');
-INSERT INTO `rotinas` VALUES (50,'Sons - Relacao de Sons');
-INSERT INTO `rotinas` VALUES (51,'Sons - Cadastro de Sons (I/A/E)');
-INSERT INTO `rotinas` VALUES (53,'Musicas em Espera');
-INSERT INTO `rotinas` VALUES (64,'Configuracoes: Aliases de Troncos');
-INSERT INTO `rotinas` VALUES (65,'Configuracoes: Relacao de Aliases de Troncos');
-INSERT INTO `rotinas` VALUES (59, 'Contatos: Relacao de contatos');
-INSERT INTO `rotinas` VALUES (57, 'Contatos: (A/I/E)');
-INSERT INTO `rotinas` VALUES (82, 'Permitir EXCLUIR gravacoes das chamadas');
-INSERT INTO `rotinas` VALUES (100, 'Relatório Filas de Atendimento');
-INSERT INTO `rotinas` VALUES (101, 'Relatório Loguin Logoff em Filas');
-INSERT INTO `rotinas` VALUES (102, 'Relatório Serviços Utilizados');
-INSERT INTO `rotinas` VALUES (103, 'Logs do Sistema'), (104, 'Relatório de Fax'), (114, 'Diagnóstico do Sistema');
-
 INSERT INTO `sounds` VALUES ('fpm-calm-river.wav','Som de Musica em Espera - Calm River','2008-07-25 10:51:42','MOH','default');
 INSERT INTO `sounds` VALUES ('fpm-sunshine.wav','Som de Musica em Espera - Sunshine','2008-07-25 10:51:56','MOH','default');
 INSERT INTO `sounds` VALUES ('fpm-world-mix.wav','Som de Musica em Espera - World Mix','2008-07-25 10:52:13','MOH','default');
@@ -265,9 +208,5 @@ INSERT INTO `sounds` VALUES ('queue-seconds.wav','Filas - Segundos','2008-08-12 
 INSERT INTO `sounds` VALUES ('queue-thereare.wav','Filas - Sua chamada é a','2008-08-12 08:48:21','AST','');
 INSERT INTO `sounds` VALUES ('queue-youarenext.wav','Filas - Sua chamada é a primeira da fila','2008-08-12 08:48:44','AST','');
 
-INSERT INTO peers (name, password,callerid,context,mailbox,qualify,secret,type,allow,fromuser,username,fullcontact,dtmfmode,email,`call-limit`,incominglimit,outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,trunk, `group`, callgroup, time_total, time_chargeby ,accountcode,amaflags,defaultip,host,insecure,language,deny,permit,mask,port,restrictcid,rtptimeout,rtpholdtimeout,musiconhold,regseconds,ipaddr,regexten,cancallforward,setvar,disallow,canreinvite) VALUES ('admin','admin123','Administrador ','default','admin','no','admin123','peer','alaw;ulaw;gsm;g729;','admin','admin','','rfc2833','','0','1','1', 'no', NULL ,'','no', 'R',false,'no','admin','', NULL, 'NULL' ,'','','','dynamic','','pt_BR','','','','','','','','cliente',0,'','','yes','','all','no')
-
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
-
-

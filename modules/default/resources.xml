@@ -4,6 +4,8 @@
     Document   : resources.xml
     Created on : March 15, 2011, 5:39 PM
     Author     : Henrique Grolli Bassotto <henrique@opens.com.br>
+    Edited by  : Tiago Zimmermann <tiago.zimmermann@opens.com.br> 
+    Edited in  : February 14, 2014, 10:34 AM
     Description:
         Default modules resources for permission mapping
 -->
@@ -21,42 +23,74 @@
     </group>
 
     <group id="manage" label="Manage">
-        <resource id="cost-center" label="Cost Center"></resource>
-        <resource id="contacts" label="Contacts"></resource>
-        <resource id="contact-groups" label="Contact Groups"></resource>
-        <resource id="queues" label="Queues"></resource>
-        <resource id="extensions-groups" label="Extension Groups"></resource>
-        <resource id="pickup-groups" label="Pickup Groups"></resource>
+        <resource id="cost-center" label="Cost Center">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="contacts" label="Contacts">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="contact-groups" label="Contact Groups">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="queues" label="Queues">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="extensions-groups" label="Extension Groups">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="pickup-groups" label="Pickup Groups">
+            <resource id="write"></resource>
+        </resource>
         <resource id="extensions" label="Extensions">
-            <resource id="permission"></resource>
+            <resource id="write"></resource>
         </resource>
         <resource id="conference-rooms" label="Conference Rooms"></resource>
-        <resource id="trunks" label="Trunks"></resource>
-        <resource id="users" label="Users"></resource>
-        <resource id="profiles" label="Profiles"></resource>
+        <resource id="trunks" label="Trunks">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="users" label="Users">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="profiles" label="Profiles">
+            <resource id="write"></resource>
+        </resource>
     </group>
     
     <group id="reports" label="Reports">
-		<resource id="calls-report" label="Calls"></resource>
-       	<resource id="ranking-report" label="Call Ranking"></resource>
+        <resource id="calls-report" label="Calls"></resource>
+        <resource id="ranking-report" label="Call Ranking"></resource>
         <resource id="services-report" label="Services Use"></resource>
     </group>
 
     <group id="carrier" label="Carrier">
-        <resource id="carrier" label="Carrier"></resource>
-        <resource id="billing" label="Billing"></resource>
+        <resource id="carrier" label="Carrier">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="billing" label="Billing">
+            <resource id="write"></resource>
+        </resource>
     </group>
 
     <group id="routing" label="Routing">
-        <resource id="route" label="Routes"></resource>
-        <resource id="action-configs" label="Default Config"></resource>
-        <resource id="expression-alias" label="Expression Alias"></resource>
+        <resource id="route" label="Routes">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="action-configs" label="Default Config">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="expression-alias" label="Expression Alias">
+            <resource id="write"></resource>
+        </resource>
     </group>
 
     <group id="configs" label="Configure" >
         <resource id="parameters" label="Parameters"></resource>
-        <resource id="sound-files" label="Sound Files"></resource>
-        <resource id="music-on-hold" label="Music on Hold"></resource>
+        <resource id="sound-files" label="Sound Files">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="music-on-hold" label="Music on Hold">
+            <resource id="write"></resource>
+        </resource>
         <resource id="inspector" label="System Status"></resource>
         <resource id="cnl" label="Cnl Update"></resource>
     </group>

@@ -529,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `contacts_names` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
-
+-- NOVA ESTRUTURA ADICIONADA / TIAGO
 
 --
 -- Estrutura da tabela `profiles`
@@ -576,13 +576,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 CREATE TABLE IF NOT EXISTS `profiles_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `permission_id` int(11) NOT NULL,
+  `permission_id` varchar(256) NOT NULL,
   `profile_id` INT NOT NULL,
+  `allow` tinyint(1) NOT NULL default '0',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `permission_id` (`permission_id`),
-  CONSTRAINT `peers_groups_peers_id_refs_profiles_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
   KEY `profile_id` (`profile_id`),
   CONSTRAINT `fk_user_profiles` FOREIGN KEY (`profile_id` ) REFERENCES `profiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

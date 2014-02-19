@@ -131,7 +131,7 @@ class Snep_Permission_Manager {
             );
         };
     }
-    
+
     /**
      * Method to check for individual permission
      * @param <int> $id
@@ -144,11 +144,11 @@ class Snep_Permission_Manager {
         $select = $db->select()
                 ->from("users_permissions")
                 ->where('user_id = ?', $id);
-                
+
 
         $stmt = $db->query($select);
         $result = $stmt->fetch();
-        
+
         return $result;
     }
 
@@ -296,4 +296,24 @@ class Snep_Permission_Manager {
         return $stmt->fetch();
     }
 
+    /**
+     * Method to get permission of user
+     * @param <string> $user
+     * @param <string> $resource
+     * @return <array>
+     */
+    public static function getUser($user, $resource) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("users_permissions", array("permission_id", "allow"))
+                ->where('user_id = ?', $user)
+                ->where('permission_id = ?', $resource);
+
+        $stmt = $db->query($select);
+        return $stmt->fetch();
+    }
+
 }
+

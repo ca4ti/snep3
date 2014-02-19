@@ -60,6 +60,13 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
 
             $result = Snep_Permission_Manager::get($group, ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
 
+            $user = Snep_Permission_Manager::getUser($_SESSION['id_user'], ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
+
+            // Verifica se usuario possui permissao individuais
+            if ($user != false) {
+                $result = $user;
+            }
+
             if ($request->getControllerName() == 'index' || $request->getControllerName() == 'auth' || $request->getControllerName() == 'installer' || $request->getControllerName() == 'error') {
                 return;
             }

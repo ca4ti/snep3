@@ -35,7 +35,7 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * getAllPermissions - 
+     * Method to get permissions
      * @param <string> $profile
      * @return <array>
      */
@@ -53,12 +53,107 @@ class Snep_Permission_Manager {
 
         $result = array();
         foreach ($fetch as $value)
-            $result[] = $value['permission_id'];
+            $result[$value['permission_id']] = $value['permission_id'];
         return $result;
     }
 
     /**
-     * getAll - Retorna todos os resources dos modulos.
+     * Method to get permissions of user 
+     * @param <string> $profile
+     * @return <array>
+     */
+    public static function getAllPermissionsUser($id) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("users_permissions", array("permission_id", "allow"))
+                ->where('user_id = ?', $id);
+
+        $stmt = $db->query($select);
+        $fetch = $stmt->fetchAll();
+
+        $result = array();
+        foreach ($fetch as $value) {
+
+            $result[$value['permission_id']] = $value['permission_id'] . $value['allow'];
+        }
+        return $result;
+    }
+
+    /**
+     * Method to remove permissions of user
+     * @param <int> $id
+     * @param <array> $modules
+     */
+    public static function removePermissionUser($id, $modules) {
+
+        $db = Zend_Registry::get('db');
+        $where[] = "user_id = '$id'";
+        $where[] = "allow =" . 0;
+
+        $db->delete("users_permissions", $where);
+
+        foreach ($modules as $key => $value) {
+
+            $db->insert('users_permissions', array(
+                "permission_id" => $value,
+                "user_id" => $id,
+                "created" => date('Y-m-d H:i:s'),
+                "updated" => date('Y-m-d H:i:s'),
+                "allow" => 0
+                    )
+            );
+        };
+    }
+
+    /**
+     * Method to add permissions of user
+     * @param <int> $id
+     * @param <array> $modules
+     */
+    public static function addPermissionUser($id, $modules) {
+
+        $db = Zend_Registry::get('db');
+        $where[] = "user_id = '$id'";
+        $where[] = "allow =" . 1;
+
+        $db->delete("users_permissions", $where);
+
+        foreach ($modules as $key => $value) {
+            $db->insert('users_permissions', array(
+                "permission_id" => $value,
+                "user_id" => $id,
+                "created" => date('Y-m-d H:i:s'),
+                "updated" => date('Y-m-d H:i:s'),
+                "allow" => 1
+                    )
+            );
+        };
+    }
+    
+    /**
+     * Method to check for individual permission
+     * @param <int> $id
+     * @return <boolean>
+     */
+    public static function existPermission($id) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("users_permissions")
+                ->where('user_id = ?', $id);
+                
+
+        $stmt = $db->query($select);
+        $result = $stmt->fetch();
+        
+        return $result;
+    }
+
+    /**
+     * Method to return all resouces of modules
      * @return <array>
      */
     public static function getAll() {
@@ -67,7 +162,7 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * update - Method to add update all resources.
+     * Method to add update all resources.
      * @param <array> $resources
      * @param <string> $group
      */
@@ -95,10 +190,9 @@ class Snep_Permission_Manager {
     public static function addPermissionOld($resource, $id) {
 
         $db = Zend_Registry::get('db');
-        $permission_id = $resource["permission_id"];
 
         $db->insert('profiles_permissions', array(
-            "permission_id" => $permission_id,
+            "permission_id" => $resource,
             "profile_id" => $id,
             "created" => date('Y-m-d H:i:s'),
             "updated" => date('Y-m-d H:i:s'),
@@ -107,7 +201,7 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * update - Method to remove permission
+     * Method to remove permission
      * @param <array> $resource
      * @param <string> $id
      */
@@ -123,7 +217,7 @@ class Snep_Permission_Manager {
 
         $db->update("profiles_permissions", $update_data, $where);
     }
-    
+
     /**
      * Method list permissions
      * @param type $id
@@ -139,7 +233,29 @@ class Snep_Permission_Manager {
                 ->where('allow = ?', true);
 
         $stmt = $db->query($select);
-        return $stmt->fetchall();
+        $fetch = $stmt->fetchAll();
+
+        $result = array();
+        foreach ($fetch as $value)
+            $result[] = $value['permission_id'];
+        return $result;
+    }
+
+    /**
+     * getIdprofile - Get id of profile
+     * @param <int> $id
+     * @return <array>
+     */
+    public static function getIdProfile($id) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("users", array("profile_id"))
+                ->where('id = ?', $id);
+
+        $stmt = $db->query($select);
+        return $stmt->fetch();
     }
 
     /**

@@ -14,16 +14,17 @@ echo $this->render('filter.phtml');
             <th> <?php echo $this->translate('Created') ?> </th>
             <th> <?php echo $this->translate('Updated') ?> </th>
             <th> <?php echo $this->translate('Profile') ?> </th>
-            <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
+            <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
         </tr>
     </thead>
     <tbody>
         <?php
         $c = 0;
+
         if ($this->users):
             foreach ($this->users as $user):
                 ?>
-        <?php ($c ? $c = 0 : $c = 1 ); ?>
+                <?php ($c ? $c = 0 : $c = 1 ); ?>
                 <tr class="c<?php echo $c ?>">
                     <td class="numeric"> <b> <?php echo $user['ide'] ?> </b> </td>
                     <td> <?php echo $user['nome'] ?> </td>
@@ -33,18 +34,23 @@ echo $this->render('filter.phtml');
                     <td> <?php echo $user['name'] ?> </td>
                     <td class="action">
                         <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $user['ide'] ?>">
-        <?php echo $this->translate('Edit') ?>
+                            <?php echo $this->translate('Edit') ?>
                         </a>
                     </td>
                     <td class="action">
-                            <?php $this->remove_msg = $this->translate("Do you really wish to remove this item?"); ?>
+                        <?php $this->remove_msg = $this->translate("Do you really wish to remove this item?"); ?>
                         <span class="excluir" onclick="remove_item('<?php echo $this->url ?>', '<?php echo $user['ide'] ?>', '<?php echo $this->remove_msg ?>')">
-        <?php echo $this->translate('Delete') ?>
+                            <?php echo $this->translate('Delete') ?>
                         </span>
+                    </td>
+                    <td class="action">
+                        <a class="permissao" href="<?php echo $this->url ?>/permission/id/<?php echo $user['ide'] ?>">
+                            <?php echo $this->translate('Permission') ?>
+                        </a>
                     </td>
                 </tr>
             <?php endforeach ?>
-<?php endif ?>
+        <?php endif ?>
 </table>
 
 <?php echo $this->render('pagination.phtml') ?>

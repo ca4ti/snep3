@@ -18,7 +18,7 @@
  */
 
 /**
- * Controller for extension management
+ * Controller for users
  * 
  * @category  Snep
  * @package   Snep
@@ -153,15 +153,22 @@ class UsersController extends Zend_Controller_Action {
 
         $profile = Snep_Profiles_Manager::getAll();
 
+
         foreach ($profile as $group) {
             $allGroups[$group['id']] = $group['name'];
         }
 
-        $group = $form->getElement('group');
-        $group->setValue($user["profile_id"]);
+        $idProfile = $user["profile_id"];
 
-        $group = $form->getElement('group')->setMultiOptions($allGroups);
-        ( isset($user['group']) ? $group->setValue($user['group']) : null );
+        if ($id != 1) {
+            $group = $form->getElement('group');
+            $group->setValue($user["profile_id"]);
+
+            $group = $form->getElement('group')->setMultiOptions($allGroups);
+            ( isset($user['group']) ? $group->setValue($user['group']) : null );
+        } else {
+            $form->removeElement('group');
+        }
 
         $name = $form->getElement('name');
         ( isset($user['name']) ? $name->setValue($user['name']) : null );
@@ -184,6 +191,12 @@ class UsersController extends Zend_Controller_Action {
                     $dados['password'] = md5($dados['password']);
                 }
 
+                // Ao editar grupo, o usuario perde as permissões individuais
+                if ($idProfile != $dados['group']) {
+
+                    Snep_Users_Manager::removePermission($id);
+                }
+
                 Snep_Users_Manager::edit($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
             }
@@ -198,8 +211,157 @@ class UsersController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         Snep_Users_Manager::removeRecovery($id);
+        Snep_Users_Manager::removePermission($id);
         Snep_Users_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
+    }
+
+    /**
+     *  Edit permission
+     */
+    public function permissionAction() {
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Users"),
+                    $this->view->translate("Permission")
+        ));
+
+        $id = $this->_request->getParam('id');
+        if ($id == null) {
+            $id = $_POST['user'];
+        }
+
+        $profile = Snep_Permission_Manager::getIdProfile($id);
+        $idProfile = (int) $profile["profile_id"];
+
+        //Permissões do grupo
+        $currentResourcesGroup = Snep_Permission_Manager::getAllPermissions($idProfile);
+
+        //Permissões individuais do usuário 
+        $currentResourcesUsers = Snep_Permission_Manager::getAllPermissionsUser($id);
+
+        // Modulos do sistema
+        $modules = Snep_Permission_Manager::getAll();
+
+        $resources = array();
+        foreach ($modules as $moduleKey => $module) {
+            foreach ($module as $controllerKey => $controller) {
+
+                if (isset($controller["write"])) {
+                    $controller["write"] = $controller["read"];
+                }
+
+                // Modulos de erro e login/logout não são inseridos no banco
+                $valid = true;
+                if ($controllerKey == 'error' || $controllerKey == "auth" || $controllerKey == "installer") {
+                    $valid = false;
+                }
+
+                if ($valid == true) {
+                    foreach ($controller as $actionKey => $action) {
+                        $resource = $moduleKey . '_' . $controllerKey . '_' . $actionKey;
+                        $label = Snep_Modules::$modules[$moduleKey]->getName() . " - " . $action;
+
+                        if (substr($label, 0, 7) == 'Default') {
+                            $label = substr_replace($label, '', 0, 10);
+                        }
+
+                        // verifica se arquivo possui opcao de escrita para montar label
+                        if (substr($resource, -5) == 'write') {
+                            $resources[$resource] = $label . " - " . $this->view->translate('write');
+                        } else {
+                            $resources[$resource] = $label . " - " . $this->view->translate('read');
+                        }
+                    }
+                }
+            }
+        }
+
+        $permissionsGroup = array_intersect_key($currentResourcesGroup, $resources);
+
+        // usuário nao possui permissão individual
+        if (empty($currentResourcesUsers)) {
+            $this->view->user = false;
+        } else {
+            $permissionUser = array();
+
+            foreach ($currentResourcesUsers as $key => $resourceUser) {
+                $permissionUser[$key] = substr($resourceUser, 0, -1);
+            }
+
+            $permissionsUser = array_intersect_key($permissionUser, $resources);
+            $this->view->user = true;
+        }
+
+        //verifica permissões do grupo do usuário
+        $modulesAll = array();
+        $cont = 0;
+
+        // Caso possua dados de permissão do usuário, as permissões passam 
+        // a ser da tabela users_permission
+        foreach ($resources as $key => $res) {
+
+            $modulesAll[$cont]['id_permission'] = $key;
+            $modulesAll[$cont]['name'] = $res;
+            foreach ($permissionsGroup as $item => $permissionGroup) {
+                if ($key == $item) {
+                    $modulesAll[$cont]['group'] = true;
+                }
+            }
+            if (!empty($permissionsUser)) {
+                foreach ($permissionsUser as $item_ => $userPermission) {
+
+                    if ($key == $item_) {
+                        $modulesAll[$cont]['user'] = true;
+                        foreach ($currentResourcesUsers as $try => $allow) {
+                            if ($item_ == $try) {
+                                $modulesAll[$cont]['allow'] = substr($allow, -1);
+                            }
+                        }
+                    }
+                }
+            }
+            $cont++;
+        }
+
+        $this->view->modules = $modulesAll;
+        $this->view->id = $id;
+
+        if ($this->_request->isPost()) {
+
+            $dados = array();
+            $dados['id'] = $_POST['user'];
+
+            unset($_POST['user']);
+            foreach ($_POST as $key => $permission_id) {
+                $dados['permission_id'][$key] = $key;
+            }
+
+            $deleted = array_diff($currentResourcesGroup, $dados['permission_id']);
+            $added = $dados['permission_id'];
+
+            if (!empty($permissionUser)) {
+                $deletedusers = array_diff($permissionUser, $dados['permission_id']);
+                $deleted = array_merge($deleted, $deletedusers);
+            }
+
+            // Caso se exclua todas as permissões
+            if (!array_key_exists('permission_id', $dados)) {
+                $deleted = array_merge($currentResourcesGroup, $permissionUser);
+            }
+
+            // retirar permissão do usuário por id 
+            if (!empty($deleted)) {
+                Snep_Permission_Manager::removePermissionUser($dados['id'], $deleted);
+            }
+
+            //adicionar permissão ao usuário por id
+            if (!empty($added)) {
+                Snep_Permission_Manager::addPermissionUser($dados['id'], $added);
+            }
+
+            $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
+        }
     }
 
 }

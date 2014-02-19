@@ -224,12 +224,12 @@ CREATE TABLE IF NOT EXISTS `services_log` (
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `permissoes` (
-  `cod_rotina` int(11) NOT NULL default '0',
-  `cod_usuario` int(11) NOT NULL default '0',
-  `permissao` char(1) NOT NULL default 'S',
-  PRIMARY KEY  (`cod_rotina`,`cod_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `permissoes` (
+--   `cod_rotina` int(11) NOT NULL default '0',
+--   `cod_usuario` int(11) NOT NULL default '0',
+--   `permissao` char(1) NOT NULL default 'S',
+--   PRIMARY KEY  (`cod_rotina`,`cod_usuario`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `queue_log` (
   `time` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -305,11 +305,11 @@ CREATE TABLE IF NOT EXISTS `queues_agent` (
   `queue` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `rotinas` (
-  `cod_rotina` int(11) NOT NULL default '0',
-  `desc_rotina` varchar(50) NOT NULL default '',
-  PRIMARY KEY  (`cod_rotina`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `rotinas` (
+--   `cod_rotina` int(11) NOT NULL default '0',
+--   `desc_rotina` varchar(50) NOT NULL default '',
+--   PRIMARY KEY  (`cod_rotina`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `sounds` (
   `arquivo` varchar(50) NOT NULL,
@@ -384,10 +384,10 @@ CREATE TABLE IF NOT EXISTS `time_history` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `vinculos` (
-  `ramal` varchar(80) default NULL,
-  `cod_usuario` varchar(80) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `vinculos` (
+--   `ramal` varchar(80) default NULL,
+--   `cod_usuario` varchar(80) default NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS `voicemail_messages` (
@@ -451,23 +451,23 @@ CREATE TABLE IF NOT EXISTS `lista_abandono` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `permissoes_vinculos` (
-  `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  `id_peer` VARCHAR( 100 ) NOT NULL ,
-  `tipo` CHAR( 1 ) NOT NULL,
-  `id_vinculado` VARCHAR( 100 ) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `permissoes_vinculos` (
+--   `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+--   `id_peer` VARCHAR( 100 ) NOT NULL ,
+--   `tipo` CHAR( 1 ) NOT NULL,
+--   `id_vinculado` VARCHAR( 100 ) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `alertas` (
-  `recurso` VARCHAR( 20 ) NOT NULL ,
-  `tipo` VARCHAR( 10 ) NOT NULL ,
-  `tme` INT( 10 ) NOT NULL ,
-  `sla` INT( 10 ) NOT NULL ,
-  `item` VARCHAR( 20 ) NOT NULL ,
-  `alerta` VARCHAR( 255 ) NOT NULL ,
-  `destino` VARCHAR( 255 ) NOT NULL ,
-  `ativo` TINYINT( 1 ) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE IF NOT EXISTS `alertas` (
+--   `recurso` VARCHAR( 20 ) NOT NULL ,
+--   `tipo` VARCHAR( 10 ) NOT NULL ,
+--   `tme` INT( 10 ) NOT NULL ,
+--   `sla` INT( 10 ) NOT NULL ,
+--   `item` VARCHAR( 20 ) NOT NULL ,
+--   `alerta` VARCHAR( 255 ) NOT NULL ,
+--   `destino` VARCHAR( 255 ) NOT NULL ,
+--   `ativo` TINYINT( 1 ) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS ars_operadora (
     `id` integer primary key auto_increment,
@@ -592,14 +592,13 @@ CREATE TABLE IF NOT EXISTS `profiles_permissions` (
 CREATE TABLE IF NOT EXISTS `users_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
+  `permission_id` varchar(256) NOT NULL,
+  `allow` tinyint(1) NOT NULL default '0',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `peers_groups_peers_id_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  KEY `permission_id` (`permission_id`),
-  CONSTRAINT `peers_groups_peers_id_refs_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`)
+  CONSTRAINT `fk_user_users` FOREIGN KEY (`user_id` ) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

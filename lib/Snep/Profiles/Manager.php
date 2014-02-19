@@ -35,7 +35,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * getAll - Method to get all profiles
+     * Method to get all profiles
      * @return <array>
      */
     public function getAll() {
@@ -52,7 +52,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * add - Method to add a profile
+     * Method to add a profile
      * @param <array> $profile
      */
     public function add($profile) {
@@ -67,7 +67,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * remove - Method to remove a profile
+     * Method to remove a profile
      * @param <int> $id
      */
     public function remove($id) {
@@ -85,7 +85,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * removePermission - Method to remove permission a profile
+     * Method to remove permission a profile
      * @param <int> $id
      */
     public function removePermission($id) {
@@ -103,7 +103,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * get - Method to get a profile by id
+     * Method to get a profile by id
      * @param <int> $id
      * @return <Array>
      */
@@ -122,7 +122,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * edit - Method to update a profile data
+     * Method to update a profile data
      * @param <Array> $profile
      */
     public function edit($profile) {
@@ -137,7 +137,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * migration - Method to migration users for profile default while remove profile 
+     * Method to migration users for profile default while remove profile 
      * @param <Array> $member
      * @param <Array> $id
      */
@@ -152,25 +152,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * getusersAll - Method for get all users
-     * @return <array>
-     */
-    public function getUsersAll() {
-
-        $db = Zend_Registry::get('db');
-
-        $select = $db->select()
-                ->from(array("n" => "users"), array("id", "name as nome"))
-                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name");
-
-        $stmt = $db->query($select);
-        $users = $stmt->fetchAll();
-
-        return $users;
-    }
-
-    /**
-     * getUsersProfiles - Method to get members of profile
+     * Method to get members of profile
      * @param <int> $id
      * @return <array>
      */
@@ -180,7 +162,8 @@ class Snep_Profiles_Manager {
 
         $select = $db->select()
                 ->from('users', array('id', 'name'))
-                ->where("users.profile_id = ?", $id);
+                ->where("users.profile_id = ?", $id)
+                ->where("users.id != ?", 1);
 
         $stmt = $db->query($select);
         $users = $stmt->fetchall();
@@ -189,7 +172,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * getUsersnotProfile - Method to get not members of profile
+     * Method to get not members of profile
      * @param <int> $id
      * @return <array>
      */
@@ -198,8 +181,10 @@ class Snep_Profiles_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('users', array('id', 'name'))
-                ->where("users.profile_id != ?", $id);
+                ->from(array("n" => "users"), array("id", "name as nome"))
+                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name")
+                ->where("n.profile_id != ?", $id)
+                ->where("n.id != ?", 1);
 
         $stmt = $db->query($select);
         $users = $stmt->fetchall();
@@ -208,7 +193,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * lastId - Method to get a last id of profile 
+     * Method to get a last id of profile 
      * @return <int> 
      */
     public function lastId() {
@@ -227,7 +212,7 @@ class Snep_Profiles_Manager {
     }
 
     /**
-     * getIdPorifile - Get id of profile in users
+     * Get id of profile in users
      * @param <int> $id
      * @return <array>
      */

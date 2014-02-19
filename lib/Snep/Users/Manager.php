@@ -89,6 +89,24 @@ class Snep_Users_Manager {
     }
 
     /**
+     * removePermission - Method to remove permission a user
+     * @param <int> $id
+     */
+    public function removePermission($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('users_permissions', "user_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
      * addProfile - Adds the id of the profile to the User
      * @param <array> $data
      * @return \Exception|boolean

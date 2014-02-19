@@ -16,9 +16,7 @@
                 </validators>
             </options>
         </name>
-        <id>
-            <type>hidden</type>
-        </id>
+        
     </elements>
 </modelo>
 

@@ -59,14 +59,13 @@ CREATE TABLE IF NOT EXISTS `profiles_permissions` (
 CREATE TABLE IF NOT EXISTS `users_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
+  `permission_id` varchar(256) NOT NULL,
+  `allow` tinyint(1) NOT NULL default '0',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `peers_groups_peers_id_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  KEY `permission_id` (`permission_id`),
-  CONSTRAINT `peers_groups_peers_id_refs_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`)
+  CONSTRAINT `fk_user_users` FOREIGN KEY (`user_id` ) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 21726 2010-03-31 19:57:27Z rob $
+ * @version    $Id: Abstract.php 25105 2012-11-07 20:33:22Z rob $
  */
 
 /**
@@ -27,7 +27,7 @@ require_once 'Zend/Validate/Interface.php';
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
@@ -216,10 +216,10 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         $message = $this->_messageTemplates[$messageKey];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated($messageKey)) {
+            if ($translator->isTranslated($messageKey)) {
                 $message = $translator->translate($messageKey);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -230,16 +230,20 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
                 $value = $value->__toString();
             }
         } else {
-            $value = (string)$value;
+            $value = implode((array) $value);
         }
 
         if ($this->getObscureValue()) {
             $value = str_repeat('*', strlen($value));
         }
 
-        $message = str_replace('%value%', (string) $value, $message);
+        $message = str_replace('%value%', $value, $message);
         foreach ($this->_messageVariables as $ident => $property) {
-            $message = str_replace("%$ident%", (string) $this->$property, $message);
+            $message = str_replace(
+                "%$ident%",
+                implode(' ', (array) $this->$property),
+                $message
+            );
         }
 
         $length = self::getMessageLength();
@@ -345,10 +349,6 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
             return null;
         }
 
-        if( null !== self::getDefaultTranslator() ) {
-            return self::getDefaultTranslator();
-        }
-
         if (null === $this->_translator) {
             return self::getDefaultTranslator();
         }
@@ -358,14 +358,14 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 
     /**
      * Does this validator have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
     {
         return (bool)$this->_translator;
-    }  
-    
+    }
+
     /**
      * Set default translation object for all validate objects
      *
@@ -408,14 +408,14 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 
     /**
      * Is there a default translation object set?
-     * 
+     *
      * @return boolean
      */
     public static function hasDefaultTranslator()
-    { 
+    {
         return (bool)self::$_defaultTranslator;
     }
-    
+
     /**
      * Indicate whether or not translation should be disabled
      *

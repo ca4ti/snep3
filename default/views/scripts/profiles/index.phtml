@@ -36,7 +36,7 @@ echo $this->render('filter.phtml');
                     </td>
 
                     <td class="action">
-                        <a class="membros" href="<?php echo $this->url ?>/member/id/<?php echo $profile['id'] ?>">
+                        <a class="membros" onclick="javascript:alert('<?=$this->translate("Users who do not have individual permissions are listed. To change the group of users with these permissions is necessary to make editing user.")?>')" href="<?php echo $this->url ?>/member/id/<?php echo $profile['id'] ?>">
                             <?php echo $this->translate('Members') ?>
                         </a>
                     </td>

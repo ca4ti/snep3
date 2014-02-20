@@ -6,13 +6,6 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/selectB
 echo $this->form;
 ?>
 
-<script type="text/javascript">
-    Event.observe(window, 'load', init, false);
-
-    function init() {
-        select = new SelectBox('<?php echo $this->objSelectBox ?>');
-    }
-</script>
 
 
 

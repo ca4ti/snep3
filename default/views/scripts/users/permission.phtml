@@ -57,7 +57,7 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/selectB
                             <?php if (isset($module['user']) === true && $module['allow'] == true) { ?>
                                 <td> <?php echo $enabled ?> </td>
                                 <td> <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked><?php echo $this->translate('Allow') ?><br></td>
-                            <?php } else if (isset($module['group']) == true && $module['user'] == false) { ?>
+                            <?php } else if (isset($module['group']) == true && isset($module['user']) == false) { ?>
                                 <td> <?php echo $enabled ?> </td>  
                                 <td> <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked><?php echo $this->translate('Allow') ?><br></td>
                             <?php } else { ?>

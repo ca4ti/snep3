@@ -190,7 +190,13 @@ class UsersController extends Zend_Controller_Action {
                 if (strlen($dados['password']) != 32) {
                     $dados['password'] = md5($dados['password']);
                 }
-
+                
+                // Caso seja admin, recebe profile default
+                if($id == 1){
+                    $dados['group'] = 1;
+                }
+                
+                
                 // Ao editar grupo, o usuario perde as permissões individuais
                 if ($idProfile != $dados['group']) {
 

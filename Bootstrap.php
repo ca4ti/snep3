@@ -12,8 +12,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /*
      * _initLogin - Agendamento de verificação de login
      */
-
     protected function _initLogin() {
+        
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(new Snep_AuthPlugin());
     }

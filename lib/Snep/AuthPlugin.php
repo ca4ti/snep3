@@ -39,7 +39,9 @@ class Snep_AuthPlugin extends Zend_Controller_Plugin_Abstract{
     public function preDispatch(Zend_Controller_Request_Abstract $request){
     	 
     	$auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
+        $action = $this->getRequest()->getActionName();
+               
+        if (!$auth->hasIdentity() && ($action != "redefine" && $action != "recuperation")) {
 	    	$request->setModuleName("default");
 	    	$request->setControllerName("auth");
 	    	$request->setActionName("login");

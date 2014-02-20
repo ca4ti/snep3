@@ -623,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `binds` (
 CREATE TABLE IF NOT EXISTS `password_recovery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `code` varchar(45) NOT NULL,
+  `code` varchar(10) NOT NULL,
   `created` datetime NOT NULL,
   `expiration` datetime NOT NULL,
   PRIMARY KEY (`id`),

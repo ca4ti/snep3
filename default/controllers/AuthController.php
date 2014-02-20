@@ -96,6 +96,7 @@ class AuthController extends Zend_Controller_Action {
                     case Zend_Auth_Result::SUCCESS:
                         $auth->getStorage()->write($result->getIdentity());
 
+
                         $extension = $db->query("SELECT id, name FROM users WHERE name='$username'")->fetchObject();
 
                         /* Mantendo antigo verifica.php no ar */
@@ -196,14 +197,17 @@ class AuthController extends Zend_Controller_Action {
                 $this->view->message = $this->view->translate("User not registered");
             } else {
 
-                $user['code'] = md5($user['name'] . $date);
+                $user['code'] = $this->aleatorio();
                 $user['expiration'] = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($date)));
                 Snep_Auth_Manager::addCode($user);
 
                 $code = $user['code'];
                 $expiration = date('d/m/Y G:i:s', strtotime($user['expiration']));
 
-                $msg = $this->view->translate("You requested the redefinition of their password <b>Snep</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>" . $code . "</b></font><br>Your code will expire on: " . $expiration . "<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
+                $config = Zend_Registry::get('config');
+                $client = $config->ambiente->emp_nome;
+                
+                $msg = $this->view->translate("You asked for resetting your password the user <b>$username</b> on PABX <b>$client</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>" . $code . "</b></font><br>Your code will expire on: " . $expiration . "<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
                 $subject = $this->view->translate("Redefinition password - SNEP");
 
                 Snep_Auth_Manager::sendEmail($user, $msg, $subject);
@@ -212,6 +216,16 @@ class AuthController extends Zend_Controller_Action {
                 $this->_redirect('/auth/recuperation?param=' . $mail);
             }
         }
+    }
+
+    public function aleatorio() {
+        $key = "";
+        $valor = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+        srand((double) microtime() * 1000000);
+        for ($i = 0; $i < 6; $i++) {
+            $key.= $valor[rand() % strlen($valor)];
+        }
+        return $key;
     }
 
     public function logoutAction() {

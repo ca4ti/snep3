@@ -8,7 +8,16 @@ require_once 'default/model/PermissionPlugin.php';
 Zend_Session::start();
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
+    
+        /*
+     * _initLogin - Agendamento de verificação de login
+     */
 
+    protected function _initLogin() {
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(new Snep_AuthPlugin());
+    }
+    
     protected function _initRouter() {
         $front_controller = Zend_Controller_Front::getInstance();
         $front_controller->setBaseUrl($_SERVER['SCRIPT_NAME']);

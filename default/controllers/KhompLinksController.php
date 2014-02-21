@@ -16,6 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once "includes/AsteriskInfo.php";
+
 class KhompLinksController extends Zend_Controller_Action {
 
     /**
@@ -23,23 +25,33 @@ class KhompLinksController extends Zend_Controller_Action {
      * @var Zend_Form
      */
     protected $form;
+
     /**
      *
      * @var array
      */
     protected $forms;
 
+    /**
+     * indexAction
+     * @return type
+     * @throws ErrorException
+     */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
                     $this->view->translate("Khomp Links")
-                ));
+        ));
         $form = new Snep_Form(new Zend_Config_Xml("default/forms/khomp_links.xml"));
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
 
-        require_once "includes/AsteriskInfo.php";
-        $astinfo = new AsteriskInfo();
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/khomp-links/asterisk-error");
+            return;
+        }
 
         $khomp_signal = array("kesOk (sync)" => $this->view->translate('Activated'),
             "kesOk" => $this->view->translate('Activated'),
@@ -93,7 +105,7 @@ class KhompLinksController extends Zend_Controller_Action {
 
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
 
-            throw new ErrorException($this->view->translate("No Khomp board installed"));
+            $this->_redirect("/khomp-links/khomp-error");
         }
 
         while (list($key, $val) = each($lines)) {
@@ -132,7 +144,11 @@ class KhompLinksController extends Zend_Controller_Action {
             }
         }
     }
-
+    
+    /**
+     * viewAction
+     * @throws ErrorException
+     */
     public function viewAction() {
 
         $data = $this->_request->getParam('id');
@@ -330,7 +346,7 @@ class KhompLinksController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
                     $this->view->translate("Khomp Links")
-                ));
+        ));
         $this->view->gsm = $gsm;
         $this->view->dados = $links;
         $this->view->canais = $channels;
@@ -340,6 +356,20 @@ class KhompLinksController extends Zend_Controller_Action {
         $this->view->status = $statusk;
         $this->view->tiporel = $tiporel;
         $this->view->sintetic = $sintetic;
+    }
+
+    /**
+     * asterisErrorAction
+     */
+    public function asteriskErrorAction() {
+        
+    }
+
+    /**
+     * asterisErrorAction
+     */
+    public function khompErrorAction() {
+        
     }
 
 }

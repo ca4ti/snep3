@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once "includes/AsteriskInfo.php";
 
 class ErrorsKhompController extends Zend_Controller_Action {
 
@@ -24,62 +25,71 @@ class ErrorsKhompController extends Zend_Controller_Action {
      * @var Zend_Form
      */
     protected $form;
+
     /**
      *
      * @var array
      */
     protected $forms;
-
+    
+    /**
+     * indexAction
+     * @return type
+     * @throws ErrorException
+     */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
                     $this->view->translate("Errors Khomp Links")
-                ));
+        ));
 
-        require_once "includes/AsteriskInfo.php";
-        $astinfo = new AsteriskInfo();
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
 
-        $data = $astinfo->status_asterisk("database show","",True);
+            $this->_redirect("/errors-Khomp/asterisk-error");
+            return;
+        }
+
+        $data = $astinfo->status_asterisk("database show", "", True);
 
         if (!isset($data)) {
 
-            throw new ErrorException( $this->view->translate("Socket connection to the server is not available at the moment."));
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
-        $data = $astinfo->status_asterisk("khomp summary concise","",True);
+        $data = $astinfo->status_asterisk("khomp summary concise", "", True);
 
         if (!isset($data)) {
 
-            throw new ErrorException( $this->view->translate("Socket connection to the server is not available at the moment."));
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
-        $lines = explode("\n",$data);
+        $lines = explode("\n", $data);
 
-        $kchannels = array() ;
-        $ONLYGSM = False ;
+        $kchannels = array();
+        $ONLYGSM = False;
 
         while (list($key, $val) = each($lines)) {
 
-            $lin = explode(";", $val) ;
+            $lin = explode(";", $val);
 
-            if (substr($lin[0],0,3) == "<K>" ) {
+            if (substr($lin[0], 0, 3) == "<K>") {
 
-                $placa = substr($lin[0],3) ;
+                $placa = substr($lin[0], 3);
 
                 if (isset($lin[4])) {
 
-                    if ( substr($lin[1],0,4) != 'KGSM' && substr($lin[1],0,7) != 'KFXVoIP' )  {
+                    if (substr($lin[1], 0, 4) != 'KGSM' && substr($lin[1], 0, 7) != 'KFXVoIP') {
 
-                        if ($lin[4] > 0 ) {
+                        if ($lin[4] > 0) {
 
-                            for ($i=0; $i <= $lin[4]-1; $i++ )
-
-                                $kchannels[$placa][$i] = $lin[1] ;
-
+                            for ($i = 0; $i <= $lin[4] - 1; $i++)
+                                $kchannels[$placa][$i] = $lin[1];
                         } else {
 
-                            $kchannels[$placa][0] = $lin[1] ;
+                            $kchannels[$placa][0] = $lin[1];
                         }
                     }
                 }
@@ -87,37 +97,37 @@ class ErrorsKhompController extends Zend_Controller_Action {
 
             if (isset($lin[1])) {
 
-                if (substr($lin[1],0,4) == 'KGSM' || substr($lin[1],0,7) == 'KFXVoIP' ) {
+                if (substr($lin[1], 0, 4) == 'KGSM' || substr($lin[1], 0, 7) == 'KFXVoIP') {
 
-                    $ONLYGSM = TRUE ;
+                    $ONLYGSM = TRUE;
                 }
             }
         }
 
-        if( $ONLYGSM && count($kchannels) == 0) {
+        if ($ONLYGSM && count($kchannels) == 0) {
 
-            throw new ErrorException( $this->view->translate("Error"));
+            throw new ErrorException($this->view->translate("Error"));
         }
 
-        if (!$data = $astinfo->status_asterisk("khomp links errors concise","",True )) {
+        if (!$data = $astinfo->status_asterisk("khomp links errors concise", "", True)) {
 
-            throw new ErrorException( $this->view->translate("Socket connection to the server is not available at the moment."));
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
-        
-        $lines = explode("\n",$data);
-        $kstatus = array() ;
+
+        $lines = explode("\n", $data);
+        $kstatus = array();
 
         while (list($key, $val) = each($lines)) {
 
-            $lin = explode(":", $val) ;
+            $lin = explode(":", $val);
 
-            if (substr($lin[0],0,3) == "<K>" ) {
+            if (substr($lin[0], 0, 3) == "<K>") {
 
-                $placa = substr($lin[0],3) ;
-                $link  = $lin[1] ;
+                $placa = substr($lin[0], 3);
+                $link = $lin[1];
                 $sts_name = $lin[2];
                 $sts_val = $lin[3];
-                $kstatus[$sts_name][$placa][$link] = $sts_val ;
+                $kstatus[$sts_name][$placa][$link] = $sts_val;
             }
         }
 
@@ -128,9 +138,17 @@ class ErrorsKhompController extends Zend_Controller_Action {
 
             require_once "includes/AsteriskInfo.php";
             $astinfo = new AsteriskInfo();
-            $astinfo->status_asterisk("khomp links errors clear","","");
+            $astinfo->status_asterisk("khomp links errors clear", "", "");
 
             $this->_redirect($this->getRequest()->getControllerName());
         }
     }
+
+    /**
+     * asterisErrorAction
+     */
+    public function asteriskErrorAction() {
+        
+    }
+
 }

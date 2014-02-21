@@ -34,7 +34,7 @@ class AsteriskInfo {
      * Construtor do objeto
      */
     public function AsteriskInfo() {
-        global $SETUP, $LANG;
+        global $SETUP;
         // Verificando se já existe alguma conex�o
         if(!isset(self::$asterisk)) {
             // Criando a primeira instancia da conexão

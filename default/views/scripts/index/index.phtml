@@ -7,14 +7,21 @@ $this->headLink()->appendStylesheet($this->baseUrl() . "/css/system_status.css")
         <?php echo $this->translate("This software is in Alpha stage. Its unstable and may contain defects."); ?>
     </p>
 
-    <?php if( $this->error  ) : ?>
-            <div class="error_box" >
-                <?php echo $this->translate("Errors were detected in the configuration of SNEP, click ");  ?>
-                <a href="<?php echo $this->inspector; ?>">
-                    <?php echo $this->translate("here"); ?>
-                </a>
-                    <?php echo $this->translate(" for more information"); ?>
-            </div>
+    <?php if ($this->error) : ?>
+        <div class="error_box" >
+            <?php echo $this->translate("Errors were detected in the configuration of SNEP, click "); ?>
+            <a href="<?php echo $this->inspector; ?>">
+                <?php echo $this->translate("here"); ?>
+            </a>
+            <?php echo $this->translate(" for more information"); ?>
+        </div>
+    <?php endif ?>
+
+    <?php if ($this->erroast) : ?>
+        <div class="error_box" >
+            <?php echo $this->translate("Failed to connect to server Asterisk"); ?>
+
+        </div>
     <?php endif ?>
 </div>
 
@@ -137,13 +144,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . "/css/system_status.css")
                         <th><?php echo $this->translate("Fisical Memory"); ?></th>
                         <td><?php echo sprintf("%.2f", ($this->indexData["memory"]['ram']["total"] / 1024)); ?></td>
                         <td><?php echo sprintf("%.2f", ($this->indexData["memory"]['ram']["free"] / 1024)); ?></td>
-                        <td><?php echo $this->indexData["memory"]['ram']["percent"].'%'; ?></td>
+                        <td><?php echo $this->indexData["memory"]['ram']["percent"] . '%'; ?></td>
                     </tr>
                     <tr>
                         <th><?php echo $this->translate("Swap Memory"); ?></th>
                         <td><?php echo sprintf("%.2f", ($this->indexData["memory"]['swap']["total"] / 1024)); ?></td>
                         <td><?php echo sprintf("%.2f", ($this->indexData["memory"]['swap']["free"] / 1024)); ?></td>
-                        <td><?php echo $this->indexData["memory"]['swap']["percent"].'%'; ?></td>
+                        <td><?php echo $this->indexData["memory"]['swap']["percent"] . '%'; ?></td>
                     </tr>
                 </table>
 
@@ -161,21 +168,23 @@ $this->headLink()->appendStylesheet($this->baseUrl() . "/css/system_status.css")
                         <th><?php echo $this->translate("Free"); ?></th>
                         <th><?php echo $this->translate("Used"); ?></th>
                     </tr>
-                    <?php  
-                                    foreach ($this->indexData["space"] as $key => $value) {
-                             ?>             
-                                   
-                 <tr>
-                <th><?php echo $value["mount_point"]; ?></th>
-                 <td><?php echo sprintf("%.2f",($value["size"]/1048576)); ?></td>
-                 <td><?php echo sprintf("%.2f",($value["free"]/1048576)); ?></td>
-                 <td><?php echo $value["percent"]; ?></td>
-            </tr> 
-            
-             <?php } ?>
+                    <?php
+                    foreach ($this->indexData["space"] as $key => $value) {
+                        ?>             
+
+                        <tr>
+                            <th><?php echo $value["mount_point"]; ?></th>
+                            <td><?php echo sprintf("%.2f", ($value["size"] / 1048576)); ?></td>
+                            <td><?php echo sprintf("%.2f", ($value["free"] / 1048576)); ?></td>
+                            <td><?php echo $value["percent"]; ?></td>
+                        </tr> 
+
+                    <?php } ?>
                 </table>
             </div>
         </td>
     </tr>
 </table>
+
+
 

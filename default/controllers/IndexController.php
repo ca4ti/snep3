@@ -1,9 +1,13 @@
 <?php
 
 require_once 'Zend/Controller/Action.php';
+require_once "includes/AsteriskInfo.php";
 
 class IndexController extends Zend_Controller_Action {
-
+    
+    /**
+     * indexAction 
+     */
     public function indexAction() {
         $this->view->breadcrumb = $this->view->translate("Welcome to Snep version %s", SNEP_VERSION);
 
@@ -41,6 +45,17 @@ class IndexController extends Zend_Controller_Action {
                 exec("cat /etc/issue", $linuxVer);
                 $systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
             }
+
+            try {
+                $astinfo = new AsteriskInfo();
+                $astVersionRaw = explode('@', $astinfo->status_asterisk("core show version", "", True));
+            } catch (Exception $e) {
+                
+            }
+            if (!isset($astVersionRaw)) {
+                $this->view->erroast = true;
+            }
+
 
             $systemInfo['linux_kernel'] = exec("uname -sr");
 

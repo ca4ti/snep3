@@ -16,16 +16,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-class IpStatusController extends Zend_Controller_Action {
+require_once "includes/AsteriskInfo.php";
 
+class IpStatusController extends Zend_Controller_Action {
+    
+    /**
+     * indexAction
+     * @return type
+     */
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
                     $this->view->translate("IP Status")
-                ));
+        ));
 
-        require_once "includes/AsteriskInfo.php";
-        $astinfo = new AsteriskInfo();
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/ip-status/asterisk-error");
+            return;
+        }
 
         $data = $astinfo->status_asterisk("database show", "", True);
         $lines = explode("\n", $data);
@@ -125,87 +135,87 @@ class IpStatusController extends Zend_Controller_Action {
                         break;
                 }
             }
-        }
 
-        /* -------------------------------------------------------------------------------------- */
+            /* -------------------------------------------------------------------------------------- */
 
-        $trunk = $astinfo->status_asterisk("sip show registry", "", True);
+            $trunk = $astinfo->status_asterisk("sip show registry", "", True);
 
-        $peer = $astinfo->status_asterisk("sip show peers", "", True);
+            $peer = $astinfo->status_asterisk("sip show peers", "", True);
 
 
-        $peers = explode("\n", $peer);
-        $trunks = explode("\n", $trunk);
+            $peers = explode("\n", $peer);
+            $trunks = explode("\n", $trunk);
 
-        $trunk_all = array();
-        $trunk_ret = array();
+            $trunk_all = array();
+            $trunk_ret = array();
 
-        foreach ($trunks as $t_key => $t_val) {
-            if ($t_key > 1) {
-                $trunk_val = strtok($t_val, ' ');
-                $trunk_val = strtok(' ');
+            foreach ($trunks as $t_key => $t_val) {
+                if ($t_key > 1) {
+                    $trunk_val = strtok($t_val, ' ');
+                    $trunk_val = strtok(' ');
 
-                if ($trunk_val != null)
-                    array_push($trunk_all, $trunk_val);
-            }
-        }
-
-        // SIP Trunks from Peer list
-        foreach ($peers as $p_key => $p_val) {
-
-            if ($p_key > 1) {
-
-                if (preg_match_all('/^([A-Za-z0-9]+|\w+\/|\d+|\d+\.\d+\.\d+\.\d+|\d+\/)(\w+)?[ ]+(\d+\.\d+\.\d+\.\d+)[ ]+([[:alpha:]]?[[:space:]]?)*\d+[ ]+(\w+[[:space:]]?)(\(\d+ ms\))?[ ]+$/', $p_val, $match)) {
-
-                    $trunk_tmp = array();
-
-                    foreach ($trunk_all as $trunk_ip) {
-
-                        if (($trunk_ip == $match[1][0]) || ($trunk_ip == $match[2][0])) {
-
-                            array_push($trunk_tmp, $match[1][0] . $match[2][0]);
-                            array_push($trunk_tmp, $match[3][0]);
-
-                            $status = $match[5][0];
-
-                            if (!strcmp("UNREACHABLE ", $status)) {
-                                $status = $this->view->translate("Not Registered");
-                            } elseif (!strcmp("Unmonitored ", $status)) {
-                                $status = $this->view->translate("N/A");
-                            } elseif (!strcmp("OK ", $status)) {
-                                $status = $this->view->translate("Registered");
-                            }
-                            array_push($trunk_tmp, $status);
-
-                            array_push($trunk_tmp, $match[6][0]);
-                        }
-                    }
-                    array_push($trunk_ret, $trunk_tmp);
+                    if ($trunk_val != null)
+                        array_push($trunk_all, $trunk_val);
                 }
             }
+
+            // SIP Trunks from Peer list
+            foreach ($peers as $p_key => $p_val) {
+
+                if ($p_key > 1) {
+
+                    if (preg_match_all('/^([A-Za-z0-9]+|\w+\/|\d+|\d+\.\d+\.\d+\.\d+|\d+\/)(\w+)?[ ]+(\d+\.\d+\.\d+\.\d+)[ ]+([[:alpha:]]?[[:space:]]?)*\d+[ ]+(\w+[[:space:]]?)(\(\d+ ms\))?[ ]+$/', $p_val, $match)) {
+
+                        $trunk_tmp = array();
+
+                        foreach ($trunk_all as $trunk_ip) {
+
+                            if (($trunk_ip == $match[1][0]) || ($trunk_ip == $match[2][0])) {
+
+                                array_push($trunk_tmp, $match[1][0] . $match[2][0]);
+                                array_push($trunk_tmp, $match[3][0]);
+
+                                $status = $match[5][0];
+
+                                if (!strcmp("UNREACHABLE ", $status)) {
+                                    $status = $this->view->translate("Not Registered");
+                                } elseif (!strcmp("Unmonitored ", $status)) {
+                                    $status = $this->view->translate("N/A");
+                                } elseif (!strcmp("OK ", $status)) {
+                                    $status = $this->view->translate("Registered");
+                                }
+                                array_push($trunk_tmp, $status);
+
+                                array_push($trunk_tmp, $match[6][0]);
+                            }
+                        }
+                        array_push($trunk_ret, $trunk_tmp);
+                    }
+                }
+            }
+
+            $this->view->troncos = $trunk_ret;
+
+            /* -------------------------------------------------------------------------------------- */
+
+            $codecs = $astinfo->status_asterisk("g729 show licenses", "", True);
+
+            $arrCodecs = explode("\n", $codecs);
+
+            $codec = null;
+            if (!preg_match("/No such command/", $arrCodecs['1'])) {
+                $arrValores = explode(" ", $arrCodecs['1']);
+                $exp = explode("/", $arrValores['0']);
+                $codec = array('0' => $arrValores['3'],
+                    '1' => $exp['0'],
+                    '2' => $exp['1']
+                );
+            }
+
+            $this->view->filas = $queues;
+            $this->view->ramais = $ramais;
+            $this->view->codecs = $codec;
         }
-
-        $this->view->troncos = $trunk_ret;
-
-        /* -------------------------------------------------------------------------------------- */
-
-        $codecs = $astinfo->status_asterisk("g729 show licenses", "", True);
-
-        $arrCodecs = explode("\n", $codecs);
-
-        $codec = null;
-        if (!preg_match("/No such command/", $arrCodecs['1'])) {
-            $arrValores = explode(" ", $arrCodecs['1']);
-            $exp = explode("/", $arrValores['0']);
-            $codec = array('0' => $arrValores['3'],
-                '1' => $exp['0'],
-                '2' => $exp['1']
-            );
-        }
-
-        $this->view->filas = $queues;
-        $this->view->ramais = $ramais;
-        $this->view->codecs = $codec;
     }
 
     protected function ramalInfo($ramal) {
@@ -253,6 +263,13 @@ class IpStatusController extends Zend_Controller_Action {
 
             return $return;
         }
+    }
+
+    /**
+     * asterisErrorAction
+     */
+    public function asteriskErrorAction() {
+        
     }
 
 }

@@ -9,19 +9,6 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
---
--- Estrutura da tabela `permissions`
---
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(11) NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `created` datetime NOT NULL,
-  `updated` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-
 --
 -- Estrutura da tabela `users`
 --

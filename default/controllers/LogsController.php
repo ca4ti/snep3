@@ -45,14 +45,14 @@ class LogsController extends Zend_Controller_Action {
 
     private function initLogFile() {
         $log = new Snep_Log(Zend_Registry::get('config')->system->path->log, 'agi.log');
-
+        
         return $log;
     }
 
     public function viewAction() {
 
         $log = $this->initLogFile();
-
+        
         $this->view->breadcrumb = $this->view->translate("Status » System Logs ");
 
         $this->view->back = $this->view->translate("Back");
@@ -65,7 +65,9 @@ class LogsController extends Zend_Controller_Action {
 
             // Normal search mode
             if (strcmp($this->_request->getParam('real_time'), 'yes')) {
-
+                
+                $formData = $this->_request->getParams();
+                
                 $this->view->mode = 'normal';
                 $this->view->location = 'index';
                 

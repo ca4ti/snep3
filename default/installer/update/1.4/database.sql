@@ -85,6 +85,27 @@ CREATE TABLE IF NOT EXISTS `password_recovery` (
   CONSTRAINT `password_recovery_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+drop table queue_log;
+
+--
+-- Estrutura da tabela `queue_log`
+--
+CREATE TABLE IF NOT EXISTS `queue_log` (
+  id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  time char(26) default NULL,
+  callid varchar(32) NOT NULL default '',
+  queuename varchar(32) NOT NULL default '',
+  agent varchar(32) NOT NULL default '',
+  event varchar(32) NOT NULL default '',
+  data1 varchar(100) NOT NULL default '',
+  data2 varchar(100) NOT NULL default '',
+  data3 varchar(100) NOT NULL default '',
+  data4 varchar(100) NOT NULL default '',
+  data5 varchar(100) NOT NULL default '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
 

@@ -231,15 +231,19 @@ CREATE TABLE IF NOT EXISTS `services_log` (
 --   PRIMARY KEY  (`cod_rotina`,`cod_usuario`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `queue_log` (
-  `time` datetime NOT NULL default '0000-00-00 00:00:00',
-  `callid` varchar(20) NOT NULL default '',
-  `queuename` varchar(20) NOT NULL default '',
-  `agent` varchar(20) NOT NULL default '',
-  `event` varchar(20) NOT NULL default '',
-  `arg1` varchar(100) NOT NULL default '',
-  `arg2` varchar(100) NOT NULL default '',
-  `arg3` varchar(100) NOT NULL default ''
+CREATE TABLE queue_log (
+  id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  time char(26) default NULL,
+  callid varchar(32) NOT NULL default '',
+  queuename varchar(32) NOT NULL default '',
+  agent varchar(32) NOT NULL default '',
+  event varchar(32) NOT NULL default '',
+  data1 varchar(100) NOT NULL default '',
+  data2 varchar(100) NOT NULL default '',
+  data3 varchar(100) NOT NULL default '',
+  data4 varchar(100) NOT NULL default '',
+  data5 varchar(100) NOT NULL default '',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `queue_members` (

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,57 +30,62 @@
 class PBX_Rule_Actions {
 
     private $actions = array();
-
     private static $instance;
 
     /**
-     * Retorna instancia dessa classe
-     *
+     * getInstance - Retorna instancia dessa classe
      * @return PBX_Rule_Actions
      */
     public static function getInstance() {
-        if( self::$instance === null ) {
+        if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
     /**
-     * Construtor
+     * __construct - Construtor
      */
-    private function __construct() {}
-    private function  __clone() {}
+    private function __construct() {
+        
+    }
 
-    public function registerAction( $action ) {
-        if( in_array($action, $this->actions) ) {
+    private function __clone() {
+        
+    }
+
+    /**
+     * registerAction
+     * @param <string> $action
+     * @throws Exception
+     */
+    public function registerAction($action) {
+        if (in_array($action, $this->actions)) {
             throw new Exception("Action already registered");
-        }
-        else {
+        } else {
             $this->actions[] = $action;
         }
     }
 
     /**
-     * Retorna um array com todas as ações instaladas no sistema.
-     *
-     * @return array $actions ações instaladas no sistema
+     * getInstalledActions - Retorna um array com todas as ações instaladas no sistema.
+     * @return <array> $actions ações instaladas no sistema
      */
     public function getInstalledActions() {
         return $this->actions;
     }
 
     /**
-     * Verifica se o nome de uma classe foi registrada no sistema.
-     *
-     * @param string $classname
-     * @return boolean
+     * isRegistered - Verifica se o nome de uma classe foi registrada no sistema.
+     * @param <string> $classname
+     * @return <boolean>
      */
     public function isRegistered($classname) {
-        if( in_array($classname, $this->getInstalledActions()) ) {
+        if (in_array($classname, $this->getInstalledActions())) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
 }

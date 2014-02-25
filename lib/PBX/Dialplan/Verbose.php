@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -37,11 +38,9 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
 
     /**
      * Tempo em que a regra será executada.
-     *
      * É usado para definir manualmente o horário de execução do Parsing.
      * Útil para debug.
-     *
-     * @var string Time
+     * @var <string> Time
      */
     protected $execution_time;
 
@@ -71,31 +70,29 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     protected $matches;
 
     /**
-     * Retorna o horário de execução do ultimo parse
-     *
-     * @return string time
+     * getLastExecutionTime - Retorna o horário de execução do ultimo parse
+     * @return <string> time
      */
     public function getLastExecutionTime() {
         return $this->execution_time;
     }
 
     /**
-     * Retorna a lista de regras que foram encontradas para a requisição do
-     * ultimo parse.
-     *
-     * @return array matches
+     * getMAtches - Retorna a lista de regras que foram encontradas para 
+     * a requisição do ultimo parse.
+     * @return <array> matches
      */
     public function getMatches() {
         return $this->matches;
     }
-    
+
     /**
-     * Sobreescreve PBX_Dialplan::parse() fazendo uma análise mais detalhada de
-     * cada regra de negócio.
+     * parse - Sobreescreve PBX_Dialplan::parse() fazendo uma análise mais 
+     * detalhada de cada regra de negócio.
      */
     public function parse() {
-        
-        if(!isset($this->execution_time)) {
+
+        if (!isset($this->execution_time)) {
             $this->execution_time = date("H:i");
         }
 
@@ -103,38 +100,36 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
         $this->matches = array();
 
         $rules = PBX_Rules::getAll();
-        if(count($rules) > 0) {
+        if (count($rules) > 0) {
             foreach ($rules as $rule) {
                 $rule->setRequest($this->request);
 
-                if( $rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isActive()) {
+                if ($rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isActive()) {
                     // Armazenando a regra válida (parcialmente)
                     $this->matches[] = $rule;
 
                     // Caso seja a primeira regra válida (e com tempo válido), ela é a que queremos executar
-                    if(is_null($this->foundRule) && $rule->isValidTime($this->execution_time)) {
+                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time)) {
                         $this->foundRule = $rule;
                     }
-                    
                 }
             }
-            
-            if(!is_object($this->foundRule)) { // Caso nenhuma regra tenha sido encontrada
+
+            if (!is_object($this->foundRule)) { // Caso nenhuma regra tenha sido encontrada
                 throw new PBX_Exception_NotFound("No rule found for this request");
             }
-        }
-        else {
+        } else {
             throw new PBX_Exception_NotFound("No rules in database");
         }
     }
 
     /**
-     * Define manualmente o tempo que será usado em consideração na avaliação
-     * da regra. (Execution time)
-     *
-     * @param string $time Tempo de execução da regra
+     * setTime - Define manualmente o tempo que será usado em consideração 
+     * na avaliação da regra. (Execution time)
+     * @param <string> $time Tempo de execução da regra
      */
     public function setTime($time) {
         $this->execution_time = $time;
     }
+
 }

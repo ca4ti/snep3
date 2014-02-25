@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -35,24 +36,20 @@ abstract class PBX_Rule_Plugin {
 
     /**
      * Regra de negócio que executará esse plugin
-     *
      * @var PBX_Rule
      */
     protected $rule = null;
 
     /**
      * Interface de comunicação com o Asterisk
-     *
      * Este objeto só estara disponível no momento em que as ações específicas
      * do plugin forem invocadas.
-     *
      * @var Asterisk_AGI
      */
     protected $asterisk = null;
 
     /**
-     * Retorna a regra que executa esse plugin
-     *
+     * getRule - Retorna a regra que executa esse plugin
      * @return PBX_Rule
      */
     public function getRule() {
@@ -60,17 +57,15 @@ abstract class PBX_Rule_Plugin {
     }
 
     /**
-     * Define qual a regra que executará as ações desse plugin
-     *
+     * setRule - Define qual a regra que executará as ações desse plugin
      * @param PBX_Rule $rule
      */
-    public function setRule( PBX_Rule $rule ) {
+    public function setRule(PBX_Rule $rule) {
         $this->rule = $rule;
     }
 
     /**
-     * Retorna o objeto asterisk
-     *
+     * getAsteriskInterface - Retorna o objeto asterisk
      * @return Asterisk_AGI
      */
     public function getAsteriskInterface() {
@@ -78,9 +73,8 @@ abstract class PBX_Rule_Plugin {
     }
 
     /**
-     * Define uma interface de comunicação com asterisk para uso com as ações do
-     * plugin.
-     *
+     * setAsteriskInterface - Define uma interface de comunicação com 
+     * asterisk para uso com as ações do plugin.
      * @param Asterisk_AGI $asterisk
      */
     public function setAsteriskInterface(Asterisk_AGI $asterisk) {
@@ -88,28 +82,35 @@ abstract class PBX_Rule_Plugin {
     }
 
     /**
-     * Chamado no início do processo de execução da regra
+     * startup - Chamado no início do processo de execução da regra
      */
-    public function startup() {}
+    public function startup() {
+        
+    }
 
     /**
      * Chamado antes da execução de cada ação da regra
      *
      * @param int $index Índice da ação que está sendo executada essa chamada
      */
-    public function preExecute($index) {}
+    public function preExecute($index) {
+        
+    }
 
     /**
-     * Chamado ao final da execução de cada ação da regra
-     *
-     * @param int $index Índice da ação que está sendo executada essa chamada
+     * postExecute - Chamado ao final da execução de cada ação da regra
+     * @param <int> $index Índice da ação que está sendo executada essa chamada
      */
-    public function postExecute($index) {}
+    public function postExecute($index) {
+        
+    }
 
     /**
      * Chamado ao final da execução da regra
      */
-    public function shutdown() {}
+    public function shutdown() {
+        
+    }
 
 }
 

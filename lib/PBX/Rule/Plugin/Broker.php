@@ -29,14 +29,12 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
 
     /**
      * Array com os plugins a serem executados.
-     *
-     * @var array
+     * @var <array>
      */
     protected $plugins = array();
 
     /**
      * Define a regra que tem controle sobre esse Broker
-     *
      * @param PBX_Rule $rule
      */
     public function setRule(PBX_Rule $rule) {
@@ -48,7 +46,6 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
 
     /**
      * Define a interface de comunicação com o asterisk em todos os plugins.
-     *
      * @param Asterisk_AGI $asterisk
      */
     public function setAsteriskInterface(Asterisk_AGI $asterisk) {
@@ -59,10 +56,9 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Register a plugin.
-     *
+     * registerPlugin - Register a plugin.
      * @param  PBX_Rule_Plugin $plugin
-     * @param  int $stackIndex
+     * @param  <int> $stackIndex
      * @return PBX_Rule_Plugin_Broker
      */
     public function registerPlugin(PBX_Rule_Plugin $plugin, $stackIndex = null) {
@@ -103,8 +99,7 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Unregister a plugin.
-     *
+     * unregisterPlugin - Unregister a plugin.
      * @param string|PBX_Rule_Plugin $plugin Plugin object or class name
      * @return PBX_Rule_Plugin_Broker
      */
@@ -130,10 +125,9 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Is a plugin of a particular class registered?
-     *
-     * @param  string $class
-     * @return bool
+     * hasPlugin - Is a plugin of a particular class registered?
+     * @param  <string> $class
+     * @return <boolean>
      */
     public function hasPlugin($class) {
         foreach ($this->plugins as $plugin) {
@@ -147,9 +141,8 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Retrieve a plugin or plugins by class
-     *
-     * @param  string $class Class name of plugin(s) desired
+     * getPlugin - Retrieve a plugin or plugins by class
+     * @param  <string> $class Class name of plugin(s) desired
      * @return false|PBX_Rule_Plugin|array Returns false if none found, plugin
      * if only one found, and array of plugins if multiple plugins of same class
      * found
@@ -174,16 +167,15 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Retrieve all plugins
-     *
-     * @return array
+     * getPlguins - Retrieve all plugins
+     * @return <array>
      */
     public function getPlugins() {
         return $this->plugins;
     }
 
     /**
-     * Invoca o metodo correspondente de todos os plugins registrados.
+     * startup - Invoca o metodo correspondente de todos os plugins registrados.
      */
     public function startup() {
         foreach ($this->plugins as $plugin) {
@@ -202,9 +194,8 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Invoca o metodo correspondente de todos os plugins registrados.
-     *
-     * @param int $index Índice da ação que está sendo executada essa chamada
+     * preExecute - Invoca o metodo correspondente de todos os plugins registrados.
+     * @param <int> $index Índice da ação que está sendo executada essa chamada
      */
     public function preExecute($index) {
         foreach ($this->plugins as $plugin) {
@@ -223,9 +214,8 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Invoca o metodo correspondente de todos os plugins registrados.
-     *
-     * @param int $index Índice da ação que está sendo executada essa chamada
+     * postExecute - Invoca o metodo correspondente de todos os plugins registrados.
+     * @param <int> $index Índice da ação que está sendo executada essa chamada
      */
     public function postExecute($index) {
         foreach ($this->plugins as $plugin) {
@@ -244,7 +234,7 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
     }
 
     /**
-     * Invoca o metodo correspondente de todos os plugins registrados.
+     * shutdown - Invoca o metodo correspondente de todos os plugins registrados.
      */
     public function shutdown() {
         foreach ($this->plugins as $plugin) {

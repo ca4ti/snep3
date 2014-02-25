@@ -35,10 +35,9 @@ class PBX_Rule_Action_Exception_GoTo extends Exception {
     private $index;
 
     /**
-     * Construtor da exceção
-     *
-     * @param indice $index
-     * @param codigo $code
+     * __construct - Construtor da exceção
+     * @param <string> indice $index
+     * @param <int> codigo $code
      */
     public function __construct($index, $code = 0) {
         parent::__construct("Desviar para $index", $code);
@@ -47,9 +46,8 @@ class PBX_Rule_Action_Exception_GoTo extends Exception {
     }
 
     /**
-     * Retorna o indice para se desviar o fluxo de execução das ações.
-     *
-     * @return int index
+     * getIndex - Retorna o indice para se desviar o fluxo de execução das ações.
+     * @return <int> index
      */
     public function getIndex() {
         return $this->index;

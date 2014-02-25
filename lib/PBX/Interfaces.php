@@ -38,41 +38,38 @@ require_once "PBX/Usuarios.php";
 class PBX_Interfaces {
 
     private $interfaceList;
-
+    
     public function __construct() {
         $this->interfaceList = array();
     }
 
     /**
-     * Adiciona interfaces na lista de inclusão.
-     *
-     * @param Snep_Interface $interface
+     * addInterface - Adiciona interfaces na lista de inclusão.
+     * @param <object> Snep_Interface $interface
      */
     public function addInterface($interface) {
         throw new Exception("Nao suportado por essa versao do snep");
     }
 
     /**
-     * Executa a inclusão no banco de dados
+     * commit - Executa a inclusão no banco de dados
      */
     public function commit() {
         throw new Exception("Nao suportado por essa versao do snep");
     }
 
     /**
-     * Remove interfaces do banco de dados.
-     *
-     * @param id da interface a ser removida do banco de dados do snep.
+     * delete - Remove interfaces do banco de dados.
+     * @param <string> id da interface a ser removida do banco de dados do snep.
      */
     public static function delete($interface_id) {
         throw new Exception("Nao suportado por essa versao do snep");
     }
 
     /**
-     * Retorna uma instancia de interface a partir de sua persistencia no
-     * banco de dados do Snep.
-     *
-     * @param int Id da interface no banco.
+     * get - Retorna uma instancia de interface a partir de sua persistencia 
+     * no banco de dados do Snep
+     * @param <int> Id da interface no banco
      * @return PBX_Asterisk_Interface do tipo correspondente ao presente no banco
      */
     public static function get($id) {
@@ -80,23 +77,23 @@ class PBX_Interfaces {
     }
 
     /**
-     * Retorna todas as interfaces do banco de dados em um array.
+     * getAll - Retorna todas as interfaces do banco de dados em um array.
      * Esse metodo também pode retornar todas as classes de um tipo
-     * específico.
+     * específico
      *
-     * @param string Tipo da interface a serem retornadas no array
-     * (SIP, IAX2, etc).
-     * @return Array associativo com as interfaces encontradas.
+     * @param <string> Tipo da interface a serem retornadas no array
+     * (SIP, IAX2, etc)
+     * @return array associativo com as interfaces encontradas.
      */
     public static function getAll($tipo = 'all') {
         throw new Exception("Nao suportado por essa versao do snep");
     }
     
     /**
-     * Procura o dono de uma interface baseado em canal.
+     * getChannelOwner - Procura o dono de uma interface baseado em canal.
      *
-     * @param string $channel Canal da interface
-     * @return object Objeto que representa o dono da interface (se houver)
+     * @param <string> $channel Canal da interface
+     * @return <object> Objeto que representa o dono da interface (se houver)
      */
     public static function getChannelOwner($channel) {
         $db = Snep_Db::getInstance();
@@ -119,8 +116,28 @@ class PBX_Interfaces {
         $interfaces = $db->query($select)->fetchAll();
 
         foreach ($interfaces as $interface) {
-            if(preg_match("#^{$interface['canal']}$#i", $channel)) {
-                return PBX_Usuarios::get($interface['name']);
+            if(preg_match("#^{$interface['canal']}$#i", $channel)
+               || preg_match("#^Manual/{$channel}$#i", $interface['canal'])) {
+
+                   
+                 
+                $exten = PBX_Usuarios::get($interface['name']);
+                
+                if(class_exists("Agents_Manager")) {
+                    // Identify if user is logged in as agent
+                    $agent = Agents_Manager::isExtenLogged($exten->getNumero());
+                    $agent_ = Agents_Manager::get($agent);
+                    if($agent !== false) {
+                        $agent_obj = new Agents_Agent();
+                        $agent_obj->setExtension($exten);
+                        $agent_obj->setCode($agent);
+                        $agent_obj->setName($agent_['name']);
+                        
+                        return $agent_obj;
+                    }
+                }
+
+                return $exten;
             }
         }
         
@@ -128,19 +145,19 @@ class PBX_Interfaces {
     }
 
     /**
-     * Força reconfiguração de todas as interfaces. Chama as configurações
-     * efetivas das interfaces no banco de dados para que seja reconstruida
-     * a configuração real das mesmas.
+     * reconfigure - Força reconfiguração de todas as interfaces. Chama 
+     * as configurações efetivas das interfaces no banco de dados para que 
+     * seja reconstruida a configuração real das mesmas
      */
     public static function reconfigure() {
         throw new Exception("Nao suportado por essa versao do snep");
     }
 
     /**
-     * Faz o armazenamento de uma interface no banco de dados de interfaces
-     * do snep.
+     * register - Faz o armazenamento de uma interface no banco de dados de 
+     * interfaces do snep
      *
-     * @param Interface a ser registrada no banco de dados.
+     * @param <string> Interface a ser registrada no banco de dados.
      * @return id que foi atribuido pelo banco a nova interface
      */
     public static function register($interface) {
@@ -148,7 +165,7 @@ class PBX_Interfaces {
     }
 
     /**
-     * Atualiza configurações de interface no banco de dados.
+     * update - Atualiza configurações de interface no banco de dados.
      *
      * Funcionamento:
      *   Esse método só opera com objetos que herdem a classe
@@ -159,7 +176,7 @@ class PBX_Interfaces {
      * Esse método também faz atualização de tipo. Ou seja, um tipo de
      * interface pode ser alterado mantendo o mesmo id.
      *
-     * @param Interface a ser armazenada no banco de dados no lugar da
+     * @param <string> Interface a ser armazenada no banco de dados no lugar da
      * interface de mesmo id.
      */
     public static function update($interface) {

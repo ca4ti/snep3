@@ -38,7 +38,11 @@ class PBX_Fax {
     private $totrec;
     private $totenv;
 
-    // Contrutor da classe. Relaciona arquivos com datas para futura pesquisa.
+    /**
+     * __construct - Contrutor da classe. Relaciona arquivos com datas para futura pesquisa
+     * @param <string> $sended
+     * @param <string> $received
+     */
     public function __construct($sended, $received) {
         $config = Zend_Registry::get('config');
         $this->rec_path = $config->system->path->hylafax . "/recvq";
@@ -75,8 +79,15 @@ class PBX_Fax {
             $this->recebido = 1;
         }        
     }
-
-    // Função que retorna um determinado periodo de pesquisa.
+    
+    /**
+     * getPeriodo - Retorna um determinado período de pesquisa
+     * @param <string> $dia_ini
+     * @param <string> $dia_fim
+     * @param <string> $hora_ini
+     * @param <string> $hora_fim
+     * @return <array> $retorno
+     */
     public function getPeriodo($dia_ini, $dia_fim, $hora_ini, $hora_fim) {
         // Dia Inicial
         $diai = substr($dia_ini, 0, 2);
@@ -145,7 +156,10 @@ class PBX_Fax {
         return $retorno;
     }
 
-    // Calcula os totalizadores.
+    /**
+     * getTot - Calcula os totalizadores
+     * @return <array> $result
+     */
     public function getTot() {
         $result = array(
             'recebidas' => $this->totrec,

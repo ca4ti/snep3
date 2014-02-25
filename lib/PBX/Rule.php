@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -39,80 +40,69 @@ class PBX_Rule {
     /**
      * Array contendo os objetos que executam as ações da regra de negócio.
      * As classes aqui devem extender a classe PBX_Rule_Action
-     *
      * @var array de Actions
      */
     private $acoes = array();
 
     /**
      * Define se a regra deve ser considerada ativada ou desativada.
-     *
-     * @var boolean ativa
+     * @var <boolean> ativa
      */
     private $active = true;
 
     /**
      * Interface de comunicação com o asterisk
-     *
      * @var Asterisk_AGI asterisk
      */
     private $asterisk = null;
 
     /**
      * Descrição para usuários da regra de negócio.
-     *
-     * @var string descrição
+     * @var <string> descrição
      */
     private $desc = "";
 
     /**
      * Lista de destinos aos quais essa regra espera.
-     *
-     * @var array dst Destinos com que essa regra trabalha
+     * @var <array> dst Destinos com que essa regra trabalha
      */
     private $dst = array();
 
     /**
      * ID para controle de regras persistidas em banco de dados.
-     *
-     * @var int id da regra.
+     * @var <int> id da regra.
      */
     private $id = -1;
 
     /**
      * Define se a regra vai ou não gravar a ligação.
-     *
-     * @var boolean isRecording
+     * @var <boolean> isRecording
      */
     private $isRecording = false;
 
     /**
      * Prioridade com a qual deve ser trada essa regra em relação a outras
      * regras na hora de processar o plano de discagem.
-     *
-     * @var int prio Prioridade de execução da regra
+     * @var <int> prio Prioridade de execução da regra
      */
     private $priority = 0;
 
     /**
      * Define qual será a aplicação que efetuará a gravação da ligação.
-     *
-     * @var array recordApp
+     * @var <array> recordApp
      */
     private $recordApp;
 
     /**
      * Requisição de ligação a qual essa regra deve usar para executar suas
      * ações.
-     *
      * @var Asterisk_AGI_Request requisição
      */
     private $request = null;
 
     /**
      * Lista de origens as quais essa regra está apta a operar.
-     *
-     * @var array src Origens com que essa regra trabalha
+     * @var <array> src Origens com que essa regra trabalha
      */
     private $src = array();
 
@@ -126,7 +116,7 @@ class PBX_Rule {
      * 08:00-12:00
      * 13:30-18:00
      * 
-     * @var string|array Array com Range de horários
+     * @var <string|array> Array com Range de horários
      */
     private $validade = array();
 
@@ -138,7 +128,7 @@ class PBX_Rule {
      * thu
      * fri
      *
-     * @var string|array Array com dias da semana em que a regra é válida
+     * @var <string|array> Array com dias da semana em que a regra é válida
      */
     private $validWeekDays = array("sun", "mon", "tue", "wed", "thu", "fri", "sat");
 
@@ -149,8 +139,7 @@ class PBX_Rule {
     protected $plugins = null;
 
     /**
-     * Construtor do objeto.
-     *
+     * __construct - Construtor do objeto.
      * Inicia alguns atributos mais complexos.
      */
     public function __construct() {
@@ -161,65 +150,54 @@ class PBX_Rule {
     }
 
     /**
-     * Register a plugin.
-     *
+     * registerPlugin - Register a plugin
      * @param  PBX_Rule_Plugin $plugin
-     * @param  int $stackIndex Optional; stack index for plugin
+     * @param  <int> $stackIndex Optional; stack index for plugin
      * @return PBX_Rule
      */
-    public function registerPlugin(PBX_Rule_Plugin $plugin, $stackIndex = null)
-    {
+    public function registerPlugin(PBX_Rule_Plugin $plugin, $stackIndex = null) {
         $this->plugins->registerPlugin($plugin, $stackIndex);
         return $this;
     }
 
     /**
-     * Unregister a plugin.
-     *
+     * unregisterPlugin - Unregister a plugin
      * @param  string|PBX_Rule_Plugin $plugin Plugin class or object to unregister
      * @return PBX_Rule
      */
-    public function unregisterPlugin($plugin)
-    {
+    public function unregisterPlugin($plugin) {
         $this->plugins->unregisterPlugin($plugin);
         return $this;
     }
 
     /**
-     * Is a particular plugin registered?
-     *
-     * @param  string $class
-     * @return bool
+     * hasPlugin - Is a particular plugin registered?
+     * @param  <string> $class
+     * @return <boolean>
      */
-    public function hasPlugin($class)
-    {
+    public function hasPlugin($class) {
         return $this->plugins->hasPlugin($class);
     }
 
     /**
-     * Retrieve a plugin or plugins by class
-     *
-     * @param  string $class
+     * getPlugin - Retrieve a plugin or plugins by class
+     * @param  <string> $class
      * @return false|PBX_Rule_Plugin|array
      */
-    public function getPlugin($class)
-    {
+    public function getPlugin($class) {
         return $this->plugins->getPlugin($class);
     }
 
     /**
-     * Retrieve all plugins
-     *
-     * @return array
+     * getPlugins - Retrieve all plugins
+     * @return <array>
      */
-    public function getPlugins()
-    {
+    public function getPlugins() {
         return $this->plugins->getPlugins();
     }
 
     /**
-     * Adiciona Actions a fila de execução da regra.
-     *
+     * addAcao - Adiciona Actions a fila de execução da regra.
      * @param PBX_Rule_Action $acao - Ação a ser adicionada a fila de execução
      */
     public function addAcao(PBX_Rule_Action $acao) {
@@ -227,8 +205,7 @@ class PBX_Rule {
     }
 
     /**
-     * Adiciona Actions a fila de execução da regra.
-     *
+     * addAction - Adiciona Actions a fila de execução da regra.
      * @param PBX_Rule_Action $action - Ação a ser adicionada a fila de execução
      */
     public function addAction(PBX_Rule_Action $action) {
@@ -237,8 +214,7 @@ class PBX_Rule {
     }
 
     /**
-     * Adiciona elemento a lista de Destinos da regra
-     *
+     * addDst - Adiciona elemento a lista de Destinos da regra
      * Tipos válidos:
      *  R  - Ramal, aceita numero do ramal
      *  RX - Expressão Regular Asterisk
@@ -246,20 +222,18 @@ class PBX_Rule {
      *  G  - Grupo de Destino
      *  CG - Grupo de contatos
      *
-     * @param array $item array com tipo e valor do destino
+     * @param <array> $item array com tipo e valor do destino
      */
     public function addDst($item) {
-        if(is_array($item) && isset($item['type']) && isset($item['value'])) {
+        if (is_array($item) && isset($item['type']) && isset($item['value'])) {
             $this->dst[] = $item;
-        }
-        else {
+        } else {
             throw new PBX_Exception_BadArg("Argumento invalido para adicao de destino na regra {$this->getId()}: {$this->getDesc()})");
         }
     }
 
     /**
-     * Adiciona elemento a lista de origens
-     *
+     * addSrc - Adiciona elemento a lista de origens
      * Tipos válidos:
      *  R  - Ramal, aceita numero do ramal
      *  T  - Tronco, id do tronco
@@ -267,28 +241,26 @@ class PBX_Rule {
      *  X  - Qualquer Numero
      *  CG - Grupo de contatos
      *
-     * @param array $item array com o tipo e valor da origem
+     * @param <array> $item array com o tipo e valor da origem
      */
     public function addSrc($item) {
-        if(is_array($item) && isset($item['type']) && isset($item['value'])) {
+        if (is_array($item) && isset($item['type']) && isset($item['value'])) {
             $this->src[] = $item;
-        }
-        else {
+        } else {
             throw new PBX_Exception_BadArg("Argumento invalido para adicao de origem na regra {$this->getId()}: {$this->getDesc()})");
         }
     }
 
     /**
-     * Adiciona tempo na lista de tempos.
-     * @param string $time
+     * addValidTime - Adiciona tempo na lista de tempos.
+     * @param <string> $time
      */
     public function addValidTime($time) {
         $this->validade[] = $time;
     }
-    
+
     /**
-     * Adiciona dia da semana na lista de dias válidos.
-     * 
+     * addWeekDay - Adiciona dia da semana na lista de dias válidos.
      * Formato: Dia em inglês abreviado em 3 letras:
      * sun
      * mon
@@ -298,37 +270,36 @@ class PBX_Rule {
      * fri
      * sat
      *
-     * @param string $weekDay 
+     * @param <string> $weekDay 
      */
     public function addWeekDay($weekDay) {
         $weekDay = strtolower($weekDay);
 
-        if( !in_array($weekDay, array("sun", "mon", "tue", "wed", "thu", "fri", "sat")) ) {
+        if (!in_array($weekDay, array("sun", "mon", "tue", "wed", "thu", "fri", "sat"))) {
             throw new InvalidArgumentException("Dia da semana invalido");
         }
-        
-        if( !in_array($weekDay, $this->validWeekDays) ) {
+
+        if (!in_array($weekDay, $this->validWeekDays)) {
             $this->validWeekDays[] = $weekDay;
         }
     }
 
     /**
-     * Coverte expressões regulares do asterisk para o padrão posix
-     *
-     * @param expressão regular do asterisk
+     * astrule2regex - Coverte expressões regulares do asterisk para o padrão posix
+     * @param <string> #astrule - expressão regular do asterisk
      * @return regra em expressão regular padrão posix
      */
     private function astrule2regex($astrule) {
         $astrule = str_replace("*", "\*", $astrule);
         $astrule = str_replace("|", "", $astrule);
-        if(preg_match_all("#\[[^]]*\]#",$astrule, $brackets)){
+        if (preg_match_all("#\[[^]]*\]#", $astrule, $brackets)) {
             $brackets = $brackets[0];
-            foreach($brackets as $key => $value){
+            foreach ($brackets as $key => $value) {
                 $new_bracket = "[";
-                for($i = 1; $i < strlen($value)-1; $i++){
-                    $char = (substr($value,$i,1) !== false) ? substr($value,$i,1) : -1;
-                    $charnext = (substr($value,$i+1,1) !== false) ? substr($value,$i+1,1) : -1;
-                    if($char != "-" && $charnext != "-" && $i < (strlen($value)-2)){
+                for ($i = 1; $i < strlen($value) - 1; $i++) {
+                    $char = (substr($value, $i, 1) !== false) ? substr($value, $i, 1) : -1;
+                    $charnext = (substr($value, $i + 1, 1) !== false) ? substr($value, $i + 1, 1) : -1;
+                    if ($char != "-" && $charnext != "-" && $i < (strlen($value) - 2)) {
                         $new_bracket = $new_bracket . $char . "|";
                     } else {
                         $new_bracket = $new_bracket . $char;
@@ -338,45 +309,42 @@ class PBX_Rule {
             }
             $astrule = str_replace($brackets, $lists, $astrule);
         }
-        $sub  = array("_","X","Z","N", ".", "!");
-        $exp  = array("","[0-9]","[1-9]","[2-9]", "[[0-9]|.*]", ".*");
+        $sub = array("_", "X", "Z", "N", ".", "!");
+        $exp = array("", "[0-9]", "[1-9]", "[2-9]", "[[0-9]|.*]", ".*");
         $rule = str_replace($sub, $exp, $astrule);
         return "^" . $rule . "\$";
     }
 
     /**
-     * Checa se uma origem/destino casa com um numero
-     *
-     * @param string $type Tipo de origem/destino
-     * @param string $expr Expressão do tipo, se houver
-     * @param string $value Valor a ser confrontado com a expressão
-     * @return boolean Resultado da checagem
+     * checkExpr - Checa se uma origem/destino casa com um numero
+     * @param <string> $type Tipo de origem/destino
+     * @param <string> $expr Expressão do tipo, se houver
+     * @param <string> $value Valor a ser confrontado com a expressão
+     * @return <boolean> Resultado da checagem
      */
     private function checkExpr($type, $expr, $value) {
-        switch($type) {
+        switch ($type) {
             case 'RX': // Expressão Regular
                 return preg_match("/{$this->astrule2regex($expr)}/", $value);
                 break;
             case 'G':
-                if($this->request->getSrcObj() instanceof Snep_Usuario) {
+                if ($this->request->getSrcObj() instanceof Snep_Usuario) {
                     return PBX_Usuarios::hasGroupInheritance($expr, $this->request->getSrcObj()->getGroup());
-                }
-                else {
+                } else {
                     return false;
                 }
                 break;
             case 'R': // Vinda de um Ramal específico
-                return $value == $expr? true : false;
+                return $value == $expr ? true : false;
                 break;
             case 'S': // Sem destino - Válido somente para destinos (duh!).
-                return $value == 's'? true : false;
+                return $value == 's' ? true : false;
                 break;
             case 'T': // Troncos
                 $log = Snep_Logger::getInstance();
-                if( ($this->request->getSrcObj() instanceof Snep_Trunk) && $this->request->getSrcObj()->getId() == $expr) {
+                if (($this->request->getSrcObj() instanceof Snep_Trunk) && $this->request->getSrcObj()->getId() == $expr) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
                 break;
@@ -386,26 +354,25 @@ class PBX_Rule {
             case 'CG':
                 $db = Zend_Registry::get('db');
                 $select = $db->select()
-                             ->from('contacts_names')
-                             ->where("`group` = '$expr' AND (phone_1 = '$value' OR cell_1 = '$value')");
+                        ->from('contacts_names')
+                        ->where("`group` = '$expr' AND (phone_1 = '$value' OR cell_1 = '$value')");
 
                 $stmt = $db->query($select);
                 $groups = $stmt->fetchAll();
-                if( count($groups) > 0 ) {
+                if (count($groups) > 0) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
                 break;
             case "AL":
                 $aliases = PBX_ExpressionAliases::getInstance();
 
-                $expression = $aliases->get( (int)$expr );
+                $expression = $aliases->get((int) $expr);
 
                 $found = false;
                 foreach ($expression["expressions"] as $expr_value) {
-                    if(preg_match("/{$this->astrule2regex($expr_value)}/", $value)) {
+                    if (preg_match("/{$this->astrule2regex($expr_value)}/", $value)) {
                         $found = true;
                         break;
                     }
@@ -419,119 +386,144 @@ class PBX_Rule {
     }
 
     /**
-     * Limpa a lista de ações da regra
+     * cleanActionList - Limpa a lista de ações da regra
      */
     public function cleanActionsList() {
         $this->acoes = array();
     }
 
     /**
-     * Limpa lista de Validade
+     * cleanValidTimeList - Limpa lista de Validade
      */
     public function cleanValidTimeList() {
         $this->validade = array();
     }
 
     /**
-     * Limpa lista de dias da semana em que a regra é válida.
+     * cleanValidWeekList - Limpa lista de dias da semana em que a regra é válida.
      */
     public function cleanValidWeekList() {
         $this->validWeekDays = array();
     }
 
     /**
-     * Desativa a regra de negócio
+     * disable - Desativa a regra de negócio
      */
     public function disable() {
         $this->active = false;
     }
 
     /**
-     * Não permite gravação da ligação na próxima execução da regra.
+     * dontRecord - Não permite gravação da ligação na próxima execução da regra.
      */
     public function dontRecord() {
         $this->isRecording = false;
     }
 
     /**
-     * Limpa o array de destinos
+     * dstClean - Limpa o array de destinos
      */
     public function dstClean() {
         $this->dst = array();
     }
 
     /**
-     * Habilita a regra de negócio.
+     * enable - Habilita a regra de negócio.
      */
     public function enable() {
         $this->active = true;
     }
 
     /**
-     * Execute the rule
-     *
-     * This method is meant to be executed exclusively within AGI context.
+     * execute - Execute the rule
+     * This method is meant to be executed exclusively within AGI context
+     * @param <string> $origem
      */
-    public function execute() {
+    public function execute($origem) {
         $asterisk = $this->asterisk;
         $log = Zend_Registry::get('log');
 
         $to_execute = true;
         try {
             $this->plugins->startup();
-        }
-        catch(PBX_Rule_Action_Exception_StopExecution $ex) {
+        } catch (PBX_Rule_Action_Exception_StopExecution $ex) {
             $log->info("Stopping rule execution by plugin request: {$ex->getMessage()}");
             $to_execute = false;
         }
 
-        if(count($this->acoes) == 0) {
+        if (count($this->acoes) == 0) {
             $log->warn("Rule does not have any actions.");
-        }
-        else {
-            $requester = $this->request->getSrcObj();
-            if($requester instanceof Snep_Exten && $requester->isLocked()) {
-                $log->info("User $requester have padlock enabled");
-                $asterisk->stream_file('ext-disabled');
-            }
-            else {
-                if( $this->isRecording() ) {
-                    $recordApp = $this->getRecordApp();
-                    $log->info("Recording with '{$recordApp['application']}'");
-                    $this->asterisk->exec($recordApp['application'], $recordApp['options']);
+        } else {
+
+            $isagent = false;
+
+            if (class_exists("Agents_Agent") || class_exists("Agents_Manager")) {
+
+                //verifica se origem é agente ou ramal
+                $isagent = self::isAgent($origem);
+
+                if ($isagent == true) {
+
+                    //Busca último evento do agente
+                    $db = Zend_Registry::get('db');
+
+                    $select = "SELECT event FROM `agent_availability` WHERE agent='$origem' order by date DESC limit 1; ";
+                    $result = $db->query($select)->fetch();
+                    $event = $result['event'];
+
+                    //caso seja pausa exibe mensagem
+                    if ($event != 1 && $event != 2 && $event != 4) {
+
+                        $log->info("User $origem have padlock enabled");
+                        $asterisk->stream_file('ext-disabled');
+                    } else {
+                        // Efetua ligação caso agente não esteja pausado
+                        $isagent = false;
+                    }
                 }
+            }
 
-                for($priority=0; $priority < count($this->acoes) && $to_execute; $priority++) {
-                    $acao = $this->acoes[$priority];
+            // Se origem é ramal
+            if ($isagent == false) {
 
-                    $log->debug(sprintf("Executing action %d-%s", $priority, get_class($acao)));
-                    try {
-                        $this->plugins->preExecute($priority);
-                        $acao->execute($asterisk, $this->request);
+                $requester = $this->request->getSrcObj();
+                if ($requester instanceof Snep_Exten && $requester->isLocked()) {
+                    $log->info("User $requester have padlock enabled");
+                    $asterisk->stream_file('ext-disabled');
+                } else {
+                    if ($this->isRecording()) {
+                        $recordApp = $this->getRecordApp();
+                        $log->info("Recording with '{$recordApp['application']}'");
+                        $this->asterisk->exec($recordApp['application'], $recordApp['options']);
                     }
-                    catch(PBX_Exception_AuthFail $ex) {
-                        $log->info("Stopping rule. Failed to authenticate extension $priority-" . get_class($acao) . ". Response: {$ex->getMessage()}");
-                        $to_execute = false;
-                    }
-                    catch(PBX_Rule_Action_Exception_StopExecution $ex) {
-                        $log->info("Stopping rule execution by action request: $priority-" . get_class($acao));
-                        $to_execute = false;
-                    }
-                    catch(PBX_Rule_Action_Exception_GoTo $goto) {
-                        $priority = $goto->getIndex() -1;
-                        $log->info("Deviating to action {$goto->getIndex()}.");
-                    }
-                    catch(Exception $ex) {
-                        $log->crit("Failure on execute action $priority-" . get_class($acao) ." of rule $this->id-$this");
-                        $log->crit($ex);
-                    }
-                    
-                    try {
-                        $this->plugins->postExecute($priority);
-                    }
-                    catch(PBX_Rule_Action_Exception_StopExecution $ex) {
-                        $log->info("Stopping execution by plugin request: {$ex->getMessage()}");
-                        $to_execute = false;
+
+                    for ($priority = 0; $priority < count($this->acoes) && $to_execute; $priority++) {
+                        $acao = $this->acoes[$priority];
+
+                        $log->debug(sprintf("Executing action %d-%s", $priority, get_class($acao)));
+                        try {
+                            $this->plugins->preExecute($priority);
+                            $acao->execute($asterisk, $this->request);
+                        } catch (PBX_Exception_AuthFail $ex) {
+                            $log->info("Stopping rule. Failed to authenticate extension $priority-" . get_class($acao) . ". Response: {$ex->getMessage()}");
+                            $to_execute = false;
+                        } catch (PBX_Rule_Action_Exception_StopExecution $ex) {
+                            $log->info("Stopping rule execution by action request: $priority-" . get_class($acao));
+                            $to_execute = false;
+                        } catch (PBX_Rule_Action_Exception_GoTo $goto) {
+                            $priority = $goto->getIndex() - 1;
+                            $log->info("Deviating to action {$goto->getIndex()}.");
+                        } catch (Exception $ex) {
+                            $log->crit("Failure on execute action $priority-" . get_class($acao) . " of rule $this->id-$this");
+                            $log->crit($ex);
+                        }
+
+                        try {
+                            $this->plugins->postExecute($priority);
+                        } catch (PBX_Rule_Action_Exception_StopExecution $ex) {
+                            $log->info("Stopping execution by plugin request: {$ex->getMessage()}");
+                            $to_execute = false;
+                        }
                     }
                 }
             }
@@ -540,9 +532,41 @@ class PBX_Rule {
     }
 
     /**
-     * Retorna a ação da regra pelo seu índice
-     *
-     * @param int $index
+     * isAgent - Verify if src is agent
+     * @param <string> $origem
+     * @return <boolean>
+     */
+    public static function isAgent($origem) {
+
+        $agentFile = '/etc/asterisk/snep/snep-agents.conf';
+        $agents = explode("\n", file_get_contents($agentFile));
+        $agentsData = array();
+
+        foreach ($agents as $agent) {
+            if (preg_match('/^agent/', $agent)) {
+                $info = explode(",", substr($agent, 9));
+                $agentsData[] = array('code' => $info[0], 'password' => $info[1], 'name' => $info[2]);
+            }
+        }
+        $isagent = false;
+        foreach ($agentsData as $name) {
+            if ($name["code"] == $origem) {
+                $isagent = true;
+            } else {
+                $isexten = true;
+            }
+        }
+
+        if ($isagent == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * getAcao - Retorna a ação da regra pelo seu índice
+     * @param <int> $index
      * @return PBX_Rule_Action
      */
     public function getAcao($index) {
@@ -550,59 +574,52 @@ class PBX_Rule {
     }
 
     /**
-     * Retorna a ação da regra pelo seu índice
-     *
-     * @param int $index
+     * getAction - Retorna a ação da regra pelo seu índice
+     * @param <int> $index
      * @return PBX_Rule_Action
      */
     public function getAction($index) {
-        if(isset($this->acoes[$index])) {
+        if (isset($this->acoes[$index])) {
             return $this->acoes[$index];
-        }
-        else {
+        } else {
             throw new PBX_Exception_NotFound("Nenhuma acao de indice $index na regra.");
         }
     }
 
     /**
-     * Retorna as ações que a regra de negócio executa.
-     *
-     * @return array acoes da regra
+     * getAcoes - Retorna as ações que a regra de negócio executa
+     * @return <array> acoes da regra
      */
     public function getAcoes() {
         return $this->getActions();
     }
 
     /**
-     * Retorna as ações que a regra de negócio executa.
-     *
-     * @return array acoes da regra
+     * getActions - Retorna as ações que a regra de negócio executa.
+     * @return <array> acoes da regra
      */
     public function getActions() {
         return $this->acoes;
     }
 
     /**
-     * Obter a descrição da regra de negócio
-     *
-     * @return string descrição
+     * getDesc - Obter a descrição da regra de negócio
+     * @return <string> descrição
      */
     public function getDesc() {
         return $this->desc;
     }
 
     /**
-     * Recupera a lista de destinos
-     *
-     * @return array dst
+     * getDstList - Recupera a lista de destinos
+     * @return <array> dst
      */
     public function getDstList() {
         return $this->dst;
     }
 
     /**
-     * Recupera o ID da regra de negócio
-     *
+     * getId - Recupera o ID da regra de negócio
      * @return id da regra
      */
     public function getId() {
@@ -610,42 +627,38 @@ class PBX_Rule {
     }
 
     /**
-     * Prioridade que a regra está requisitando
-     *
-     * @return int $prio
+     * getPriority - Prioridade que a regra está requisitando
+     * @return <int> $prio
      */
     public function getPriority() {
         return $this->priority;
     }
 
     /**
-     * Retorna o nome da aplicação que será usada para gravar as ligações.
-     *
-     * @return string recordApp
+     * getRecordApp - Retorna o nome da aplicação que será usada para gravar as ligações.
+     * @return <string> recordApp
      */
     public function getRecordApp() {
         return $this->recordApp;
     }
 
     /**
-     * Recupera a lista de origens
-     *
-     * @return array src
+     * getSrcList - Recupera a lista de origens
+     * @return <array> src
      */
     public function getSrcList() {
         return $this->src;
     }
 
     /**
-     * Verifica se um destino é válido para essa regra e retorna a expressão
-     * válida.
-     *
-     * @param string $dst
-     * @return null | string
+     * getValidDstExpr - Verifica se um destino é válido para essa regra 
+     * e retorna a expressão válida
+     * @param <string> $dst
+     * @return <null | string>
      */
     public function getValidDstExpr($dst) {
         foreach ($this->getDstList() as $thisdst) {
-            if($this->checkExpr($thisdst['type'], $thisdst['value'], $dst)) {
+            if ($this->checkExpr($thisdst['type'], $thisdst['value'], $dst)) {
                 return $thisdst;
             }
         }
@@ -653,15 +666,14 @@ class PBX_Rule {
     }
 
     /**
-     * Verifica se uma origem é válida para essa regra e retorna a expressão
-     * válida.
-     *
-     * @param string $src
-     * @return null | string
+     * getValidSrcExpr - Verifica se uma origem é válida para essa regra 
+     * e retorna a expressão válida
+     * @param <string> $src
+     * @return <null | string>
      */
     public function getValidSrcExpr($src) {
         foreach ($this->getSrcList() as $thissrc) {
-            if($this->checkExpr($thissrc['type'], $thissrc['value'], $src)) {
+            if ($this->checkExpr($thissrc['type'], $thissrc['value'], $src)) {
                 return $thissrc;
             }
         }
@@ -669,7 +681,7 @@ class PBX_Rule {
     }
 
     /**
-     * Pega a lista de tempos da regra
+     * getValidTimeList - Pega a lista de tempos da regra
      * @return array string $time
      */
     public function getValidTimeList() {
@@ -677,8 +689,7 @@ class PBX_Rule {
     }
 
     /**
-     * Retorna um array com os dias da semana que são válidos para essa regra
-     *
+     * getValidWeekDays - Retorna um array com os dias da semana que são válidos para essa regra
      * @return array string
      */
     public function getValidWeekDays() {
@@ -686,42 +697,39 @@ class PBX_Rule {
     }
 
     /**
-     * Checa se a regra gostari de estar ativa ou não
-     *
-     * @return boolean active
+     * isActive - Checa se a regra gostari de estar ativa ou não
+     * @return <boolean> active
      */
     public function isActive() {
         return $this->active;
     }
 
     /**
-     * Retorna a ordem de gravação da ligação.
-     *
-     * @return boolean isRecording;
+     * isRecording - Retorna a ordem de gravação da ligação.
+     * @return <boolean> isRecording;
      */
     public function isRecording() {
         return $this->isRecording;
     }
 
     /**
-     * Verifica se um destino é válido para essa regra.
-     *
-     * @param string $extension
-     * @return boolean validity
+     * isValidDst - Verifica se um destino é válido para essa regra
+     * @param <string> $extension
+     * @return <boolean> validity
      */
     public function isValidDst($extension) {
         foreach ($this->getDstList() as $dst) {
-            if( $dst['type'] == 'G' ) {
+            if ($dst['type'] == 'G') {
                 try {
                     $peer = PBX_Usuarios::get($extension);
+                } catch (PBX_Exception_NotFound $ex) {
+                    $peer = false;
                 }
-                catch(PBX_Exception_NotFound $ex) { $peer = false; }
 
-                if($peer instanceof Snep_Usuario && PBX_Usuarios::hasGroupInheritance($dst['value'], $peer->getGroup()) ){
+                if ($peer instanceof Snep_Usuario && PBX_Usuarios::hasGroupInheritance($dst['value'], $peer->getGroup())) {
                     return true;
                 }
-            }
-            else if( $this->checkExpr($dst['type'], $dst['value'], $extension) ) {
+            } else if ($this->checkExpr($dst['type'], $dst['value'], $extension)) {
                 return true;
             }
         }
@@ -729,50 +737,46 @@ class PBX_Rule {
     }
 
     /**
-     * Verifica se uma origem é válida para essa regra.
-     *
-     * @param string $src
-     * @return boolean validity
+     * isValidSrc - Verifica se uma origem é válida para essa regra.
+     * @param <string> $src
+     * @return <boolean> validity
      */
     public function isValidSrc($src) {
         foreach ($this->getSrcList() as $thissrc) {
-            if($this->checkExpr($thissrc['type'], $thissrc['value'], $src))
+            if ($this->checkExpr($thissrc['type'], $thissrc['value'], $src))
                 return true;
         }
         return false;
     }
 
     /**
-     * Verifica se um tempo é válido para execução dessa regra.
-     *
-     * @param string $time
-     * @param string $week Dia da semana em formato 3 letras e em inglês
-     * @return boolean validity
+     * isValidTime - Verifica se um tempo é válido para execução dessa regra.
+     * @param <string> $time
+     * @param <string> $week Dia da semana em formato 3 letras e em inglês
+     * @return <boolean> validity
      */
     public function isValidTime($time = null, $week = null) {
-        if($time === null) {
-            $time = date("H:i");
+        if ($time === null) {
+            $time = date("H:i:s");
         }
-        
-        if($week === null) {
+
+        if ($week === null) {
             $week = strtolower(date("D"));
-        }
-        else {
+        } else {
             $week = strtolower($week);
         }
 
-        if( in_array($week, $this->validWeekDays) ) {
+        if (in_array($week, $this->validWeekDays)) {
             foreach ($this->getValidTimeList() as $validTimeRange) {
-                $validTimeRange = explode('-',$validTimeRange);
+                $validTimeRange = explode('-', $validTimeRange);
                 $start = $validTimeRange[0];
                 $end = $validTimeRange[1];
-                if($start > $end){
-                    if($start < $time OR $time <= $end) {
+                if ($start > $end) {
+                    if ($start < $time OR $time <= $end) {
                         return true;
                     }
-                }
-                else {
-                    if($start <= $time && $time < $end) {
+                } else {
+                    if ($start <= $time && $time < $end) {
                         return true;
                     }
                 }
@@ -782,18 +786,17 @@ class PBX_Rule {
     }
 
     /**
-     * Ativa gravação da ligação na próxima execução da regra.
+     * record - Ativa gravação da ligação na próxima execução da regra.
      */
     public function record() {
         $this->isRecording = true;
     }
 
     /**
-     * Remove a ação da lista pelo índice dela.
-     *
+     * removerAcao - Remove a ação da lista pelo índice dela.
      * Remove ação do índice específicado e reordena os índices.
      *
-     * @param int $indice
+     * @param <int> $indice
      * @return PBX_Rule_Action|null Regra removida.
      */
     public function removerAcao($indice) {
@@ -801,67 +804,61 @@ class PBX_Rule {
         $removed = null;
         // Loop necessário para manter a estrutura linear organizada das ações
         foreach ($this->acoes as $i => $acao) {
-            if($i != $indice) {
+            if ($i != $indice) {
                 $nova_ordem[] = $acao;
-            }
-            else {
+            } else {
                 $removed = $acao;
                 $removed->setRegra(null);
             }
         }
         $this->acoes = $nova_ordem;
-        
+
         return $removed;
     }
 
     /**
-     * Remove um dia da semana da lista de dias válidos.
-     *
-     * @param string $weekDay
+     * removeWeekDay - Remove um dia da semana da lista de dias válidos.
+     * @param <string> $weekDay
      */
-    public function removeWeekDay( $weekDay ) {
+    public function removeWeekDay($weekDay) {
         $weekDay = strtolower($weekDay);
         $index = array_search($weekDay, $this->validWeekDays);
-        if( $index !== null ) {
+        if ($index !== null) {
             unset($this->validWeekDays[$index]);
         }
     }
 
     /**
-     * Define se a regra está ativa ou não
-     *
-     * @param boolean $active
+     * setActive - Define se a regra está ativa ou não
+     * @param <boolean> $active
      */
-    public function setActive( $active ) {
+    public function setActive($active) {
         $this->active = $active;
     }
 
     /**
-     * Fornece uma interface de conexão com o asterisk.
-     *
+     * setAsteriskInterface - Fornece uma interface de conexão com o asterisk.
      * @param Asterisk_AGI $asterisk
      */
     public function setAsteriskInterface($asterisk) {
         $this->asterisk = $asterisk;
         $this->plugins->setAsteriskInterface($asterisk);
-        if(!isset($this->request)) $this->request = $asterisk->requestObj;
+        if (!isset($this->request))
+            $this->request = $asterisk->requestObj;
     }
 
     /**
-     * Define uma descrição para a regra
-     *
-     * @param string $desc descrição
+     * setDesc - Define uma descrição para a regra
+     * @param <string> $desc descrição
      */
     public function setDesc($desc) {
         $this->desc = $desc;
     }
 
     /**
-     * Define a lista de destinos para o ramal.
-     *
+     * setDstList - Define a lista de destinos para o ramal.
      * Não há uma definição direta para que haja validação nos itens.
-     *
-     * @param array $list
+     * @param <array> $list
      */
     public function setDstList($list) {
         $this->dstClean();
@@ -871,27 +868,24 @@ class PBX_Rule {
     }
 
     /**
-     * Seta o id da regra
-     *
+     * setId - Seta o id da regra
      * Define um numero de identificação para a regra.
-     *
-     * @param int $id
+     * @param <int> $id
      */
     public function setId($id) {
         $this->id = $id;
     }
 
     /**
-     * Define uma prioridade para a regra
-     *
-     * @param int $prio
+     * setPriority - Define uma prioridade para a regra
+     * @param <int> $prio
      */
     public function setPriority($prio) {
         $this->priority = $prio;
     }
 
     /**
-     * Define o nome da aplicação que será executada para iniciar a gravação
+     * setRecordApp - Define o nome da aplicação que será executada para iniciar a gravação
      * das ligações.
      *
      * O parametro options será repassado como parametro para a aplicação de
@@ -906,8 +900,8 @@ class PBX_Rule {
      * );
      * </code>
      *
-     * @param string $recordApp Application name
-     * @param string $options Opções da applicação
+     * @param <string> $recordApp Application name
+     * @param <string> $options Opções da applicação
      */
     public function setRecordApp($recordApp, $options) {
         $this->recordApp = array(
@@ -917,8 +911,7 @@ class PBX_Rule {
     }
 
     /**
-     * Requisição de conexão para ser usado na execução da regra.
-     *
+     * setRequest - Requisição de conexão para ser usado na execução da regra.
      * @param Asterisk_AGI_Request $request
      */
     public function setRequest($request) {
@@ -926,11 +919,9 @@ class PBX_Rule {
     }
 
     /**
-     * Define a lista de origens para o ramal.
-     *
+     * setSrcList - Define a lista de origens para o ramal.
      * Não há uma definição direta para que haja validação nos itens.
-     *
-     * @param array $list
+     * @param <array> $list
      */
     public function setSrcList($list) {
         $this->srcClean();
@@ -940,16 +931,17 @@ class PBX_Rule {
     }
 
     /**
-     * Limpa o array de origens
+     * srcClean - Limpa o array de origens
      */
     public function srcClean() {
         $this->src = array();
     }
 
     /**
-     * Retorna um string imprimivel dessa regra
+     * __toString - Retorna um string imprimivel dessa regra
      */
-    public function  __toString() {
+    public function __toString() {
         return $this->desc;
     }
+
 }

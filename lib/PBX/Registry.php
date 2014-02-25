@@ -48,21 +48,18 @@ final class PBX_Registry {
 
     /**
      * Classe de interface com o banco de dados
-     *
      * @var Zend_Db_Adapter_Abstract
      */
     private $db;
 
     /**
      * Instancia única desta classe
-     *
      * @var PBX_Registry
      */
     private static $instance;
 
     /**
      * Conteúdo do contexto que está sendo processado pela classe.
-     *
      * Funciona como cache para acesso.
      * @var <array>
      */
@@ -231,7 +228,7 @@ final class PBX_Registry {
      */
     private function update() {
         $select = $this->db->select()
-                ->from('registry',array("key","value"))
+                ->from('registry', array("key", "value"))
                 ->where("context = '$this->context'");
 
         $raw_data = $this->db->query($select)->fetchAll();

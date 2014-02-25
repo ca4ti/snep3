@@ -41,7 +41,6 @@ class PBX_Dialplan {
 
     /**
      * Regra válida encontrada no ultimo parse.
-     *
      * @var PBX_Rule
      */
     protected $foundRule;

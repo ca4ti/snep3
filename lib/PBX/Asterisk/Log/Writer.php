@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -15,7 +16,6 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
-
 require_once "Zend/Log/Writer/Abstract.php";
 
 /**
@@ -34,8 +34,7 @@ class PBX_Asterisk_Log_Writer extends Zend_Log_Writer_Abstract {
     protected $asterisk;
 
     /**
-     * Construtor
-     *
+     * __construct - Construtor
      * @param Asterisk_AGI $asterisk interface de comunicação com o asterisk
      */
     public function __construct($asterisk) {
@@ -45,8 +44,7 @@ class PBX_Asterisk_Log_Writer extends Zend_Log_Writer_Abstract {
     }
 
     /**
-     * Construct a Zend_Log driver
-     *
+     * factory - Construct a Zend_Log driver
      * @param  array|Zen_Config $config
      * @return Zend_Log_FactoryInterface
      */
@@ -55,17 +53,17 @@ class PBX_Asterisk_Log_Writer extends Zend_Log_Writer_Abstract {
     }
 
     /**
-     * Escreve uma mensagem no CLI do asterisk
-     *
-     * @param  array  $event  log data event
+     * _write - Escreve uma mensagem no CLI do asterisk
+     * @param  <array>  $event  log data event
      * @return void
      */
     protected function _write($event) {
         $line = $this->_formatter->format($event);
 
         $line = trim($line, "\n"); // Removendo quebras de linha a mais
-        $line = str_replace('"','\"',$line); // Escaping "
+        $line = str_replace('"', '\"', $line); // Escaping "
 
         $this->asterisk->verbose($line);
     }
+
 }

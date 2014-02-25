@@ -31,8 +31,8 @@
 class PBX_Asterisk_Interface_VIRTUAL extends PBX_Asterisk_Interface {
 
     /**
-     * Construtor da classe
-     * @param array $config Array de configurações da interface
+     * __construct - Construtor da classe
+     * @param <array> $config Array de configurações da interface
      */
     public function __construct($config) {
         $this->tech = 'VIRTUAL';
@@ -40,19 +40,17 @@ class PBX_Asterisk_Interface_VIRTUAL extends PBX_Asterisk_Interface {
     }
 
     /**
-     * Devolve o canal que identifica essa interface no asterisk.
-     *
-     * @return string Canal
+     * getCanal - Devolve o canal que identifica essa interface no asterisk.
+     * @return <string> Canal
      */
     public function getCanal() {
         return $this->config['channel'];
     }
 
     /**
-     * Método que retorna expressão de identificação do canal no asterisk
+     * getIncomingChannel - Método que retorna expressão de identificação do canal no asterisk
      * para que se possa identificar ligações entrantes da interface.
-     *
-     * @return Expressão para identificação de chamadas
+     * @return <string> Expressão para identificação de chamadas
      */
     public function getIncomingChannel() {
         return $this->config['channel_regex'];

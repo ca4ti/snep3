@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,8 +30,8 @@
 class PBX_Asterisk_Interface_KHOMP extends PBX_Asterisk_Interface {
 
     /**
-     * Construtor da classe
-     * @param array $config Array de configurações da interface
+     * __construct - Construtor da classe
+     * @param <array> $config Array de configurações da interface
      */
     public function __construct($config) {
         $this->tech = 'KHOMP';
@@ -38,34 +39,29 @@ class PBX_Asterisk_Interface_KHOMP extends PBX_Asterisk_Interface {
     }
 
     /**
-     * Devolve o canal que identifica essa interface no asterisk.
-     *
+     * getCanal - Devolve o canal que identifica essa interface no asterisk.
      * Usado para discagem e pesquisa. Para interfaces khomp o canal é geralmente:
      * KHOMP/bXcY
-     *
      * onde X é o numero da placa e Y o canal dela
-     *
      * O canal é opcional, já que se pode ligar tanto para placa como para links.
      * Lembrando que links fazem mais sentido sendo usados em E1's.
-     *
-     * @return string Canal
+     * @return <string> Canal
      */
     public function getCanal() {
         $link = 0;
         $channel = 0;
 
-        if(isset($this->config['channel']) && $this->config['channel'] != "") {
-            if(isset($this->config['link']) && $this->config['link'] != "")
+        if (isset($this->config['channel']) && $this->config['channel'] != "") {
+            if (isset($this->config['link']) && $this->config['link'] != "")
                 $channel = $this->config['link'] * 30;
             else
                 $link = "";
             $channel = "c" . ($channel + $this->config['channel']);
         }
-        else if(isset($this->config['link']) && $this->config['link'] != "") {
+        else if (isset($this->config['link']) && $this->config['link'] != "") {
             $link = "l" . $this->config['link'];
             $channel = "";
-        }
-        else {
+        } else {
             $channel = "";
             $link = "";
         }
@@ -76,28 +72,24 @@ class PBX_Asterisk_Interface_KHOMP extends PBX_Asterisk_Interface {
     }
 
     /**
-     * Método que retorna expressão de identificação do canal no asterisk
+     * getIncomingChannel - Método que retorna expressão de identificação do canal no asterisk
      * para que se possa identificar ligações entrantes da interface.
-     *
      * Em troncos IP esse será o mesmo que o canal de saída (getCanal).
-     *
-     * @return Expressão para identificação de chamadas
+     * @return <string> $canal - Expressão para identificação de chamadas
      */
     public function getIncomingChannel() {
         $channel = 0;
 
-        if(isset($this->config['channel'])) {
+        if (isset($this->config['channel'])) {
             $channel = $this->config['channel'];
-        }
-        else if(isset($this->config['link'])) {
+        } else if (isset($this->config['link'])) {
             // Caso seja um link
-            if($this->config['link'] == 0)
+            if ($this->config['link'] == 0)
                 $channel = "[0-2]?[0-9]";
             else {
                 $channel = "[3-5][0-9]";
             }
-        }
-        else {
+        } else {
             // Caso seja a placa toda
             $channel = "[0-9]?[0-9]";
         }
@@ -106,4 +98,5 @@ class PBX_Asterisk_Interface_KHOMP extends PBX_Asterisk_Interface {
 
         return $canal;
     }
+
 }

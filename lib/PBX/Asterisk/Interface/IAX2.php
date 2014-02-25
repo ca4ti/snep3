@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -27,9 +28,10 @@
  * @author    Henrique Grolli Bassotto
  */
 class PBX_Asterisk_Interface_IAX2 extends PBX_Asterisk_Interface {
+
     /**
-     * Construtor da classe
-     * @param array $config Array de configurações da interface
+     * __construct - Construtor da classe
+     * @param <array> $config Array de configurações da interface
      */
     public function __construct($config) {
         $this->tech = 'IAX2';
@@ -43,35 +45,31 @@ class PBX_Asterisk_Interface_IAX2 extends PBX_Asterisk_Interface {
     }
 
     /**
-     * Devolve o canal que identifica essa interface no asterisk.
-     *
+     * getCanal - Devolve o canal que identifica essa interface no asterisk.
      * Usado para discagem e pesquisa. Para interfaces IAX2 o canal é geralmente:
      * IAX2/numero_interface
-     *
      * ex: para o ramal 1000
      * IAX2/1000
-     *
-     * @return string Canal
+     * @return <string> Canal
      */
     public function getCanal() {
         return $this->getTech() . "/" . $this->config['username'];
     }
 
     /**
-     * Devolve a configuração de hostname da interface.
-     *
-     * @return string host
+     * getHost - Devolve a configuração de hostname da interface.
+     * @return <string> host
      */
     public function getHost() {
         return $this->config['host'];
     }
 
     /**
-     * Devolve o usuário ao qual a interface faz ou aceita login.
-     *
-     * @return string username
+     * getUsername - Devolve o usuário ao qual a interface faz ou aceita login.
+     * @return <string> username
      */
     public function getUsername() {
         return $this->config['username'];
     }
+
 }

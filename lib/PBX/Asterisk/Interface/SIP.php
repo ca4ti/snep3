@@ -49,7 +49,6 @@ class PBX_Asterisk_Interface_SIP extends PBX_Asterisk_Interface {
      * getCanal - Devolve o canal que identifica essa interface no asterisk.
      * Usado para discagem e pesquisa. Para interfaces sip o canal é geralmente:
      * SIP/numero_interface
-     *
      * ex: para o ramal 1000
      * SIP/1000
      * @return <string> Canal

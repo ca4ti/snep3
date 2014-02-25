@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -27,102 +28,100 @@
 class Snep_Extensions {
 
     private $commitPending = false;
-
     private $commitList = array();
 
     /**
-     * Retorna um Ramal
-     *
-     * @param int $extensionId
+     * get - Retorna um Ramal
+     * @param <int> $extensionId
      * @return Snep_Exten usuario
      */
-    public function get( $extensionId ) {
+    public function get($extensionId) {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()->from('peers')->where("name = '$extensionId' AND peer_type='R'");
         $stmt = $db->query($select);
         $usuario = $stmt->fetchObject();
-        if(!$usuario) {
+        if (!$usuario) {
             throw new PBX_Exception_NotFound("Usuario $extensionId nao encontrado");
         }
-        
-        $exten =  $this->processExten($usuario);
+
+        $exten = $this->processExten($usuario);
         return $exten;
     }
 
     /**
-     * Processa dados crus da tabela no banco para instanciação de objetos de
+     * orocessExten - Processa dados crus da tabela no banco para instanciação de objetos de
      * ramais.
      *
-     * @param Object $data Resultado de um select com todas as colunas no banco
+     * @param <Object> $data Resultado de um select com todas as colunas no banco
      * de dados dos ramais.
      * @return Snep_Exten ramal criado a partir dos dados.
      */
-    private function processExten( $data ) {
+    private function processExten($data) {
         $tech = substr($data->canal, 0, strpos($data->canal, '/'));
-       
-        if( $tech == "SIP" || $tech == "IAX2" ) {
+
+        if ($tech == "SIP" || $tech == "IAX2") {
             $config = array(
                 "username" => $data->name,
-                "secret"   => $data->secret,
-                "allow"    => $data->allow,
-                "type"     => $data->type,
-                "qualify"  => $data->qualify,
+                "secret" => $data->secret,
+                "allow" => $data->allow,
+                "type" => $data->type,
+                "qualify" => $data->qualify,
                 "dtmfmode" => $data->dtmfmode,
-                "nat"      => $data->nat,
+                "directmedia" => $data->directmedia,
+                "nat" => $data->nat,
                 "call-limit" => $data->{'call-limit'}
             );
 
-            if($tech == "SIP") {
+            if ($tech == "SIP") {
                 $interface = new PBX_Asterisk_Interface_SIP($config);
-            }
-            else {
+            } else {
                 $interface = new PBX_Asterisk_Interface_IAX2($config);
             }
-        }
-        else if($tech == "VIRTUAL") {
-            $trunk = PBX_Trunks::get(substr($data->canal,strpos($data->canal, '/') +1 ));
-            $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel"=> $trunk->getInterface()->getCanal() . "/" . $exten_id));
-        }
-        else if($tech == "MANUAL") {
-            $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel"=> substr($data->canal, strpos($data->canal, '/')+1)));
-        }
-        else if($tech == "KHOMP") {
-            $khomp_id = substr($data->canal, strpos($data->canal, '/')+1);
-            $khomp_board = substr($khomp_id, 1, strpos($khomp_id, 'c')-1);
-            $khomp_channel = substr($khomp_id, strpos($khomp_id, 'c')+1);
+        } else if ($tech == "VIRTUAL") {
+            $exten_id = substr($data->canal, strpos($data->canal, '/') + 1);
+            $trunk = PBX_Trunks::get(substr($data->canal, strpos($data->canal, '/') + 1));
+            $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel" => $trunk->getInterface()->getCanal() . "/" . $exten_id));
+        } else if ($tech == "MANUAL") {
+            $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel" => substr($data->canal, strpos($data->canal, '/') + 1)));
+        } else if ($tech == "KHOMP") {
+            $khomp_id = substr($data->canal, strpos($data->canal, '/') + 1);
+            $khomp_board = substr($khomp_id, 1, strpos($khomp_id, 'c') - 1);
+            $khomp_channel = substr($khomp_id, strpos($khomp_id, 'c') + 1);
             $interface = new PBX_Asterisk_Interface_KHOMP(array("board" => $khomp_board, "channel" => $khomp_channel));
-        }
-        else {
-            throw new Exception("Tecnologia $tech desconhecida ou invalida.");
+        } else {
+            if ($data->name == "admin")
+                $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel" => "admin"));
+            else
+                throw new Exception("Tecnologia $tech desconhecida ou invalida.");
         }
 
         $exten = new Snep_Exten($data->name, $data->password, $data->callerid, $interface);
         $exten->setChannel($data->canal);
         $exten->setGroup($data->group);
 
-        if($data->authenticate) {
+        if ($data->authenticate) {
             $exten->lock();
         }
 
-        if($data->dnd) {
+        if ($data->dnd) {
             $exten->DNDEnable();
         }
 
-        if($data->sigame != "") {
+        if ($data->sigame != "") {
             $exten->setFollowMe($data->sigame);
         }
 
-        if(is_numeric($data->pickupgroup)) {
+        if (is_numeric($data->pickupgroup)) {
             $exten->setPickupGroup($data->pickupgroup);
         }
 
-        if($data->usa_vc) {
+        if ($data->usa_vc == 'yes') {
             $exten->setMailBox($data->mailbox);
             $exten->setEmail($data->email);
         }
-        
-        if($data->time_total != NULL) {
+
+        if ($data->time_total != NULL) {
             $exten->setTimeTotal($data->time_total);
             $exten->setCtrlType($data->time_chargeby);
         }
@@ -131,8 +130,7 @@ class Snep_Extensions {
     }
 
     /**
-     * Retorna todos os ramais do banco.
-     *
+     * getAll - Retorna todos os ramais do banco.
      * @return Snep_Exten[] array
      */
     public function getAll() {
@@ -145,35 +143,32 @@ class Snep_Extensions {
         $raw_data = $stmt->fetchAll();
 
         $extensions = array();
-        foreach($raw_data as $row) {
-            $extensions[] = $this->processExten( $row );
+        foreach ($raw_data as $row) {
+            $extensions[] = $this->processExten($row);
         }
 
         return $extensions;
     }
 
     /**
-     * Registra um ramal no banco de dados.
-     *
+     * register - Registra um ramal no banco de dados.
      * @param Snep_Exten $exten Ramal a ser persistido no banco.
      */
-    public function register( Snep_Exten $exten ) {
-        if($this->commitPending === false) {
+    public function register(Snep_Exten $exten) {
+        if ($this->commitPending === false) {
             $this->queueRegister($exten);
             $this->commit();
-        }
-        else {
+        } else {
             throw new Exception("Transação pendente, 'commite' antes de adicionar um ramal diretamente.");
         }
     }
 
     /**
-     * Adiciona um ramal na fila para ser adicionado em lote no banco de dados.
-     *
+     * queueRegister - Adiciona um ramal na fila para ser adicionado em lote no banco de dados.
      * @param Snep_Exten $exten
      */
-    public function queueRegister( Snep_Exten $exten ) {
-        if( array_key_exists($exten->getNumero(), $this->commitList) ) {
+    public function queueRegister(Snep_Exten $exten) {
+        if (array_key_exists($exten->getNumero(), $this->commitList)) {
             throw new Exception("Ramal $exten já está na fila para inserção no banco.");
         }
 
@@ -182,7 +177,7 @@ class Snep_Extensions {
     }
 
     /**
-     * Processa a fila de ramais para registro.
+     * commit - Processa a fila de ramais para registro.
      */
     public function commit() {
         $data = array();
@@ -192,19 +187,18 @@ class Snep_Extensions {
 
         $db = Zend_Registry::get('db');
 
-        $db->insert("peers",$data);
+        $db->insert("peers", $data);
 
         $this->commitPending = false;
     }
 
     /**
-     * Processa os dados de um objeto em um array associativo que pode ser
-     * usado para manipulação do banco de dados.
-     *
+     * ExtenDataAsArray - Processa os dados de um objeto em um array 
+     * associativo que pode ser usado para manipulação do banco de dados.
      * @param Snep_Exten $exten
-     * @return array string
+     * @return <array> string
      */
-    public function ExtenDataAsArray( Snep_Exten $exten ) {
+    public function ExtenDataAsArray(Snep_Exten $exten) {
         $extenData = array(
             "context" => "default",
             "peer_type" => "R",
@@ -227,29 +221,29 @@ class Snep_Extensions {
         /**
          * Adicionando informações específica de interface.
          */
-        if( $exten->getInterface() instanceof PBX_Asterisk_Interface_SIP ||
-            $exten->getInterface() instanceof PBX_Asterisk_Interface_IAX2) {
+        if ($exten->getInterface() instanceof PBX_Asterisk_Interface_SIP ||
+                $exten->getInterface() instanceof PBX_Asterisk_Interface_IAX2) {
             $interface = $exten->getInterface();
             $extenData['allow'] = $interface->allow;
             $extenData['type'] = $interface->type;
             $extenData['secret'] = $interface->secret;
             $extenData['qualify'] = $interface->qualify;
             $extenData['dtmfmode'] = $interface->dtmfmode;
+            $extenData['directmedia'] = $interface->directmedia ;
             $extenData['call-limit'] = $interface->{'call-limit'};
             $extenData['nat'] = $interface->nat;
         }
 
         return $extenData;
     }
-    
-        /**
-     * Processa os dados de um objeto em um array associativo que pode ser
-     * usado para manipulação do banco de dados.
-     *
+
+    /**
+     * getExtenDataAsArray - Processa os dados de um objeto em um array 
+     * associativo que pode ser usado para manipulação do banco de dados.
      * @param Snep_Exten $exten
-     * @return array string
+     * @return <array> string
      */
-    private function getExtenDataAsArray( Snep_Exten $exten ) {
+    private function getExtenDataAsArray(Snep_Exten $exten) {
         $extenData = array(
             "context" => "default",
             "peer_type" => "R",
@@ -272,8 +266,8 @@ class Snep_Extensions {
         /**
          * Adicionando informações específica de interface.
          */
-        if( $exten->getInterface() instanceof PBX_Asterisk_Interface_SIP ||
-            $exten->getInterface() instanceof PBX_Asterisk_Interface_IAX2) {
+        if ($exten->getInterface() instanceof PBX_Asterisk_Interface_SIP ||
+                $exten->getInterface() instanceof PBX_Asterisk_Interface_IAX2) {
             $interface = $exten->getInterface();
             $extenData['allow'] = $interface->allow;
             $extenData['type'] = $interface->type;
@@ -288,27 +282,26 @@ class Snep_Extensions {
     }
 
     /**
-     * Atualiza informações de um ramal registrado no banco de dados.
-     *
+     * update - Atualiza informações de um ramal registrado no banco de dados.
      * @param Snep_Exten $exten
      */
-    public function update( Snep_Exten $exten ) {
+    public function update(Snep_Exten $exten) {
         $db = Zend_Registry::get('db');
 
         $db->update("peers", $this->getExtenDataAsArray($exten), "name='{$exten->getNumero()}'");
     }
 
     /**
-     * Remove um ou mais ramais do banco de dados.
+     * delete - Remove um ou mais ramais do banco de dados.
      *
      * Para remover mais de um ramal do banco basta passar um array com todos
      * os ramais a serem removidos. Caso a operação falhe em qualquer ponto
      * nenhum ramal será removido.
      *
-     * @param string|array $exten
+     * @param <string|array> $exten
      */
-    public function delete( $exten ) {
-        if( is_array($exten) ) {
+    public function delete($exten) {
+        if (is_array($exten)) {
             $db = Zend_Registry::get("db");
             $db->beginTransaction();
 
@@ -318,14 +311,13 @@ class Snep_Extensions {
 
             try {
                 $db->commit();
-            }
-            catch( Exception $ex ) {
+            } catch (Exception $ex) {
                 $db->rollBack();
                 throw $ex;
             }
-        }
-        else {
+        } else {
             $db->delete("peers", "name='$exten'");
         }
     }
+
 }

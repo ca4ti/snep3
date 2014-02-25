@@ -37,11 +37,10 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     protected $trunkController;
 
     /**
-     * Verifica se um tronco tem permissão de efetuar ligação baseado no seu
-     * tempo.
-     *
-     * @param int $id
-     * @return boolean
+     * trunkIsAllowed - Verifica se um tronco tem permissão de efetuar 
+     * ligação baseado no seu tempo
+     * @param <int> $id
+     * @return <boolean>
      */
     protected function trunkIsAllowed($id) {
         $log = Zend_Registry::get('log');
@@ -53,11 +52,10 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * Verifica se um ramal tem permissão para efetuar ligações baseado no seu
-     * saldo de tempo.
-     *
-     * @param int $id
-     * @return boolean
+     * extensioIsAllowed - Verifica se um ramal tem permissão para efetuar 
+     * ligações baseado no seu saldo de tempo
+     * @param <int> $id
+     * @return <boolean>
      */
     protected function extensionIsAllowed($id) {
         $log = Zend_Registry::get('log');
@@ -69,10 +67,10 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * Verificamos antes de cada ação se um tronco será usado e se o
-     * ramal/tronco tem permissão de fazer essa ligação
-     *
-     * @param int $index
+     * preExecute - Verificamos antes de cada ação se um tronco será usado 
+     * e se o ramal/tronco tem permissão de fazer essa ligação
+     * @param <int> $index
+     * @throws PBX_Rule_Action_Exception_GoTo
      */
     public function preExecute($index) {
         $action = $this->rule->getAction($index);
@@ -94,10 +92,9 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * A cada ação verificamos se alguma atualização nos tempos deve ser
-     * computada e se o bloqueio deve ser feito.
-     *
-     * @param integer $index
+     * posExecute - A cada ação verificamos se alguma atualização nos tempos 
+     * deve ser computada e se o bloqueio deve ser feito
+     * @param <int> $index
      */
     public function postExecute($index) {
         $action = $this->rule->getAction($index);

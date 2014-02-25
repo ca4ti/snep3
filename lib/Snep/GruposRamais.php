@@ -36,17 +36,22 @@ class Snep_GruposRamais {
     public function __get($atributo) {
         return $this->{$atributo};
     }
-
+    
+    /**
+     * getAll - get groups
+     * @return <array> $grupos
+     */
     public function getAll() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('groups');
+                     ->from('groups')
+                     ->where("groups.name NOT IN ('NULL','all')");
         
         $stmt = $db->query($select);
         $grupos = $stmt->fetchAll();
-
+       
         return $grupos;
     }
 

@@ -49,13 +49,13 @@ class Snep_Inspector {
             $config = Zend_Registry::get('config');
             $path = $config->system->path->base . "/inspectors/";
             $classes = array();
-
+            
             foreach( scandir($path) as $file ) {
                 if( preg_match("/.*\.php$/", $file) ) {
                     include $path ."/". $file ;
                     $class = basename($file, ".php");
                     $obj = new $class;
-
+                    
                     $testData = $obj->getTests();
                     $testData["name"] = $obj->getTestName();
                     $this->inspected[$class] = $testData;
@@ -65,7 +65,7 @@ class Snep_Inspector {
                 }
             }
         }else{
-
+            
             $config = Zend_Registry::get('config');
             $path = $config->system->path->base . "/inspectors/";
             include $path ."/". $inspect .".php" ;

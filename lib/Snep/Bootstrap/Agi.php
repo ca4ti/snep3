@@ -31,24 +31,40 @@ require_once "Snep/Bootstrap.php";
 class Snep_Bootstrap_Agi extends Snep_Bootstrap {
 
     private $rulePlugins;
-
+    
+    /**
+     * getRulePlugins
+     * @return type
+     */
     public function getRulePlugins() {
         return $this->rulePlugins->getPlugins();
     }
-
+    
+    /**
+     * startAsterisk
+     */
     private function startAsterisk() {
         $agiconfig['debug'] = false;
         $agiconfig['error_handler'] = false;
         $asterisk = new Asterisk_AGI( null, $agiconfig );
         Zend_Registry::set("asterisk", $asterisk);
     }
-
+    
+    /**
+     * updateRequest
+     */
     private function updateRequest() {
         $asterisk = Zend_Registry::get('asterisk');
         $request = new PBX_Asterisk_AGI_Request($asterisk->request);
         $asterisk->requestObj = $request;
+        if($request->getOriginalCallerid() != $request->callerid) {
+            $asterisk->set_variable("CALLERID(all)", sprintf("%s <%s>", $request->origem, $request->origem));
+        }
     }
-
+    
+    /**
+     * startLogger
+     */
     private function startLogger() {
         $log = Zend_Registry::get('log');
         $asterisk = Zend_Registry::get('asterisk');
@@ -73,7 +89,10 @@ class Snep_Bootstrap_Agi extends Snep_Bootstrap {
             $console_writer->addFilter(new Zend_Log_Filter_Priority(Zend_Log::INFO));
         }
     }
-
+    
+    /**
+     * startRulePlugins
+     */
     protected function startRulePlugins() {
         $config = Zend_Registry::get('config');
         $log = Zend_Registry::get('log');
@@ -102,12 +121,16 @@ class Snep_Bootstrap_Agi extends Snep_Bootstrap {
             }
         }
     }
-
+    
+    /**
+     * boot
+     */
     public function boot() {
         set_time_limit(0);
         // Iniciando ambiente para ideal funcionamento da Lib
         $this->startAutoLoader();
         $this->startLocale();
+        $this->startModules();
 
         // Coletando informações enviadas pelo asterisk
         $this->startAsterisk();
@@ -116,7 +139,7 @@ class Snep_Bootstrap_Agi extends Snep_Bootstrap {
         $this->startLogger();
 
         // Iniciando objeto para comunicação com banco de dados
-        $this->startDatabase();
+        Snep_Db::getInstance();
 
         $this->registerCCustos();
         $this->registerQueues();
@@ -125,7 +148,7 @@ class Snep_Bootstrap_Agi extends Snep_Bootstrap {
         $this->updateRequest();
 
         // Iniciando modulos e Actions das regras de negócio
-        $this->startModules();
+      
         $this->startActions();
 
         // Coletando plugins para regras de negócio

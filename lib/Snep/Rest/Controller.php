@@ -41,7 +41,7 @@ class Snep_Rest_Controller extends Zend_Controller_Action {
     }
 
     /**
-     * Treats all the requests for GET, POST, PUT and DELETE routing for the right method.
+     * indexAction - Treats all the requests for GET, POST, PUT and DELETE routing for the right method.
      */
     public function indexAction() {
         $method = strtolower($_SERVER["REQUEST_METHOD"]);
@@ -101,55 +101,47 @@ class Snep_Rest_Controller extends Zend_Controller_Action {
     }
 
     /**
-     * Index action
-     *
+     * index - Index action
      * Same as a GET without any params.
-     *
-     * @return array $response
+     * @return <array> $response
      */
     public function index() {
         throw new Snep_Rest_Exception_MethodNotAllowed();
     }
 
     /**
-     * GET action
-     *
+     * get - GET action
      * Normal HTTP GET action with parameters set.
-     *
-     * @param Object $data
-     * @return array $response
+     * @param <Object> $data
+     * @return <array> $response
      */
     public function get($data) {
         throw new Snep_Rest_Exception_MethodNotAllowed();
     }
 
     /**
-     * HTTP POST Request
-     *
-     * @param Object $data
-     * @return array $response
+     * post - HTTP POST Request
+     * @param <Object> $data
+     * @return <array> $response
      */
     public function post($data) {
         throw new Snep_Rest_Exception_MethodNotAllowed();
     }
 
     /**
-     * HTTP PUT Request
-     *
-     * @param Object $data
-     * @return array $response
+     * put - HTTP PUT Request
+     * @param <Object> $data
+     * @return <array> $response
      */
     public function put($data) {
         throw new Snep_Rest_Exception_MethodNotAllowed();
     }
 
     /**
-     * HTTP DELETE Request
-     * 
-     * @return array $response
+     * delete - HTTP DELETE Request
+     * @return <array> $response
      */
     public function delete($data) {
         throw new Snep_Rest_Exception_MethodNotAllowed();
     }
-
 }

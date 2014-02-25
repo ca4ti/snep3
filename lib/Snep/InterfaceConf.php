@@ -28,10 +28,14 @@
  */
 class Snep_InterfaceConf {
 
+    /**
+     * loadConfFromDb
+     * @throws PBX_Exception_IO
+     */
     public static function loadConfFromDb() {
         $view = new Zend_View();
         $db = Snep_Db::getInstance();
-        
+
         foreach (array("sip", "iax2") as $tech) {
             $config = Zend_Registry::get('config');
             $asteriskDirectory = $config->system->path->asterisk->conf;
@@ -50,16 +54,16 @@ class Snep_InterfaceConf {
 
             /* Register header on output string of the file */
             $todayDate = date("d/m/Y H:m:s");
-            $header = ";------------------------------------------------------------------------------------\n";
-            $header .= "; Arquivo: snep-$tech.conf - Cadastro de ramais                                        \n";
-            $header .= ";                                                                                    \n";
+            $header = ";-----------------------------------------------------------------------------------\n";
+            $header .= "; Arquivo: snep-$tech.conf - Cadastro de ramais e Troncos                           \n";
+            $header .= ";                                                                                   \n";
             $header .= "; Atualizado em: $todayDate                                                         \n";
-            $header .= "; Copyright(c) 2008 Opens Tecnologia                                                 \n";
-            $header .= ";------------------------------------------------------------------------------------\n";
-            $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.                              \n";
-            $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de                        \n";
-            $header .= "; causar mau funcionamento do Asterisk                                               \n";
-            $header .= ";------------------------------------------------------------------------------------\n";
+            $header .= "; Copyright(c) 2008-2014 Opens Tecnologia                                           \n";
+            $header .= ";-----------------------------------------------------------------------------------\n";
+            $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.                             \n";
+            $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de                       \n";
+            $header .= "; causar mal funcionamento do Asterisk                                              \n";
+            $header .= ";-----------------------------------------------------------------------------------\n";
 
             /* query that gets information of the peers on the DB */
             $sql = "SELECT * FROM peers WHERE name != 'admin' AND canal like '" . strtoupper($tech) . "%'";
@@ -85,7 +89,9 @@ class Snep_InterfaceConf {
                         $select = $db->select()->from('trunks')->where("name = {$peer['name']}")->limit(1);
                         $trunk = $db->query($select)->fetchObject();
 
+
                         if ($trunk->type == "SNEPSIP") {
+
                             /* Assemble trunk entries */
                             $peers .= '[' . $peer['username'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";

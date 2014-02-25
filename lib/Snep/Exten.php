@@ -110,41 +110,46 @@ class Snep_Exten extends Snep_Usuario {
     }
 
     /**
-     * Formato imprimivel do ramal
-     *
-     * @return string
+     * __toString - Formato imprimivel do ramal
+     * @return <string>
      */
     public function __toString() {
         return (string) $this->numero;
     }
 
     /**
-     * Desativa DND
+     * DNDDisable - Desativa DND
      */
     public function DNDDisable() {
         $this->dnd = false;
     }
 
     /**
-     * Ativa DND
+     * DNDEnable - Ativa DND
      */
     public function DNDEnable() {
         $this->dnd = true;
     }
     
-    
+    /**
+     * getChannel
+     * @return type
+     */
     public function getChannel() {
         return $this->channel;
     }
     
+    /**
+     * setChannel
+     * @param <string> $channel
+     */
     public function setChannel($channel) {
         $this->channel = $channel;
     }
 
 
     /**
-     * Email do ramal para voicemail.
-     *
+     * getEmail - Email do ramal para voicemail.
      * @return string email
      */
     public function getEmail() {
@@ -152,25 +157,31 @@ class Snep_Exten extends Snep_Usuario {
     }
 
     /**
-     * Retorna o ramal para siga-me, se habilitado.
-     *
-     * @return string followme
+     * getFollowMe - Retorna o ramal para siga-me, se habilitado.
+     * @return <string> followme
      */
     public function getFollowMe() {
         return $this->followme;
     }
-
+    
+    /**
+     * getTimeTotal
+     * @return type
+     */
     public function getTimeTotal() {
         return $this->timeTotal;
     }
-
+    
+    /**
+     * getCtrlType
+     * @return type
+     */
     public function getCtrlType() {
         return $this->ctrlType;
     }
 
     /**
-     * Retorna a interface física do ramal.
-     *
+     * getInterface - Retorna a interface física do ramal
      * @return PBX_Asterisk_Interface interface
      */
     public function getInterface() {
@@ -179,52 +190,47 @@ class Snep_Exten extends Snep_Usuario {
     }
 
     /**
-     * Retorna a caixa de mensagem do ramal
-     *
-     * @return integer mailbox
+     * getMailBox - Retorna a caixa de mensagem do ramal
+     * @return <int> mailbox
      */
     public function getMailBox() {
         return $this->mailbox;
     }
 
     /**
-     * Retorna a que grupo de captura pertence esse ramal.
-     *
-     * @return string pickupgroup
+     * getPickupGroup - Retorna a que grupo de captura pertence esse ramal
+     * @return <string> pickupgroup
      */
     public function getPickupGroup() {
         return $this->pickupgroup;
     }
 
     /**
-     * Informa se o ramal tem ou não VoiceMail configurado.
-     *
-     * @return boolean hasVoicemail
+     * hasVoiceMail - Informa se o ramal tem ou não VoiceMail configurado
+     * @return <boolean> hasVoicemail
      */
     public function hasVoiceMail() {
         return ($this->mailbox === null) ? false : true;
     }
 
     /**
-     * Verifica se DND está ou não ativado
-     *
-     * @return boolean dnd
+     * isDNDActive - Verifica se DND está ou não ativado
+     * @return <boolean> dnd
      */
     public function isDNDActive() {
         return $this->dnd;
     }
 
     /**
-     * Verifica se o ramal está ou não bloqueado.
-     *
-     * @return boolean locked
+     * isLocked - Verifica se o ramal está ou não bloqueado.
+     * @return <boolean> locked
      */
     public function isLocked() {
         return $this->locked;
     }
 
     /**
-     * Coloca o ramal em estado de trava. O sistema pode usar esse estado para
+     * lock - Coloca o ramal em estado de trava. O sistema pode usar esse estado para
      * pedir senha antes de efetuar qualquer ação com esse ramal. (autenticação)
      */
     public function lock() {
@@ -232,26 +238,23 @@ class Snep_Exten extends Snep_Usuario {
     }
 
     /**
-     * Define um email para o ramal usar com voicemail.
-     *
-     * @param string $email
+     * setEmail - Define um email para o ramal usar com voicemail.
+     * @param <string> $email
      */
     public function setEmail($email) {
         $this->email = $email;
     }
 
     /**
-     * Define siga-me para ramal.
-     *
-     * @param string $ramal siga-me
+     * setFollowMe - Define siga-me para ramal
+     * @param <string> $ramal siga-me
      */
     public function setFollowMe($ramal) {
         $this->followme = $ramal;
     }
 
     /**
-     * Define a interface física do ramal
-     *
+     * setInterface - Define a interface física do ramal
      * @param PBX_Asterisk_Interface $interface
      */
     public function setInterface($interface) {
@@ -259,33 +262,39 @@ class Snep_Exten extends Snep_Usuario {
     }
 
     /**
-     * Define uma caixa de mensagens para o ramal.
-     *
-     * @param integer $mailbox
+     * setMailBox - Define uma caixa de mensagens para o ramal.
+     * @param <int> $mailbox
      */
     public function setMailBox($mailbox) {
         $this->mailbox = $mailbox;
     }
 
     /**
-     * Define a qual grupo de captura pertence esse usuário.
-     *
-     * @param string $group name
+     * setPIckupGroup - Define a qual grupo de captura pertence esse usuário.
+     * @param <string> $group name
      */
     public function setPickupGroup($group) {
         $this->pickupgroup = $group;
     }
-
+    
+    /**
+     * setTimeTotal
+     * @param <string> $timeTotal
+     */
     public function setTimeTotal($timeTotal) {
         $this->timeTotal = $timeTotal;
     }
-
+    
+    /**
+     * setCtrlType
+     * @param <string> $ctrl
+     */
     public function setCtrlType($ctrl) {
         $this->ctrlType = $ctrl;
     }
 
     /**
-     * Destrava o ramal
+     * unlock - Destrava o ramal
      */
     public function unlock() {
         $this->locked = false;

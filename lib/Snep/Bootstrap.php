@@ -49,7 +49,10 @@ abstract class Snep_Bootstrap {
         Zend_Registry::set('snep_version', file_get_contents($this->config->system->path->base . "/configs/snep_version"));
         Zend_Registry::set('vendor', $this->config->ambiente->emp_nome);
     }
-
+    
+    /**
+     * startLocale
+     */
     protected function startLocale() {
         require_once "Zend/Translate.php";
         // silenciando strict até arrumar zend_locale
@@ -90,11 +93,20 @@ abstract class Snep_Bootstrap {
         );
         Zend_Validate_Abstract::setDefaultTranslator($zend_validate_translator);
     }
-
+    
+    /**
+     * getConfigFile
+     * @return <object>
+     */
     public function getConfigFile() {
         return $this->configFile;
     }
-
+    
+    /**
+     * setConfigFile
+     * @param <string> $configFile
+     * @throws Exception
+     */
     protected function setConfigFile($configFile) {
         if( file_exists($configFile) ) {
             $this->configFile = $configFile;
@@ -127,7 +139,10 @@ abstract class Snep_Bootstrap {
             throw new Exception("Fatal Error: configuration file not found: $configFile");
         }
     }
-
+    
+    /**
+     * startAutoLoader
+     */
     protected function startAutoLoader() {
         require_once "Zend/Loader/Autoloader.php";
         $this->autoloader = Zend_Loader_Autoloader::getInstance();
@@ -167,7 +182,10 @@ abstract class Snep_Bootstrap {
             }
         }
     }
-
+    
+    /**
+     * startActions
+     */
     protected function startActions() {
         $config = Zend_Registry::get('config');
 
@@ -208,7 +226,10 @@ abstract class Snep_Bootstrap {
             }
         }
     }
-
+    
+    /**
+     * registerCCustos
+     */
     protected function registerCCustos() {
         $db = Zend_Registry::get("db");
         $ccustos = Snep_CentroCustos::getInstance();
@@ -224,7 +245,10 @@ abstract class Snep_Bootstrap {
             $ccustos->register(array("codigo" => $ccusto['codigo'], "nome" => $ccusto['nome']));
         }
     }
-
+    
+    /**
+     * registerQueues
+     */
     protected function registerQueues() {
         $db = Zend_Registry::get("db");
         $queues = Snep_Queues::getInstance();
@@ -240,7 +264,8 @@ abstract class Snep_Bootstrap {
     }
 
     /**
-     * Registra no autoloader os namespaces necessários para o ambiente Snep
+     * registernameSpaces - Registra no autoloader os namespaces 
+     * necessários para o ambiente Snep
      */
     protected function registerNameSpaces() {
         $autoloader = $this->autoloader;

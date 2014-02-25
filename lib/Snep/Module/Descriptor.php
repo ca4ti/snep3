@@ -72,7 +72,7 @@ class Snep_Module_Descriptor {
      * @var string
      */
     protected $author;
-
+        
     /**
      * Constructor
      *

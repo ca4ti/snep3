@@ -26,6 +26,7 @@ if($argc != 3) {
 
 try {
     $peer = PBX_Interfaces::getChannelOwner($argv[1]);
+                              
 } catch (Exception $e) {
     $asterisk->verbose("[$requestid] Failure to resolv extension: " . $e->getMessage(), 1);
     exit(1);

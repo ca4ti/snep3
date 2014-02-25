@@ -69,7 +69,7 @@ $log = Zend_Registry::get('log');
 $request = $asterisk->requestObj;
 
 $log->info("Call from $request->origem ($request->channel) to $request->destino");
-
+$origem = $request->origem;
 try {
     $dialplan = new PBX_Dialplan();
     $dialplan->setRequest($asterisk->requestObj);
@@ -108,14 +108,14 @@ if ($lastuserfield['data'] === "") {
     $filename = $lastuserfield['data'];
 }
 
-$recordPath = realpath($config->ambiente->path_voz);
+$recordPath = realpath($config->ambiente->path_voz).date("/Y-m-d");
 $regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".wav", $config->general->record->flags));
 
 $regra->setAsteriskInterface($asterisk);
 
 try {
     $log->info("Executing rule {$regra->getId()}:$regra");
-    $regra->execute();
+    $regra->execute($origem);
     $log->info("End of execution of rule {$regra->getId()}:$regra");
 } catch (PBX_Exception_AuthFail $ex) {
     $log->info("Failure to authenticate extension. Check password.");

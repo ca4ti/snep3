@@ -16,36 +16,46 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 // Tratamento de sinais vindos do asterisk
-declare(ticks = 1);
-if (function_exists('pcntl_signal')) {
-        pcntl_signal(SIGHUP,  SIG_IGN);
-}
 
 // Controle da exibição de erros
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 
-$config_file = "/var/www/snep/includes/setup.conf";
+require_once "Bootstrap.php";
+new Bootstrap();
 
-//encontrado diretórios do sistema
-if(!file_exists($config_file)) {
-    echo "VERBOSE \"FATAL ERROR: config file '$config_file' not found\" 1\n";
-    exit(1);
-}
-$config = parse_ini_file($config_file,true);
+require_once "Snep/Config.php";
+require_once "Snep/Logger.php";
+require_once "PBX/Asterisk/AGI.php";
+require_once "Zend/Console/Getopt.php";
+ob_implicit_flush(true);
 
-// Adicionando caminho de libs ao include path para autoloader trabalhar:
-set_include_path($config['system']['path.base'] . "/lib" . PATH_SEPARATOR  . get_include_path());
-$logdir = $config['system']['path.base'] . "/log";
-unset($config);
-
-require_once "Snep/Bootstrap/Agi.php";
-$bootstrap = new Snep_Bootstrap_Agi($config_file);
-$bootstrap->boot();
-
-$asterisk = Zend_Registry::get('asterisk');
-$config = Zend_Registry::get('config');
-$db = Zend_Registry::get('db');
+$config = Snep_Config::getConfig();
+$log = Snep_Logger::getInstance();
+$asterisk = PBX_Asterisk_AGI::getInstance();
+$db = Zend_Registry::get("db");
 $request = $asterisk->requestObj;
-$log = Zend_Registry::get('log');
+// Adds the modules directory to the snep module system
+//require_once "Snep/Modules.php";
+//Snep_Modules::getInstance()->addPath(APPLICATION_PATH . "/modules");
+
+// Configuração das opções da linha de comando
+try {
+    $opts = new Zend_Console_Getopt(array(
+        'version|v' => 'Prints version.',
+        'outgoing_number|o=s' => 'Define a outgoing number',
+        'xfer|x=s' => 'Replace the channel used for source identification.'
+    ));
+    $opts->parse();
+} catch (Zend_Console_Getopt_Exception $e) {
+    $log->err($e->getMessage());
+    $log->err($e->getUsageMessage());
+    exit;
+}
+Zend_Registry::set("db", Snep_Db::getInstance());
+
+if ($opts->version) {
+    echo "SNEP Version " . Zend_Registry::get('snep_version') . "\n";
+    exit;
+}

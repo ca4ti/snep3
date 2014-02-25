@@ -73,6 +73,12 @@ class DialExtension extends PBX_Rule_Action {
      * @var boolean dont_overflow
      */
     private $dont_overflow;
+     
+     /** Faz com que a regra tente resolver números de agentes.
+     * 
+     * @var boolean
+     */
+    private $resolv_agent;
 
     /**
      * @var Internacionalização
@@ -105,6 +111,7 @@ class DialExtension extends PBX_Rule_Action {
         $this->allow_voicemail = ( isset($config['allow_voicemail']) && $config['allow_voicemail'] == 'true') ? true:false;
         $this->dont_overflow   = ( isset($config['dont_overflow']) && $config['dont_overflow'] == 'true') ? true:false;
         $this->ramal           = ( isset($config['ramal']) && $config['ramal'] != "" ) ? PBX_Usuarios::get($config['ramal']) : "";
+        $this->resolv_agent    = ( isset($config['resolv_agent']) && $config['resolv_agent'] == 'true') ? true : false;
     }
 
     /**
@@ -140,6 +147,7 @@ class DialExtension extends PBX_Rule_Action {
             "dial_timeout"    => $this->dial_timeout == null ? '60' : $this->dial_timeout,
             "diff_ring"       => $this->diff_ring ? 'true' : 'false',
             "dont_overflow"   => $this->dont_overflow ? 'true' : 'false',
+            "resolv_agent"    => $this->resolv_agent ? 'true' : 'false',
             "allow_voicemail" => $this->allow_voicemail ? 'true' : 'false'
         );
 
@@ -162,9 +170,33 @@ class DialExtension extends PBX_Rule_Action {
         $diff_ring       = (isset($this->config['diff_ring']))?"<value>{$this->config['diff_ring']}</value>":"";
         $allow_voicemail = (isset($this->config['allow_voicemail']))?"<value>{$this->config['allow_voicemail']}</value>":"";
         $dont_overflow   = (isset($this->config['dont_overflow']))?"<value>{$this->config['dont_overflow']}</value>":"";
+        $resolv_agent    = (isset($this->config['resolv_agent']))?"<value>{$this->config['resolv_agent']}</value>":"";
+
+        
 
         $default_dial_timeout = isset($this->defaultConfig['dial_timeout']) ? $this->defaultConfig['dial_timeout'] : 60;
+        
+        $TAllowVoiceMail = $i18n->translate("Allow voicemail");
+        $TDial_timeout = $i18n->translate("Dial Timeout");
+        $Tinseconds = $i18n->translate("in seconds");
+        $TDial_flags = $i18n->translate("Dial Flags");
+        $TDiffer = $i18n->translate("Differ ring");
+        $TOverflow = $i18n->translate("Do not overflow (busy and no answer)");
 
+     if(class_exists("Agents_Manager")) {
+            $agent_config = <<<AGENT_CONFIG
+<boolean>
+    <id>resolv_agent</id>
+    <default>false</default>
+    <label>{$i18n->translate("Resolver Agentes")}</label>
+    $resolv_agent
+</boolean>
+AGENT_CONFIG;
+
+        }
+        else {
+            $agent_config = "";
+        }
         return <<<XML
 <params>
     <ramal>
@@ -205,6 +237,7 @@ class DialExtension extends PBX_Rule_Action {
         <label>{$i18n->translate("Do not overflow (busy and no answer)")}</label>
         $dont_overflow
     </boolean>
+    $agent_config
 </params>
 XML;
     }
@@ -229,6 +262,20 @@ XML;
 </params>
 XML;
     }
+  /**
+     * Resolve um Exten para um número de agente.
+     */
+    protected function resolvAgentExten($agent) {
+        // verificar se o agente existe
+        if(Agents_Manager::get($agent) !== null) {
+            // Verifica se está logado
+            $exten = Agents_Manager::isLogged($agent);
+            
+            if($exten !== null) {
+                return $exten;
+            }
+        }
+    }
 
     /**
      * Executa a ação.
@@ -240,7 +287,14 @@ XML;
 
         try {
             if (!$this->ramal instanceof Snep_Exten) {
-                $ramal = PBX_Usuarios::get($request->destino);
+                $exten = $request->destino;
+
+                if ($this->resolv_agent === true) {
+                    $agent_exten = $this->resolvAgentExten($exten);
+                    $exten = $agent_exten !== null ? $agent_exten : $exten;
+                }
+
+                $ramal = PBX_Usuarios::get($exten);
             }
             else {
                 $ramal = $this->ramal;

@@ -15,6 +15,8 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
+// No output buffer for real time operations
+ob_implicit_flush(true);
 // Required for signal handling below
 declare(ticks = 1);
 

@@ -32,11 +32,9 @@
 class PBX_Dialplan {
 
     /**
-     * Requisição de execução.
-     *
+     * Requisição de execução
      * Define o ambiente ao qual se encontra a central e ao qual as regras
-     * deverão ser confrontadas.
-     *
+     * deverão ser confrontadas
      * @var Asterisk_AGI_Request Request
      */
     protected $request;
@@ -49,8 +47,7 @@ class PBX_Dialplan {
     protected $foundRule;
 
     /**
-     * Retorna a regra que casou no ultimo parse executado.
-     *
+     * getLastRule - Retorna a regra que casou no ultimo parse executado
      * @return PBX_Rule
      */
     public function getLastRule() {
@@ -61,8 +58,8 @@ class PBX_Dialplan {
     }
 
     /**
-     * Executa a análise das regras para encontrar a que melhor se enquadra na
-     * requisição.
+     * parse - Executa a análise das regras para encontrar a que melhor se 
+     * enquadra na requisição
      */
     public function parse() {
         $execution_time = date("H:i");
@@ -87,9 +84,8 @@ class PBX_Dialplan {
     }
 
     /**
-     * Define o objeto de requisição a que o dialplan se submete.
-     *
-     * @param Asterisk_AGI_Request $request
+     * setRequest - Define o objeto de requisição a que o dialplan se submete
+     * @param <object> Asterisk_AGI_Request $request
      */
     public function setRequest($request) {
         $this->request = $request;

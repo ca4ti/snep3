@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -41,8 +42,7 @@ final class PBX_Registry {
 
     /**
      * Contexto que está sendo usado no registro
-     *
-     * @var string
+     * @var <string>
      */
     private $context;
 
@@ -64,130 +64,118 @@ final class PBX_Registry {
      * Conteúdo do contexto que está sendo processado pela classe.
      *
      * Funciona como cache para acesso.
-     *
-     * @var array
+     * @var <array>
      */
     private $registryData;
 
     /**
-     * Construtor de objetos de registro
-     *
-     * @param string $context
+     * __construct - Construtor de objetos de registro
+     * @param <string> $context
      */
-    private function __construct( $context ) {
+    private function __construct($context) {
         $this->db = Zend_Registry::get('db');
         $this->setContext($context);
     }
 
     /**
-     * Tornando clones privados para evitar violação de Singleton
+     * __clone - Tornando clones privados para evitar violação de Singleton
      */
-    private function __clone() { /* Nada aqui */ }
+    private function __clone() { /* Nada aqui */
+    }
 
     /**
-     * Retorna um valor do registro
-     *
-     * @param string $key chave
+     * __get - Retorna um valor do registro
+     * @param <string> $key 
      * @return mixed valor
      */
-    public function __get( $key ) {
-        if(isset($this->registryData[$key])) {
+    public function __get($key) {
+        if (isset($this->registryData[$key])) {
             return $this->registryData[$key];
-        }
-        else {
+        } else {
             throw new PBX_Exception_NotFound("Chave não existe neste contexto");
         }
     }
 
     /**
-     * Verifica se um valor existe no registro
-     *
-     * @param string $key
+     * __isset - Verifica se um valor existe no registro
+     * @param <string> $key
      * @return mixed valor
      */
-    public function  __isset( $key ) {
-        if(isset($this->registryData[$key])) {
+    public function __isset($key) {
+        if (isset($this->registryData[$key])) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     /**
-     * Seta/Atualiza um valor do registro
-     *
-     * @param string $key chave do valor
-     * @param mixed $value novo valor
+     * __set - Seta/Atualiza um valor do registro
+     * @param <string> $key 
+     * @param mixed $value 
      */
-    public function __set( $key, $value ) {
-        if( isset($this->{$key}) ) {
-            $this->db->update("registry", array("value"=>$value), "context='{$this->getContext()}' AND `key`='$key'");
-        }
-        else {
+    public function __set($key, $value) {
+        if (isset($this->{$key})) {
+            $this->db->update("registry", array("value" => $value), "context='{$this->getContext()}' AND `key`='$key'");
+        } else {
             $this->db->insert("registry", array(
                 "context" => $this->getContext(),
-                "key"     => $key,
-                "value"   => $value
+                "key" => $key,
+                "value" => $value
             ));
         }
         $this->update();
     }
 
     /**
-     * Remove um valor do registro
-     *
-     * @param string $key
+     * __unset - Remove um valor do registro
+     * @param <string> $key
      */
-    public function __unset( $key ) {
-        if( isset($this->{$key}) ) {
+    public function __unset($key) {
+        if (isset($this->{$key})) {
             $this->db->delete("registry", "context='{$this->getContext()}' AND `key`='$key'");
             $this->update();
         }
     }
 
     /**
-     * Remove um valor do registro
-     *
-     * @param string $context
-     * @param string $key
+     * delete - Remove um valor do registro
+     * @param <string> $context
+     * @param <string> $key
      */
-    public static function delete( $context, $key ) {
-        $registry = self::getInstance( $context );
+    public static function delete($context, $key) {
+        $registry = self::getInstance($context);
         $registry->setContext($context);
 
         unset($registry->{$key});
     }
 
     /**
-     * Retorna um valor do registro
-     *
-     * @param string $context contexto do registro
-     * @param string $key chave do registro
+     * get - Retorna um valor do registro
+     * @param <string> $context contexto do registro
+     * @param <string> $key chave do registro
      * @return mixed valor do registro
      */
-    public static function get( $context, $key ) {
-        $registry = self::getInstance( $context );
-        
+    public static function get($context, $key) {
+        $registry = self::getInstance($context);
+
         return $registry->{$key};
     }
 
     /**
-     * Retorna todos os valores de um contexto
-     *
-     * @param string $context
+     * getAll - Retorna todos os valores de um contexto
+     * @param <string> $context
      * @return array valores que foram encontrados no contexto
      */
-    public static function getAll( $context ) {
-        $registry = self::getInstance( $context );
+    public static function getAll($context) {
+        $registry = self::getInstance($context);
         $registry->setContext($context);
 
         return $registry->getAllValues();
     }
 
     /**
-     * Retorna um array associativo com todos os valors do atual contexto
-     *
+     * getAllValues - Retorna um array associativo com todos os valors do atual contexto
      * @return array valores
      */
     public function getAllValues() {
@@ -195,8 +183,7 @@ final class PBX_Registry {
     }
 
     /**
-     * Retorna o contexto que essa classe está usando
-     *
+     * getContext - Retorna o contexto que essa classe está usando
      * @return string contexto
      */
     public function getContext() {
@@ -204,13 +191,12 @@ final class PBX_Registry {
     }
 
     /**
-     * Retorna a instancia dessa classe
-     *
-     * @param string context
+     * getInstance - Retorna a instancia dessa classe
+     * @param <string> context
      * @return PBX_Registry instancia única desta classe
      */
-    public static function getInstance( $context ) {
-        if( !isset( self::$instance ) ) {
+    public static function getInstance($context) {
+        if (!isset(self::$instance)) {
             self::$instance = new self($context);
         }
         self::$instance->setContext($context);
@@ -218,31 +204,30 @@ final class PBX_Registry {
     }
 
     /**
-     * Armazena um valor no registro
+     * set - Armazena um valor no registro
      *
-     * @param string $context contexto do registro
-     * @param string $key chave do registro
+     * @param <string> $context contexto do registro
+     * @param <string> $key chave do registro
      * @param mixed $value valor a ser guardado
      */
-    public static function set( $context, $key, $value) {
+    public static function set($context, $key, $value) {
         $registry = self::getInstance($context);
         $registry->{$key} = $value;
     }
 
     /**
-     * Define o contexto a ser usado pela classe
-     *
-     * @param string $context novo contexto
+     * setContext - Define o contexto a ser usado pela classe
+     * @param <string> $context novo contexto
      */
-    public function setContext( $context ) {
-        if($this->getContext() != $context) {
+    public function setContext($context) {
+        if ($this->getContext() != $context) {
             $this->context = $context;
             $this->update();
         }
     }
 
     /**
-     * Atualiza o cache da classe
+     * update - Atualiza o cache da classe
      */
     private function update() {
         $select = $this->db->select()

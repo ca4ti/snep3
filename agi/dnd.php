@@ -32,6 +32,7 @@ if($argc < 2 && ($argv[1] != "enable" OR $argv[1] != "disable")) {
 $funcao = $argv[1];
 
 try {
+// $db = Zend_Registry::get("db");
     if($funcao == "enable") {
         $sql = "UPDATE `peers` SET dnd=1 WHERE name='{$asterisk->request['agi_callerid']}'";
         $db->query($sql);

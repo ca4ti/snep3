@@ -7,17 +7,23 @@ require_once 'default/model/PermissionPlugin.php';
 
 Zend_Session::start();
 
+/**
+ * Bootstrap
+ *
+ */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
-    
-        /*
+    /*
      * _initLogin - Agendamento de verificação de login
      */
+
     protected function _initLogin() {
-        
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(new Snep_AuthPlugin());
     }
-    
+
+    /**
+     * _initRouter
+     */
     protected function _initRouter() {
         $front_controller = Zend_Controller_Front::getInstance();
         $front_controller->setBaseUrl($_SERVER['SCRIPT_NAME']);
@@ -33,14 +39,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
     }
 
+    /**
+     * _initLocale
+     */
     protected function _initLocale() {
         $locale = Snep_Locale::getInstance();
         Zend_Registry::set("i18n", $locale->getZendTranslate());
     }
 
     /**
-     * Starts the system view and layout
-     *
+     * _initViewHelpers - Starts the system view and layout
      * @return Zend_View
      */
     protected function _initViewHelpers() {
@@ -63,6 +71,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         return $view;
     }
 
+    /**
+     * _initCCustos
+     */
     protected function _initCCustos() {
         $db = Snep_Db::getInstance();
         $ccustos = Snep_CentroCustos::getInstance();
@@ -79,6 +90,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
     }
 
+    /**
+     * _initQueues
+     */
     protected function _initQueues() {
         $db = Snep_Db::getInstance();
         $queues = Snep_Queues::getInstance();
@@ -93,6 +107,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
     }
 
+    /**
+     * _initLogger
+     */
     protected function _initLogger() {
         $log = Snep_Logger::getInstance();
 
@@ -108,7 +125,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     /*
-     * _initPermission - Permissionamento
+     * _initPermission - Agendamento de verificação de permissão
      */
 
     protected function _initPermission() {

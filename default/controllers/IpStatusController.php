@@ -17,9 +17,10 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 require_once "includes/AsteriskInfo.php";
+require_once "includes/functions.php";
 
 class IpStatusController extends Zend_Controller_Action {
-    
+
     /**
      * indexAction
      * @return type
@@ -37,7 +38,12 @@ class IpStatusController extends Zend_Controller_Action {
             return;
         }
 
-        $data = $astinfo->status_asterisk("database show", "", True);
+        if (!$data = ast_status("database show", "", True)) {
+            $this->_redirect("/ip-status/asterisk-error");
+            exit;
+        }
+
+
         $lines = explode("\n", $data);
         $arr = array();
 
@@ -55,214 +61,334 @@ class IpStatusController extends Zend_Controller_Action {
             }
         }
 
+        /**
+         * ramalInfo
+         * @param <String> $ramal
+         * @return <string>
+         */
+        function ramalInfo($ramal) {
+            if ($ramal['tec'] == 'SIP') {
+                if (!$info = ast_status("sip show peer {$ramal['num']}", "", True)) {
+                    display_error($LANG['msg_nosocket'], true);
+                    exit;
+                }
+
+                $return = null;
+
+                $return = array();
+
+                if (preg_match("/(\d+)/", $info, $matches)) {
+                    $return['ramal'] = $matches[0];
+                }
+                else
+                    $return['ramal'] = 'Indeterminado';
+
+                $return['tipo'] = 'SIP';
+
+                $tmp = substr($info, strpos($info, 'Addr->IP'), +35);
+                if (preg_match("#[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}# ", $tmp, $matches)) {
+                    $return['ip'] = $matches[0];
+                }
+                else
+                    $return['ip'] = 'Indeterminado';
+
+                $tmp = substr($info, strpos($info, 'Status'), +40);
+                if (preg_match("#\((.*?)\)#", $tmp, $matches))
+                    $return['delay'] = $matches[0];
+                else
+                    $return['delay'] = '---';
+
+                $tmp = substr($info, strpos($info, 'Codec Order'), +50);
+                if (preg_match("#\((.*?)\)#", $tmp, $matches)) {
+                    $return['codec'] = $matches[0];
+                    $return['codec'] = str_replace(")", "", $return['codec']);
+                    $return['codec'] = str_replace("(", "", $return['codec']);
+                    $return['codec'] = str_replace("|", ", ", $return['codec']);
+                }
+                else
+                    $return['codec'] = '---';
+
+                return $return;
+            }
+        }
+
         $ramais = array();
         foreach ($lista as $ram) {
-            $swp = $this->ramalInfo($ram);
+            $swp = ramalInfo($ram);
 
             if ($swp['ramal'] != '') {
                 $ramais[] = $swp;
             }
         }
 
-        // ---------------------------------------------------------------------
+        /**
+         * Queues
+         */
+        $filas = array();
+        $queues = Snep_IpStatus_Manager::getQueue();
 
-        $filas = $astinfo->status_asterisk("queue show", "", True);
+        foreach ($queues as $key => $val) {
 
-        $queues = array();
-        $fila = explode("\n", $filas);
-        unset($fila['0']);
-        if ($fila['1'] == 'No queues.') {
-            unset($fila['1']);
-            unset($fila['2']);
+            $queue_stat = explode("\n", ast_status("queue show " . $val['name'], "", True));
+            $calls = $ctd = 0;
+            $calls = substr($queue_stat[1], strpos($queue_stat[1], "has") + 3, 3);
+            foreach ($queue_stat as $q_key => $q_val) {
+                if ($q_key > 2) {
+                    if (preg_match('/Callers/i', $q_val)) {
+                        break;
+                    }
+                    $ctd += 1;
+                }
+            }
+            $filas[] = array('name' => $val['name'], 'calls' => $calls, 'members' => $ctd);
         }
-        $strFila = '';
 
 
-        foreach ($fila as $keyl => $vall) {
+        /**
+         * Iax2 Trunk
+         */
+        $like = 'IAX%';
+        $troncos = Snep_IpStatus_Manager::getTrunk($like);
 
-            if (!isset($queues[$strFila]['fila'])) {
+        foreach ($troncos as $val => $key) {
+            $troncos[$val]['status'] = "N.D.";
+            $troncos[$val]['latencia'] = "N.D.";
+        }
+        if (!$iax_trunk = ast_status("iax2 show peers", "", True)) {
+            display_error($LANG['msg_nosocket'], true);
+            exit;
+        }
 
-                $queues[$strFila]['fila'] = '';
-            }
+        // Define array das linhas retornadas pelo Asterisk
+        $trunksReg = explode("\n", ast_status("iax2 show registry", "", True));
 
-            if (!isset($queues[$strFila]['agent'])) {
+        // Varre troncos cadastrados no sistema 
+        foreach ($troncos as $key => $val) {
 
-                $queues[$strFila]['agent'] = '';
-            }
+            $sis_chan = $val['channel'];
+            $sis_clid = $val['callerid'];
+            $sis_host = $val['host'];
+            $sis_user = $val['username'];
+            $sis_type = $val['type'];
+            $CV = $CSS = False;
 
-            if (!isset($queues[$strFila]['status'])) {
-
-                $queues[$strFila]['status'] = '';
-            }
-
-            if (substr($vall, 0, 3) != "   " && strlen(trim($vall)) > 1) {
-
-                $strFila = substr($vall, 0, strpos($vall, " "));
-                $queues[$strFila]['fila'] = substr($vall, 0, strpos($vall, " "));
-            }
-
-            if (strpos($vall, "SIP") > 1 || strpos($vall, "IAX2") > 1 || strpos($vall, "KHOMP") > 1 || strpos($vall, "Agent") > 1) {
-
-                $d = trim($vall);
-
-                $queues[$strFila]['agent'] .= substr($d, 0, strpos($d, " ")) . "<br> ";
-
-                switch ($vall) {
-
-                    case strpos($vall, "Not in use") > 1 :
-
-                        $queues[$strFila]['status'] .= $this->view->translate('Unused') . "<br> ";
-                        break;
-
-                    case strpos($vall, "Unknown") > 1 :
-
-                        $queues[$strFila]['status'] .= $this->view->translate('Unknown') . "<br> ";
-                        break;
-
-                    case strpos($vall, "In use") > 1 :
-
-                        $queues[$strFila]['status'] .= $this->view->translate('In Use') . "<br> ";
-                        break;
-
-                    case strpos($vall, "paused") > 1 :
-
-                        $queues[$strFila]['status'] .= $this->view->translate('Paused') . "<br> ";
-                        break;
-
-                    case strpos($vall, "Unavailable") > 1 :
-
-                        $queues[$strFila]['status'] .= $this->view->translate('Unavailable') . "<br> ";
-                        break;
+            // Varre troncos com autenticacao para pegar status e latencia
+            foreach ($trunksReg as $tr_key => $tr_val) {
+                if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
+                    continue;
                 }
-            }
+                // Array individual apra cada tronco
+                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
 
-            /* -------------------------------------------------------------------------------------- */
+                $tr_user = $tr_val_ind[2];
+                $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
 
-            $trunk = $astinfo->status_asterisk("sip show registry", "", True);
+                // Verifica latencia do tronco
+                $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
 
-            $peer = $astinfo->status_asterisk("sip show peers", "", True);
+                $peer_lat = ast_status("iax2 show peer $peer_user", "Status", True);
+                $peer_lat = explode(":", $peer_lat);
 
-
-            $peers = explode("\n", $peer);
-            $trunks = explode("\n", $trunk);
-
-            $trunk_all = array();
-            $trunk_ret = array();
-
-            foreach ($trunks as $t_key => $t_val) {
-                if ($t_key > 1) {
-                    $trunk_val = strtok($t_val, ' ');
-                    $trunk_val = strtok(' ');
-
-                    if ($trunk_val != null)
-                        array_push($trunk_all, $trunk_val);
-                }
-            }
-
-            // SIP Trunks from Peer list
-            foreach ($peers as $p_key => $p_val) {
-
-                if ($p_key > 1) {
-
-                    if (preg_match_all('/^([A-Za-z0-9]+|\w+\/|\d+|\d+\.\d+\.\d+\.\d+|\d+\/)(\w+)?[ ]+(\d+\.\d+\.\d+\.\d+)[ ]+([[:alpha:]]?[[:space:]]?)*\d+[ ]+(\w+[[:space:]]?)(\(\d+ ms\))?[ ]+$/', $p_val, $match)) {
-
-                        $trunk_tmp = array();
-
-                        foreach ($trunk_all as $trunk_ip) {
-
-                            if (($trunk_ip == $match[1][0]) || ($trunk_ip == $match[2][0])) {
-
-                                array_push($trunk_tmp, $match[1][0] . $match[2][0]);
-                                array_push($trunk_tmp, $match[3][0]);
-
-                                $status = $match[5][0];
-
-                                if (!strcmp("UNREACHABLE ", $status)) {
-                                    $status = $this->view->translate("Not Registered");
-                                } elseif (!strcmp("Unmonitored ", $status)) {
-                                    $status = $this->view->translate("N/A");
-                                } elseif (!strcmp("OK ", $status)) {
-                                    $status = $this->view->translate("Registered");
-                                }
-                                array_push($trunk_tmp, $status);
-
-                                array_push($trunk_tmp, $match[6][0]);
-                            }
+                // SE    o username do BD = Username do Asterisk e
+                // E SE  o host do BD = Hostname do Asterisk  
+                // ENTÃO Define o status como sendo o State do Asterisk
+                if ($tr_user === $sis_user && $tr_host === $sis_host) {
+                    $troncos[$key]['status'] = $tr_val_ind[5];
+                    $troncos[$key]['latencia'] = $peer_lat[1];
+                } else {
+                    // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
+                    if ($sis_type == "VIRTUAL") {
+                        // Define como Username a 2a. parte do Channel
+                        $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+                        if ($virt_name === $tr_user) {
+                            $CV = True;
+                            $troncos[$key]['status'] = $tr_val_ind[5];
+                            $troncos[$key]['host'] = $tr_host;
+                            $troncos[$key]['username'] = $tr_user;
+                            $troncos[$key]['latencia'] = $peer_lat[1];
                         }
-                        array_push($trunk_ret, $trunk_tmp);
+                    } elseif ($sis_type == "SNEPIAX2") {
+                        $CSS = True;
+                        $troncos[$key]['latencia'] = $peer_lat[1];
+                    }
+                }
+            }
+            if ($sis_type == "SNEPIAX2" && !$CSS) {
+
+                // Define como Username a 2a. parte do Channel
+                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+                $iax_peer = explode("\n", ast_status("iax2 show peer $virt_name", "", True));
+                $peer_lat = implode(":", preg_grep('/Status/', $iax_peer));
+                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
+                $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
+                $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
+                $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
+                $troncos[$key]['username'] = $virt_name;
+            }
+            if ($sis_type == "VIRTUAL" && !$CV) {
+
+                // Define como Username a 2a. parte do Channel
+                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+                $iax_peer = explode("\n", ast_status("iax2 show peer $virt_name", "", True));
+                $peer_lat = implode(":", preg_grep('/Status/', $iax_peer));
+                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
+                $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
+                $peer_host = substr($peer_host, strpos($peer_host, ":") + 1);
+                $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
+                $troncos[$key]['username'] = $virt_name;
+            }
+        }
+        foreach ($troncos as $val => $key) {
+            unset($troncos[$val]['channel']);
+        }
+
+        $this->view->trunkIax = $troncos;
+
+
+        /**
+         * Trunk Sip
+         */
+        $like = 'SIP%';
+        $troncos = Snep_IpStatus_Manager::getTrunk($like);
+
+        // Popula troncos com itens faltantes do array
+        foreach ($troncos as $val => $key) {
+            $troncos[$val]['status'] = "N.D.";
+            $troncos[$val]['latencia'] = "N.D.";
+        }
+        if (!$sip_trunk = ast_status("sip show peers", "", True)) {
+            display_error($LANG['msg_nosocket'], true);
+            exit;
+        }
+
+        // Define array das linhas retornadas pelo Asterisk
+        $trunksReg = explode("\n", ast_status("sip show registry", "", True));
+
+        foreach ($troncos as $key => $val) {
+            $troncos[$key]['status'] = "";
+            $troncos[$key]['latencia'] = "";
+            $sis_chan = $val['channel'];
+            $sis_clid = $val['callerid'];
+            $sis_host = $val['host'];
+            $sis_user = $val['username'];
+            $sis_type = $val['type'];
+
+            // Varre troncos com autenticacao para pegar status e latencia
+            $CV = $CSS = False;
+            foreach ($trunksReg as $tr_key => $tr_val) {
+                if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
+                    continue;
+                }
+                // Array individual apra cada tronco
+                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
+
+                $tr_user = $tr_val_ind[1];
+                $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
+
+                // Verifica latencia do tronco
+                $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
+
+                $sip_peer = explode("\n", ast_status("sip show peer $peer_user", "", True));
+
+                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
+                $peer_lat = substr($peer_lat, strpos($peer_lat, ":") + 2);
+
+                // SE    o username do BD = Username do Asterisk e
+                // E SE  o host do BD = Hostname do Asterisk  
+                // ENTÃO Define o status como sendo o State do Asterisk
+                if ($tr_user === $sis_user && $tr_host === $sis_host) {
+                    if ($tr_val_ind[3] === "Registered")
+                        $troncos[$key]['status'] = $tr_val_ind[3];
+                    else
+                        $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
+                    $troncos[$key]['latencia'] = $peer_lat;
+                } else {
+                    // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
+                    if ($sis_type == "VIRTUAL") {
+                        // Define como Username a 2a. parte do Channel
+                        $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+
+
+
+                        if ($virt_name === $tr_user) {
+                            $CV = True;
+                            if ($tr_val_ind[3] === "Registered")
+                                $troncos[$key]['status'] = $tr_val_ind[3];
+                            else
+                                $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
+                            $troncos[$key]['host'] = $tr_host;
+                            $troncos[$key]['username'] = $tr_user;
+                            $troncos[$key]['latencia'] = $peer_lat;
+                        }
+                    } elseif ($sis_type == "SNEPSIP") {
+                        $CSS = True;
+                        $troncos[$key]['latencia'] = $peer_lat;
                     }
                 }
             }
 
-            $this->view->troncos = $trunk_ret;
+            if ($sis_type == "SNEPSIP" && !$CSS) {
 
-            /* -------------------------------------------------------------------------------------- */
-
-            $codecs = $astinfo->status_asterisk("g729 show licenses", "", True);
-
-            $arrCodecs = explode("\n", $codecs);
-
-            $codec = null;
-            if (!preg_match("/No such command/", $arrCodecs['1'])) {
-                $arrValores = explode(" ", $arrCodecs['1']);
-                $exp = explode("/", $arrValores['0']);
-                $codec = array('0' => $arrValores['3'],
-                    '1' => $exp['0'],
-                    '2' => $exp['1']
-                );
+                // Define como Username a 2a. parte do Channel
+                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+                $sip_peer = explode("\n", ast_status("sip show peer $virt_name", "", True));
+                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
+                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
+                $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
+                $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
+                $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":"));
+                $troncos[$key]['username'] = $virt_name;
             }
 
-            $this->view->filas = $queues;
-            $this->view->ramais = $ramais;
-            $this->view->codecs = $codec;
+
+            if ($sis_type == "VIRTUAL" && !$CV) {
+
+                // Define como Username a 2a. parte do Channel
+                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
+                $sip_peer = explode("\n", ast_status("sip show peer $virt_name", "", True));
+                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
+                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
+                $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
+                $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":") + 2);
+                $troncos[$key]['username'] = $virt_name;
+            }
         }
-    }
 
-    protected function ramalInfo($ramal) {
-        if ($ramal['tec'] == 'SIP') {
-
-            $astinfo = new AsteriskInfo();
-            $info = $astinfo->status_asterisk("sip show peer {$ramal['num']}", "", True);
-
-            $return = null;
-
-
-            $return = array();
-
-            if (preg_match("/(\d+)/", $info, $matches)) {
-                $return['ramal'] = $matches[0];
+        foreach ($troncos as $val => $key) {
+            unset($troncos[$val]['channel']);
+            if (trim($troncos[$val]['latencia']) === "") {
+                $troncos[$val]['latencia'] = "UNREACHABLE";
             }
-            else
-                $return['ramal'] = $this->view->translate('Undefined');
-
-            $return['tipo'] = 'SIP';
-
-            $tmp = substr($info, strpos($info, 'Addr->IP'), +35);
-            if (preg_match("#[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}# ", $tmp, $matches)) {
-                $return['ip'] = $matches[0];
+            if (trim($troncos[$val]['status']) === "") {
+                $troncos[$val]['status'] = "N.D.";
             }
-            else
-                $return['ip'] = $this->view->translate('Undefined');
-
-            $tmp = substr($info, strpos($info, 'Status'), +40);
-            if (preg_match("#\((.*?)\)#", $tmp, $matches))
-                $return['delay'] = $matches[0];
-            else
-                $return['delay'] = '---';
-
-            $tmp = substr($info, strpos($info, 'Codecs'), +50);
-            if (preg_match("#\((.*?)\)#", $tmp, $matches)) {
-                $return['codec'] = $matches[0];
-                $return['codec'] = str_replace(")", "", $return['codec']);
-                $return['codec'] = str_replace("(", "", $return['codec']);
-                $return['codec'] = str_replace("|", ", ", $return['codec']);
-            }
-            else
-                $return['codec'] = '---';
-
-
-            return $return;
         }
+
+        $this->view->troncoSip = $troncos;
+
+        /* -------------------------------------------------------------------------------------- */
+
+
+        if (!$codecs = ast_status("g729 show licenses", "", True)) {
+            display_error($LANG['msg_nosocket'], true);
+            exit;
+        }
+
+        $arrCodecs = explode("\n", $codecs);
+
+        $codec = null;
+        if (!preg_match("/No such command/", $arrCodecs['1'])) {
+            $arrValores = explode(" ", $arrCodecs['1']);
+            $exp = explode("/", $arrValores['0']);
+            $codec = array('0' => $arrValores['3'],
+                '1' => $exp['0'],
+                '2' => $exp['1']
+            );
+        }
+
+        $this->view->filas = $filas;
+        $this->view->ramais = $ramais;
+        $this->view->codecs = $codec;
     }
 
     /**

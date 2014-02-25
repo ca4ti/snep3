@@ -18,7 +18,7 @@
         </thead>
         <tr>
             <!-- Extensions -->
-            <td valign="top" width="60%">
+            <td valign="top" width="40%">
                 <table>
                     <thead>
                         <tr>
@@ -26,7 +26,6 @@
                             <td class="cen"><?php echo $this->translate("Type") ?></td>
                             <td class="esq"><?php echo $this->translate("IP Address") ?></td>
                             <td class="esq"><?php echo $this->translate("Latency") ?></td>
-                            <td class="esq"><?php echo $this->translate("Codecs") ?></td>
                         </tr>
                     </thead>
                     <?php
@@ -38,7 +37,6 @@
                                 <td class="cen"><?php echo $value['tipo'] ?></td>
                                 <td class="esq"><?php echo $value['ip'] ?></td>
                                 <td class="esq"><?php echo $value['delay'] ?></td>
-                                <td class="esq"><?php echo $value['codec'] ?></td>
                             </tr>
                             <?php
                         }
@@ -59,17 +57,18 @@
                         <tr>
                             <td class="esq"><?php echo $this->translate("Queue") ?></td>
                             <td class="esq"><?php echo $this->translate("Members") ?></td>
-                            <td class="esq"><?php echo $this->translate("Status") ?></td>
+                            <td class="esq"><?php echo $this->translate("Calls in the queue awaiting") ?></td>
                         </tr>
                     </thead>
                     <?php
                     if ($this->filas) {
                         foreach ($this->filas as $key => $value) {
                             ?>
+
                             <tr bgcolor=''>
-                                <td class="esq" style="vertical-align: top;"><?php echo $value['fila'] ?></td>
-                                <td class="esq"><?php echo $value['agent'] ?></td>
-                                <td class="esq"><?php echo $value['status'] ?></td>
+                                <td class="esq" style="vertical-align: top;"><?php echo $value['name'] ?></td>
+                                <td class="esq"><?php echo $value['members'] ?></td>
+                                <td class="esq"><?php echo $value['calls'] ?></td>
                             </tr>
                             <?php
                         }
@@ -111,22 +110,65 @@
                 </table>
                 <br />
 
-                <!-- Trunks -->
+                <!-- Trunks SIP -->
                 <table>
                     <thead>
-                    <th colspan='5'>
+                    <th colspan='6'>
                         <?php echo $this->translate("SIP Trunks") ?>
                     </th>
                     <tr>
                         <td><?php echo $this->translate("Name") ?></td>
                         <td><?php echo $this->translate("IP") ?></td>
+                        <td><?php echo $this->translate("User") ?></td>
+                        <td><?php echo $this->translate("Type") ?></td>
                         <td><?php echo $this->translate("Status") ?></td>
                         <td><?php echo $this->translate("Latency") ?></td>
                     </tr>
                     </thead>
                     <?php
-                    if ($this->troncos) {
-                        foreach ($this->troncos as $key => $value) {
+                    if ($this->troncoSip) {
+
+                        foreach ($this->troncoSip as $key => $value) {
+                            ?>
+                            <tr>
+                                <?php
+                                foreach ($value as $peerskey => $peersvalue) {
+                                    ?>
+                                    <td class="esq" style="vertical-align: top;"><?php echo $peersvalue ?><br/></td>
+                                <?php } ?>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <tr bgcolor=''>
+                            <td class="esq" colspan="4"><?php echo $this->translate("no trunk available") ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+
+                <br />
+
+                <!-- Trunks Iax2 -->
+                <table>
+                    <thead>
+                    <th colspan='6'>
+                        <?php echo $this->translate("Iax Trunks") ?>
+                    </th>
+                    <tr>
+                        <td><?php echo $this->translate("Name") ?></td>
+                        <td><?php echo $this->translate("IP") ?></td>
+                        <td><?php echo $this->translate("User") ?></td>
+                        <td><?php echo $this->translate("Type") ?></td>
+                        <td><?php echo $this->translate("Status") ?></td>
+                        <td><?php echo $this->translate("Latency") ?></td>
+                    </tr>
+                    </thead>
+                    <?php
+                    if ($this->trunkIax) {
+                        foreach ($this->trunkIax as $key => $value) {
                             ?>
                             <tr>
                                 <?php

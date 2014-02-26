@@ -27,84 +27,111 @@ class ConferenceRoomsController extends Zend_Controller_Action {
      * @var Zend_Form
      */
     protected $form;
+
     /**
      *
      * @var array
      */
     protected $forms;
 
+    /**
+     * indexAction - List Conference Rooms
+     * @return <boolean>
+     * @throws ErrorException
+     */
     public function indexAction() {
 
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Conference Rooms")
-        ));
 
         $config = Zend_Registry::get('config');
 
         $conf_app = $config->ambiente->conference_app;
 
-        for ($i=901 ; $i <= 915; $i++) {
-            
-            $salas[$i]["id"] = $i ;
-            $salas[$i]["usa_auth"] = False ;
-            $salas[$i]["authenticate"] = "" ;
-            $salas[$i]["status"] = 0 ;
-            $salas[$i]["ccustos"] = "" ;
+        for ($i = 901; $i <= 915; $i++) {
+
+            $salas[$i]["id"] = $i;
+            $salas[$i]["usa_auth"] = False;
+            $salas[$i]["authenticate"] = "";
+            $salas[$i]["status"] = 0;
+            $salas[$i]["rec"] = False;
+            $salas[$i]["ccustos"] = "";
         }
 
-        exec('cat /etc/asterisk/snep/snep-authconferences.conf | grep "^[9][0-1][0-9]"',$senhas,$err);
+        exec('cat /etc/asterisk/snep/snep-authconferences.conf | grep "^[9][0-1][0-9]"', $senhas, $err);
 
         foreach ($senhas as $value) {
-            
-            $line = explode(":",$value);
-            $salas[$line[0]]["authenticate"] = $line[1] ;
-            $salas[$line[0]]["usa_auth"] = True ;
+
+            $line = explode(":", $value);
+            $salas[$line[0]]["authenticate"] = $line[1];
+            $salas[$line[0]]["usa_auth"] = True;
         }
 
-        exec("cat /etc/asterisk/snep/snep-conferences.conf | grep 'exten => [9][0-1][0-9]' | cut -d '>' -f2",$out,$err);
+        //verifica se salas possuem gravacao
+        exec("cat /etc/asterisk/snep/snep-conferences.conf | grep 'exten => [9][0-1][0-9],n,Set(gravacao' | cut -d '>' -f2", $gravacoes, $err);
 
-        foreach ( $out as $key => $value){
+        foreach ($gravacoes as $gravacao_ => $gravacao) {
 
-            $room = explode(",",$value);
+            $item = explode(",", $gravacao);
+            $item_ = trim($item[0]);
+
+            $salas[$item_]["rec"] = true;
+        }
+
+
+        exec("cat /etc/asterisk/snep/snep-conferences.conf | grep 'exten => [9][0-1][0-9]' | cut -d '>' -f2", $out, $err);
+
+        foreach ($out as $key => $value) {
+
+            $room = explode(",", $value);
 
             if (isset($room[0])) {
-                
-                $sala = trim($room[0]) ;
+
+                $sala = trim($room[0]);
                 $salas[$sala]["status"] = 1;
+
                 (isset($salas[$sala]["ccustos"]) ? null : $salas[$sala]["ccustos"] = "");
             }
 
-            if (strpos($room[2],"accountcode") > 0) {
+            if (strpos($room[2], "accountcode") > 0) {
 
-                $ccustos = trim(substr($room[2],strpos($room[2],"=")+1,-1)) ;
+                $ccustos = trim(substr($room[2], strpos($room[2], "=") + 1, -1));
                 $salas[$sala]["ccustos"] = $ccustos;
             }
         }
+
 
         $this->view->conferenceRooms = $salas;
         $this->view->costCenter = Snep_CostCenter_Manager::getAll();
 
         if ($this->getRequest()->getPost()) {
 
-            $file_conf = "/etc/asterisk/snep/snep-conferences.conf" ;
-            $file_auth = "/etc/asterisk/snep/snep-authconferences.conf" ;
+            $file_conf = "/etc/asterisk/snep/snep-conferences.conf";
+            $file_auth = "/etc/asterisk/snep/snep-authconferences.conf";
 
             if (!is_writable($file_conf) || !is_writable($file_auth)) {
 
-                throw new ErrorException( $this->view->translate("File does not have editing permission"));
-                return False ;
+                throw new ErrorException($this->view->translate("File does not have editing permission"));
+                return False;
             }
 
-            $linhas_conf = file($file_conf) ;
-            $linhas_auth = file($file_auth) ;
+            $linhas_conf = file($file_conf);
+            $linhas_auth = file($file_auth);
 
-            $authenticate = $_POST['authenticate'] ;
-            $password = $_POST['password'] ;
-            $costCenter = $_POST['costCenter'] ;
-            $activate = $_POST['activate'] ;
+            $authenticate = $_POST['authenticate'];
 
-            $updateDate = "; Atualizado em:".date('d/m/Y H:i:s')."\n" ;
+            for ($i = 901; $i <= 915; $i++) {
+                $rec = $salas[$i]["rec"];
+                if (isset($authenticate[$i]) == 'on') {
+                    $password[$i] = $_POST['password'][$i];
+                } else {
+                    $password[$i] = '';
+                }
+            }
+
+            $costCenter = $_POST['costCenter'];
+            $activate = $_POST['activate'];
+            $rec = $_POST["rec"];
+
+            $updateDate = "; Atualizado em:" . date('d/m/Y H:i:s') . "\n";
 
             $contentAuth = ";-------------------------------------------------------------------------------\n";
             $contentAuth .= "; Arquivo: snep-authenticate.conf - Cadastro de Senhas de Cadeado\n";
@@ -152,43 +179,79 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
                 foreach ($password as $idPassword => $valuePassword) {
 
-                    if ( $valuePassword <> "" && $idActivate == $idPassword ) {
-
-                        $newPassword = $idPassword.":".$valuePassword."\n";
+                    if ($valuePassword <> "" && $idActivate == $idPassword) {
+                        if (strlen($valuePassword) != 32) {
+                            $valuePassword = md5($valuePassword);
+                        }
+                        $newPassword = $idPassword . ":" . $valuePassword . "\n";
                         $contentAuth .= $newPassword;
                     }
                 }
 
+
+
                 foreach ($costCenter as $idCostCenter => $valueCostCenter) {
 
-                    if ( $idActivate == $idCostCenter ) {
+                    if ($idActivate == $idCostCenter) {
 
-                        $contentConfe .= ";SNEP(".$idActivate."): Room added by system\n";
-                        $contentConfe .= "exten => ".$idActivate.",1,Set(CHANNEL(language)=pt_BR)\n";
+                        $contentConfe .= ";SNEP(" . $idActivate . "): Room added by system\n";
+                        $contentConfe .= "exten => " . $idActivate . ",1,Set(CHANNEL(language)=pt_BR)\n";
                     }
 
                     foreach ($password as $idPassword => $valuePassword) {
 
-                        if ( $idActivate == $idCostCenter && $idActivate == $idPassword && $valuePassword <> "" ) {
+                        if ($idActivate == $idCostCenter && $idActivate == $idPassword && $valuePassword <> "") {
 
-                            $contentConfe .= "exten => ".$idActivate.",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
+                            $contentConfe .= "exten => " . $idActivate . ",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
                         }
                     }
 
-                    if ( $idActivate == $idCostCenter ) {
+                    if ($idActivate == $idCostCenter) {
 
-                        $contentConfe .= "exten => ".$idActivate.",n,Set(CDR(accountcode)=".$valueCostCenter.")\n";
-                        $contentConfe .= "exten => ".$idActivate.",n,Conference(\${EXTEN}/S)\n";
-                        $contentConfe .= "exten => ".$idActivate.",n,Hangup\n";
-                        $contentConfe .= "\n";
+
+                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CDR(accountcode)=" . $valueCostCenter . ")\n";
+                        $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";
+                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_JOIN_SOUND=beep)\n";
+                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_MOH=default)\n";
                     }
-                }                
+                }
+                foreach ($rec as $_rec_ => $_rec) {
+
+                    if ($_rec == "") {
+                        if ($idActivate == $_rec_) {
+
+                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/var/www/snep/arquivos/$";
+                            $contentConfe .= "{UNIQUEID:0:10}_$";
+                            $contentConfe .= "{STRFTIME($";
+                            $contentConfe .= "{EPOCH},,%Y%m%d-%H%M)}_$";
+                            $contentConfe .= "{EXTEN:}_$";
+                            $contentConfe .= "{CALLERID(num)})\n";
+
+                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(CDR(userfield)=$";
+                            $contentConfe .= '{UNIQUEID:0:10}_$';
+                            $contentConfe .= '{STRFTIME($';
+                            $contentConfe .= '{EPOCH},,%Y%m%d-%H%M)}_$';
+                            $contentConfe .= '{EXTEN:}_$';
+                            $contentConfe .= "{CALLERID(num)}" . ")\n";
+
+                            $contentConfe .= "exten => " . $_rec_ . ",n,MixMonitor($";
+                            $contentConfe .= "{gravacao}.wav)\n\n";
+                        }
+                    }
+                }
+                $contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN},cM)\n";
+                $contentConfe .= "exten => " . $idActivate . ",n,Hangup\n";
+                $contentConfe .= "\n";
             }
 
-            file_put_contents($file_conf, $contentConfe );
-            file_put_contents($file_auth, $contentAuth );
-            
-            $this->_redirect( $this->getRequest()->getControllerName() );
+            file_put_contents($file_conf, $contentConfe);
+            file_put_contents($file_auth, $contentAuth);
+
+            $asterisk = PBX_Asterisk_AMI::getInstance();
+            $asterisk->Command("module reload");
+
+            $this->_redirect($this->getRequest()->getControllerName());
         }
     }
+
 }

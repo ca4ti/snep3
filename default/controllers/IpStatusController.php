@@ -364,7 +364,7 @@ class IpStatusController extends Zend_Controller_Action {
             }
         }
 
-        $this->view->troncoSip = $troncos;
+        $this->view->troncoSip  = $troncos;
 
         /* -------------------------------------------------------------------------------------- */
 

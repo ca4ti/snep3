@@ -1,7 +1,29 @@
 <?php
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
+/**
+ * controller logs of system
+ */
 class LogsController extends Zend_Controller_Action {
-
+    
+    /**
+     * indexAction - filter logs of system
+     */
     public function indexAction() {
         $this->view->breadcrumb = $this->view->translate("Status » System Logs ");
         $config = Zend_Registry::get('config');
@@ -42,13 +64,20 @@ class LogsController extends Zend_Controller_Action {
 
         $this->view->form = $form;
     }
-
+    
+    /**
+     * initLogFile - init file log
+     * @return <object> \Snep_Log
+     */
     private function initLogFile() {
         $log = new Snep_Log(Zend_Registry::get('config')->system->path->log, 'agi.log');
         
         return $log;
     }
-
+    
+    /**
+     * viewAction - List log system
+     */
     public function viewAction() {
 
         $log = $this->initLogFile();
@@ -105,7 +134,10 @@ class LogsController extends Zend_Controller_Action {
             $this->_helper->viewRenderer('error');
         }
     }
-
+    
+    /**
+     * tailAction - List log system
+     */
     public function tailAction() {
         $this->_helper->layout->disableLayout();
 

@@ -85,7 +85,10 @@ class ContactsController extends Zend_Controller_Action {
                 "css" => "includes"),
             array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
                 "display" => $this->view->translate("Export CSV"),
-                "css" => "includes")
+                "css" => "back"),
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/multiRemove/",
+                "display" => $this->view->translate("Remove multiple"),
+                "css" => "remove")
         );
     }
 
@@ -245,6 +248,61 @@ class ContactsController extends Zend_Controller_Action {
         $form->addElement(new Zend_Form_Element_File('file'));
 
         $this->view->form = $form;
+    }
+    
+    /**
+     * multiRemoveAction - Remove various contacts
+     */
+    public function multiremoveAction() {
+
+            if($this->_request->getPost()) {
+
+                if( $_POST['group'] == 'all' ) {
+                    $groups = Snep_ContactGroups_Manager::getAll();
+
+                }else{
+                    $groups = Snep_ContactGroups_Manager::get($_POST['group']);
+                }
+                
+                foreach($groups as $group ) {
+                    Snep_Contacts_Manager::removeByGroupId($group['id']);                    
+                }
+
+                $this->_redirect($this->getRequest()->getControllerName());
+
+            }else{
+
+                $this->view->message = $this->view->translate('Select a contact group to remove your contacts.');
+                $_contactGroups = Snep_ContactGroups_Manager::getAll();
+                $contactGroups = array('all' => $this->view->translate('All Groups'));
+                foreach($_contactGroups as $contactGroup) {
+                    $contactGroups[$contactGroup['id']] = $contactGroup['name'] ;
+                }
+
+                $form = new Snep_Form();
+
+                $select = new Zend_Form_Element_Select('group');
+                $select->addMultiOptions( $contactGroups )->setLabel($this->view->translate('Group'));
+                
+                $select->setDecorators(array(
+                		'ViewHelper',
+                		'Description',
+                		'Errors',
+                		array(array('elementTd' => 'HtmlTag'), array('tag' => 'div', 'class' => 'input')),
+                		array('Label', array('tag' => 'div', 'class'=>'label')),
+                		array(array('elementTr' => 'HtmlTag'), array('tag' => 'div', 'class' => 'line')),
+                ));
+                
+                $form->addElement( $select );
+                
+                
+                
+                $this->view->form = $form;
+
+                $this->renderScript("contacts/select-multi-remove.phtml");
+
+            }
+
     }
 
     /**

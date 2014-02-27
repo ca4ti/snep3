@@ -43,10 +43,10 @@
             </options>
         </city>
         <state>
-            <type>text</type>
+            <type>select</type>
             <options>
+                <required>true</required>
                 <label>State</label>
-                <description>Abbreviations only. EX: SC</description>
             </options>
         </state>
         <zipcode>
@@ -71,7 +71,7 @@
             <type>text</type>
             <options>
                 <label>Phone</label>
-                 <validators>
+                <validators>
                     <alnum>
                         <validator>Alnum</validator>
                         <options>
@@ -85,7 +85,7 @@
             <type>text</type>
             <options>
                 <label>Cellphone</label>
-                 <validators>
+                <validators>
                     <alnum>
                         <validator>Alnum</validator>
                         <options>

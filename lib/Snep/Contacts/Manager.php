@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,7 +30,9 @@
  */
 class Snep_Contacts_Manager {
 
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     /**
      * Method to get all contact
@@ -39,14 +42,14 @@ class Snep_Contacts_Manager {
         $db = Zend_registry::get('db');
 
         $select = $db->select()
-            ->from("contacts_names")
-            ->from("contacts_group", "name as groupName")
-            ->where('contacts_names.group = contacts_group.id');
+                ->from("contacts_names")
+                ->from("contacts_group", "name as groupName")
+                ->where('contacts_names.group = contacts_group.id');
 
         $stmt = $db->query($select);
         $allGroups = $stmt->fetchAll();
 
-        return $allGroups;        
+        return $allGroups;
     }
 
     /**
@@ -59,13 +62,30 @@ class Snep_Contacts_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('contacts_names')
-            ->where("contacts_names.id = ?", $id);
+                ->from('contacts_names')
+                ->where("contacts_names.id = ?", $id);
 
         $stmt = $db->query($select);
         $contacts = $stmt->fetch();
 
         return $contacts;
+    }
+
+    /**
+     * Method to get all state
+     * @return <Array>
+     */
+    public function getStates() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('ars_estado');
+
+        $stmt = $db->query($select);
+        $states = $stmt->fetchall();
+
+        return $states;
     }
 
     /**
@@ -79,18 +99,17 @@ class Snep_Contacts_Manager {
 
         print_r($contact);
 
-        $insert_data = array('id'       => $contact['id'],
-                             'name'     => $contact['name'],
-                             'address'  => $contact['address'],
-                             'city'     => $contact['city'],
-                             'state'    => $contact['state'],
-                             'cep'      => $contact['zipcode'],
-                             'phone_1'  => $contact['phone'],
-                             'cell_1'   => $contact['cell'],
-                             'group'    => $contact['group'] );
+        $insert_data = array('id' => $contact['id'],
+            'name' => $contact['name'],
+            'address' => $contact['address'],
+            'city' => $contact['city'],
+            'state' => $contact['state'],
+            'cep' => $contact['zipcode'],
+            'phone_1' => $contact['phone'],
+            'cell_1' => $contact['cell'],
+            'group' => $contact['group']);
 
         $db->insert('contacts_names', $insert_data);
-   
     }
 
     /**
@@ -99,16 +118,16 @@ class Snep_Contacts_Manager {
      */
     public function remove($id) {
 
-            $db = Zend_Registry::get('db');
+        $db = Zend_Registry::get('db');
 
-            $db->beginTransaction();
-            $db->delete('contacts_names', "id = '$id'");
+        $db->beginTransaction();
+        $db->delete('contacts_names', "id = '$id'");
 
-            try {
-                $db->commit();
-            } catch (Exception $e) {
-                $db->rollBack();
-            }        
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
     }
 
     /**
@@ -119,18 +138,17 @@ class Snep_Contacts_Manager {
 
         $db = Zend_Registry::get('db');
 
-        $update_data = array('name'     => $contact['name'],
-                             'address'  => $contact['address'],
-                             'city'     => $contact['city'],
-                             'state'    => $contact['state'],
-                             'cep'      => $contact['zipcode'],
-                             'phone_1'  => $contact['phone'],
-                             'cell_1'   => $contact['cell'],
-                             'group'    => $contact['group']);
+        $update_data = array('name' => $contact['name'],
+            'address' => $contact['address'],
+            'city' => $contact['city'],
+            'state' => $contact['state'],
+            'cep' => $contact['zipcode'],
+            'phone_1' => $contact['phone'],
+            'cell_1' => $contact['cell'],
+            'group' => $contact['group']);
 
 
         $db->update("contacts_names", $update_data, "id = '{$contact['id']}'");
-
     }
 
     /**
@@ -142,9 +160,9 @@ class Snep_Contacts_Manager {
         $db = Zend_registry::get('db');
 
         $select = $db->select()
-            ->from("contacts_names", array(' max( floor( id ) ) as id'))
-            //->order('id DESC')
-            ->limit('1');
+                ->from("contacts_names", array(' max( floor( id ) ) as id'))
+                //->order('id DESC')
+                ->limit('1');
 
         $stmt = $db->query($select);
         $lastId = $stmt->fetch();
@@ -152,4 +170,5 @@ class Snep_Contacts_Manager {
 
         return $return;
     }
+
 }

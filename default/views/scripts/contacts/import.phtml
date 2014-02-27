@@ -1,5 +1,12 @@
-<div style='text-align: center;'>
-	<?php echo $this->message ?>
-	</br></br></br>
+<?php
+$this->headLink()->appendStylesheet($this->baseUrl() . '/modules/default/css/main.css');
+?>
+
+<div class="form_element">
+	<h4><?php echo $this->message ?></h4>
 </div>
-<?php echo $this->form ?>
+        
+<div style='text-align: center;'>        
+        <?php echo $this->form ?>
+</div>
+

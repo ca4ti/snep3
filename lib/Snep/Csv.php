@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *  Para território Brasileiro leia LICENCA_BR.txt
@@ -31,7 +32,9 @@
  */
 class Snep_Csv {
 
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     /**
      *
@@ -39,30 +42,34 @@ class Snep_Csv {
      * @param <bool> $header
      * @return string 
      */
-    public function generate($data, $header = true, $title = null) {
+    public function generate($data, $header = true) {
 
-        $indexes = array();
-        $values = "";
-        foreach($data as $k => $registers) {
+        $indexes = null;
+        $values = null;
+        foreach ($data as $k => $registers) {
 
-            if(is_null($indexes)) {
+            if (is_array($header)) {
+                $indexes = $header;
+            } else {
                 $indexes = array_keys($registers);
             }
-            $values .= preg_replace("/(\r|\n)+/", "", implode(",", $registers) ) ;
+
+            $values .= preg_replace("/(\r|\n)+/", "", implode(",", $registers));
             $values .= "\n";
         }
 
         $headers = array();
-        foreach($indexes as $i => $v) {
-             if ($title){
-                 $headers[$v] = $title[$v];
-             }else{
-                 $headers[$v] = $v;
-             }
+        foreach ($indexes as $i => $v) {
+
+            if (is_array($header)) {
+                $headers[$v] = $v;
+            } else {
+                $headers[$i] = $i;
+            }
         }
 
-        if($header) {
-            $output = implode(",", $headers ) . "\n";
+        if ($header) {
+            $output = implode(",", $headers) . "\n";
         }
 
         $output .= $values;
@@ -70,3 +77,5 @@ class Snep_Csv {
     }
 
 }
+
+?>

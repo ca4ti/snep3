@@ -853,7 +853,7 @@ select
 }
 
 .snep_form_element input[type='text'], .snep_form_element input[type='password'] {
-    width: 265px;
+    width: 230px;
 }
 
 .snep_form table {

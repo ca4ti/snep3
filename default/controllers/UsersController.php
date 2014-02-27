@@ -75,7 +75,11 @@ class UsersController extends Zend_Controller_Action {
         $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
 
         $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
+        $this->view->filter = array(
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
+                "display" => $this->view->translate("Export CSV"),
+                "css" => "back"),
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
                 "display" => $this->view->translate("Add User"),
                 "css" => "include"));
     }
@@ -190,13 +194,13 @@ class UsersController extends Zend_Controller_Action {
                 if (strlen($dados['password']) != 32) {
                     $dados['password'] = md5($dados['password']);
                 }
-                
+
                 // Caso seja admin, recebe profile default
-                if($id == 1){
+                if ($id == 1) {
                     $dados['group'] = 1;
                 }
-                
-                
+
+
                 // Ao editar grupo, o usuario perde as permissões individuais
                 if ($idProfile != $dados['group']) {
 
@@ -367,6 +371,30 @@ class UsersController extends Zend_Controller_Action {
             }
 
             $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
+        }
+    }
+
+    /**
+     * exportAction - Export contacts for CSV file.
+     */
+    public function exportAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Users"),
+                    $this->view->translate("Export CSV")
+        ));
+
+        $ie = new Snep_CsvIE('users');
+        if ($this->_request->getParam('download')) {
+            $this->_helper->layout()->disableLayout();
+            $this->_helper->viewRenderer->setNoRender(true);
+
+            $ie->export();
+        } else {
+            $this->view->form = $ie->exportResult();
+            $this->view->title = "Export";
+            $this->render('export');
         }
     }
 

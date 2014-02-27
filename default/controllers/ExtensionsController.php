@@ -1,4 +1,5 @@
 <?php
+
 /*
  *  This file is part of SNEP.
  *
@@ -35,32 +36,32 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $config = Zend_Registry::get('config');
         $asteriskDirectory = $config->system->path->asterisk->conf;
-        
+
         foreach ($files as $file => $status) {
             $files[$file] = is_writable($asteriskDirectory . "/snep/" . $file);
-            if($files[$file] === false && $all_writable === true) {
+            if ($files[$file] === false && $all_writable === true) {
                 $all_writable = false;
             }
         }
 
         $this->view->all_writable = $all_writable;
-        if(!$all_writable) {
+        if (!$all_writable) {
             $this->view->writable_files = $files;
         }
     }
 
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extensions")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extensions")
         ));
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
         $select = $db->select()->from("peers", array(
-            "id"      => "id",
-            "exten"   => "name",
-            "name"    => "callerid",
+            "id" => "id",
+            "exten" => "name",
+            "name" => "callerid",
             "channel" => "canal",
             "group"
         ));
@@ -104,9 +105,12 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $this->view->form_filter = $filter;
         $this->view->filter = array(
-            /*array("url" => $baseUrl . "/extensions/multiadd",
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
+                "display" => $this->view->translate("Export CSV"),
+                "css" => "back"),
+            array("url" => $baseUrl . "/extensions/multiadd",
                 "display" => $this->view->translate("Add Multiple Extensions"),
-                "css" => "includes"),*/
+                "css" => "includes"),
             array("url" => $baseUrl . "/extensions/add",
                 "display" => $this->view->translate("Add Extension"),
                 "css" => "include")
@@ -116,27 +120,27 @@ class ExtensionsController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extensions"),
-            $this->view->translate("Add Extension")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extensions"),
+                    $this->view->translate("Add Extension")
         ));
         $this->view->form = $this->getForm();
-        if(!$this->view->all_writable) {
+        if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
         }
         $this->view->boardData = $this->boardData;
 
         if ($this->getRequest()->isPost()) {
-            
-             if (key_exists('virtual_error', $postData)){
-                    $this->view->error = "There's no trunks registered on the system. Try a different technology";
-                    $this->view->form->valid(false);
-                    }
-                    
+
+            if (key_exists('virtual_error', $postData)) {
+                $this->view->error = "There's no trunks registered on the system. Try a different technology";
+                $this->view->form->valid(false);
+            }
+
 
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
-                
+
                 $ret = $this->execAdd($postData);
 
                 if (!is_string($ret)) {
@@ -154,14 +158,14 @@ class ExtensionsController extends Zend_Controller_Action {
     public function editAction() {
         $id = $this->_request->getParam("id");
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extensions"),
-            $this->view->translate("Edit %s", $id)
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extensions"),
+                    $this->view->translate("Edit %s", $id)
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
-        if(!$this->view->all_writable) {
+        if (!$this->view->all_writable) {
             $form->getElement("submit")->setAttrib("disabled", "disabled");
         }
         $this->view->form = $form;
@@ -298,7 +302,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $khompChannel = substr($khompInfo, strpos($khompInfo, 'c') + 1);
 
                 $khompInfo = new PBX_Khomp_Info();
-                
+
                 if ($khompInfo->hasWorkingBoards()) {
                     foreach ($khompInfo->boardInfo() as $board) {
                         if (preg_match("/KFXS/", $board['model'])) {
@@ -431,10 +435,9 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $advEmail = $formData["advanced"]["email"];
 
-        if($techType == "sip" || $techType == "iax2") {
+        if ($techType == "sip" || $techType == "iax2") {
             $allow = sprintf("%s;%s;%s", $formData[$techType]['codec'], $formData[$techType]['codec1'], $formData[$techType]['codec2']);
-        }
-        else {
+        } else {
             $allow = "ulaw";
         }
 
@@ -467,7 +470,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "'$extenPickGrp', $advTimeTotal, '$advCtrlType' " . $sqlDefaultValues;
             $sql.= ")";
         }
-        
+
         $stmt = $db->query($sql);
 
         $idExten = $db->lastInsertId();
@@ -552,7 +555,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "iax2"), "iax2");
             $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->manual, "manual"), "manual");
             $subFormVirtual = new Snep_Form_SubForm(null, $form_xml->virtual, "virtual");
-            if(PBX_Trunks::getAll() == null){
+            if (PBX_Trunks::getAll() == null) {
                 $subFormVirtual->removeElement('virtual');
                 $subFormVirtual->addElement(new Snep_Form_Element_Html("extensions/trunk_error.phtml", "err", false, null, "virtual_error"));
             }
@@ -576,7 +579,6 @@ class ExtensionsController extends Zend_Controller_Action {
                 $subFormKhomp->getElement('channel')->setRegisterInArrayValidator(false);
                 $boardTmp = Zend_Json_Encoder::encode($boardList);
                 $this->boardData = $boardTmp;
-                
             } else {
                 $subFormKhomp->removeElement('board');
                 $subFormKhomp->removeElement('channel');
@@ -620,7 +622,6 @@ class ExtensionsController extends Zend_Controller_Action {
                 //$subFormKhomp->getElement('channel')->setRegisterInArrayValidator(false);
                 $boardTmp = Zend_Json_Encoder::encode($boardList);
                 $this->boardData = $boardTmp;
-
             } else {
                 $subFormKhomp->removeElement('board');
                 $subFormKhomp->removeElement('channel');
@@ -634,120 +635,150 @@ class ExtensionsController extends Zend_Controller_Action {
         return $this->form;
     }
 
+    /**
+     * exportAction - Export CSV
+     */
+    public function exportAction() {
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension"),
+                    $this->view->translate("Export")
+        ));
+
+        $ie = new Snep_CsvIE('peers');
+        if ($this->_request->getParam('download')) {
+            $this->_helper->layout()->disableLayout();
+            $this->_helper->viewRenderer->setNoRender(true);
+
+            $ie->export();
+        } else {
+            $this->view->form = $ie->exportResult();
+            $this->view->title = "Export";
+            $this->render('import-export');
+        }
+    }
+
     public function multiaddAction() {
 
-        $this->view->breadcrumb = $this->view->translate("Manage » Extensions » Add Multiple Extension");
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extensions"),
+                    $this->view->translate("Add Multiples Extensions")
+        ));
 
         $this->view->form = $this->getmultiaddForm();
-        if(!$this->view->all_writable) {
+        if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
         }
         $this->view->boardData = $this->boardData;
 
         if ($this->getRequest()->isPost()) {
+            $postData = $this->_request->getParams();
 
             if ($this->view->form->isValid($_POST)) {
 
-                $postData = $this->_request->getParams();
 
                 $range = explode(";", $postData["extension"]["exten"]);
 
-                $dataForm = array();
-                $dataForm["controller"] = $postData["controller"];
-                $dataForm["action"] = $postData["action"];
-                $dataForm["module"] = $postData["module"];
-                $dataForm["extension"]["exten_group"] = $postData["extension"]["exten_group"];
-                $dataForm["extension"]["pickup_group"] = $postData["extension"]["pickup_group"];
-                $dataForm["technology"]["type"] = $postData["technology"]["type"];
-                $dataForm["sip"]["calllimit"] = "";
-                $dataForm["sip"]["nat"] = "no";
-                $dataForm["sip"]["qualify"] = "no";
-                $dataForm["sip"]["type"] = "peer";
-                $dataForm["sip"]["dtmf"] = $postData["sip"]["dtmf"];
-                $dataForm["sip"]["codec"] = $postData["sip"]["codec"];
-                $dataForm["sip"]["codec1"] = $postData["sip"]["codec1"];
-                $dataForm["sip"]["codec2"] = $postData["sip"]["codec2"];
-                $dataForm["iax2"]["calllimit"] = "";
-                $dataForm["iax2"]["nat"] = "no";
-                $dataForm["iax2"]["qualify"] = "no";
-                $dataForm["iax2"]["type"] = "peer";
-                $dataForm["iax2"]["dtmf"] = $postData["iax2"]["dtmf"];
-                $dataForm["iax2"]["codec"] = $postData["iax2"]["codec"];
-                $dataForm["iax2"]["codec1"] = $postData["iax2"]["codec1"];
-                $dataForm["iax2"]["codec2"] = $postData["iax2"]["codec2"];
+                $this->view->error = "";
 
-                if ( isset($postData["manual"]["manual"]) ) {
-
-                    $dataForm["manual"]["manual"] = $postData["manual"]["manual"];
-                } else {
-
-                    $dataForm["manual"]["manual"] = "1";
+                $khomp_iface = false;
+                if (strtoupper($postData["technology"]["type"]) == 'KHOMP') {
+                    $khompInfo = new PBX_Khomp_Info();
+                    $khompChannels = array();
+                    $khomp_iface = true;
+                    $boardInfo = $khompInfo->boardInfo($postData["khomp"]["board"]);
+                    for ($i = 0; $i < $boardInfo['channels']; $i++) {
+                        $khompChannels[$i] = $i; //"KHOMP/b{$boardInfo['id']}c$i";
+                    }
                 }
 
-                $dataForm["virtual"]["virtual"] = $postData["virtual"]["virtual"];
 
-                $dataForm["khomp"]["board"] = $postData["khomp"]["board"];
 
-                if ( isset($postData["advanced"]["voicemail"]) ) {
 
-                    $dataForm["advanced"]["voicemail"] = $postData["advanced"]["voicemail"];
-                } else {
-
-                    $dataForm["advanced"]["voicemail"] = "";
-                }
-
-                if ( isset($postData["advanced"]["email"]) ) {
-
-                    $dataForm["advanced"]["email"] = $postData["advanced"]["email"];
-                } else {
-
-                    $dataForm["advanced"]["email"] = "";
-                }
+//                //log-user
+//                $tabela = self::verificaLog();
+//                if ($tabela == true) {
+//
+//                    $acao = "Adicionou Ramais multiplos";
+//                    self::salvaLog($acao, $_POST["extension"]["exten"]);
+//                    $tech = $_POST["technology"]["type"];
+//                    $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
+//                    $action = "ADD R";
+//                    $add = array();
+//                    $add["name"] = $_POST["extension"]["exten"];
+//                    $add["canal"] = $tech;
+//                    $add["allow"] = $codecs;
+//                    $add["dtmfmode"] = $_POST[$tech]["dtmf"];
+//                    $add["directmedia"] = $_POST[$tech]["directmedia"];
+//                    self::insertLogRamal($action, $add);
+//                }
 
                 foreach ($range as $exten) {
 
-                    if ( is_numeric($exten)) {
+                    if ($this->view->error)
+                        break;
 
-                        $dataForm["extension"]["exten"] = $exten;
-                        $dataForm["extension"]["password"] = $exten.$exten;
-                        $dataForm["extension"]["name"] = 'Ramal'.$exten.'<'.$exten.'>';
-                        $dataForm["sip"]["password"] = $exten;
-                        $dataForm["iax"]["password"] = $exten;
-                        
-                        $ret = $this->execAdd($dataForm);
+                    if (is_numeric($exten)) {
 
-                        if (!is_string($ret)) {
-                            $this->_redirect('/extensions/');
-                        } else {
-                            $this->view->error = $ret;
+                        $postData["extension"]["exten"] = $exten;
+                        $postData["extension"]["password"] = $exten . $exten;
+                        $postData["extension"]["name"] = 'Ramal' . $exten . '<' . $exten . '>';
+                        $postData["sip"]["password"] = $exten;
+                        $postData["iax"]["password"] = $exten;
+
+
+                        $ret = $this->execAdd($postData);
+
+                        if (is_string($ret)) {
+                            $this->view->error = $exten . " - " . $ret;
                             $this->view->form->valid(false);
+                            break;
                         }
-
                     } else {
 
-                        $exten = explode("-",$exten);
+                        $exten = explode(";", $exten);
 
-                        foreach (range($exten[0], $exten[1]) as $exten) {
+                        foreach ($exten as $range) {
 
-                            $dataForm["id"] = $exten;
-                            $dataForm["extension"]["exten"] = $exten;
-                            $dataForm["extension"]["password"] = $exten.$exten;
-                            $dataForm["extension"]["name"] = 'Ramal'.$exten.'<'.$exten.'>';
-                            $dataForm["sip"]["password"] = $exten.$exten;
-                            $dataForm["iax2"]["password"] = $exten.$exten;
+                            $rangeToAdd = explode('-', $range);
 
-                            $ret = $this->execAdd($dataForm);
 
-                            if (!is_string($ret)) {
-                                $this->_redirect('/extensions/');
-                            } else {
-                                $this->view->error = $ret;
-                                $this->view->form->valid(false);
+                            if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
+                                $i = $rangeToAdd[0];
+                                while ($i <= $rangeToAdd[1]) {
+
+                                    $postData["id"] = $i;
+                                    $postData["extension"]["exten"] = $i;
+                                    $postData["extension"]["password"] = $i . $i;
+                                    $postData["extension"]["name"] = 'Ramal ' . $i . '<' . $i . '>';
+                                    $postData["sip"]["password"] = $i . $i;
+                                    $postData["iax2"]["password"] = $i . $i;
+
+                                    if ($khomp_iface && count($khompChannels) > 0) {
+                                        $channel = array_shift($khompChannels);
+                                        $postData["extension"]["khomp_channel"] = $channel;
+                                    }
+                                    $ret = $this->execAdd($postData);
+                                    $i++;
+
+                                    if (is_string($ret)) {
+                                        $this->view->error = $i . " - " . $ret;
+                                        $this->view->form->valid(false);
+                                        break;
+                                    }
+                                }
                             }
+                            if ($this->view->error)
+                                break;
                         }
                     }
+                }
+                if (!$this->view->error) {
+                    $this->_redirect('/extensions/');
                 }
             }
         }
     }
+
 }

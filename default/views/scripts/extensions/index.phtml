@@ -23,7 +23,7 @@ echo $this->render('filter.phtml');
          <th> <?php echo $this->translate('Caller ID') ?> </th>
          <th> <?php echo $this->translate('Channel') ?> </th>
          <th> <?php echo $this->translate('Extension Group') ?> </th>
-         <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?>  </th>
+         <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?>  </th>
       </tr>
    </thead>
    <tbody>
@@ -47,11 +47,6 @@ echo $this->render('filter.phtml');
                     <?php echo $this->translate('Delete')?>
                 </span>
                 <?php endif; ?>
-            </td>
-            <td class="action">
-                <a class="membros"  href='<?php echo $this->baseUrl(); ?>/index.php/permission/<?php echo $val['exten']?>' >
-                    <?php echo $this->translate('Permissions')?>
-                </a>
             </td>
         </tr>
     <?php endforeach ?>

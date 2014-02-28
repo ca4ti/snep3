@@ -27,6 +27,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
      * @var Zend_Form
      */
     protected $form;
+
     /**
      *
      * @var array
@@ -36,8 +37,8 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extension Groups")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension Groups")
         ));
 
         $db = Zend_Registry::get('db');
@@ -45,12 +46,12 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $this->view->tra = array("admin" => $this->view->translate("Administrators"),
             "users" => $this->view->translate("Users"),
             "all" => $this->view->translate("All"));
-        
+
 
         $select = $db->select()
-                        ->from("groups", array("name", "inherit"))
-                        ->where("name not in ('all','users','administrator') ");
-        
+                ->from("groups", array("name", "inherit"))
+                ->where("name not in ('all','users','administrator') ");
+
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
@@ -97,42 +98,42 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extension Groups"),
-            $this->view->translate("Add Extension Groups"),
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension Groups"),
+                    $this->view->translate("Add Extension Groups"),
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form_xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
         $form = new Snep_Form($form_xml);
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName().'/add');
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
 
         $form->getElement('name')
-             ->setLabel($this->view->translate('Name'));
+                ->setLabel($this->view->translate('Name'));
 
         $form->getElement('type')
-            ->setRequired(true)
-             ->setLabel($this->view->translate('Type'))
-             ->setMultiOptions(array('administrator' => $this->view->translate('Administrator'),
-                                     'users' => $this->view->translate('User')) );
-        
+                ->setRequired(true)
+                ->setLabel($this->view->translate('Type'))
+                ->setMultiOptions(array('all' => $this->view->translate('Administrator'),
+                    'users' => $this->view->translate('User'),
+                    'NULL' => $this->view->translate('None')));
+
         try {
             $extensionsAllGroup = Snep_ExtensionsGroups_Manager::getExtensionsAll();
+        } catch (Exception $e) {
 
-        }catch(Exception $e) {
-
-            display_error($LANG['error'].$e->getMessage(),true);
+            display_error($LANG['error'] . $e->getMessage(), true);
         }
 
         $extensions = array();
-        foreach($extensionsAllGroup as $key => $val) {
 
-            $extensions[$val['id']] = $val['name'] ;
+        foreach ($extensionsAllGroup as $key => $val) {
+
+            $extensions[$val['name']] = $val['name'] . " ( " . $val['group'] . " )";
         }
-
         $this->view->objSelectBox = "extensions";
 
-        $form->setSelectBox( $this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
         if ($this->getRequest()->getPost()) {
 
@@ -143,106 +144,104 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             if ($form_isValid) {
 
                 $group = array('name' => $dados['name'],
-                                         'inherit' => $dados['type']
-                                        );
+                    'inherit' => $dados['type']
+                );
 
                 $this->view->group = Snep_ExtensionsGroups_Manager::addGroup($group);
 
-                if( $dados['box_add'] && $this->view->group ) {
+                if ($dados['box_add'] && $this->view->group) {
 
-                    foreach($dados['box_add'] as $id => $extensions) {
+                    foreach ($dados['box_add'] as $id => $extensions) {
 
-                        $extensionsGroup = array    ( 'group' => $dados['name'],
-                                                      'extensions' => $extensions
-                                                    );
+                        $extensionsGroup = array('group' => $dados['name'],
+                            'extensions' => $extensions
+                        );
 
                         $this->view->extensions = Snep_ExtensionsGroups_Manager::addExtensionsGroup($extensionsGroup);
-
                     }
                 }
 
-                $this->_redirect("/".$this->getRequest()->getControllerName()."/");
+                $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
             }
         }
 
         $this->view->form = $form;
-
     }
 
     public function editAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extension Groups"),
-            $this->view->translate("Edit Extension Groups"),
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension Groups"),
+                    $this->view->translate("Edit Extension Groups"),
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $xml = new Zend_Config_Xml( "default/forms/extensions_groups.xml" );
-        $form = new Snep_Form( $xml );
-        $form->setAction( $this->getFrontController()->getBaseUrl() .'/'. $this->getRequest()->getControllerName() . '/edit');
+        $xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
+        $form = new Snep_Form($xml);
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/edit');
 
         $id = $this->_request->getParam('id');
 
         $group = Snep_ExtensionsGroups_Manager::getGroup($id);
 
         $groupId = $form->getElement('id')->setValue($id);
-        $groupName = $form->getElement('name')->setValue($group['name'])->setLabel($this->view->translate('Name'));;
+        $groupName = $form->getElement('name')->setValue($group['name'])->setLabel($this->view->translate('Name'));
 
         $groupType = $form->getElement('type');
-        $groupType ->setRequired(true)
-             ->setLabel($this->view->translate('Type'))
-             ->setMultiOptions(array('administrator' => $this->view->translate('Administrator'),
-                                     'users' => $this->view->translate('User')) )
-             ->setValue($group['inherit']);
+        $groupType->setRequired(true)
+                ->setLabel($this->view->translate('Type'))
+                ->setMultiOptions(array('all' => $this->view->translate('Administrator'),
+                    'users' => $this->view->translate('User'),
+                    'NULL' => $this->view->translate('None')))
+                ->setValue($group['inherit']);
 
         $groupExtensions = array();
-        foreach(Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
+        foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
 
             $groupExtensions[$data['name']] = "{$data['name']}";
         }
 
         $groupAllExtensions = array();
-        foreach(Snep_ExtensionsGroups_Manager::getExtensionsAll() as $data) {
+        foreach (Snep_ExtensionsGroups_Manager::getExtensionsAll() as $data) {
 
-                if( ! isset($groupExtensions[$data['name']]) ) {
+            if (!isset($groupExtensions[$data['name']])) {
 
-                    $groupAllExtensions[$data['name']] = "{$data['name']}";
-                }
+                $groupAllExtensions[$data['name']] = "{$data['name']}" . " ( " . "{$data['group']}" . " )";
+            }
         }
 
         $this->view->objSelectBox = "extensions";
 
-        $form->setSelectBox( $this->view->objSelectBox, $this->view->translate('Extensions'), $groupAllExtensions, $groupExtensions);
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $groupAllExtensions, $groupExtensions);
 
-        if($this->_request->getPost()) {
+        if ($this->_request->getPost()) {
 
-                $form_isValid = $form->isValid($_POST);
+            $form_isValid = $form->isValid($_POST);
 
-                $dados = $this->_request->getParams();
-                $idGroup = $dados['id'];
+            $dados = $this->_request->getParams();
+            $idGroup = $dados['id'];
 
-                $this->view->group = Snep_ExtensionsGroups_Manager::editGroup(array('name' => $dados['name'],'type' => $dados['type'],'id' => $idGroup));
+            $this->view->group = Snep_ExtensionsGroups_Manager::editGroup(array('name' => $dados['name'], 'type' => $dados['type'], 'id' => $idGroup));
 
-                foreach(Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $extensionsGroup) {
+            foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $extensionsGroup) {
 
-                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $extensionsGroup['name'], 'group' => 'all'));
+                Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $extensionsGroup['name'], 'group' => 'all'));
+            }
+
+            if ($dados['box_add']) {
+
+                foreach ($dados['box_add'] as $id => $dados['name']) {
+
+                    $this->view->extensions = Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
                 }
+            }
 
-                if( $dados['box_add'] ) {
-
-                    foreach($dados['box_add'] as $id => $dados['name']) {
-
-                        $this->view->extensions = Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
-                    }
-                }
-
-                $this->_redirect( $this->getRequest()->getControllerName() );
+            $this->_redirect($this->getRequest()->getControllerName());
         }
 
         $this->view->form = $form;
     }
-
 
     /**
      * Remove a Extensions Group
@@ -250,30 +249,29 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     public function deleteAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extension Groups"),
-            $this->view->translate("Delete Extension Groups"),
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension Groups"),
+                    $this->view->translate("Delete Extension Groups"),
         ));
 
 
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
 
-        if( $confirm == 1 ) {
-             Snep_ExtensionsGroups_Manager::delete($id);
-             $this->_redirect( $this->getRequest()->getControllerName() );
+        if ($confirm == 1) {
+            Snep_ExtensionsGroups_Manager::delete($id);
+            $this->_redirect($this->getRequest()->getControllerName());
         }
 
         $extensions = Snep_ExtensionsGroups_Manager::getExtensionsGroup($id);
 
-        if( count($extensions) > 0 )  {
-            $this->_redirect($this->getRequest()->getControllerName().'/migration/id/'. $id);
-
-        }else{
+        if (count($extensions) > 0) {
+            $this->_redirect($this->getRequest()->getControllerName() . '/migration/id/' . $id);
+        } else {
 
             $this->view->message = $this->view->translate("The extension group will be deleted. Are you sure?.");
             $form = new Snep_Form();
-            $form->setAction( $this->getFrontController()->getBaseUrl() .'/'. $this->getRequest()->getControllerName() . '/delete/id/'.$id.'/confirm/1');
+            $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/delete/id/' . $id . '/confirm/1');
 
             $form->getElement('submit')->setLabel($this->view->translate('Yes'));
 
@@ -287,9 +285,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     public function migrationAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Extension Groups"),
-            $this->view->translate("Migrate Extension Group"),
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Extension Groups"),
+                    $this->view->translate("Migrate Extension Group"),
         ));
 
 
@@ -297,9 +295,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $_allGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
 
-        foreach($_allGroups as $group) {
+        foreach ($_allGroups as $group) {
 
-            if($group['name'] != $id){
+            if ($group['name'] != $id) {
 
                 $allGroups[$group['name']] = $group['name'];
             }
@@ -307,20 +305,19 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form();
-        $form->setAction( $this->getFrontController()->getBaseUrl() .'/'. $this->getRequest()->getControllerName() . '/migration/');
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/migration/');
 
-        if(isset($allGroups)) {
+        if (isset($allGroups)) {
 
             $groupSelect = new Zend_Form_Element_Select('select');
-            $groupSelect->setMultiOptions( $allGroups );
-            $groupSelect->setLabel( $this->view->translate( $this->view->translate("New Group")  ) );
+            $groupSelect->setMultiOptions($allGroups);
+            $groupSelect->setLabel($this->view->translate($this->view->translate("New Group")));
             $form->addElement($groupSelect);
             $this->view->message = $this->view->translate("This groups has extensions associated. Select another group for these extensions. ");
-
-        }else{
+        } else {
 
             $groupName = new Zend_Form_Element_Text('new_group');
-            $groupName->setLabel( $this->view->translate( $this->view->translate("New Group")  ) );
+            $groupName->setLabel($this->view->translate($this->view->translate("New Group")));
             $form->addElement($groupName);
             $this->view->message = $this->view->translate("This is the only group and it has extensions associated. You can migrate these extensions to a new group.");
         }
@@ -330,29 +327,29 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $form->addElement($id_exclude);
 
-        if($this->_request->getPost()) {
+        if ($this->_request->getPost()) {
 
-                if( isset( $_POST['select'] ) ) {
+            if (isset($_POST['select'])) {
 
-                    $toGroup = $_POST['select'];
+                $toGroup = $_POST['select'];
+            } else {
 
-                }else{
+                $new_group = array('group' => $_POST['new_group']);
+                $toGroup = Snep_ExtensionsGroups_Manager::addGroup($new_group);
+            }
 
-                    $new_group = array('group' => $_POST['new_group']);
-                    $toGroup = Snep_ExtensionsGroups_Manager::addGroup( $new_group );
-                }
+            $extensions = Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id);
 
-                $extensions = Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id);
+            foreach ($extensions as $extension) {
+                Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $extension['name'], 'group' => $toGroup));
+            }
 
-                foreach($extensions as $extension) {
-                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $extension['name'], 'group' => $toGroup));
-                }
+            Snep_ExtensionsGroups_Manager::delete($id);
 
-                Snep_ExtensionsGroups_Manager::delete($id);
-
-                $this->_redirect( $this->getRequest()->getControllerName() );
+            $this->_redirect($this->getRequest()->getControllerName());
         }
 
         $this->view->form = $form;
     }
+
 }

@@ -141,7 +141,8 @@ class Snep_ExtensionsGroups_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('peers',array('id','name','group'));
+                     ->from('peers',array('id','name','group'))
+                     ->where('peers.peer_type = ?', 'R');
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
@@ -155,7 +156,6 @@ class Snep_ExtensionsGroups_Manager {
      *
      * @param int $group
      */
-
     public static function addGroup($group) {
 
         $db = Zend_Registry::get('db');

@@ -5,12 +5,12 @@
     <dl id="login_form">
 
         <div class="form_element">
-            <dt><?php echo $this->translate("Usuário"); ?>:</dt>
+            <dt><?php echo $this->translate("User"); ?>:</dt>
             <dd><input type="text" size="30" id="exten" name="user"></dd>
         </div>
 
         <div class="form_element">
-            <dt><?php echo $this->translate("Senha"); ?>:</dt>
+            <dt><?php echo $this->translate("Password"); ?>:</dt>
             <dd><input type="password" size="30" name="password" /></dd>
         </div>
 
@@ -18,9 +18,9 @@
             <dt></dt>
             <dd><input type="submit" value="<?php echo $this->translate("Enter"); ?>" /></dd>
         </div>
-        
+        <?php $password_recovery = $this->translate("Forgot Password?");?>
             <div class="login_password">
-                <?php echo "<a href=\"{$this->PAGEINFO}\">Esqueceu a senha?<a/>"; ?>
+                <?php echo "<a href=\"{$this->PAGEINFO}\">$password_recovery<a/>"; ?>
             </div>
 
         </dl>

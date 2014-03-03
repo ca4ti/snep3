@@ -89,13 +89,15 @@ class Snep_Manutencao {
      * @return <string> Caminho para o arquivo.
      */
     public function arquivoExiste($calldate, $userfield) {
-
+	
         $data = substr($calldate, 0, 10);
-
-        $config = Zend_Registry::get('config');
-
-        $arquivos = $config->ambiente->path_voz;
-        
+        $ano  = substr($calldate, 0, 4);
+	$mes  = substr($calldate, 5,2);
+	$dia  = substr($calldate, 8, 2);
+	$hora = substr($calldate, 11,2);
+	$config = Zend_Registry::get('config');
+        $file_dir = $config->ambiente->path_voz;
+        $arquivos = substr($file_dir,0,strlen($file_dir)-1);
         if( file_exists($arquivos) ) {
 
                 // Se existir pasta com data, já organizado pelo movefiles.
@@ -105,6 +107,10 @@ class Snep_Manutencao {
                 elseif( file_exists($arquivos ."/". $userfield .".mp3") ) {
                     return "/snep/arquivos/". $userfield .".mp3";
                 }
+		elseif( file_exists($arquivos ."/". $ano ."/".$mes."/".$dia."/".$hora."/".$userfield .".wav") ) {
+                    return "/snep/arquivos/". $ano ."/".$mes."/".$dia."/".$hora."/".$userfield .".wav";
+               }
+
                 elseif( file_exists($arquivos ."/". $userfield .".WAV")) {
                     return "/snep/arquivos/". $userfield .".WAV";
                 }

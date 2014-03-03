@@ -108,7 +108,7 @@ if ($lastuserfield['data'] === "") {
     $filename = $lastuserfield['data'];
 }
 
-$recordPath = realpath($config->ambiente->path_voz).date("/Y-m-d");
+$recordPath = realpath($config->ambiente->path_voz).date("/Y-m-d/"). date("H");
 $regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".wav", $config->general->record->flags));
 
 $regra->setAsteriskInterface($asterisk);

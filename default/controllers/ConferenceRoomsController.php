@@ -215,12 +215,17 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                         $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_MOH=default)\n";
                     }
                 }
+
+                $date = date("Y-m-d");
+                $hour = date("H");
+                $path_voz = $config->ambiente->path_voz;
+
                 foreach ($rec as $_rec_ => $_rec) {
 
                     if ($_rec == "") {
                         if ($idActivate == $_rec_) {
 
-                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/var/www/snep/arquivos/$";
+                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/$path_voz/$date/$hour/$";
                             $contentConfe .= "{UNIQUEID:0:10}_$";
                             $contentConfe .= "{STRFTIME($";
                             $contentConfe .= "{EPOCH},,%Y%m%d-%H%M)}_$";

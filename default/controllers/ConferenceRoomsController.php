@@ -228,14 +228,14 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                             $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/$path_voz/$date/$hour/$";
                             $contentConfe .= "{UNIQUEID:0:10}_$";
                             $contentConfe .= "{STRFTIME($";
-                            $contentConfe .= "{EPOCH},,%Y%m%d-%H%M)}_$";
+                            $contentConfe .= "{EPOCH},,%Y%m%d_%H%M)}_$";
                             $contentConfe .= "{EXTEN:}_$";
                             $contentConfe .= "{CALLERID(num)})\n";
 
                             $contentConfe .= "exten => " . $_rec_ . ",n,Set(CDR(userfield)=$";
                             $contentConfe .= '{UNIQUEID:0:10}_$';
                             $contentConfe .= '{STRFTIME($';
-                            $contentConfe .= '{EPOCH},,%Y%m%d-%H%M)}_$';
+                            $contentConfe .= '{EPOCH},,%Y%m%d_%H%M)}_$';
                             $contentConfe .= '{EXTEN:}_$';
                             $contentConfe .= "{CALLERID(num)}" . ")\n";
 

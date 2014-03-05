@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelo>
+    <form>
+        <elements>
+            <init_day>
+                <type>text</type>
+                <options>
+                    <label>Period from:</label>
+                    <required>true</required>
+                    <description>dd/mm/YYYY hh:mm</description>
+                </options>
+            </init_day>
+
+            <end_day>
+                <type>text</type>
+                <options>
+                    <required>true</required>
+                    <label>To:</label>                    
+                    <description>dd/mm/YYYY hh:mm</description>
+                </options>
+            </end_day>
+        
+            <src>
+                <type>text</type>
+                <options>
+                    <label>Source Extensions</label>
+                    <description>Separated by a comma</description>
+                    <required></required>
+                </options>
+            </src>
+            
+            <srctype>
+                <type>radio</type>
+                <options>
+                    <label></label>	
+                    <separator></separator>
+                    <multioptions>
+                        <src1>Equal</src1>
+                        <src2>Init with</src2>
+                        <src3>End with</src3>
+                        <src4>Contains</src4>
+                    </multioptions>
+                </options>
+            </srctype>
+
+            <dst>
+                <type>text</type>
+                <options>
+                    <label>Destination Extensions</label>
+                    <description>Separated by a comma</description>
+                    <required></required>
+                </options>
+            </dst>
+            
+            <dsttype>
+                <type>radio</type>
+                <options>
+                    <label></label>	
+                    <separator></separator>
+                    <multioptions>
+                        <dst1>Equal</dst1>
+                        <dst2>Init with</dst2>
+                        <dst3>End with</dst3>
+                        <dst4>Contains</dst4>
+                    </multioptions>
+                </options>
+            </dsttype>
+            
+        </elements>
+    </form>
+</modelo>

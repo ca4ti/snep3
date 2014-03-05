@@ -231,6 +231,15 @@ button:hover {
     clear: both;
 }
 
+.form_compress {
+    text-align: left;
+    padding-top: 10px;
+    height: auto;
+    clear: both;
+    text-align: center;
+    
+}
+
 .permission{
     text-align: center;
     padding-top: 5px;

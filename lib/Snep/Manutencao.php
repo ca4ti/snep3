@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,9 +30,17 @@
  */
 class Snep_Manutencao {
 
-    public function __construct() {}
-    public function __destruct() {}
-    public function __clone() {}
+    public function __construct() {
+        
+    }
+
+    public function __destruct() {
+        
+    }
+
+    public function __clone() {
+        
+    }
 
     public function __get($atributo) {
         return $this->{$atributo};
@@ -49,11 +58,11 @@ class Snep_Manutencao {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-        ->from('cdr', array('calldate', 'userfield'))
-        ->where("calldate >= '$data_inicio'")
-        ->where("calldate <= '$data_fim'")
-        ->where("userfield != '' ")
-        ->group('userfield');
+                ->from('cdr', array('calldate', 'userfield'))
+                ->where("calldate >= '$data_inicio'")
+                ->where("calldate <= '$data_fim'")
+                ->where("userfield != '' ")
+                ->group('userfield');
 
         $stmt = $db->query($select);
         $registros = $stmt->fetchAll();
@@ -69,11 +78,11 @@ class Snep_Manutencao {
      */
     public function listaStorage($arquivos) {
 
-        $root = scandir( $arquivos );
-        $return  = array();
+        $root = scandir($arquivos);
+        $return = array();
 
-        foreach($root as $files) {
-            if( preg_match('/^storage/', $files ) ) {
+        foreach ($root as $files) {
+            if (preg_match('/^storage/', $files)) {
                 $return[] = $files;
             }
         }
@@ -89,59 +98,40 @@ class Snep_Manutencao {
      * @return <string> Caminho para o arquivo.
      */
     public function arquivoExiste($calldate, $userfield) {
-	
+
         $data = substr($calldate, 0, 10);
-        $ano  = substr($calldate, 0, 4);
-	$mes  = substr($calldate, 5,2);
-	$dia  = substr($calldate, 8, 2);
-	$hora = substr($calldate, 11,2);
-	$config = Zend_Registry::get('config');
+        $ano = substr($calldate, 0, 4);
+        $mes = substr($calldate, 5, 2);
+        $dia = substr($calldate, 8, 2);
+        $hora = substr($calldate, 11, 2);
+        $config = Zend_Registry::get('config');
         $file_dir = $config->ambiente->path_voz;
-        $arquivos = substr($file_dir,0,strlen($file_dir)-1);
-        if( file_exists($arquivos) ) {
+        $arquivos = substr($file_dir, 0, strlen($file_dir) - 1);
 
-                // Se existir pasta com data, já organizado pelo movefiles.
-                if( file_exists($arquivos ."/". $userfield .".wav") ) {
-                    return "/snep/arquivos/". $userfield .".wav";
-                }
-                elseif( file_exists($arquivos ."/". $userfield .".mp3") ) {
-                    return "/snep/arquivos/". $userfield .".mp3";
-                }
-		elseif( file_exists($arquivos ."/". $ano ."/".$mes."/".$dia."/".$hora."/".$userfield .".wav") ) {
-                    return "/snep/arquivos/". $ano ."/".$mes."/".$dia."/".$hora."/".$userfield .".wav";
-               }
 
-                elseif( file_exists($arquivos ."/". $userfield .".WAV")) {
-                    return "/snep/arquivos/". $userfield .".WAV";
-                }
-                elseif( file_exists($arquivos ."/". $data ."/". $userfield .".wav") ) {
-                    return "/snep/arquivos/". $data ."/". $userfield .".wav";
-                }
-                elseif( file_exists($arquivos ."/". $data ."/". $userfield .".mp3") ) {
-                    return "/snep/arquivos/". $data ."/". $userfield .".mp3";
-                }
-                elseif( file_exists($arquivos ."/". $data ."/". $userfield .".WAV")) {
-                    return "/snep/arquivos/". $data ."/". $userfield .".WAV";
-                    
-                }else{
+        if (file_exists($arquivos)) {
 
-                    $storages = self::listaStorage($arquivos);
+            // Se existir pasta com data, já organizado pelo movefiles.
+            if (file_exists($arquivos . "/" . $data . "/" . $hora . "/" . $userfield . ".wav")) {
+                return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".wav";
+            } elseif (file_exists($arquivos . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3")) {
+                return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
+            } else {
 
-                    foreach($storages as $storage) {
+                $storages = self::listaStorage($arquivos);
 
-                        if( file_exists($arquivos ."/". $storage ."/". $data ."/". $userfield .".wav") ) {
-                            return "/snep/arquivos/". $storage ."/". $data ."/". $userfield .".wav";
-                        }
-                        elseif( file_exists($arquivos ."/". $storage ."/". $data ."/". $userfield .".mp3") ) {
-                            return "/snep/arquivos/". $storage ."/". $data ."/". $userfield .".mp3";
-                        }
-                        elseif( file_exists($arquivos ."/". $storage ."/". $data ."/". $userfield .".WAV")) {
-                            return "/snep/arquivos/". $storage ."/". $data ."/". $userfield .".WAV";
-                        }
+                foreach ($storages as $storage) {
+
+                    if (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".wav")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".wav";
+                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
+                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV";
                     }
-
                 }
-        }else{
+            }
+        } else {
             return false;
         }
     }
@@ -153,52 +143,51 @@ class Snep_Manutencao {
      */
     public function removeBackup($arquivo) {
 
-        if(file_exists($arquivo)) {
+        if (file_exists($arquivo)) {
             return (unlink($arquivo));
-        }       
-
+        }
     }
 
     /**
-    * Compacta lista de arquivos
-    * @param <string> $arquivo
-    * @return <string> $file_path 
-    */
-	public function compactaArquivos($arquivos) {
+     * Compacta lista de arquivos
+     * @param <string> $arquivo
+     * @return <string> $file_path 
+     */
+    public function compactaArquivos($arquivos) {
 
         $config = Zend_Registry::get('config');
 
         $save_dir = $config->ambiente->path_voz_bkp;
 
         $file_dir = $config->ambiente->path_voz;
-		
-		$strArquivos 		= substr($arquivos,0,strlen($arquivos)-1);
-		$strListaArquivos 	= str_replace(","," ",$strArquivos);
-		$strNomeArquivo 	= date("d-m-Y-h-i").".zip";
 
-		$strArquivo 		= $save_dir."/".$strNomeArquivo;
+        $strArquivos = substr($arquivos, 0, strlen($arquivos) - 1);
+        $strListaArquivos = str_replace(",", " ", $strArquivos);
+        $strNomeArquivo = date("d-m-Y-h-i") . ".zip";
 
-		$zip = new ZipArchive();
+        $strArquivo = $save_dir . "/" . $strNomeArquivo;
 
-		if ($zip->open($strArquivo, ZipArchive::CREATE) !== TRUE) {
-			return 2;
-		} 
+        $zip = new ZipArchive();
 
-		$arquivosLista = explode(",", trim($strArquivos));
+        if ($zip->open($strArquivo, ZipArchive::CREATE) !== TRUE) {
+            return 2;
+        }
 
-		foreach ($arquivosLista as $arquivo) {
-			$arq = $file_dir.$arquivo;
+        $arquivosLista = explode(",", trim($strArquivos));
 
-			if (file_exists($arq)) {
-				$zip->addFile($arq);
-			}
-		}
+        foreach ($arquivosLista as $arquivo) {
+            $arq = $file_dir . $arquivo;
 
-		$zip->close();
+            if (file_exists($arq)) {
+                $zip->addFile($arq);
+            }
+        }
 
-		return "/snep/arquivos/".$strNomeArquivo;
+        $zip->close();
 
-	}
+        return "/snep/arquivos/" . $strNomeArquivo;
+    }
+
 }
 
 ?>

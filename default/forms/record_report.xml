@@ -8,6 +8,24 @@
                     <label>Period from:</label>
                     <required>true</required>
                     <description>dd/mm/YYYY hh:mm</description>
+                    <validators>
+                        <regex>
+                            <validator>regex</validator>
+                            <options>
+                                <messages>
+                                    <regexNotMatch>'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm.</regexNotMatch>
+                                </messages>
+                                <pattern>#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#</pattern>
+                            </options>
+                        </regex>
+                        <strlen>
+                            <validator>StringLength</validator>
+                            <options>
+                                <min>10</min>
+                                <max>16</max>
+                            </options>
+                        </strlen>
+                    </validators>
                 </options>
             </init_day>
 
@@ -17,6 +35,24 @@
                     <required>true</required>
                     <label>To:</label>                    
                     <description>dd/mm/YYYY hh:mm</description>
+                    <validators>
+                        <regex>
+                            <validator>regex</validator>
+                            <options>
+                                <messages>
+                                    <regexNotMatch>'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm.</regexNotMatch>
+                                </messages>
+                                <pattern>#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#</pattern>
+                            </options>
+                        </regex>
+                        <strlen>
+                            <validator>StringLength</validator>
+                            <options>
+                                <min>10</min>
+                                <max>16</max>
+                            </options>
+                        </strlen>
+                    </validators>
                 </options>
             </end_day>
         

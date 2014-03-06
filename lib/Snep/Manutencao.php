@@ -108,6 +108,13 @@ class Snep_Manutencao {
         $file_dir = $config->ambiente->path_voz;
         $arquivos = substr($file_dir, 0, strlen($file_dir) - 1);
 
+        $conference = explode("_", $userfield);
+        if ($conference[3] >= 901 && $conference[3] <= 915) {
+            $conf = true;
+        } else {
+            $conf = false;
+        }
+
 
         if (file_exists($arquivos)) {
 
@@ -116,6 +123,11 @@ class Snep_Manutencao {
                 return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".wav";
             } elseif (file_exists($arquivos . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3")) {
                 return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
+            } elseif ($conf == true) {
+
+                if (file_exists($arquivos . "/" . $conference[3] . "/" . $userfield . ".wav")) {
+                    return "/snep/arquivos/" . $conference[3] . "/" . $userfield . ".wav";
+                }
             } else {
 
                 $storages = self::listaStorage($arquivos);
@@ -128,6 +140,11 @@ class Snep_Manutencao {
                         return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
                     } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV")) {
                         return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV";
+                    } elseif ($conf == true) {
+
+                        if (file_exists($arquivos . "/" . $storage . "/" . $conference[3] . "/" . $userfield . ".wav")) {
+                            return "/snep/arquivos/" . $storage . "/" . $conference[3] . "/" . $userfield . ".wav";
+                        }
                     }
                 }
             }

@@ -225,7 +225,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                     if ($_rec == "") {
                         if ($idActivate == $_rec_) {
 
-                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/$path_voz/$date/$hour/$";
+                            $contentConfe .= "exten => " . $_rec_ . ",n,Set(gravacao=/$path_voz/$_rec_/$";
                             $contentConfe .= "{UNIQUEID:0:10}_$";
                             $contentConfe .= "{STRFTIME($";
                             $contentConfe .= "{EPOCH},,%Y%m%d_%H%M)}_$";

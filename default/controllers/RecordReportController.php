@@ -27,7 +27,7 @@ class RecordReportController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Reports"),
-                    $this->view->translate("Search Recording")
+                    $this->view->translate("Search Records")
         ));
 
         $form = $this->getForm();
@@ -60,7 +60,7 @@ class RecordReportController extends Zend_Controller_Action {
 
         $form_xml = new Zend_Config_Xml('./default/forms/record_report.xml');
 
-        $dados = new Snep_Form_SubForm($this->view->translate("Recording"), $form_xml->form);
+        $dados = new Snep_Form_SubForm($this->view->translate("Records"), $form_xml->form);
 
         $locale = Snep_Locale::getInstance()->getLocale();
 
@@ -85,7 +85,7 @@ class RecordReportController extends Zend_Controller_Action {
         $dsttype = $dados->getElement('dsttype');
         $dsttype->setValue('dst1');
 
-        $form->getElement('submit')->setLabel($this->view->translate("Show Recordings"));
+        $form->getElement('submit')->setLabel($this->view->translate("Show Records"));
         $form->removeElement('cancel');
 
         return $form;
@@ -216,7 +216,7 @@ class RecordReportController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Reports"),
-                    $this->view->translate("Recording")
+                    $this->view->translate("Record")
         ));
 
         $format = new Formata;
@@ -228,7 +228,7 @@ class RecordReportController extends Zend_Controller_Action {
         $this->view->disposition = $this->view->translate("Status");
         $this->view->duration = $this->view->translate("Duration");
         $this->view->billsec = $this->view->translate("Conversation");
-        $this->view->gravation = $this->view->translate("Recordings");
+        $this->view->gravation = $this->view->translate("Records");
         $this->view->compress_files = $this->view->translate("Compress selected files");
 
         $defaultNS = new Zend_Session_Namespace('call_sql');

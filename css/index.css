@@ -69,6 +69,10 @@ td, th {
     background: url("../imagens/back.png") no-repeat center left;
 }
 
+.links .refresh {
+    background: url("../imagens/refresh.png") no-repeat center left;
+}
+
 .links .includes {
     background: url("../imagens/include_all.png") no-repeat center left;
 }

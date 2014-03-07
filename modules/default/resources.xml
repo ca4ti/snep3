@@ -60,7 +60,7 @@
         <resource id="calls-report" label="Calls"></resource>
         <resource id="ranking-report" label="Call Ranking"></resource>
         <resource id="services-report" label="Services Use"></resource>
-        <resource id="record-report" label="Search recording"></resource>
+        <resource id="record-report" label="Search records"></resource>
     </group>
 
     <group id="carrier" label="Carrier">

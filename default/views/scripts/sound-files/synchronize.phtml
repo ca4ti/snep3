@@ -1,0 +1,29 @@
+<form  action="<?php echo $this->url(array("controller" => "sound-files", "action" => "synchronize"), null, true); ?>" METHOD="post">
+    <?php
+    $this->headLink()->appendStylesheet($this->baseUrl() . "/css/add.css");
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+    ?>
+
+    <?php if ($this->message): ?>
+        <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
+    <?php endif; ?>
+
+
+    <?php if ($this->submit) { ?>
+
+
+        <div class="list_sounds">
+            <?php echo $this->dados; ?>
+        </div>
+
+
+        <dl id="login_form">
+            <div class="form_element">
+
+                <dd><input type="submit" value="<?php echo $this->translate("Erase data"); ?>" /></dd>
+            </div>
+        </dl>
+
+    <?php } ?>
+
+

@@ -316,12 +316,12 @@ class SoundFilesController extends Zend_Controller_Action {
             foreach ($fileNotExist as $key => $file) {
                 $message .= $file . "<br />";
             }
-            $this->view->message = $this->view->translate("Não existem os arquivos abaixo no diretorio. ") . "<br /><br />";
+            $this->view->message = $this->view->translate("The following files do not exist in the directory. ") . "<br /><br />";
             $this->view->dados = $message;
             $this->view->submit = true;
             $this->view->msgclass = 'failure';
         } else {
-            $this->view->message = $this->view->translate("Seus arquivos estão sincronizados");
+            $this->view->message = $this->view->translate("Your files are synchronized");
             $this->view->msgclass = 'sucess';
         }
 

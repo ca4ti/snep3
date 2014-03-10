@@ -270,7 +270,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $this->_redirect($this->getRequest()->getControllerName());
     }
-    
+
     /**
      * synchronizeAction - Synchronize sounds file
      */
@@ -286,7 +286,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $list_db = array();
         foreach ($soundDb as $sound) {
-            $list_db[] = $sound['arquivo'];
+            $list_db[] = strtolower($sound['arquivo']);
         }
 
 
@@ -297,7 +297,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $list_sounds = array();
         foreach ($recursiveSounds as $obj) {
-            $list_sounds[] = $obj->getFilename();
+            $list_sounds[] = strtolower($obj->getFilename());
         }
 
         // Lista de arquivos de som da pasta moh
@@ -306,20 +306,56 @@ class SoundFilesController extends Zend_Controller_Action {
         $recursiveMoh = new RecursiveIteratorIterator($listMoh);
 
         foreach ($recursiveMoh as $obj) {
-            $list_sounds[] = $obj->getFilename();
+            $list_sounds[] = strtolower($obj->getFilename());
         }
 
         $fileNotExist = array_diff($list_db, $list_sounds);
 
+        // Arquivos contidos no diretorio além dos cadastrados no banco
+
+        $fileDirectory = array_diff($list_sounds, $list_db);
+
+        $array_directory = array();
+        foreach ($fileDirectory as $number => $file) {
+
+            if (substr(strtolower($file), -3) == 'gsm' || substr(strtolower($file), -3) == 'wav' || substr(strtolower($file), -3) == 'mp3') {
+                $array_directory[] = $file;
+            }
+        }
+
+        //retira dados duplicados do array
+        $fileNotExist = array_unique($fileNotExist);
+        $array_directory = array_unique($array_directory);
+
+
+        $bool = false;
         if ($fileNotExist) {
+            $bool = true;
+        }
+        if ($array_directory) {
+            $bool = true;
+        }
+
+        if ($bool == true) {
+
+            $this->view->submit = true;
+            $this->view->msgclass = 'failure';
+
+
             $message = "";
             foreach ($fileNotExist as $key => $file) {
                 $message .= $file . "<br />";
             }
-            $this->view->message = $this->view->translate("The following files do not exist in the directory. ") . "<br /><br />";
-            $this->view->dados = $message;
-            $this->view->submit = true;
-            $this->view->msgclass = 'failure';
+            $this->view->messagedb = $this->view->translate("The following files do not exist in the directory and will be excluded from the database.") . "<br />";
+            $this->view->dadosdb = $message;
+
+
+            $messagefile = "";
+            foreach ($array_directory as $number => $archive) {
+                $messagefile .= $archive . "<br />";
+            }
+            $this->view->messagedir = $this->view->translate("The following files were found in the directory and will be registered in the database.") . "<br />";
+            $this->view->dadosdir = $messagefile;
         } else {
             $this->view->message = $this->view->translate("Your files are synchronized");
             $this->view->msgclass = 'sucess';
@@ -329,6 +365,9 @@ class SoundFilesController extends Zend_Controller_Action {
 
             foreach ($fileNotExist as $key => $file) {
                 Snep_SoundFiles_Manager::remove($file);
+            }
+            foreach ($array_directory as $cont => $archive) {
+                Snep_SoundFiles_Manager::addSounds($archive);
             }
         }
     }

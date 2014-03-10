@@ -110,6 +110,28 @@ class Snep_SoundFiles_Manager {
     }
 
     /**
+     * Add a sound file of direcoty in syncronize
+     * @param array $file
+     */
+    public function addSounds($file) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('arquivo' => $file,
+            'descricao' => substr($file, 0, -4),
+            'data' => new Zend_Db_Expr('NOW()'),
+            'tipo' => 'AST');
+
+        try {
+            $db->insert('sounds', $insert_data);
+            return true;
+        } catch (Exception $e) {
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
      * Remove a Sound File register
      * @param int $id
      */

@@ -540,11 +540,20 @@ select
     list-style:none;
 }
 
-#content .list_sounds {
+#content .list_soundsfalse {
     margin-top: 10px;
     padding: 5px 3px 5px 25px;
     background: url("../imagens/false.png") no-repeat scroll 5px center;
     font-weight: bolder;
+    color: red;
+}
+
+#content .list_soundstrue {
+    margin-top: 10px;
+    padding: 5px 3px 5px 25px;
+    background: url("../imagens/true.png") no-repeat scroll 5px center;
+    font-weight: bolder;
+    color: green;
 }
 
 #content .list_error {

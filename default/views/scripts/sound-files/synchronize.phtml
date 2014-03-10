@@ -7,7 +7,13 @@
 
     <?php if ($this->message): ?>
         <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
+         
+        <dl id="login_form">
+            <div class="form_element">
 
+                <dd> <input class="new_button" type="button" id="voltar" value="<?php echo $this->translate("Back"); ?>" onClick="location.href='../'" /></dd>
+            </div>
+        </dl>       
     <?php endif; ?>
 
 

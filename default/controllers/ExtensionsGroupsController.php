@@ -107,7 +107,8 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $form_xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
         $form = new Snep_Form($form_xml);
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
-
+        
+        $form->removeElement('id');
         $form->getElement('name')
                 ->setLabel($this->view->translate('Name'));
 
@@ -131,8 +132,8 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
             $extensions[$val['name']] = $val['name'] . " ( " . $val['group'] . " )";
         }
+        
         $this->view->objSelectBox = "extensions";
-
         $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
         if ($this->getRequest()->getPost()) {
@@ -195,7 +196,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                     'users' => $this->view->translate('User'),
                     'NULL' => $this->view->translate('None')))
                 ->setValue($group['inherit']);
-
+        
+        $form->removeElement('id');
+        
         $groupExtensions = array();
         foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
 

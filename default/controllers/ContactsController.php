@@ -77,18 +77,18 @@ class ContactsController extends Zend_Controller_Action {
         $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
 
         $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add Contact"),
-                "css" => "include"),
+        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/multiRemove/",
+                "display" => $this->view->translate("Remove multiple"),
+                "css" => "remove"),
             array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/import/",
                 "display" => $this->view->translate("Import CSV"),
                 "css" => "includes"),
             array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
                 "display" => $this->view->translate("Export CSV"),
                 "css" => "back"),
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/multiRemove/",
-                "display" => $this->view->translate("Remove multiple"),
-                "css" => "remove")
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
+                "display" => $this->view->translate("Add Contact"),
+                "css" => "include")
         );
     }
 
@@ -105,8 +105,8 @@ class ContactsController extends Zend_Controller_Action {
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
 
-        $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId());
-
+        $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId())->setAttrib('readonly', true)->setAttrib('disabled', true);
+        
         $_allGroups = Snep_ContactGroups_Manager::getAll();
         foreach ($_allGroups as $group) {
             $allGroups[$group['id']] = $group['name'];
@@ -174,7 +174,7 @@ class ContactsController extends Zend_Controller_Action {
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
 
-        $form->getElement('id')->setValue($contact['id'])->setAttrib('readonly', true);
+        $form->getElement('id')->setValue($contact['id'])->setAttrib('readonly', true)->setAttrib('disabled', true);
         $form->getElement('name')->setValue($contact['name']);
 
         $_allGroups = Snep_ContactGroups_Manager::getAll();

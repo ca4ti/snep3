@@ -60,7 +60,7 @@ class ErrorsKhompController extends Zend_Controller_Action {
         }
 
         $data = $astinfo->status_asterisk("khomp summary concise", "", True);
-
+        
         if (!isset($data)) {
 
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
@@ -70,6 +70,11 @@ class ErrorsKhompController extends Zend_Controller_Action {
 
         $kchannels = array();
         $ONLYGSM = False;
+        
+        if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
+
+            $this->_redirect("/khomp-links/khomp-error");
+        }
 
         while (list($key, $val) = each($lines)) {
 

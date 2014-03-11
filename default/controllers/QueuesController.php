@@ -33,8 +33,8 @@ class QueuesController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Queues")
         ));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
@@ -89,9 +89,9 @@ class QueuesController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues"),
-            $this->view->translate("Add Queues")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Queues"),
+                    $this->view->translate("Add Queues")
         ));
 
         $sections = new Zend_Config_Ini('/etc/asterisk/snep/snep-musiconhold.conf');
@@ -174,25 +174,6 @@ class QueuesController extends Zend_Controller_Action {
          */
         $form->addSubForm($advanced, "advanced");
 
-        $alertsData = new Zend_Config_Xml('./default/forms/queues.xml', 'alerts', true);
-        $alerts = new Snep_Form_SubForm($this->view->translate("Alert Configuration"), $alertsData);
-
-        $alerts->getElement('valueMail')
-                ->addValidator('NotEmpty')
-                ->addValidator('EmailAddress')
-                ->addFilter('StringToLower');
-
-        $alerts->setElementDecorators(array(
-            'ViewHelper',
-            'Description',
-            'Errors',
-            array(array('elementTd' => 'HtmlTag'), array('tag' => 'td')),
-            array('Label', array('tag' => 'th')),
-            array(array('elementTr' => 'HtmlTag'), array('tag' => 'tr', 'class' => "snep_form_element" /* . " $name " */))
-        ));
-
-        $form->addSubForm($alerts, "alerts");
-
         if ($this->_request->getPost()) {
 
             $dados = array('name' => $_POST['essential']['name'],
@@ -227,47 +208,6 @@ class QueuesController extends Zend_Controller_Action {
 
                 Snep_Queues_Manager::add($dados);
 
-                if ($_POST['alerts']) {
-
-                    $addAlerts = $_POST['alerts'];
-                    $queue = $_POST['essential']['name'];
-
-                    if ($addAlerts['checkMail'] != 0) {
-                        if ($addAlerts['tmeMail'] <= 0) {
-                            $addAlerts['tmeMail'] = 1;
-                        }
-
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'mail',
-                            'tme' => $addAlerts['tmeMail'],
-                            'sla' => $addAlerts['nmlMail'],
-                            'destino' => $addAlerts['valueMail'],
-                            'check' => 1));
-                    }
-                    if ($addAlerts['checkSound'] != 0) {
-                        if ($addAlerts['tmeSound'] <= 0) {
-                            $addAlerts['tmeSound'] = 1;
-                        }
-
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'sound',
-                            'tme' => $addAlerts['tmeSound'],
-                            'sla' => $addAlerts['nmlSound'],
-                            'destino' => 'sound',
-                            'check' => 1));
-                    }
-                    if ($addAlerts['checkVisual'] != 0) {
-                        if ($addAlerts['tmeVisual'] <= 0) {
-                            $addAlerts['tmeVisual'] = 1;
-                        }
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'visual',
-                            'tme' => $addAlerts['tmeVisual'],
-                            'sla' => $addAlerts['nmlVisual'],
-                            'destino' => 'visual',
-                            'check' => 1));
-                    }
-                }
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -286,9 +226,9 @@ class QueuesController extends Zend_Controller_Action {
         $id = $this->_request->getParam("id");
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues"),
-            $this->view->translate("Edit $id")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Queues"),
+                    $this->view->translate("Edit $id")
         ));
 
         $queue = Snep_Queues_Manager::get($id);
@@ -382,46 +322,6 @@ class QueuesController extends Zend_Controller_Action {
 
         $form->addSubForm($advanced, "advanced");
 
-        $alertsData = new Zend_Config_Xml('./default/forms/queues.xml', 'alerts', true);
-        $alerts = new Snep_Form_SubForm($this->view->translate("Alert Configuration"), $alertsData);
-        $queueAlerts = Snep_Alerts::getAlert($id);
-
-        foreach ($queueAlerts as $queueAlert) {
-
-            switch ($queueAlert['tipo']) {
-                case 'mail':
-                    $alerts->getElement('checkMail')->setValue($queueAlert['ativo']);
-                    $alerts->getElement('valueMail')->addValidator('NotEmpty')
-                            ->addValidator('EmailAddress')
-                            ->addFilter('StringToLower')
-                            ->setValue($queueAlert['destino']);
-                    $alerts->getElement('tmeMail')->setValue($queueAlert['tme']);
-                    $alerts->getElement('nmlMail')->setValue($queueAlert['sla']);
-                    break;
-                case 'sound';
-                    $alerts->getElement('checkSound')->setValue($queueAlert['ativo']);
-                    $alerts->getElement('tmeSound')->setValue($queueAlert['tme']);
-                    $alerts->getElement('nmlSound')->setValue($queueAlert['sla']);
-                    break;
-                case 'visual';
-                    $alerts->getElement('checkVisual')->setValue($queueAlert['ativo']);
-                    $alerts->getElement('tmeVisual')->setValue($queueAlert['tme']);
-                    $alerts->getElement('nmlVisual')->setValue($queueAlert['sla']);
-                    break;
-            }
-        }
-
-        $alerts->setElementDecorators(array(
-            'ViewHelper',
-            'Description',
-            'Errors',
-            array(array('elementTd' => 'HtmlTag'), array('tag' => 'td')),
-            array('Label', array('tag' => 'th')),
-            array(array('elementTr' => 'HtmlTag'), array('tag' => 'tr', 'class' => "snep_form_element" /* . " $name" */))
-        ));
-
-        $form->addSubForm($alerts, "alerts");
-
         if ($this->_request->getPost()) {
 
             $dados = array('name' => $_POST['essential']['name'],
@@ -457,49 +357,6 @@ class QueuesController extends Zend_Controller_Action {
 
                 Snep_Queues_Manager::edit($dados);
 
-                if ($_POST['alerts']) {
-
-                    $addAlerts = $_POST['alerts'];
-                    $queue = $_POST['essential']['name'];
-
-                    Snep_Alerts::resetAlert($queue);
-
-                    if ($addAlerts['checkMail'] != 0) {
-                        if ($addAlerts['tmeMail'] <= 0) {
-                            $addAlerts['tmeMail'] = 1;
-                        }
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'mail',
-                            'tme' => $addAlerts['tmeMail'],
-                            'sla' => $addAlerts['nmlMail'],
-                            'destino' => $addAlerts['valueMail'],
-                            'check' => 1));
-                    }
-                    if ($addAlerts['checkSound'] != 0) {
-                        if ($addAlerts['tmeSound'] <= 0) {
-                            $addAlerts['tmeSound'] = 1;
-                        }
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'sound',
-                            'tme' => $addAlerts['tmeSound'],
-                            'sla' => $addAlerts['nmlSound'],
-                            'destino' => 'sound',
-                            'check' => 1));
-                    }
-                    if ($addAlerts['checkVisual'] != 0) {
-                        if ($addAlerts['tmeVisual'] <= 0) {
-                            $addAlerts['tmeVisual'] = 1;
-                        }
-                        Snep_Alerts::setAlert(array('queue' => $queue,
-                            'type' => 'visual',
-                            'tme' => $addAlerts['tmeVisual'],
-                            'sla' => $addAlerts['nmlVisual'],
-                            'destino' => 'visual',
-                            'check' => 1));
-                    }
-                }
-
-
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -512,9 +369,9 @@ class QueuesController extends Zend_Controller_Action {
     public function removeAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues"),
-            $this->view->translate("Delete")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Queues"),
+                    $this->view->translate("Delete")
         ));
 
         $id = $this->_request->getParam('id');
@@ -532,11 +389,11 @@ class QueuesController extends Zend_Controller_Action {
     public function membersAction() {
 
         $queue = $this->_request->getParam("id");
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues"),
-            $this->view->translate("Members $queue")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Queues"),
+                    $this->view->translate("Members $queue")
         ));
 
         $members = Snep_Queues_Manager::getMembers($queue);

@@ -39,9 +39,12 @@ class ContactsController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from(array("n" => "contacts_names"), array("id as ide", "name as nome", "city", "state", "cep", "phone_1", "cell_1"))
+                ->from(array("n" => "contacts_names"), array("id as ide", "name as nome", "city", "state", "cep"))
                 ->join(array("g" => "contacts_group"), 'n.group = g.id')
+                ->join(array("p" => "contacts_phone"), 'n.id = p.contact_id')
+                ->group("n.id")
                 ->order('nome');
+
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
@@ -105,8 +108,8 @@ class ContactsController extends Zend_Controller_Action {
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
 
-        $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId())->setAttrib('readonly', true)->setAttrib('disabled', true);
-        
+        $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId())->setAttrib('disabled', true);
+
         $_allGroups = Snep_ContactGroups_Manager::getAll();
         foreach ($_allGroups as $group) {
             $allGroups[$group['id']] = $group['name'];
@@ -125,14 +128,12 @@ class ContactsController extends Zend_Controller_Action {
             $form->getElement('state')->setMultiOptions($allState);
         }
 
+        $form = $this->getForm($form);
+        $this->view->form = $form;
+
         if ($this->_request->getPost()) {
 
-            if (empty($_POST['cell'])) {
-                $form->getElement('phone')->setRequired(true);
-            }
-            if (empty($_POST['phone'])) {
-                $form->getElement('cell')->setRequired(true);
-            }
+            $_POST['id'] = Snep_Contacts_Manager::getLastId();
 
             $form_isValid = $form->isValid($_POST);
 
@@ -140,21 +141,44 @@ class ContactsController extends Zend_Controller_Action {
                 $form->getElement('group')->addError($this->view->translate('No group selected'));
                 $form_isValid = false;
             }
+
             if (Snep_Contacts_Manager::get($_POST['id'])) {
                 $form->getElement('id')->addError($this->view->translate('Code already exists'));
                 $form_isValid = false;
             }
 
-            $dados = $this->_request->getParams();
-
-
             if ($form_isValid) {
-                Snep_Contacts_Manager::add($dados);
+
+                Snep_Contacts_Manager::add($_POST);
+                $numbers = explode(",", $_POST['phoneValue']);
+                foreach ($numbers as $key => $phone) {
+                    Snep_Contacts_Manager::addNumber($_POST['id'], $phone);
+                }
+
                 $this->_redirect($this->getRequest()->getControllerName());
             }
+        } else {
+            $this->view->dataphone = "phoneObj.addItem();\n";
         }
+        $this->renderScript('contacts/add.phtml');
+    }
 
-        $this->view->form = $form;
+    /**
+     * getForm
+     * @param <object> $form
+     * @return <object>
+     */
+    protected function getForm($form) {
+
+
+        $phoneField = new Snep_Form_Element_Html("contacts/elements/phone.phtml", "phone", false);
+        $phoneField->setLabel($this->view->translate("Phone"));
+        $phoneField->setOrder(9);
+        $form->addElement($phoneField);
+
+        $this->form = $form;
+
+        return $this->form;
     }
 
     /**
@@ -170,12 +194,19 @@ class ContactsController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         $contact = Snep_Contacts_Manager::get($id);
+        $phones = Snep_Contacts_Manager::getPhone($id);
+
+        foreach ($phones as $phone) {
+            $contact['phone'][] = $phone['phone'];
+        }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
 
-        $form->getElement('id')->setValue($contact['id'])->setAttrib('readonly', true)->setAttrib('disabled', true);
+        $form->getElement('id')->setValue($contact['id'])->setAttrib('disabled', true);
         $form->getElement('name')->setValue($contact['name']);
+
+        $form = $this->getForm($form);
 
         $_allGroups = Snep_ContactGroups_Manager::getAll();
         foreach ($_allGroups as $group) {
@@ -202,23 +233,39 @@ class ContactsController extends Zend_Controller_Action {
         $zipcode = $form->getElement('zipcode');
         ( isset($contact['cep']) ? $zipcode->setValue($contact['cep']) : null );
 
-        $phone = $form->getElement('phone');
-        ( isset($contact['phone_1']) ? $phone->setValue($contact['phone_1']) : null );
-
-        $cell = $form->getElement('cell');
-        ( isset($contact['cell_1']) ? $cell->setValue($contact['cell_1']) : null );
+        $this->view->form = $form;
 
         if ($this->_request->getPost()) {
+            $_POST['id'] = $id;
             $form_isValid = $form->isValid($_POST);
+
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
 
                 Snep_Contacts_Manager::edit($dados);
+                Snep_Contacts_Manager::removePhone($id);
+
+                $numbers = explode(",", $_POST['phoneValue']);
+                foreach ($numbers as $key => $phone) {
+                    Snep_Contacts_Manager::addNumber($id, $phone);
+                }
                 $this->_redirect($this->getRequest()->getControllerName());
             }
+        } else {
+
+            $this->view->dataphone = "phoneObj.addItem();\n";
+            $phoneList = $contact['phone'];
+
+            $phone = "phoneObj.addItem(" . count($phoneList) . ");\n";
+
+            foreach ($phoneList as $index => $value) {
+                $phone .= "phoneObj.widgets[$index].value='{$value}';\n";
+            }
+
+            $this->view->dataphone = $phone;
+            $this->renderScript('contacts/edit.phtml');
         }
-        $this->view->form = $form;
     }
 
     /**
@@ -226,7 +273,8 @@ class ContactsController extends Zend_Controller_Action {
      */
     public function removeAction() {
         $id = $this->_request->getParam('id');
-
+        
+        Snep_Contacts_Manager::removePhone($id);
         Snep_Contacts_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
     }
@@ -249,60 +297,56 @@ class ContactsController extends Zend_Controller_Action {
 
         $this->view->form = $form;
     }
-    
+
     /**
      * multiRemoveAction - Remove various contacts
      */
     public function multiremoveAction() {
 
-            if($this->_request->getPost()) {
+        if ($this->_request->getPost()) {
 
-                if( $_POST['group'] == 'all' ) {
-                    $groups = Snep_ContactGroups_Manager::getAll();
-
-                }else{
-                    $groups = Snep_ContactGroups_Manager::get($_POST['group']);
-                }
-                
-                foreach($groups as $group ) {
-                    Snep_Contacts_Manager::removeByGroupId($group['id']);                    
-                }
-
-                $this->_redirect($this->getRequest()->getControllerName());
-
-            }else{
-
-                $this->view->message = $this->view->translate('Select a contact group to remove your contacts.');
-                $_contactGroups = Snep_ContactGroups_Manager::getAll();
-                $contactGroups = array('all' => $this->view->translate('All Groups'));
-                foreach($_contactGroups as $contactGroup) {
-                    $contactGroups[$contactGroup['id']] = $contactGroup['name'] ;
-                }
-
-                $form = new Snep_Form();
-
-                $select = new Zend_Form_Element_Select('group');
-                $select->addMultiOptions( $contactGroups )->setLabel($this->view->translate('Group'));
-                
-                $select->setDecorators(array(
-                		'ViewHelper',
-                		'Description',
-                		'Errors',
-                		array(array('elementTd' => 'HtmlTag'), array('tag' => 'div', 'class' => 'input')),
-                		array('Label', array('tag' => 'div', 'class'=>'label')),
-                		array(array('elementTr' => 'HtmlTag'), array('tag' => 'div', 'class' => 'line')),
-                ));
-                
-                $form->addElement( $select );
-                
-                
-                
-                $this->view->form = $form;
-
-                $this->renderScript("contacts/select-multi-remove.phtml");
-
+            if ($_POST['group'] == 'all') {
+                $groups = Snep_ContactGroups_Manager::getAll();
+            } else {
+                $groups = Snep_ContactGroups_Manager::get($_POST['group']);
             }
 
+            foreach ($groups as $group) {
+                Snep_Contacts_Manager::removeByGroupId($group['id']);
+            }
+
+            $this->_redirect($this->getRequest()->getControllerName());
+        } else {
+
+            $this->view->message = $this->view->translate('Select a contact group to remove your contacts.');
+            $_contactGroups = Snep_ContactGroups_Manager::getAll();
+            $contactGroups = array('all' => $this->view->translate('All Groups'));
+            foreach ($_contactGroups as $contactGroup) {
+                $contactGroups[$contactGroup['id']] = $contactGroup['name'];
+            }
+
+            $form = new Snep_Form();
+
+            $select = new Zend_Form_Element_Select('group');
+            $select->addMultiOptions($contactGroups)->setLabel($this->view->translate('Group'));
+
+            $select->setDecorators(array(
+                'ViewHelper',
+                'Description',
+                'Errors',
+                array(array('elementTd' => 'HtmlTag'), array('tag' => 'div', 'class' => 'input')),
+                array('Label', array('tag' => 'div', 'class' => 'label')),
+                array(array('elementTr' => 'HtmlTag'), array('tag' => 'div', 'class' => 'line')),
+            ));
+
+            $form->addElement($select);
+
+
+
+            $this->view->form = $form;
+
+            $this->renderScript("contacts/select-multi-remove.phtml");
+        }
     }
 
     /**

@@ -525,15 +525,28 @@ CREATE TABLE IF NOT EXISTS `contacts_names` (
   `city` varchar(50) NOT NULL,
   `state` varchar(2) NOT NULL,
   `cep` varchar(8) NOT NULL,
-  `phone_1` varchar(15) NOT NULL,
-  `cell_1` varchar(15) NOT NULL,
   `group` integer NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
   CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
 -- NOVA ESTRUTURA ADICIONADA / TIAGO
+
+--
+-- Estrutura da tabela `contacts_phone`
+--
+CREATE TABLE IF NOT EXISTS `contacts_phone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contact_id` char(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contact_id` (`contact_id`),
+  CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Estrutura da tabela `profiles`

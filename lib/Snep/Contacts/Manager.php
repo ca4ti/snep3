@@ -64,11 +64,30 @@ class Snep_Contacts_Manager {
         $select = $db->select()
                 ->from('contacts_names')
                 ->where("contacts_names.id = ?", $id);
-
+                
         $stmt = $db->query($select);
         $contacts = $stmt->fetch();
 
         return $contacts;
+    }
+    
+    /**
+     * Method to get phones a contact by id
+     * @param <int> $id
+     * @return <Array>
+     */
+    public function getPhone($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('contacts_phone',array('phone'))
+                ->where("contacts_phone.contact_id = ?", $id);
+                
+        $stmt = $db->query($select);
+        $phone = $stmt->fetchall();
+
+        return $phone;
     }
 
     /**
@@ -97,19 +116,32 @@ class Snep_Contacts_Manager {
 
         $db = Zend_Registry::get('db');
 
-        print_r($contact);
-
         $insert_data = array('id' => $contact['id'],
             'name' => $contact['name'],
             'address' => $contact['address'],
             'city' => $contact['city'],
             'state' => $contact['state'],
             'cep' => $contact['zipcode'],
-            'phone_1' => $contact['phone'],
-            'cell_1' => $contact['cell'],
-            'group' => $contact['group']);
+            'group' => $contact['group'],
+            'created' => date('Y-m-d H:i:s'),
+            'updated' => date('Y-m-d H:i:s'));
 
         $db->insert('contacts_names', $insert_data);
+    }
+    
+    /**
+     * Method to add numbers a contact.
+     * @param <array> $contact
+     * @return int
+     */
+    public function addNumber($id,$phone) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('contact_id' => $id,
+            'phone' => $phone);
+
+        $db->insert('contacts_phone', $insert_data);
     }
 
     /**
@@ -122,6 +154,24 @@ class Snep_Contacts_Manager {
 
         $db->beginTransaction();
         $db->delete('contacts_names', "id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+    
+    /**
+     * Method to remove phone a contact
+     * @param <int> $id
+     */
+    public function removePhone($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('contacts_phone', "contact_id = '$id'");
 
         try {
             $db->commit();
@@ -143,10 +193,8 @@ class Snep_Contacts_Manager {
             'city' => $contact['city'],
             'state' => $contact['state'],
             'cep' => $contact['zipcode'],
-            'phone_1' => $contact['phone'],
-            'cell_1' => $contact['cell'],
-            'group' => $contact['group']);
-
+            'group' => $contact['group'],
+            'updated' => date('Y-m-d H:i:s'));
 
         $db->update("contacts_names", $update_data, "id = '{$contact['id']}'");
     }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelo>
+    <attribs>
+        <id>contactsForm</id>
+    </attribs>
     <elements>
         <id>
             <type>text</type>
@@ -58,42 +61,21 @@
                     <regex>
                         <validator>regex</validator>
                         <options>
-                            <pattern>/[[:digit:]]/i</pattern>
+                            <pattern>/^(([0-9]\.?)+)$/</pattern>
                             <messages>
                                 <regexNotMatch>This field should contain numbers only</regexNotMatch>
                             </messages>
                         </options>
                     </regex>
+                    <strlen>
+                    <validator>StringLength</validator>
+                    <options>
+                        <min>5</min>
+                        <max>9</max>
+                    </options>
+                </strlen>
                 </validators>
             </options>
         </zipcode>
-        <phone>
-            <type>text</type>
-            <options>
-                <label>Phone</label>
-                <validators>
-                    <alnum>
-                        <validator>Alnum</validator>
-                        <options>
-                            <allowWhiteSpace>true</allowWhiteSpace>
-                        </options>
-                    </alnum>
-                </validators>
-            </options>
-        </phone>
-        <cell>
-            <type>text</type>
-            <options>
-                <label>Cellphone</label>
-                <validators>
-                    <alnum>
-                        <validator>Alnum</validator>
-                        <options>
-                            <allowWhiteSpace>true</allowWhiteSpace>
-                        </options>
-                    </alnum>
-                </validators>
-            </options>
-        </cell>
     </elements>
 </modelo>

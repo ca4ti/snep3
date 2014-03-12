@@ -106,6 +106,19 @@ CREATE TABLE IF NOT EXISTS `queue_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Estrutura da tabela `contacts_phone`
+--
+CREATE TABLE IF NOT EXISTS `contacts_phone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contact_id` char(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contact_id` (`contact_id`),
+  CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
 

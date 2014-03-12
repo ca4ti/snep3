@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,7 +30,9 @@
  */
 class Snep_Queues_Manager {
 
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     /**
      * Get a queue by id
@@ -41,8 +44,8 @@ class Snep_Queues_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('queues')
-            ->where("queues.name = ?", $name);
+                ->from('queues')
+                ->where("queues.name = ?", $name);
 
         $stmt = $db->query($select);
         $queue = $stmt->fetch();
@@ -59,29 +62,29 @@ class Snep_Queues_Manager {
 
         $db = Zend_Registry::get('db');
 
-        $insert_data = array('name'              => $queue['name'],
-                             'musiconhold'       => $queue['musiconhold'],
-                             'announce'          => $queue['announce'],
-                             'context'           => $queue['context'],
-                             'timeout'           => $queue['timeout'],
-                             'queue_youarenext'  => $queue['queue_youarenext'],
-                             'queue_thereare'    => $queue['queue_thereare'],
-                             'queue_callswaiting'=> $queue['queue_callswaiting'],
-                             'queue_thankyou'    => $queue['queue_thankyou'],
-                             'announce_frequency'=> $queue['announce_frequency'],
-                             'retry'             => $queue['retry'],
-                             'wrapuptime'        => $queue['wrapuptime'],
-                             'maxlen'            => $queue['maxlen'],
-                             'servicelevel'      => $queue['servicelevel'],
-                             'strategy'          => $queue['strategy'],
-                             'joinempty'         => $queue['joinempty'],
-                             'leavewhenempty'    => $queue['leavewhenempty'],
-                             'reportholdtime'    => $queue['reportholdtime'],
-                             'memberdelay'       => $queue['memberdelay'],
-                             'weight'            => $queue['weight']
-                              );
+        $insert_data = array('name' => $queue['name'],
+            'musiconhold' => $queue['musiconhold'],
+            'announce' => $queue['announce'],
+            'context' => $queue['context'],
+            'timeout' => $queue['timeout'],
+            'queue_youarenext' => $queue['queue_youarenext'],
+            'queue_thereare' => $queue['queue_thereare'],
+            'queue_callswaiting' => $queue['queue_callswaiting'],
+            'queue_thankyou' => $queue['queue_thankyou'],
+            'announce_frequency' => $queue['announce_frequency'],
+            'retry' => $queue['retry'],
+            'wrapuptime' => $queue['wrapuptime'],
+            'maxlen' => $queue['maxlen'],
+            'servicelevel' => $queue['servicelevel'],
+            'strategy' => $queue['strategy'],
+            'joinempty' => $queue['joinempty'],
+            'leavewhenempty' => $queue['leavewhenempty'],
+            'reportholdtime' => $queue['reportholdtime'],
+            'memberdelay' => $queue['memberdelay'],
+            'weight' => $queue['weight']
+        );
 
-        $db->insert('queues', $insert_data);   
+        $db->insert('queues', $insert_data);
     }
 
     /**
@@ -92,26 +95,26 @@ class Snep_Queues_Manager {
 
         $db = Zend_Registry::get('db');
 
-        $update_data = array('musiconhold'       => $queue['musiconhold'],
-                             'announce'          => $queue['announce'],
-                             'context'           => $queue['context'],
-                             'timeout'           => $queue['timeout'],
-                             'queue_youarenext'  => $queue['queue_youarenext'],
-                             'queue_thereare'    => $queue['queue_thereare'],
-                             'queue_callswaiting'=> $queue['queue_callswaiting'],
-                             'queue_thankyou'    => $queue['queue_thankyou'],
-                             'announce_frequency'=> $queue['announce_frequency'],
-                             'retry'             => $queue['retry'],
-                             'wrapuptime'        => $queue['wrapuptime'],
-                             'maxlen'            => $queue['maxlen'],
-                             'servicelevel'      => $queue['servicelevel'],
-                             'strategy'          => $queue['strategy'],
-                             'joinempty'         => $queue['joinempty'],
-                             'leavewhenempty'    => $queue['leavewhenempty'],
-                             'reportholdtime'    => $queue['reportholdtime'],
-                             'memberdelay'       => $queue['memberdelay'],
-                             'weight'            => $queue['weight']
-                              );
+        $update_data = array('musiconhold' => $queue['musiconhold'],
+            'announce' => $queue['announce'],
+            'context' => $queue['context'],
+            'timeout' => $queue['timeout'],
+            'queue_youarenext' => $queue['queue_youarenext'],
+            'queue_thereare' => $queue['queue_thereare'],
+            'queue_callswaiting' => $queue['queue_callswaiting'],
+            'queue_thankyou' => $queue['queue_thankyou'],
+            'announce_frequency' => $queue['announce_frequency'],
+            'retry' => $queue['retry'],
+            'wrapuptime' => $queue['wrapuptime'],
+            'maxlen' => $queue['maxlen'],
+            'servicelevel' => $queue['servicelevel'],
+            'strategy' => $queue['strategy'],
+            'joinempty' => $queue['joinempty'],
+            'leavewhenempty' => $queue['leavewhenempty'],
+            'reportholdtime' => $queue['reportholdtime'],
+            'memberdelay' => $queue['memberdelay'],
+            'weight' => $queue['weight']
+        );
 
         $db->update('queues', $update_data, "name = '{$queue['name']}'");
     }
@@ -129,10 +132,45 @@ class Snep_Queues_Manager {
 
         try {
             $db->commit();
-
         } catch (Exception $e) {
             $db->rollBack();
-        }            
+        }
+    }
+
+    /**
+     * removeQueues - Remove a queues_agent
+     * @param <string> $name
+     */
+    public function removeQueues($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('queues_agent', "queue = '$name'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeQueuePeers
+     * @param <string> $queue
+     */
+    public function removeQueuePeers($queue) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('queue_peers', "queue_peers.fila = '$queue'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
     }
 
     /**
@@ -145,8 +183,8 @@ class Snep_Queues_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('queue_members')
-            ->where("queue_members.queue_name = ?", $queue);
+                ->from('queue_members')
+                ->where("queue_members.queue_name = ?", $queue);
 
         $stmt = $db->query($select);
         $queuemember = $stmt->fetchAll();
@@ -166,7 +204,7 @@ class Snep_Queues_Manager {
                 ->from('peers', array('name', 'canal', 'callerid', 'group'))
                 ->where("peers.name != 'admin'")
                 ->where("peers.peer_type = 'R'")
-                ->where("peers.canal != ''")                
+                ->where("peers.canal != ''")
                 ->order("group");
 
         $stmt = $db->query($select);
@@ -181,14 +219,13 @@ class Snep_Queues_Manager {
      */
     public function removeAllMembers($queue) {
 
-         $db = Zend_Registry::get('db');
+        $db = Zend_Registry::get('db');
 
-         $db->beginTransaction();
-         $db->delete('queue_members', "queue_name = '$queue'");
+        $db->beginTransaction();
+        $db->delete('queue_members', "queue_name = '$queue'");
 
         try {
             $db->commit();
-
         } catch (Exception $e) {
             $db->rollBack();
         }
@@ -199,14 +236,15 @@ class Snep_Queues_Manager {
      * @param string $queue
      * @param string $member
      */
-    public function insertMember($queue,$member) {
+    public function insertMember($queue, $member) {
 
-            $db = Zend_Registry::get('db');
+        $db = Zend_Registry::get('db');
 
-            $insert_data = array('membername' => $member,
-                                 'queue_name'   => $queue,
-                                 'interface'    => $member );
+        $insert_data = array('membername' => $member,
+            'queue_name' => $queue,
+            'interface' => $member);
 
-            $db->insert('queue_members', $insert_data);
+        $db->insert('queue_members', $insert_data);
     }
+
 }

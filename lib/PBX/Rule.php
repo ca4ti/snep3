@@ -354,11 +354,14 @@ class PBX_Rule {
             case 'CG':
                 $db = Zend_Registry::get('db');
                 $select = $db->select()
-                        ->from('contacts_names')
-                        ->where("`group` = '$expr' AND (phone_1 = '$value' OR cell_1 = '$value')");
+                        ->from(array("n" => "contacts_names"))
+                        ->join(array("p" => "contacts_phone"), 'n.id = p.contact_id')
+                        ->where("`group` = '$expr'")
+                        ->where("`phone` = '$value'");
 
                 $stmt = $db->query($select);
                 $groups = $stmt->fetchAll();
+                
                 if (count($groups) > 0) {
                     return true;
                 } else {

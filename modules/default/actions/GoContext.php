@@ -87,10 +87,11 @@ class GoContext extends PBX_Rule_Action {
         $context = (isset($this->config['context']))?"<value>{$this->config['context']}</value>":"";
         $trs = Zend_Registry::get("i18n");
 
+        $Tcontext = $trs->translate("Context");
         return <<<XML
 <params>
     <string>
-        <label>{$trs->translate("Context")}</label>
+        <label>$Tcontext</label>
         <id>context</id>
         <default>default</default>
         $context

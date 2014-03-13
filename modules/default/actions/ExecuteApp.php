@@ -68,10 +68,11 @@ class ExecuteApp extends PBX_Rule_Action {
             $parameters = "";
         }
 
+        $Taplication = $trs->translate("Application");
         return <<<XML
 <params>
     <string>
-        <label>{$trs->translate("Application")}</label>
+        <label>$Taplication</label>
         <id>application</id>
         $application
     </string>

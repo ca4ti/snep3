@@ -82,17 +82,20 @@ class Restore extends PBX_Rule_Action {
         $i18n = $this->i18n;
         $origem  = (isset($this->config['origem']))?"<value>{$this->config['origem']}</value>":"";
         $destino = (isset($this->config['destino']))?"<value>{$this->config['destino']}</value>":"";
+        
+        $Tsource = $i18n->translate("Restore Source");
+        $Tdestination = $i18n->translate("Restore Destination");
         return <<<XML
 <params>
     <boolean>
         <id>origem</id>
-        <label>{$i18n->translate("Restore Source")}</label>
+        <label>$Tsource</label>
         <default>false</default>
         $origem
     </boolean>
     <boolean>
         <id>destino</id>
-        <label>{$i18n->translate("Restore Destination")}</label>
+        <label>$Tdestination</label>
         <default>false</default>
         $destino
     </boolean>

@@ -85,6 +85,12 @@ class Rewrite extends PBX_Rule_Action {
         $replace = (isset($this->config['replace']))?"<value>{$this->config['replace']}</value>":"";
         $prefix  = (isset($this->config['prefix']))?"<value>{$this->config['prefix']}</value>":"";
         $suffix  = (isset($this->config['suffix']))?"<value>{$this->config['suffix']}</value>":"";
+        
+        $Tcut = $i18n->translate("Cut");
+        $Tnotcut = $i18n->translate("Do not cut");
+        $Tcutpipe = $i18n->translate("Cut on pipe '|'");
+        $Treplacefor = $i18n->translate("Replace for");
+        $Tsuffix = $i18n->translate("Suffix");
         return <<<XML
 <params>
     <radio>
@@ -103,21 +109,21 @@ class Rewrite extends PBX_Rule_Action {
     </radio>
     <radio>
         <id>cut</id>
-        <label>{$i18n->translate("Cut")}</label>
+        <label>$Tcut</label>
         <default>nocut</default>
         $cut
         <option>
-            <label>{$i18n->translate("Do not cut")}</label>
+            <label>$Tnotcut</label>
             <value>nocut</value>
         </option>
         <option>
-            <label>{$i18n->translate("Cut on pipe '|'")}</label>
+            <label>$Tcutpipe</label>
             <value>pipecut</value>
         </option>
     </radio>
     <string>
         <id>replace</id>
-        <label>{$i18n->translate("Replace for")}</label>
+        <label>$Treplacefor</label>
         <size>10</size>
         $replace
     </string>
@@ -129,7 +135,7 @@ class Rewrite extends PBX_Rule_Action {
     </string>
     <string>
         <id>suffix</id>
-        <label>{$i18n->translate("Suffix")}</label>
+        <label>$Tsuffix</label>
         <size>10</size>
         $suffix
     </string>

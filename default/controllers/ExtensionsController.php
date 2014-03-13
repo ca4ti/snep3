@@ -491,16 +491,14 @@ class ExtensionsController extends Zend_Controller_Action {
     }
 
     public function deleteAction() {
-        $db = Zend_Registry::get('db');
 
         $id = $this->_request->getParam("id");
 
-        // Fazendo procura por referencia a esse ramal em regras de negócio.
-        $rulesQuery = "SELECT id, `desc` FROM regras_negocio WHERE origem LIKE '%R:$id%' OR destino LIKE '%R:$id%'";
-        $rules = $db->query($rulesQuery)->fetchAll();
+        //checks if the exten is used in the rule 
+        $rules = Snep_Extensions_Manager::getValidation($id);
+        $rulesQuery = Snep_Extensions_Manager::getValidationRules($id);
 
-        $rulesQuery = "SELECT rule.id, rule.desc FROM regras_negocio as rule, regras_negocio_actions_config as rconf WHERE (rconf.regra_id = rule.id AND rconf.value = '$id')";
-        $rules = array_merge($rules, $db->query($rulesQuery)->fetchAll());
+        $rules = array_merge($rules, $rulesQuery);
 
         if (count($rules) > 0) {
             $errMsg = $this->view->translate('The following routes use this extension, modify them prior to remove this extension') . ":<br />\n";
@@ -508,37 +506,38 @@ class ExtensionsController extends Zend_Controller_Action {
                 $errMsg .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
             }
             $this->view->error = $errMsg;
-            $this->view->back = $this->view->translate("Voltar");
-            $this->_helper->viewRenderer('error');
-        }
-        $sql = "DELETE FROM peers WHERE name='" . $id . "'";
-
-        $db->beginTransaction();
-
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $sql = "delete from voicemail_users where customer_id='$id'";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        try {
-            $db->commit();
-        } catch (PDOException $e) {
-            $db->rollBack();
-            $this->view->error = $this->view->translate("DB Delete Error: ") . $e->getMessage();
             $this->view->back = $this->view->translate("Back");
             $this->_helper->viewRenderer('error');
+        } else {
+            $sql = "DELETE FROM peers WHERE name='" . $id . "'";
+
+            $db->beginTransaction();
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $sql = "delete from voicemail_users where customer_id='$id'";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+            try {
+                $db->commit();
+            } catch (PDOException $e) {
+                $db->rollBack();
+                $this->view->error = $this->view->translate("DB Delete Error: ") . $e->getMessage();
+                $this->view->back = $this->view->translate("Back");
+                $this->_helper->viewRenderer('error');
+            }
+
+            $return = Snep_InterfaceConf::loadConfFromDb();
+
+            If ($return != true) {
+                $this->view->error = $return;
+                $this->view->back = $this->view->translate("Back");
+                $this->_helper->viewRenderer('error');
+            }
+
+            $this->_redirect("default/extensions");
         }
-
-        $return = Snep_InterfaceConf::loadConfFromDb();
-
-        If ($return != true) {
-            $this->view->error = $return;
-            $this->view->back = $this->view->translate("Back");
-            $this->_helper->viewRenderer('error');
-        }
-
-        $this->_redirect("default/extensions");
     }
 
     /**

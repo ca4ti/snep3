@@ -31,8 +31,8 @@ class ExpressionAliasController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Routing"),
-            $this->view->translate("Expression Alias"),
+                    $this->view->translate("Routing"),
+                    $this->view->translate("Expression Alias"),
         ));
 
         $aliases = PBX_ExpressionAliases::getInstance();
@@ -64,9 +64,9 @@ class ExpressionAliasController extends Zend_Controller_Action {
 
     public function addAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Routing"),
-            $this->view->translate("Expression Alias"),
-            $this->view->translate("Add Expression Alias"),
+                    $this->view->translate("Routing"),
+                    $this->view->translate("Expression Alias"),
+                    $this->view->translate("Add Expression Alias"),
         ));
 
         $form = $this->getForm();
@@ -87,11 +87,10 @@ class ExpressionAliasController extends Zend_Controller_Action {
                 foreach ($exprList as $index => $value) {
                     $expr .= "exprObj.widgets[$index].value='{$value}';\n";
                 }
-                
+
                 $this->view->dataExprAlias = $expr;
                 $form = $this->getForm();
                 $form->getElement('name')->setValue($_POST['name']);
-                
             } catch (Exception $ex) {
                 throw new PBX_Exception_BadArg("Invalid Argument");
             }
@@ -100,15 +99,14 @@ class ExpressionAliasController extends Zend_Controller_Action {
         }
 
         $this->renderScript('expression-alias/add_edit.phtml');
-        
     }
 
     public function editAction() {
         $id = (int) $this->getRequest()->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Routing"),
-            $this->view->translate("Expression Alias"),
-            $this->view->translate("Edit Expression Alias %s", $id),
+                    $this->view->translate("Routing"),
+                    $this->view->translate("Expression Alias"),
+                    $this->view->translate("Edit Expression Alias %s", $id),
         ));
 
         $form = $this->getForm();
@@ -129,7 +127,7 @@ class ExpressionAliasController extends Zend_Controller_Action {
             }
             $this->_forward('index', 'expression-alias');
         } else {
-            
+
             $alias = $aliasesPersistency->get($id);
             $exprList = $alias['expressions'];
             $expr = "exprObj.addItem(" . count($exprList) . ");\n";
@@ -149,13 +147,27 @@ class ExpressionAliasController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isGet()) {
             $id = (int) $this->getRequest()->getParam('id');
-
             $aliasesPersistency = PBX_ExpressionAliases::getInstance();
-            $alias = $aliasesPersistency->get($id);
-            if ($alias !== null) {
-                $aliasesPersistency->delete($id);
+
+            //verifica se grupo é usado em alguma regra
+            $regras = $aliasesPersistency->getValidation($id);
+
+            if (count($regras) > 0) {
+
+                $this->view->error = $this->view->translate("Cannot remove. The following routes are using this expression alias: ") . "<br />";
+                foreach ($regras as $regra) {
+                    $this->view->error .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
+                }
+
+                $this->_helper->viewRenderer('error');
+            } else {
+
+                $alias = $aliasesPersistency->get($id);
+                if ($alias !== null) {
+                    $aliasesPersistency->delete($id);
+                }
+                $this->_forward('index', 'expression-alias');
             }
-            $this->_forward('index', 'expression-alias');
         }
     }
 

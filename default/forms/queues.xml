@@ -7,6 +7,16 @@
                 <options>
                     <label>Queue Name</label>
                     <required>true</required>
+                    <description>Maximum 12 characters</description>
+                    <validators>
+                    <strlen>
+                    <validator>StringLength</validator>
+                    <options>
+                        <min>1</min>
+                        <max>12</max>
+                    </options>
+                </strlen>
+                </validators>
                 </options>
             </name>
             <musiconhold>
@@ -155,14 +165,14 @@
                     </options>
             </autofill>
 
-            <autopause>
-               <type>radio</type>
-                    <options>
-                      <yes></yes>
-                      <no></no>
-                    </options>
-            </autopause>
--->
+                        <autopause>
+                           <type>radio</type>
+                                <options>
+                                  <yes></yes>
+                                  <no></no>
+                                </options>
+                        </autopause>
+            -->
         </elements>
     </advanced>
     

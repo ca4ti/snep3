@@ -376,17 +376,11 @@ class QueuesController extends Zend_Controller_Action {
         $db = Zend_Registry::get('db');
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
-
-        // check if the cost center is used in the rule 
-        $rules_query = "SELECT rule.id, rule.desc FROM regras_negocio as rule, regras_negocio_actions_config as rconf WHERE (rconf.regra_id = rule.id AND rconf.value = '$id' AND (rconf.key = 'queue'))";
-        $regras = $db->query($rules_query)->fetchAll();
-
-        //Tratamento de membros na fila
-        $exten_member = "SELECT `membername` FROM `queue_members` WHERE `queue_name` = '$id'";
-        $exten_members = $db->query($exten_member)->fetchAll();
-
-        $agent_member = "SELECT `agent_id` FROM `queues_agent` WHERE `queue` = '$id'";
-        $agent_members = $db->query($agent_member)->fetchAll();
+        
+        // check if the queues is used in the rule or have members 
+        $regras = Snep_Queues_Manager::getValidation($id);
+        $exten_members = Snep_Queues_Manager::getValidationPeers($id);
+        $agent_members = Snep_Queues_Manager::getValidationAgent($id);
 
         if (count($exten_members) > 0 || count($agent_members) > 0) {
             $msg = $this->view->translate("The following members make use of this queue, remove before deleting:") . "<br />\n";

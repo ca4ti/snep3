@@ -115,6 +115,26 @@ class PBX_ExpressionAliases {
 
         return $alias;
     }
+    
+    /**
+     * getValidation - checks if the regular expression is used in the rule 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidation($id){
+        
+        $db = Zend_Registry::get('db');
+        
+         $select = $db->select()
+                ->from('regras_negocio',array('id','desc'))
+                ->where("regras_negocio.origem LIKE ?", 'AL:'.$id)
+                ->orwhere("regras_negocio.destino LIKE ?", 'AL:'.$id);
+        
+        $stmt = $db->query($select);
+        $regras = $stmt->fetchall();
+         
+        return $regras;
+    }
 
     /**
      * register

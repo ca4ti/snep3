@@ -29,7 +29,7 @@ class TrunksController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Trunks")
-                ));
+        ));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
@@ -185,8 +185,8 @@ class TrunksController extends Zend_Controller_Action {
                 }
                 $subFormKhomp->getElement('board')->setMultiOptions($khomp_boards);
             }
-            
-            if(count($khomp_boards) == 0) {
+
+            if (count($khomp_boards) == 0) {
                 $subFormKhomp->removeElement('board');
                 $subFormKhomp->addElement(new Snep_Form_Element_Html("extensions/khomp_error.phtml", "err", false, null, "khomp"));
             }
@@ -278,15 +278,13 @@ class TrunksController extends Zend_Controller_Action {
 
             $trunk_data['id_regex'] = $trunktype . "/" . $trunk_data['username'];
             $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
-            
         } else if ($trunktype == "SNEPSIP" || $trunktype == "SNEPIAX2") {
 
             $trunk_data['peer_type'] = $trunktype == "SNEPSIP" ? "peer" : "friend";
             $trunk_data['username'] = $trunktype == "SNEPSIP" ? $trunk_data['host'] : $trunk_data['username'];
             $trunk_data['channel'] = $trunk_data['id_regex'] = substr($trunktype, 4) . "/" . $trunk_data['username'];
-
         } else if ($trunktype == "KHOMP") {
-            
+
             $khomp_board = $trunk_data['board'];
             $trunk_data['channel'] = 'KHOMP/' . $khomp_board;
             $b = substr($khomp_board, 1, 1);
@@ -307,7 +305,6 @@ class TrunksController extends Zend_Controller_Action {
             }
             $trunk = new PBX_Asterisk_Interface_KHOMP($config);
             $trunk_data['id_regex'] = $trunk->getIncomingChannel();
-            
         } else { // VIRTUAL
             $trunk_data['id_regex'] = $trunk_data['id_regex'] == "" ? $trunk_data['channel'] : $trunk_data['id_regex'];
         }
@@ -336,7 +333,7 @@ class TrunksController extends Zend_Controller_Action {
                     $this->view->translate("Manage"),
                     $this->view->translate("Trunks"),
                     $this->view->translate("Add")
-                ));
+        ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
@@ -395,11 +392,9 @@ class TrunksController extends Zend_Controller_Action {
                 $form->getSubForm(strtolower($info['type']))->getElement("dialmethod")->setValue(strtolower($info['dialmethod']));
                 $form->getSubForm(strtolower($info['type']))->getElement("peer_type")->setValue($ip_info['type']);
             }
-        }
-        else if ($info['type'] == "KHOMP" && $form->getSubForm("khomp")->getElement("board")!=NULL) {
+        } else if ($info['type'] == "KHOMP" && $form->getSubForm("khomp")->getElement("board") != NULL) {
             $form->getSubForm("khomp")->getElement("board")->setValue(substr($info['channel'], 6));
         }
-
     }
 
     public function editAction() {
@@ -408,7 +403,7 @@ class TrunksController extends Zend_Controller_Action {
                     $this->view->translate("Manage"),
                     $this->view->translate("Trunks"),
                     $this->view->translate("Edit trunk %s", $id)
-                ));
+        ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
@@ -445,15 +440,15 @@ class TrunksController extends Zend_Controller_Action {
     }
 
     public function removeAction() {
-        $db = Zend_Registry::get('db');
+
         $id = $this->_request->getParam("id");
         $name = $this->_request->getParam("name");
 
-        $rules_query = "SELECT id, `desc` FROM regras_negocio WHERE origem LIKE '%T:$id,%' OR destino LIKE '%T:$id,%'";
-        $regras = $db->query($rules_query)->fetchAll();
+        $regras = Snep_Trunks_Manager::getValidation($id);
 
-        $rules_query = "SELECT rule.id, rule.desc FROM regras_negocio as rule, regras_negocio_actions_config as rconf WHERE (rconf.regra_id = rule.id AND rconf.value = '$id' AND (rconf.key = 'tronco' OR rconf.key = 'trunk'))";
-        foreach ($db->query($rules_query)->fetchAll() as $rule) {
+        $rules_query = Snep_Trunks_Manager::getRules($id);
+
+        foreach ($rules_query as $rule) {
             if (!in_array($rule, $regras)) {
                 $regras[] = $rule;
             }
@@ -468,12 +463,9 @@ class TrunksController extends Zend_Controller_Action {
 
             $this->_helper->viewRenderer('error');
         } else {
-            $db->beginTransaction();
-            $sql = "DELETE FROM trunks WHERE id='$id'";
-            $db->exec($sql);
-            $sql = "DELETE FROM peers WHERE name='$name'";
-            $db->exec($sql);
-            $db->commit();
+
+            Snep_Trunks_Manager::remove($id);
+            Snep_Trunks_Manager::removePeers($name);
 
             Snep_InterfaceConf::loadConfFromDb();
             $this->_redirect("trunks");

@@ -247,4 +247,57 @@ class Snep_Queues_Manager {
         $db->insert('queue_members', $insert_data);
     }
 
+    /**
+     * getValidationpeers - checks if the queue have member 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidationPeers($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('queue_members', array('membername'))
+                ->where("queue_members.queue_name = ?", $id);
+
+        $stmt = $db->query($select);
+        $member = $stmt->fetchall();
+
+        return $member;
+    }
+
+    /**
+     * getValidation - checks if the queue have member 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidationAgent($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('queues_agent', array('agent_id'))
+                ->where("queues_agent.queue = ?", $id);
+
+        $stmt = $db->query($select);
+        $agent = $stmt->fetchall();
+
+        return $agent;
+    }
+
+    /**
+     * getValidation - checks if the queue is used in the rule 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidation($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $rules_query = "SELECT rule.id, rule.desc FROM regras_negocio as rule, regras_negocio_actions_config as rconf WHERE (rconf.regra_id = rule.id AND rconf.value = '$id' AND (rconf.key = 'queue'))";
+        $regras = $db->query($rules_query)->fetchAll();
+
+        return $regras;
+    }
+
 }

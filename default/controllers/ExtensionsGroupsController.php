@@ -107,7 +107,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $form_xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
         $form = new Snep_Form($form_xml);
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
-        
+
         $form->removeElement('id');
         $form->getElement('name')
                 ->setLabel($this->view->translate('Name'));
@@ -132,7 +132,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
             $extensions[$val['name']] = $val['name'] . " ( " . $val['group'] . " )";
         }
-        
+
         $this->view->objSelectBox = "extensions";
         $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
@@ -196,9 +196,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                     'users' => $this->view->translate('User'),
                     'NULL' => $this->view->translate('None')))
                 ->setValue($group['inherit']);
-        
+
         $form->removeElement('id');
-        
+
         $groupExtensions = array();
         foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
 
@@ -260,25 +260,39 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
+        
+        //checks if the group is used in the rule 
+        $regras = Snep_ExtensionsGroups_Manager::getValidation($id);
+        
+        if (count($regras) > 0) {
 
-        if ($confirm == 1) {
-            Snep_ExtensionsGroups_Manager::delete($id);
-            $this->_redirect($this->getRequest()->getControllerName());
-        }
+            $this->view->error = $this->view->translate("Cannot remove. The following routes are using this extensions group: ") . "<br />";
+            foreach ($regras as $regra) {
+                $this->view->error .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
+            }
 
-        $extensions = Snep_ExtensionsGroups_Manager::getExtensionsGroup($id);
-
-        if (count($extensions) > 0) {
-            $this->_redirect($this->getRequest()->getControllerName() . '/migration/id/' . $id);
+            $this->_helper->viewRenderer('error');
         } else {
 
-            $this->view->message = $this->view->translate("The extension group will be deleted. Are you sure?.");
-            $form = new Snep_Form();
-            $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/delete/id/' . $id . '/confirm/1');
+            if ($confirm == 1) {
+                Snep_ExtensionsGroups_Manager::delete($id);
+                $this->_redirect($this->getRequest()->getControllerName());
+            }
 
-            $form->getElement('submit')->setLabel($this->view->translate('Yes'));
+            $extensions = Snep_ExtensionsGroups_Manager::getExtensionsGroup($id);
 
-            $this->view->form = $form;
+            if (count($extensions) > 0) {
+                $this->_redirect($this->getRequest()->getControllerName() . '/migration/id/' . $id);
+            } else {
+
+                $this->view->message = $this->view->translate("The extension group will be deleted. Are you sure?.");
+                $form = new Snep_Form();
+                $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/delete/id/' . $id . '/confirm/1');
+
+                $form->getElement('submit')->setLabel($this->view->translate('Yes'));
+
+                $this->view->form = $form;
+            }
         }
     }
 

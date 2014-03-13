@@ -147,4 +147,24 @@ class Snep_ContactGroups_Manager {
 
         return $contactGroup;
     }
+    
+    /**
+     * getValidation - checks if the group is used in the rule 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidation($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('regras_negocio', array('id', 'desc'))
+                ->where("regras_negocio.origem LIKE ?", 'CG:' . $id)
+                ->orwhere("regras_negocio.destino LIKE ?", 'CG:' . $id);
+
+        $stmt = $db->query($select);
+        $regras = $stmt->fetchall();
+
+        return $regras;
+    }
 }

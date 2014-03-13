@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -35,10 +36,14 @@
  */
 class Snep_ExtensionsGroups_Manager {
 
-    private function __construct() { /* Protegendo métodos dinâmicos */ }
-    private function __destruct() { /* Protegendo métodos dinâmicos */ }
-    private function __clone() { /* Protegendo métodos dinâmicos */ }
+    private function __construct() { /* Protegendo métodos dinâmicos */
+    }
 
+    private function __destruct() { /* Protegendo métodos dinâmicos */
+    }
+
+    private function __clone() { /* Protegendo métodos dinâmicos */
+    }
 
     /**
      * Return a group from the database based on their ID.
@@ -46,13 +51,12 @@ class Snep_ExtensionsGroups_Manager {
      *
      * @param int $id
      */
-
-    public static function getGroup ($id) {
+    public static function getGroup($id) {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from ('groups')
-                ->where ("name = '$id'");
+                ->from('groups')
+                ->where("name = '$id'");
 
         $stmt = $db->query($select);
         $registros = $stmt->fetch();
@@ -64,14 +68,13 @@ class Snep_ExtensionsGroups_Manager {
      * Return all the group's database.
      * Retorna todos os grupo do banco de dados.
      */
-
     public static function getAllGroup() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('groups',array('name','inherit'))
-                     ->where("name not in ('all','users','administrator') ");
+                ->from('groups', array('name', 'inherit'))
+                ->where("name not in ('all','users','administrator') ");
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
@@ -85,30 +88,29 @@ class Snep_ExtensionsGroups_Manager {
      *
      * @param int $id
      */
-
     public function getExtensionsGroup($id) {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('peers',array('id','name','group'))
-                     ->from('groups',array('name','inherit'))
-                     ->where('peers.group = groups.name')
-                     ->where('groups.name = ?', $id);
+                ->from('peers', array('id', 'name', 'group'))
+                ->from('groups', array('name', 'inherit'))
+                ->where('peers.group = groups.name')
+                ->where('groups.name = ?', $id);
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
 
         return $extensionsGroup;
     }
-    
+
     public function getExtensionsOnlyGroup($id) {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('peers',array('id','name','group'))
-                     ->where('peers.group = ?', $id);
+                ->from('peers', array('id', 'name', 'group'))
+                ->where('peers.group = ?', $id);
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
@@ -120,36 +122,35 @@ class Snep_ExtensionsGroups_Manager {
      * Returns all groups and extensions of the database.
      * Retorna todos os grupo e suas extensões do banco de dados.
      */
-
     public function getExtensionsAllGroup() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('peers',array('id','name','group'))
-                     ->from('groups',array('name','inherit'))
-                     ->where('peers.group = groups.name');
+                ->from('peers', array('id', 'name', 'group'))
+                ->from('groups', array('name', 'inherit'))
+                ->where('peers.group = groups.name');
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
 
         return $extensionsGroup;
     }
-    
-        public function getExtensionsAll() {
+
+    public function getExtensionsAll() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from('peers',array('id','name','group'))
-                     ->where('peers.peer_type = ?', 'R');
+                ->from('peers', array('id', 'name', 'group'))
+                ->where('peers.peer_type = ?', 'R');
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();
 
         return $extensionsGroup;
     }
-    
+
     /**
      * Adds the group to the database based on the value reported.
      * Adiciona o grupo no banco de dados com base no valor informado.
@@ -165,12 +166,10 @@ class Snep_ExtensionsGroups_Manager {
             $db->insert('groups', $group);
             $db->commit();
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $db->rollBack();
             return $e;
         }
-
     }
 
     /**
@@ -179,22 +178,20 @@ class Snep_ExtensionsGroups_Manager {
      *
      * @param int $group
      */
-
-    public static function  editGroup($group) {
+    public static function editGroup($group) {
 
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
 
         try {
 
-            $value = array('name' => $group['name'] , 'inherit' => $group['type']);
+            $value = array('name' => $group['name'], 'inherit' => $group['type']);
 
-            $db->update("groups" , $value, "name ='".$group['id']."'");
+            $db->update("groups", $value, "name ='" . $group['id'] . "'");
             $db->commit();
 
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
 
             $db->rollBack();
             return $e;
@@ -216,12 +213,11 @@ class Snep_ExtensionsGroups_Manager {
 
             $value = array("peers.group" => $extensionsGroup['group']);
 
-            $db->update("peers", $value, "name = ".$extensionsGroup['extensions']);
+            $db->update("peers", $value, "name = " . $extensionsGroup['extensions']);
             $db->commit();
-            
+
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
 
             $db->rollBack();
             return $e;
@@ -234,7 +230,6 @@ class Snep_ExtensionsGroups_Manager {
      *
      * @param int $id
      */
-
     public static function delete($id) {
 
         $db = Zend_Registry::get('db');
@@ -243,16 +238,37 @@ class Snep_ExtensionsGroups_Manager {
 
         try {
 
-            $db->delete("groups","name='{$id}'");
+            $db->delete("groups", "name='{$id}'");
             $db->commit();
 
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
 
             $db->rollBack();
             return $e;
         }
     }
+
+    /**
+     * getValidation - checks if the group is used in the rule 
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getValidation($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('regras_negocio', array('id', 'desc'))
+                ->where("regras_negocio.origem LIKE ?", 'G:' . $id)
+                ->orwhere("regras_negocio.destino LIKE ?", 'G:' . $id);
+
+        $stmt = $db->query($select);
+        $regras = $stmt->fetchall();
+
+        return $regras;
+    }
+
 }
+
 ?>

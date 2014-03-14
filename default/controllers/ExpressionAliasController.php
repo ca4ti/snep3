@@ -78,27 +78,45 @@ class ExpressionAliasController extends Zend_Controller_Action {
                 "expressions" => explode(",", $_POST['exprValue'])
             );
             $aliasesPersistency = PBX_ExpressionAliases::getInstance();
-            try {
 
-                $aliasesPersistency->register($expression);
-                $exprList = $expression['expressions'];
-                $expr = "exprObj.addItem(" . count($exprList) . ");\n";
+            //validation
+            $valida = Snep_ValidateExpression::execute($_POST['exprValue']);
 
-                foreach ($exprList as $index => $value) {
-                    $expr .= "exprObj.widgets[$index].value='{$value}';\n";
+            if ($valida['status'] != false) {
+
+                $this->view->message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
+                $this->view->msgclass = 'failure';
+                header("refresh:7; ../expression-alias/add");
+            } else
+            if ($_POST["name"] == "" || $_POST["exprValue"] == "") {
+                $this->view->message = $this->view->translate("Required value");
+                $this->view->msgclass = 'failure';
+
+                header("refresh:2; ../expression-alias/add");
+            } else {
+                try {
+
+                    $aliasesPersistency->register($expression);
+                    $exprList = $expression['expressions'];
+                    $expr = "exprObj.addItem(" . count($exprList) . ");\n";
+
+                    foreach ($exprList as $index => $value) {
+                        $expr .= "exprObj.widgets[$index].value='{$value}';\n";
+                    }
+
+                    $this->view->dataExprAlias = $expr;
+                    $form = $this->getForm();
+                    $form->getElement('name')->setValue($_POST['name']);
+                } catch (Exception $ex) {
+                    throw new PBX_Exception_BadArg("Invalid Argument");
                 }
-
-                $this->view->dataExprAlias = $expr;
-                $form = $this->getForm();
-                $form->getElement('name')->setValue($_POST['name']);
-            } catch (Exception $ex) {
-                throw new PBX_Exception_BadArg("Invalid Argument");
+                $this->_helper->redirector('index');
             }
         } else {
             $this->view->dataExprAlias = "exprObj.addItem();\n";
         }
 
-        $this->renderScript('expression-alias/add_edit.phtml');
+        $this->renderScript('expression-alias/add.phtml');
     }
 
     public function editAction() {
@@ -120,12 +138,29 @@ class ExpressionAliasController extends Zend_Controller_Action {
                 "expressions" => explode(",", $_POST['exprValue'])
             );
 
-            try {
-                $aliasesPersistency->update($expression);
-            } catch (Exception $ex) {
-                display_error($ex->getMessage(), true);
+            //validation
+            $valida = Snep_ValidateExpression::execute($_POST['exprValue']);
+
+            if ($valida['status'] != false) {
+
+                $this->view->message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
+                $this->view->msgclass = 'failure';
+                header("refresh:7; ../expression-alias/edit/id/$id");
+            } else
+            if ($_POST["name"] == "" || $_POST["exprValue"] == "") {
+                $this->view->message = $this->view->translate("Required value");
+                $this->view->msgclass = 'failure';
+
+                header("refresh:2; ../expression-alias/edit/id/$id");
+            } else {
+
+                try {
+                    $aliasesPersistency->update($expression);
+                } catch (Exception $ex) {
+                    display_error($ex->getMessage(), true);
+                }
+                $this->_forward('index', 'expression-alias');
             }
-            $this->_forward('index', 'expression-alias');
         } else {
 
             $alias = $aliasesPersistency->get($id);
@@ -139,7 +174,7 @@ class ExpressionAliasController extends Zend_Controller_Action {
             $form = $this->getForm();
             $form->getElement('name')->setValue($alias['name']);
 
-            $this->renderScript('expression-alias/add_edit.phtml');
+            $this->renderScript('expression-alias/edit.phtml');
         }
     }
 

@@ -350,6 +350,16 @@ class TrunksController extends Zend_Controller_Action {
                         $db->insert("peers", $trunk_data['ip']);
                     }
                     $db->commit();
+                    
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+                        
+                        $name = $trunk_data['trunk']['callerid'];
+                        $id = Snep_Trunks_Manager::getId($name);
+                        Snep_LogUser::salvaLog("Adicionou tronco", $id["id"],2);
+                        $add = Snep_Trunks_Manager::getTrunkLog($id["id"]);
+                        Snep_Trunks_Manager::insertLogTronco("ADD", $add);
+                    }
                 } catch (Exception $ex) {
                     $db->rollBack();
                     throw $ex;

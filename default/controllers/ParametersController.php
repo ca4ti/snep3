@@ -22,11 +22,14 @@
  */
 class ParametersController extends Zend_Controller_Action {
 
+    /**
+     * indexAction - List parameters
+     */
     public function indexAction() {
         // Title
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Configure"),
-            $this->view->translate("Parameters")
+                    $this->view->translate("Configure"),
+                    $this->view->translate("Parameters")
         ));
 
         // Get configuration properties from Zend_Registry
@@ -52,35 +55,43 @@ class ParametersController extends Zend_Controller_Action {
 
         // Section General
         $general = new Snep_Form_SubForm($this->view->translate("General Configuration"), $form_xml->general);
+        $old_param = array();
 
         // Setting propoertie values
         $empName = $general->getElement('emp_nome');
         $empName->setValue($config->ambiente->emp_nome);
+        $old_param["emp_nome"] = $config->ambiente->emp_nome;
 
         $debug = $general->getElement('debug');
         $debug->setValue($config->system->debug);
+        $old_param["debug"] = $config->system->debug;
 
         $ipSock = $general->getElement('ip_sock');
         $ipSock->setValue($config->ambiente->ip_sock);
+        $old_param["ip_sock"] = $config->ambiente->ip_sock;
 
         $userSock = $general->getElement('user_sock');
         $userSock->setValue($config->ambiente->user_sock);
+        $old_param["user_sock"] = $config->ambiente->user_sock;
 
         $passSock = $general->getElement('pass_sock');
         $passSock->setValue($config->ambiente->pass_sock);
 
         $email = $general->getElement('mail');
         $email->setValue($config->system->mail);
+        $old_param["email"] = $config->system->mail;
 
         $lineLimit = $general->getElement('linelimit');
         $lineLimit->setValue($config->ambiente->linelimit);
+        $old_param["linelimit"] = $config->ambiente->linelimit;
 
         $dstExceptions = $general->getElement('dst_exceptions');
         $dstExceptions->setValue($config->ambiente->dst_exceptions);
+        $old_param["dst_exceptions"] = $config->ambiente->dst_exceptions;
 
         $conferenceApp = $general->getElement('conference_app');
         $conferenceApp->setValue($config->ambiente->conference_app);
-
+        $old_param["conference_app"] = $config->ambiente->conference_app;
 
         $form->addSubForm($general, "general");
 
@@ -113,7 +124,6 @@ class ParametersController extends Zend_Controller_Action {
         }
         $languageElement->setValue(Snep_Locale::getInstance()->getLanguage());
 
-
         $form->addSubForm($locale_form, "locale");
 
         // Section Recording
@@ -122,19 +132,39 @@ class ParametersController extends Zend_Controller_Action {
         // Setting propoertie values
         $application = $recording->getElement('application');
         $application->setValue($config->general->record->application);
+        $old_param["application"] = $config->general->record->application;
 
         $flag = $recording->getElement('flag');
         $flag->setValue($config->general->record->flag);
+        $old_param["flag"] = $config->general->record->flag;
 
         $recordMp3 = $recording->getElement('record_mp3');
         $recordMp3->setValue($config->general->record_mp3);
+        $old_param["record_mp3"] = $config->general->record_mp3;
 
         $pathVoice = $recording->getElement('path_voz');
         $pathVoice->setValue($config->ambiente->path_voz);
+        $old_param["path_voz"] = $config->ambiente->path_voz;
 
         $pathVoiceBkp = $recording->getElement('path_voz_bkp');
         $pathVoiceBkp->setValue($config->ambiente->path_voz_bkp);
         $form->addSubForm($recording, "gravacao");
+        $old_param["path_voz_bkp"] = $config->ambiente->path_voz_bkp;
+
+        // Sessão Ramais
+        $ramais = new Snep_Form_SubForm($this->view->translate("Extensions Configurations"), $form_xml->extensions);
+
+        // Setando valores do arquivo.
+        $peers_range = $ramais->getElement('peers_range');
+        $peers_range->setValue($config->canais->peers_range);
+        $old_param["peers_range"] = $config->canais->peers_range;
+
+        $agents = $ramais->getElement('agents');
+
+        $agents->setValue($config->ambiente->agents);
+        $old_param["agents"] = $config->ambiente->agents;
+
+        $form->addSubForm($ramais, "ramais");
 
         // Section Trunks
         $trunks = new Snep_Form_SubForm($this->view->translate("Trunks Configuration"), $form_xml->trunks);
@@ -143,6 +173,7 @@ class ParametersController extends Zend_Controller_Action {
         $qualControlValue = $trunks->getElement('valor_controle_qualidade');
         $qualControlValue->setValue($config->ambiente->valor_controle_qualidade);
         $form->addSubForm($trunks, "troncos");
+        $old_param["valor_controle_qualidade"] = $config->ambiente->valor_controle_qualidade;
 
         // Verify if the request is a post
         if ($this->_request->getPost()) {
@@ -158,6 +189,16 @@ class ParametersController extends Zend_Controller_Action {
 
             //Validates form, then sets propertie values and records it on the configuration file
             if ($formIsValid) {
+
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    $old_param["tipo"] = "OLD";
+                    Snep_Parameters_Manager::insertParameter($old_param);
+                    // Inserção de log de todas edições efetuadas em parametros
+                    $acao = "Editou parametros";
+                    Snep_Parameters_Manager::salvalog($acao);
+                }
 
                 $configFile = APPLICATION_PATH . "/includes/setup.conf";
                 $config = new Zend_Config_Ini($configFile, null, true);
@@ -185,12 +226,21 @@ class ParametersController extends Zend_Controller_Action {
                 $config->ambiente->path_voz = $formData['gravacao']['path_voz'];
                 $config->ambiente->path_voz_bkp = $formData['gravacao']['path_voz_bkp'];
 
+                $config->canais->peers_range = $formData['ramais']['peers_range'];
+                $config->ambiente->agents = $formData['ramais']['agents'];
+
                 $config->ambiente->valor_controle_qualidade = $formData['troncos']['valor_controle_qualidade'];
 
                 $writer = new Zend_Config_Writer_Ini(array('config' => $config,
-                            'filename' => $configFile));
+                    'filename' => $configFile));
                 // Write file
                 $writer->write();
+
+                if (class_exists("Loguser_Manager")) {
+
+                    $formData["tipo"] = "NEW";
+                    Snep_Parameters_Manager::insertParameter($formData);
+                }
 
                 $this->_redirect('parameters');
             }

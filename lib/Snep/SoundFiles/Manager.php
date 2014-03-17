@@ -544,4 +544,29 @@ class Snep_SoundFiles_Manager {
         return $result;
     }
 
+    /**
+     * insertLogFila - Insert on table logs_users the data of sound files
+     * @param <string> $acao
+     * @param <array> $add
+     */
+    function insertLogSounds($acao, $add) {
+
+        $db = Zend_Registry::get("db");
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["arquivo"],
+            'param1' => $add["descricao"],
+            'param2' => $add["tipo"],
+            'value' => "SOM",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
+    }
+
 }

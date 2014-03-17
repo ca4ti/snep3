@@ -168,6 +168,16 @@ class SoundFilesController extends Zend_Controller_Action {
                         Snep_SoundFiles_Manager::add(array('arquivo' => $originalName,
                             'descricao' => $description,
                             'tipo' => 'AST'));
+
+                        //log-user
+                        if (class_exists("Loguser_Manager")) {
+
+                            $id = $originalName;
+                            Snep_LogUser::salvaLog("Adicionou Arquivo de som", $id, 8);
+                            $add = Snep_SoundFiles_Manager::get($id);
+                            Snep_SoundFiles_Manager::insertLogSounds("ADD", $add);
+                        }
+
                         $this->_redirect($this->getRequest()->getControllerName());
                     } else {
 
@@ -245,6 +255,13 @@ class SoundFilesController extends Zend_Controller_Action {
                     $this->view->translate("Delete")
         ));
         $id = $this->_request->getParam('id');
+
+        if (class_exists("Loguser_Manager")) {
+
+            Snep_LogUser::salvaLog("Excluiu Arquivo de som", $id, 8);
+            $add = Snep_SoundFiles_Manager::get($id);
+            Snep_SoundFiles_Manager::insertLogSounds("DEL", $add);
+        }
 
         Snep_SoundFiles_Manager::remove($id);
         exec("rm /var/lib/asterisk/sounds/pt_BR/$id");

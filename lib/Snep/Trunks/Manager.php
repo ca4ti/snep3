@@ -54,6 +54,11 @@ class Snep_Trunks_Manager {
         return $regras;
     }
 
+    /**
+     * getId
+     * @param <string> $name
+     * @return <array>
+     */
     public function getId($name) {
 
         $db = Zend_Registry::get('db');
@@ -168,7 +173,7 @@ class Snep_Trunks_Manager {
 
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
-        
+
         if ($acao == "Adicionou tronco") {
             $valor = "ADD";
         } else if ($acao == "Excluiu tronco") {
@@ -219,7 +224,7 @@ class Snep_Trunks_Manager {
                 'reverse_auth' => $add["reverse_auth"],
                 'domain' => $add["domain"],
                 'tipo' => $valor);
-            
+
             $db->insert('logs_trunk', $insert_data);
         }
     }

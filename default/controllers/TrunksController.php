@@ -350,13 +350,13 @@ class TrunksController extends Zend_Controller_Action {
                         $db->insert("peers", $trunk_data['ip']);
                     }
                     $db->commit();
-                    
+
                     //log-user
                     if (class_exists("Loguser_Manager")) {
-                        
+
                         $name = $trunk_data['trunk']['callerid'];
                         $id = Snep_Trunks_Manager::getId($name);
-                        Snep_LogUser::salvaLog("Adicionou tronco", $id["id"],2);
+                        Snep_LogUser::salvaLog("Adicionou tronco", $id["id"], 2);
                         $add = Snep_Trunks_Manager::getTrunkLog($id["id"]);
                         Snep_Trunks_Manager::insertLogTronco("ADD", $add);
                     }
@@ -415,6 +415,12 @@ class TrunksController extends Zend_Controller_Action {
                     $this->view->translate("Edit trunk %s", $id)
         ));
 
+        //log-user
+        if (class_exists("Loguser_Manager")) {
+            $edit = Snep_Trunks_Manager::getTrunkLog($id);
+            Snep_Trunks_Manager::insertLogTronco("OLD", $edit);
+        }
+
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
         $form->setAction($this->view->baseUrl() . "/index.php/trunks/edit/trunk/$id");
@@ -435,6 +441,16 @@ class TrunksController extends Zend_Controller_Action {
                         $db->update("peers", $trunk_data['ip'], "name='{$trunk_data['trunk']['name']}' and peer_type='T'");
                     }
                     $db->commit();
+
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+
+                        $name = $trunk_data['trunk']['callerid'];
+                        $id = Snep_Trunks_Manager::getId($name);
+                        Snep_LogUser::salvaLog("Editou tronco", $id["id"], 2);
+                        $edit = Snep_Trunks_Manager::getTrunkLog($id["id"]);
+                        Snep_Trunks_Manager::insertLogTronco("NEW", $edit);
+                    }
                 } catch (Exception $ex) {
                     $db->rollBack();
                     throw $ex;
@@ -473,6 +489,14 @@ class TrunksController extends Zend_Controller_Action {
 
             $this->_helper->viewRenderer('error');
         } else {
+
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+
+                Snep_LogUser::salvaLog("Excluiu tronco", $id, 2);
+                $add = Snep_Trunks_Manager::getTrunkLog($id);
+                Snep_Trunks_Manager::insertLogTronco("DEL", $add);
+            }
 
             Snep_Trunks_Manager::remove($id);
             Snep_Trunks_Manager::removePeers($name);

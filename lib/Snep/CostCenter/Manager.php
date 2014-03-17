@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -29,7 +30,9 @@
  */
 class Snep_CostCenter_Manager {
 
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     /**
      * Method to get all cost centers
@@ -39,12 +42,12 @@ class Snep_CostCenter_Manager {
         $db = Zend_registry::get('db');
 
         $select = $db->select()
-                        ->from("ccustos", array("codigo", "tipo", "nome", "descricao"));
+                ->from("ccustos", array("codigo", "tipo", "nome", "descricao"));
 
         $stmt = $db->query($select);
         $allCostCenters = $stmt->fetchAll();
 
-        return $allCostCenters;        
+        return $allCostCenters;
     }
 
     /**
@@ -57,8 +60,8 @@ class Snep_CostCenter_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                     ->from("ccustos", array("codigo", "tipo", "nome", "descricao"))
-                     ->where("ccustos.codigo = ?", $id);
+                ->from("ccustos", array("codigo", "tipo", "nome", "descricao"))
+                ->where("ccustos.codigo = ?", $id);
 
         $stmt = $db->query($select);
         $contactGroup = $stmt->fetch();
@@ -76,13 +79,13 @@ class Snep_CostCenter_Manager {
         $db = Zend_Registry::get('db');
 
         $insert_data = array('codigo' => $costcenter['id'],
-                             'tipo'   => $costcenter['type'],
-                             'nome'   => $costcenter['name'],
-                             'descricao' => $costcenter['description']);
-        
+            'tipo' => $costcenter['type'],
+            'nome' => $costcenter['name'],
+            'descricao' => $costcenter['description']);
+
         $db->insert('ccustos', $insert_data);
 
-        return $db->lastInsertId();        
+        return $db->lastInsertId();
     }
 
     /**
@@ -91,16 +94,16 @@ class Snep_CostCenter_Manager {
      */
     public function remove($id) {
 
-            $db = Zend_Registry::get('db');
+        $db = Zend_Registry::get('db');
 
-            $db->beginTransaction();
-            $db->delete('ccustos', "codigo = '$id'");
+        $db->beginTransaction();
+        $db->delete('ccustos', "codigo = '$id'");
 
-            try {
-                $db->commit();
-            } catch (Exception $e) {
-                $db->rollBack();
-            }        
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
     }
 
     /**
@@ -109,14 +112,40 @@ class Snep_CostCenter_Manager {
      */
     public function edit($costcenter) {
 
-            $db = Zend_Registry::get('db');
-            
-            $update_data = array('codigo' => $costcenter['id'],
-                                 'tipo'   => $costcenter['type'],
-                                 'nome'   => $costcenter['name'],
-                                 'descricao' => $costcenter['description']);
-            
-            $db->update("ccustos", $update_data, "codigo = '{$costcenter['id']}'");        
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('codigo' => $costcenter['id'],
+            'tipo' => $costcenter['type'],
+            'nome' => $costcenter['name'],
+            'descricao' => $costcenter['description']);
+
+        $db->update("ccustos", $update_data, "codigo = '{$costcenter['id']}'");
+    }
+
+    /**
+     * insertLogCcustos - insere na tabela logs_users os dados do centro de custo
+     * @param <array> $acao
+     * @param <array> $add
+     */
+    function insertLogCcustos($acao, $add) {
+
+        $db = Zend_Registry::get("db");
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["codigo"],
+            'param1' => $add["tipo"],
+            'param2' => $add["nome"],
+            'param3' => $add["descricao"],
+            'value' => "CCUSTOS",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
     }
 
 }

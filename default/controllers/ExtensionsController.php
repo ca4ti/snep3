@@ -144,6 +144,16 @@ class ExtensionsController extends Zend_Controller_Action {
                 $ret = $this->execAdd($postData);
 
                 if (!is_string($ret)) {
+
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+
+                        $id = $_POST["extension"]["exten"];
+                        Snep_LogUser::salvaLog("Adicionou Ramal", $id, 5);
+                        $add = Snep_Extensions_Manager::getPeer($id);
+                        Snep_Extensions_Manager::insertLogRamal("ADD", $add);
+                    }
+
                     $this->_redirect('/extensions/');
                 } else {
                     $this->view->error = $ret;
@@ -509,18 +519,20 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->back = $this->view->translate("Back");
             $this->_helper->viewRenderer('error');
         } else {
-            $sql = "DELETE FROM peers WHERE name='" . $id . "'";
 
-            $db->beginTransaction();
+            //log-user
+            if (class_exists("Loguser_Manager")) {
 
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-            $sql = "delete from voicemail_users where customer_id='$id'";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
+                Snep_LogUser::salvaLog("Excluiu Ramal", $id, 5);
+                $add = Snep_Extensions_Manager::getPeer($id);
+                Snep_Extensions_Manager::insertLogRamal("DEL", $add);
+            }
+
+            Snep_Extensions_Manager::remove($id);
+            Snep_Extensions_Manager::removeVoicemail($id);
 
             try {
-                $db->commit();
+                
             } catch (PDOException $e) {
                 $db->rollBack();
                 $this->view->error = $this->view->translate("DB Delete Error: ") . $e->getMessage();
@@ -692,26 +704,20 @@ class ExtensionsController extends Zend_Controller_Action {
                     }
                 }
 
+                //log-user
+                if (class_exists("Loguser_Manager")) {
 
-
-
-//                //log-user
-//                $tabela = self::verificaLog();
-//                if ($tabela == true) {
-//
-//                    $acao = "Adicionou Ramais multiplos";
-//                    self::salvaLog($acao, $_POST["extension"]["exten"]);
-//                    $tech = $_POST["technology"]["type"];
-//                    $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
-//                    $action = "ADD R";
-//                    $add = array();
-//                    $add["name"] = $_POST["extension"]["exten"];
-//                    $add["canal"] = $tech;
-//                    $add["allow"] = $codecs;
-//                    $add["dtmfmode"] = $_POST[$tech]["dtmf"];
-//                    $add["directmedia"] = $_POST[$tech]["directmedia"];
-//                    self::insertLogRamal($action, $add);
-//                }
+                    Snep_LogUser::salvaLog("Adicionou Ramais multiplos", $_POST["extension"]["exten"], 5);
+                    $tech = $_POST["technology"]["type"];
+                    $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
+                    $add = array();
+                    $add["name"] = $_POST["extension"]["exten"];
+                    $add["canal"] = $tech;
+                    $add["allow"] = $codecs;
+                    $add["dtmfmode"] = $_POST[$tech]["dtmf"];
+                    $add["directmedia"] = $_POST[$tech]["directmedia"];
+                    Snep_Extensions_Manager::insertLogRamal("ADD R", $add);
+                }
 
                 foreach ($range as $exten) {
 

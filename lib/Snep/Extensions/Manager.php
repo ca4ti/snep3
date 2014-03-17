@@ -69,4 +69,86 @@ class Snep_Extensions_Manager {
         return $regras;
     }
 
+    /**
+     * getPeer - Monta array com todos dados do ramal
+     * @param <int> $id - Código do ramal
+     * @return <array> $ramal - Dados do ramal
+     */
+    function getPeer($id) {
+
+        $db = Zend_Registry::get("db");
+
+        $select = $db->select()
+                ->from("peers", array("id", "name", "canal", "allow", "dtmfmode"))
+                ->where("peers.name = ?", $id);
+
+
+        $stmt = $db->query($select);
+        $peer = $stmt->fetch();
+
+        return $peer;
+    }
+
+    /**
+     * insertLogRamal - insere na tabela logs_users os dados dos ramais
+     * @global <int> $id_user
+     * @param <array> $add
+     */
+    function insertLogRamal($acao, $add) {
+
+        $db = Zend_Registry::get("db");
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["name"],
+            'param1' => $add["canal"],
+            'param2' => $add["allow"],
+            'param3' => $add["dtmfmode"],
+            'value' => "Ramal",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
+    }
+
+    /**
+     * remove - Remove peer
+     * @param <int> $id
+     */
+    public function remove($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('peers', "name = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeVoicemail - Remove voicemail
+     * @param <int> $id
+     */
+    public function removeVoicemail($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('voicemail_users', "customer_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
 }

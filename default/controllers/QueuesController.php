@@ -208,6 +208,15 @@ class QueuesController extends Zend_Controller_Action {
 
                 Snep_Queues_Manager::add($dados);
 
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    $id = $dados["name"];
+                    Snep_LogUser::salvaLog("Adicionou Fila", $id, 7);
+                    $add = Snep_Queues_Manager::get($id);
+                    Snep_Queues_Manager::insertLogQueue("ADD", $add);
+                }
+
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -376,7 +385,7 @@ class QueuesController extends Zend_Controller_Action {
         $db = Zend_Registry::get('db');
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
-        
+
         // check if the queues is used in the rule or have members 
         $regras = Snep_Queues_Manager::getValidation($id);
         $exten_members = Snep_Queues_Manager::getValidationPeers($id);
@@ -417,9 +426,20 @@ class QueuesController extends Zend_Controller_Action {
         } else {
             if ($confirm == 1) {
 
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    $add = Snep_Queues_Manager::get($id);
+                }
+
                 Snep_Queues_Manager::removeQueuePeers($id);
                 Snep_Queues_Manager::remove($id);
                 Snep_Queues_Manager::removeQueues($id);
+
+                if (class_exists("Loguser_Manager")) {
+
+                    Snep_LogUser::salvaLog("Excluiu Fila", $id, 7);
+                    Snep_Queues_Manager::insertLogQueue("DEL", $add);
+                }
 
                 $this->_redirect($this->getRequest()->getControllerName());
             }

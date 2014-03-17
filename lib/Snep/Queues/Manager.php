@@ -300,4 +300,29 @@ class Snep_Queues_Manager {
         return $regras;
     }
 
+    /**
+     * insertLogFila - insere na tabela logs_users os dados das filas
+     * @param <string> $acao
+     * @param <array> $add
+     */
+    function insertLogQueue($acao, $add) {
+
+        $db = Zend_Registry::get("db");
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["name"],
+            'param1' => $add["musiconhold"],
+            'param2' => $add["context"],
+            'value' => "Fila",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
+    }
+
 }

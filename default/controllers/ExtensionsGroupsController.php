@@ -34,6 +34,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
      */
     protected $forms;
 
+    /**
+     * indexAction - List all Extensions groups
+     */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
@@ -45,8 +48,13 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $this->view->tra = array("admin" => $this->view->translate("Administrators"),
             "users" => $this->view->translate("Users"),
+            "NULL" => $this->view->translate("None"),
             "all" => $this->view->translate("All"));
 
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $this->view->user = $username;
 
         $select = $db->select()
                 ->from("groups", array("name", "inherit"))
@@ -92,8 +100,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     }
 
     /**
-     * Adds a group and their extensions in the database.
-     * Adiciona um grupo e seus ramais no banco de dados.
+     * addAction - Adds a group and their extensions in the database
      */
     public function addAction() {
 
@@ -119,6 +126,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                     'users' => $this->view->translate('User'),
                     'NULL' => $this->view->translate('None')));
 
+
         try {
             $extensionsAllGroup = Snep_ExtensionsGroups_Manager::getExtensionsAll();
         } catch (Exception $e) {
@@ -132,11 +140,12 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
             $extensions[$val['name']] = $val['name'] . " ( " . $val['group'] . " )";
         }
-
         $this->view->objSelectBox = "extensions";
+
         $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
         if ($this->getRequest()->getPost()) {
+
 
             $form_isValid = $form->isValid($_POST);
 
@@ -162,6 +171,15 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                     }
                 }
 
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    $nome = $dados['name'];
+                    Snep_LogUser::salvaLog("Adicionou Grupo de ramal", $nome, 11);
+                    $add = Snep_ExtensionsGroups_Manager::getGroupLog($nome);
+                    Snep_ExtensionsGroups_Manager::insertLogGroup("ADD", $add);
+                }
+
                 $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
             }
         }
@@ -169,6 +187,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /**
+     * editAction - Edit extensions groups
+     */
     public function editAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
@@ -184,6 +205,13 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam('id');
 
+        if (class_exists("Loguser_Manager")) {
+
+            $add = Snep_ExtensionsGroups_Manager::getGroupLog($id);
+            Snep_ExtensionsGroups_Manager::insertLogGroup("OLD", $add);
+        }
+
+
         $group = Snep_ExtensionsGroups_Manager::getGroup($id);
 
         $groupId = $form->getElement('id')->setValue($id);
@@ -196,8 +224,6 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                     'users' => $this->view->translate('User'),
                     'NULL' => $this->view->translate('None')))
                 ->setValue($group['inherit']);
-
-        $form->removeElement('id');
 
         $groupExtensions = array();
         foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
@@ -215,7 +241,6 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         }
 
         $this->view->objSelectBox = "extensions";
-
         $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $groupAllExtensions, $groupExtensions);
 
         if ($this->_request->getPost()) {
@@ -240,6 +265,14 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                 }
             }
 
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+
+                Snep_LogUser::salvaLog("Editou Grupo de ramal", $dados['name'], 11);
+                $add = Snep_ExtensionsGroups_Manager::getGroupLog($dados['name']);
+                Snep_ExtensionsGroups_Manager::insertLogGroup("NEW", $add);
+            }
+
             $this->_redirect($this->getRequest()->getControllerName());
         }
 
@@ -247,7 +280,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     }
 
     /**
-     * Remove a Extensions Group
+     * deleteAction - Remove a Extensions Group
      */
     public function deleteAction() {
 
@@ -260,10 +293,10 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
-        
+
         //checks if the group is used in the rule 
         $regras = Snep_ExtensionsGroups_Manager::getValidation($id);
-        
+
         if (count($regras) > 0) {
 
             $this->view->error = $this->view->translate("Cannot remove. The following routes are using this extensions group: ") . "<br />";
@@ -275,8 +308,17 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         } else {
 
             if ($confirm == 1) {
+
                 Snep_ExtensionsGroups_Manager::delete($id);
                 $this->_redirect($this->getRequest()->getControllerName());
+            }
+
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+
+                Snep_LogUser::salvaLog("Excluiu Grupo de ramal", $id, 11);
+                $add = Snep_ExtensionsGroups_Manager::getGroupLog($id);
+                Snep_ExtensionsGroups_Manager::insertLogGroup("DEL", $add);
             }
 
             $extensions = Snep_ExtensionsGroups_Manager::getExtensionsGroup($id);
@@ -297,7 +339,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
     }
 
     /**
-     * Migrate extensions to other Extensions Group
+     * migrationAction - Migrate extensions to other Extensions Group
      */
     public function migrationAction() {
 

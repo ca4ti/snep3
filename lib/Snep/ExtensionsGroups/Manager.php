@@ -269,6 +269,60 @@ class Snep_ExtensionsGroups_Manager {
         return $regras;
     }
 
+    /**
+     * getGroup - Monta array com todos dados do grupo de ramal
+     * @param <int> $id - codigo da expressao
+     * @return <array> $archive - Dados da expressao
+     */
+    function getGroupLog($id) {
+
+        $db = Zend_Registry::get("db");
+
+        $select = $db->select()
+                ->from("groups")
+                ->where("groups.name = ?", $id);
+        $stmt = $db->query($select);
+        $archive = $stmt->fetch();
+
+        $select = $db->select()
+                ->from("peers", array("name as member"))
+                ->where("peers.group = ?", $id);
+        $stmt = $db->query($select);
+        $expressions = $stmt->fetchall();
+        $archive["member"] = "";
+
+        foreach ($expressions as $expr) {
+            $archive["member"] .= $expr["member"] . " ";
+        }
+
+        return $archive;
+    }
+
+    /**
+     * insertLogGroup - insere na tabela logs_users os dados do grupo de ramal
+     * @global <int> $id_user
+     * @param <array> $add
+     */
+    function insertLogGroup($acao, $add) {
+
+        $db = Zend_Registry::get("db");
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["name"],
+            'param1' => $add["inherit"],
+            'param2' => $add["member"],
+            'value' => "GRP",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
+    }
+
 }
 
 ?>

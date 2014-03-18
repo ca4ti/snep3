@@ -115,24 +115,24 @@ class PBX_ExpressionAliases {
 
         return $alias;
     }
-    
+
     /**
      * getValidation - checks if the regular expression is used in the rule 
      * @param <int> $id
      * @return <array>
      */
-    public function getValidation($id){
-        
+    public function getValidation($id) {
+
         $db = Zend_Registry::get('db');
-        
-         $select = $db->select()
-                ->from('regras_negocio',array('id','desc'))
-                ->where("regras_negocio.origem LIKE ?", 'AL:'.$id)
-                ->orwhere("regras_negocio.destino LIKE ?", 'AL:'.$id);
-        
+
+        $select = $db->select()
+                ->from('regras_negocio', array('id', 'desc'))
+                ->where("regras_negocio.origem LIKE ?", 'AL:' . $id)
+                ->orwhere("regras_negocio.destino LIKE ?", 'AL:' . $id);
+
         $stmt = $db->query($select);
         $regras = $stmt->fetchall();
-         
+
         return $regras;
     }
 
@@ -154,12 +154,9 @@ class PBX_ExpressionAliases {
         }
 
         //log-user
-        $tabela = self::verificaLog();
-        if ($tabela == true) {
+        if (class_exists("Loguser_Manager")) {
 
-            $acao = "Adicionou expressao regular";
-            self::salvaLog($acao, $id);
-            $action = "ADD";
+            Snep_LogUser::salvaLog("Adicionou expressao regular", $id, 10);
 
             $add["id"] = $id;
             $add["name"] = $expression["name"];
@@ -168,7 +165,7 @@ class PBX_ExpressionAliases {
 
                 $add["exp"] .= $expr . "  ";
             }
-            self::insertLogExpression($action, $add);
+            self::insertLogExpression("ADD", $add);
         }
 
         try {
@@ -188,12 +185,10 @@ class PBX_ExpressionAliases {
         $id = $expression['id'];
 
         //log-user
-        $tabela = self::verificaLog();
-        if ($tabela == true) {
+        if (class_exists("Loguser_Manager")) {
 
-            $action = "OLD";
             $add = self::getExpression($id);
-            self::insertLogExpression($action, $add);
+            self::insertLogExpression("OLD", $add);
         }
 
         $db = Zend_Registry::get('db');
@@ -206,13 +201,11 @@ class PBX_ExpressionAliases {
             $db->insert("expr_alias_expression", $data);
         }
 
-        if ($tabela == true) {
+        if (class_exists("Loguser_Manager")) {
 
-            $acao = "Editou expressao regular";
-            self::salvaLog($acao, $id);
-            $action = "NEW";
+            Snep_LogUser::salvaLog("Editou expressao regular", $id, 10);
             $add = self::getExpression($id);
-            self::insertLogExpression($action, $add);
+            self::insertLogExpression("NEW", $add);
         }
 
         try {
@@ -231,56 +224,14 @@ class PBX_ExpressionAliases {
         $db = Zend_Registry::get('db');
 
         //log-user
-        $tabela = self::verificaLog();
-        if ($tabela == true) {
+        if (class_exists("Loguser_Manager")) {
 
-            $acao = "Excluiu expressao regular";
-            self::salvaLog($acao, $id);
-            $action = "DEL";
+            Snep_LogUser::salvaLog("Excluiu expressao regular", $id, 10);
             $add = self::getExpression($id);
-            self::insertLogExpression($action, $add);
+            self::insertLogExpression("DEL", $add);
         }
 
         $db->delete("expr_alias", "aliasid='$id'");
-    }
-
-    /**
-     * verificaLog - Verify if exists module Loguser
-     * @return <boolean> $tabela
-     */
-    function verificaLog() {
-        if (class_exists("Loguser_Manager")) {
-            $tabela = true;
-        } else {
-            $tabela = false;
-        }
-        return $tabela;
-    }
-
-    /**
-     * salvalog - Insert data on database
-     * @param <String> $ação 
-     * @param <String> $sounds 
-     * @return <boolean> 
-     */
-    function salvaLog($acao, $sounds) {
-        $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hora = date('Y-m-d H:i:s');
-        $tipo = 10;
-
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $acao = mysql_escape_string($acao);
-
-        $sql = "INSERT INTO `logs` VALUES (NULL, '" . $hora . "', '" . $ip . "', '" . $username . "', '" . $acao . "', '" . $sounds . "', '" . $tipo . "' , '" . NULL . "', '" . NULL . "', '" . NULL . "', '" . NULL . "')";
-
-        if ($db->query($sql)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -290,15 +241,18 @@ class PBX_ExpressionAliases {
      */
     function getExpression($id) {
 
-        $archive = array();
-
         $db = Zend_Registry::get("db");
-        $sql = "SELECT aliasid as id,name from  expr_alias where aliasid='$id'";
-        $stmt = $db->query($sql);
+
+        $select = $db->select()
+                ->from("expr_alias", array("aliasid as id", "name"))
+                ->where("expr_alias.aliasid = ?", $id);
+        $stmt = $db->query($select);
         $archive = $stmt->fetch();
 
-        $sql = "SELECT expression from  expr_alias_expression where aliasid='$id'";
-        $stmt = $db->query($sql);
+        $select = $db->select()
+                ->from("expr_alias_expression", array("expression"))
+                ->where("expr_alias_expression.aliasid = ?", $id);
+        $stmt = $db->query($select);
         $expressions = $stmt->fetchall();
         $archive["exp"] = "";
 
@@ -317,14 +271,21 @@ class PBX_ExpressionAliases {
     function insertLogExpression($acao, $add) {
 
         $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hora = date('Y-m-d H:i:s');
 
+        $ip = $_SERVER['REMOTE_ADDR'];
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
 
-        $sql = "INSERT INTO `logs_users` VALUES (NULL, '" . $hora . "', '" . $ip . "', '" . $username . "', '" . $add["id"] . "', '" . $add["name"] . "', '" . $add["exp"] . "', '" . NULL . "', '" . "EXP" . "', '" . $acao . "')";
-        $db->query($sql);
+        $insert_data = array('hora' => date('Y-m-d H:i:s'),
+            'ip' => $ip,
+            'idusuario' => $username,
+            'cod' => $add["id"],
+            'param1' => $add["name"],
+            'param2' => $add["exp"],
+            'value' => "EXP",
+            'tipo' => $acao);
+
+        $db->insert('logs_users', $insert_data);
     }
 
 }

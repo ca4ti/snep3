@@ -111,7 +111,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
+        $form_xml = new Zend_Config_Xml("modules/default/forms/extensions_groups.xml");
         $form = new Snep_Form($form_xml);
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
 
@@ -199,7 +199,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $xml = new Zend_Config_Xml("default/forms/extensions_groups.xml");
+        $xml = new Zend_Config_Xml("modules/default/forms/extensions_groups.xml");
         $form = new Snep_Form($xml);
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/edit');
 

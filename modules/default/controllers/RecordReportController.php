@@ -58,7 +58,7 @@ class RecordReportController extends Zend_Controller_Action {
         $form->setAction($this->getFrontController()->getBaseUrl() . '/record-report/');
         $form->setName('create');
 
-        $form_xml = new Zend_Config_Xml('./default/forms/record_report.xml');
+        $form_xml = new Zend_Config_Xml('./modules/default/forms/record_report.xml');
 
         $dados = new Snep_Form_SubForm($this->view->translate("Records"), $form_xml->form);
 

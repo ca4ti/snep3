@@ -90,7 +90,7 @@ class ProfilesController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/profiles.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/profiles.xml"));
         $form->getElement('name')->setRequired(true);
 
         if ($this->_request->getPost()) {
@@ -123,7 +123,7 @@ class ProfilesController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("default/forms/profiles.xml");
+        $form_xml = new Zend_Config_Xml("modules/default/forms/profiles.xml");
         $form = new Snep_Form($form_xml);
 
         $id = $this->_request->getParam('id');
@@ -170,7 +170,7 @@ class ProfilesController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("default/forms/member.xml");
+        $form_xml = new Zend_Config_Xml("modules/default/forms/member.xml");
         $form = new Snep_Form($form_xml);
 
         $usersProfiles = array();
@@ -275,7 +275,7 @@ class ProfilesController extends Zend_Controller_Action {
         }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("default/forms/permission.xml");
+        $form_xml = new Zend_Config_Xml("modules/default/forms/permission.xml");
         $form = new Snep_Form($form_xml);
 
         $id = $this->_request->getParam('id');

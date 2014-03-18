@@ -36,7 +36,7 @@ class PermissionController extends Zend_Controller_Action {
         }
 
         if ($exten == 'error' || $exten == 'error-unset') {
-            $this->_redirect("default/" . $this->getRequest()->getControllerName() . '/' . $exten);
+            $this->_redirect("modules/default/" . $this->getRequest()->getControllerName() . '/' . $exten);
         }
 
         try {

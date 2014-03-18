@@ -97,7 +97,7 @@ class BillingController extends Zend_Controller_Action {
                     $this->view->translate("Add")
         ));
 
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/queues.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/queues.xml"));
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
 
 

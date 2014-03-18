@@ -106,7 +106,7 @@ class ContactsController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contacts.xml"));
 
         $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId())->setAttrib('disabled', true);
 
@@ -201,7 +201,7 @@ class ContactsController extends Zend_Controller_Action {
         }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/contacts.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contacts.xml"));
 
         $form->getElement('id')->setValue($contact['id'])->setAttrib('disabled', true);
         $form->getElement('name')->setValue($contact['name']);

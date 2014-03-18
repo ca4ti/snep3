@@ -43,7 +43,7 @@ class KhompLinksController extends Zend_Controller_Action {
                     $this->view->translate("Status"),
                     $this->view->translate("Khomp Links")
         ));
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/khomp_links.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/khomp_links.xml"));
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
 
         try {

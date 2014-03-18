@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -15,7 +16,6 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
-
 require_once "Snep/Locale.php";
 
 /**
@@ -32,11 +32,10 @@ class Snep_Menu {
 
     /**
      * Master instance of Snep_Menu
-     *
      * @return Snep_Menu
      */
     public static function getMasterInstance() {
-        if(self::$master === null) {
+        if (self::$master === null) {
             self::$master = new self("master");
         }
 
@@ -45,14 +44,12 @@ class Snep_Menu {
 
     /**
      * Menu or resource id.
-     *
-     * @var string id
+     * @var <string> id
      */
     private $id;
 
     /**
      * Sub-menus of this menu.
-     *
      * @var Snep_Menu[]
      */
     private $children = array();
@@ -69,59 +66,79 @@ class Snep_Menu {
 
     /**
      * Base path for menu links
-     *
-     * @var string
+     * @var <string>
      */
     protected $baseUrl = "";
 
-    public function __construct( $id ) {
+    /**
+     * __construct
+     * @param <string> $id
+     */
+    public function __construct($id) {
         $this->id = $id;
     }
 
+    /**
+     * __toString
+     * @return <string>
+     */
     public function __toString() {
         return $this->render();
     }
 
+    /**
+     * getBaseUrl
+     * @return type
+     */
     public function getBaseUrl() {
         return $this->baseUrl;
     }
 
+    /**
+     * setBaseUrl
+     * @param <string> $baseUrl
+     */
     public function setBaseUrl($baseUrl) {
         $this->baseUrl = $baseUrl;
     }
-    
+
+    /**
+     * getUri
+     * @return type
+     */
     public function getUri() {
         return $this->uri;
     }
 
+    /**
+     * setUri
+     * @param <string> $uri
+     */
     public function setUri($uri) {
         $this->uri = $uri;
     }
-    
+
     /**
-     * Add a child.
-     *
+     * addChild - Add a child
      * @param Snep_Menu $child
      */
-    public function addChild( Snep_Menu $child ) {
+    public function addChild(Snep_Menu $child) {
         $item = $this->getChildById($child->getId());
-        if($item) {
+        if ($item) {
             $item->setSubmenu(array_merge($item->getSubmenu(), $child->getSubmenu()));
-        }
-        else {
+        } else {
             $this->children[] = $child;
         }
     }
 
     /**
-     * Finds a child with the desidered id
-     *
-     * @param string $id
+     * getChildById - Finds a child with the desidered id
+     * @param <string> $id
      * @return Snep_Menu|null
      */
-    public function getChildById( $id ) {
+    public function getChildById($id) {
         foreach ($this->getChildren() as $child) {
-            if( $child->getId() === $id ) {
+            if ($child->getId() === $id) {
                 return $child;
             }
         }
@@ -129,8 +146,7 @@ class Snep_Menu {
     }
 
     /**
-     * Returns all the children of this menu.
-     *
+     * getChildren - Returns all the children of this menu
      * @return Snep_Menu[]
      */
     public function getChildren() {
@@ -138,8 +154,7 @@ class Snep_Menu {
     }
 
     /**
-     * Defines the children of this menu
-     *
+     * setChildren - Defines the children of this menu
      * @param Snep_Menu_Item[] $children
      */
     public function setChildren($children) {
@@ -147,6 +162,7 @@ class Snep_Menu {
     }
 
     /**
+     * getId
      * @return string menu id
      */
     public function getId() {
@@ -154,6 +170,7 @@ class Snep_Menu {
     }
 
     /**
+     * setId
      * @param string $id
      */
     public function setId($id) {
@@ -161,9 +178,8 @@ class Snep_Menu {
     }
 
     /**
-     * Render all the children of this menu
-     *
-     * @return string HTML rendered children
+     * renderChildren - Render all the children of this menu
+     * @return <string> HTML rendered children
      */
     public function renderChildren() {
         $html = "";
@@ -173,30 +189,38 @@ class Snep_Menu {
         return $html;
     }
 
+    /**
+     * getLabel
+     * @return type
+     */
     public function getLabel() {
         return $this->label;
     }
 
+    /**
+     * setLabel
+     * @param <string> $label
+     */
     public function setLabel($label) {
-        $this->label = Snep_Locale::getInstance()->getZendTranslate()->translate($label);;
+        $this->label = Snep_Locale::getInstance()->getZendTranslate()->translate($label);
+        ;
     }
 
     /**
-     * Render the menu and its children
-     *
-     * @return string HTML rendered menu
+     * render - Render the menu and its children
+     * @return <string> HTML rendered menu
      */
     public function render() {
         $html = "<li id=\"{$this->getId()}\">";
         $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
-        if(count($this->getChildren()) > 0) {
+        if (count($this->getChildren()) > 0) {
             $html .= "<ul>";
             $html .= $this->renderChildren();
             $html .= "</ul>";
         }
 
         $html .= "</li>";
-        
+
         return $html;
     }
 

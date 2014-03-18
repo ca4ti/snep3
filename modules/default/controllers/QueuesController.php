@@ -124,7 +124,7 @@ class QueuesController extends Zend_Controller_Action {
         $form = new Snep_Form();
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
-        $essentialData = new Zend_Config_Xml('./default/forms/queues.xml', 'essential', true);
+        $essentialData = new Zend_Config_Xml('./modules/default/forms/queues.xml', 'essential', true);
         $essential = new Snep_Form_SubForm($this->view->translate("General Configuration"), $essentialData);
 
         $essential->getElement('musiconhold')->setMultiOptions($section);
@@ -142,7 +142,7 @@ class QueuesController extends Zend_Controller_Action {
 
         $form->addSubForm($essential, "essential");
 
-        $advancedData = new Zend_Config_Xml('./default/forms/queues.xml', 'advanced', true);
+        $advancedData = new Zend_Config_Xml('./modules/default/forms/queues.xml', 'advanced', true);
         $advanced = new Snep_Form_SubForm($this->view->translate("Advanced Configuration"), $advancedData);
 
         $boolOptions = array(1 => $this->view->translate('Yes'),
@@ -273,7 +273,7 @@ class QueuesController extends Zend_Controller_Action {
         $form = new Snep_Form();
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/edit/id/' . $id);
 
-        $essentialData = new Zend_Config_Xml('./default/forms/queues.xml', 'essential', true);
+        $essentialData = new Zend_Config_Xml('./modules/default/forms/queues.xml', 'essential', true);
         $essential = new Snep_Form_SubForm($this->view->translate("General Configuration"), $essentialData);
 
         $essential->getElement('name')->setValue($queue['name'])->setAttrib('readonly', true);
@@ -296,7 +296,7 @@ class QueuesController extends Zend_Controller_Action {
 
         $form->addSubForm($essential, "essential");
 
-        $advancedData = new Zend_Config_Xml('./default/forms/queues.xml', 'advanced', true);
+        $advancedData = new Zend_Config_Xml('./modules/default/forms/queues.xml', 'advanced', true);
         $advanced = new Snep_Form_SubForm($this->view->translate("Advanced Configuration"), $advancedData);
 
         $boolOptions = array(1 => $this->view->translate('Yes'),

@@ -95,7 +95,7 @@ class UsersController extends Zend_Controller_Action {
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/users.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
 
         $profiles = Snep_Profiles_Manager::getAll();
 
@@ -153,7 +153,7 @@ class UsersController extends Zend_Controller_Action {
         $user = Snep_Users_Manager::get($id);
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/users.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
 
         $profile = Snep_Profiles_Manager::getAll();
 

@@ -54,7 +54,7 @@ class InstallerController extends Zend_Controller_Action {
         $this->view->error = $inspect['Permissions'];
 
         $form = new Snep_Form();
-        $form_xml = new Zend_Config_Xml('./default/forms/setup.conf.xml');
+        $form_xml = new Zend_Config_Xml('./modules/default/forms/setup.conf.xml');
 
         $locale_form = new Snep_Form_SubForm($this->view->translate("Locale Configuration"), $form_xml->locale);
         $locale = Snep_Locale::getInstance()->getZendLocale();
@@ -130,9 +130,9 @@ class InstallerController extends Zend_Controller_Action {
         $config = Zend_Registry::get('config');
         $path = $config->system->path;
 
-        $schema = file_get_contents($path->base . "/default/installer/schema.sql");
-        $system_data = file_get_contents($path->base . "/default/installer/system_data.sql");
-        $cnl_data = file_get_contents($path->base . "/default/installer/cnl_data.sql");
+        $schema = file_get_contents($path->base . "/modules/default/installer/schema.sql");
+        $system_data = file_get_contents($path->base . "/modules/default/installer/system_data.sql");
+        $cnl_data = file_get_contents($path->base . "/modules/default/installer/cnl_data.sql");
 
         $db->beginTransaction();
         try {
@@ -176,7 +176,7 @@ class InstallerController extends Zend_Controller_Action {
 
         $this->view->hideMenu = true;
         $this->view->breadcrumb = $this->view->translate("Instalador » Configuração");
-        $form_config = new Zend_Config_Xml("./default/forms/installer.xml");
+        $form_config = new Zend_Config_Xml("./modules/default/forms/installer.xml");
 
         $form = new Snep_Form();
         $form->setAction($this->getFrontController()->getBaseUrl() . '/installer/configure');

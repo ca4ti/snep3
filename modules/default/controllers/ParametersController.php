@@ -51,7 +51,7 @@ class ParametersController extends Zend_Controller_Action {
         // Set form action
         $form->setAction($this->getFrontController()->getBaseUrl() . '/parameters/index');
 
-        $form_xml = new Zend_Config_Xml('./default/forms/setup.conf.xml');
+        $form_xml = new Zend_Config_Xml('./modules/default/forms/setup.conf.xml');
 
         // Section General
         $general = new Snep_Form_SubForm($this->view->translate("General Configuration"), $form_xml->general);

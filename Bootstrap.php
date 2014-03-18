@@ -3,7 +3,7 @@
 require_once 'Zend/Session.php';
 require_once 'Zend/Application/Bootstrap/Bootstrap.php';
 require_once 'Snep/Locale.php';
-require_once 'default/model/PermissionPlugin.php';
+require_once 'modules/default/model/PermissionPlugin.php';
 
 Zend_Session::start();
 
@@ -66,7 +66,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/prototype.js", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/functions.js", 'text/javascript');
-
+        
+        //List installed modules to be used on the modules menu
+        $systemInfo['modules'] = array();
+        $modules = Snep_Modules::getInstance()->getRegisteredModules();
+        foreach ($modules as $module) {
+            $systemInfo['modules'][] = array(
+                "id" => $module->getModuleId(),
+                "name" => $module->getName(),
+                "version" => $module->getVersion(),
+                "description" => $module->getDescription()
+            );
+        }
+        $view->indexData = $systemInfo;
         // Return it, so that it can be stored by the bootstrap
         return $view;
     }

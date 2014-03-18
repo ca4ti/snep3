@@ -1,0 +1,51 @@
+<?php
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
+$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/removeItem.js');
+echo $this->render('filter.phtml');
+?>
+
+<table>
+   <thead>
+      <tr>
+         <th> <?php echo $this->translate('Name') ?> </th>
+         <th> <?php echo $this->translate('Audio Class') ?> </th>
+         <th> <?php echo $this->translate('Strategy') ?> </th>
+         <th> <?php echo $this->translate('SLA') ?> </th>
+         <th> <?php echo $this->translate('Timeout') ?> </th>
+         <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
+      </tr>
+   </thead>
+   <tbody>
+    <?php
+    $c = 0;
+    if($this->queues) :
+        foreach($this->queues as $cha => $queue ): ?>
+            <?php ($c ? $c = 0 : $c = 1 ); ?>
+            <tr class="c<?php echo $c ?>">
+                <td> <b> <?php echo $queue['name'] ?> </b> </td>
+                <td> <?php echo $queue['musiconhold'] ?> </td>
+                <td> <?php echo $queue['strategy'] ?> </td>
+                <td> <?php echo $queue['servicelevel'] ?> </td>
+                <td> <?php echo $queue['timeout'] ?> </td>
+                <td class="action">
+                    <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $queue['name'] ?>">
+                        <?php echo $this->translate('Edit')?>
+                    </a>
+                </td>
+                <td class="action">                    
+                    <a class="excluir" href="<?php echo $this->url ."/remove/id/".  $queue['name'] ?>">
+                        <?php echo $this->translate('Delete')?>
+                    </a>                    
+                </td>
+                <td class="action">
+                    <a class="membros" href="<?php echo $this->url ?>/members/id/<?php echo $queue['name'] ?>">
+                        <?php echo $this->translate('Members')?>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    <?php endif ?>
+</table>
+
+<?php echo $this->render('pagination.phtml') ?>

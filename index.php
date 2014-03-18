@@ -16,6 +16,8 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//error_reporting(1);
+
 // Define path to application directory
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 

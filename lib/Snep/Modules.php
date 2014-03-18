@@ -116,7 +116,7 @@ class Snep_Modules {
         if (isset($info->website)) {
             $descriptor->setWebsite((string) $info->website);
         }
-
+        
         return $descriptor;
     }
 

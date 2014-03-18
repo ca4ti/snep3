@@ -232,6 +232,12 @@ class RouteController extends Zend_Controller_Action {
 
         if ($_POST) {
             if ($this->isValidPost()) {
+                
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    Snep_LogUser::salvalog("Editou Regra", $rule->getId(),1);
+                }
+                
                 $new_rule = $this->parseRuleFromPost();
                 $new_rule->setId($id);
                 $new_rule->setActive($rule->isActive());
@@ -284,9 +290,19 @@ class RouteController extends Zend_Controller_Action {
 
         if ($_POST) {
             if ($this->isValidPost()) {
+                                
                 $new_rule = $this->parseRuleFromPost();
                 $new_rule->setActive($rule->isActive());
                 PBX_Rules::register($new_rule);
+                
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                 Snep_LogUser::salvalog("Duplicou Regra", $rule->getId(),1);
+                 $lastId = Snep_Route::getLastId();
+                 $dpl = Snep_Route::getRegra($lastId);
+                 Snep_Route::insertLogRegra("Duplicou Regra",$dpl);
+                }
+                
                 $this->_redirect("route");
             } else {
                 $actions = "";
@@ -333,6 +349,14 @@ class RouteController extends Zend_Controller_Action {
             if ($this->isValidPost()) {
                 $rule = $this->parseRuleFromPost();
                 PBX_Rules::register($rule);
+                
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    Snep_LogUser::salvalog("Adicionou Regra", $rule->getId(),1);
+                    $add = Snep_Route::getRegra($rule->getId());
+                    Snep_Route::insertLogRegra("Adicionou Regra", $add);
+                }
+                
                 $this->_redirect("route");
             } else {
                 $actions = "";
@@ -572,8 +596,16 @@ class RouteController extends Zend_Controller_Action {
         catch(PBX_Exception_NotFound $ex) {
             throw new Zend_Controller_Action_Exception('Page not found.', 404);
         }
-
+        
+        $del = Snep_Route::getRegra($rule->getId());
+        
         PBX_Rules::delete($id);
+        
+        //log-user
+        if (class_exists("Loguser_Manager")) {
+            Snep_LogUser::salvalog("Excluiu Regra", $rule->getId(),1);
+            Snep_Route::insertLogRegra("Excluiu Regra",$del);
+        }
 
         $this->_redirect("route");
     }

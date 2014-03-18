@@ -191,12 +191,11 @@ class PBX_Rules {
     public static function update($rule) {
 
         //log-user
-        $tabela = self::verificaLog();
-        if ($tabela == true) {
+        if (class_exists("Loguser_Manager")) {
             $historico = array();
             $id_regra = $rule->getId();
-            $historico = self::getRegra($id_regra);
-            $exAction = self::getActions($id_regra);
+            $historico = Snep_Route::getRegra($id_regra);
+            $exAction = Snep_Route::getActions($id_regra);
         }
 
         if ($rule->getId() == -1) {
@@ -275,10 +274,8 @@ class PBX_Rules {
         }
 
         //log-user
-        $tabela = self::verificaLog();
-        if ($tabela == true) {
-            $regra_update = self::getRegra($id_regra);
-
+        if (class_exists("Loguser_Manager")) {
+            $regra_update = Snep_Route::getRegra($id_regra);
             self::insertLogRegra($historico, $regra_update);
         }
     }
@@ -291,12 +288,10 @@ class PBX_Rules {
     function insertLogRegra($historico, $regra_update) {
 
         $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hora = date('Y-m-d H:i:s');
 
+        $ip = $_SERVER['REMOTE_ADDR'];
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
-        $tipo = 1;
         $acao = "Editou regra";
         $actions_hist = $historico['acoes'];
         $actions_up = $regra_update['acoes'];
@@ -314,8 +309,26 @@ class PBX_Rules {
                 $action = $item['action'];
             }
 
-            $sql = "INSERT INTO `logs_regra` VALUES (NULL, '" . $historico["id"] . "', '" . $hora . "', '" . $ip . "', '" . $username . "', '" . $acao . "', '" . $historico["prio"] . "' , '" . $historico["desc"] . "', '" . $historico["origem"] . "', '" . $historico["destino"] . "', '" . $historico["validade"] . "', '" . $historico["diasDaSemana"] . "', '" . $historico["record"] . "', '" . $historico["ativa"] . "', '" . $action . "', '" . $item["prio"] . "', '" . $item["key"] . "', '" . $item["value"] . "', '" . "OLD" . "')";
-            $db->query($sql);
+            $insert_data = array('id_regra' => $historico["id"],
+                'hora' => date('Y-m-d H:i:s'),
+                'ip' => $ip,
+                'idusuario' => $username,
+                'acao' => $acao,
+                'prio' => $historico["prio"],
+                'desc' => $historico["desc"],
+                'src' => $historico["origem"],
+                'dst' => $historico["destino"],
+                'validade' => $historico["validade"],
+                'days' => $historico["diasDaSemana"],
+                'record' => $historico["record"],
+                'ativa' => $historico["ativa"],
+                'action' => $action,
+                'prio_action' => $item["prio"],
+                'campo' => $item["key"],
+                'valores' => $item["value"],
+                'tipo' => "OLD");
+
+            $db->insert('logs_regra', $insert_data);
         }
 
         //add update
@@ -331,106 +344,26 @@ class PBX_Rules {
                 $action = $up['action'];
             }
 
-            $sql = "INSERT INTO `logs_regra` VALUES (NULL, '" . $regra_update["id"] . "', '" . $hora . "', '" . $ip . "', '" . $username . "', '" . $acao . "', '" . $regra_update["prio"] . "' , '" . $regra_update["desc"] . "', '" . $regra_update["origem"] . "', '" . $regra_update["destino"] . "', '" . $regra_update["validade"] . "', '" . $regra_update["diasDaSemana"] . "', '" . $regra_update["record"] . "', '" . $regra_update["ativa"] . "', '" . $action . "', '" . $up["prio"] . "', '" . $up["key"] . "', '" . $up["value"] . "', '" . "NEW" . "')";
-            $db->query($sql);
-        }
-    }
+            $insert_data = array('id_regra' => $regra_update["id"],
+                'hora' => date('Y-m-d H:i:s'),
+                'ip' => $ip,
+                'idusuario' => $username,
+                'acao' => $acao,
+                'prio' => $regra_update["prio"],
+                'desc' => $regra_update["desc"],
+                'src' => $regra_update["origem"],
+                'dst' => $regra_update["destino"],
+                'validade' => $regra_update["validade"],
+                'days' => $regra_update["diasDaSemana"],
+                'record' => $regra_update["record"],
+                'ativa' => $regra_update["ativa"],
+                'action' => $action,
+                'prio_action' => $up["prio"],
+                'campo' => $up["key"],
+                'valores' => $up["value"],
+                'tipo' => "NEW");
 
-    /**
-     * getRegra - Monta array com todos dados da regra de negócios
-     * @param <int> $id - Código da regra
-     * @return <array> $regra - Dados da regra
-     */
-    function getRegra($id) {
-
-        $regra = array();
-        $action = array();
-
-        $db = Zend_Registry::get("db");
-        $sql = "SELECT * from  regras_negocio where id='$id'";
-        $stmt = $db->query($sql);
-        $regra = $stmt->fetch();
-
-        $sql = "SELECT * FROM `regras_negocio_actions` where `regra_id`='$id'";
-        $stmt = $db->query($sql);
-        $acoes = $stmt->fetchall();
-
-        $sql = "SELECT * FROM `regras_negocio_actions_config` where `regra_id`='$id'";
-        $stmt = $db->query($sql);
-        $valores = $stmt->fetchall();
-
-        foreach ($acoes as $item => $acao) {
-            foreach ($valores as $key => $valor) {
-
-                $regra["acoes"][$item]["prio"] = $acao["prio"];
-                $regra["acoes"][$item]["action"] = $acao["action"];
-                if ($acao["prio"] == $valor["prio"]) {
-
-                    $regra["acoes"][$item]["key"] .= $valor["key"] . " | ";
-                    $regra["acoes"][$item]["value"] .= $valor["value"] . " | ";
-                }
-            }
-        }
-        return $regra;
-    }
-
-    /**
-     * getActions - Monta array com ações da regra
-     * @param <int> $id
-     * @return <array> Array de ações
-     */
-    function getActions($id) {
-
-        $db = Zend_Registry::get("db");
-        $sql = "SELECT action from regras_negocio_actions where regras_negocio_actions.regra_id = '$id' ";
-        $stmt = $db->query($sql);
-        $acao = $stmt->fetchAll();
-
-        foreach ($acao as $item => $value) {
-            $acao .= "," . $value["action"];
-        }
-        $exacao = explode(",", $acao);
-
-        return $exacao;
-    }
-
-    /**
-     * verificaLog - Verifica se existe o módulo loguser
-     * @return <boolean>
-     */
-    function verificaLog() {
-        if (class_exists("Loguser_Manager")) {
-            $tabela = true;
-        } else {
-            $tabela = false;
-        }
-        return $tabela;
-    }
-
-    /**
-     * salvaLog - Salva os dados do log no banco de dados
-     * @param <string> $acao
-     * @param <int> $rule
-     * @param <int> $exprio
-     * @param <int> $prio
-     * @return <boolean>
-     */
-    public function salvaLog($acao, $rule, $exprio, $prio) {
-        $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hora = date('Y-m-d H:i:s');
-
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-        $tipo = 1;
-        $acao = mysql_escape_string($acao);
-
-        $sql = "INSERT INTO `logs` VALUES (NULL, '" . $hora . "', '" . $ip . "', '" . $username . "', '" . $acao . "', '" . $rule . "', '" . $tipo . "' , '" . $exprio . "', '" . $prio . "', '" . NULL . "', '" . NULL . "')";
-
-        if ($db->query($sql)) {
-            return true;
-        } else {
-            return false;
+            $db->insert('logs_regra', $insert_data);
         }
     }
 

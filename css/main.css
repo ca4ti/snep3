@@ -403,7 +403,7 @@ select
 }
 
 .navmenu ul li {
-    width: 160px;
+    width: 165px;
     float: left; /*For IE 7 lack of compliance*/
     display: block !important;
     display: inline; /*For IE*/

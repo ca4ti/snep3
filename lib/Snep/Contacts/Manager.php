@@ -72,6 +72,25 @@ class Snep_Contacts_Manager {
     }
     
     /**
+     * get id of members in group
+     * @param <int> $id
+     * @return <array>
+     */
+    public function getMember($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('contacts_names',array('id'))
+                ->where("contacts_names.group = ?", $id);
+                
+        $stmt = $db->query($select);
+        $member = $stmt->fetchall();
+
+        return $member;
+    }
+    
+    /**
      * Method to get phones a contact by id
      * @param <int> $id
      * @return <Array>

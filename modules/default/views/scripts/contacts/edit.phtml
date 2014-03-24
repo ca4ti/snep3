@@ -1,8 +1,36 @@
 <?php
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/snep.js", 'text/javascript');
-echo $this->form;
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
+
+<div id="lightboxbody">
+    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+</div>
+
+<div id="containerDiv">
+    <h2>Contatos - Edição</h2>
+
+    Preencha o formul&aacute;rio corretamente com as informa&ccedil;&otilde;es
+    do contato.Os campos <strong>nome</strong> e <strong>telefone</strong> s&atilde;o de preenchimento obrigat&oacute;rio.
+    <br>
+    <strong>Código:</strong> Identificará o cadastro do Contato. Este campo o Sistema 
+    preenche um código automáticamente.
+    <br>
+    <strong>Nome:</strong> Nome identificador do contato.
+    <br>
+    <strong>Grupo:</strong> Grupo de contato no qual ele vai pertencer.
+    <br>
+    <strong>Endereço, Cidade, Estado CEP:</strong> Dados do endereço do contato.
+    <br>   
+    <strong>Telefone</strong>: Identifica o telefone do Contato. É possível cadastrar vários
+    números ao usuário.
+    <br>
+    <br>
+    <a id="closeLink" href="javascript:void(0);">Fechar</a>
+</div>
+
+<?php echo $this->form; ?>
 
 <script language="javascript" type="text/javascript">
     
@@ -19,5 +47,18 @@ echo $this->form;
     }
 
     Event.observe($('contactsForm'), 'submit', atualizaValues);
+    
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
 </script>
+
 

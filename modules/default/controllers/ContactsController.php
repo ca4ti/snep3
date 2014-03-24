@@ -99,6 +99,7 @@ class ContactsController extends Zend_Controller_Action {
      *  Add Contact
      */
     public function addAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
@@ -273,7 +274,7 @@ class ContactsController extends Zend_Controller_Action {
      */
     public function removeAction() {
         $id = $this->_request->getParam('id');
-        
+
         Snep_Contacts_Manager::removePhone($id);
         Snep_Contacts_Manager::remove($id);
         $this->_redirect($this->getRequest()->getControllerName());
@@ -312,6 +313,12 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             foreach ($groups as $group) {
+                $contact = Snep_Contacts_Manager::getMember($group);
+
+                foreach ($contact as $key => $id) {
+                    Snep_Contacts_Manager::removePhone($id['id']);
+                }
+
                 Snep_Contacts_Manager::removeByGroupId($group['id']);
             }
 

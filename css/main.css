@@ -71,10 +71,16 @@ body {
     background-position: top;
 }
 
-#header, #menus, #breadcrumb, #content, #footer_content {
+#header, #menus, #content, #footer_content {
     margin-left: auto;
     margin-right: auto;
     width: 975px;
+}
+
+#breadcrumb{
+    margin-left: auto;
+    margin-right: auto;
+    width: 840px;    
 }
 
 #header {
@@ -97,25 +103,25 @@ body {
 }
 
 #breadcrumb{
-    width: 955px;
+    width: 940px;
     color: #808080;
-    font-size: 14px;
-    padding-top: 17px;
+    font-size: 12px;
+    padding-top: 5px;
     padding-bottom: 14px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
 #breadcrumb strong {
-    color: #333333;
+    color: #red;
 }
 
 #content {
-    border: 1px solid #a4a7ab;
+    border: 1px solid #dadbdd;
     font-size: 12px;
     display: table;
     height: auto;
-    padding: 10px 0px 0px 0px;
+    padding: 5px 0px 0px 0px;
     margin-bottom: 30px;
 }
 
@@ -237,7 +243,7 @@ button:hover {
     height: auto;
     clear: both;
     text-align: center;
-    
+
 }
 
 .permission{
@@ -977,4 +983,231 @@ select
     background-position: 0px 1px;
     border: 1px solid #A4A7AB;
     padding-left: 30px;
+}
+
+/*Bar*/
+.barTop{
+    background-image:url(../imagens/background_title_bar.png);
+    display: table;
+    width: 100%;
+    border-radius:5px;
+    text-transform:lowercase;
+}
+.barTop .title{
+    float:left;
+    border-radius:5px 0px 0px 5px;
+    padding: 4px 15px 4px 15px;
+}
+.barTop .html{
+    float:right;
+    display: table;
+    padding: 5px 15px 0px 15px;
+    font-size: 14px;
+    color:#555;
+}
+.barTop .option{
+    border-radius:0px 5px 5px 0px;
+    padding: 4px 15px 4px 15px;
+    float:right;
+}
+.barTop span{
+    float:left;
+    margin:3px 5px 0px 5px;
+    color: #555;
+    font-weight: bold;
+    font-size: 14px;
+}
+.barTop .html input, .barTop .html button{
+    border-radius:5px;
+    border:solid 1px #BBB;
+    background-color: #FFF;
+    padding: 3px;
+}
+.barTop .html button, .barTop .html input[type=submit]{
+    border-radius:5px;
+    border:solid 1px #BBB;
+    background-color: #FFF;
+    padding: 3px 13px 4px 13px;
+    cursor: pointer;
+}
+.barTop .icon{
+    height: 20px;
+    width: 20px;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.barTop form input[type=submit]{
+    float: left;
+}
+.barTop form input[type=text]{
+    float: left;
+}
+.barTop form select{
+    margin-right: 8px;
+    margin-top: 2px;
+    float: left;
+    padding: 2px;
+    border-radius:3px;
+    border:solid 1px #BBB;
+}
+.barTop form label{
+    margin-top: 4px;
+    margin-right: 5px;
+    float: left;
+}
+
+.barTop .add .title{
+    background-image:url(../imagens/background_dashboard_item.png);
+    margin: 2px;
+}
+.barTop .add .option{
+    background-image:url(../imagens/background_dashboard_item.png);
+    margin: 2px;
+}
+.barTop .add .icon{
+    background-image:url(../imagens/new_icon_title_bar.png);
+}
+.barTop .add .option .icon{
+    background-image:url(../imagens/icon_view_title_bar.png);
+}
+
+.barTop .view .title{
+    background-image:url(../imagens/background_dashboard_item.png);
+}
+.barTop .view .option{
+    background-image:url(../imagens/background_title_add.png);	
+}
+.barTop .view .icon{
+    background-image:url(../imagens/icon_view_title_bar.png);
+}
+.barTop .view .option .icon{
+    background-image:url(../imagens/new_icon_title_bar.png);	
+}
+
+.barTop .config .title{
+    background-image:url(../imagens/background_title_config.png);	
+}
+.barTop .config .option{
+    background-image:url(../imagens/background_title_list_view.png);
+}
+.barTop .config .icon{
+    background-image:url(../imagens/edit_icon_title.png);
+}
+.barTop .config .option .icon{
+    background-image:url(../imagens/icon_view_title_bar.png);
+}
+
+
+.barTop .export .title{
+    background-image:url(../imagens/background_title_config.png);	
+}
+.barTop .export .option{
+    background-image:url(../imagens/background_title_list_view.png);
+}
+.barTop .export .icon{
+    background-image:url(../imagens/links_icon_title.png);
+}
+.barTop .export .option .icon{
+    background-image:url(../imagens/icon_view_title_bar.png);
+}
+
+.barTop .reports .title{
+    background-image:url(../imagens/background_title_add.png);
+}
+.barTop .reports .option{
+    background-image:none;	
+}
+.barTop .reports .icon{
+    background-image:url(../imagens/report_title_icon.png);
+}
+.barTop .reports .option .icon{
+    background-image:none;	
+}
+
+.barTop .inline .icon {
+    background-image:url(../imagens/help.png);
+    float: right ;
+    padding: 5px;
+}
+
+/*Dashboard edit screen*/
+#addDashboard .title{
+    margin-top: 20px;
+    border-bottom: 1px solid #999;
+}
+
+.titleTop{
+    font-size:16px;
+    color:#959595;
+    font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    border-bottom: solid 1px #CCC;
+    padding-bottom:5px;
+    margin-bottom: 15px;
+}
+.titleTop a{
+    display:block;
+    float:right;
+    font-size:16px;
+    margin: 10px;
+    font-weight:normal;
+    text-transform: uppercase;
+}
+.titleTop span{
+    margin: 0px 0px 5px 5px;
+    display: block;
+    float: left;
+}
+.titleTop img{
+    display: block;
+    float: left;
+}
+
+
+
+.lightboxbody{
+    padding-top: 5px;
+    position: absolute;
+}
+
+.right {
+    float:right; 
+    margin-right:0; 
+    margin-left:10px; 
+    margin-bottom:5px;
+}
+
+#bg_fade {
+    background-image:url(../imagens/overlay.png);
+    height:140%;
+    left:0px;
+    margin:0px;
+    padding:0px;
+    position:absolute;
+    top:0px;
+    visibility:hidden;
+    width:100%;
+    z-index:1000;
+}
+
+#containerDiv {
+    position: absolute;
+    width: 50%;
+    z-index: 99999;
+    background-image:url(../imagens/subtle-dots-pattern.png);
+    color: #555;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-right: 15px;
+    border: 2px black solid;
+}
+
+#containerDiv p {
+    position: absolute;
+    height: 10%;
+    padding: 10%;
+    text-align: center;
+    border: 5px black solid;
+    background-color: white;
+    z-index: 99999;
 }

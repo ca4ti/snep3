@@ -66,7 +66,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/prototype.js", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/functions.js", 'text/javascript');
-        
+
+
         //List installed modules to be used on the modules menu
         $systemInfo['modules'] = array();
         $modules = Snep_Modules::getInstance()->getRegisteredModules();

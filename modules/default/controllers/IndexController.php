@@ -1,239 +1,113 @@
 <?php
 
-require_once 'Zend/Controller/Action.php';
-require_once "includes/AsteriskInfo.php";
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
+/**
+ * controller index
+ */
 class IndexController extends Zend_Controller_Action {
     
     /**
-     * indexAction 
+     * indexAction - List dashboard
      */
     public function indexAction() {
-        $this->view->breadcrumb = $this->view->translate("Welcome to Snep version %s", SNEP_VERSION);
+    	
+        $modelos = Snep_Dashboard_Manager::getModelos();
+        if ($this->_request->getParam("add") !== NULL && $modelos[$this->_request->getParam("add")]) {
+        	Snep_Dashboard_Manager::add($this->_request->getParam("add"));
+        }
+        
+        $this->view->dashboard = Snep_Dashboard_Manager::getArray($modelos);
+        if(!$this->view->dashboard)$this->_helper->redirector('add', 'index');
+        
+    }
+    
+    /**
+     * editAction - Edit dashboard
+     */
+    public function editAction() {
 
-        // Direcionando para o "snep antigo"
-        $config = Zend_Registry::get('config');
-        $db = Zend_Registry::get('db');
-
-        if (trim($config->ambiente->db->host) == "") {
-            $this->_redirect("/installer/");
-        } else {
-            $systemInfo = array();
-            $execUptimeRaw = explode(",", exec("uptime"));
-            $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
-
-            if (strpos($uptimeRaw, "min") > 0) {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "min") + 3);
-            } elseif (strpos($uptimeRaw, ":") > 0) {
-                $uptimeTmp = explode(":", $uptimeRaw);
-                $systemInfo['uptime'] = $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            } else {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "day")) . $this->view->translate(' dias, ');
-                $uptimeTmp = explode(":", $execUptimeRaw[1]);
-                $systemInfo['uptime'].= $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            }
-            $systemInfo['uptime'] = trim($systemInfo['uptime']);
-
-            $systemInfo['asterisk'] = exec("/usr/sbin/asterisk -V ");
-
-            $systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
-
-            if (file_exists("/etc/slackware-version")) {
-                exec("cat /etc/slackware-version", $linuxVer);
-                $systemInfo['linux_ver'] = $linuxVer[0];
-            } else {
-                exec("cat /etc/issue", $linuxVer);
-                $systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
-            }
-
-            try {
-                $astinfo = new AsteriskInfo();
-                $astVersionRaw = explode('@', $astinfo->status_asterisk("core show version", "", True));
-            } catch (Exception $e) {
-                
-            }
-            if (!isset($astVersionRaw)) {
-                $this->view->erroast = true;
-            }
-
-
-            $systemInfo['linux_kernel'] = exec("uname -sr");
-
-            $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
-            $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
-            $systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
-
-            $systemInfo['memory'] = $this->sys_meminfo();
-            $systemInfo['space'] = $this->sys_fsinfo();
-
-            $sqlN = "select count(*) from";
-            $select = $db->query($sqlN . ' peers');
-            $result = $select->fetch();
-
-            $systemInfo['num_peers'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' trunks');
-            $result = $select->fetch();
-
-            $systemInfo['num_trunks'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' regras_negocio');
-            $result = $select->fetch();
-
-            $systemInfo['num_routes'] = $result['count(*)'];
-
-            $systemInfo['modules'] = array();
-            $modules = Snep_Modules::getInstance()->getRegisteredModules();
-            foreach ($modules as $module) {
-                $systemInfo['modules'][] = array(
-                    "name" => $module->getName(),
-                    "version" => $module->getVersion(),
-                    "description" => $module->getDescription()
-                );
-            }
-
-            $this->view->indexData = $systemInfo;
-
-            // Creates Snep_Inspector Object
-            $objInspector = new Snep_Inspector();
-
-            // Get array with status of inspected system requirements
-            $inspect = $objInspector->getInspects();
-
-            // Verify errors
-            $this->view->error = false;
-            foreach ($inspect as $log => $message) {
-                if ($message['error'] == 1) {
-                    $this->view->error = true;
-                }
-            }
-
-            // Inspector url
-            $this->view->inspector = $this->getFrontController()->getBaseUrl() . '/inspector/';
+        
+        $this->view->dashboard = Snep_Dashboard_Manager::getArray();
+        if(!$this->view->dashboard)$this->_helper->redirector('add', 'index');
+        
+        
+        if ($this->_request->getPost()) {
+            $dados = $this->_request->getParams();
+            $dashboard = explode("|", substr($dados['dashboard'], 1));
+            Snep_Dashboard_Manager::set($dashboard);
+            $this->_redirect($this->getRequest()->getControllerName());
         }
     }
-
-    private function sys_meminfo() {
-        $results['ram'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
-        $results['swap'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
-        $results['devswap'] = array();
-
-        $bufr = $this->rfts('/proc/meminfo');
-
-        if ($bufr != "ERROR") {
-            $bufe = explode("\n", $bufr);
-            foreach ($bufe as $buf) {
-                if (preg_match('/^MemTotal:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['total'] = $ar_buf[1];
-                } else if (preg_match('/^MemFree:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['free'] = $ar_buf[1];
-                } else if (preg_match('/^Cached:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['cached'] = $ar_buf[1];
-                } else if (preg_match('/^Buffers:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['buffers'] = $ar_buf[1];
-                }
+        
+    /**
+     * addAction - Add item in dashboard
+     */
+    public function addAction() {
+        
+    	$i18n = Zend_Registry::get("i18n");
+        $usados = Snep_Dashboard_Manager::get();
+        $modelos = Snep_Dashboard_Manager::getModelos();
+        $i = -1;
+        $id = 0;
+        $titles = 0;
+        $group = "";
+        foreach($modelos AS $key=>$value)if(isset($value['nome']) &&  $value['nome'] != $group){ $titles++; $group = $value['nome'];}
+        $group = "";
+        $coluns = array("","","","");
+        foreach($modelos AS $key=>$value){
+            if($value['nome'] != $group){
+            	$i++;
+            	if(isset($value['nome'])){
+            		$coluns[$i%4] .= "<div class='title'>$value[nome]</div>";
+            		$group = $value['nome'];
+            	}
             }
-            $results['ram']['used'] = $results['ram']['total'] - $results['ram']['free'];
-            $results['ram']['percent'] = round(($results['ram']['used'] * 100) / $results['ram']['total']);
-            // values for splitting memory usage
-            if (isset($results['ram']['cached']) && isset($results['ram']['buffers'])) {
-                $results['ram']['app'] = $results['ram']['used'] - $results['ram']['cached'] - $results['ram']['buffers'];
-                $results['ram']['app_percent'] = round(($results['ram']['app'] * 100) / $results['ram']['total']);
-                $results['ram']['buffers_percent'] = round(($results['ram']['buffers'] * 100) / $results['ram']['total']);
-                $results['ram']['cached_percent'] = round(($results['ram']['cached'] * 100) / $results['ram']['total']);
-            }
-
-            $bufr = $this->rfts('/proc/swaps');
-            if ($bufr != "ERROR") {
-                $swaps = explode("\n", $bufr);
-                for ($i = 1; $i < (sizeof($swaps)); $i++) {
-                    if (trim($swaps[$i]) != "") {
-                        $ar_buf = preg_split('/\s+/', $swaps[$i], 6);
-                        $results['devswap'][$i - 1] = array();
-                        $results['devswap'][$i - 1]['dev'] = $ar_buf[0];
-                        $results['devswap'][$i - 1]['total'] = $ar_buf[2];
-                        $results['devswap'][$i - 1]['used'] = $ar_buf[3];
-                        $results['devswap'][$i - 1]['free'] = ($results['devswap'][$i - 1]['total'] - $results['devswap'][$i - 1]['used']);
-                        $results['devswap'][$i - 1]['percent'] = round(($ar_buf[3] * 100) / $ar_buf[2]);
-                        $results['swap']['total'] += $ar_buf[2];
-                        $results['swap']['used'] += $ar_buf[3];
-                        $results['swap']['free'] = $results['swap']['total'] - $results['swap']['used'];
-                        $results['swap']['percent'] = round(($results['swap']['used'] * 100) / $results['swap']['total']);
-                    }
-                }
-            }
+        	$coluns[$i%4] .= "<div class='item'><input type='checkbox' id='i$id' class='newcheck' value='$key' ".(in_array($key, $usados)?"checked = 'checked'":"")." name='dash[]'/> <label for='i$id'>$value[descricao]</label></div>";
+        	$id++;
         }
-        return $results;
+        $filters = "";
+        foreach($usados as $key=>$value){
+        	if(is_array($value)){
+        		$filters .= "<div class='item'><input type='checkbox' id='i$value[id]' value='$value[id]' class='newcheck' checked = 'checked' name='dash[]'/> <label for='i$value[id]'>$value[nome] - $value[descricao]</label></div>";
+        	}
+        }
+        
+        $form = "<form class='form' id='addDashboard' action='' method='post'>";
+        	if($filters) $form .= "<div class='filter'><div class='title'>".$i18n->translate('Custom Dashboards')."</div>$filters</div>";
+        	$form .= "<div class='coluna'>$coluns[0]</div>";
+        	$form .= "<div class='coluna'>$coluns[1]</div>";
+        	$form .= "<div class='coluna'>$coluns[2]</div>";
+        	$form .= "<div class='coluna'>$coluns[3]</div>";
+        $form .= "</form>";
+        
+        
+        if ($this->_request->getPost()) {
+            
+            $dados = $this->_request->getParams();
+            
+            Snep_Dashboard_Manager::set($dados['dash']);
+            $this->_redirect($this->getRequest()->getControllerName());
+            
+        }
+        $this->view->form = $form; 
     }
-
-    private function rfts($strFileName, $intLines = 0, $intBytes = 4096) {
-        $strFile = "";
-        $intCurLine = 1;
-        if (file_exists($strFileName)) {
-            if ($fd = fopen($strFileName, 'r')) {
-                while (!feof($fd)) {
-                    $strFile .= fgets($fd, $intBytes);
-                    if ($intLines <= $intCurLine && $intLines != 0) {
-                        break;
-                    } else {
-                        $intCurLine++;
-                    }
-                }
-                fclose($fd);
-            } else {
-                return "ERROR";
-            }
-        } else {
-            return "ERROR";
-        }
-        return $strFile;
-    }
-
-    private function sys_fsinfo() {
-        $df = $this->execute_program('df', '-kP');
-        $mounts = explode("\n", $df);
-        $fstype = array();
-        if ($fd = fopen('/proc/mounts', 'r')) {
-            while ($buf = fgets($fd, 4096)) {
-                list($dev, $mpoint, $type) = preg_split('/\s+/', trim($buf), 4);
-                $fstype[$mpoint] = $type;
-                $fsdev[$dev] = $type;
-            }
-            fclose($fd);
-        }
-
-        for ($i = 1; $i < sizeof($mounts); $i++) {
-            $ar_buf = preg_split('/\s+/', $mounts[$i], 6);
-            if ($fstype[$ar_buf[5]] == "tmpfs")
-                continue;
-            $results[$i - 1] = array();
-
-            $results[$i - 1]['disk'] = $ar_buf[0];
-            $results[$i - 1]['size'] = $ar_buf[1];
-            $results[$i - 1]['used'] = $ar_buf[2];
-            $results[$i - 1]['free'] = $ar_buf[3];
-            $results[$i - 1]['percent'] = round(($results[$i - 1]['used'] * 100) / $results[$i - 1]['size']) . '%';
-            $results[$i - 1]['mount_point'] = $ar_buf[5];
-            ($fstype[$ar_buf[5]]) ? $results[$i - 1]['fstype'] = $fstype[$ar_buf[5]] : $results[$i - 1]['fstype'] = $fsdev[$ar_buf[0]];
-        }
-
-        return $results;
-    }
-
-    private function execute_program($program, $params) {
-        $path = array('/bin/', '/sbin/', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin');
-        $buffer = '';
-        while ($cur_path = current($path)) {
-            if (is_executable("$cur_path/$program")) {
-                if ($fp = popen("$cur_path/$program $params", 'r')) {
-                    while (!feof($fp)) {
-                        $buffer .= fgets($fp, 4096);
-                    }
-                    return trim($buffer);
-                }
-            }
-            next($path);
-        }
-    }
-
+   
 }
+
+?>

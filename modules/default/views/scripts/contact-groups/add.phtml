@@ -1,15 +1,45 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/add.css" );
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/selectBox.js');
-
-echo $this->form;
+$this->headLink()->appendStylesheet($this->baseUrl() . "/css/add.css");
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/selectBox.js');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
-<script type="text/javascript">
-Event.observe(window, 'load', init, false);
+<div id="lightboxbody">
+    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+</div>
 
-function init() {
-     select = new SelectBox('<?php echo $this->objSelectBox ?>');
-}
+<div id="containerDiv">
+    <h2><?php echo $this->translate("Grupo de Contatos - Cadastrar"); ?></h2>
+
+    <?php echo $this->translate("Esta rotina cadastra um novo grupo de contatos. 
+    Basta fornecer um nome para o grupo e opcionalmente você pode 
+    selecionar os contatos diretamente da lista abaixo para facilitar a 
+    administração."); ?>
+    <br>
+    <br>
+    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+</div> 
+
+<?php echo $this->form; ?>
+
+<script type="text/javascript">
+    Event.observe(window, 'load', init, false);
+
+    function init() {
+        select = new SelectBox('<?php echo $this->objSelectBox ?>');
+    }
+
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
 </script>

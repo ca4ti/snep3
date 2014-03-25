@@ -12,12 +12,12 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'tex
     </div>
 
     <div id="containerDiv">
-        <h2>Contatos - Remover multiplos</h2>
+        <h2><?php echo $this->translate("Contatos - Remover multiplos"); ?></h2>
 
-        Esta rotina exclui todos os contatos do grupo escolhido.
+        <?php echo $this->translate("Esta rotina exclui todos os contatos do grupo escolhido."); ?>
         <br>
         <br>
-        <a id="closeLink" href="javascript:void(0);">Fechar</a><br><br>
+        <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
     </div>  
 </div>
 

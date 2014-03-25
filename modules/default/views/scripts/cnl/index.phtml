@@ -1,12 +1,42 @@
+<?php
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
+?>
+
 <form enctype="multipart/form-data" action="<?php echo $this->formAction; ?>" method="post">
+    <div id="lightboxbody">
+        <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+    </div>
+
+    <div id="containerDiv">
+        <h2><?php echo $this->translate("Atualizar CNL"); ?></h2>
+
+        <?php echo $this->translate("A atualização da CNL permite que seja atualizadas as tabelas do banco de 
+        dados que contém os nomes das cidades, ddd's e prefixos de telefones de 
+        todas as operadoras de telefonia."); ?>
+        <br><?php echo $this->translate("Estes dados são utilizados para mostrar nos relatórios de qual 
+        cidade a chamade se originou ou se destinou."); ?>
+
+        <br><strong><?php echo $this->translate("IMPORTANTE:"); ?></strong> 
+        <br><?php echo $this->translate("1) Os dados são fornecidos pela ANATEL (www.anatel.gov.br)"); ?> 
+        <br><?php echo $this->translate("2) O arquivo de atualização é preparado pela Opens e está no formato JSON."); ?> 
+        <br><?php echo $this->translate("3) Existem 2 tipos de arquivos: para telefonia fixa e telefonia movel e seus nomes seguem o seguinte formato:"); ?> 
+        <br><?php echo $this->translate("* Movel: cnl-movel-dd-mm-aaaa.json"); ?> 
+        <br><?php echo $this->translate("* Fixo.: cnl-fixo-dd-mm-aaaa.json 
+        onde: dd = dia, mm=mes, aaaa=ano => data que o arquivo foi gerado."); ?>
+        <br>
+        <br>
+        <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+    </div> 
+
     <div class="zend_form" style="text-align:center; padding-top: 20px;">
         <label for="cnl" class="optional"><?php echo $this->translate("CNL File"); ?></label>
         <input type="hidden" name="MAX_FILE_SIZE" value="2097152" id="MAX_FILE_SIZE">
         <input type="file" name="cnl" id="cnl">
-        <?php if(!$this->valid): ?>
-        <ul class="errors">
-            <li style="display:inline-block;"><?php echo $this->translate("File is not valid"); ?></li>
-        </ul>
+        <?php if (!$this->valid): ?>
+            <ul class="errors">
+                <li style="display:inline-block;"><?php echo $this->translate("File is not valid"); ?></li>
+            </ul>
         <?php endif; ?>
         <div class="menus" style="margin-top:15px; padding: 15px;">
             <input type="submit" name="submit" id="submit" value="Save">
@@ -18,3 +48,17 @@
     <img src="<?php echo $this->pathweb ?>/imagens/ajax-loader2.gif" width="256" height="24" /><br />
     <?php echo $this->translate("Please Wait..."); ?>
 </div>
+
+<script language="javascript" type="text/javascript">
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
+</script>

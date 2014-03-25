@@ -1,9 +1,41 @@
 <?php
 $this->headLink()->appendStylesheet($this->baseUrl() . "/css/index.css");
 $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 <form method="post">
     <table>
+        <div id="lightboxbody">
+            <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+        </div>
+
+        <div id="containerDiv">
+            <h2><?php echo $this->translate("Salas de conferência"); ?></h2>
+
+            <?php echo $this->translate("A conferência consiste em adicionar uma ou mais pessoas a uma conversa, 
+            possibilitando que sejam feitas salas de conferência.Os números das Salas de 
+            Conferências são pré­determinados na Instalação do SNEP, e são reconhecidos 
+            no Sistema como se fossem um “RAMAL”."); ?>
+
+            <br><strong><?php echo $this->translate("Código:"); ?></strong> 
+            <?php echo $this->translate("Código da sala de conferência."); ?>
+
+            <br><strong><?php echo $this->translate("Senha:"); ?></strong>
+            <?php echo $this->translate("Senha da sala de conferência."); ?>
+
+            <br><strong><?php echo $this->translate("Centro de custo:"); ?></strong> 
+            <?php echo $this->translate("Centro de custo da sala de conferência."); ?>
+
+            <br><strong><?php echo $this->translate("Ativo:"); ?></strong>
+            <?php echo $this->translate("Ativa ou desativa a sala de conferência."); ?>
+
+            <br><strong><?php echo $this->translate("Gravação:"); ?></strong>
+            <?php echo $this->translate("Ativa ou desativa a gravação da sala de conferência."); ?>
+            <br>
+            <br>
+            <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+        </div> 
         <thead>
             <tr>
                 <th> <?php echo $this->translate('Code') ?> </th>
@@ -81,11 +113,22 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scripta
 </form>
 
 <script type="text/javascript">
-    function pass(id) {
-        if (document.getElementById('box_' + id).style.display == '') {
-            document.getElementById('box_' + id).style.display = 'none';
-        } else {
-            document.getElementById('box_' + id).style.display = '';
-        }
-    }
+                        function pass(id) {
+                            if (document.getElementById('box_' + id).style.display == '') {
+                                document.getElementById('box_' + id).style.display = 'none';
+                            } else {
+                                document.getElementById('box_' + id).style.display = '';
+                            }
+                        }
+                        var test;
+
+                        Event.observe(window, 'load', function() {
+                            test = new Lightbox('containerDiv');
+                        });
+                        Event.observe('lightboxLink', 'click', function() {
+                            test.open();
+                        });
+                        Event.observe('closeLink', 'click', function() {
+                            test.close();
+                        });
 </script>

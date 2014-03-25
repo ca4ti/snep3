@@ -1,15 +1,42 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/add.css" );
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/selectBox.js');
-
-echo $this->form;
+$this->headLink()->appendStylesheet($this->baseUrl() . "/css/add.css");
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/selectBox.js');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
-<script type="text/javascript">
-Event.observe(window, 'load', init, false);
+<div id="lightboxbody">
+    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+</div>
 
-function init() {
-     select = new SelectBox('<?php echo $this->objSelectBox ?>');
-}
+<div id="containerDiv">
+    <h2><?php echo $this->translate("Grupo de Contatos - Editar"); ?></h2>
+
+    <?php echo $this->translate("Esta rotina edita um grupo existente. 
+    POderá haver edição dos nomes e membros do grupo."); ?>
+    <br>
+    <br>
+    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+</div> 
+
+<?php echo $this->form; ?>
+
+<script type="text/javascript">
+    Event.observe(window, 'load', init, false);
+
+    function init() {
+        select = new SelectBox('<?php echo $this->objSelectBox ?>');
+    }
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
 </script>

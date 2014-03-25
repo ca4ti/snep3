@@ -248,7 +248,7 @@ class ContactGroupsController extends Zend_Controller_Action {
         }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("default/forms/contact_groups_migration.xml"));
+        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contact_groups_migration.xml"));
         $form->setAction($this->getFrontController()->getBaseUrl() . '/contact-groups/migration/stage/2');
 
         if (isset($allGroups)) {

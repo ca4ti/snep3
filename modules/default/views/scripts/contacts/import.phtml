@@ -1,12 +1,51 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . '/modules/default/css/main.css');
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
 <div class="form_element">
-	<h4><?php echo $this->message ?></h4>
+    <h4><?php echo $this->message ?></h4>
+
+    <div id="lightboxbody">
+        <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+    </div>
+
+    <div id="containerDiv">
+        <h2><?php echo $this->translate("Contatos - Importar CSV"); ?></h2>
+
+        <?php echo $this->translate("Esta rotina permite que a partir de um arquivo no formato .csv, uma lista de
+        contatos possa ser importada para o sistema. Após selecionar o arquivo e
+        clicar em “Enviar”, uma tela com os campos detectados no arquivo .csv será 
+        apresentada. É necessário relacionar cada campo com o referido campo do cadastro 
+        do contato. A primeira linha é a chamada “linha de cabeçalho”, que identifica cada coluna do 
+        arquivo e as demais são as linhas de dados. A vírgula separa cada campo e mesmo que não 
+        exista dados para ele, o mesmo deve estar presente."); ?>
+
+        <br><strong><?php echo $this->translate("Exemplo:"); ?></strong> <?php echo $this->translate("nome,cep,cidade,estado,telefone"); ?> 
+        <br><?php echo $this->translate("Pedro da Silva,80123333,Curitiba,PR,041991122234"); ?> 
+        <br><?php echo $this->translate("Carlos Fagundes,,Criciuma,SC,04878900012"); ?> 
+        <br>
+        <br>
+        <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+    </div> 
 </div>
-        
+
 <div style='text-align: center;'>        
-        <?php echo $this->form ?>
+    <?php echo $this->form ?>
 </div>
+
+<script language="javascript" type="text/javascript">
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
+</script>
 

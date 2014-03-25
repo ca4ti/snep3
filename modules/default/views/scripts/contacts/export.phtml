@@ -1,13 +1,43 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . '/modules/default/css/main.css');
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
 <div class="form_element">
-	<h4><?php echo $this->message ?></h4>
+    <h4><?php echo $this->message ?></h4>
+
+    <div id="lightboxbody">
+        <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+    </div>
+
+    <div id="containerDiv">
+        <h2><?php echo $this->translate("Contatos - Export CSV"); ?></h2>
+
+        <?php echo $this->translate("Esta rotina exporta os contatos para um arquivo .csv. É possível exporta
+        todos os contatos ou especificamente de um determinado grupo."); ?>
+        <br>
+        <br>
+        <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+    </div> 
 </div>
 
 <div style='text-align: center;'>
-<?php echo $this->form ?>
+    <?php echo $this->form ?>
 </div>
+
+<script language="javascript" type="text/javascript">
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
+</script>
 
 

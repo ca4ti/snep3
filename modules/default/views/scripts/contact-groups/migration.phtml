@@ -1,22 +1,7 @@
 <?php
 $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
-
-<div id="lightboxbody">
-    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-</div>
-
-<div id="containerDiv">
-    <h2><?php echo $this->translate("Grupo de Contatos - Migrar"); ?></h2>
-
-    <?php echo $this->translate("Essa função realiza a migração dos contatos associados ao grupo para um 
-        novo grupo ou efetua a exclusão dos contatos associados."); ?>
-    <br>
-    <br>
-    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-</div> 
 
 <?php echo $this->message ?>
 <?php echo $this->form ?>
@@ -34,20 +19,3 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'tex
         enableField('option-migrate', 'group');
     }
 </script>
-
-<script language="javascript" type="text/javascript">
-    var test;
-
-    Event.observe(window, 'load', function() {
-        test = new Lightbox('containerDiv');
-    });
-    Event.observe('lightboxLink', 'click', function() {
-        test.open();
-    });
-    Event.observe('closeLink', 'click', function() {
-        test.close();
-    });
-</script>
-
-
-

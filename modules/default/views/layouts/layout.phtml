@@ -1,47 +1,97 @@
+<?php
+//
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
+?>
+
 <?php echo $this->doctype(); ?>
 <html>
-<head>
-    <?php echo $this->headTitle() . "\n"; ?>
-    <?php echo $this->headLink() . "\n"; ?>
-    <?php echo $this->headMeta(); ?>
-    <?php echo $this->headStyle() . "\n"; ?>
-    <?php echo $this->headScript() . "\n"; ?>
-</head>
-<body>
-    <!-- ugly markup for footer pindown -->
-    <div id="wrapper">
-        <div id="header">
-            <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/" alt="inicio" title="inicio">
-                <img src="<?php echo $this->baseUrl(); ?>/imagens/snep_logo.png" alt="SNEP" id="snep_logo" />
-            </a>
+    <head>
+        <?php echo $this->headTitle() . "\n"; ?>
+        <?php echo $this->headLink() . "\n"; ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headStyle() . "\n"; ?>
+        <?php echo $this->headScript() . "\n"; ?>
+    </head>
+    <body>
+        <!-- ugly markup for footer pindown -->
+        <div id="wrapper">
+            <div id="header">
+                <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/" alt="inicio" title="inicio">
+                    <img src="<?php echo $this->baseUrl(); ?>/imagens/snep_logo.png" alt="SNEP" id="snep_logo" />
+                </a>
+            </div>
+            <?php if (!$this->hideMenu): ?>
+
+                <div id="menus">
+
+                    <ul class="navmenu rightmenu">
+                        <li>
+                            <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth/logout"><?php echo $this->translate("Logout"); ?></a>
+                        </li>
+                    </ul>
+
+                    <!-- Help --> 
+                    <div id="lightboxbody">
+
+                        <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+                    </div>
+
+                    <div id="containerDiv">
+                        <?php
+                        $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+                        $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+
+                        $locale = Zend_Registry::get('config')->system->language;
+                        $homepage = file_get_contents('/var/www/snep/modules/' . $module . '/help/' . $locale . '/' . $controller . '.html');
+                        if ($homepage) {
+                            echo $homepage;
+                        } else {
+                            echo $this->translate("Found no help in this language");
+                        }
+                        ?>
+
+                        <br>
+                        <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+                    </div>
+
+                    <ul class="navmenu">
+                        <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <div id="breadcrumb" <?php
+            if ($this->hideMenu) {
+                echo 'class="fullbreadcrumb"';
+            }
+            ?>>
+                     <?php echo $this->breadcrumb; ?>
+            </div>
+            <div id="content">
+                <?php echo $this->layout()->content; ?>
+            </div>
+            <div class="push"></div>
         </div>
-        <?php if(!$this->hideMenu): ?>
-                
-        <div id="menus">
-            
-            <ul class="navmenu rightmenu">
-                <li>
-                    <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth/logout"><?php echo $this->translate("Logout"); ?></a>
-                </li>
-            </ul>
-            <ul class="navmenu">
-                <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>
-            </ul>
+        <div id="footer">
+            <div id="footer_content">
+                <p id="footer_vendor""><?php echo SNEP_VENDOR; ?></p>
+                <p id="footer_version">Snep <?php echo SNEP_VERSION ?></p>
+            </div>
         </div>
-        <?php endif; ?>
-        <div id="breadcrumb" <?php if($this->hideMenu) { echo 'class="fullbreadcrumb"'; } ?>>
-            <?php echo $this->breadcrumb; ?>
-        </div>
-        <div id="content">
-            <?php echo $this->layout()->content; ?>
-        </div>
-        <div class="push"></div>
-    </div>
-    <div id="footer">
-        <div id="footer_content">
-            <p id="footer_vendor""><?php echo SNEP_VENDOR; ?></p>
-            <p id="footer_version">Snep <?php echo SNEP_VERSION?></p>
-        </div>
-    </div>
-</body>
+    </body>
 </html>
+
+<script language="javascript" type="text/javascript">
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
+</script>

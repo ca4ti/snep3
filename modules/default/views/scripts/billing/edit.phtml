@@ -2,7 +2,6 @@
 $this->headLink()->appendStylesheet($this->baseUrl() . "/css/add.css");
 $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
 <div class="snep_form workaround ">
@@ -14,31 +13,6 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'tex
     <form name="formulario"  method="POST" action="<?php echo $this->url . "/edit/" ?>" >
 
         <table cellspacing="0" align="center">
-            <div id="lightboxbody">
-                <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-            </div>
-
-            <div id="containerDiv">
-                <h2><?php echo $this->translate("Tarifas - Alterar"); ?></h2>
-
-                <?php echo $this->translate("Esta rotina permite que uma Tarifa tenha o seu valor alterado no Sistema."); ?>
-
-                <br><strong><?php echo $this->translate("Tarifa para Fixo:"); ?></strong> 
-                <?php echo $this->translate("Define o valor da Tarifa padrão para chamadas a telefones Fixos."); ?>
-
-                <br><strong><?php echo $this->translate("Tarifa para Celular:"); ?></strong> 
-                <?php echo $this->translate("Define o valor da Tarifa padrão para chamadas a telefones Celulares."); ?>
-                <br><?php echo $this->translate("A primeira caixa esta datada com o dia e a hora na qual foi inserida as devidas tarifas. 
-                Você tem a opção de Editar essas tarifas, fazendo com que nos relatórios as 
-                tarifas mudem para esse valor, mesmo aquelas ligações que ja tenham sido feitas."); ?> 
-                <br><?php echo $this->translate("Poderá também fazer um novo ajuste na caixa abaixo, acionando o botão Adicionar, fazendo que 
-                a partir da data de hoje as ligações sejam tarifadas com o valor novo, e as 
-                antigas permanecerão com o valor antigo."); ?>
-                <br>
-                <br>
-                <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-            </div> 
-
             <tr>
                 <td valign="top" style="width:140px;">
 
@@ -279,15 +253,4 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'tex
         $('ddd').value = ret.responseText;
     }
 
-    var test;
-
-    Event.observe(window, 'load', function() {
-        test = new Lightbox('containerDiv');
-    });
-    Event.observe('lightboxLink', 'click', function() {
-        test.open();
-    });
-    Event.observe('closeLink', 'click', function() {
-        test.close();
-    });
 </script>

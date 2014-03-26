@@ -4,7 +4,6 @@ $this->headLink()->appendStylesheet($this->baseUrl() . "/css/add.css");
 $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/functions_smarty.js');
 $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
 <div class="snep_form workaround ">
@@ -16,77 +15,7 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'tex
     <form name="formulario"  method="POST" action="<?php echo $this->url . "/add/" ?>" >
 
         <table cellspacing="0" align="center">
-            <div id="lightboxbody">
-                <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-            </div>
 
-            <div id="containerDiv">
-                <h2><?php echo $this->translate("Tarifas - Incluir"); ?></h2>
-
-                <?php echo $this->translate("Esta rotina permite que uma Tarifa seja Cadastrada no Sistema."); ?>
-
-                <br><strong><?php echo $this->translate("Operadora:") ?></strong>
-                <?php echo $this->translate("Define o nome da Operadora.") ?>
-
-                <br><strong><?php echo $this->translate("Pais:"); ?></strong>
-                <?php echo $this->translate("Define o nome do país."); ?>
-
-                <br><strong><?php echo $this->translate("Estado:"); ?></strong> 
-                <?php echo $this->translate("Define a Sigla do Estado."); ?>
-
-                <br><strong><?php echo $this->translate("Cidade:"); ?></strong>
-                <?php echo $this->translate("Define o nome do cidade , baseado no estado escolhido."); ?>
-
-                <br><strong><?php echo $this->translate("Código do País:"); ?></strong> 
-                <?php echo $this->translate("Define o código DDI do país informado."); ?>
-
-                <br><strong><?php echo $this->translate("Código da Cidade:"); ?></strong> 
-                <?php echo $this->translate("Define o código DDD da cidade escolhida."); ?>
-
-                <br><strong><?php echo $this->translate("Prefixo:"); ?></strong>
-                <?php echo $this->translate("Define o prefixo de telefones , da cidade 
-                    escolhida sobre o qual incidirá a tarifa a ser informada. Caso a tarifa 
-                    seja a mesma para todos os prefixos, informe o valor 0000 neste campo."); ?>
-
-                <br><strong><?php echo $this->translate("Tarifa para Fixo:"); ?></strong> 
-                <?php echo $this->translate("Define o valor da Tarifa padrão para chamadas a telefones Fixos."); ?>
-
-                <br><strong><?php echo $this->translate("Tarifa para Celular:"); ?></strong> 
-                <?php echo $this->translate("Define o valor da Tarifa padrão para chamadas a telefones Celulares."); ?>
-
-                <br><br><strong><?php echo $this->translate("Regras Gerais"); ?></strong>
-                <br>
-                <?php echo $this->translate("Os valores padrão (Fixo e Móvel) para casa operadora é informado em seu cadastro.
-                Para ajustar os valores padrão, deixe os campos com os seguintes dados:"); ?>
-
-                <br><strong><?php echo $this->translate("Estado:"); ?></strong> 
-                <?php echo $this->translate("---"); ?>
-
-                <br><strong><?php echo $this->translate("Cidade:"); ?></strong>
-                <?php echo $this->translate("Selecione"); ?>
-
-                <br><strong><?php echo $this->translate("Codigo da Cidade:"); ?></strong>
-                <?php echo $this->translate("0"); ?>
-
-                <br><strong><?php echo $this->translate("Prefixo:"); ?></strong>
-                <?php echo $this->translate("0000"); ?>
-                <br>
-                <?php echo $this->translate("O cadastro de tarifação deve seguir estas 3 regras:"); ?>
-
-                <br><?php echo $this->translate("1 - Se cidades diferentes tem diferentes valores, 
-                    independentemente do PREFIXO do destino, uma Tarifa deve ser criada, informando 
-                    o DDD e o PREFIXO correto da cidade.'0000'"); ?>
-                <br><?php echo $this->translate("2 - se a operadora tem um valor diferente para alguns 
-                    PREFIXOS de uma mesma CIDADE."); ?>
-                <br><?php echo $this->translate("3 - Para Tarifação INTERNACIONAL, uma tarifa individual 
-                    deve ser criada para cada PAÍS, prestando atenção aos seguintes detalhes:"); ?>
-                <br><strong>a)</strong> <?php echo $this->translate("Informe o Código"); ?>
-                <br><strong>b)</strong> <?php echo $this->translate("Informe o DDD = 000"); ?>
-                <br><strong>c)</strong> <?php echo $this->translate("Informe o PREFIXO = 0000"); ?>
-                <br>
-                <br>
-                <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-            </div> 
             <tr>
                 <td valign="top">          
                     <table class="subtable" style="width: 360px;">
@@ -274,18 +203,6 @@ if (isset($this->dados['estado'])) {
 }
 ?>
 
-
-                                    var test;
-
-                                    Event.observe(window, 'load', function() {
-                                        test = new Lightbox('containerDiv');
-                                    });
-                                    Event.observe('lightboxLink', 'click', function() {
-                                        test.open();
-                                    });
-                                    Event.observe('closeLink', 'click', function() {
-                                        test.close();
-                                    });
 </script>
 
 

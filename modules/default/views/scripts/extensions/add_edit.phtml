@@ -2,7 +2,6 @@
 $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/lib/prototype.js');
 $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
 <?php if (!$this->all_writable): ?>
@@ -23,89 +22,6 @@ if (isset($this->error)) {
     echo "<div class=\"error_box\" > {$this->error} </div>";
 }
 ?>
-
-<div id="lightboxbody">
-    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-</div>
-
-<div id="containerDiv">
-    <h2><?php echo $this->translate("Ramais"); ?></h2>
-
-    <?php echo $this->translate("Esta rotina permite o Cadastro de um Ramal no Sistema. 
-    Os Ramais definem os membros dos sistemas Asterisk e SNEP, ou seja, servem 
-    para identificar um membro no sistema de telefonia e para acessar este sistema 
-    de Gerenciamento."); ?>
-    <br><?php echo $this->translate("Para o cadastro de Ramais é necessário que se ajuste em Configurações >> Parâmetros, 'Configuração do Ramal' os ramais cadastrados devem estar entre a margem de variação do Range de Ramais."); ?>
-    <br><?php echo $this->translate("Ramal:"); ?> 
-    <?php echo $this->translate("Define o código do que identificará o Ramal. 
-    Este código também será o LOGIN para o SNEP."); ?>
-    <br><strong><?php echo $this->translate("Senha:"); ?></strong> 
-    <?php echo $this->translate("Define uma senha para o Ramal, que também será a senha para o LOGIN no SNEP."); ?>
-    <br><strong><?php echo $this->translate("Nome:") ?></strong> 
-    <?php echo $this->translate("Define um nome para o Ramal."); ?>
-    <br><strong><?php echo $this->translate("Grupo de Ramal:"); ?></strong>
-    <?php echo $this->translate("Define o grupo de Ramais qual o ramal pertence"); ?>
-    <br><strong><?php echo $this->translate("Grupo de Captura:"); ?></strong> 
-    <?php echo $this->translate("Grupo de Captura do qual o Ramal fará parte. Ramais 
-    em um mesmo grupo de captura permitem-se capturar ligaços uns dos outros."); ?>
-    <br><br><strong><?php echo $this->translate("TECNOLOGIA DE INTERFACE"); ?></strong>
-    <br><strong><?php echo $this->translate("Tecnologia:"); ?></strong> 
-    <?php echo $this->translate("Define qual tecnologia de canal o ramal irá usar para fazer/receber ligações."); ?>
-    <br><strong><?php echo $this->translate("SIP/IAX:"); ?></strong>
-    <?php echo $this->translate("Canais com tecnologia SIP ou IAX."); ?>
-    <br><strong><?php echo $this->translate("Khomp:"); ?></strong> 
-    <?php echo $this->translate("Ramais de tecnologia Khomp."); ?>
-    <br><strong><?php echo $this->translate("Virtual:"); ?></strong> 
-    <?php echo $this->translate("Ramais com interfaces virtuais são mapeados em um 
-    tronco. Ao selecionar um tronco para a interface virtual do ramal, a ligação 
-    para ele será feita discando através do tronco para o numero do ramal."); ?>
-    <br><strong><?php echo $this->translate("Manual:"); ?></strong> 
-    <?php echo $this->translate("Permite especificar qual canal/tecnologia será utlizada na 
-    criação do ramal ."); ?>
-    <br><br><strong><?php echo $this->translate("OPÇÕES SIP / IAX"); ?></strong>
-    <br><strong><?php echo $this->translate("Senha: "); ?></strong>
-    <?php echo $this->translate("Define uma senha para autenficação do ramal."); ?>
-    <br><strong><?php echo $this->translate("Limite de Chamadas Simultaneas:"); ?></strong> 
-    <?php echo $this->translate("Define o número máximo de chamadas simultaneas para este ramal."); ?>
-    <br><strong><?php echo $this->translate("NAT:"); ?></strong> 
-    <?php echo $this->translate("Define se a conexão do Ramal irá ou não através um NAT."); ?>
-    <br><strong><?php echo $this->translate("Controle de Qualidade:"); ?></strong> 
-    <?php echo $this->translate("Define se haverá ou não controle de qualidade nas ligações do Ramal."); ?>
-    <br><strong><?php echo $this->translate("Direct Media:"); ?></strong> 
-    <?php echo $this->translate("Define passagem ou não dos pacotes RTP pelo Asterisk."); ?>
-    <br><strong><?php echo $this->translate("Modo de DTMF:"); ?></strong> 
-    <?php echo $this->translate("Define o tipo tons freqüência utilizados na discagem."); ?>
-    <br><strong><?php echo $this->translate("CODECS: "); ?></strong>
-    <?php echo $this->translate("Define a sequencia dos CODECS que serão preferidos para o Ramal."); ?>
-    <br><br><strong><?php echo $this->translate("OPÇÃO KHOMP"); ?></strong>
-    <br><strong><?php echo $this->translate("Placa:"); ?></strong> 
-    <?php echo $this->translate("Define qual das placas existentes no sistema."); ?>
-    <br><strong><?php echo $this->translate("Canal:"); ?></strong> 
-    <?php echo $this->translate("Define qual canal da placa selecionada."); ?>
-    <br><br><strong><?php echo $this->translate("OPÇÃO VIRTUAL"); ?></strong>
-    <br><strong><?php echo $this->translate("Tronco:"); ?> </strong>
-    <?php echo $this->translate("Define o tronco a ser mapeado."); ?>
-    <br><br><strong><?php echo $this->translate("OPÇÃO MANUAL"); ?></strong>
-    <br><strong><?php echo $this->translate("Manual:"); ?> </strong>
-    <?php echo $this->translate("Define o canal/tecnologia a ser utilizado."); ?>
-    <br><br><strong><?php echo $this->translate("AVANÇADO"); ?></strong>
-    <br><strong><?php echo $this->translate("Correio de Voz:"); ?></strong> 
-    <?php echo $this->translate("Define se o Ramal vai ou não utilizar Correio de Voz."); ?>
-    <br><strong><?php echo $this->translate("E-Mail:"); ?></strong> 
-    <?php echo $this->translate("Define um e-mail para o Ramal."); ?>
-    <br><strong><?php echo $this->translate("Bloqueio:"); ?> </strong>
-    <?php echo $this->translate("Cadeado para o ramal. Permite ou não efetuar chamadas."); ?>
-    <br><strong><?php echo $this->translate("Controle de Minutos: "); ?></strong>
-    <?php echo $this->translate("Define se vai ser estipulado um tempo para as ligações desse 
-    ramal ou não."); ?>
-    <br><strong><?php echo $this->translate("Tempo Total:"); ?></strong> 
-    <?php echo $this->translate("Tempo total que o ramal pode ficar em ligação."); ?>
-    <br><strong><?php echo $this->translate("Tipo de Controle:"); ?></strong> 
-    <?php echo $this->translate("Define se os minutos <br>são controlados por ano, mes ou dia."); ?>
-    <br>
-    <br>
-    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-</div> 
 
 <?php echo $this->form; ?>
 <script type="text/javascript">
@@ -159,18 +75,4 @@ if (isset($this->error)) {
             channels.value = channelValue;
         }
     }
-</script>
-
-<script language="javascript" type="text/javascript">
-    var test;
-
-    Event.observe(window, 'load', function() {
-        test = new Lightbox('containerDiv');
-    });
-    Event.observe('lightboxLink', 'click', function() {
-        test.open();
-    });
-    Event.observe('closeLink', 'click', function() {
-        test.close();
-    });
 </script>

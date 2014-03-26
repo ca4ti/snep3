@@ -1,47 +1,5 @@
 <?php
+
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
+echo $this->form
 ?>
-
-<div id="lightboxbody">
-    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-</div>
-
-<div id="containerDiv">
-    <h2><?php echo $this->translate("Centro de Custos - Editar"); ?></h2>
-
-    <?php echo $this->translate("Esta rotina permite a edição do Centro de Custos."); ?>
-
-    <br><?php echo $this->translate("Os Centro de Custos são usados pelo Asterisk 
-        para definir o 'Accountcode' de cada ligação de saída, gravando esta 
-        informação na tabela cdr."); ?>
-
-    <br><?php echo $this->translate("Um Centro de Custos é composto dos seguintes campos:"); ?>
-
-    <br><strong><?php echo $this->translate("Código:"); ?></strong>
-    <?php echo $this->translate("Não é possível editar o código do centro de custo:"); ?>
-
-    <br><strong><?php echo $this->translate("Nome:"); ?></strong> <?php echo $this->translate("Define um Nome para o centro de Custos;"); ?>
-    <br><strong><?php echo $this->translate("Descrição:"); ?></strong> <?php echo $this->translate("Breve descrição do objetivo do Centro de Custos"); ?>
-    <br><strong><?php echo $this->translate("Tipo:"); ?></strong> <?php echo $this->translate("Define em que tipo de ligação o Centro de 
-        Custos será aplicado: de Entrada ou de Saída"); ?>
-    <br>
-    <br>
-    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-</div> 
-
-<?php echo $this->form ?>
-
-<script language="javascript" type="text/javascript">
-    var test;
-
-    Event.observe(window, 'load', function() {
-        test = new Lightbox('containerDiv');
-    });
-    Event.observe('lightboxLink', 'click', function() {
-        test.open();
-    });
-    Event.observe('closeLink', 'click', function() {
-        test.close();
-    });
-</script>

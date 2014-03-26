@@ -1175,11 +1175,15 @@ select
     margin-right:0; 
     margin-left:10px; 
     margin-bottom:5px;
+    padding-top: 5px;
+/*    padding-bottom: 14px;
+    padding-left: 10px;
+    padding-right: 10px;*/
 }
 
 #bg_fade {
     background-image:url(../imagens/overlay.png);
-    height:140%;
+    height:200%;
     left:0px;
     margin:0px;
     padding:0px;
@@ -1198,8 +1202,8 @@ select
     color: #555;
     padding-left: 10px;
     padding-right: 10px;
-    padding-right: 15px;
     border: 2px black solid;
+    font-size: 12px;
 }
 
 #containerDiv p {

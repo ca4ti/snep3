@@ -1,0 +1,55 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h2>Contatos - Cadastrar/Editar </h2>
+
+        Preencha o formul&aacute;rio corretamente com as informa&ccedil;&otilde;es
+        do contato.Os campos <strong>nome e telefone</strong> s&atilde;o de preenchimento obrigat&oacute;rio.
+        <br><strong>Código:</strong>
+        Identificará o cadastro do Contato. Este campo o Sistema 
+        preenche um código automáticamente.
+
+        <br><strong>Nome:</strong>
+        Nome identificador do contato.
+
+        <br><strong>Grupo:</strong> 
+        Grupo de contato no qual ele vai pertencer.
+
+        <br><strong>Endereço, Cidade, Estado CEP:</strong>
+        Dados do endereço do contato.
+
+        <br><strong>Telefone:</strong>
+        Identifica o telefone do Contato. É possível cadastrar vários
+        números ao usuário.
+        <br>
+                
+        <h2>Contatos - Importar CSV</h2>
+
+        Esta rotina permite que a partir de um arquivo no formato .csv, uma lista de
+        contatos possa ser importada para o sistema. Após selecionar o arquivo e
+        clicar em “Enviar”, uma tela com os campos detectados no arquivo .csv será 
+        apresentada. É necessário relacionar cada campo com o referido campo do cadastro 
+        do contato. A primeira linha é a chamada “linha de cabeçalho”, que identifica cada coluna do 
+        arquivo e as demais são as linhas de dados. A vírgula separa cada campo e mesmo que não 
+        exista dados para ele, o mesmo deve estar presente.
+
+        <br><strong>Exemplo:</strong> nome,cep,cidade,estado,telefone 
+        <br>Pedro da Silva,80123333,Curitiba,PR,041991122234 
+        <br>Carlos Fagundes,,Criciuma,SC,04878900012
+        
+        <h2>Contatos - Export CSV</h2>
+        Esta rotina exporta os contatos para um arquivo .csv. É possível exporta
+        todos os contatos ou especificamente de um determinado grupo.
+               
+        <h2>Contatos - Remover multiplos</h2>
+        Esta rotina exclui todos os contatos do grupo escolhido.
+    </body>
+</html>

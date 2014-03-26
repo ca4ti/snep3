@@ -1,13 +1,74 @@
 <?php
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/maskCostCenter.js');
-echo $this->form
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/maskCostCenter.js');
+$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/lightbox.js', 'text/javascript');
 ?>
 
-<script type="text/javascript">
-Event.observe(window, 'load', init, false);
+<div id="lightboxbody">
+    <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+</div>
 
-function init() {
-     mask = new maskCostCenter('id');
-}
+<div id="containerDiv">
+    <h2><?php echo $this->translate("Centro de Custos - Incluir"); ?></h2>
+
+    <?php echo $this->translate("Esta rotina permite a Inclusão de um 
+        Centro de Custos."); ?>
+
+    <br><?php echo $this->translate("Os Centro de Custos são usados pelo Asterisk 
+        para definir o 'Accountcode' de cada ligação de saída, gravando esta 
+        informação na tabela cdr."); ?>
+
+    <br><?php echo $this->translate("Um Centro de Custos é composto dos seguintes campos:"); ?>
+
+    <br><strong><?php echo $this->translate("Código:"); ?></strong>
+    <?php echo $this->translate("O código pode ser de 1, 3 ou 5 digitos, sempre NUMÉRICOS, 
+        e distribuidos em até 3 'casas', que determinam sua herarquia. Definição:"); ?>
+
+    <br><?php echo $this->translate("9 - código com 1 dígito, é considerado o código PAI. 
+        Devem existir apenas 2 (dois) códigos PAI no sistema - um para ENTRADAs e um para SAÌDAS."); ?>
+
+    <br><?php echo $this->translate("9.99 - código com 3 dígitos, é considerado o código Filho de 1a. Geração"); ?>
+
+    <br><?php echo $this->translate("9.99.99 - código com 5 dígitos, é considerado o código Filho de 2a. Geração"); ?>
+
+    <br><?php echo $this->translate("Exemplo:"); ?>
+
+    <br><?php echo $this->translate("1 - Ligações de Entrada"); ?>
+    <br><?php echo $this->translate("1.01 - Departamento Comercial"); ?>
+    <br><?php echo $this->translate("1.01.01 - Diretor Comercial"); ?>
+    <br><?php echo $this->translate("1.01.02 - Vendedores"); ?>
+    <br><?php echo $this->translate("1.01.03 - Telemarketing"); ?>
+
+    <br><strong><?php echo $this->translate("Nome:"); ?></strong> <?php echo $this->translate("Define um Nome para o centro de Custos;"); ?>
+    <br><strong><?php echo $this->translate("Descrição:"); ?></strong> <?php echo $this->translate("Breve descrição do objetivo do Centro de Custos"); ?>
+    <br><strong><?php echo $this->translate("Tipo:"); ?></strong> <?php echo $this->translate("Define em que tipo de ligação o Centro de 
+        Custos será aplicado: de Entrada ou de Saída"); ?>
+    <br>
+    <br>
+    <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
+</div> 
+
+<?php echo $this->form ?>
+
+<script type="text/javascript">
+    Event.observe(window, 'load', init, false);
+
+    function init() {
+        mask = new maskCostCenter('id');
+    }
+</script>
+
+<script language="javascript" type="text/javascript">
+    var test;
+
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
 </script>

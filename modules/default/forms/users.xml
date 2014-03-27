@@ -45,7 +45,7 @@
             <type>select</type>
             <options>
                 <required>true</required>
-                <label>Group</label>
+                <label>Profile</label>
             </options>
         </group>
     </elements>

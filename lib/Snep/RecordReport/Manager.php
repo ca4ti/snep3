@@ -33,7 +33,7 @@ class Snep_RecordReport_Manager {
     public function __construct() {
         
     }
-    
+
     /**
      * Get data of calls
      * @param <string> $condicao
@@ -42,13 +42,13 @@ class Snep_RecordReport_Manager {
     public function getCalls($condicao) {
 
         $db = Zend_Registry::get('db');
-                      
+
         $select = $db->select()
-                ->from('cdr', array("calldate","src","dst","duration","billsec","disposition","userfield"))
+                ->from('cdr', array("calldate", "src", "dst", "duration", "billsec", "disposition", "userfield"))
                 ->where($condicao)
                 ->where('disposition = ?', 'ANSWERED')
                 ->where('userfield != ?', ' ');
-               
+
 
         $stmt = $db->query($select);
         $calls = $stmt->fetchall();
@@ -56,4 +56,34 @@ class Snep_RecordReport_Manager {
         return $calls;
     }
     
+    /**
+     * format date
+     * @param <date> $init
+     * @param <date> $end
+     * @return <array>
+     */
+    public function fmtDate($init,$end) {
+
+        $data_inicio = $init;
+        $data_fim = $end;
+
+        $data_inicial = explode(" ", $data_inicio);
+        $data_final = explode(" ", $data_fim);
+
+        $data_inicio = implode(preg_match("~\/~", $data_inicial[0]) == 0 ? "/" : "-", array_reverse(explode(preg_match("~\/~", $data_inicial[0]) == 0 ? "-" : "/", $data_inicial[0])));
+        $data_fim = implode(preg_match("~\/~", $data_final[0]) == 0 ? "/" : "-", array_reverse(explode(preg_match("~\/~", $data_final[0]) == 0 ? "-" : "/", $data_final[0])));
+        if (strlen($data_inicial[1]) >= 8) {
+            $data_inicial = $data_inicio . " " . $data_inicial[1];
+            $data_final = $data_fim . " " . $data_final[1];
+        } else {
+            $data_inicial = $data_inicio . " " . $data_inicial[1] . ":00";
+            $data_final = $data_fim . " " . $data_final[1] . ":59";
+        }
+        $date = array();
+        $date['init'] = $data_inicial;
+        $date['end'] = $data_final;
+
+        return $date;
+    }
+
 }

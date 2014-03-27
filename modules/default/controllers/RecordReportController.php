@@ -103,16 +103,9 @@ class RecordReportController extends Zend_Controller_Action {
         $prefix_inout = $config->ambiente->prefix_inout;
         $dst_exceptions = $config->ambiente->dst_exceptions;
 
-        $locale = Snep_Locale::getInstance()->getLocale();
-
-        if ($locale == 'en_US') {
-            $formated_init_day = $formData['dados']['init_day'] . ":00";
-            $formated_end_day = $formData['dados']['end_day'] . ":59";
-        } else {
-            $formated_init_day = date("Y-d-m H:m", strtotime($formData['dados']['init_day'])) . ':00';
-            $formated_end_day = date("Y-d-m H:m", strtotime($formData['dados']['end_day'])) . ':59';
-        }
-
+        $date_formated = Snep_RecordReport_Manager::fmtDate($formData['dados']['init_day'], $formData['dados']['end_day']);
+        $init = $date_formated['init'];
+        $end = $date_formated['end'];
 
         if (isset($formData['dados']['src'])) {
             $src = $formData['dados']['src'];
@@ -134,8 +127,8 @@ class RecordReportController extends Zend_Controller_Action {
             $dsttype = "";
         }
 
-        $date_clause = " ( calldate >= '$formated_init_day'";
-        $date_clause .=" AND calldate <= '$formated_end_day' )  ";
+        $date_clause = " calldate >= '$init'";
+        $date_clause .=" AND calldate <= '$end'";
         $condicao = $date_clause;
 
         // Clausula do where: Origens

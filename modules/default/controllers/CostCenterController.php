@@ -24,6 +24,7 @@
  * @package   Snep
  * @copyright Copyright (c) 2010 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti
+ * @edited    Tiago Zimmermann 28/03/2014
  */
 class CostCenterController extends Zend_Controller_Action {
 
@@ -78,7 +79,11 @@ class CostCenterController extends Zend_Controller_Action {
         $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
 
         $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add",
+        $this->view->filter = array(
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
+                "display" => $this->view->translate("Export CSV"),
+                "css" => "includes"),
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add",
                 "display" => $this->view->translate("Add Cost Center"),
                 "css" => "include"),
         );
@@ -141,6 +146,32 @@ class CostCenterController extends Zend_Controller_Action {
             Snep_CostCenter_Manager::insertLogCcustos("DEL", $add);
         }
         Snep_CostCenter_Manager::remove($id);
+    }
+
+    /**
+     * exportAction - Export cost center for CSV file.
+     */
+    public function exportAction() {
+
+        $costCenter = Snep_CostCenter_Manager::getAll();
+        $headers = array('codigo' => $this->view->translate('Code'),
+            'tipo' => $this->view->translate('Type'),
+            'nome' => $this->view->translate('Name'),
+            'descricao' => $this->view->translate('Description'));
+
+        $csv = new Snep_Csv();
+        $csv_data = $csv->generate($costCenter, $headers);
+
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $dateNow = new Zend_Date();
+        $fileName = $this->view->translate('Cost-center_csv_') . $dateNow->toString($this->view->translate(" dd-MM-yyyy_hh'h'mm'm' ")) . '.csv';
+
+        header('Content-type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+        echo $csv_data;
     }
 
     /**

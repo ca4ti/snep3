@@ -9,8 +9,11 @@ class IndexController extends Zend_Controller_Action {
      * indexAction 
      */
     public function indexAction() {
-
-        $this->view->breadcrumb = $this->view->translate("Welcome to Snep version %s", SNEP_VERSION);
+        
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+        
+        $this->view->breadcrumb = $this->view->translate("Welcome to Snep, <b>" . $username."</b>.");
 
         // Direcionando para o "snep antigo"
         $config = Zend_Registry::get('config');

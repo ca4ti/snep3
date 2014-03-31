@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once "includes/AsteriskInfo.php";
 
 /**
  * Controller for extension management
@@ -55,6 +56,7 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Manage"),
                     $this->view->translate("Extensions")
         ));
+
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
@@ -124,6 +126,18 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add Extension")
         ));
+
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/extensions/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         $this->view->form = $this->getForm();
         if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
@@ -172,6 +186,17 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Extensions"),
                     $this->view->translate("Edit %s", $id)
         ));
+
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/extensions/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
@@ -504,6 +529,17 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam("id");
 
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/extensions/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         //checks if the exten is used in the rule 
         $rules = Snep_Extensions_Manager::getValidation($id);
         $rulesQuery = Snep_Extensions_Manager::getValidationRules($id);
@@ -677,6 +713,17 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Add Multiples Extensions")
         ));
 
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/extensions/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         $this->view->form = $this->getmultiaddForm();
         if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
@@ -784,6 +831,13 @@ class ExtensionsController extends Zend_Controller_Action {
                 }
             }
         }
+    }
+
+    /**
+     * asterisErrorAction
+     */
+    public function asteriskErrorAction() {
+        
     }
 
 }

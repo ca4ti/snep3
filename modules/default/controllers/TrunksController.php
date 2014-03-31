@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once "includes/AsteriskInfo.php";
 
 /**
  * Trunk management
@@ -335,6 +336,17 @@ class TrunksController extends Zend_Controller_Action {
                     $this->view->translate("Add")
         ));
 
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/trunks/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
 
@@ -415,6 +427,17 @@ class TrunksController extends Zend_Controller_Action {
                     $this->view->translate("Edit trunk %s", $id)
         ));
 
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/trunks/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         //log-user
         if (class_exists("Loguser_Manager")) {
             $edit = Snep_Trunks_Manager::getTrunkLog($id);
@@ -470,6 +493,17 @@ class TrunksController extends Zend_Controller_Action {
         $id = $this->_request->getParam("id");
         $name = $this->_request->getParam("name");
 
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->_redirect("/trunks/asterisk-error");
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+        }
+
         $regras = Snep_Trunks_Manager::getValidation($id);
 
         $rules_query = Snep_Trunks_Manager::getRules($id);
@@ -504,6 +538,13 @@ class TrunksController extends Zend_Controller_Action {
             Snep_InterfaceConf::loadConfFromDb();
             $this->_redirect("trunks");
         }
+    }
+
+    /**
+     * asterisErrorAction
+     */
+    public function asteriskErrorAction() {
+        
     }
 
 }

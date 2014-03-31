@@ -261,7 +261,7 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->message = $this->view->translate("The excluded group has associated contacts.");
 
         $form->getElement('id')->setValue($id);
-
+        $form->removeElement('id');
         $stage = $this->_request->getParam('stage');
 
         if (isset($stage['stage']) && $id) {

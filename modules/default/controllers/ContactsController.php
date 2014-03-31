@@ -444,7 +444,7 @@ class ContactsController extends Zend_Controller_Action {
 
             $db = Zend_Registry::get('db');
             $select = $db->select()
-                    ->from(array("n" => "contacts_names"), array("name as nome", "city", "state", "cep", "phone_1", "cell_1"))
+                    ->from(array("n" => "contacts_names"), array("id", "name as nome", "city", "state", "cep"))
                     ->join(array("g" => "contacts_group"), 'n.group = g.id', array("g.name"))
                     ->order('g.id');
 
@@ -455,14 +455,22 @@ class ContactsController extends Zend_Controller_Action {
             $stmt = $db->query($select);
             $contacts = $stmt->fetchAll();
 
-            $headers = array('nome' => $this->view->translate('Name'),
+            foreach ($contacts as $key => $contact) {
+                $phones = Snep_Contacts_Manager::getPhone($contact['id']);
+                $phone = "";
+                foreach ($phones as $cont => $number) {
+                    $phone .= $number['phone'] . " ";
+                }
+                $contacts[$key]['phones'] = $phone;
+            }
+
+            $headers = array('id' => $this->view->translate('Code'),
+                'nome' => $this->view->translate('Name'),
                 'city' => $this->view->translate('City'),
                 'state' => $this->view->translate('State'),
                 'cep' => $this->view->translate('ZipCode'),
-                'phone_1' => $this->view->translate('Phone'),
-                'cell_1' => $this->view->translate('Mobile'),
-                'name' => $this->view->translate('Group'));
-
+                'name' => $this->view->translate('Group'),
+                'phones' => $this->view->translate('Phones'));
 
             $csv = new Snep_Csv();
             $csv_data = $csv->generate($contacts, $headers);

@@ -47,7 +47,6 @@ class ContactGroupsController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
-
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
         $this->view->filtro = $this->_request->getParam('filtro');
@@ -120,7 +119,6 @@ class ContactGroupsController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-
         $this->view->form = $form;
     }
 
@@ -277,11 +275,14 @@ class ContactGroupsController extends Zend_Controller_Action {
 
                 Snep_ContactGroups_Manager::remove($_POST['id']);
             } elseif ($_POST['option'] == 'remove') {
+
                 $contacts = Snep_ContactGroups_Manager::getGroupContacts($id);
+
                 foreach ($contacts as $contact) {
-                    Snep_Contacts_Manager::remove($contact['id']);
+                    Snep_Contacts_Manager::removePhone($contact['id']);
                 }
 
+                Snep_Contacts_Manager::removeGroup($contact['idGroup']);
                 Snep_ContactGroups_Manager::remove($_POST['id']);
             }
 

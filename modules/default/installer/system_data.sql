@@ -210,3 +210,6 @@ INSERT INTO `sounds` VALUES ('queue-youarenext.wav','Filas - Sua chamada é a pr
 
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
+
+INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES
+(1, 'GERAL');

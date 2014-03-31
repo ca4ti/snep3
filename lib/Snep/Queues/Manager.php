@@ -33,7 +33,7 @@ class Snep_Queues_Manager {
     public function __construct() {
         
     }
-
+    
     /**
      * Get a queue by id
      * @param int $id
@@ -323,6 +323,23 @@ class Snep_Queues_Manager {
             'tipo' => $acao);
 
         $db->insert('logs_users', $insert_data);
+    }
+    
+    /**
+     * Get all queue for csv file
+     * @return <array>
+     */
+    public function getCsv() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('queues', array('name', 'musiconhold', 'context', 'servicelevel'));
+
+        $stmt = $db->query($select);
+        $queues = $stmt->fetchall();
+
+        return $queues;
     }
 
 }

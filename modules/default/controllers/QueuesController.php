@@ -78,7 +78,11 @@ class QueuesController extends Zend_Controller_Action {
         $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
 
         $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
+        $this->view->filter = array(
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
+                "display" => $this->view->translate("Export CSV"),
+                "css" => "back"),
+            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
                 "display" => $this->view->translate("Add Queue"),
                 "css" => "include"));
     }
@@ -529,6 +533,45 @@ class QueuesController extends Zend_Controller_Action {
         }
 
         echo $options;
+    }
+
+    /**
+     * exportAction - Export cost center for CSV file.
+     */
+    public function exportAction() {
+
+        $queues = Snep_Queues_Manager::getCsv();
+        
+
+        foreach ($queues as $key => $queue) {
+            $member = "";
+            $members = Snep_Queues_Manager::getMembers($queue['name']);
+
+            foreach ($members as $item) {
+                $member .= $item["membername"] . ",";
+            }
+            $queues[$key]['members'] = $member;
+        }
+        
+        $headers = array('name' => $this->view->translate('Name'),
+            'musiconhold' => $this->view->translate('Music on hold class'),
+            'context' => $this->view->translate('Go to Context'),
+            'servicelevel' => $this->view->translate('SLA'),
+            'members' => $this->view->translate('Members'));
+
+        $csv = new Snep_Csv();
+        $csv_data = $csv->generate($queues, $headers);
+
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $dateNow = new Zend_Date();
+        $fileName = $this->view->translate('Queues_csv_') . $dateNow->toString($this->view->translate(" dd-MM-yyyy_hh'h'mm'm' ")) . '.csv';
+
+        header('Content-type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+        echo $csv_data;
     }
 
 }

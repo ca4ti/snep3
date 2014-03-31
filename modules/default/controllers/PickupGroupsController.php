@@ -27,6 +27,7 @@ class PickupGroupsController extends Zend_Controller_Action {
      * @var Zend_Form
      */
     protected $form;
+
     /**
      *
      * @var array
@@ -35,8 +36,8 @@ class PickupGroupsController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Pickup Groups")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Pickup Groups")
         ));
 
         $db = Zend_Registry::get('db');
@@ -80,22 +81,37 @@ class PickupGroupsController extends Zend_Controller_Action {
                 "display" => $this->view->translate("Add Pickup Group"),
                 "css" => "include")
         );
-
     }
 
     public function addAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Pickup Groups"),
-            $this->view->translate("Add Pickup Group")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Pickup Groups"),
+                    $this->view->translate("Add Pickup Group")
         ));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form_xml = new Zend_Config_Xml("modules/default/forms/pickupGroup.xml");
         $form = new Snep_Form($form_xml->general);
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName().'/add');
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
 
-        $name = $form->getElement('name')->setLabel($this->view->translate("Name"));
+        $form->getElement('name')->setLabel($this->view->translate('Name'));
+        $extensionsAllGroup = Snep_PickupGroups_Manager::getExtensionsAll();
+
+        $extensions = array();
+        foreach ($extensionsAllGroup as $key => $val) {
+
+            if ($val['nome']) {
+                $extensions[$val['name']] = $val['name'] . " ( " . $val['nome'] . " )";
+            } else {
+                $extensions[$val['name']] = $val['name'];
+            }
+        }
+
+        $this->view->objSelectBox = "extensions";
+
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
         if ($this->getRequest()->getPost()) {
 
@@ -103,23 +119,34 @@ class PickupGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
-                $pickupGroup = array('nome' => $dados['name']);
+                $namegroup = array('nome' => $dados['name']);
 
-                $this->view->group = Snep_PickupGroups_Manager::add($pickupGroup);
+                $groupId = Snep_PickupGroups_Manager::addGroup($namegroup);
 
-                $this->_redirect("/".$this->getRequest()->getControllerName()."/");
+                if ($dados['box_add'] && $groupId > 0) {
+
+                    foreach ($dados['box_add'] as $id => $extensions) {
+
+                        $extensionsGroup = array('pickupgroup' => $groupId,
+                            'extensions' => $extensions
+                        );
+
+                        $this->view->extensions = Snep_PickupGroups_Manager::addExtensionsGroup($extensionsGroup);
+                    }
+                }
+                $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
             }
         }
 
         $this->view->form = $form;
-        $this->renderScript("pickup-groups/add_edit.phtml");
     }
 
     public function editAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Pickup Groups"),
-            $this->view->translate("Edit Pickup Group")
+                    $this->view->translate("Manage"),
+                    $this->view->translate("Pickup Groups"),
+                    $this->view->translate("Edit Pickup Group")
         ));
 
         $id = $this->_request->getParam('group');
@@ -128,24 +155,60 @@ class PickupGroupsController extends Zend_Controller_Action {
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form_xml = new Zend_Config_Xml("modules/default/forms/pickupGroup.xml");
         $form = new Snep_Form($form_xml->general);
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName()."/edit/group/$id");
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . "/edit/group/$id");
 
         $name = $form->getElement('name')->setValue($pickupgroup['nome']);
         $name = $form->getElement('name')->setLabel($this->view->translate("Name"));
 
+        $group = Snep_PickupGroups_Manager::getGroup($id);
+
+        $groupExtensions = array();
+        foreach (Snep_PickupGroups_Manager::getExtensionsOnlyGroup($id) as $data) {
+
+            $groupExtensions[$data['name']] = "{$data['name']}";
+        }
+
+        $groupAllExtensions = array();
+        foreach (Snep_PickupGroups_Manager::getExtensionsAll() as $data) {
+
+            if (!isset($groupExtensions[$data['name']])) {
+                if ($data['nome']) {
+                    $groupAllExtensions[$data['name']] = $data['name'] . " ( " . $data['nome'] . " )";
+                } else {
+                    $groupAllExtensions[$data['name']] = $data['name'];
+                }
+            }
+        }
+
+        $this->view->objSelectBox = "extensions";
+
+        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $groupAllExtensions, $groupExtensions);
+
         if ($this->_request->getPost()) {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
+            $dados['id'] = $id;
 
-            if ($form_isValid) {
-                $pickupgroup = array('id' => $id, 'name' => $dados['name']);
+            /* Remove todas as extensoes do grupo atual */
+            $this->view->group = Snep_PickupGroups_Manager::editGroup(array('name' => $dados['name'], 'id' => $dados['id']));
 
-                $this->view->Group = Snep_PickupGroups_Manager::edit($pickupgroup);
-                $this->_redirect($this->getRequest()->getControllerName());
+            foreach (Snep_PickupGroups_Manager::getExtensionsOnlyGroup($dados['id']) as $extensionsGroup) {
+
+                Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $extensionsGroup['name'], 'pickupgroup' => '1'));
             }
+
+            if ($dados['box_add']) {
+
+                foreach ($dados['box_add'] as $id => $dados['name']) {
+
+                    $this->view->extensions = Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'pickupgroup' => $dados['id']));
+                }
+            }
+
+            $this->_redirect($this->getRequest()->getControllerName());
         }
+
         $this->view->form = $form;
-        $this->renderScript("pickup-groups/add_edit.phtml");
     }
 
     public function deleteAction() {
@@ -153,8 +216,7 @@ class PickupGroupsController extends Zend_Controller_Action {
 
         try {
             $pickugroups = Snep_PickupGroups_Manager::get($id);
-        }
-        catch(PBX_Exception_NotFound $ex) {
+        } catch (PBX_Exception_NotFound $ex) {
             throw new Zend_Controller_Action_Exception('Page not found.', 404);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -26,9 +27,14 @@
  */
 class Snep_PickupGroups_Manager {
 
-    private function __construct() { /* Protegendo métodos dinâmicos */ }
-    private function __destruct() { /* Protegendo métodos dinâmicos */ }
-    private function __clone() { /* Protegendo métodos dinâmicos */ }
+    private function __construct() { /* Protegendo métodos dinâmicos */
+    }
+
+    private function __destruct() { /* Protegendo métodos dinâmicos */
+    }
+
+    private function __clone() { /* Protegendo métodos dinâmicos */
+    }
 
     /**
      * Remove a pickup group from the database based on his  ID.
@@ -38,7 +44,7 @@ class Snep_PickupGroups_Manager {
     public static function delete($id) {
 
         $db = Zend_Registry::get('db');
-        $db->delete("grupos","cod_grupo='{$id}'");
+        $db->delete("grupos", "cod_grupo='{$id}'");
     }
 
     /**
@@ -46,12 +52,12 @@ class Snep_PickupGroups_Manager {
      *
      * @param int $id
      */
-    public static function get ($id) {
+    public static function get($id) {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from ('grupos')
-                ->where ("cod_grupo = '$id'");
+                ->from('grupos')
+                ->where("cod_grupo = '$id'");
 
         $stmt = $db->query($select);
         $registros = $stmt->fetch();
@@ -63,9 +69,9 @@ class Snep_PickupGroups_Manager {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from ('grupos');
+                ->from('grupos');
 
-        $stmt = $db->query ($select);
+        $stmt = $db->query($select);
         $row = $stmt->fetchAll();
 
         $pickupGroups = array();
@@ -75,14 +81,14 @@ class Snep_PickupGroups_Manager {
         return $pickupGroups;
     }
 
-    public static function getFilter ($field, $query) {
+    public static function getFilter($field, $query) {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from ('grupos');
+                ->from('grupos');
 
         if (!is_null($query)) {
-                $select->where ("$field like '%$query%'");
+            $select->where("$field like '%$query%'");
         }
 
         return $select;
@@ -97,29 +103,155 @@ class Snep_PickupGroups_Manager {
             $db->insert('grupos', $pickupGroup);
             $db->commit();
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $db->rollBack();
             return $e;
         }
     }
 
-    public static function  edit($pickupGroup) {
+    public static function edit($pickupGroup) {
 
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
-        $value = array ('nome' => $pickupGroup['name']);
+        $value = array('nome' => $pickupGroup['name']);
 
         try {
 
-            $db->update ('grupos', $value, 'cod_grupo ='.$pickupGroup['id']);
+            $db->update('grupos', $value, 'cod_grupo =' . $pickupGroup['id']);
             $db->commit();
             return true;
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
 
             $db->rollBack();
             throw $e;
         }
     }
+
+    /**
+     * getExtensiosAll - Obtem uma lista de todas extensões (ramais) com seus grupos de captura
+     * @return <array> $extensionsGroup
+     */
+    public function getExtensionsAll() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('peers', array('id', 'name', 'pickupgroup', 'peer_type'))
+                ->joinleft('grupos', 'cod_grupo = peers.pickupgroup', array('cod_grupo', 'nome'))
+                ->where('peers.peer_type != "T"');
+
+        $stmt = $db->query($select);
+        $extensionsGroup = $stmt->fetchAll();
+
+        return $extensionsGroup;
+    }
+
+    /**
+     * addGroup - Adds the group to the database based on the value reported
+     * @param <string> $pickupGroup
+     * @return \Exception
+     */
+    public static function addGroup($pickupGroup) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+            $db->insert('grupos', $pickupGroup);
+            $idPickupGroup = $db->lastInsertId();
+
+            $db->commit();
+
+            return $idPickupGroup;
+        } catch (Exception $e) {
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * addExtensiosGroup - Adds the group their extensions in the database based on the value reported
+     * @param <string> $extensionsGroup
+     * @return \Exception|boolean
+     */
+    public function addExtensionsGroup($extensionsGroup) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+
+            $value = array("peers.pickupgroup" => $extensionsGroup['pickupgroup']);
+
+            $db->update("peers", $value, "name = " . $extensionsGroup['extensions']);
+            $db->commit();
+
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * getGroup - Return a pickup group from the database based on his ID
+     * @param <int> $id
+     */
+    public static function getGroup($id) {
+
+        $db = Zend_Registry::get('db');
+        $select = $db->select()
+                ->from('grupos')
+                ->where("cod_grupo = '$id'");
+
+        $stmt = $db->query($select);
+        $registros = $stmt->fetch();
+
+        return $registros;
+    }
+
+    /**
+     * getExtensiosOnlyGroup - Find Extensions with pickup group selected
+     * @param <string> $id
+     * @return type
+     */
+    public function getExtensionsOnlyGroup($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('peers', array('id', 'name', 'pickupgroup'))
+                ->where('peers.pickupgroup = ?', $id);
+
+        $stmt = $db->query($select);
+        $extensionsGroup = $stmt->fetchAll();
+
+        return $extensionsGroup;
+    }
+
+    /**
+     * editGroup - Edit the group to the database based on the value reported
+     * @param <string> $pickupGroup
+     * @return <boolean>
+     * @throws Exception
+     */
+    public static function editGroup($pickupGroup) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+        $value = array('nome' => $pickupGroup['name']);
+
+        try {
+
+            $db->update('grupos', $value, 'cod_grupo =' . $pickupGroup['id']);
+            $db->commit();
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            throw $e;
+        }
+    }
+
 }

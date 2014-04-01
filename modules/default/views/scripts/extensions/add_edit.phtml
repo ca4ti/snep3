@@ -51,6 +51,13 @@ if (isset($this->error)) {
         enableField('advanced-minute_control-option', 'advanced-controltype-M');
         enableField('advanced-minute_control-option', 'advanced-controltype-D');
     }
+    
+    $('advanced-voicemail-option').observe('click', email);
+    Event.observe(window, 'load', email);
+    
+    function email() {
+        enableField('advanced-voicemail-option', 'advanced-email');
+    }
 
     $('khomp-board').observe('change', fillChannels);
     Event.observe(window, 'load', fillChannels);

@@ -3,7 +3,15 @@ $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
 ?>
 
-<?php echo $this->message ?>
+<table>
+    <thead>
+        <tr>
+            <th class="failure"> <?php echo $this->message ?> </th>
+        </tr>
+    </thead>
+</table>    
+<br>   
+
 <?php echo $this->form ?>
 
 <script language="javascript" type="text/javascript">

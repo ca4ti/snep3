@@ -181,6 +181,18 @@
                     </multioptions>
                 </options>
             </qualify>
+            <directmedia>
+                <type>radio</type>
+                <options>
+                    <label>Direct Media</label>
+                    <value>yes</value>
+                    <separator> </separator>
+                    <multioptions>
+                        <yes>yes</yes>
+                        <no>no</no>
+                    </multioptions>
+                </options>
+            </directmedia>
             <type>
                 <type>radio</type>
                 <options>

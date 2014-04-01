@@ -209,6 +209,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `regserver` int(250) default NULL,
   `dnd` BOOL NOT NULL DEFAULT '0',
   `sigame` VARCHAR( 20 ) NULL ,
+  `directmedia` varchar(10),
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),

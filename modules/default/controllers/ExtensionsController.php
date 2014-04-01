@@ -270,6 +270,7 @@ class ExtensionsController extends Zend_Controller_Action {
         $timeTotal = $exten["time_total"];
         if (!empty($timeTotal)) {
             $form->getSubForm('advanced')->getElement('minute_control')->setAttrib('checked', 'checked');
+            $timeTotal = $timeTotal / 60;
             $form->getSubForm('advanced')->getElement('timetotal')->setValue($timeTotal);
             $ctrlType = $exten["time_chargeby"];
             $form->getSubForm('advanced')->getElement('controltype')->setValue($ctrlType);
@@ -286,11 +287,13 @@ class ExtensionsController extends Zend_Controller_Action {
                 $simCalls = $exten["call-limit"];
                 $nat = $exten["nat"];
                 $qualify = $exten["qualify"];
+                $directmedia = $exten["directmedia"];
                 $typeIp = $exten["type"];
                 $dtmfMode = $exten["dtmfmode"];
                 $form->getSubForm('sip')->getElement('password')->setValue($pass);
                 $form->getSubForm('sip')->getElement('password')->renderPassword = true;
                 $form->getSubForm('sip')->getElement('calllimit')->setValue($simCalls);
+                $form->getSubForm('sip')->getElement('directmedia')->setValue($directmedia);
                 if ($nat == 'yes') {
                     $form->getSubForm('sip')->getElement('nat')->setAttrib('checked', 'checked');
                 }
@@ -311,6 +314,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $simCalls = $exten["call-limit"];
                 $nat = $exten["nat"];
                 $qualify = $exten["qualify"];
+                $directmedia = $exten["directmedia"];
                 $typeIp = $exten["type"];
                 $dtmfMode = $exten["dtmfmode"];
                 $form->getSubForm('iax2')->getElement('password')->setValue($pass);
@@ -324,7 +328,8 @@ class ExtensionsController extends Zend_Controller_Action {
                 }
                 $form->getSubForm('iax2')->getElement('type')->setValue($typeIp);
                 $form->getSubForm('iax2')->getElement('dtmf')->setValue($dtmfMode);
-
+                $form->getSubForm('sip')->getElement('directmedia')->setValue($directmedia);
+                
                 $codecs = explode(";", $exten['allow']);
                 $form->getSubForm('iax2')->getElement('codec')->setValue($codecs[0]);
                 $form->getSubForm('iax2')->getElement('codec1')->setValue($codecs[1]);
@@ -398,6 +403,7 @@ class ExtensionsController extends Zend_Controller_Action {
         $secret = $formData[$techType]["password"];
         $type = $formData[$techType]["type"];
         $dtmfmode = $formData[$techType]["dtmf"];
+        $directmedia = $formData[$techType]["directmedia"];
         $callLimit = $formData[$techType]["calllimit"];
 
         $nat = 'no';
@@ -449,11 +455,12 @@ class ExtensionsController extends Zend_Controller_Action {
             $advPadLock = '0';
         }
 
-        if (key_exists("minute_control", $formData["advanced"])) {
+        //if (key_exists("minute_control", $formData["advanced"])) {
+        if ($formData["advanced"]["minute_control"]) {
             $advMinCtrl = true;
             $advTimeTotal = $formData["advanced"]["timetotal"] * 60;
             $advTimeTotal = $advTimeTotal == 0 ? "NULL" : "'$advTimeTotal'";
-            $advCtrlType = $advTimeTotal > 0 ? "{$formData['advanced']['controltype']}" : "NULL";
+            $advCtrlType = $formData['advanced']['controltype'];
         } else {
             $advMinCtrl = false;
             $advTimeTotal = 'NULL';
@@ -486,7 +493,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "outgoinglimit='1', incominglimit='1',";
             $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
             $sql.= "nat='$nat',canal='$channel', authenticate=$advPadLock, ";
-            $sql.= "`group`='$extenGroup', ";
+            $sql.= "`group`='$extenGroup', `directmedia`='$directmedia',";
             $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType'  WHERE id=$idExt";
         } else {
             $sql = "INSERT INTO peers (";
@@ -494,7 +501,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "secret,type,allow,fromuser,username,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
-            $sql.= "trunk, `group`, callgroup, time_total, ";
+            $sql.= "trunk, `group`, callgroup, time_total, directmedia, ";
             $sql.= "time_chargeby " . $sqlFieldsExten;
             $sql.= ") values (";
             $sql.= "'$exten','$extenPass','$extenName','$context','$exten','$qualify',";
@@ -502,7 +509,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "'$dtmfmode','$advEmail','$callLimit','1',";
             $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',";
             $sql.= "$advPadLock,'no','$extenGroup',";
-            $sql.= "'$extenPickGrp', $advTimeTotal, '$advCtrlType' " . $sqlDefaultValues;
+            $sql.= "'$extenPickGrp', $advTimeTotal, '$directmedia', '$advCtrlType' " . $sqlDefaultValues;
             $sql.= ")";
         }
 
@@ -524,6 +531,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         Snep_InterfaceConf::loadConfFromDb();
     }
+
 
     public function deleteAction() {
 

@@ -176,7 +176,8 @@ class Snep_InterfaceConf {
                         $peers .= 'fromuser=' . $peer['name'] . "\n";
 
                         $peers .= 'call-limit=' . $peer['call-limit'] . "\n";
-
+                        $peers .= 'directmedia=' . $peer['directmedia'] . "\n";
+                        
                         $peers .= "\n";
                     }
                 }

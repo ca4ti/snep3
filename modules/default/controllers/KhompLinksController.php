@@ -33,7 +33,7 @@ class KhompLinksController extends Zend_Controller_Action {
     protected $forms;
 
     /**
-     * indexAction
+     * indexAction - List links khomp
      * @return type
      * @throws ErrorException
      */
@@ -41,7 +41,7 @@ class KhompLinksController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
-                    $this->view->translate("Khomp Links")
+                    $this->view->translate("Links")
         ));
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/khomp_links.xml"));
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
@@ -144,9 +144,9 @@ class KhompLinksController extends Zend_Controller_Action {
             }
         }
     }
-    
+
     /**
-     * viewAction
+     * viewAction - view links khomp
      * @throws ErrorException
      */
     public function viewAction() {
@@ -214,12 +214,12 @@ class KhompLinksController extends Zend_Controller_Action {
             "none" => $this->view->translate('None'),
             "down" => $this->view->translate('Hanging Up'));
 
-        $status_canais_khomp = array("Unused" => "#00A651",
-            "On Going" => "#ED1C24",
-            "Ringing" => "#ff9c00",
-            "Dialing" => "#ff9c00",
-            "Reserved" => "#ff9c00",
-            "Busy" => "#ED1C24");
+        $status_canais_khomp = array($this->view->translate("Unused") => "#83C46D",
+            $this->view->translate('On Going') => "#F66",
+            $this->view->translate('Ringing') => "#FFDF6F",
+            $this->view->translate('Dialing') => "#FFDF6F",
+            $this->view->translate('Reserved') => "#FFDF6F",
+            $this->view->translate('Busy') => "#F66");
 
         $linksKhomp = array("0" => "B00", "1" => "B01", "3" => "B02", "4" => "B03",
             "5" => "B04", "6" => "B05", "7" => "B06", "8" => "B07");
@@ -295,7 +295,8 @@ class KhompLinksController extends Zend_Controller_Action {
 
             while (list($chave, $valor) = each($lines)) {
 
-                if (substr($valor, 0, 1) === "B" && substr($valor, 3, 1) === "C") {
+                //if (substr($valor, 0, 1) === "B" && substr($valor, 3, 1) === "C") {
+                if (substr($valor, 4, 1) === "B" && substr($valor, 7, 1) === "C") {
 
                     $linha = explode(":", $valor);
                     $st_ast = $khomp_signal[$linha[1]];
@@ -303,11 +304,15 @@ class KhompLinksController extends Zend_Controller_Action {
                     $st_canal = $khomp_signal[$linha[3]];
 
                     if (isset($sintetic[substr($valor, 0, 3)][$linha[1]])) {
-
                         $sintetic[substr($valor, 0, 3)][$linha[1]] += 1;
                     } else {
-
                         $sintetic[substr($valor, 0, 3)][$linha[1]] = 1;
+                    }
+
+                    if (isset($sintetic[substr($valor, 4, 3)][$linha[1]])) {
+                        $sintetic[substr($valor, 4, 3)][$linha[1]] += 1;
+                    } else {
+                        $sintetic[substr($valor, 4, 3)][$linha[1]] = 1;
                     }
 
                     $l = "$linha[0]:$st_ast:$st_placa:$st_canal";
@@ -318,14 +323,15 @@ class KhompLinksController extends Zend_Controller_Action {
                         $st_opera = $linha[5];
                         $st_gsm = true;
                     } else {
-
                         $st_sinal = '';
                         $st_opera = '';
                         $st_gsm = false;
                     }
 
-                    $board = substr($l, 0, 3);
-                    $channel = substr($l, 3, 3);
+                    //$board = substr($l, 0, 3);
+                    $board = substr($l, 4, 3);
+                    //$channel = substr($l, 3, 3);
+                    $channel = substr($l, 7, 4);
                     $status = explode(":", $l);
 
                     if ($status[3] != "kecs{Busy,Locked,LocalFail}") {

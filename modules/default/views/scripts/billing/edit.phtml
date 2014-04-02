@@ -20,6 +20,12 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
 
                     <table class="subtable" style="width: 360px;">
                         <tr>
+                            <td colspan="4" >
+                                <div class="info_box"> <?php echo $this->translate("Warning: Changes to existing fees, influence on the report.") ?>  </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
                             <td class="formlabel" width="140px"> <?php echo $this->translate("Carrier") ?> </td>
                             <td class="subtable" >
                                 <select name="operadora" disabled  style="width:220px;" >
@@ -81,11 +87,7 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
                                 <input name="prefixo" disabled id="prefixo" type="text" size="5" maxlength="4" value="<?php echo $this->Carrier['prefixo'] ?>" />
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="4" >
-                                <div class="info_box"> <?php echo $this->translate("Warning: Changes to existing fees, influence on the report.") ?>  </div>
-                            </td>
-                        </tr>
+                        
 
                     </table>
                 </td>

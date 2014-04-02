@@ -43,7 +43,7 @@ class EmailAction extends PBX_Rule_Action {
         $to = (isset($this->config['to']))?"<value>{$this->config['to']}</value>":"";
         $message = (isset($this->config['message']))?"<value>{$this->config['message']}</value>":"";
         $subject = (isset($this->config['subject']))?"<value>{$this->config['subject']}</value>":"";
-
+        $info = (isset($this->config['info']))?"<value>{$this->config['info']}</value>":"";
         return <<<XML
 <params>
     <string>
@@ -63,6 +63,12 @@ class EmailAction extends PBX_Rule_Action {
         <label>Mensagem</label>
         $message
     </text>
+    <boolean>
+    <id>info</id>
+    <default>false</default>
+    <label>Deseja exibir informação de origem e destino da chamada no corpo do e-mail?</label>
+    $info    
+    </boolean>
 </params>
 XML;
     }
@@ -79,8 +85,11 @@ XML;
         $mail->setFrom("Snep PBX");
         $mail->setSubject($this->config['subject']);
         $mail->addTo($this->config['to']);
-        $mail->setBodyText($this->config['message']);
-
+        if($this->config['info'] != 'false'){
+        $mail->setBodyText($this->config['message'] . "\n\nInformações da chamada:\nNúmero de origem: " . $request->getOriginalCallerid() . "\nNúmero de destino: " . $request->destino);
+        }else{
+        $mail->setBodyText($this->config['message']);    
+        }
         $log->info("Enviando email para " . $this->config['to']);
         $mail->send();
     }

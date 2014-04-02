@@ -1,6 +1,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as
@@ -17,7 +19,13 @@
  */
 
 /**
- * Used to make loop in actions.
+ * ActionLooop Loop em Ações
+ *
+ * Ação que faz possível um loop finito na execução de ações nas regras de
+ * negócio.
+ *
+ * @see PBX_Rule
+ * @see PBX_Rule_Action
  *
  * @category  Snep
  * @package   PBX_Rule_Action
@@ -40,6 +48,7 @@ class ActionLoop extends PBX_Rule_Action {
 
     /**
      * Construtor
+     * @param array $config configurações da ação
      */
     public function __construct() {
         $this->count = 0;

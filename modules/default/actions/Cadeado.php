@@ -1,6 +1,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as
@@ -147,6 +149,7 @@ XML;
             $senha = $this->config['senha'];
         }
         else {
+            $log->warn("Impossivel determinar qual senha usar para a regra");
             return;
         }
 

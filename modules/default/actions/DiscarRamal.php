@@ -1,6 +1,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as
@@ -243,6 +245,13 @@ XML;
     }
 
     /**
+     * Configurações padrão para todas as ações dessa classe. Essas possuem uma
+     * tela de configuração separada.
+     *
+     * Os campos descritos aqui podem ser usados para controle de timout,
+     * valores padrão e informações que não pertencem exclusivamente a uma
+     * instancia da ação em uma regra de negócio.
+     *
      * @return string XML com as configurações default para as classes
      */
     public function getDefaultConfigXML() {

@@ -1,6 +1,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as
@@ -31,6 +33,10 @@ class DiscarTronco extends PBX_Rule_Action {
      */
     private $i18n;
 
+    /**
+     * Construtor
+     * @param array $config configurações da ação
+     */
     public function __construct() {
         $this->i18n = Zend_Registry::get("Zend_Translate");
     }
@@ -124,6 +130,7 @@ class DiscarTronco extends PBX_Rule_Action {
         $dial_timeout    = (isset($this->config['dial_timeout']))?"<value>{$this->config['dial_timeout']}</value>":"";
         $dial_flags      = (isset($this->config['dial_flags']))?"<value>{$this->config['dial_flags']}</value>":"";
         $dial_limit      = (isset($this->config['dial_limit']))?"<value>{$this->config['dial_limit']}</value>":"";
+        $carrier_msg	 = (isset($this->config['carrier_msg']))?"<value>{$this->config['carrier_msg']}</value>":"";
         $omit_kgsm       = (isset($this->config['omit_kgsm']))?"<value>{$this->config['omit_kgsm']}</value>":"";
         $alertEmail      = (isset($this->config['alertEmail']))?"<value>{$this->config['alertEmail']}</value>":"";
 
@@ -168,6 +175,13 @@ class DiscarTronco extends PBX_Rule_Action {
     </string>
 
     <boolean>
+        <id>carrier_msg</id>
+        <default>false</default>
+        <label>{$i18n->translate("Detectar Atendimento de Maquina e Caixa de Mensagem")}</label>
+        $carrier_msg
+    </boolean>
+
+    <boolean>
         <id>omit_kgsm</id>
         <default>false</default>
         <label>$Talert</label>
@@ -185,6 +199,13 @@ XML;
     }
 
     /**
+     * Configurações padrão para todas as ações dessa classe. Essas possuem uma
+     * tela de configuração separada.
+     *
+     * Os campos descritos aqui podem ser usados para controle de timout,
+     * valores padrão e informações que não pertencem exclusivamente a uma
+     * instancia da ação em uma regra de negócio.
+     *
      * @return string XML com as configurações default para as classes
      */
     public function getDefaultConfigXML() {
@@ -269,9 +290,24 @@ XML;
             $destiny = $tronco->getInterface()->getTech() . "/" . $dst_number . "@" . $tronco->getInterface()->getHost();
         }
         else {
-            $postfix = ( isset($this->config['omit_kgsm']) && $this->config['omit_kgsm'] == "true" ) ? "/orig=restricted" : "";
-            $destiny = $tronco->getInterface()->getCanal() . "/" . $dst_number . $postfix;
-        }
+		$postfix = "/";
+		if (isset($this->config['omit_kgsm']) && $this->config['omit_kgsm'] == "true") {
+			$postfix .= "orig=restricted";
+
+			if ( isset($this->config['carrier_msg']) && $this->config['carrier_msg'] == "true") {
+				$postfix .= ":";
+			}
+		} 
+		if (isset($this->config['carrier_msg']) && $this->config['carrier_msg'] == "true") {
+			$ret_agi = $asterisk->get_variable("CHANNEL");
+			$postfix .= "parent=".$ret_agi['data'].":answer_info:drop_on=message_box+carrier_message";
+		}
+		if (strlen($postfix) == 1) {
+			$postfix = "";
+		}	
+			
+	}
+	$destiny = $tronco->getInterface()->getCanal() . "/" . $dst_number . $postfix;
 
         $log->info("Dialing to $request->destino through trunk {$tronco->getName()}($destiny)");
 

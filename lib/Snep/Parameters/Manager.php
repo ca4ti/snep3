@@ -65,8 +65,6 @@ class Snep_Parameters_Manager {
                 'record_mp3' => $dados["record_mp3"],
                 'path_voz' => $dados["path_voz"],
                 'path_voz_bkp' => $dados["path_voz_bkp"],
-                'peers_range' => $dados["peers_range"],
-                'agents' => $dados["agents"],
                 'valor_controle_qualidade' => $dados["valor_controle_qualidade"],
                 'tipo' => $dados["tipo"]);
 
@@ -89,8 +87,6 @@ class Snep_Parameters_Manager {
                 'record_mp3' => $dados['gravacao']['record_mp3'],
                 'path_voz' => $dados['gravacao']['path_voz'],
                 'path_voz_bkp' => $dados['gravacao']['path_voz_bkp'],
-                'peers_range' => $dados['ramais']['peers_range'],
-                'agents' => $dados['ramais']['agents'],
                 'valor_controle_qualidade' => $dados['troncos']['valor_controle_qualidade'],
                 'tipo' => $dados["tipo"]);
 

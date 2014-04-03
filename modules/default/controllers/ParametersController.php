@@ -151,21 +151,6 @@ class ParametersController extends Zend_Controller_Action {
         $form->addSubForm($recording, "gravacao");
         $old_param["path_voz_bkp"] = $config->ambiente->path_voz_bkp;
 
-        // Sessão Ramais
-        $ramais = new Snep_Form_SubForm($this->view->translate("Extensions Configurations"), $form_xml->extensions);
-
-        // Setando valores do arquivo.
-        $peers_range = $ramais->getElement('peers_range');
-        $peers_range->setValue($config->canais->peers_range);
-        $old_param["peers_range"] = $config->canais->peers_range;
-
-        $agents = $ramais->getElement('agents');
-
-        $agents->setValue($config->ambiente->agents);
-        $old_param["agents"] = $config->ambiente->agents;
-
-        $form->addSubForm($ramais, "ramais");
-
         // Section Trunks
         $trunks = new Snep_Form_SubForm($this->view->translate("Trunks Configuration"), $form_xml->trunks);
 
@@ -225,9 +210,6 @@ class ParametersController extends Zend_Controller_Action {
 
                 $config->ambiente->path_voz = $formData['gravacao']['path_voz'];
                 $config->ambiente->path_voz_bkp = $formData['gravacao']['path_voz_bkp'];
-
-                $config->canais->peers_range = $formData['ramais']['peers_range'];
-                $config->ambiente->agents = $formData['ramais']['agents'];
 
                 $config->ambiente->valor_controle_qualidade = $formData['troncos']['valor_controle_qualidade'];
 

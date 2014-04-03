@@ -26,7 +26,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                     <img src="<?php echo $this->baseUrl(); ?>/imagens/snep_logo.png" alt="SNEP" id="snep_logo" />
                 </a>
             </div>
-<?php if (!$this->hideMenu): ?>
+            <?php if (!$this->hideMenu): ?>
 
                 <div id="menus">
 
@@ -66,7 +66,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                 echo 'class="fullbreadcrumb"';
             }
             ?>>
-                 <?php echo $this->breadcrumb; ?>
+                     <?php echo $this->breadcrumb; ?>
             </div>
             <div id="content">
                 <?php echo $this->layout()->content; ?>
@@ -79,12 +79,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
 
                 <!-- Language -->
                 <?php
-                
-                $eng = '<img src="/snep/imagens/Eua.png" class="right" title="Click to change language to english";">';
-                $port = '<img src="/snep/imagens/Brazil.png" class="right" title="Clique para mudar o idioma para português";">';
+                if ($controller != "auth") {
+                    $eng = '<img src="/snep/imagens/Eua.png" class="right" title="Click to change language to english";">';
+                    $port = '<img src="/snep/imagens/Brazil.png" class="right" title="Clique para mudar o idioma para português";">';
 
-                echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/eng?module=$controller\">$eng<a/>";
-                echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/port?module=$controller\">$port<a/>";
+                    echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/eng?module=$controller\">$eng<a/>";
+                    echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/port?module=$controller\">$port<a/>";
+                }
                 ?>
 
 

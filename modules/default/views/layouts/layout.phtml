@@ -13,6 +13,10 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headStyle() . "\n"; ?>
         <?php echo $this->headScript() . "\n"; ?>
+        <?php
+        $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+        ?>
     </head>
     <body>
         <!-- ugly markup for footer pindown -->
@@ -22,7 +26,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                     <img src="<?php echo $this->baseUrl(); ?>/imagens/snep_logo.png" alt="SNEP" id="snep_logo" />
                 </a>
             </div>
-            <?php if (!$this->hideMenu): ?>
+<?php if (!$this->hideMenu): ?>
 
                 <div id="menus">
 
@@ -33,16 +37,12 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                     </ul>
 
                     <!-- Help --> 
-                    <div id="lightboxbody">
-
+                    <div>
                         <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
                     </div>
 
                     <div id="containerDiv">
                         <?php
-                        $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
-                        $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
-
                         $locale = Zend_Registry::get('config')->system->language;
                         $homepage = file_get_contents('/var/www/snep/modules/' . $module . '/help/' . $locale . '/' . $controller . '.html');
                         if ($homepage) {
@@ -66,7 +66,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                 echo 'class="fullbreadcrumb"';
             }
             ?>>
-                     <?php echo $this->breadcrumb; ?>
+                 <?php echo $this->breadcrumb; ?>
             </div>
             <div id="content">
                 <?php echo $this->layout()->content; ?>
@@ -75,7 +75,19 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
         </div>
         <div id="footer">
             <div id="footer_content">
-                <p id="footer_vendor""><?php echo SNEP_VENDOR; ?></p>
+                <p id="footer_vendor"><?php echo SNEP_VENDOR; ?></p>
+
+                <!-- Language -->
+                <?php
+                
+                $eng = '<img src="/snep/imagens/Eua.png" class="right" title="Click to change language to english";">';
+                $port = '<img src="/snep/imagens/Brazil.png" class="right" title="Clique para mudar o idioma para português";">';
+
+                echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/eng?module=$controller\">$eng<a/>";
+                echo "<a href=\"{$this->PAGEINFO}/snep/index.php/default/parameters/port?module=$controller\">$port<a/>";
+                ?>
+
+
                 <p id="footer_version">Snep <?php echo SNEP_VERSION ?></p>
             </div>
         </div>

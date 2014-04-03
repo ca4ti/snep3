@@ -249,4 +249,30 @@ class ParametersController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    public function engAction() {
+
+        $configFile = APPLICATION_PATH . "/includes/setup.conf";
+        $config = new Zend_Config_Ini($configFile, null, true);
+        $config->system->language = "en";
+        $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+            'filename' => $configFile));
+        $writer->write();
+
+        $module = $_GET["module"];
+        $this->_redirect($module);
+    }
+
+    public function portAction() {
+
+        $configFile = APPLICATION_PATH . "/includes/setup.conf";
+        $config = new Zend_Config_Ini($configFile, null, true);
+        $config->system->language = "pt_BR";
+        $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+            'filename' => $configFile));
+        $writer->write();
+
+        $module = $_GET["module"];
+        $this->_redirect($module);
+    }
+
 }

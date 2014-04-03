@@ -35,7 +35,7 @@ class AuthController extends Zend_Controller_Action {
         ));
         $this->view->hideMenu = true;
 
-        $this->view->PAGEINFO = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
+        $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
         $config = Zend_Registry::get('config');
         if (trim($config->ambiente->db->host) == "") {
@@ -45,7 +45,7 @@ class AuthController extends Zend_Controller_Action {
             $this->_redirect("installer/");
         }
 
-        if ($_GET) {
+        if (isset($_GET["recuperation"])) {
             $this->view->message = $this->view->translate("Password successfully recovered");
             $this->view->msgclass = 'sucess';
         }
@@ -128,7 +128,7 @@ class AuthController extends Zend_Controller_Action {
 
         $this->view->hideMenu = true;
 
-        if ($_GET) {
+        if (isset($_GET['param'])) {
             $this->view->msgclass = 'sucess';
             $this->view->message = $this->view->translate("We've sent an access code to the email: " . base64_decode($_GET['param']));
         }
@@ -206,7 +206,7 @@ class AuthController extends Zend_Controller_Action {
 
                 $config = Zend_Registry::get('config');
                 $client = $config->ambiente->emp_nome;
-                
+
                 $msg = $this->view->translate("You asked for resetting your password the user <b>$username</b> on PABX <b>$client</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>" . $code . "</b></font><br>Your code will expire on: " . $expiration . "<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
                 $subject = $this->view->translate("Redefinition password - SNEP");
 

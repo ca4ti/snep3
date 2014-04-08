@@ -210,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `dnd` BOOL NOT NULL DEFAULT '0',
   `sigame` VARCHAR( 20 ) NULL ,
   `directmedia` varchar(10),
+  `lastms` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),

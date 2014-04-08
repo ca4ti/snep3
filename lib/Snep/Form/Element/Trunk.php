@@ -31,7 +31,7 @@ class Snep_Form_Element_Trunk extends Zend_Form_Element_Select {
         foreach (PBX_Trunks::getAll() as $trunk) {
             $data[$trunk->getId()] = $trunk->getName();
         }
-        if ($data != null) {
+        if (isset($data) != null) {
             $this->addMultiOptions($data);
         } else {
             $this->addMultiOption(null, '');

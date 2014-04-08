@@ -37,17 +37,23 @@ echo $this->render('filter.phtml');
                             <?php echo $this->translate('Edit') ?>
                         </a>
                     </td>
+
                     <td class="action">
-                        <?php $this->remove_msg = $this->translate("Do you really wish to remove this item?"); ?>
-                        <span class="excluir" onclick="remove_item('<?php echo $this->url ?>', '<?php echo $user['ide'] ?>', '<?php echo $this->remove_msg ?>')">
-                            <?php echo $this->translate('Delete') ?>
-                        </span>
+                        <?php if ($user['ide'] != 1) { ?>
+                            <?php $this->remove_msg = $this->translate("Do you really wish to remove this item?"); ?>
+                            <span class="excluir" onclick="remove_item('<?php echo $this->url ?>', '<?php echo $user['ide'] ?>', '<?php echo $this->remove_msg ?>')">
+                                <?php echo $this->translate('Delete') ?>
+                            </span>
+                        <?php } ?>
                     </td>
                     <td class="action">
-                        <a class="permissao" href="<?php echo $this->url ?>/permission/id/<?php echo $user['ide'] ?>">
-                            <?php echo $this->translate('Permission') ?>
-                        </a>
+                        <?php if ($user['ide'] != 1) { ?>
+                            <a class="permissao" href="<?php echo $this->url ?>/permission/id/<?php echo $user['ide'] ?>">
+                                <?php echo $this->translate('Permission') ?>
+                            </a>
+                        <?php } ?>
                     </td>
+
                 </tr>
             <?php endforeach ?>
         <?php endif ?>

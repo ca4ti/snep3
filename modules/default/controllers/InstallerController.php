@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -15,7 +16,6 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
-
 require_once 'Zend/Controller/Action.php';
 require_once 'Snep/Inspector.php';
 
@@ -29,24 +29,24 @@ require_once 'Snep/Inspector.php';
  */
 class InstallerController extends Zend_Controller_Action {
 
-    public function  preDispatch() {
+    public function preDispatch() {
 
         $config = Zend_Registry::get('config');
-        if( trim ( $config->ambiente->db->host ) != "" ) {
+        if (trim($config->ambiente->db->host) != "") {
             $this->_redirect("auth/login/");
         }
 
         parent::preDispatch();
         $this->view->hideMenu = true;
         // Fazer checagem futura se o sistema está instalado ou não.
-        if(Zend_Auth::getInstance()->hasIdentity() && $this->getRequest()->getActionName() == "installed") {
+        if (Zend_Auth::getInstance()->hasIdentity() && $this->getRequest()->getActionName() == "installed") {
             $this->_redirect("index");
         }
     }
 
     public function indexAction() {
-        $this->view->breadcrumb = $this->view->translate("Instalador do SNEP");
-        //$this->view->next = $this->view->url(array("controller"=>"installer", "action"=>"diagnostic"), null, true);
+        $this->view->breadcrumb = $this->view->translate("Installer Snep");
+        $this->view->next = $this->view->url(array("controller" => "installer", "action" => "diagnostic"), null, true);
 
         $objInspector = new Snep_Inspector('Permissions');
         $inspect = $objInspector->getInspects();
@@ -82,47 +82,45 @@ class InstallerController extends Zend_Controller_Action {
                 $languageElement->addMultiOption($lcode, ucfirst($language));
             }
         }
-        $languageElement->setValue(Snep_Locale::getInstance()->getLanguage());        
-        
+        $languageElement->setValue(Snep_Locale::getInstance()->getLanguage());
 
-        if($this->getRequest()->isPost()) {
-            
+
+        if ($this->getRequest()->isPost()) {
+
             $form_isValid = $form->isValid($_POST);
 
             $configFile = APPLICATION_PATH . "/includes/setup.conf";
-            $config = new Zend_Config_Ini( $configFile, null, true );
+            $config = new Zend_Config_Ini($configFile, null, true);
 
             $config->system->locale = $_POST['locale']['locale'];
             $config->system->timezone = $_POST['locale']['timezone'];
             $config->system->language = $_POST['locale']['language'];
 
-            if($form_isValid) {
+            if ($form_isValid) {
                 $writer = new Zend_Config_Writer_Ini(array('config' => $config,
-                                                       'filename' => $configFile));
+                    'filename' => $configFile));
                 $writer->write();
                 $this->_redirect('installer/diagnostic/');
             }
         }
 
         $submit_button = $form->getElement('submit');
-        $submit_button->setLabel('Iniciar a Instalar');
-        
-        if( $this->view->error['error'] ) {
+        $submit_button->setLabel('Start the installation');
+
+        if ($this->view->error['error']) {
             $submit_button->setAttrib('disabled', true);
         }
 
         $this->view->form = $form->addSubForm($locale_form, "locale");
-
     }
 
     public function diagnosticAction() {
-        $this->view->breadcrumb = $this->view->translate("Instalador » Diagnóstico");
-        $this->view->next = $this->view->url(array("controller"=>"installer", "action"=>"configure"), null, true);
+        $this->view->breadcrumb = $this->view->translate("Installer » Diagnostic");
+        $this->view->next = $this->view->url(array("controller" => "installer", "action" => "configure"), null, true);
 
         $inspector = new Snep_Inspector();
         $this->view->errored = $inspector->errored();
         $this->view->testResult = $inspector->getInspects();
-        
     }
 
     protected function install(Zend_Db_Adapter_Abstract $db) {
@@ -142,30 +140,27 @@ class InstallerController extends Zend_Controller_Action {
             $db->query($cnl_data);
 
             $db->commit();
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             $db->rollBack();
             throw $ex;
         }
-
     }
 
     public function installedAction() {
-        $this->view->breadcrumb = $this->view->translate("Instalação Concluida");
+        $this->view->breadcrumb = $this->view->translate("Installation completed");
         $this->view->hideMenu = true;
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-           ->from('peers', array('name', 'password'))
-           ->where("name = 'admin'");
+                ->from('peers', array('name', 'password'))
+                ->where("name = 'admin'");
 
         $stmt = $db->query($select);
         $secret = $stmt->fetch();
         $this->view->secret = $secret;
 
         $this->getRequest()->setActionName("installed");
-
     }
 
     public function configureAction() {
@@ -190,54 +185,50 @@ class InstallerController extends Zend_Controller_Action {
         $form->addSubForm($snep_form, "snep");
 
         $submit_button = $form->getElement('submit');
-        if( $this->view->error['error'] ) {
+        if ($this->view->error['error']) {
             $submit_button->setAttrib('disabled', true);
         }
 
 
-        if($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isPost()) {
             $form_isValid = $form->isValid($_POST);
 
             $snep_data = $form->getValue("snep");
-            if($snep_data['password'] !== $snep_data['confirmpassword']) {
+            if ($snep_data['password'] !== $snep_data['confirmpassword']) {
                 $snep_form->getElement('confirmpassword')->addError($this->view->translate("A confirmação de senha não é igual a senha informada"));
                 $form_isValid = false;
             }
 
-            if(!$asterisk_form->isErrors()) {
+            if (!$asterisk_form->isErrors()) {
                 $asterisk_data = $form->getValue("asterisk");
                 $asterisk = new Asterisk_AMI(null, $asterisk_data);
 
                 try {
                     $asterisk->connect();
-                }
-                catch(Asterisk_Exception_Auth $ex) {
+                } catch (Asterisk_Exception_Auth $ex) {
                     $asterisk_form->getElement('secret')->addError($this->view->translate("Usuário ou senha recusada pelo servidor Asterisk"));
                     $form_isValid = false;
-                }
-                catch(Asterisk_Exception_CantConnect $ex) {
+                } catch (Asterisk_Exception_CantConnect $ex) {
                     $asterisk_form->getElement('server')->addError($this->view->translate("Falha ao conectar: %s", $ex->getMessage()));
                     $form_isValid = false;
                 }
             }
 
-            if(!$database_form->isErrors()) {
+            if (!$database_form->isErrors()) {
                 $database_data = $form->getValue('database');
                 $db = Zend_Db::factory('Pdo_Mysql', $database_data);
                 try {
                     $db->getConnection();
-                }
-                catch(Zend_Db_Exception $ex) {
+                } catch (Zend_Db_Exception $ex) {
                     $database_form->getElement('hostname')->addError($this->view->translate("Falha ao conectar: %s", $ex->getMessage()));
                     $form_isValid = false;
                 }
             }
 
-            if($form_isValid) {
+            if ($form_isValid) {
                 try {
                     $this->install($db);
-                }
-                catch(Exception $ex) {
+                } catch (Exception $ex) {
                     $this->view->message = $ex->getMessage();
                     $this->renderScript("installer/error.phtml");
                 }
@@ -249,22 +240,21 @@ class InstallerController extends Zend_Controller_Action {
                 $config_file = "./includes/setup.conf";
                 $config = new Zend_Config_Ini($config_file, null, true);
 
-                $config->ambiente->ip_sock     = $_POST['asterisk']['server'];
-                $config->ambiente->user_sock   = $_POST['asterisk']['username'];
-                $config->ambiente->pass_sock   = $_POST['asterisk']['secret'];
+                $config->ambiente->ip_sock = $_POST['asterisk']['server'];
+                $config->ambiente->user_sock = $_POST['asterisk']['username'];
+                $config->ambiente->pass_sock = $_POST['asterisk']['secret'];
 
-                $config->ambiente->db->host              = $_POST['database']['hostname'];
-                $config->ambiente->db->username          = $_POST['database']['username'];
-                $config->ambiente->db->password          = $_POST['database']['password'];
-                $config->ambiente->db->dbname            = $_POST['database']['dbname'];
+                $config->ambiente->db->host = $_POST['database']['hostname'];
+                $config->ambiente->db->username = $_POST['database']['username'];
+                $config->ambiente->db->password = $_POST['database']['password'];
+                $config->ambiente->db->dbname = $_POST['database']['dbname'];
 
-                $writer = new Zend_Config_Writer_Ini(array('config'   => $config,
-                                                           'filename' => $config_file));
+                $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+                    'filename' => $config_file));
                 // Grava arquivo.
                 $writer->write();
-                
-                $this->_redirect("installer/installed");
 
+                $this->_redirect("installer/installed");
             }
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -27,16 +28,15 @@
  * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
  *
  */
-
 class Logs extends Snep_Inspector_Test {
 
     /**
      * Lista de arquivos a serem verificados
      * @var Array
      */
-    public $paths = array('ui.log'      => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          'agi.log'     => array('exists' => 1, 'writable' => 1, 'readable' => 1)
-        );
+    public $paths = array('ui.log' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
+        'agi.log' => array('exists' => 1, 'writable' => 1, 'readable' => 1)
+    );
 
     /**
      * Executa teste na criação do objeto.
@@ -64,38 +64,37 @@ class Logs extends Snep_Inspector_Test {
         $core_path = $config->system->path->log . "/";
 
         // Percorre array de arquivos.
-        foreach($this->paths as $path => $logs) {
+        foreach ($this->paths as $path => $logs) {
 
             // Verifica existência do arquivo.
-            if( ! file_exists( $core_path . $path ) ) {
+            if (!file_exists($core_path . $path)) {
                 // Não existindo concatena mensagem de erro.
-                Zend_Registry::get("Zend_Translate")->translate(" $core_path$path não existe.") ."\n";
+                Zend_Registry::get("Zend_Translate")->translate(" $core_path$path not exist.") . "\n";
                 // Seta erro como verdadeiro.
                 $result['logs']['error'] = 1;
 
                 // Existindo arquivo
-            }else{
+            } else {
 
                 // Verifica se existe exigência de verificação de escrita.
-                if($logs['writable']) {
-                    if( ! is_writable($core_path . $path) ) {
+                if ($logs['writable']) {
+                    if (!is_writable($core_path . $path)) {
                         // Não existindo concatena mensagem de erro.
-                        $result['logs']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path não possue permissão de escrita.") ."\n";
+                        $result['logs']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path does not have permition to be modified.") . "\n";
                         // Seta erro como verdadeiro.
                         $result['logs']['error'] = 1;
                     }
                 }
 
                 // Verifica se existe exigência de verificação de leitura
-                if($logs['readable']) {
-                    if( ! is_readable($core_path . $path) ) {
+                if ($logs['readable']) {
+                    if (!is_readable($core_path . $path)) {
                         // Não existindo concatena mensagem de erro.
-                        $result['logs']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path não possue permissão de leitura.") ."\n";
+                        $result['logs']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path does not have permition to be viewed.") . "\n";
                         // Seta erro como verdadeiro.
                         $result['logs']['error'] = 1;
                     }
                 }
-
             }
 
             // Transforma newline em br
@@ -104,10 +103,10 @@ class Logs extends Snep_Inspector_Test {
             // Retorna Array
             return $result['logs'];
         }
-
     }
 
     public function getTestName() {
-        return Zend_Registry::get("Zend_Translate")->translate("Arquivos de log");
+        return Zend_Registry::get("Zend_Translate")->translate("Log Files");
     }
+
 }

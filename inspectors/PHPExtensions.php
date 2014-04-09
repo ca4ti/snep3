@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -34,9 +35,9 @@ class PHPExtensions extends Snep_Inspector_Test {
      * @var Array
      */
     public $extensions = array('pdo_mysql',
-                               'gd',
-                               'json'
-        );
+        'gd',
+        'json'
+    );
 
     /**
      * Executa teste na criação do objeto.
@@ -57,24 +58,24 @@ class PHPExtensions extends Snep_Inspector_Test {
         $result['extension']['message'] = '';
 
         // Percorre lista de extensões.
-        foreach($this->extensions as $extension) {
-            if( ! extension_loaded( $extension ) ) {
+        foreach ($this->extensions as $extension) {
+            if (!extension_loaded($extension)) {
                 // Não estando carregada e extensão, concatena mensagem de erro.
-                $result['extension']['message'] .= Zend_Registry::get("Zend_Translate")->translate("A extensão $extension não está presente no sistema, verifique. ") ."\n";
+                $result['extension']['message'] .= Zend_Registry::get("Zend_Translate")->translate("The extension $extension not present in the system, verify. ") . "\n";
                 // Seta erro como verdadeiro.
                 $result['extension']['error'] = 1;
             }
         }
 
         // Transforma newline em br
-        $result['extension']['message'] = $result['extension']['message'] ;
+        $result['extension']['message'] = $result['extension']['message'];
 
         // Retorna Array
         return $result['extension'];
     }
 
     public function getTestName() {
-        return Zend_Registry::get("Zend_Translate")->translate("Extensões PHP");
+        return Zend_Registry::get("Zend_Translate")->translate("Extension PHP");
     }
-    
+
 }

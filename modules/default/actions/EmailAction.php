@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ação que envia email quando executada.
  *
@@ -11,6 +12,20 @@
  * @author    Henrique Grolli Bassotto
  */
 class EmailAction extends PBX_Rule_Action {
+
+    /**
+     * @var Internacionalização
+     */
+    private $i18n;
+
+    /**
+     * Construtor
+     * @param array $config configurações da ação
+     */
+    public function __construct() {
+        $this->i18n = Zend_Registry::get("i18n");
+    }
+
     /**
      * Retorna o nome da Ação. Geralmente o nome da classe.
      * @return Nome da Ação
@@ -40,33 +55,41 @@ class EmailAction extends PBX_Rule_Action {
      * @return String XML
      */
     public function getConfig() {
-        $to = (isset($this->config['to']))?"<value>{$this->config['to']}</value>":"";
-        $message = (isset($this->config['message']))?"<value>{$this->config['message']}</value>":"";
-        $subject = (isset($this->config['subject']))?"<value>{$this->config['subject']}</value>":"";
-        $info = (isset($this->config['info']))?"<value>{$this->config['info']}</value>":"";
+        $i18n = $this->i18n;
+        $to = (isset($this->config['to'])) ? "<value>{$this->config['to']}</value>" : "";
+        $message = (isset($this->config['message'])) ? "<value>{$this->config['message']}</value>" : "";
+        $subject = (isset($this->config['subject'])) ? "<value>{$this->config['subject']}</value>" : "";
+        $info = (isset($this->config['info'])) ? "<value>{$this->config['info']}</value>" : "";
+
+        $subj = $i18n->translate("Subject");
+        $dst = $i18n->translate("Addressee");
+        $dstdesc = $i18n->translate("E-mail of addressee");
+        $msg = $i18n->translate("Message");
+        $information = $i18n->translate("Want to display information of source and destination of the call in the body of the email?");
+
         return <<<XML
 <params>
     <string>
         <id>subject</id>
-        <label>Assunto</label>
+        <label>$subj</label>
         <description></description>
         $subject
     </string>
     <email>
         <id>to</id>
-        <label>Destinatário</label>
-        <description>Endereço de email do destinatário</description>
+        <label>$dst</label>
+        <description>$dstdesc</description>
         $to
     </email>
     <text>
         <id>message</id>
-        <label>Mensagem</label>
+        <label>$msg</label>
         $message
     </text>
     <boolean>
     <id>info</id>
     <default>false</default>
-    <label>Deseja exibir informação de origem e destino da chamada no corpo do e-mail?</label>
+    <label>$information</label>
     $info    
     </boolean>
 </params>
@@ -80,17 +103,18 @@ XML;
      */
     public function execute($asterisk, $request) {
         $log = Zend_Registry::get('log');
-        
+
         $mail = new Zend_Mail("utf8");
         $mail->setFrom("Snep PBX");
         $mail->setSubject($this->config['subject']);
         $mail->addTo($this->config['to']);
-        if($this->config['info'] != 'false'){
-        $mail->setBodyText($this->config['message'] . "\n\nInformações da chamada:\nNúmero de origem: " . $request->getOriginalCallerid() . "\nNúmero de destino: " . $request->destino);
-        }else{
-        $mail->setBodyText($this->config['message']);    
+        if ($this->config['info'] != 'false') {
+            $mail->setBodyText($this->config['message'] . "\n\nInformações da chamada:\nNúmero de origem: " . $request->getOriginalCallerid() . "\nNúmero de destino: " . $request->destino);
+        } else {
+            $mail->setBodyText($this->config['message']);
         }
         $log->info("Enviando email para " . $this->config['to']);
         $mail->send();
     }
+
 }

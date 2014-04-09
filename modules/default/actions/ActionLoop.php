@@ -87,8 +87,8 @@ class ActionLoop extends PBX_Rule_Action {
         $loopcount  = (isset($this->config['loopcount']))?"<value>{$this->config['loopcount']}</value>":"";
         $actionindex = (isset($this->config['actionindex']))?"<value>{$this->config['actionindex']}</value>":"";
 
-        $lbl_loopcount = $i18n->translate("Repeat:");
-        $lbl_actionindex = $i18n->translate("Action index:");
+        $lbl_loopcount = $i18n->translate("Repeat");
+        $lbl_actionindex = $i18n->translate("Action index");
 
         $unit = $i18n->translate("times");
         return <<<XML

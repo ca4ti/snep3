@@ -95,7 +95,7 @@ class Cadeado extends PBX_Rule_Action {
         $senha = (isset($this->config['senha']))?"<value>{$this->config['senha']}</value>":"";
         $ask_peer = isset($this->config['ask_peer']) ? "<value>{$this->config['ask_peer']}</value>":"";
 
-        $lbl_senha = $i18n->translate("Static Password:");
+        $lbl_senha = $i18n->translate("Static Password");
         $lbl_desc = $i18n->translate("Leave blank to use extensions password.");
         $lbl_ask_peer = $i18n->translate("Replace source extension with requested");
         return <<<XML

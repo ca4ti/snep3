@@ -1,5 +1,17 @@
 --
--- Estrutura da tabela `profiles`
+-- Table structure for table `contacts_phone`
+--
+CREATE TABLE IF NOT EXISTS `contacts_phone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contact_id` char(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contact_id` (`contact_id`),
+  CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `profiles`
 --
 CREATE TABLE IF NOT EXISTS `profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -10,7 +22,18 @@ CREATE TABLE IF NOT EXISTS `profiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `permissions`
+--
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(11) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+--
+-- Table structure for table `users`
 --
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -26,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura da tabela `profiles_permissions`
+-- Table structure for table `profiles_permissions`
 --
 CREATE TABLE IF NOT EXISTS `profiles_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -41,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `profiles_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura da tabela `users_permissions`
+-- Table structure for table `users_permissions`
 --
 CREATE TABLE IF NOT EXISTS `users_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -56,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `users_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura da tabela `binds`
+-- Table structure for table `binds`
 --
 CREATE TABLE IF NOT EXISTS `binds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -72,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `binds` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura da tabela `password_recovery`
+-- Table structure for table `password_recovery`
 --
 CREATE TABLE IF NOT EXISTS `password_recovery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -85,12 +108,11 @@ CREATE TABLE IF NOT EXISTS `password_recovery` (
   CONSTRAINT `password_recovery_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-drop table queue_log;
-
 --
--- Estrutura da tabela `queue_log`
+-- Table structure for table `queue_log`
 --
+DROP TABLE queue_log;
+
 CREATE TABLE IF NOT EXISTS `queue_log` (
   id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   time char(26) default NULL,
@@ -106,19 +128,11 @@ CREATE TABLE IF NOT EXISTS `queue_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Estrutura da tabela `contacts_phone`
---
-CREATE TABLE IF NOT EXISTS `contacts_phone` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contact_id` char(11) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `contact_id` (`contact_id`),
-  CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
-
+ALTER TABLE peers ADD COLUMN directmedia varchar(10);
+ALTER TABLE peers ADD COLUMN lastms integer(11) NOT NULL;
+ALTER TABLE contacts_names ADD COLUMN created datetime NOT NULL;
+ALTER TABLE contacts_names ADD COLUMN updated datetime NOT NULL;
+ALTER TABLE contacts_names DROP COLUMN phone_1;
+ALTER TABLE contacts_names DROP COLUMN cell_1;

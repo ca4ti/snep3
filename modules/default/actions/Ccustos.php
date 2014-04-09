@@ -29,7 +29,11 @@
 class Ccustos extends PBX_Rule_Action {
 
     private $i18n;
-
+    
+    /**
+     * Construtor
+     * @param array $config configurações da ação
+     */
     public function __construct() {
         $this->i18n = Zend_Registry::get("i18n");
     }

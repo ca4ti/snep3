@@ -28,7 +28,7 @@
 class BillingController extends Zend_Controller_Action {
 
     /**
-     * List all Billing
+     * indexAction - List all Billing
      */
     public function indexAction() {
 
@@ -100,7 +100,6 @@ class BillingController extends Zend_Controller_Action {
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/queues.xml"));
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
 
-
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         foreach (Snep_Carrier_Manager::getAll() as $_carrier) {
@@ -124,7 +123,6 @@ class BillingController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
 
             $form_isValid = true;
-
             $this->view->error = array();
 
             if (!preg_match('/[0-9]+$/', $dados['ddd']) || $dados['ddd'] == "") {
@@ -191,7 +189,6 @@ class BillingController extends Zend_Controller_Action {
 
                 $this->_redirect($this->getRequest()->getControllerName());
             }
-
             $this->view->dados = ( isset($dados) ? $dados : null);
         }
     }
@@ -203,23 +200,20 @@ class BillingController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Carrier"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
-
         $id = $this->_request->getParam("id");
-
         $_carriers = Snep_Carrier_Manager::getAll();
+
         foreach ($_carriers as $_carrier) {
             $carriers[$_carrier['codigo']] = $_carrier['nome'];
         }
+
         $this->view->carriers = $carriers;
-
         $this->view->Carrier = Snep_Billing_Manager::get($id);
-
         $this->view->billingValues = Snep_Billing_Manager::getBillingValues($id);
 
         $_estado = Snep_Billing_Manager::getStates();
@@ -248,7 +242,7 @@ class BillingController extends Zend_Controller_Action {
                         }
 
                         Snep_Billing_Manager::editBilling($id, $values);
-                        
+
                         if (class_exists("Loguser_Manager")) {
 
                             $new = Snep_Billing_Manager::getTarifaLog($id);
@@ -264,7 +258,6 @@ class BillingController extends Zend_Controller_Action {
 
                         Snep_Billing_Manager::addBilling($id, $values);
 
-                        
                         if (class_exists("Loguser_Manager")) {
 
                             $new = Snep_Billing_Manager::getTarifaLog($id);
@@ -275,7 +268,6 @@ class BillingController extends Zend_Controller_Action {
                     }
                 }
             }
-
             $this->_redirect($this->getRequest()->getControllerName());
         }
     }
@@ -287,8 +279,7 @@ class BillingController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Billing"),
-                    $this->view->translate("Delete")
-        ));
+                    $this->view->translate("Delete")));
 
         $id = $this->_request->getParam('id');
 
@@ -302,7 +293,6 @@ class BillingController extends Zend_Controller_Action {
         }
 
         Snep_Billing_Manager::remove($id);
-
         $this->_redirect($this->getRequest()->getControllerName());
     }
 
@@ -325,7 +315,6 @@ class BillingController extends Zend_Controller_Action {
                 $states[] = $state['name'];
             }
         }
-
         echo Zend_Json::encode($states);
     }
 

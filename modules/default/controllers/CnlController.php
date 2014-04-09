@@ -16,17 +16,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 ini_set("max_execution_time", 180);
 
+/**
+ * Cnl Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class CnlController extends Zend_Controller_Action {
 
+    /**
+     * indexAction
+     * @throws Exception
+     * @throws ErrorException
+     */
     public function indexAction() {
 
-       $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Configure"),
-            $this->view->translate("CNL Update")
-        ));
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Configure"),
+                    $this->view->translate("CNL Update")));
 
         $config = Zend_Registry::get('config');
         $this->view->pathweb = $config->system->path->web;
@@ -39,26 +49,25 @@ class CnlController extends Zend_Controller_Action {
         $result = $stmt->fetchAll();
 
         // insert state data
-        if( count($result ) < 26 ) {
+        if (count($result) < 26) {
 
-            $brStates = array( 'AC'=>'Acre', 'AL'=>'Alagoas','AM'=>'Amazonas','AP'=>'Amapá',
-                    'BA'=>'Bahia','CE'=>'Ceará','DF'=>'Distrito Federal',
-                    'ES'=>'Espírito Santo','GO'=>'Goiás','MA'=>'Maranhão',
-                    'MG'=>'Minas Gerais','MS'=>'Mato Grosso do Sul',
-                    'MT'=>'Mato Grosso','PA'=>'Pará','PB'=>'Paraíba',
-                    'PE'=>'Pernambuco','PI'=>'Piauí','PR'=>'Paraná','RJ'=>'Rio de Janeiro',
-                    'RN'=>'Rio Grande do Norte','RO'=>'Rondônia','RR'=>'Roraima',
-                    'RS'=>'Rio Grande do Sul','SC'=>'Santa Catarina','SE'=>'Sergipe',
-                    'SP'=>'São Paulo', 'TO'=>'Tocantins'  );
+            $brStates = array('AC' => 'Acre', 'AL' => 'Alagoas', 'AM' => 'Amazonas', 'AP' => 'Amapá',
+                'BA' => 'Bahia', 'CE' => 'Ceará', 'DF' => 'Distrito Federal',
+                'ES' => 'Espírito Santo', 'GO' => 'Goiás', 'MA' => 'Maranhão',
+                'MG' => 'Minas Gerais', 'MS' => 'Mato Grosso do Sul',
+                'MT' => 'Mato Grosso', 'PA' => 'Pará', 'PB' => 'Paraíba',
+                'PE' => 'Pernambuco', 'PI' => 'Piauí', 'PR' => 'Paraná', 'RJ' => 'Rio de Janeiro',
+                'RN' => 'Rio Grande do Norte', 'RO' => 'Rondônia', 'RR' => 'Roraima',
+                'RS' => 'Rio Grande do Sul', 'SC' => 'Santa Catarina', 'SE' => 'Sergipe',
+                'SP' => 'São Paulo', 'TO' => 'Tocantins');
 
-            foreach($brStates as $uf => $state) {
+            foreach ($brStates as $uf => $state) {
 
                 $db->beginTransaction();
                 try {
                     $_state = array('cod' => $uf, 'name' => $state);
                     $db->insert('ars_estado', $_state);
                     $db->commit();
-
                 } catch (Exception $ex) {
                     $db->rollBack();
                     throw $ex;
@@ -73,14 +82,13 @@ class CnlController extends Zend_Controller_Action {
         $element = new Zend_Form_Element_File('cnl');
         $element->setLabel($this->view->translate('CNL File'))
                 ->setDestination('/tmp/')
-                ->setRequired(true) ;
+                ->setRequired(true);
 
-        $element->addValidator('Extension', false, array('bz2','tar.bz2'));
+        $element->addValidator('Extension', false, array('bz2', 'tar.bz2'));
         $element->removeDecorator('DtDdWrapper');
         $form->addElement($element, 'cnl');
 
         $form->getElement("submit")->setLabel($this->view->translate("Save"));
-
         $form->setAttrib('enctype', 'multipart/form-data');
 
         $this->view->valid = true;
@@ -96,9 +104,7 @@ class CnlController extends Zend_Controller_Action {
                 $adapter = new Zend_File_Transfer_Adapter_Http();
 
                 if ($adapter->isValid()) {
-
                     $adapter->receive();
-
                     $fileName = $adapter->getFileName();
                     exec("tar xjvf {$fileName} -C /tmp");
 
@@ -114,16 +120,12 @@ class CnlController extends Zend_Controller_Action {
                     Snep_Cnl::delOperadora();
 
                     foreach ($data as $carrier => $id) {
-
-                            Snep_Cnl::addOperadora($id, $carrier);
+                        Snep_Cnl::addOperadora($id, $carrier);
                     }
 
                     foreach ($cnl as $data => $id) {
-
                         foreach ($id as $state => $es) {
-
                             foreach ($es as $ddd => $d) {
-
                                 foreach ($d as $city => $pre) {
 
                                     $cityId = Snep_Cnl::addCidade($city);
@@ -138,9 +140,9 @@ class CnlController extends Zend_Controller_Action {
                     }
                 } else {
 
-                    throw new ErrorException( $this->view->translate("File format is not valid") );
+                    throw new ErrorException($this->view->translate("File format is not valid"));
                 }
-                $this->_redirect ($this->getRequest()->getControllerName());
+                $this->_redirect($this->getRequest()->getControllerName());
             }
         }
         $this->view->form = $form;

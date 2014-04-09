@@ -33,8 +33,7 @@ class ContactGroupsController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Contact Group")
-        ));
+                    $this->view->translate("Contact Group")));
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
@@ -84,8 +83,7 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
 
@@ -129,15 +127,13 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
 
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contact_groups.xml"));
-
         $group = Snep_ContactGroups_Manager::get($id);
         $form->getElement('group')->setValue($group['name']);
 
@@ -145,7 +141,6 @@ class ContactGroupsController extends Zend_Controller_Action {
         foreach (Snep_ContactGroups_Manager::getGroupContacts($id) as $contact) {
             $groupContacts[$contact['id']] = "{$contact['name']} ({$contact['group']})";
         }
-
 
         $noGroupContacts = array();
         foreach (Snep_Contacts_Manager::getAll() as $contact) {
@@ -175,7 +170,6 @@ class ContactGroupsController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-
         $this->view->form = $form;
     }
 
@@ -186,8 +180,7 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
-                    $this->view->translate("Delete")
-        ));
+                    $this->view->translate("Delete")));
 
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
@@ -211,16 +204,12 @@ class ContactGroupsController extends Zend_Controller_Action {
             }
 
             $contacts = Snep_ContactGroups_Manager::getGroupContacts($id);
-
             if (count($contacts) > 0) {
-
                 $this->_redirect('default/contact-groups/migration/id/' . $id);
             } else {
-
                 $this->view->message = $this->view->translate("The group will be removed. After that you can't go back.");
                 $form = new Snep_Form();
                 $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/remove/id/' . $id . '/confirm/1');
-
                 $this->view->form = $form;
             }
         }
@@ -233,8 +222,7 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
-                    $this->view->translate("Migrate Contacts")
-        ));
+                    $this->view->translate("Migrate Contacts")));
 
         $id = $this->_request->getParam('id');
 

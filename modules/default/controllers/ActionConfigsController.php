@@ -16,13 +16,17 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 class ActionConfigsController extends Zend_Controller_Action {
 
+    /**
+     * indexAction
+     */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Routing"),
-            $this->view->translate("Default Configs")
+                    $this->view->translate("Routing"),
+                    $this->view->translate("Default Configs")
         ));
 
         $actionsDisp = PBX_Rule_Actions::getInstance();
@@ -41,6 +45,10 @@ class ActionConfigsController extends Zend_Controller_Action {
         $this->view->infoAcoes = $infoActions;
     }
 
+    /**
+     * editAction
+     * @throws PBX_Exception_BadArg
+     */
     public function editAction() {
 
         $idAction = $this->getRequest()->getParam('id');
@@ -50,7 +58,7 @@ class ActionConfigsController extends Zend_Controller_Action {
         } else {
             $action = new $idAction();
             $registry = PBX_Registry::getInstance($idAction);
-            
+
 
             if ($action->getDefaultConfigXML() != "") {
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
@@ -70,19 +78,17 @@ class ActionConfigsController extends Zend_Controller_Action {
                         if (!key_exists($key, $newConfig)) {
                             unset($registry->{$key});
                         }
-                    }              
+                    }
                     $this->view->success = true;
-
                 }
-                
-                $action->setDefaultConfig( $registry->getAllValues() );
+
+                $action->setDefaultConfig($registry->getAllValues());
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
                 $this->view->breadcrumb = $this->view->translate("Regras de Negócio » Configurações Padrão » " . $action->getName());
                 $actionForm = $actionConfig->getForm();
                 $actionForm->getElement('cancel')->setAttrib("onclick", "location.href='{$this->getFrontController()->getBaseUrl()}/action-configs/'");
                 $actionForm->getElement('cancel')->setLabel('Voltar');
                 $this->view->form = $actionForm;
-                
             } else {
                 throw new PBX_Exception_BadArg("No Configurable Action");
             }

@@ -35,8 +35,7 @@ class CostCenterController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Cost Center")
-        ));
+                    $this->view->translate("Cost Center")));
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
@@ -93,11 +92,11 @@ class CostCenterController extends Zend_Controller_Action {
      * Add new Cost Center's
      */
     public function addAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Cost Center"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/cost_center.xml"));
@@ -106,7 +105,6 @@ class CostCenterController extends Zend_Controller_Action {
 
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
-
             $newId = Snep_CostCenter_Manager::get($dados['id']);
 
             if (count($newId) > 1) {
@@ -128,7 +126,6 @@ class CostCenterController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-
         $this->view->form = $form;
     }
 
@@ -136,6 +133,7 @@ class CostCenterController extends Zend_Controller_Action {
      * Remove Cost Center's
      */
     public function removeAction() {
+
         $id = $this->_request->getParam('id');
 
         //log-user
@@ -170,7 +168,6 @@ class CostCenterController extends Zend_Controller_Action {
 
         header('Content-type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
         echo $csv_data;
     }
 
@@ -178,12 +175,12 @@ class CostCenterController extends Zend_Controller_Action {
      * Edit Cost Center's
      */
     public function editAction() {
+
         $id = $this->_request->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Cost Center"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $costCenter = Snep_CostCenter_Manager::get($id);
 
@@ -196,7 +193,6 @@ class CostCenterController extends Zend_Controller_Action {
         $form->getElement('type')->setValue($costCenter['tipo']);
 
         if ($this->_request->getPost()) {
-
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
@@ -215,11 +211,9 @@ class CostCenterController extends Zend_Controller_Action {
                     $add = Snep_CostCenter_Manager::get($id);
                     Snep_CostCenter_Manager::insertLogCcustos("NEW", $add);
                 }
-
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-
         $this->view->form = $form;
     }
 

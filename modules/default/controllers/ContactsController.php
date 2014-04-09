@@ -33,8 +33,7 @@ class ContactsController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Contacts")
-        ));
+                    $this->view->translate("Contacts")));
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
@@ -44,7 +43,6 @@ class ContactsController extends Zend_Controller_Action {
                 ->join(array("p" => "contacts_phone"), 'n.id = p.contact_id')
                 ->group("n.id")
                 ->order('nome');
-
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
@@ -103,12 +101,10 @@ class ContactsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contacts.xml"));
-
         $form->getElement('id')->setValue(Snep_Contacts_Manager::getLastId())->setAttrib('disabled', true);
 
         $_allGroups = Snep_ContactGroups_Manager::getAll();
@@ -135,7 +131,6 @@ class ContactsController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
 
             $_POST['id'] = Snep_Contacts_Manager::getLastId();
-
             $form_isValid = $form->isValid($_POST);
 
             if (empty($_POST['group'])) {
@@ -149,7 +144,6 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             if ($form_isValid) {
-
                 Snep_Contacts_Manager::add($_POST);
                 $numbers = explode(",", $_POST['phoneValue']);
                 foreach ($numbers as $key => $phone) {
@@ -171,14 +165,11 @@ class ContactsController extends Zend_Controller_Action {
      */
     protected function getForm($form) {
 
-
         $phoneField = new Snep_Form_Element_Html("contacts/elements/phone.phtml", "phone", false);
         $phoneField->setLabel($this->view->translate("Phone"));
         $phoneField->setOrder(9);
         $form->addElement($phoneField);
-
         $this->form = $form;
-
         return $this->form;
     }
 
@@ -186,11 +177,11 @@ class ContactsController extends Zend_Controller_Action {
      * Edit Contact
      */
     public function editAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
 
@@ -203,10 +194,8 @@ class ContactsController extends Zend_Controller_Action {
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/contacts.xml"));
-
         $form->getElement('id')->setValue($contact['id'])->setAttrib('disabled', true);
         $form->getElement('name')->setValue($contact['name']);
-
         $form = $this->getForm($form);
 
         $_allGroups = Snep_ContactGroups_Manager::getAll();
@@ -273,6 +262,7 @@ class ContactsController extends Zend_Controller_Action {
      * Remove a Contact
      */
     public function removeAction() {
+
         $id = $this->_request->getParam('id');
 
         Snep_Contacts_Manager::removePhone($id);
@@ -284,18 +274,18 @@ class ContactsController extends Zend_Controller_Action {
      * Import contacts from CSV file
      */
     public function importAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
-                    $this->view->translate("Import CSV")
-        ));
+                    $this->view->translate("Import CSV")));
+
         $this->view->message = $this->view->translate("The file must be separated by commas. Header is optional and columns can be associated in the next screen.");
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form();
         $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/csv/');
         $form->addElement(new Zend_Form_Element_File('file'));
-
         $this->view->form = $form;
     }
 
@@ -348,10 +338,7 @@ class ContactsController extends Zend_Controller_Action {
 
             $form->addElement($select);
 
-
-
             $this->view->form = $form;
-
             $this->renderScript("contacts/select-multi-remove.phtml");
         }
     }
@@ -360,38 +347,34 @@ class ContactsController extends Zend_Controller_Action {
      * Associate fields between database and csv file
      */
     public function csvAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
                     $this->view->translate("Import CSV"),
-                    $this->view->translate("Column Association"),
-        ));
-        $adapter = new Zend_File_Transfer_Adapter_Http();
+                    $this->view->translate("Column Association")));
 
+        $adapter = new Zend_File_Transfer_Adapter_Http();
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         if (!$adapter->isValid()) {
             $this->view->invalid = true;
         } else {
-
             $this->view->invalid = false;
             $adapter->receive();
 
             $fileName = $adapter->getFileName();
-
             $handle = fopen($fileName, "r");
             $csv = array();
             $row_number = 2;
             $first_row = explode(",", str_replace("\n", "", fgets($handle, 4096)));
             $column_count = count($first_row);
-
             $csv[] = $first_row;
 
             while (!feof($handle)) {
                 $line = fgets($handle, 4096);
                 if (strpos($line, ",")) {
                     $row = explode(",", preg_replace("/[^a-zA-Z0-9,\._\*#]/", "", $line));
-
 
                     if (count($row) != $column_count) {
                         throw new ErrorException($this->view->translate("Invalid column count on line %d", $row_number));
@@ -437,8 +420,7 @@ class ContactsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contacts"),
-                    $this->view->translate("Export CSV")
-        ));
+                    $this->view->translate("Export CSV")));
 
         if ($this->_request->getPost()) {
 
@@ -483,7 +465,6 @@ class ContactsController extends Zend_Controller_Action {
 
             header('Content-type: application/octet-stream');
             header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
             echo $csv_data;
         } else {
 
@@ -495,13 +476,11 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             $form = new Snep_Form();
-
             $select = new Zend_Form_Element_Select('group');
             $select->addMultiOptions($contactGroups);
 
             $form->addElement($select);
             $this->view->form = $form;
-
             $this->renderScript("contacts/export.phtml");
         }
     }

@@ -18,7 +18,11 @@
  */
 
 /**
- * controller  Conference Rooms.
+ * Conference Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
  */
 class ConferenceRoomsController extends Zend_Controller_Action {
 
@@ -43,11 +47,9 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Conference Rooms")
-        ));
+                    $this->view->translate("Conference Rooms")));
 
         $config = Zend_Registry::get('config');
-
         $conf_app = $config->ambiente->conference_app;
 
         for ($i = 901; $i <= 915; $i++) {
@@ -63,7 +65,6 @@ class ConferenceRoomsController extends Zend_Controller_Action {
         exec('cat /etc/asterisk/snep/snep-authconferences.conf | grep "^[9][0-1][0-9]"', $senhas, $err);
 
         foreach ($senhas as $value) {
-
             $line = explode(":", $value);
             $salas[$line[0]]["authenticate"] = $line[1];
             $salas[$line[0]]["usa_auth"] = True;
@@ -73,22 +74,17 @@ class ConferenceRoomsController extends Zend_Controller_Action {
         exec("cat /etc/asterisk/snep/snep-conferences.conf | grep 'exten => [9][0-1][0-9],n,Set(gravacao' | cut -d '>' -f2", $gravacoes, $err);
 
         foreach ($gravacoes as $gravacao_ => $gravacao) {
-
             $item = explode(",", $gravacao);
             $item_ = trim($item[0]);
-
             $salas[$item_]["rec"] = true;
         }
-
 
         exec("cat /etc/asterisk/snep/snep-conferences.conf | grep 'exten => [9][0-1][0-9]' | cut -d '>' -f2", $out, $err);
 
         foreach ($out as $key => $value) {
-
             $room = explode(",", $value);
 
             if (isset($room[0])) {
-
                 $sala = trim($room[0]);
                 $salas[$sala]["status"] = 1;
 
@@ -96,30 +92,25 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             }
 
             if (strpos($room[2], "accountcode") > 0) {
-
                 $ccustos = trim(substr($room[2], strpos($room[2], "=") + 1, -1));
                 $salas[$sala]["ccustos"] = $ccustos;
             }
         }
 
-
         $this->view->conferenceRooms = $salas;
         $this->view->costCenter = Snep_CostCenter_Manager::getAll();
 
         if ($this->getRequest()->getPost()) {
-
             $file_conf = "/etc/asterisk/snep/snep-conferences.conf";
             $file_auth = "/etc/asterisk/snep/snep-authconferences.conf";
 
             if (!is_writable($file_conf) || !is_writable($file_auth)) {
-
                 throw new ErrorException($this->view->translate("File does not have editing permission"));
                 return False;
             }
 
             $linhas_conf = file($file_conf);
             $linhas_auth = file($file_auth);
-
             $authenticate = $_POST['authenticate'];
 
             for ($i = 901; $i <= 915; $i++) {
@@ -180,7 +171,6 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentConfe .= "\n";
 
             foreach ($activate as $idActivate => $valueActivate) {
-
                 foreach ($password as $idPassword => $valuePassword) {
 
                     if ($valuePassword <> "" && $idActivate == $idPassword) {
@@ -192,12 +182,9 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                     }
                 }
 
-
-
                 foreach ($costCenter as $idCostCenter => $valueCostCenter) {
 
                     if ($idActivate == $idCostCenter) {
-
                         $contentConfe .= ";SNEP(" . $idActivate . "): Room added by system\n";
                         $contentConfe .= "exten => " . $idActivate . ",1,Set(CHANNEL(language)=pt_BR)\n";
                     }
@@ -205,13 +192,11 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                     foreach ($password as $idPassword => $valuePassword) {
 
                         if ($idActivate == $idCostCenter && $idActivate == $idPassword && $valuePassword <> "") {
-
                             $contentConfe .= "exten => " . $idActivate . ",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
                         }
                     }
 
                     if ($idActivate == $idCostCenter) {
-
 
                         $contentConfe .= "exten => " . $idActivate . ",n,Set(CDR(accountcode)=" . $valueCostCenter . ")\n";
                         $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";
@@ -258,7 +243,6 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
             $asterisk = PBX_Asterisk_AMI::getInstance();
             $asterisk->Command("module reload");
-
             $this->_redirect($this->getRequest()->getControllerName());
         }
     }

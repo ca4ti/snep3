@@ -28,13 +28,14 @@ require_once 'Zend/Controller/Action.php';
  */
 class AuthController extends Zend_Controller_Action {
 
+    /**
+     * loginAction - Login on system
+     */
     public function loginAction() {
         $this->view->headTitle($this->view->translate("Login"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Login")
-        ));
+                    $this->view->translate("Login")));
         $this->view->hideMenu = true;
-
         $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
         $config = Zend_Registry::get('config');
@@ -50,18 +51,17 @@ class AuthController extends Zend_Controller_Action {
             $this->view->msgclass = 'sucess';
         }
 
-        // Não precisamos fazer login se ja estamos logados
+        // If you are already logged
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
             $this->_redirect('/');
         }
 
         if ($this->_request->isPost()) {
-            // Filtrando informações do usuário
+            // Filter information of user
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
             $password = $this->_request->getPost('password');
-
 
             if (empty($username)) {
                 $this->view->message = $this->view->translate("Please enter a username");
@@ -69,24 +69,17 @@ class AuthController extends Zend_Controller_Action {
             } else {
                 $db = Zend_Registry::get('db');
 
-                // criando adaptador de autorização
                 $authAdapter = new Zend_Auth_Adapter_DbTable($db);
-
-                // informações das tabelas
                 $authAdapter->setTableName('users');
                 $authAdapter->setIdentityColumn('name');
                 $authAdapter->setCredentialColumn('password');
-
-                // Valores vindos do usuário como credencial
                 $authAdapter->setIdentity($username);
                 $authAdapter->setCredential(md5($password));
 
-                // autenticação
+                // Autentication
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
 
-
-                // tratando resultados
                 switch ($result->getCode()) {
                     case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
                     case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
@@ -96,10 +89,9 @@ class AuthController extends Zend_Controller_Action {
                     case Zend_Auth_Result::SUCCESS:
                         $auth->getStorage()->write($result->getIdentity());
 
-
                         $extension = $db->query("SELECT id, name FROM users WHERE name='$username'")->fetchObject();
 
-                        /* Mantendo antigo verifica.php no ar */
+                        // Retaining the old verifica.php 
                         $_SESSION['id_user'] = $extension->id;
                         $_SESSION['name_user'] = $username;
                         $_SESSION['active_user'] = $extension->name;
@@ -123,9 +115,7 @@ class AuthController extends Zend_Controller_Action {
 
         $this->view->headTitle($this->view->translate("Password Recovery"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Password Recovery")
-        ));
-
+                    $this->view->translate("Password Recovery")));
         $this->view->hideMenu = true;
 
         if (isset($_GET['param'])) {
@@ -136,7 +126,6 @@ class AuthController extends Zend_Controller_Action {
         if ($this->_request->isPost()) {
 
             $f = new Zend_Filter_StripTags();
-
             $data = array();
             $data['user'] = $f->filter($this->_request->getPost('user'));
             $data['password'] = $f->filter($this->_request->getPost('password'));
@@ -173,14 +162,15 @@ class AuthController extends Zend_Controller_Action {
             }
         }
     }
-
+    
+    /**
+     * refefineAction - Redefine password
+     */
     public function redefineAction() {
 
         $this->view->headTitle($this->view->translate("Password Recovery"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Password Recovery")
-        ));
-
+                    $this->view->translate("Password Recovery")));
         $this->view->hideMenu = true;
         $this->view->msgclass = 'failure';
 
@@ -190,7 +180,6 @@ class AuthController extends Zend_Controller_Action {
             $username = $f->filter($this->_request->getPost('user'));
 
             $user = Snep_Auth_Manager::getUser($username);
-
             $date = date("Y-m-d H:i:s");
 
             if ($user == false) {
@@ -203,21 +192,22 @@ class AuthController extends Zend_Controller_Action {
 
                 $code = $user['code'];
                 $expiration = date('d/m/Y G:i:s', strtotime($user['expiration']));
-
                 $config = Zend_Registry::get('config');
                 $client = $config->ambiente->emp_nome;
-
                 $msg = $this->view->translate("You asked for resetting your password the user <b>$username</b> on PABX <b>$client</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>" . $code . "</b></font><br>Your code will expire on: " . $expiration . "<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
                 $subject = $this->view->translate("Redefinition password - SNEP");
 
                 Snep_Auth_Manager::sendEmail($user, $msg, $subject);
                 $mail = base64_encode($user['email']);
-
                 $this->_redirect('/auth/recuperation?param=' . $mail);
             }
         }
     }
-
+    
+    /**
+     * aleatorio - Riding a random code
+     * @return <string>
+     */
     public function aleatorio() {
         $key = "";
         $valor = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
@@ -227,7 +217,10 @@ class AuthController extends Zend_Controller_Action {
         }
         return $key;
     }
-
+    
+    /**
+     * logoutAction - Logoff on system
+     */
     public function logoutAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             Zend_Auth::getInstance()->clearIdentity();

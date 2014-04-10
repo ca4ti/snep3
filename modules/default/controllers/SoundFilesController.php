@@ -16,6 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once 'Snep/Inspector.php';
+
 /**
  * Sound Files Controller
  *
@@ -24,19 +26,16 @@
  * @copyright Copyright (c) 2010 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti
  */
-require_once 'Snep/Inspector.php';
-
 class SoundFilesController extends Zend_Controller_Action {
 
     /**
-     * List all sound files
+     * indexAction - List all sound files
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Configure"),
-                    $this->view->translate("Sound Files")
-        ));
+                    $this->view->translate("Sound Files")));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
@@ -51,7 +50,6 @@ class SoundFilesController extends Zend_Controller_Action {
             $query = mysql_escape_string($this->_request->getPost('filtro'));
             $select->where("`$field` like '%$query%'");
         }
-
 
         $objInspector = new Snep_Inspector('Permissions');
         $inspect = $objInspector->getInspects();
@@ -99,14 +97,13 @@ class SoundFilesController extends Zend_Controller_Action {
     }
 
     /**
-     *  Add Sound File
+     *  addAction - Add Sound File
      */
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Sound Files"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/sound_files.xml"));
 
@@ -116,8 +113,8 @@ class SoundFilesController extends Zend_Controller_Action {
                 ->removeDecorator('DtDdWrapper')
                 ->setIgnore(true)
                 ->setRequired(true);
-        $form->addElement($file);
 
+        $form->addElement($file);
         $form->removeElement('filename');
 
         if ($this->_request->getPost()) {
@@ -191,14 +188,13 @@ class SoundFilesController extends Zend_Controller_Action {
     }
 
     /**
-     * Edit Carrier
+     * editAction - Edit Carrier
      */
     public function editAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Sound Files"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $file = $this->_request->getParam("file");
         $data = Snep_SoundFiles_Manager::get($file);
@@ -212,8 +208,8 @@ class SoundFilesController extends Zend_Controller_Action {
                 ->addValidator(new Zend_Validate_File_Extension(array('wav', 'gsm')))
                 ->removeDecorator('DtDdWrapper')
                 ->setIgnore(true);
-        $form->addElement($file);
 
+        $form->addElement($file);
         $form->getElement('filename')->setValue($data['arquivo'])
                 ->setAttrib('readonly', true);
 
@@ -246,18 +242,17 @@ class SoundFilesController extends Zend_Controller_Action {
     }
 
     /**
-     * Remove a Carrier
+     * removeAction - Remove a Carrier
      */
     public function removeAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Sound Files"),
-                    $this->view->translate("Delete")
-        ));
+                    $this->view->translate("Delete")));
+
         $id = $this->_request->getParam('id');
 
         if (class_exists("Loguser_Manager")) {
-
             Snep_LogUser::salvaLog("Excluiu Arquivo de som", $id, 8);
             $add = Snep_SoundFiles_Manager::get($id);
             Snep_SoundFiles_Manager::insertLogSounds("DEL", $add);
@@ -269,6 +264,10 @@ class SoundFilesController extends Zend_Controller_Action {
         $this->_redirect($this->getRequest()->getControllerName());
     }
 
+    /**
+     * restoreAction
+     * @throws ErrorException
+     */
     public function restoreAction() {
 
         $file = $this->_request->getParam('file');
@@ -295,8 +294,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Sound Files"),
-                    $this->view->translate("Synchronization of sound files ")
-        ));
+                    $this->view->translate("Synchronization of sound files ")));
 
         // Arquivos de som cadastrados no banco
         $soundDb = Snep_SoundFiles_Manager::getSounds();
@@ -305,7 +303,6 @@ class SoundFilesController extends Zend_Controller_Action {
         foreach ($soundDb as $sound) {
             $list_db[] = strtolower($sound['arquivo']);
         }
-
 
         // Lista de arquivos de som da pasta sounds
         $pasteSounds = "/var/lib/asterisk/sounds/";
@@ -344,7 +341,6 @@ class SoundFilesController extends Zend_Controller_Action {
         $fileNotExist = array_unique($fileNotExist);
         $array_directory = array_unique($array_directory);
 
-
         $bool = false;
         if ($fileNotExist) {
             $bool = true;
@@ -358,14 +354,12 @@ class SoundFilesController extends Zend_Controller_Action {
             $this->view->submit = true;
             $this->view->msgclass = 'failure';
 
-
             $message = "";
             foreach ($fileNotExist as $key => $file) {
                 $message .= $file . "<br />";
             }
             $this->view->messagedb = $this->view->translate("The following files do not exist in the directory and will be excluded from the database.") . "<br />";
             $this->view->dadosdb = $message;
-
 
             $messagefile = "";
             foreach ($array_directory as $number => $archive) {

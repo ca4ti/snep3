@@ -27,12 +27,16 @@
  */
 class SimulatorController extends Zend_Controller_Action {
 
+    /**
+     * indexAction
+     * @return type
+     */
     public function indexAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Routing"),
-            $this->view->translate("Routes"),
-            $this->view->translate("Simulator")
-        ));
+                    $this->view->translate("Routing"),
+                    $this->view->translate("Routes"),
+                    $this->view->translate("Simulator")));
 
         $trunks = array();
         foreach (PBX_Trunks::getAll() as $value) {
@@ -40,11 +44,9 @@ class SimulatorController extends Zend_Controller_Action {
         }
 
         $this->view->trunks = $trunks;
-
         if ($this->_request->getPost()) {
 
             $formData = $this->_request->getParams();
-
             $extension = isset($formData['dst']) && $formData['dst'] != "" ? $formData['dst'] : 's';
             $srcType = isset($formData['srcType']) ? $formData['srcType'] : NULL;
             $trunk = isset($formData['trunk']) ? $formData['trunk'] : NULL;
@@ -74,11 +76,9 @@ class SimulatorController extends Zend_Controller_Action {
             $request = new PBX_Asterisk_AGI_Request(array(
                 "agi_callerid" => $caller,
                 "agi_extension" => $extension,
-                "agi_channel" => $channel
-            ));
+                "agi_channel" => $channel));
 
             $request->setSrcObj($srcObj);
-
             $dialplan->setRequest($request);
 
             if ($time) {
@@ -96,7 +96,6 @@ class SimulatorController extends Zend_Controller_Action {
                 $this->renderScript('simulator/error.phtml');
                 return;
             }
-
 
             if (count($dialplan->getMatches()) > 0) {
                 $found = false;
@@ -159,8 +158,7 @@ class SimulatorController extends Zend_Controller_Action {
                         "dst" => $dsts,
                         "desc" => $rule->getDesc(),
                         "valid" => join(";", $rule->getValidTimeList()),
-                        "actions" => $actions
-                    );
+                        "actions" => $actions);
                 }
 
                 $input = array("caller" => $caller, "dst" => $extension, "time" => $dialplan->getLastExecutionTime());

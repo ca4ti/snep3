@@ -29,14 +29,14 @@
 class UsersController extends Zend_Controller_Action {
 
     /**
-     * List all users
+     * indexAction - List all users
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Users")
-        ));
+                    $this->view->translate("Users")));
+
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
@@ -85,14 +85,14 @@ class UsersController extends Zend_Controller_Action {
     }
 
     /**
-     *  Add User
+     *  addAction - Add User
      */
     public function addAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Users"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
@@ -134,29 +134,26 @@ class UsersController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-
         $this->view->form = $form;
     }
 
     /**
-     * Edit users
+     * editAction - Edit users
      */
     public function editAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Users"),
-                    $this->view->translate("Edit")
-        ));
+                    $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
-
         $user = Snep_Users_Manager::get($id);
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
 
         $profile = Snep_Profiles_Manager::getAll();
-
 
         foreach ($profile as $group) {
             $allGroups[$group['id']] = $group['name'];
@@ -200,10 +197,8 @@ class UsersController extends Zend_Controller_Action {
                     $dados['group'] = 1;
                 }
 
-
                 // Ao editar grupo, o usuario perde as permissões individuais
                 if ($idProfile != $dados['group']) {
-
                     Snep_Users_Manager::removePermission($id);
                 }
 
@@ -218,8 +213,8 @@ class UsersController extends Zend_Controller_Action {
      * Remove a user
      */
     public function removeAction() {
-        $id = $this->_request->getParam('id');
 
+        $id = $this->_request->getParam('id');
         Snep_Users_Manager::removeRecovery($id);
         Snep_Users_Manager::removePermission($id);
         Snep_Users_Manager::remove($id);
@@ -230,11 +225,11 @@ class UsersController extends Zend_Controller_Action {
      *  Edit permission
      */
     public function permissionAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Users"),
-                    $this->view->translate("Permission")
-        ));
+                    $this->view->translate("Permission")));
 
         $id = $this->_request->getParam('id');
         if ($id == null) {
@@ -382,8 +377,7 @@ class UsersController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Users"),
-                    $this->view->translate("Export CSV")
-        ));
+                    $this->view->translate("Export CSV")));
 
         $ie = new Snep_CsvIE('users');
         if ($this->_request->getParam('download')) {

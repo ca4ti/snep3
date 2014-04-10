@@ -19,23 +19,31 @@
 require_once "includes/AsteriskInfo.php";
 
 /**
- * Trunk management
+ * Trunk Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
  */
 class TrunksController extends Zend_Controller_Action {
 
+    /**
+     * @var Zend_Form
+     */
     protected $form;
     protected $boardData;
 
+    /**
+     * indexAction
+     */
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Trunks")
-        ));
+                    $this->view->translate("Trunks")));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
-
         $select = "SELECT t.id, t.callerid, t.name, t.type, t.trunktype, t.time_chargeby, t.time_total,
                             (
                                 SELECT th.used
@@ -135,9 +143,11 @@ class TrunksController extends Zend_Controller_Action {
     }
 
     /**
+     * getForm - Snep_Form
      * @return Snep_Form
      */
     protected function getForm() {
+
         $this->form = null;
 
         if ($this->form === Null) {
@@ -202,7 +212,13 @@ class TrunksController extends Zend_Controller_Action {
         return $this->form;
     }
 
+    /**
+     * preparePost
+     * @param <string> $post
+     * @return type
+     */
     protected function preparePost($post = null) {
+
         $post = $post === null ? $_POST : $post;
         $tech = $post['technology']['type'];
         $trunktype = $post['technology']['type'] = strtoupper($tech);
@@ -329,12 +345,18 @@ class TrunksController extends Zend_Controller_Action {
         return array("trunk" => $trunk_data, "ip" => $ip_data);
     }
 
+    /**
+     * addAction - Add trunk
+     * @return type
+     * @throws ErrorException
+     * @throws Exception
+     */
     public function addAction() {
+
         $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Trunks"),
-                    $this->view->translate("Add")
-        ));
+                    $this->view->translate("Add")));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -385,7 +407,13 @@ class TrunksController extends Zend_Controller_Action {
         $this->renderScript("trunks/add_edit.phtml");
     }
 
+    /**
+     * populateFromTrunk
+     * @param <Snep_Form> $form
+     * @param <int> $trunk_id
+     */
     protected function populateFromTrunk(Snep_Form $form, $trunk_id) {
+
         $db = Snep_Db::getInstance();
         $info = $db->query("select * from trunks where id='$trunk_id'")->fetch();
         $form->getSubForm("trunks")->getElement("callerid")->setValue($info['callerid']);
@@ -419,13 +447,19 @@ class TrunksController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * editAction - Edit trunk
+     * @return type
+     * @throws ErrorException
+     * @throws Exception
+     */
     public function editAction() {
+
         $id = mysql_escape_string($this->getRequest()->getParam("trunk"));
         $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Trunks"),
-                    $this->view->translate("Edit trunk %s", $id)
-        ));
+                    $this->view->translate("Edit trunk %s", $id)));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -488,6 +522,9 @@ class TrunksController extends Zend_Controller_Action {
         $this->renderScript("trunks/add_edit.phtml");
     }
 
+    /**
+     * removeAction - Remove trunk
+     */
     public function removeAction() {
 
         $id = $this->_request->getParam("id");

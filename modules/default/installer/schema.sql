@@ -675,7 +675,7 @@ CREATE TABLE IF NOT EXISTS `validation` (
 --
 CREATE TABLE IF NOT EXISTS `contacts_phone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contact_id` char(11) NOT NULL,
+  `contact_id` int NOT NULL,
   `phone` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `contact_id` (`contact_id`),

@@ -16,23 +16,29 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
+/**
+ * Inspector Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class InspectorController extends Zend_Controller_Action {
-
+    
+    /**
+     * indexAction
+     */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Configure"),
-            $this->view->translate("System Status")
-        ));
+            $this->view->translate("System Status")));
 
         // Creates Snep_Inspector Object
         $objInspector = new Snep_Inspector();
 
         // Get array with status of inspected system requirements 
         $inspect = $objInspector->getInspects();
-
         $this->view->inspect = $inspect;
     }
 }

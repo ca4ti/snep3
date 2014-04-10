@@ -18,16 +18,21 @@
  */
 require_once "includes/AsteriskInfo.php";
 
+/**
+ * Khomp Links Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class KhompLinksController extends Zend_Controller_Action {
 
     /**
-     *
      * @var Zend_Form
      */
     protected $form;
 
     /**
-     *
      * @var array
      */
     protected $forms;
@@ -41,8 +46,8 @@ class KhompLinksController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
-                    $this->view->translate("Links")
-        ));
+                    $this->view->translate("Links")));
+
         $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/khomp_links.xml"));
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
 
@@ -90,11 +95,9 @@ class KhompLinksController extends Zend_Controller_Action {
             "kfxsDisabled" => $this->view->translate('Disabled'),
             "kfxsEnable" => $this->view->translate('Enabled'),
             "reserved" => $this->view->translate('Reserved'),
-            "ring" => $this->view->translate('Ringing')
-        );
+            "ring" => $this->view->translate('Ringing'));
 
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
@@ -104,7 +107,6 @@ class KhompLinksController extends Zend_Controller_Action {
         $lst = '';
 
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
-
             $this->_redirect("/khomp-links/khomp-error");
         }
 
@@ -137,9 +139,7 @@ class KhompLinksController extends Zend_Controller_Action {
             if ($form_isValid) {
 
                 $dados = $this->_request->getParams();
-
                 $boards = implode(",", $dados['boards']);
-
                 $this->_redirect($this->getRequest()->getControllerName() . '/view/id/' . $dados['view'] . ',' . $dados['status'] . ',' . $boards);
             }
         }
@@ -152,7 +152,6 @@ class KhompLinksController extends Zend_Controller_Action {
     public function viewAction() {
 
         $data = $this->_request->getParam('id');
-
         $placas = explode(',', $data);
 
         $tiporel = $placas[0];
@@ -200,8 +199,7 @@ class KhompLinksController extends Zend_Controller_Action {
             "kfxsDisabled" => $this->view->translate('Disabled'),
             "kfxsEnable" => $this->view->translate('Enabled'),
             "reserved" => $this->view->translate('Reserved'),
-            "ring" => $this->view->translate('Ringing')
-        );
+            "ring" => $this->view->translate('Ringing'));
 
         $status_sintetico_khomp = array("unused" => $this->view->translate('Unused'),
             "ongoing" => $this->view->translate('On Going'),
@@ -229,12 +227,10 @@ class KhompLinksController extends Zend_Controller_Action {
         $astinfo = new AsteriskInfo();
 
         if (!$data = $astinfo->status_asterisk("khomp summary concise", "", True)) {
-
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
         $sumary = explode("\n", $data);
-
         $gsm = array();
 
         foreach ($sumary as $id => $iface) {
@@ -248,7 +244,6 @@ class KhompLinksController extends Zend_Controller_Action {
         }
 
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
@@ -258,11 +253,9 @@ class KhompLinksController extends Zend_Controller_Action {
         while (list($key, $val) = each($lines)) {
 
             if (substr($val, 0, 1) === "B" && substr($val, 3, 1) === "L") {
-
                 $s = substr($val, 0, 3);
 
                 if (in_array($s, $placas)) {
-
                     $board = substr($val, 0, 3);
                     $lnk = substr($val, 3, 3);
                     $status = trim(substr($val, strpos($val, ":") + 1));
@@ -351,8 +344,8 @@ class KhompLinksController extends Zend_Controller_Action {
         $this->view->linksKhomp = $linksKhomp;
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
-                    $this->view->translate("Khomp Links")
-        ));
+                    $this->view->translate("Khomp Links")));
+
         $this->view->gsm = $gsm;
         $this->view->dados = $links;
         $this->view->canais = $channels;

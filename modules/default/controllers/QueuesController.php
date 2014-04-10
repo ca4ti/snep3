@@ -28,19 +28,17 @@
 class QueuesController extends Zend_Controller_Action {
 
     /**
-     * List all Queues
+     * indexAction - List all Queues
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Queues")
-        ));
+                    $this->view->translate("Queues")));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
-
         $select = $db->select()
                 ->from("queues");
 
@@ -69,7 +67,6 @@ class QueuesController extends Zend_Controller_Action {
             "servicelevel" => $this->view->translate("SLA"),
             "timeout" => $this->view->translate("Timeout"));
 
-
         $filter = new Snep_Form_Filter();
         $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $filter->setValue($this->_request->getPost('campo'));
@@ -88,15 +85,14 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     *  Add Queue
+     *  AddAction - Add Queue
      */
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Queues"),
-                    $this->view->translate("Add Queues")
-        ));
+                    $this->view->translate("Add Queues")));
 
         $sections = new Zend_Config_Ini('/etc/asterisk/snep/snep-musiconhold.conf');
         $_section = array_keys($sections->toArray());
@@ -207,7 +203,6 @@ class QueuesController extends Zend_Controller_Action {
             );
 
             $form_isValid = $form->isValid($_POST);
-
             if ($form_isValid) {
 
                 Snep_Queues_Manager::add($dados);
@@ -228,21 +223,19 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     * Edit Queues
+     * editAction - Edit Queues
      */
     public function editAction() {
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
-
         $id = $this->_request->getParam("id");
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Queues"),
-                    $this->view->translate("Edit $id")
-        ));
+                    $this->view->translate("Edit $id")));
 
         $queue = Snep_Queues_Manager::get($id);
 
@@ -252,7 +245,6 @@ class QueuesController extends Zend_Controller_Action {
         foreach ($_section as $value) {
             $section[$value] = $value;
         }
-
 
         $files = '/var/lib/asterisk/sounds/';
         if (file_exists($files)) {
@@ -363,13 +355,10 @@ class QueuesController extends Zend_Controller_Action {
                      */
             );
 
-
             $form_isValid = $form->isValid($_POST);
-
             if ($form_isValid) {
 
                 Snep_Queues_Manager::edit($dados);
-
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -377,15 +366,15 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     * Remove a queue
+     * removeAction - Remove a queue
      */
     public function removeAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Queues"),
-                    $this->view->translate("Delete")
-        ));
+                    $this->view->translate("Delete")));
+
         $db = Zend_Registry::get('db');
         $id = $this->_request->getParam('id');
         $confirm = $this->_request->getParam('confirm');
@@ -454,8 +443,7 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     * Set member queue
-     * 
+     * membersAction - Set member queue 
      */
     public function membersAction() {
 
@@ -464,8 +452,7 @@ class QueuesController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Queues"),
-                    $this->view->translate("Members $queue")
-        ));
+                    $this->view->translate("Members $queue")));
 
         $members = Snep_Queues_Manager::getMembers($queue);
         $mem = array();
@@ -512,7 +499,7 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     * Depracated method
+     * cidadeAction - Depracated method
      * PALEATIVOS para adaptação da interface.     *
      */
     public function cidadeAction() {
@@ -531,7 +518,6 @@ class QueuesController extends Zend_Controller_Action {
         } else {
             $options = "<option> {$LANG['select']} </option>";
         }
-
         echo $options;
     }
 
@@ -541,7 +527,6 @@ class QueuesController extends Zend_Controller_Action {
     public function exportAction() {
 
         $queues = Snep_Queues_Manager::getCsv();
-        
 
         foreach ($queues as $key => $queue) {
             $member = "";
@@ -552,7 +537,7 @@ class QueuesController extends Zend_Controller_Action {
             }
             $queues[$key]['members'] = $member;
         }
-        
+
         $headers = array('name' => $this->view->translate('Name'),
             'musiconhold' => $this->view->translate('Music on hold class'),
             'context' => $this->view->translate('Go to Context'),
@@ -570,7 +555,6 @@ class QueuesController extends Zend_Controller_Action {
 
         header('Content-type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
         echo $csv_data;
     }
 

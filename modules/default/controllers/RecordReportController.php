@@ -18,6 +18,13 @@
  */
 include ("includes/functions.php");
 
+/**
+ * Record Report Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class RecordReportController extends Zend_Controller_Action {
 
     /**
@@ -27,18 +34,14 @@ class RecordReportController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Reports"),
-                    $this->view->translate("Search Records")
-        ));
+                    $this->view->translate("Search Records")));
 
         $form = $this->getForm();
 
         if ($this->_request->getPost()) {
-
             $formIsValid = $form->isValid($_POST);
 
-
             if ($formIsValid) {
-
                 $this->createAction();
             }
         }
@@ -61,7 +64,6 @@ class RecordReportController extends Zend_Controller_Action {
         $form_xml = new Zend_Config_Xml('./modules/default/forms/record_report.xml');
 
         $dados = new Snep_Form_SubForm($this->view->translate("Records"), $form_xml->form);
-
         $locale = Snep_Locale::getInstance()->getLocale();
 
         if ($locale == 'en_US') {
@@ -209,12 +211,10 @@ class RecordReportController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Reports"),
-                    $this->view->translate("Record")
-        ));
+                    $this->view->translate("Record")));
 
         $format = new Formata;
 
-        // View labels
         $this->view->calldate = $this->view->translate("Call's date");
         $this->view->src = $this->view->translate("Source");
         $this->view->dst = $this->view->translate("Destination");
@@ -281,11 +281,9 @@ class RecordReportController extends Zend_Controller_Action {
         }
 
         if (empty($listItems)) {
-
             $this->view->error = $this->view->translate("No entries found!.");
             $this->_helper->viewRenderer('error');
         } else {
-
             $this->view->dados = $listItems;
             $this->view->compact_success = $this->view->translate("The files were compressed successfully! Wait for the download start.");
             $this->renderScript('record-report/report.phtml');
@@ -340,7 +338,6 @@ class RecordReportController extends Zend_Controller_Action {
 
         $config = Zend_Registry::get('config');
         $this->_helper->layout->disableLayout();
-
         $path = $config->ambiente->path_voz;
 
         $zip = new ZipArchive();
@@ -351,13 +348,11 @@ class RecordReportController extends Zend_Controller_Action {
         $caminho = $caminho[0];
 
         $zip->open($path . $fileName, ZipArchive::CREATE);
-
         $arrFiles = explode(',', $files);
 
         foreach ($arrFiles as $file) {
 
             $file = $caminho . $file;
-
             $zip->addFile($file, $file);
         }
         $zip->close();
@@ -365,7 +360,7 @@ class RecordReportController extends Zend_Controller_Action {
     }
 
     /**
-     * 
+     * errorAction
      */
     public function errorAction() {
         

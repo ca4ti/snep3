@@ -27,13 +27,19 @@
  */
 class ExpressionAliasController extends Zend_Controller_Action {
 
+    /**
+     *
+     * @var Zend_Form
+     */
     protected $form;
 
+    /**
+     * indexAction
+     */
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routing"),
-                    $this->view->translate("Expression Alias"),
-        ));
+                    $this->view->translate("Expression Alias")));
 
         $aliases = PBX_ExpressionAliases::getInstance();
         $this->view->aliases = $aliases->getAll();
@@ -44,6 +50,10 @@ class ExpressionAliasController extends Zend_Controller_Action {
         );
     }
 
+    /**
+     * getForm
+     * @return <obj>
+     */
     protected function getForm() {
 
         if ($this->form === Null) {
@@ -58,16 +68,18 @@ class ExpressionAliasController extends Zend_Controller_Action {
 
             $this->form = $form;
         }
-
         return $this->form;
     }
 
+    /**
+     * AddAction - Add expression alias
+     * @throws PBX_Exception_BadArg
+     */
     public function addAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routing"),
                     $this->view->translate("Expression Alias"),
-                    $this->view->translate("Add Expression Alias"),
-        ));
+                    $this->view->translate("Add Expression Alias")));
 
         $form = $this->getForm();
         $this->view->form = $form;
@@ -119,13 +131,15 @@ class ExpressionAliasController extends Zend_Controller_Action {
         $this->renderScript('expression-alias/add.phtml');
     }
 
+    /**
+     * editAction - Edit expression alias
+     */
     public function editAction() {
         $id = (int) $this->getRequest()->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routing"),
                     $this->view->translate("Expression Alias"),
-                    $this->view->translate("Edit Expression Alias %s", $id),
-        ));
+                    $this->view->translate("Edit Expression Alias %s", $id)));
 
         $form = $this->getForm();
         $this->view->form = $form;
@@ -178,6 +192,9 @@ class ExpressionAliasController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * deleteAction - Delete expression alias
+     */
     public function deleteAction() {
 
         if ($this->getRequest()->isGet()) {

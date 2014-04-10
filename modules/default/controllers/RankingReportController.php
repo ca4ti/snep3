@@ -16,31 +16,43 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/**
+ * Ranking Report Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class RankingReportController extends Zend_Controller_Action {
 
+    /**
+     * @var Zend_Form
+     */
     private $form;
 
+    /**
+     * indexAction
+     */
     public function indexAction() {
-        // Title
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-			$this->view->translate("Reports"),
-			$this->view->translate("Call Rankings"))
-		);
+                    $this->view->translate("Reports"),
+                    $this->view->translate("Call Rankings")));
 
         $config = Zend_Registry::get('config');
         $form = $this->getForm();
 
         if ($this->_request->getPost()) {
-
             $formIsValid = $form->isValid($_POST);
             $formData = $this->_request->getParams();
 
             $locale = Snep_Locale::getInstance()->getLocale();
 
-            if($locale == 'en_US')  {
+            if ($locale == 'en_US') {
                 $format = 'yyyy-MM-dd';
-            }else{
-                $format = Zend_Locale_Format::getDateFormat( $locale );
+            } else {
+                $format = Zend_Locale_Format::getDateFormat($locale);
             }
 
             $ini_date = explode(" ", $formData['period']['init_day']);
@@ -49,20 +61,20 @@ class RankingReportController extends Zend_Controller_Action {
             $ini_date_valid = Zend_Date::isDate($ini_date[0], $format);
             $final_date_valid = Zend_Date::isDate($final_date[0], $format);
 
-            if( ! $ini_date_valid ) {
+            if (!$ini_date_valid) {
                 $iniDateElem = $form->getSubForm('period')->getElement('init_day');
-                $iniDateElem->addError( $this->view->translate('Invalid Date') );
+                $iniDateElem->addError($this->view->translate('Invalid Date'));
                 $formIsValid = false;
             }
-            if( ! $final_date_valid ) {
+            if (!$final_date_valid) {
                 $finalDateElem = $form->getSubForm('period')->getElement('till_day');
-                $finalDateElem->addError( $this->view->translate('Invalid Date') );
+                $finalDateElem->addError($this->view->translate('Invalid Date'));
                 $formIsValid = false;
             }
 
             $reportType = $formData['rank']['out_type'];
 
-            if($formIsValid) {
+            if ($formIsValid) {
                 if ($reportType == 'csv') {
                     $this->csvAction();
                 } else {
@@ -70,16 +82,16 @@ class RankingReportController extends Zend_Controller_Action {
                 }
             }
         }
-
         $this->view->form = $form;
-
     }
 
+    /**
+     * getForm
+     * @return \Snep_Form
+     */
     protected function getForm() {
-        // Create object Snep_Form
-        $form = new Snep_Form();
 
-        // Set form action
+        $form = new Snep_Form();
         $form->setAction($this->getFrontController()->getBaseUrl() . '/ranking-report/index');
 
         $form_xml = new Zend_Config_Xml('./modules/default/forms/ranking_report.xml');
@@ -89,18 +101,18 @@ class RankingReportController extends Zend_Controller_Action {
         $locale = Snep_Locale::getInstance()->getLocale();
         $now = Zend_Date::now();
 
-        if($locale == 'en_US') {
+        if ($locale == 'en_US') {
             $now = $now->toString('YYYY-MM-dd HH:mm');
-        }else{
+        } else {
             $now = $now->toString('dd/MM/YYYY HH:mm');
         }
 
         $yesterday = Zend_Date::now()->subDate(1);
         $initDay = $period->getElement('init_day');
-        $initDay->setValue( $now );
+        $initDay->setValue($now);
 
         $tillDay = $period->getElement('till_day');
-        $tillDay->setValue( $now );
+        $tillDay->setValue($now);
 
         $form->addSubForm($period, "period");
 
@@ -112,38 +124,42 @@ class RankingReportController extends Zend_Controller_Action {
         }
 
         $form->addSubForm($rank, "rank");
-
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
         $form->removeElement("cancel");
         return $form;
     }
 
+    /**
+     * getQuery
+     * @param <array> $data
+     * @param <boolean> $exportCsv
+     * @return <array>
+     * @throws Exception
+     */
     protected function getQuery($data, $exportCsv = false) {
 
-        $init_day = explode(" ", $formData['period']['init_day'] );
+        $init_day = explode(" ", $formData['period']['init_day']);
         $final_day = explode(" ", $formData['period']['till_day']);
 
-        $formated_init_day = new Zend_Date( $init_day[0] );
-        $formated_init_day =  $formated_init_day->toString('yyyy-MM-dd');
+        $formated_init_day = new Zend_Date($init_day[0]);
+        $formated_init_day = $formated_init_day->toString('yyyy-MM-dd');
         $formated_init_time = $init_day[1];
 
-        $formated_final_day = new Zend_Date( $final_day[0] );
-        $formated_final_day =  $formated_final_day->toString('yyyy-MM-dd');
+        $formated_final_day = new Zend_Date($final_day[0]);
+        $formated_final_day = $formated_final_day->toString('yyyy-MM-dd');
         $formated_final_time = $final_day[1];
 
-        $fromDay =  $formated_init_day;
-        $tillDay =  $formated_final_day;
+        $fromDay = $formated_init_day;
+        $tillDay = $formated_final_day;
         $fromHour = $formated_init_time;
         $tillHour = $formated_final_time;
-        
+
         $rankType = $data["rank"]["type"];
         $rankOrigins = $data["rank"]["origin"];
         $rankView = $data["rank"]["view"];
 
-
         $config = Zend_Registry::get('config');
         $db = Zend_Registry::get('db');
-
 
         $dateClause = " ( calldate >= '{$fromDay->get($dateFormat)}'";
         $dateClause.=" AND calldate <= '{$tillDay->get($dateFormat)} 23:59:59'"; //'
@@ -176,7 +192,6 @@ class RankingReportController extends Zend_Controller_Action {
                 $whereCond .= " AND ( " . substr($condPrefix, 0, strlen($condPrefix) - 4) . " ) ";
         }
 
-
         $condDstExp = "";
         $dstExceptions = $config->ambiente->dst_exceptions;
         $dstExceptions = explode(";", $dstExceptions);
@@ -208,7 +223,6 @@ class RankingReportController extends Zend_Controller_Action {
         $rankData = array();
 
         try {
-
             $flag = $disposition = "";
             $dst = "";
             $brk = False;
@@ -240,7 +254,6 @@ class RankingReportController extends Zend_Controller_Action {
                 if (!isset($duration)) {
                     $duration = '';
                 }
-
 
                 if (!isset($rankData[$src])) {
                     $rankData[$src][$dst]["QA"] = 0;
@@ -365,7 +378,6 @@ class RankingReportController extends Zend_Controller_Action {
 
         if ($exportCsv) {
 
-
             $resultRank = array();
 
             foreach ($rank as $chaves => $valores) {
@@ -390,23 +402,24 @@ class RankingReportController extends Zend_Controller_Action {
                 "TA" => $this->view->translate('TIME TOTAL ANSWERD'),
                 "TN" => $this->view->translate('TIME TOTAL UNANSWERD')
             );
-            
+
             $result = array(
                 "data" => $resultRank,
-                "cols"  => $titulo   
-            );
+                "cols" => $titulo);
         } else {
             $result = array(
                 "timeTotal" => $timeTotal,
                 "countTotal" => $countTotal,
                 "rank" => $rank,
-                "type" => $rankType
-            );
+                "type" => $rankType);
         }
 
         return $result;
     }
 
+    /**
+     * viewAction - View report
+     */
     public function viewAction() {
 
         $formData = $this->_request->getParams();
@@ -414,12 +427,10 @@ class RankingReportController extends Zend_Controller_Action {
 
 
         if ($reportData) {
-        	$this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-				$this->view->translate("Reports"),
-				$this->view->translate("Call Ranking"),
-				$this->view->translate("{$formData["period"]["init_day"]} ({$formData["period"]["init_hour"]}) - {$formData["period"]["till_day"]} ({$formData["period"]["till_hour"]})"))
-			);
-
+            $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                        $this->view->translate("Reports"),
+                        $this->view->translate("Call Ranking"),
+                        $this->view->translate("{$formData["period"]["init_day"]} ({$formData["period"]["init_hour"]}) - {$formData["period"]["till_day"]} ({$formData["period"]["till_hour"]})")));
 
             $this->view->PAGE_URL = "/snep/index.php/{$this->getRequest()->getControllerName()}/view/";
             $this->view->rank = $reportData["rank"];
@@ -434,7 +445,11 @@ class RankingReportController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * csvAction - Export CSV
+     */
     public function csvAction() {
+
         if ($this->_request->getPost()) {
             $formData = $this->_request->getParams();
             $reportData = $this->getQuery($formData, true);
@@ -451,16 +466,20 @@ class RankingReportController extends Zend_Controller_Action {
 
                 header('Content-type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
                 echo $csvData;
             } else {
-            $this->view->error = $this->view->translate("No records found.");
-            $this->view->back = $this->view->translate("Back");
+                $this->view->error = $this->view->translate("No records found.");
+                $this->view->back = $this->view->translate("Back");
                 $this->_helper->viewRenderer('error');
             }
         }
     }
 
+    /**
+     * formatNumberAsPhone
+     * @param <int> $phone
+     * @return <string>
+     */
     private function formatNumberAsPhone($phone) {
 
         if (strlen($phone) == 8)
@@ -477,7 +496,13 @@ class RankingReportController extends Zend_Controller_Action {
             return $phone;
     }
 
+    /**
+     * formatSecondsAsTime
+     * @param <int> $sec
+     * @return <string>
+     */
     private function formatSecondsAsTime($sec) {
+
         $minTime = intval($sec / 60);
         $secTime = sprintf("%02s", intval($sec % 60));
         $hourTime = sprintf("%02s", intval($minTime / 60));
@@ -485,6 +510,12 @@ class RankingReportController extends Zend_Controller_Action {
         return $hourTime . ":" . $restMinTime . ":" . $secTime;
     }
 
+    /**
+     * subval_sort
+     * @param <array> $a
+     * @param <string> $subkey
+     * @return <array>
+     */
     function subval_sort($a, $subkey) {
         foreach ($a as $k => $v) {
             $b[$k] = strtolower($v[$subkey]);

@@ -19,13 +19,24 @@
 require_once "includes/AsteriskInfo.php";
 
 /**
- * Controller for extension management
+ * Extension Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
  */
 class ExtensionsController extends Zend_Controller_Action {
 
+    /**
+     *
+     * @var Zend_Form
+     */
     protected $form;
     protected $boardData;
 
+    /**
+     * preDispatch
+     */
     public function preDispatch() {
         $all_writable = true;
         $files = array(
@@ -51,11 +62,14 @@ class ExtensionsController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * indexAction - List extensions
+     */
     public function indexAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
-                    $this->view->translate("Extensions")
-        ));
+                    $this->view->translate("Extensions")));
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
@@ -65,8 +79,7 @@ class ExtensionsController extends Zend_Controller_Action {
             "exten" => "name",
             "name" => "callerid",
             "channel" => "canal",
-            "group"
-        ));
+            "group"));
         $select->where("peer_type='R'");
 
         if ($this->_request->getPost('filtro')) {
@@ -92,12 +105,10 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $options = array("name" => $this->view->translate("Extension"),
             "callerid" => $this->view->translate("Name"),
-            "group" => $this->view->translate("Group")
-        );
+            "group" => $this->view->translate("Group"));
 
         $baseUrl = $this->getFrontController()->getBaseUrl();
 
-        // Formulário de filtro.
         $filter = new Snep_Form_Filter();
         $filter->setAction($baseUrl . '/extensions/index');
         $filter->setValue($this->_request->getPost('campo'));
@@ -119,13 +130,17 @@ class ExtensionsController extends Zend_Controller_Action {
         );
     }
 
+    /**
+     * addAction - Add extensions
+     * @return type
+     * @throws ErrorException
+     */
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add Extension")
-        ));
+                    $this->view->translate("Add Extension")));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -134,23 +149,22 @@ class ExtensionsController extends Zend_Controller_Action {
             return;
         }
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
         $this->view->form = $this->getForm();
+
         if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
         }
+
         $this->view->boardData = $this->boardData;
 
         if ($this->getRequest()->isPost()) {
-
             if (key_exists('virtual_error', $postData)) {
                 $this->view->error = "There's no trunks registered on the system. Try a different technology";
                 $this->view->form->valid(false);
             }
-
 
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
@@ -175,17 +189,21 @@ class ExtensionsController extends Zend_Controller_Action {
                 }
             }
         }
-
         $this->renderScript("extensions/add_edit.phtml");
     }
 
+    /**
+     * editAction - Edit extensions
+     * @return type
+     * @throws ErrorException
+     */
     public function editAction() {
+
         $id = $this->_request->getParam("id");
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Edit %s", $id)
-        ));
+                    $this->view->translate("Edit %s", $id)));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -193,23 +211,23 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->_redirect("/extensions/asterisk-error");
             return;
         }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
 
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
         Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
         $form = $this->getForm();
+
         if (!$this->view->all_writable) {
             $form->getElement("submit")->setAttrib("disabled", "disabled");
         }
+
         $this->view->form = $form;
         $this->view->boardData = $this->boardData;
-
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
 
         if ($this->getRequest()->isPost()) {
-
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
                 $postData["extension"]["exten"] = $this->_request->getParam("id");
@@ -239,6 +257,7 @@ class ExtensionsController extends Zend_Controller_Action {
         } else {
             $techType = strtolower(substr($exten["canal"], 0, strpos($exten["canal"], '/')));
         }
+
         $form->getSubForm('technology')->getElement('type')->setValue($techType);
 
         $password = $exten["password"];
@@ -329,7 +348,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $form->getSubForm('iax2')->getElement('type')->setValue($typeIp);
                 $form->getSubForm('iax2')->getElement('dtmf')->setValue($dtmfMode);
                 $form->getSubForm('sip')->getElement('directmedia')->setValue($directmedia);
-                
+
                 $codecs = explode(";", $exten['allow']);
                 $form->getSubForm('iax2')->getElement('codec')->setValue($codecs[0]);
                 $form->getSubForm('iax2')->getElement('codec1')->setValue($codecs[1]);
@@ -372,11 +391,17 @@ class ExtensionsController extends Zend_Controller_Action {
                 $form->getSubForm('manual')->getElement('manual')->setValue($manualComp);
                 break;
         }
-
         $this->renderScript("extensions/add_edit.phtml");
     }
 
+    /**
+     * execAdd
+     * @param <array> $postData
+     * @param <boolean> $update
+     * @return type
+     */
     protected function execAdd($postData, $update = false) {
+
         $formData = $postData;
 
         $db = Zend_Registry::get('db');
@@ -514,9 +539,7 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         $stmt = $db->query($sql);
-
         $idExten = $db->lastInsertId();
-
 
         if ($advVoiceMail == 'yes') {
             if ($update) {
@@ -532,9 +555,14 @@ class ExtensionsController extends Zend_Controller_Action {
         Snep_InterfaceConf::loadConfFromDb();
     }
 
-
+    /**
+     * deleteAction - Remove exetension
+     * @return type
+     * @throws ErrorException
+     */
     public function deleteAction() {
 
+        $db = Zend_Registry::get('db');
         $id = $this->_request->getParam("id");
 
         try {
@@ -551,7 +579,6 @@ class ExtensionsController extends Zend_Controller_Action {
         //checks if the exten is used in the rule 
         $rules = Snep_Extensions_Manager::getValidation($id);
         $rulesQuery = Snep_Extensions_Manager::getValidationRules($id);
-
         $rules = array_merge($rules, $rulesQuery);
 
         if (count($rules) > 0) {
@@ -566,7 +593,6 @@ class ExtensionsController extends Zend_Controller_Action {
 
             //log-user
             if (class_exists("Loguser_Manager")) {
-
                 Snep_LogUser::salvaLog("Excluiu Ramal", $id, 5);
                 $add = Snep_Extensions_Manager::getPeer($id);
                 Snep_Extensions_Manager::insertLogRamal("DEL", $add);
@@ -591,15 +617,16 @@ class ExtensionsController extends Zend_Controller_Action {
                 $this->view->back = $this->view->translate("Back");
                 $this->_helper->viewRenderer('error');
             }
-
             $this->_redirect("default/extensions");
         }
     }
 
     /**
-     * @return Snep_Form
+     * getForm
+     * @return <object> Snep_Form
      */
     protected function getForm() {
+
         if ($this->form === Null) {
             Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
             $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/extensions.xml");
@@ -618,6 +645,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $subFormKhomp = new Snep_Form_SubForm(null, $form_xml->khomp, "khomp");
             $selectFill = $subFormKhomp->getElement('board');
             $selectFill->addMultiOption(null, ' ');
+
             // Monta informações para placas khomp
             $boardList = array();
 
@@ -647,7 +675,12 @@ class ExtensionsController extends Zend_Controller_Action {
         return $this->form;
     }
 
+    /**
+     * getmultiaddForm
+     * @return <object> Snep_Form
+     */
     protected function getmultiaddForm() {
+
         if ($this->form === Null) {
             $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/extensionsMulti.xml");
             $form = new Snep_Form();
@@ -660,8 +693,8 @@ class ExtensionsController extends Zend_Controller_Action {
             $subFormKhomp = new Snep_Form_SubForm(null, $form_xml->khomp, "khomp");
             $selectFill = $subFormKhomp->getElement('board');
             $selectFill->addMultiOption(null, ' ');
-            // Monta informações para placas khomp
 
+            // Monta informações para placas khomp
             $boardList = array();
 
             $khompInfo = new PBX_Khomp_Info();
@@ -686,7 +719,6 @@ class ExtensionsController extends Zend_Controller_Action {
             //$form->addSubForm(new Snep_Form_SubForm($this->view->translate("Advanced"), $form_xml->advanced), "advanced");
             $this->form = $form;
         }
-
         return $this->form;
     }
 
@@ -697,8 +729,7 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Extension"),
-                    $this->view->translate("Export")
-        ));
+                    $this->view->translate("Export")));
 
         $ie = new Snep_CsvIE('peers');
         if ($this->_request->getParam('download')) {
@@ -713,13 +744,17 @@ class ExtensionsController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * multiaddAction - Add multi extensions
+     * @return type
+     * @throws ErrorException
+     */
     public function multiaddAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add Multiples Extensions")
-        ));
+                    $this->view->translate("Add Multiples Extensions")));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -728,7 +763,6 @@ class ExtensionsController extends Zend_Controller_Action {
             return;
         }
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
@@ -736,6 +770,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if (!$this->view->all_writable) {
             $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
         }
+
         $this->view->boardData = $this->boardData;
 
         if ($this->getRequest()->isPost()) {
@@ -743,11 +778,8 @@ class ExtensionsController extends Zend_Controller_Action {
 
             if ($this->view->form->isValid($_POST)) {
 
-
                 $range = explode(";", $postData["extension"]["exten"]);
-
                 $this->view->error = "";
-
                 $khomp_iface = false;
                 if (strtoupper($postData["technology"]["type"]) == 'KHOMP') {
                     $khompInfo = new PBX_Khomp_Info();
@@ -787,7 +819,6 @@ class ExtensionsController extends Zend_Controller_Action {
                         $postData["sip"]["password"] = $exten;
                         $postData["iax"]["password"] = $exten;
 
-
                         $ret = $this->execAdd($postData);
 
                         if (is_string($ret)) {
@@ -800,9 +831,7 @@ class ExtensionsController extends Zend_Controller_Action {
                         $exten = explode(";", $exten);
 
                         foreach ($exten as $range) {
-
                             $rangeToAdd = explode('-', $range);
-
 
                             if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
                                 $i = $rangeToAdd[0];

@@ -28,6 +28,10 @@
  */
 class PermissionController extends Zend_Controller_Action {
 
+    /**
+     * indexAction
+     * @throws Zend_Controller_Action_Exception
+     */
     public function indexAction() {
         $exten = $this->getRequest()->getParam("exten");
 
@@ -46,12 +50,10 @@ class PermissionController extends Zend_Controller_Action {
         }
 
         $this->view->exten = $exten;
-
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     "Manage",
                     "Extensions",
-                    "Permissions"
-        ));
+                    "Permissions"));
 
         $resources = array();
         foreach (Snep_Acl::getInstance()->getResources() as $resource) {
@@ -65,10 +67,16 @@ class PermissionController extends Zend_Controller_Action {
         $this->view->resources = $resources;
     }
 
+    /**
+     * errorAction
+     */
     public function errorAction() {
         
     }
 
+    /**
+     * errorUnsetAction
+     */
     public function errorUnsetAction() {
         
     }

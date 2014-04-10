@@ -19,6 +19,13 @@
 require_once "includes/AsteriskInfo.php";
 require_once "includes/functions.php";
 
+/**
+ * IpStatus Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class IpStatusController extends Zend_Controller_Action {
 
     /**
@@ -28,8 +35,7 @@ class IpStatusController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Status"),
-                    $this->view->translate("IP Status")
-        ));
+                    $this->view->translate("IP Status")));
 
         try {
             $astinfo = new AsteriskInfo();
@@ -42,7 +48,6 @@ class IpStatusController extends Zend_Controller_Action {
             $this->_redirect("/ip-status/asterisk-error");
             exit;
         }
-
 
         $lines = explode("\n", $data);
         $arr = array();
@@ -121,9 +126,6 @@ class IpStatusController extends Zend_Controller_Action {
             }
         }
 
-        /**
-         * Queues
-         */
         $filas = array();
         $queues = Snep_IpStatus_Manager::getQueue();
 
@@ -143,10 +145,7 @@ class IpStatusController extends Zend_Controller_Action {
             $filas[] = array('name' => $val['name'], 'calls' => $calls, 'members' => $ctd);
         }
 
-
-        /**
-         * Iax2 Trunk
-         */
+        //Iax2 Trunk
         $like = 'IAX%';
         $troncos = Snep_IpStatus_Manager::getTrunk($like);
 
@@ -244,10 +243,7 @@ class IpStatusController extends Zend_Controller_Action {
 
         $this->view->trunkIax = $troncos;
 
-
-        /**
-         * Trunk Sip
-         */
+        // Trunk Sip
         $like = 'SIP%';
         $troncos = Snep_IpStatus_Manager::getTrunk($like);
 
@@ -289,7 +285,6 @@ class IpStatusController extends Zend_Controller_Action {
                 $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
 
                 $sip_peer = explode("\n", ast_status("sip show peer $peer_user", "", True));
-
                 $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
                 $peer_lat = substr($peer_lat, strpos($peer_lat, ":") + 2);
 
@@ -307,8 +302,6 @@ class IpStatusController extends Zend_Controller_Action {
                     if ($sis_type == "VIRTUAL") {
                         // Define como Username a 2a. parte do Channel
                         $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-
-
 
                         if ($virt_name === $tr_user) {
                             $CV = True;
@@ -340,7 +333,6 @@ class IpStatusController extends Zend_Controller_Action {
                 $troncos[$key]['username'] = $virt_name;
             }
 
-
             if ($sis_type == "VIRTUAL" && !$CV) {
 
                 // Define como Username a 2a. parte do Channel
@@ -364,10 +356,9 @@ class IpStatusController extends Zend_Controller_Action {
             }
         }
 
-        $this->view->troncoSip  = $troncos;
+        $this->view->troncoSip = $troncos;
 
         /* -------------------------------------------------------------------------------------- */
-
 
         if (!$codecs = ast_status("g729 show licenses", "", True)) {
             display_error($LANG['msg_nosocket'], true);

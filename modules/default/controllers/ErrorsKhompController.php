@@ -18,6 +18,14 @@
  */
 require_once "includes/AsteriskInfo.php";
 
+/**
+ * Error Khomp Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @author    Henrique Grolli Bassotto
+ */
 class ErrorsKhompController extends Zend_Controller_Action {
 
     /**
@@ -31,7 +39,7 @@ class ErrorsKhompController extends Zend_Controller_Action {
      * @var array
      */
     protected $forms;
-    
+
     /**
      * indexAction
      * @return type
@@ -60,7 +68,7 @@ class ErrorsKhompController extends Zend_Controller_Action {
         }
 
         $data = $astinfo->status_asterisk("khomp summary concise", "", True);
-        
+
         if (!isset($data)) {
 
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
@@ -70,7 +78,7 @@ class ErrorsKhompController extends Zend_Controller_Action {
 
         $kchannels = array();
         $ONLYGSM = False;
-        
+
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
 
             $this->_redirect("/khomp-links/khomp-error");

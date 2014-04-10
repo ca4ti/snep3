@@ -1,19 +1,42 @@
 <?php
 
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
 require_once 'Zend/Controller/Action.php';
 require_once "includes/AsteriskInfo.php";
 
+/**
+ * Index Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class IndexController extends Zend_Controller_Action {
 
     /**
      * indexAction 
      */
     public function indexAction() {
-        
+
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
-        
-        $this->view->breadcrumb = $this->view->translate("Welcome to Snep, <b>" . $username."</b>.");
+
+        $this->view->breadcrumb = $this->view->translate("Welcome to Snep, <b>" . $username . "</b>.");
 
         // Direcionando para o "snep antigo"
         $config = Zend_Registry::get('config');
@@ -59,7 +82,6 @@ class IndexController extends Zend_Controller_Action {
             if (!isset($astVersionRaw)) {
                 $this->view->erroast = true;
             }
-
 
             $systemInfo['linux_kernel'] = exec("uname -sr");
 
@@ -117,6 +139,10 @@ class IndexController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * sys_meminfo
+     * @return type
+     */
     private function sys_meminfo() {
         $results['ram'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
         $results['swap'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
@@ -170,6 +196,13 @@ class IndexController extends Zend_Controller_Action {
         return $results;
     }
 
+    /**
+     * rfts
+     * @param <string> $strFileName
+     * @param <int> $intLines
+     * @param <int> $intBytes
+     * @return <string>
+     */
     private function rfts($strFileName, $intLines = 0, $intBytes = 4096) {
         $strFile = "";
         $intCurLine = 1;
@@ -193,6 +226,10 @@ class IndexController extends Zend_Controller_Action {
         return $strFile;
     }
 
+    /**
+     * sys_fsinfo
+     * @return type
+     */
     private function sys_fsinfo() {
         $df = $this->execute_program('df', '-kP');
         $mounts = explode("\n", $df);
@@ -224,6 +261,12 @@ class IndexController extends Zend_Controller_Action {
         return $results;
     }
 
+    /**
+     * execute_program
+     * @param <string> $program
+     * @param <string> $params
+     * @return type
+     */
     private function execute_program($program, $params) {
         $path = array('/bin/', '/sbin/', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin');
         $buffer = '';

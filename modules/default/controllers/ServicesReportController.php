@@ -16,14 +16,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/**
+ * Services report Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
+ */
 class ServicesReportController extends Zend_Controller_Action {
 
+    /**
+     * indexAction
+     */
     public function indexAction() {
-        // Title
-         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Reports"),
-            $this->view->translate("Services Use")
-        ));
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Reports"),
+                    $this->view->translate("Services Use")));
 
         $config = Zend_Registry::get('config');
 
@@ -34,17 +44,16 @@ class ServicesReportController extends Zend_Controller_Action {
 
         $form = $this->getForm();
 
-
         if ($this->_request->getPost()) {
             $formIsValid = $form->isValid($_POST);
             $formData = $this->_request->getParams();
 
             $locale = Snep_Locale::getInstance()->getLocale();
 
-            if($locale == 'en_US')  {
+            if ($locale == 'en_US') {
                 $format = 'yyyy-MM-dd';
-            }else{
-                $format = Zend_Locale_Format::getDateFormat( $locale );
+            } else {
+                $format = Zend_Locale_Format::getDateFormat($locale);
             }
 
             $ini_date = explode(" ", $formData['period']['init_day']);
@@ -53,14 +62,14 @@ class ServicesReportController extends Zend_Controller_Action {
             $ini_date_valid = Zend_Date::isDate($ini_date[0], $format);
             $final_date_valid = Zend_Date::isDate($final_date[0], $format);
 
-            if( ! $ini_date_valid ) {
+            if (!$ini_date_valid) {
                 $iniDateElem = $form->getSubForm('period')->getElement('init_day');
-                $iniDateElem->addError( $this->view->translate('Invalid Date') );
+                $iniDateElem->addError($this->view->translate('Invalid Date'));
                 $formIsValid = false;
             }
-            if( ! $final_date_valid ) {
+            if (!$final_date_valid) {
                 $finalDateElem = $form->getSubForm('period')->getElement('till_day');
-                $finalDateElem->addError( $this->view->translate('Invalid Date') );
+                $finalDateElem->addError($this->view->translate('Invalid Date'));
                 $formIsValid = false;
             }
 
@@ -76,8 +85,12 @@ class ServicesReportController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /**
+     * getForm - Snep_Form
+     * @return <object> \Snep_Form
+     */
     protected function getForm() {
-        // Create object Snep_Form
+
         $form = new Snep_Form();
 
         // Set form action
@@ -88,23 +101,22 @@ class ServicesReportController extends Zend_Controller_Action {
         $period = new Snep_Form_SubForm($this->view->translate("Period"), $form_xml->period);
         $validatorDate = new Zend_Validate_Date(Zend_Locale_Format::getDateFormat(Zend_Registry::get('Zend_Locale')));
 
-
         $locale = Snep_Locale::getInstance()->getLocale();
         $now = Zend_Date::now();
 
-        if($locale == 'en_US') {
+        if ($locale == 'en_US') {
             $now = $now->toString('YYYY-MM-dd HH:mm');
-        }else{
+        } else {
             $now = $now->toString('dd/MM/YYYY HH:mm');
         }
 
         $yesterday = Zend_Date::now()->subDate(1);
         $initDay = $period->getElement('init_day');
-        $initDay->setValue( $now );
+        $initDay->setValue($now);
         //$initDay->addValidator($validatorDate);
 
         $tillDay = $period->getElement('till_day');
-        $tillDay->setValue( $now );
+        $tillDay->setValue($now);
         //$tillDay->addValidator($validatorDate);
         $form->addSubForm($period, "period");
 
@@ -140,16 +152,21 @@ class ServicesReportController extends Zend_Controller_Action {
         $selectGroup->setAttrib('onSelect', "enableField('exten-group_select', 'exten-exten_select');");
 
         $form->addSubForm($exten, "exten");
-
         $service = new Snep_Form_SubForm($this->view->translate("Services"), $form_xml->service);
-
         $form->addSubForm($service, "service");
-
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
         $form->removeElement("cancel");
+
         return $form;
     }
 
+    /**
+     * getQuery
+     * @param <array> $data
+     * @param <boolean> $ExportCsv
+     * @return <string>
+     * @throws Zend_Exception
+     */
     protected function getQuery($data, $ExportCsv = false) {
 
         $fromDay = $data["period"]["init_day"];
@@ -225,14 +242,14 @@ class ServicesReportController extends Zend_Controller_Action {
                 if ($value['state'] == 1) {
                     $dataTmp[$key]['state'] = $this->view->translate(' - Activated');
                 } else {
-                    $dataTmp[$key]['state'] =  $this->view->translate(' - Deactivated');
+                    $dataTmp[$key]['state'] = $this->view->translate(' - Deactivated');
                 }
             } else {
 
                 if ($value['state'] == 1) {
-                    $dataTmp[$key]['state'] =  $this->view->translate('Activated');
+                    $dataTmp[$key]['state'] = $this->view->translate('Activated');
                 } else {
-                    $dataTmp[$key]['state'] =  $this->view->translate('Deactivated');
+                    $dataTmp[$key]['state'] = $this->view->translate('Deactivated');
                 }
 
                 $dataTmp[$key]['status'] = '"' . $value['status'] . '"';
@@ -241,6 +258,9 @@ class ServicesReportController extends Zend_Controller_Action {
         return $dataTmp;
     }
 
+    /**
+     * viewAction - View report services
+     */
     public function viewAction() {
 
         if ($this->_request->getPost()) {
@@ -277,7 +297,11 @@ class ServicesReportController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * csvAction - Export CSV
+     */
     public function csvAction() {
+
         if ($this->_request->getPost()) {
             $formData = $this->_request->getParams();
             $reportData = $this->getQuery($formData, true);

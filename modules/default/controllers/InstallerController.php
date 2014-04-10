@@ -29,6 +29,9 @@ require_once 'Snep/Inspector.php';
  */
 class InstallerController extends Zend_Controller_Action {
 
+    /**
+     * preDispatch
+     */
     public function preDispatch() {
 
         $config = Zend_Registry::get('config');
@@ -44,6 +47,9 @@ class InstallerController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * indexAction - Install Snep
+     */
     public function indexAction() {
         $this->view->breadcrumb = $this->view->translate("Installer Snep");
         $this->view->next = $this->view->url(array("controller" => "installer", "action" => "diagnostic"), null, true);
@@ -84,7 +90,6 @@ class InstallerController extends Zend_Controller_Action {
         }
         $languageElement->setValue(Snep_Locale::getInstance()->getLanguage());
 
-
         if ($this->getRequest()->isPost()) {
 
             $form_isValid = $form->isValid($_POST);
@@ -114,6 +119,9 @@ class InstallerController extends Zend_Controller_Action {
         $this->view->form = $form->addSubForm($locale_form, "locale");
     }
 
+    /**
+     * diagnosticAction - Diagnostic of system
+     */
     public function diagnosticAction() {
         $this->view->breadcrumb = $this->view->translate("Installer » Diagnostic");
         $this->view->next = $this->view->url(array("controller" => "installer", "action" => "configure"), null, true);
@@ -123,6 +131,11 @@ class InstallerController extends Zend_Controller_Action {
         $this->view->testResult = $inspector->getInspects();
     }
 
+    /**
+     * install - Install Snep
+     * @param Zend_Db_Adapter_Abstract $db
+     * @throws Exception
+     */
     protected function install(Zend_Db_Adapter_Abstract $db) {
 
         $config = Zend_Registry::get('config');
@@ -146,6 +159,9 @@ class InstallerController extends Zend_Controller_Action {
         }
     }
 
+    /**
+     * installedAction - Install finish
+     */
     public function installedAction() {
         $this->view->breadcrumb = $this->view->translate("Installation completed");
         $this->view->hideMenu = true;
@@ -163,6 +179,9 @@ class InstallerController extends Zend_Controller_Action {
         $this->getRequest()->setActionName("installed");
     }
 
+    /**
+     * configuraAction - Configuration install
+     */
     public function configureAction() {
 
         $objInspector = new Snep_Inspector('Permissions');
@@ -188,7 +207,6 @@ class InstallerController extends Zend_Controller_Action {
         if ($this->view->error['error']) {
             $submit_button->setAttrib('disabled', true);
         }
-
 
         if ($this->getRequest()->isPost()) {
             $form_isValid = $form->isValid($_POST);

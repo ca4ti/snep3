@@ -18,7 +18,11 @@
  */
 
 /**
- * System settings controller.
+ * Paramenters Controller - System settings controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
  */
 class ParametersController extends Zend_Controller_Action {
 
@@ -26,11 +30,10 @@ class ParametersController extends Zend_Controller_Action {
      * indexAction - List parameters
      */
     public function indexAction() {
-        // Title
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Configure"),
-                    $this->view->translate("Parameters")
-        ));
+                    $this->view->translate("Parameters")));
 
         // Get configuration properties from Zend_Registry
         $config = Zend_Registry::get('config');
@@ -50,7 +53,6 @@ class ParametersController extends Zend_Controller_Action {
 
         // Set form action
         $form->setAction($this->getFrontController()->getBaseUrl() . '/parameters/index');
-
         $form_xml = new Zend_Config_Xml('./modules/default/forms/setup.conf.xml');
 
         // Section General
@@ -96,7 +98,6 @@ class ParametersController extends Zend_Controller_Action {
         $form->addSubForm($general, "general");
 
         $locale_form = new Snep_Form_SubForm($this->view->translate("Locale Configuration"), $form_xml->locale);
-
         $locale = Snep_Locale::getInstance()->getZendLocale();
 
         $locales = array();
@@ -191,7 +192,6 @@ class ParametersController extends Zend_Controller_Action {
                 $config->ambiente->emp_nome = $formData['general']['emp_nome'];
                 $config->system->debug = $formData['general']['debug'];
 
-
                 $config->system->language = $formData['locale']['language'];
                 $config->system->locale = $formData['locale']['locale'];
                 $config->system->timezone = $formData['locale']['timezone'];
@@ -215,11 +215,10 @@ class ParametersController extends Zend_Controller_Action {
 
                 $writer = new Zend_Config_Writer_Ini(array('config' => $config,
                     'filename' => $configFile));
-                // Write file
+
                 $writer->write();
 
                 if (class_exists("Loguser_Manager")) {
-
                     $formData["tipo"] = "NEW";
                     Snep_Parameters_Manager::insertParameter($formData);
                 }
@@ -227,10 +226,12 @@ class ParametersController extends Zend_Controller_Action {
                 $this->_redirect('parameters');
             }
         }
-
         $this->view->form = $form;
     }
 
+    /**
+     * engAction - Modify linguage for english
+     */
     public function engAction() {
 
         $configFile = APPLICATION_PATH . "/includes/setup.conf";
@@ -244,6 +245,9 @@ class ParametersController extends Zend_Controller_Action {
         $this->_redirect($module);
     }
 
+    /**
+     * portAction - Modify linguage for portugues
+     */
     public function portAction() {
 
         $configFile = APPLICATION_PATH . "/includes/setup.conf";

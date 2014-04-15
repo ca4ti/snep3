@@ -20,7 +20,7 @@
 require_once("agi_base.php");
 
 if($argc != 3) {
-    $asterisk->verbose("This script expects one extension and variable name as parameter.");
+    $asterisk->verbose("Este scripts espera dois parametro.");
     exit(1);
 }
 
@@ -28,7 +28,7 @@ try {
     $peer = PBX_Interfaces::getChannelOwner($argv[1]);
                               
 } catch (Exception $e) {
-    $asterisk->verbose("[$requestid] Failure to resolv extension: " . $e->getMessage(), 1);
+    $asterisk->verbose("[$requestid] Erro na resolucao de ramal: " . $e->getMessage(), 1);
     exit(1);
 }
 

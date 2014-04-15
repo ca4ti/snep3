@@ -29,7 +29,7 @@ if(!$ramal->isLocked()) {
 else if($ramal->isLocked()){
     $auth = $asterisk->exec('AUTHENTICATE', array($ramal->getPassword(),'',strlen((string)$ramal->getPassword())));
     if($auth['result'] == -1) {
-        $log->info("Wrong password to lock extension $ramal");
+        $log->info("Senha incorreta para bloqueio da extensão $ramal");
     }
     else {
         $db->update('peers', array("authenticate" => false), "name='{$ramal->getNumero()}'");

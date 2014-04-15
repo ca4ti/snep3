@@ -2,6 +2,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,6 +18,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+/**
+ * @file Executável AGI SNEP.
+ *
+ * Executável AGI que faz o controle de ligações no dialplan do Asterisk.
+ *
+ * Este aplicativo inicia o ambiente para que a biblioteca do snep possa
+ * trabalhar no encaminhamento das ligações.
+ */
+// Tratamento de sinais vindos do asterisk
+declare(ticks = 1);
+if (function_exists('pcntl_signal')) {
+    pcntl_signal(SIGHUP, SIG_IGN);
+}
 
 // Controle da exibição de erros
 error_reporting(E_ALL | E_STRICT);
@@ -67,17 +82,18 @@ if ($opts->outgoing_number) {
 
 $log = Zend_Registry::get('log');
 $request = $asterisk->requestObj;
-
-$log->info("Call from $request->origem ($request->channel) to $request->destino");
+// Primeira informação sobre a ligação
+$log->info("Tentativa de conexao de $request->origem ($request->channel) para $request->destino");
 $origem = $request->origem;
 try {
+    // Procurando por regra de negócio no banco de dados
     $dialplan = new PBX_Dialplan();
     $dialplan->setRequest($asterisk->requestObj);
     $dialplan->parse();
 
     $regra = $dialplan->getLastRule();
 } catch (PBX_Exception_NotFound $ex) {
-    $log->info("No valid rule for this request: " . $ex->getMessage());
+    $log->info("Nenhuma regra valida para essa requisicao: " . $ex->getMessage());
     if (!$opts->xfer) {
         $asterisk->answer();
         $asterisk->stream_file('invalid');
@@ -85,7 +101,7 @@ try {
     }
     exit();
 } catch (Exception $ex) {
-    $log->crit("Oops! Exception resolving routing rule.");
+    $log->crit("Oops! Excecao ao resolver regra de negocio, contate o suporte tecnico");
     $log->crit($ex);
     die();
 }
@@ -114,11 +130,11 @@ $regra->setRecordApp($config->general->record->application, array($recordPath . 
 $regra->setAsteriskInterface($asterisk);
 
 try {
-    $log->info("Executing rule {$regra->getId()}:$regra");
+    $log->info("Executando regra {$regra->getId()}:$regra");
     $regra->execute($origem);
-    $log->info("End of execution of rule {$regra->getId()}:$regra");
+    $log->info("Fim de execucao da regra {$regra->getId()}:$regra");
 } catch (PBX_Exception_AuthFail $ex) {
-    $log->info("Failure to authenticate extension. Check password.");
+    $log->info("Falha na autenticacao do ramal.");
 } catch (Exception $ex) {
     $log->crit($ex);
     die();

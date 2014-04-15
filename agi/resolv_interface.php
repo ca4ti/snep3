@@ -20,7 +20,7 @@
 require_once("agi_base.php");
 
 if($argc != 3) {
-    $asterisk->verbose("This script requires one extension and a variable name as parameter");
+    $asterisk->verbose("Este scripts espera dois parametro, ramal e variavel");
     exit(1);
 }
 
@@ -28,7 +28,7 @@ if($argc != 3) {
 try {
     $ramal = PBX_Usuarios::get($argv[1]);
 } catch (Exception $e) {
-    $asterisk->verbose("[$requestid] Failure to resolv interface: " . $e->getMessage(), 1);
+    $asterisk->verbose("[$requestid] Erro na resolucao de interface: " . $e->getMessage(), 1);
     exit(1);
 }
 

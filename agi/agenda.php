@@ -24,18 +24,15 @@ require_once('agi_base.php');
 $action = substr($asterisk->request['agi_extension'],0,3);
 $entryid = substr($asterisk->request['agi_extension'],3);
 $log = Zend_Registry::get('log');
-$log->info("Connection request from " . $asterisk->request['agi_callerid'] . " to agenda entry " . $entryid . ".");
+$log->info("Connectando ligacao de " . $asterisk->request['agi_callerid'] . " para codigo " . $entryid . " da agenda.");
 
 try {
-    $sql = "SELECT phone_1, cell_1 FROM contacts_names WHERE id='$entryid'";
+    $sql = "SELECT phone FROM contacts_phone WHERE contact_id='$entryid' limit 1";
     $result = $db->query($sql)->fetchAll();
-    if(count($result) == 1 && ($action == "*12" && $result[0]['phone_1'] != "") OR ($action == "*13" && $result[0]['cell_1'] != "")) {
-        if($action == "*12") {
-            $asterisk->set_extension($result[0]['phone_1']);
-        }
-        else {
-            $asterisk->set_extension($result[0]['cell_1']);
-        }
+    if(count($result) == 1 && ($action == "*12" && $result[0]['phone'] != "") ) {
+        
+            $asterisk->set_extension($result[0]['phone']);        
+        
     }
     else {
         $asterisk->verbose("[$requestid] Entrada encontrada nao valida!", 1);

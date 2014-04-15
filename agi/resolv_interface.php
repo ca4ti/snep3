@@ -17,6 +17,11 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @file Script agi que faz a resolução do canal (interface) de um ramal do snep
+ */
+
+// Importando as configura��es para AGI's
 require_once("agi_base.php");
 
 if($argc != 3) {

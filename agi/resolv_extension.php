@@ -17,13 +17,19 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @file Script agi que faz a resolução do ramal do snep baseado na interface
+ */
+
+// Importando as configurações para AGI's
 require_once("agi_base.php");
 
 if($argc != 3) {
-    $asterisk->verbose("Este scripts espera dois parametro.");
+    $asterisk->verbose("Este scripts espera dois parametro");
     exit(1);
 }
 
+// Procurando no banco pelo canal do peer
 try {
     $peer = PBX_Interfaces::getChannelOwner($argv[1]);
                               
@@ -32,4 +38,8 @@ try {
     exit(1);
 }
 
-$asterisk->set_variable($argv[2], $peer->getNumero());
+if ($peer instanceof Agents_Agent ) {
+	$asterisk->set_variable($argv[2], $peer->getCode());
+}else{	
+	$asterisk->set_variable($argv[2], $peer->getNumero());
+}

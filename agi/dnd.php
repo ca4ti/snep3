@@ -33,26 +33,48 @@ if($argc < 2 && ($argv[1] != "enable" OR $argv[1] != "disable")) {
 
 $funcao = $argv[1];
 
-try {
-// $db = Zend_Registry::get("db");
-    if($funcao == "enable") {
-        $sql = "UPDATE `peers` SET dnd=1 WHERE name='{$asterisk->request['agi_callerid']}'";
-        $db->query($sql);
-        
-        // Gerando entrada no log
-        $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'DND', True, 'Nao perturbe ativado')";
-        $db->query($sql);
-    }
-    else {
-        $sql = "UPDATE `peers` SET dnd=0 WHERE name='{$asterisk->request['agi_callerid']}'";
-        $db->query($sql);
-        
-        // Gerando entrada no log
-        $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'DND', False, 'Nao perturbe desativado')";
-        $db->query($sql);
-    }
+$src = $request->getOriginalCallerid();
+
+if(class_exists('Agents_Manager') ) {
+	$extension = Agents_Manager::isLogged($asterisk->request['agi_callerid']);
+
+	// Verifica status de DND em agents_config
+	$agents_config = Agents_Manager::getConfig() ;
+	if (count($agents_config) > 0 ) {
+    		$lrec = (int) $agents_config["lockRec"];
+	} else {
+		$lrec = 1;
+	}
+} else {
+	$extension = $asterisk->request['agi_callerid'] ;
+	$lrec = 1 ;
+	$agents_config = array() ;
 }
-catch(Exception $ex) {
+if (trim($extension) === "") {
+	$extension = $src;
+} 
+// for  ebug
+# $asterisk->verbose("Status:  Funcao=$funcao // Src=$src // Extension=$extension // lrec=$lrec // agents_config=".count($agents_config)) ;
+
+try {
+	if($funcao === "enable" ) {
+		if ($lrec === 1 ) { 
+        		$sql = "UPDATE `peers` SET dnd=1 WHERE name='$extension'";
+              		$db->query($sql);
+     			// Gerando entrada no log
+       			$sql = "INSERT INTO `services_log` VALUES(NOW(), '$extension', 'DND', True, 'Nao perturbe ativado')";
+       			$db->query($sql);
+		}
+	} else {
+		if ($lrec === 1 ) { 
+        		$sql = "UPDATE `peers` SET dnd=0 WHERE name='$extension'";
+        		$db->query($sql);
+        		// Gerando entrada no log
+        		$sql = "INSERT INTO `services_log` VALUES(NOW(), '$extension', 'DND', False, 'Nao perturbe desativado')";
+        		$db->query($sql);
+        	}
+    	}
+} catch(Exception $ex) {
     $asterisk->verbose($ex->getMessage());
     exit(1);
 }

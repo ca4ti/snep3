@@ -63,6 +63,7 @@ try {
     exit;
 }
 
+// Imprime versão :)
 if ($opts->version) {
     echo "SNEP Version " . Zend_Registry::get('snep_version') . "\n";
     exit;
@@ -106,17 +107,32 @@ try {
     die();
 }
 
-// Recording file spec
-// Format: Timestamp_aaaammdd_hhmm_src_dst.wav
+$src = $request->getOriginalCallerid();
+
+    if (class_exists("Agents_Agent") || class_exists("Agents_Manager")) {
+
+        $validaAgente = Agents_Manager::getConfig();
+        $validaSrc = (int) $validaAgente["alterSrc"];
+
+        if ($validaSrc == true) {
+            $src = $request->origem;
+        } else {
+            $src = $request->getOriginalCallerid();
+        }
+    }
+
+// Definindo nome do arquivo de gravação.
+// Formato: Timestamp_aaaammdd_hhmm_src_dst.wav
 $filename = implode("_", array(
-            time(),
-            date("Ymd"),
-            date("Hi"),
-            $request->getOriginalCallerid(),
-            $request->getOriginalExtension()
+    time(),
+    date("Ymd"),
+    date("Hi"),
+    $src,
+    $request->getOriginalExtension()
         ));
 
-// Defining the CDR(userfield) to call file name so we can find it later.
+// Definindo userfield com o nome do arquivo para que se possa encontrar a
+// gravação a partir do registro no CDR.
 $lastuserfield = $asterisk->get_variable('CDR(userfield)');
 if ($lastuserfield['data'] === "") {
     $asterisk->set_variable("CDR(userfield)", $filename);

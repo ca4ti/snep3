@@ -119,10 +119,10 @@ class Snep_Manutencao {
         if (file_exists($arquivos)) {
 
             // Se existir pasta com data, já organizado pelo movefiles.
-            if (file_exists($arquivos . "/" . $data . "/" . $hora . "/" . $userfield . ".wav")) {
-                return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".wav";
-            } elseif (file_exists($arquivos . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3")) {
-                return "/snep/arquivos/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
+            if (file_exists($arquivos . "/" . $data . "/" . $userfield . ".wav")) {
+                return "/snep/arquivos/" . $data . "/" . $userfield . ".wav";
+            } elseif (file_exists($arquivos . "/" . $data . "/" . $userfield . ".mp3")) {
+                return "/snep/arquivos/" . $data . "/" . $userfield . ".mp3";
             } elseif ($conf == true) {
 
                 if (file_exists($arquivos . "/" . $conference[3] . "/" . $userfield . ".wav")) {
@@ -134,12 +134,12 @@ class Snep_Manutencao {
 
                 foreach ($storages as $storage) {
 
-                    if (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".wav")) {
-                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".wav";
-                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3")) {
-                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".mp3";
-                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV")) {
-                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $hora . "/" . $userfield . ".WAV";
+                    if (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $userfield . ".wav")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $userfield . ".wav";
+                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $userfield . ".mp3")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $userfield . ".mp3";
+                    } elseif (file_exists($arquivos . "/" . $storage . "/" . $data . "/" . $userfield . ".WAV")) {
+                        return "/snep/arquivos/" . $storage . "/" . $data . "/" . $userfield . ".WAV";
                     } elseif ($conf == true) {
 
                         if (file_exists($arquivos . "/" . $storage . "/" . $conference[3] . "/" . $userfield . ".wav")) {

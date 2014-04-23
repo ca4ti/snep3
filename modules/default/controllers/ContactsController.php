@@ -66,9 +66,7 @@ class ContactsController extends Zend_Controller_Action {
         $opcoes = array("name" => $this->view->translate("Name"),
             "city" => $this->view->translate("City"),
             "state" => $this->view->translate("State"),
-            "cep" => $this->view->translate("ZIP Code"),
-            "phone_1" => $this->view->translate("Phone"),
-            "cell_1" => $this->view->translate("Cellphone"));
+            "cep" => $this->view->translate("ZIP Code"));
 
         $filter = new Snep_Form_Filter();
         $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
@@ -144,6 +142,7 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             if ($form_isValid) {
+                
                 Snep_Contacts_Manager::add($_POST);
                 $numbers = explode(",", $_POST['phoneValue']);
                 foreach ($numbers as $key => $phone) {

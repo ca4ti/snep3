@@ -48,9 +48,9 @@ class CostCenterController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
-        $this->view->types = array('E' => $this->view->translate('Entrada'),
-            'S' => $this->view->translate('Saída'),
-            'O' => $this->view->translate('Outras'));
+        $this->view->types = array('E' => $this->view->translate('Incoming'),
+            'S' => $this->view->translate('Outgoing '),
+            'O' => $this->view->translate('Other'));
 
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
@@ -156,6 +156,17 @@ class CostCenterController extends Zend_Controller_Action {
             'tipo' => $this->view->translate('Type'),
             'nome' => $this->view->translate('Name'),
             'descricao' => $this->view->translate('Description'));
+
+        foreach ($costCenter as $key => $cc) {
+
+            if ($cc["tipo"] == 'E') {
+                $costCenter[$key]["tipo"] = $this->view->translate('Incoming');
+            } elseif ($cc["tipo"] == 'S') {
+                $costCenter[$key]["tipo"] = $this->view->translate('Outgoing');
+            } else {
+                $costCenter[$key]["tipo"] = $this->view->translate('Other');
+            }
+        }
 
         $csv = new Snep_Csv();
         $csv_data = $csv->generate($costCenter, $headers);

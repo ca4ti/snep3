@@ -30,8 +30,10 @@ echo $this->render('filter.phtml');
                     <td> <?php echo date('d/m/Y H:i:s', strtotime($profile['created'])) ?> </td>
                     <td> <?php echo date('d/m/Y H:i:s', strtotime($profile['updated'])) ?> </td>
                     <td class="action">
+                         <?php if ($profile['id'] != 1) { ?>
                         <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $profile['id'] ?>">
                             <?php echo $this->translate('Edit') ?>
+                             <?php } ?>
                         </a>
                     </td>
 

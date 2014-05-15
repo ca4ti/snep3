@@ -373,7 +373,8 @@ class ContactsController extends Zend_Controller_Action {
             while (!feof($handle)) {
                 $line = fgets($handle, 4096);
                 if (strpos($line, ",")) {
-                    $row = explode(",", preg_replace("/[^a-zA-Z0-9,\._\*#]/", "", $line));
+
+                    $row = explode(",", preg_replace("/[^a-zA-Z0-9éúíóáÉÚÍÓÁèùìòàÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ,\._\*#]/", "", $line));
 
                     if (count($row) != $column_count) {
                         throw new ErrorException($this->view->translate("Invalid column count on line %d", $row_number));
@@ -382,6 +383,7 @@ class ContactsController extends Zend_Controller_Action {
                     $row_number++;
                 }
             }
+
             fclose($handle);
 
             $standard_fields = array("discard" => $this->view->translate("Discard"),
@@ -390,8 +392,7 @@ class ContactsController extends Zend_Controller_Action {
                 "city" => $this->view->translate("City"),
                 "state" => $this->view->translate("State"),
                 "zipcode" => $this->view->translate("Zip Code"),
-                "phone" => $this->view->translate("Phone"),
-                "cell" => $this->view->translate("Cellphone"));
+                "phone" => $this->view->translate("Phone"));
 
             $session = new Zend_Session_Namespace('csv');
             $session->data = $csv;
@@ -436,10 +437,10 @@ class ContactsController extends Zend_Controller_Action {
             $stmt = $db->query($select);
             $contacts = $stmt->fetchAll();
 
-            if(empty($contacts)){
+            if (empty($contacts)) {
                 $this->_redirect($this->getRequest()->getControllerName() . '/errorExport');
             }
-            
+
             foreach ($contacts as $key => $contact) {
                 $phones = Snep_Contacts_Manager::getPhone($contact['id']);
                 $phone = "";
@@ -513,8 +514,7 @@ class ContactsController extends Zend_Controller_Action {
                     "city" => "",
                     "state" => "",
                     "zipcode" => "",
-                    "phone" => "",
-                    "cell" => "");
+                    "phone" => "");
 
                 $addEntry = true;
                 foreach ($contact as $column => $data) {
@@ -529,14 +529,15 @@ class ContactsController extends Zend_Controller_Action {
                 if (!array_key_exists('name', $contactData) || !$validateEmpty->isValid($contactData['name'])) {
                     $addEntry = false;
                     $error[] = $contactData;
-                } else if ((!array_key_exists('phone', $contactData) || !$validateEmpty->isValid($contactData['phone'])) &&
-                        (!array_key_exists('cell', $contactData) || !$validateEmpty->isValid($contactData['cell']))) {
+                } else if ((!array_key_exists('phone', $contactData) || !$validateEmpty->isValid($contactData['phone']))) {
                     $addEntry = false;
                     $error[] = $contactData;
                 }
 
                 if ($addEntry) {
+
                     Snep_Contacts_Manager::add($contactData);
+                    Snep_Contacts_Manager::addNumber($contactData['id'], $contactData['phone']);
                 } else {
 
                     $errorAdd = true;
@@ -552,8 +553,7 @@ class ContactsController extends Zend_Controller_Action {
             }
         }
         if (!$errorAdd) {
-            echo "A";
-            exit;
+
             $this->_redirect($this->getRequest()->getControllerName());
         }
     }
@@ -561,7 +561,7 @@ class ContactsController extends Zend_Controller_Action {
     public function errorAction() {
         
     }
-    
+
     public function errorexportAction() {
         
     }

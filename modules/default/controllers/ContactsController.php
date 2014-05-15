@@ -142,7 +142,7 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             if ($form_isValid) {
-                
+
                 Snep_Contacts_Manager::add($_POST);
                 $numbers = explode(",", $_POST['phoneValue']);
                 foreach ($numbers as $key => $phone) {
@@ -436,6 +436,10 @@ class ContactsController extends Zend_Controller_Action {
             $stmt = $db->query($select);
             $contacts = $stmt->fetchAll();
 
+            if(empty($contacts)){
+                $this->_redirect($this->getRequest()->getControllerName() . '/errorExport');
+            }
+            
             foreach ($contacts as $key => $contact) {
                 $phones = Snep_Contacts_Manager::getPhone($contact['id']);
                 $phone = "";
@@ -495,6 +499,7 @@ class ContactsController extends Zend_Controller_Action {
             $validateEmpty = new Zend_Validate_NotEmpty();
             $validateAlnum = new Zend_Validate_Alnum();
             $error = array();
+            $errorAdd = false;
 
             foreach ($session->data as $contact) {
 
@@ -532,6 +537,10 @@ class ContactsController extends Zend_Controller_Action {
 
                 if ($addEntry) {
                     Snep_Contacts_Manager::add($contactData);
+                } else {
+
+                    $errorAdd = true;
+                    $this->_redirect($this->getRequest()->getControllerName() . '/error');
                 }
             }
             if (count($error) > 0) {
@@ -542,7 +551,19 @@ class ContactsController extends Zend_Controller_Action {
                 throw new ErrorException($errorString);
             }
         }
-        $this->_redirect($this->getRequest()->getControllerName());
+        if (!$errorAdd) {
+            echo "A";
+            exit;
+            $this->_redirect($this->getRequest()->getControllerName());
+        }
+    }
+
+    public function errorAction() {
+        
+    }
+    
+    public function errorexportAction() {
+        
     }
 
 }

@@ -161,6 +161,7 @@ class ContactGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
+                
                 $groupId = Snep_ContactGroups_Manager::edit(array('group' => $dados['group'], 'id' => $dados['id']));
                 if ($dados['box_add']) {
                     foreach ($dados['box_add'] as $id => $idContact) {
@@ -177,6 +178,7 @@ class ContactGroupsController extends Zend_Controller_Action {
      * Remove a Contact Group
      */
     public function removeAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
@@ -219,6 +221,7 @@ class ContactGroupsController extends Zend_Controller_Action {
      * Migrate contacts to other Contact Group
      */
     public function migrationAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Manage"),
                     $this->view->translate("Contact Group"),
@@ -249,10 +252,9 @@ class ContactGroupsController extends Zend_Controller_Action {
         $this->view->message = $this->view->translate("The excluded group has associated contacts.");
 
         $form->getElement('id')->setValue($id);
-        $form->removeElement('id');
         $stage = $this->_request->getParam('stage');
 
-        if (isset($stage['stage']) && $id) {
+        if ($stage && $id) {
 
             if ($_POST['option'] == 'migrate') {
 

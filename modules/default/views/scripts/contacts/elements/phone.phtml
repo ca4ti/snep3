@@ -1,5 +1,5 @@
 <input type="hidden" name="phoneValue" id="phoneValue" value="--"  /><?php echo $this->translate("DDD + Number. Example: 4899999999"); ?>
-<ul id="phone" style="list-style:none; padding: 0px; margin: 0px;"  onkeypress="return onlyDigit(event)" ></ul>
+<ul id="phone" style="list-style:none; padding: 0px; margin: 0px;"  onkeydown = "BloqueiaComando(event)" onkeypress="return onlyDigit(event)" ></ul>
 
 
 <script type="text/javascript">
@@ -12,3 +12,25 @@
         }
     }
 </script>
+
+<script language="javascript">
+
+    function BloqueiaComando(event) {
+        var tecla = String.fromCharCode(event.keyCode).toLowerCase();
+
+        if (event.ctrlKey && (tecla == "c" || tecla == "v")) {
+            window.event ? event.returnValue = false : event.preventDefault();
+            return false
+        }
+    }
+</script>
+
+<script>
+    function click() {
+        if (event.button == 2 || event.button == 3) {
+            oncontextmenu = 'return false';
+        }
+    }
+    document.onmousedown = click
+    document.oncontextmenu = new Function("return false;")
+</script> 

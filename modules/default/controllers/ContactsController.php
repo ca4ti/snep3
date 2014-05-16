@@ -302,8 +302,8 @@ class ContactsController extends Zend_Controller_Action {
             }
 
             foreach ($groups as $group) {
-                $contact = Snep_Contacts_Manager::getMember($group);
-
+                
+                $contact = Snep_Contacts_Manager::getMember($group['id']);
                 foreach ($contact as $key => $id) {
                     Snep_Contacts_Manager::removePhone($id['id']);
                 }

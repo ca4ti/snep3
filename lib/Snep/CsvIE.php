@@ -164,6 +164,7 @@ class Snep_CsvIE {
                 'Total de cadastros a serem exportados: <b>' . $total . '</b>' .
                 '<div class="menus">' .
                 '<br><br><input type="submit" style="width:100px;" name="submit" id="submit" title="Download" value="Download">' .
+                ' <a href="../"> <input type="submit" style="width:100px;" name="submit" id="submit" title="Voltar" value="Voltar">' .
                 '</div>' .
                 '</div>' .
                 '</div>' .

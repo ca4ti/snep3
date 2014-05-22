@@ -735,9 +735,10 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->_request->getParam('download')) {
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
-
+            
             $ie->export();
         } else {
+            
             $this->view->form = $ie->exportResult();
             $this->view->title = "Export";
             $this->render('import-export');
@@ -815,7 +816,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
                         $postData["extension"]["exten"] = $exten;
                         $postData["extension"]["password"] = $exten . $exten;
-                        $postData["extension"]["name"] = 'Ramal' . $exten . '<' . $exten . '>';
+                        $postData["extension"]["name"] = $this->view->translate("Extension ") . $exten . '<' . $exten . '>';
                         $postData["sip"]["password"] = $exten;
                         $postData["iax"]["password"] = $exten;
 

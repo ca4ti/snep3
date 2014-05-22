@@ -62,7 +62,7 @@ class TrunksController extends Zend_Controller_Action {
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("`$field` like '%$query%'");
+            $select .= (" where t.`$field` like '%$query%'");
         }
 
         $page = $this->_request->getParam('page');

@@ -161,10 +161,22 @@ class ContactGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
-                
+
                 $groupId = Snep_ContactGroups_Manager::edit(array('group' => $dados['group'], 'id' => $dados['id']));
+                $members = Snep_Contacts_Manager::getMember($dados['id']);
+
+                // remove contacts of group and insert in default group
+                if ($dados['box']) {
+                    foreach ($dados['box'] as $id => $idContact) {
+
+                        Snep_ContactGroups_Manager::removeContactOnGroup($idContact);
+                    }
+                }
+
+                // add contacts
                 if ($dados['box_add']) {
                     foreach ($dados['box_add'] as $id => $idContact) {
+
                         Snep_ContactGroups_Manager::insertContactOnGroup($dados['id'], $idContact);
                     }
                 }

@@ -127,6 +127,16 @@ class Snep_ContactGroups_Manager {
         
     }
     
+    public function removeContactOnGroup($contactId) {
+
+        $db = Zend_Registry::get('db');
+        
+        $update_data = array("group" => 1);
+
+        $db->update("contacts_names", $update_data, "id = '{$contactId}'");
+        
+    }
+    
     /**
      * Method do return all contacts by group id
      * @param int $id

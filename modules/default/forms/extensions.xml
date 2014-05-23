@@ -15,12 +15,11 @@
                 <type>Text</type>
                 <options>
                     <label>Extension</label>
-                    <required>true</required>
                     <validators>
                         <regex>
                             <validator>regex</validator>
                             <options>
-                                <pattern>/^(([0-9]?)+)$/</pattern>
+                                <pattern>/^(([0-9]\.?)+)$/</pattern>
                                 <messages>
                                     <regexNotMatch>This field should contain numbers only</regexNotMatch>
                                 </messages>
@@ -29,8 +28,8 @@
                         <strlen>
                             <validator>StringLength</validator>
                             <options>
-                                <min>3</min>
-                                <max>5</max>
+                                <min>1</min>
+                                <max>7</max>
                             </options>
                         </strlen>
                     </validators>
@@ -40,6 +39,17 @@
                 <type>Password</type>
                 <options>
                     <label>Password Padlock</label>
+                    <validators>
+                        <regex>
+                            <validator>regex</validator>
+                            <options>
+                                <pattern>/^(([0-9]\.?)+)$/</pattern>
+                                <messages>
+                                    <regexNotMatch>This field should contain numbers only</regexNotMatch>
+                                </messages>
+                            </options>
+                        </regex>
+                    </validators>
                 </options>
             </password>
             <name>
@@ -163,7 +173,6 @@
                 <type>Password</type>
                 <options>
                     <label>Password</label>
-                    <required>true</required>
                 </options>
             </password>
             <calllimit>

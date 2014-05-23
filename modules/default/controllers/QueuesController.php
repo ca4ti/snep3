@@ -370,24 +370,19 @@ class QueuesController extends Zend_Controller_Action {
      */
     public function removeAction() {
 
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Queues"),
-                    $this->view->translate("Delete")));
-
-        $db = Zend_Registry::get('db');
         $id = $this->_request->getParam('id');
-        $confirm = $this->_request->getParam('confirm');
 
         // check if the queues is used in the rule or have members 
         $regras = Snep_Queues_Manager::getValidation($id);
         $exten_members = Snep_Queues_Manager::getValidationPeers($id);
         $agent_members = Snep_Queues_Manager::getValidationAgent($id);
+        $error = false;
 
         if (count($exten_members) > 0 || count($agent_members) > 0) {
             $msg = $this->view->translate("The following members make use of this queue, remove before deleting:") . "<br />\n";
 
             if (count($exten_members) > 0) {
+                $error = true;
                 $valida = 1;
 
                 foreach ($exten_members as $membros) {
@@ -398,47 +393,44 @@ class QueuesController extends Zend_Controller_Action {
             }
 
             if (count($agent_members) > 0) {
+                $error = true;
                 $valida = 1;
                 foreach ($agent_members as $member_agent) {
                     $msg .= $this->view->translate("Agent:") . $member_agent['agent_id'] . "<br/>\n";
                 }
             }
+
             $this->view->error = $msg . "<br />";
             $this->_helper->viewRenderer('error');
         }
 
         if (count($regras) > 0) {
-
+            $error = true;
             $this->view->error = $this->view->translate("Cannot remove. The following routes are using this queues: ") . "<br />";
             foreach ($regras as $regra) {
 
                 $this->view->error .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
             }
-
+        }
+        if ($error) {
             $this->_helper->viewRenderer('error');
         } else {
-            if ($confirm == 1) {
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $add = Snep_Queues_Manager::get($id);
-                }
-
-                Snep_Queues_Manager::removeQueuePeers($id);
-                Snep_Queues_Manager::remove($id);
-                Snep_Queues_Manager::removeQueues($id);
-
-                if (class_exists("Loguser_Manager")) {
-
-                    Snep_LogUser::salvaLog("Excluiu Fila", $id, 7);
-                    Snep_Queues_Manager::insertLogQueue("DEL", $add);
-                }
-
-                $this->_redirect($this->getRequest()->getControllerName());
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+                $add = Snep_Queues_Manager::get($id);
             }
 
-            $this->view->message = $this->view->translate("Are you sure you want to delete this queue?");
-            $this->view->confirm = $this->getRequest()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/remove/id/' . $id . '/confirm/1';
+            Snep_Queues_Manager::removeQueuePeers($id);
+            Snep_Queues_Manager::remove($id);
+            Snep_Queues_Manager::removeQueues($id);
+
+            if (class_exists("Loguser_Manager")) {
+
+                Snep_LogUser::salvaLog("Excluiu Fila", $id, 7);
+                Snep_Queues_Manager::insertLogQueue("DEL", $add);
+            }
+
+            $this->_redirect($this->getRequest()->getControllerName());
         }
     }
 

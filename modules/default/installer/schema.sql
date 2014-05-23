@@ -334,6 +334,7 @@ CREATE TABLE IF NOT EXISTS `queue_peers` (
 -- Table structure for table `queues`
 --
 CREATE TABLE IF NOT EXISTS `queues` (
+  `id` integer auto_increment,
   `name` varchar(128) NOT NULL,
   `musiconhold` varchar(128) default NULL,
   `announce` varchar(128) default NULL,
@@ -371,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `queues` (
   `max_call_queue` int(11) default '0',
   `max_time_call` int(11) default '0',
   `alert_mail` varchar(80) default NULL,
-  PRIMARY KEY  (`name`)
+  PRIMARY KEY  (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

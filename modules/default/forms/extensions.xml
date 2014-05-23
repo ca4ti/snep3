@@ -15,18 +15,38 @@
                 <type>Text</type>
                 <options>
                     <label>Extension</label>
+                    <required>true</required>
+                    <validators>
+                        <regex>
+                            <validator>regex</validator>
+                            <options>
+                                <pattern>/^(([0-9]?)+)$/</pattern>
+                                <messages>
+                                    <regexNotMatch>This field should contain numbers only</regexNotMatch>
+                                </messages>
+                            </options>
+                        </regex>
+                        <strlen>
+                            <validator>StringLength</validator>
+                            <options>
+                                <min>3</min>
+                                <max>5</max>
+                            </options>
+                        </strlen>
+                    </validators>
                 </options>
             </exten>
             <password>
                 <type>Password</type>
                 <options>
-                    <label>Password</label>
+                    <label>Password Padlock</label>
                 </options>
             </password>
             <name>
                 <type>Text</type>
                 <options>
                     <label>Name</label>
+                    <required>true</required>
                 </options>
             </name>
             <exten_group>
@@ -143,6 +163,7 @@
                 <type>Password</type>
                 <options>
                     <label>Password</label>
+                    <required>true</required>
                 </options>
             </password>
             <calllimit>

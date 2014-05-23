@@ -10,6 +10,23 @@
                     <description>
                         Ex: 1000-1050;1060;1063;1070-1100
                     </description>
+                    <validators>
+                        <regex>
+                            <validator>regex</validator>
+                            <options>
+                                <pattern>/^(([0-9]\-?\;?)+)$/</pattern>
+                                <messages>
+                                    <regexNotMatch>This field should contain numbers only</regexNotMatch>
+                                </messages>
+                            </options>
+                        </regex>
+                        <strlen>
+                            <validator>StringLength</validator>
+                            <options>
+                                <min>7</min>
+                            </options>
+                        </strlen>
+                    </validators>
                 </options>
             </exten>
             <exten_group>

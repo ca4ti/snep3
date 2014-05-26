@@ -60,7 +60,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $select = $db->select()
                 ->from("groups", array("name", "inherit"))
-                ->where("name not in ('all','users','administrator') ");
+                ->where("name not in ('all','users','administrator','NULL') ");
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
@@ -146,6 +146,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Extensions'), $extensions);
 
         if ($this->getRequest()->getPost()) {
+
 
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
@@ -242,17 +243,17 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
             $idGroup = $dados['id'];
 
-            $this->view->group = Snep_ExtensionsGroups_Manager::editGroup(array('name' => $dados['name'], 'type' => $dados['type'], 'id' => $idGroup));
-
-            foreach (Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($id) as $extensionsGroup) {
-
-                Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $extensionsGroup['name'], 'group' => 'all'));
-            }
-
             if ($dados['box_add']) {
 
                 foreach ($dados['box_add'] as $id => $dados['name']) {
-                    $this->view->extensions = Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
+                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
+                }
+            }
+
+            if ($dados['box']) {
+
+                foreach ($dados['box'] as $id => $dados['name']) {
+                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => 'all'));
                 }
             }
 

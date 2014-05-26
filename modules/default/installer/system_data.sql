@@ -28,6 +28,7 @@ INSERT INTO `expr_alias_expression` VALUES (4,'0|XX[6-9]XXXXXXX');
 INSERT INTO groups VALUES ('all',null);
 INSERT INTO groups VALUES ('admin','all');
 INSERT INTO groups VALUES ('users','all');
+INSERT INTO groups VALUES ('NULL',null);
 
 INSERT INTO `contacts_group` VALUES (1, 'Default');
 

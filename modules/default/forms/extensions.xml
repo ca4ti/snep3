@@ -15,6 +15,7 @@
                 <type>Text</type>
                 <options>
                     <label>Extension</label>
+                    <required>true</required>
                     <validators>
                         <regex>
                             <validator>regex</validator>

@@ -161,13 +161,15 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->boardData = $this->boardData;
 
         if ($this->getRequest()->isPost()) {
-            if (key_exists('virtual_error', $postData)) {
-                $this->view->error = "There's no trunks registered on the system. Try a different technology";
-                $this->view->form->valid(false);
-            }
+
 
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
+
+                if (key_exists('virtual_error', $postData)) {
+                    $this->view->error = "There's no trunks registered on the system. Try a different technology";
+                    $this->view->form->valid(false);
+                }
 
                 $ret = $this->execAdd($postData);
 
@@ -735,10 +737,10 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->_request->getParam('download')) {
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
-            
+
             $ie->export();
         } else {
-            
+
             $this->view->form = $ie->exportResult();
             $this->view->title = "Export";
             $this->render('import-export');

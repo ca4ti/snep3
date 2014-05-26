@@ -2,6 +2,7 @@
 $this->headLink()->appendStylesheet($this->baseUrl() . "/css/index.css");
 $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 ?>
 
 <form method="post">
@@ -10,10 +11,11 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
         <thead>
             <tr>
                 <th> <?php echo $this->translate('Code') ?> </th>
-                <th> <?php echo $this->translate('Restricted Access') ?> </th>
-                <th> <?php echo $this->translate('Cost Center') ?> </th>
                 <th class="action"> <?php echo $this->translate('Active') ?> </th>
                 <th class="action"> <?php echo $this->translate('Recording') ?> </th>
+                <th> <?php echo $this->translate('Restricted Access') ?> </th>
+                <th> <?php echo $this->translate('Cost Center') ?> </th>
+
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,15 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
                     <?php ($c ? $c = 0 : $c = 1 ); ?>
                     <tr class="c<?php echo $c ?>">
                         <td class="numeric"> <b> <?php echo $conferenceRooms['id'] ?> </b> </td>
+                        <td class="action">
+                            <?php ( $conferenceRooms['status'] ? $chek = 'checked' : $chek = '') ?>
+                            <input type="checkbox" id="hab_<?php echo $conferenceRooms['id'] ?>" class="newcheck" onclick="habilita('<?php echo $conferenceRooms['id'] ?>');" <?php echo $chek ?> value="<?php $conferenceRooms['status'] ?>"  name="activate[<?php echo $conferenceRooms['id'] ?>]">
+                        </td>
+                        <td class="action">
+                            <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
+
+                            <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
+                        </td>
                         <td class="password">
 
                             <?php
@@ -41,7 +52,7 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
                                 $display = '';
                             }
                             ?>                    
-                            <input type='checkbox' <?php echo $checked ?> name='authenticate[<?php echo $conferenceRooms['id'] ?>]' onclick="pass('<?php echo $conferenceRooms['id'] ?>');">
+                            <input id="auth_<?php echo $conferenceRooms['id'] ?>" type='checkbox' disabled="true" <?php echo $checked ?> name='authenticate[<?php echo $conferenceRooms['id'] ?>]' onclick="pass('<?php echo $conferenceRooms['id'] ?>');">
                             <?php echo $this->translate('Password Authentication') ?>
                             <div id="box_<?php echo $conferenceRooms['id'] ?>"  <?php echo $display ?> >                        
                                 <input type="password" name="password[<?php echo $conferenceRooms['id'] ?>]" onkeydown = "BloqueiaComando(event)" onkeypress="return onlyDigit(event)"  value="<?php echo $conferenceRooms['authenticate'] ?>">
@@ -60,15 +71,7 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
                                     <?php endforeach ?>
                             </select>
                         </td>
-                        <td class="action">
-                            <?php ( $conferenceRooms['status'] ? $chek = 'checked' : $chek = '') ?>
-                            <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['status'] ?>"  name="activate[<?php echo $conferenceRooms['id'] ?>]">
-                        </td>
-                        <td class="action">
-                            <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
 
-                            <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
-                        </td>
                     </tr>
                 <?php endforeach ?>
             <?php endif ?>
@@ -117,4 +120,14 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scripta
     }
     document.onmousedown = click
     document.oncontextmenu = new Function("return false;")
+
+    function habilita(id) {
+
+        if (document.getElementById('hab_' + id).checked == true) {
+            document.getElementById('auth_' + id).disabled = false;
+        } else {
+            document.getElementById('auth_' + id).disabled = true;
+        }
+    }
+
 </script> 

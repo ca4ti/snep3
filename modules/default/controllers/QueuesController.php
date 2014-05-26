@@ -478,9 +478,18 @@ class QueuesController extends Zend_Controller_Action {
         $this->view->form = $form;
 
         if ($this->_request->getPost()) {
-            Snep_Queues_Manager::removeAllMembers($queue);
+
+            // remove members 
+            if (isset($_POST['box'])) {
+                foreach ($_POST['box'] as $id => $del) {
+
+                    Snep_Queues_Manager::removeMember($del);
+                }
+            }
+
 
             if (isset($_POST['box_add'])) {
+                Snep_Queues_Manager::removeAllMembers($queue);
                 foreach ($_POST['box_add'] as $add) {
                     Snep_Queues_Manager::insertMember($queue, $add);
                 }

@@ -127,6 +127,10 @@ class Snep_ContactGroups_Manager {
         
     }
     
+    /**
+     * Remove contact on group and insert in default group
+     * @param type $contactId
+     */
     public function removeContactOnGroup($contactId) {
 
         $db = Zend_Registry::get('db');

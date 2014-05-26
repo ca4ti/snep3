@@ -230,6 +230,24 @@ class Snep_Queues_Manager {
             $db->rollBack();
         }
     }
+    
+    /**
+     * Remove queue member
+     * @param string $member
+     */
+    public function removeMember($member) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('queue_members', "membername = '$member'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
 
     /**
      * Insert member on queue

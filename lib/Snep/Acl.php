@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of SNEP.
  *
@@ -15,7 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 require_once "Zend/Acl.php";
 
 /**
@@ -35,7 +35,8 @@ class Snep_Acl extends Zend_Acl {
      */
     protected static $instance;
 
-    protected function  __clone() { /*Singleton*/ }
+    protected function __clone() { /* Singleton */
+    }
 
     /**
      * Class constructor and base resources inicialization.
@@ -53,9 +54,29 @@ class Snep_Acl extends Zend_Acl {
      * @return Snep_Acl
      */
     public static function getInstance() {
-        if( self::$instance === null ) {
+        if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
+
+    /**
+     * check if exists username discarding case sensitive
+     * @param <string> $username
+     * @return <array>
+     */
+    public function getCaseSensitive($username) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('users')
+                ->where("name = BINARY '$username'");
+
+        $stmt = $db->query($select);
+        $case = $stmt->fetch();
+
+        return $case;
+    }
+
 }

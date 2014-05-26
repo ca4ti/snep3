@@ -62,8 +62,10 @@ class AuthController extends Zend_Controller_Action {
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
             $password = $this->_request->getPost('password');
-
-            if (empty($username)) {
+            
+            $case = Snep_Acl::getCaseSensitive($username);
+            
+            if (empty($username) || empty($case)) {
                 $this->view->message = $this->view->translate("Please enter a username");
                 $this->view->msgclass = 'failure';
             } else {

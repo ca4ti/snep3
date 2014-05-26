@@ -162,10 +162,9 @@ class ExtensionsController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
 
-
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
-
+  
                 if (key_exists('virtual_error', $postData)) {
                     $this->view->error = "There's no trunks registered on the system. Try a different technology";
                     $this->view->form->valid(false);
@@ -247,13 +246,12 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
-
         $name = $exten["name"];
         $nameField = $form->getSubForm('extension')->getElement('exten');
         $nameField->setValue($name);
-        $nameField->setAttrib('readonly', true);
-        $nameField->setAttrib('disabled', true);
-
+//        $nameField->setAttrib('readonly', true);
+//        $nameField->setAttrib('disabled', true);
+        
         if (!$exten["canal"] || $exten["canal"] == 'INVALID' || substr($exten["canal"], 0, strpos($exten["canal"], '/')) == '') {
             $techType = 'manual';
         } else {

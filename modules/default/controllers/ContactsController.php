@@ -374,7 +374,7 @@ class ContactsController extends Zend_Controller_Action {
                 $line = fgets($handle, 4096);
                 if (strpos($line, ",")) {
 
-                    $row = explode(",", preg_replace("/[^a-zA-Z0-9éúíóáÉÚÍÓÁèùìòàÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ,\._\*#]/", "", $line));
+                    $row = explode(",", preg_replace("/[^a-zA-Z0-9 éúíóáÉÚÍÓÁèùìòàÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ,\._\*#]/", "", $line));
 
                     if (count($row) != $column_count) {
                         throw new ErrorException($this->view->translate("Invalid column count on line %d", $row_number));

@@ -405,8 +405,8 @@ class ContactsController extends Zend_Controller_Action {
             if (!count($_groups) > 0) {
                 $this->view->error = $this->view->translate('There is no contacts group registered.');
             }
-
-            $this->view->csvprocess = array_slice($csv, 0, 10);
+            
+            $this->view->csvprocess = array_slice($csv, 0, count($csv)+1);
             $this->view->fields = $standard_fields;
             ( isset($groups) ? $this->view->group = $groups : $this->view->group = false);
         }

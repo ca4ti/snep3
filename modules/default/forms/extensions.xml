@@ -195,7 +195,7 @@
                         <regex>
                             <validator>regex</validator>
                             <options>
-                                <pattern>/[[:digit:]]/i</pattern>
+                                <pattern>/^(([0-9]?)+)$/</pattern>
                                 <messages>
                                     <regexNotMatch>This field should contain numbers only</regexNotMatch>
                                 </messages>

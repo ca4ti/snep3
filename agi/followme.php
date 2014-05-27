@@ -16,25 +16,31 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * @file Script agi que faz a ativacao/desativacao do sigame
  */
-
 // Importando as configura��es para AGI's
 require_once("agi_base.php");
 
+$origem = $argv['2'];
+$sql = "SELECT cancallforward FROM peers WHERE name='$origem'";
+$result = $db->query($sql)->fetch();
 
-if(isset($argv[1]) && is_numeric($argv[1])) {
+if ($result['cancallforward'] == 'yes') {
+    $hab = true;
+} else {
+    $hab = false;
+}
+
+if (isset($argv[1]) && is_numeric($argv[1]) && $hab == true) {
     $funcao = "enable";
     $ramal = $argv[1];
-}
-else {
+} else {
     $funcao = "disable";
 }
 
 try {
-    if($funcao == "enable") {
+    if ($funcao == "enable") {
         // Ativando o serviço
         $sql = "UPDATE `peers` SET sigame='$ramal' WHERE name='{$asterisk->request['agi_callerid']}'";
         $db->query($sql);
@@ -44,18 +50,21 @@ try {
         $db->query($sql);
 
         $asterisk->stream_file("activated");
-    }
-    else {
+    } else {
         // Desativando o serviço
         $sql = "UPDATE `peers` SET sigame=NULL WHERE name='{$asterisk->request['agi_callerid']}'";
         $db->query($sql);
-        
+
         // Gerando entrada no log
         $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'SIGAME', False, 'Sigame desativado')";
         $db->query($sql);
     }
-}
-catch(Exception $ex) {
+
+    if (!$hab) {
+        $asterisk->verbose("Ramal não pode habilitar o siga-me");
+        $asterisk->stream_file("pm-invalid-option");
+    }
+} catch (Exception $ex) {
     $asterisk->verbose($ex->getMessage());
     exit(1);
 }

@@ -125,7 +125,9 @@ class Snep_Extensions {
             $exten->setTimeTotal($data->time_total);
             $exten->setCtrlType($data->time_chargeby);
         }
-
+	
+        $exten->setCancallforward($data->cancallforward);
+        
         return $exten;
     }
 
@@ -215,7 +217,8 @@ class Snep_Extensions {
             "mailbox" => $exten->getMailBox(),
             "authenticate" => $exten->isLocked(),
             "time_total" => $exten->getTimeTotal(),
-            "time_chargeby" => $exten->getCtrlType()
+            "time_chargeby" => $exten->getCtrlType(),
+	          "cancallforward" => $exten->getCancallforward()
         );
 
         /**

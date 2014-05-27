@@ -137,3 +137,6 @@ ALTER TABLE contacts_names ADD COLUMN updated datetime NOT NULL;
 ALTER TABLE contacts_names DROP COLUMN phone_1;
 ALTER TABLE contacts_names DROP COLUMN cell_1;
 ALTER TABLE queues ADD COLUMN id integer auto_increment PRIMARY KEY;
+
+ALTER TABLE `peers` DROP `cancallforward`;
+ALTER TABLE peers ADD COLUMN cancallforward varchar(3) default 'yes';

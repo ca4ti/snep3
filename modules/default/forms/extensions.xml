@@ -122,7 +122,17 @@
                     </multioptions>
                 </options>
             </padlock>
-            
+
+            <cancallforward>
+                <type>MultiCheckbox</type>
+                <options>   		
+                    <label>Cancallforward</label>
+                    <multioptions>
+                        <option>Enabled</option>
+                    </multioptions>
+                </options>
+            </cancallforward> 
+           
             <minute_control>
                 <type>MultiCheckbox</type>
                 <options>

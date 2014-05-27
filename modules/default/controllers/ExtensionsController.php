@@ -164,7 +164,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
             if ($this->view->form->isValid($_POST)) {
                 $postData = $this->_request->getParams();
-  
+
                 if (key_exists('virtual_error', $postData)) {
                     $this->view->error = "There's no trunks registered on the system. Try a different technology";
                     $this->view->form->valid(false);
@@ -246,12 +246,13 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
+
         $name = $exten["name"];
         $nameField = $form->getSubForm('extension')->getElement('exten');
         $nameField->setValue($name);
 //        $nameField->setAttrib('readonly', true);
 //        $nameField->setAttrib('disabled', true);
-        
+
         if (!$exten["canal"] || $exten["canal"] == 'INVALID' || substr($exten["canal"], 0, strpos($exten["canal"], '/')) == '') {
             $techType = 'manual';
         } else {
@@ -284,6 +285,11 @@ class ExtensionsController extends Zend_Controller_Action {
         $padlock = $exten["authenticate"];
         if ($padlock) {
             $form->getSubForm('advanced')->getElement('padlock')->setAttrib('checked', 'checked');
+        }
+
+        $cancallforward = $exten["cancallforward"];
+        if ($cancallforward == 'yes') {
+            $form->getSubForm('advanced')->getElement('cancallforward')->setAttrib('checked', 'checked');
         }
 
         $timeTotal = $exten["time_total"];
@@ -480,6 +486,13 @@ class ExtensionsController extends Zend_Controller_Action {
             $advPadLock = '0';
         }
 
+        $advCancallforward = 'no';
+        if ($formData["advanced"]["cancallforward"]) {
+            $advCancallforward = 'yes';
+        } else {
+            $advCancallforward = 'no';
+        }
+
         //if (key_exists("minute_control", $formData["advanced"])) {
         if ($formData["advanced"]["minute_control"]) {
             $advMinCtrl = true;
@@ -492,7 +505,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $advCtrlType = 'N';
         }
 
-        $defFielsExten = array("accountcode" => "''", "amaflags" => "''", "defaultip" => "''", "host" => "'dynamic'", "insecure" => "''", "language" => "'pt_BR'", "deny" => "''", "permit" => "''", "mask" => "''", "port" => "''", "restrictcid" => "''", "rtptimeout" => "''", "rtpholdtimeout" => "''", "musiconhold" => "'cliente'", "regseconds" => 0, "ipaddr" => "''", "regexten" => "''", "cancallforward" => "'yes'", "setvar" => "''", "disallow" => "'all'", "canreinvite" => "'no'");
+        $defFielsExten = array("accountcode" => "''", "amaflags" => "''", "defaultip" => "''", "host" => "'dynamic'", "insecure" => "''", "language" => "'pt_BR'", "deny" => "''", "permit" => "''", "mask" => "''", "port" => "''", "restrictcid" => "''", "rtptimeout" => "''", "rtpholdtimeout" => "''", "musiconhold" => "'cliente'", "regseconds" => 0, "ipaddr" => "''", "regexten" => "''", "setvar" => "''", "disallow" => "'all'", "canreinvite" => "'no'");
 
         $sqlFieldsExten = $sqlDefaultValues = "";
         foreach ($defFielsExten as $key => $value) {
@@ -519,14 +532,14 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
             $sql.= "nat='$nat',canal='$channel', authenticate=$advPadLock, ";
             $sql.= "`group`='$extenGroup', `directmedia`='$directmedia',";
-            $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType'  WHERE id=$idExt";
+            $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType', cancallforward='$advCancallforward'  WHERE id=$idExt";
         } else {
             $sql = "INSERT INTO peers (";
             $sql.= "name, password,callerid,context,mailbox,qualify,";
             $sql.= "secret,type,allow,fromuser,username,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
-            $sql.= "trunk, `group`, callgroup, time_total, directmedia, ";
+            $sql.= "trunk, `group`, callgroup, time_total, cancallforward, directmedia, ";
             $sql.= "time_chargeby " . $sqlFieldsExten;
             $sql.= ") values (";
             $sql.= "'$exten','$extenPass','$extenName','$context','$exten','$qualify',";
@@ -534,7 +547,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "'$dtmfmode','$advEmail','$callLimit','1',";
             $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',";
             $sql.= "$advPadLock,'no','$extenGroup',";
-            $sql.= "'$extenPickGrp', $advTimeTotal, '$directmedia', '$advCtrlType' " . $sqlDefaultValues;
+            $sql.= "'$extenPickGrp', $advTimeTotal, '$advCancallforward', '$directmedia', '$advCtrlType' " . $sqlDefaultValues;
             $sql.= ")";
         }
 
@@ -841,7 +854,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                     $postData["id"] = $i;
                                     $postData["extension"]["exten"] = $i;
                                     $postData["extension"]["password"] = $i . $i;
-                                    $postData["extension"]["name"] = 'Ramal ' . $i . '<' . $i . '>';
+                                    $postData["extension"]["name"] = $this->view->translate("Extension ") . $i . '<' . $i . '>';
                                     $postData["sip"]["password"] = $i . $i;
                                     $postData["iax2"]["password"] = $i . $i;
 

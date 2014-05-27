@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `regseconds` int(11) NOT NULL default '0',
   `ipaddr` varchar(15) NOT NULL default '',
   `regexten` varchar(80) NOT NULL default '',
-  `cancallforward` char(3) default 'yes',
+  `cancallforward` varchar(3) default 'yes',
   `setvar` varchar(100) NOT NULL default '',
   `email` varchar(255) default NULL,
   `canal` varchar(255) default NULL,

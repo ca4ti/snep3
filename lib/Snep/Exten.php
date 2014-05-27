@@ -180,6 +180,10 @@ class Snep_Exten extends Snep_Usuario {
         return $this->ctrlType;
     }
 
+	public function getCancallforward() {
+        return $this->cancallforward;
+    }
+
     /**
      * getInterface - Retorna a interface física do ramal
      * @return PBX_Asterisk_Interface interface
@@ -291,6 +295,10 @@ class Snep_Exten extends Snep_Usuario {
      */
     public function setCtrlType($ctrl) {
         $this->ctrlType = $ctrl;
+    }
+
+	public function setCancallforward($cancallforward) {
+        $this->cancallforward = $cancallforward;
     }
 
     /**

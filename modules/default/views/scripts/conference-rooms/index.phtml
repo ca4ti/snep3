@@ -126,7 +126,9 @@ $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
         if (document.getElementById('hab_' + id).checked == true) {
             document.getElementById('auth_' + id).disabled = false;
         } else {
+            document.getElementById('auth_' + id).checked = false;
             document.getElementById('auth_' + id).disabled = true;
+            document.getElementById('box_' + id).style.display = 'none';
         }
     }
 

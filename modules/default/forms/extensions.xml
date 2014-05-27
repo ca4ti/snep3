@@ -126,7 +126,7 @@
             <cancallforward>
                 <type>MultiCheckbox</type>
                 <options>   		
-                    <label>Cancallforward</label>
+                    <label>Enable follow-me</label>
                     <multioptions>
                         <option>Enabled</option>
                     </multioptions>

@@ -55,10 +55,18 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                         <br>
                         <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
                     </div>
-
                     <ul class="navmenu">
                         <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>
+                        <li id="default_modules" onclick="modules('maisinfo');"><a href="#"><?php echo $this->translate("Modules"); ?></a>
+                        </li>
                     </ul>
+
+                    <div id="maisinfo" style="display:none">
+                        <ul class="navmenuModule">
+                            <?php echo Snep_Menu::getMasterInstance()->renderChildrenModule(); ?>
+                        </ul>  
+                    </div>
+
                 </div>
             <?php endif; ?>
             <div id="breadcrumb" <?php
@@ -107,4 +115,15 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
     Event.observe('closeLink', 'click', function() {
         test.close();
     });
+
+    var modules = function(obj) {
+
+        var el = document.getElementById(obj);
+        if (el.style.display != 'none') {
+            el.style.display = 'none';
+        }
+        else {
+            el.style.display = '';
+        }
+    }
 </script>

@@ -183,8 +183,31 @@ class Snep_Menu {
      */
     public function renderChildren() {
         $html = "";
+
         foreach ($this->getChildren() as $child) {
-            $html .= $child->render();
+            if (substr($child->id, 0, 7) == 'default') {
+                $html .= $child->render();
+            } else {
+                $html['module'] = $child->renderModule();
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * renderChildren - Render all the children of this menu
+     * @return <string> HTML rendered children
+     */
+    public function renderChildrenModule() {
+        $html = "";
+
+        foreach ($this->getChildren() as $child) {
+            if (substr($child->id, 0, 7) == 'default') {
+                $teste = $child->render();
+            } else {
+                $html .= $child->renderModule();
+            }
         }
         return $html;
     }
@@ -221,6 +244,24 @@ class Snep_Menu {
 
         $html .= "</li>";
 
+        return $html;
+    }
+
+    /**
+     * render - Render the menu and its children
+     * @return <string> HTML rendered menu
+     */
+    public function renderModule() {
+
+        $html = "<li>";
+        $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
+        if (count($this->getChildren()) > 0) {
+            $html .= "<ul>";
+            $html .= $this->renderChildrenModule();
+            $html .= "</ul>";
+        }
+
+        $html .= "</li>";
         return $html;
     }
 

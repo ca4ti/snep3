@@ -188,7 +188,7 @@ class Snep_Menu {
             if (substr($child->id, 0, 7) == 'default') {
                 $html .= $child->render();
             } else {
-                $html['module'] = $child->renderModule();
+                $html .= $child->renderModule();
             }
         }
 

@@ -209,6 +209,7 @@ class Snep_Menu {
                 $html .= $child->renderModule();
             }
         }
+        
         return $html;
     }
 

@@ -63,17 +63,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
 
                     <div id="maisinfo" style="display:none">
                         <ul class="navmenuModule">
-
-
-                            <?php
-                            if (Snep_Menu::getMasterInstance()->renderChildrenModule() == "") {
-                                echo $this->translate("No module installed");
-                            } else {
-                                echo Snep_Menu::getMasterInstance()->renderChildrenModule();
-                            }
-                            ?>
-
-
+                            <?php echo Snep_Menu::getMasterInstance()->renderChildrenModule(); ?>
                         </ul>  
                     </div>
 
@@ -114,26 +104,26 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
 </html>
 
 <script language="javascript" type="text/javascript">
-                        var test;
+    var test;
 
-                        Event.observe(window, 'load', function() {
-                            test = new Lightbox('containerDiv');
-                        });
-                        Event.observe('lightboxLink', 'click', function() {
-                            test.open();
-                        });
-                        Event.observe('closeLink', 'click', function() {
-                            test.close();
-                        });
+    Event.observe(window, 'load', function() {
+        test = new Lightbox('containerDiv');
+    });
+    Event.observe('lightboxLink', 'click', function() {
+        test.open();
+    });
+    Event.observe('closeLink', 'click', function() {
+        test.close();
+    });
 
-                        var modules = function(obj) {
+    var modules = function(obj) {
 
-                            var el = document.getElementById(obj);
-                            if (el.style.display != 'none') {
-                                el.style.display = 'none';
-                            }
-                            else {
-                                el.style.display = '';
-                            }
-                        }
+        var el = document.getElementById(obj);
+        if (el.style.display != 'none') {
+            el.style.display = 'none';
+        }
+        else {
+            el.style.display = '';
+        }
+    }
 </script>

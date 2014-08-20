@@ -36,6 +36,9 @@
         <resource id="queues" label="Queues">
             <resource id="write"></resource>
         </resource>
+        <resource id="queues-groups" label="Queues Groups">
+            <resource id="write"></resource>
+        </resource>
         <resource id="extensions-groups" label="Extension Groups">
             <resource id="write"></resource>
         </resource>

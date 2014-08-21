@@ -55,6 +55,9 @@ class QueuesGroupsController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
+        $this->view->order = Snep_Order::setSelect($select, array("id", "name"), $this->_request);
+
+
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
 
@@ -109,12 +112,25 @@ class QueuesGroupsController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
+            $db = Zend_Registry::get('db');
+            $groupName = $dados['name'];
+
+            $sqlValidName = "SELECT * from group_queues where name = '$groupName'";
+            $selectValidName = $db->query($sqlValidName);
+            $resultGetId = $selectValidName->fetch();
+            
+            if ($resultGetId) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
                 $namegroup = array('nome' => $dados['name']);
                 $groupId = Snep_QueuesGroups_Manager::addGroup($namegroup);
 
                 $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
             }
+            
         }
 
         $this->view->form = $form;
@@ -188,6 +204,18 @@ class QueuesGroupsController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
 
             $dados = $this->_request->getParams();
+
+            $db = Zend_Registry::get('db');
+            $groupName = $dados['name'];
+
+            $sqlValidName = "SELECT * from group_queues where name = '$groupName'";
+            $selectValidName = $db->query($sqlValidName);
+            $resultGetId = $selectValidName->fetch();
+            
+            if ($resultGetId) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
             
             if ($form_isValid) {
                 

@@ -376,6 +376,7 @@ class QueuesController extends Zend_Controller_Action {
         $regras = Snep_Queues_Manager::getValidation($id);
         $exten_members = Snep_Queues_Manager::getValidationPeers($id);
         $agent_members = Snep_Queues_Manager::getValidationAgent($id);
+        $info = Snep_Queues_Manager::get($id);
         $error = false;
 
         if (count($exten_members) > 0 || count($agent_members) > 0) {
@@ -420,6 +421,7 @@ class QueuesController extends Zend_Controller_Action {
                 $add = Snep_Queues_Manager::get($id);
             }
 
+            Snep_Queues_Manager::deleteMembersGroup($info['id']);
             Snep_Queues_Manager::removeQueuePeers($id);
             Snep_Queues_Manager::remove($id);
             Snep_Queues_Manager::removeQueues($id);

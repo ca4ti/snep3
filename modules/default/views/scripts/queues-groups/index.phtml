@@ -1,0 +1,57 @@
+<?php
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/src/scriptaculous.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/registrations.js');
+echo $this->render('filter.phtml');
+?>
+
+<table>
+    <thead>
+        <tr>
+            <th> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?> </th>
+            <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
+        </tr>
+    </thead>
+   
+    <tbody>
+    
+    <?php
+    $c = 0;
+
+    if($this->queuesgroups):
+        foreach($this->queuesgroups as $cha => $val ): ?>
+
+            <?php ($c ? $c = 0 : $c = 1 ); ?>
+            <tr class="c<?php echo $c ?>">
+                <td>
+                    <b><?php echo $val['id']; ?></b>
+                </td>
+                
+                <td> 
+                    <?php echo $val['name']; ?>
+                </td>
+                
+                <td class="action">
+                    <a class="alterar" href='<?php echo $this->URL; ?>edit/id/<?php echo $val['id'] ?>'>
+                        <?php echo $this->translate('Edit')?>
+                    </a>
+                </td>
+            
+                <td class="action">
+                    <a class="excluir" href='<?php echo $this->URL; ?>delete/id/<?php echo $val['id']?>'>
+                        <?php echo $this->translate("Delete"); ?>
+                    </a>
+                </td>
+                <td class="action">
+                    <a class="membros" href='<?php echo $this->URL; ?>members/id/<?php echo $val['id']?>'>
+                        <?php echo $this->translate("Members"); ?>
+                    </a>
+                </td>           
+            </tr>
+        <?php endforeach ?>
+    <?php endif ?>
+</table>
+
+<?php echo $this->render('pagination.phtml') ?>

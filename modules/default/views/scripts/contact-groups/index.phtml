@@ -9,15 +9,9 @@ echo $this->render('filter.phtml')
 <table>
     <thead>
         <tr>
-            <th class="action"> 
-                <?php echo $this->translate('Code') ?>
-            </th>
-            <th> 
-                <?php echo $this->translate('Name') ?>
-            </th>
-            <th> 
-                <?php echo $this->translate('Group') ?>
-            </th>
+
+            <th class="action"> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?></th>
+            <th class="action"> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
             <th class="action" colspan="2"> 
                 <?php echo $this->translate('Actions') ?>
             </th>

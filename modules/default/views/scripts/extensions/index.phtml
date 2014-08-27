@@ -19,11 +19,11 @@ echo $this->render('filter.phtml');
 <table>
    <thead>
       <tr>
-         <th> <?php echo $this->translate('Extension') ?> </th>
-         <th> <?php echo $this->translate('Caller ID') ?> </th>
-         <th> <?php echo $this->translate('Channel') ?> </th>
-         <th> <?php echo $this->translate('Extension Group') ?> </th>
-         <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?>  </th>
+        <th> <?php echo Snep_Order::getLink($this, 'Extension', 'name') ?></th>
+        <th> <?php echo Snep_Order::getLink($this, 'Caller ID', 'callerid') ?></th>
+        <th> <?php echo Snep_Order::getLink($this, 'Channel', 'canal') ?></th>
+        <th> <?php echo Snep_Order::getLink($this, 'Extension Group', 'group') ?></th>
+        <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?>  </th>
       </tr>
    </thead>
    <tbody>

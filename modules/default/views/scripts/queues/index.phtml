@@ -8,11 +8,11 @@ echo $this->render('filter.phtml');
 <table>
     <thead>
         <tr>
-            <th> <?php echo $this->translate('Name') ?> </th>
-            <th> <?php echo $this->translate('Audio Class') ?> </th>
-            <th> <?php echo $this->translate('Strategy') ?> </th>
-            <th> <?php echo $this->translate('SLA') ?> </th>
-            <th> <?php echo $this->translate('Timeout') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Audio Class', 'musiconhold') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Strategy', 'strategy') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'SLA', 'servicelevel') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Timeout', 'timeout') ?></th>
             <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
         </tr>
     </thead>

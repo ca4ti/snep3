@@ -9,10 +9,10 @@ echo $this->render('filter.phtml');
 <table>
     <thead>
         <tr>
-            <th class="numeric"> <?php echo $this->translate('Code') ?> </th>
-            <th> <?php echo $this->translate('Name') ?> </th>
-            <th> <?php echo $this->translate('Created') ?> </th>
-            <th> <?php echo $this->translate('Updated') ?> </th>
+            <th class="numeric"> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Created', 'created') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Updated', 'updated') ?></th>
             <th colspan="4" class="action"> <?php echo $this->translate('Actions') ?> </th>
         </tr>
     </thead>

@@ -88,6 +88,8 @@ class ExtensionsController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
+        $this->view->order = Snep_Order::setSelect($select, array("name","callerid","canal","group"), $this->_request);
+
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
 

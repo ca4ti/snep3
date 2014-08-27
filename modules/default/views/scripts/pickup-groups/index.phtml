@@ -8,8 +8,8 @@ echo $this->render('filter.phtml');
 <table>
    <thead>
       <tr>
-         <th class="action"> <?php echo $this->translate('Code') ?> </th>
-         <th> <?php echo $this->translate('Name') ?> </th>
+         <th class="action"> <?php echo Snep_Order::getLink($this, 'Code', 'cod_grupo') ?></th>
+         <th> <?php echo Snep_Order::getLink($this, 'Name', 'nome') ?></th>
          <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
       </tr>
    </thead>

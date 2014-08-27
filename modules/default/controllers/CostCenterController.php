@@ -48,6 +48,8 @@ class CostCenterController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
+        $this->view->order = Snep_Order::setSelect($select, array("codigo", "tipo","nome","descricao"), $this->_request);
+
         $this->view->types = array('E' => $this->view->translate('Incoming'),
             'S' => $this->view->translate('Outgoing '),
             'O' => $this->view->translate('Other'));

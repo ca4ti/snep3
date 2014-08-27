@@ -9,8 +9,8 @@ echo $this->render('filter.phtml');
 <table>
    <thead>
       <tr>
-         <th> <?php echo $this->translate('Name') ?> </th>
-         <th> <?php echo$this->translate('Type') ?> </th>
+         <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
+         <th> <?php echo Snep_Order::getLink($this, 'Type', 'inherit') ?></th>
          <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
       </tr>
    </thead>

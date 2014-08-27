@@ -122,6 +122,13 @@ class PickupGroupsController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
+            $newId = Snep_PickupGroups_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
                 $namegroup = array('nome' => $dados['name']);
                 $groupId = Snep_PickupGroups_Manager::addGroup($namegroup);
@@ -190,24 +197,35 @@ class PickupGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
             $dados['id'] = $id;
 
-            /* Remove todas as extensoes do grupo atual */
-            $this->view->group = Snep_PickupGroups_Manager::editGroup(array('name' => $dados['name'], 'id' => $dados['id']));
+            $newId = Snep_PickupGroups_Manager::getName($dados['name']);
 
-            if (isset($dados['box_add'])) {
-
-                foreach ($dados['box_add'] as $id => $dados['name']) {
-                    $this->view->extensions = Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'pickupgroup' => $dados['id']));
-                }
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
             }
 
-            if (isset($dados['box'])) {
+            if($form_isValid){
+            
+                /* Remove todas as extensoes do grupo atual */
+                $this->view->group = Snep_PickupGroups_Manager::editGroup(array('name' => $dados['name'], 'id' => $dados['id']));
 
-                foreach ($dados['box'] as $id => $dados['name']) {
-                    Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'pickupgroup' => NULL));
+                if (isset($dados['box_add'])) {
+
+                    foreach ($dados['box_add'] as $id => $dados['name']) {
+                        $this->view->extensions = Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'pickupgroup' => $dados['id']));
+                    }
                 }
-            }
 
-            $this->_redirect($this->getRequest()->getControllerName());
+                if (isset($dados['box'])) {
+
+                    foreach ($dados['box'] as $id => $dados['name']) {
+                        Snep_PickupGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'pickupgroup' => NULL));
+                    }
+                }
+
+                $this->_redirect($this->getRequest()->getControllerName());
+
+            }
         }
         $this->view->form = $form;
     }

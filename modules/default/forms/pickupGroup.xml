@@ -4,7 +4,11 @@
         <elements>
             <name>
                 <type>text</type>
+                <options>
+                	<required>true</required>
+            	</options>
             </name>
         </elements>
     </general>
 </modelo>
+

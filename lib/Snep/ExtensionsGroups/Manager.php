@@ -323,6 +323,25 @@ class Snep_ExtensionsGroups_Manager {
         $db->insert('logs_users', $insert_data);
     }
 
+    /**
+     * Method to get extension group by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("groups", array("name","inherit"))
+                ->where("groups.name = ?", $name);
+
+        $stmt = $db->query($select);
+        $pgroup = $stmt->fetch();
+
+        return $pgroup;
+    }
+
 }
 
 ?>

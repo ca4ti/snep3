@@ -181,4 +181,23 @@ class Snep_ContactGroups_Manager {
 
         return $regras;
     }
+
+    /**
+     * Method to get cotact groups group by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("contacts_group", array("name","id"))
+                ->where("contacts_group.name = ?", $name);
+
+        $stmt = $db->query($select);
+        $cgroup = $stmt->fetch();
+
+        return $cgroup;
+    }
 }

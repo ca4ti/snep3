@@ -106,6 +106,14 @@ class ContactGroupsController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
+            
+            $newId = Snep_ContactGroups_Manager::getName($dados['group']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('group')->addError($this->view->translate('Name already exists.'));
+            }
+            
             if ($form_isValid) {
                 $groupId = Snep_ContactGroups_Manager::add(array('group' => $dados['group']));
 
@@ -159,6 +167,13 @@ class ContactGroupsController extends Zend_Controller_Action {
 
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
+
+            $newId = Snep_ContactGroups_Manager::getName($dados['group']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('group')->addError($this->view->translate('Name already exists.'));
+            }
 
             if ($form_isValid) {
 

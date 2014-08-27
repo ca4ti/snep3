@@ -203,6 +203,14 @@ class QueuesController extends Zend_Controller_Action {
             );
 
             $form_isValid = $form->isValid($_POST);
+
+            $newId = Snep_Queues_Manager::getName($_POST['essential']['name']);
+            
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $essential->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
 
                 Snep_Queues_Manager::add($dados);

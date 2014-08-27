@@ -373,7 +373,17 @@ class TrunksController extends Zend_Controller_Action {
         $form = $this->getForm();
 
         if ($this->getRequest()->isPost()) {
-            if ($this->form->isValid($_POST)) {
+
+            $form_isValid = $form->isValid($_POST);
+            
+            $newId = Snep_Trunks_Manager::getName($_POST['trunks']['callerid']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getSubForm("trunks")->getElement("callerid")->addError($this->view->translate('Name already exists.'));
+            }
+
+            if ($form_isValid) {
                 $trunk_data = $this->preparePost();
 
                 $db = Snep_Db::getInstance();
@@ -483,7 +493,18 @@ class TrunksController extends Zend_Controller_Action {
         $form->setAction($this->view->baseUrl() . "/index.php/trunks/edit/trunk/$id");
 
         if ($this->getRequest()->isPost()) {
-            if ($this->form->isValid($_POST)) {
+
+            $form_isValid = $form->isValid($_POST);
+            
+            $newId = Snep_Trunks_Manager::getName($_POST['trunks']['callerid']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getSubForm("trunks")->getElement("callerid")->addError($this->view->translate('Name already exists.'));
+            }
+
+            if ($form_isValid) {
+
                 $trunk_data = $this->preparePost();
 
                 $sql = "SELECT name FROM trunks WHERE id='{$id}' LIMIT 1";

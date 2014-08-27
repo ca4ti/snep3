@@ -129,6 +129,13 @@ class UsersController extends Zend_Controller_Action {
 
             $dados = $this->_request->getParams();
 
+            $newId = Snep_Users_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
                 Snep_Users_Manager::add($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
@@ -184,6 +191,13 @@ class UsersController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
+
+            $newId = Snep_Users_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
 
             if ($form_isValid) {
                 $dados['created'] = $user['created'];

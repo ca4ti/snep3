@@ -229,4 +229,23 @@ class Snep_Trunks_Manager {
         }
     }
 
+    /**
+     * Method to get trunks by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("trunks", array("id", "callerid"))
+                ->where("trunks.callerid = ?", $name);
+
+        $stmt = $db->query($select);
+        $trunk = $stmt->fetch();
+
+        return $trunk;
+    }
+
 }

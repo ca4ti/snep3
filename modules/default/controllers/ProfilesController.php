@@ -97,6 +97,13 @@ class ProfilesController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
+            $newId = Snep_Profiles_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
 
                 Snep_Profiles_Manager::add($dados);
@@ -133,6 +140,13 @@ class ProfilesController extends Zend_Controller_Action {
 
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
+
+            $newId = Snep_Profiles_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
 
             if ($form_isValid) {
                 $dados['created'] = $profile['created'];

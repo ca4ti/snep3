@@ -200,6 +200,25 @@ class Snep_Users_Manager {
         $db->update("users", $update_data, "name = '{$name}'");
     }
 
+    /**
+     * Method to get users by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("users", array("id", "name"))
+                ->where("users.name = ?", $name);
+
+        $stmt = $db->query($select);
+        $user = $stmt->fetch();
+
+        return $user;
+    }
+
 }
 
 ?>

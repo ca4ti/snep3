@@ -151,6 +151,13 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
+            $newId = Snep_ExtensionsGroups_Manager::getName($dados['name']);
+            
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
+
             if ($form_isValid) {
 
                 $group = array('name' => $dados['name'],
@@ -243,29 +250,39 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             $dados = $this->_request->getParams();
             $idGroup = $dados['id'];
 
-            if ($dados['box_add']) {
+            $newId = Snep_ExtensionsGroups_Manager::getName($dados['name']);
+            
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+            }
 
-                foreach ($dados['box_add'] as $id => $dados['name']) {
-                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
+            if($form_isValid){
+
+                if ($dados['box_add']) {
+
+                    foreach ($dados['box_add'] as $id => $dados['name']) {
+                        Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => $idGroup));
+                    }
                 }
-            }
 
-            if ($dados['box']) {
+                if ($dados['box']) {
 
-                foreach ($dados['box'] as $id => $dados['name']) {
-                    Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => 'all'));
+                    foreach ($dados['box'] as $id => $dados['name']) {
+                        Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => 'all'));
+                    }
                 }
+
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    Snep_LogUser::salvaLog("Editou Grupo de ramal", $dados['name'], 11);
+                    $add = Snep_ExtensionsGroups_Manager::getGroupLog($dados['name']);
+                    Snep_ExtensionsGroups_Manager::insertLogGroup("NEW", $add);
+                }
+
+                $this->_redirect($this->getRequest()->getControllerName());
             }
-
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-
-                Snep_LogUser::salvaLog("Editou Grupo de ramal", $dados['name'], 11);
-                $add = Snep_ExtensionsGroups_Manager::getGroupLog($dados['name']);
-                Snep_ExtensionsGroups_Manager::insertLogGroup("NEW", $add);
-            }
-
-            $this->_redirect($this->getRequest()->getControllerName());
         }
 
         $this->view->form = $form;

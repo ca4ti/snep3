@@ -9,7 +9,7 @@ echo $this->render('filter.phtml');
 <table>
     <thead>
         <tr>
-            <th> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?> </th>
+            <th class="action"> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?> </th>
             <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?> </th>
             <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
         </tr>

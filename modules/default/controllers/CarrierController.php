@@ -40,14 +40,16 @@ class CarrierController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from("operadoras")
-                ->order('nome');
+                ->from("operadoras");
+                
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
             $select->where("`$field` like '%$query%'");
         }
+
+        $this->view->order = Snep_Order::setSelect($select, array("codigo","nome", "tpm", "tdm"), $this->_request);
 
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );

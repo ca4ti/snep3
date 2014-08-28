@@ -8,12 +8,12 @@ echo $this->render('filter.phtml');
 <table>
     <thead>
         <tr>
-            <th class="numeric"> <?php echo $this->translate('Code') ?> </th>
-            <th> <?php echo $this->translate('Name') ?> </th>
-            <th> <?php echo $this->translate('Email') ?> </th>
-            <th> <?php echo $this->translate('Created') ?> </th>
-            <th> <?php echo $this->translate('Updated') ?> </th>
-            <th> <?php echo $this->translate('Profile') ?> </th>
+            <th class="numeric"> <?php echo Snep_Order::getLink($this, 'Code', 'ide') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'nome') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Email', 'email') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Created', 'created') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Updated', 'updated') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Profile', 'name') ?> </th>
             <th colspan="3" class="action"> <?php echo $this->translate('Actions') ?> </th>
         </tr>
     </thead>

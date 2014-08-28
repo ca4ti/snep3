@@ -54,6 +54,8 @@ class BillingController extends Zend_Controller_Action {
             $select->where("`$field` like '%$query%'");
         }
 
+        $this->view->order = Snep_Order::setSelect($select, array("nome","pais","estado","cidade","ddd","prefixo","data","vcel","vfix"), $this->_request);
+
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
         $this->view->filtro = $this->_request->getParam('filtro');

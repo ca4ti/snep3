@@ -9,33 +9,15 @@ echo $this->render('filter.phtml');
 <table>
     <thead>
         <tr>
-            <th class="numeric"> 
-                <?php echo $this->translate('Carrier') ?>
-            </th>
-            <th> 
-                <?php echo $this->translate('Country') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('State') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('City') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('City Code') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('Prefix') ?>
-            </th>
-            <th width="15%">
-                <?php echo $this->translate('Starts from') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('Minute Fee for Mobile') ?>
-            </th>
-            <th>
-                <?php echo $this->translate('Minute Fee for Residencial') ?>
-            </th>
+            <th class="numeric"> <?php echo Snep_Order::getLink($this, 'Carrier', 'nome') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Country', 'pais') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'State', 'estado') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'City', 'cidade') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'City Code', 'ddd') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Prefix', 'prefixo') ?> </th>
+            <th width="15%"> <?php echo Snep_Order::getLink($this, 'Starts from', 'data') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Minute Fee for Mobile', 'vcel') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Minute Fee for Residencial', 'vfix') ?> </th>
             <th colspan="2" class="action"> 
                 <?php echo $this->translate('Actions') ?>
             </th>
@@ -56,35 +38,19 @@ echo $this->render('filter.phtml');
                 ?>
                 <tr class="c<?php echo $c ?>" <?php echo $hd ?>>
 
-                    <td> 
-                        <b> <?php echo $billing['nome'] ?> </b>
+                    <td><b> <?php echo $billing['nome'] ?> </b></td>
+                    <td><?php echo $billing['pais'] ?></td>
+                    <td><?php echo $billing['estado'] ?></td>
+                    <td><?php echo $billing['cidade'] ?></td>
+                    <td><?php echo $billing['ddd'] ?></td>
+                    <td><?php echo $billing['prefixo'] ?></td>
+                    <td><?php echo new Zend_Date($billing['data']) ?></td>
+                    <td><?php echo new Zend_Currency(array('value' => $billing['vcel'])) ?>
                     </td>
-                    <td> 
-        <?php echo $billing['pais'] ?>
-                    </td>
-                    <td>
-        <?php echo $billing['estado'] ?>
-                    </td>
-                    <td>
-        <?php echo $billing['cidade'] ?>
-                    </td>
-                    <td>
-        <?php echo $billing['ddd'] ?>
-                    </td>
-                    <td>
-        <?php echo $billing['prefixo'] ?>
-                    </td>
-                    <td>
-        <?php echo new Zend_Date($billing['data']) ?>
-                    </td>
-                    <td>
-        <?php echo new Zend_Currency(array('value' => $billing['vcel'])) ?>
-                    </td>
-                    <td>
-        <?php echo new Zend_Currency(array('value' => $billing['vfix'])) ?>
+                    <td><?php echo new Zend_Currency(array('value' => $billing['vfix'])) ?>
                     </td>
 
-        <?php if ($billing['codigo'] != $lst) : ?>
+                    <?php if ($billing['codigo'] != $lst) : ?>
 
                         <td class="action">
                             <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $billing['codigo'] ?>">

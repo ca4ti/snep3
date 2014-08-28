@@ -11,7 +11,7 @@ echo $this->render('filter.phtml')
         <tr>
 
             <th class="action"> <?php echo Snep_Order::getLink($this, 'Code', 'id') ?></th>
-            <th class="action"> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
             <th class="action" colspan="2"> 
                 <?php echo $this->translate('Actions') ?>
             </th>

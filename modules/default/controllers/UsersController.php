@@ -42,14 +42,15 @@ class UsersController extends Zend_Controller_Action {
         $db = Zend_Registry::get('db');
         $select = $db->select()
                 ->from(array("n" => "users"), array("id as ide", "name as nome", "email", "created", "updated"))
-                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name")
-                ->order('nome');
+                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name");
 
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
             $select->where("n.`$field` like '%$query%'");
         }
+
+        $this->view->order = Snep_Order::setSelect($select, array("ide","nome", "email", "created", "updated", "name"), $this->_request);
 
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );

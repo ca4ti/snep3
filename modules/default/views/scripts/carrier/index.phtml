@@ -6,34 +6,29 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
 echo $this->render('filter.phtml');
 ?>
 <table>
-   <thead>
-      <tr>
-         <th class="numeric"> <?php echo $this->translate('Code') ?> </th>
-         <th> <?php echo $this->translate('Name') ?> </th>
-         <th> <?php echo $this->translate('Startup Time') ?> </th>
-         <th> <?php echo $this->translate('Fragmentation Time') ?> </th>
-         <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
-      </tr>
-   </thead>
-   <tbody>
+    <thead>
+        <tr>
+            <th class="numeric"> <?php echo Snep_Order::getLink($this, 'Code', 'codigo') ?> </th>          
+            <th> <?php echo Snep_Order::getLink($this, 'Name', 'nome') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Startup Time', 'tpm') ?> </th>
+            <th> <?php echo Snep_Order::getLink($this, 'Fragmentation Time', 'tdm') ?> </th>
+            <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
+        </tr>
+    </thead>
+      
+    <tbody>
+    
     <?php
     $c = 0;
+    
     if($this->carrier):
         foreach($this->carrier as $carrier ): ?>
             <?php ($c ? $c = 0 : $c = 1 ); ?>
             <tr class="c<?php echo $c ?>">
-                <td> 
-                    <b> <?php echo $carrier['codigo'] ?> </b>
-                </td>
-                <td>
-                    <b> <?php echo $carrier['nome'] ?> </b>
-                </td>
-                <td>
-                    <b> <?php echo $carrier['tpm'] ?> </b>
-                </td>
-                <td> 
-                    <?php echo $carrier['tdm'] ?>
-                </td>
+                <td><b> <?php echo $carrier['codigo'] ?> </b></td>
+                <td><b> <?php echo $carrier['nome'] ?> </b></td>
+                <td><b> <?php echo $carrier['tpm'] ?> </b></td>
+                <td><?php echo $carrier['tdm'] ?></td>
                 <td class="action">
                     <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $carrier['codigo'] ?>">
                         <?php echo $this->translate('Edit')?>

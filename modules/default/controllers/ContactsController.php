@@ -41,14 +41,15 @@ class ContactsController extends Zend_Controller_Action {
                 ->from(array("n" => "contacts_names"), array("id as ide", "name as nome", "city", "state", "cep"))
                 ->join(array("g" => "contacts_group"), 'n.group = g.id')
                 ->join(array("p" => "contacts_phone"), 'n.id = p.contact_id')
-                ->group("n.id")
-                ->order('nome');
-
+                ->group("n.id");
+                
         if ($this->_request->getPost('filtro')) {
             $field = mysql_escape_string($this->_request->getPost('campo'));
             $query = mysql_escape_string($this->_request->getPost('filtro'));
             $select->where("n.`$field` like '%$query%'");
         }
+
+        $this->view->order = Snep_Order::setSelect($select, array("ide","nome", "name", "city", "state", "cep", "phone"), $this->_request);
 
         $page = $this->_request->getParam('page');
         $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );

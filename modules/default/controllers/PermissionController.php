@@ -23,7 +23,7 @@
  * @category  Snep
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  * 
  */
 class PermissionController extends Zend_Controller_Action {

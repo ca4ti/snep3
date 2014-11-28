@@ -18,13 +18,12 @@
  */
 
 /**
- * Cost Center Controller
+ * Cost center Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Rafael Pereira Bozzetti
- * @edited    Tiago Zimmermann 28/03/2014
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class CostCenterController extends Zend_Controller_Action {
 

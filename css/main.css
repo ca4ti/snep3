@@ -33,18 +33,13 @@ pre {
 #footer {
     padding: 0px;
     clear: both;
-
     margin-top: 0px;
     border-top: 2px solid #F0C600;
-
     background-image: url('../imagens/footer_bg.png');
     color: #696969;
-
     line-height: 2em;
-
     font-weight: bold;
     font-size: 10px;
-
     height: 32px;
 }
 

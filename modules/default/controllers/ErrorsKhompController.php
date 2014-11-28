@@ -23,8 +23,8 @@ require_once "includes/AsteriskInfo.php";
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli Bassotto
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ErrorsKhompController extends Zend_Controller_Action {
 

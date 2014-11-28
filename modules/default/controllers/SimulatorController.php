@@ -22,8 +22,8 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2011 OpenS Tecnologia
- * @author    Lucas Ivan Seidenfus
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class SimulatorController extends Zend_Controller_Action {
 

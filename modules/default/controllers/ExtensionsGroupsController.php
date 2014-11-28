@@ -18,11 +18,12 @@
  */
 
 /**
- * Extension Groups Controller
+ * Extension Group Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ExtensionsGroupsController extends Zend_Controller_Action {
 

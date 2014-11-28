@@ -19,11 +19,12 @@
 include ("includes/functions.php");
 
 /**
- * Calls Controller
+ * Calls report Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class CallsReportController extends Zend_Controller_Action {
 

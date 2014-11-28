@@ -20,11 +20,12 @@ require_once "includes/AsteriskInfo.php";
 require_once "includes/functions.php";
 
 /**
- * IpStatus Controller
+ * IP Status Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class IpStatusController extends Zend_Controller_Action {
 

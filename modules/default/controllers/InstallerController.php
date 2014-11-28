@@ -20,12 +20,12 @@ require_once 'Zend/Controller/Action.php';
 require_once 'Snep/Inspector.php';
 
 /**
- * Snep Installer Interface
+ * Snep Installer Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli <henrique@opens.com.br>
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class InstallerController extends Zend_Controller_Action {
 

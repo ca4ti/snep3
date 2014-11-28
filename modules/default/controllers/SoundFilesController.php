@@ -23,8 +23,8 @@ require_once 'Snep/Inspector.php';
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Rafael Pereira Bozzetti
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class SoundFilesController extends Zend_Controller_Action {
 

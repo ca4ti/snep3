@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -16,15 +15,16 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
+
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Authentication Controll
+ * Authentication Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli <henrique@opens.com.br>
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class AuthController extends Zend_Controller_Action {
 
@@ -32,6 +32,7 @@ class AuthController extends Zend_Controller_Action {
      * loginAction - Login on system
      */
     public function loginAction() {
+
         $this->view->headTitle($this->view->translate("Login"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Login")));
@@ -40,6 +41,7 @@ class AuthController extends Zend_Controller_Action {
 
         $config = Zend_Registry::get('config');
         if (trim($config->ambiente->db->host) == "") {
+            
             if (Zend_Auth::getInstance()->hasIdentity()) {
                 Zend_Auth::getInstance()->clearIdentity();
             }

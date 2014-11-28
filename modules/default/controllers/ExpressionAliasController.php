@@ -18,12 +18,12 @@
  */
 
 /**
- * Expression Alias Controller. 
+ * Expression Alias Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2011 OpenS Tecnologia
- * @author    Lucas Ivan Seidenfus
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ExpressionAliasController extends Zend_Controller_Action {
 

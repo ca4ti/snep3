@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  This file is part of SNEP.
  *
@@ -16,14 +15,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 ini_set("max_execution_time", 180);
 
 /**
- * Cnl Controller
+ * CNL Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class CnlController extends Zend_Controller_Action {
 

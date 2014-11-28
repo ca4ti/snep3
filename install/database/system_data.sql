@@ -1,4 +1,4 @@
-/**
+/*
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -15,23 +15,47 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
 
+/**
+ * Default data  
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
+ */
+
+--
+-- Default expression alias
+--
 INSERT INTO `expr_alias` VALUES (1,'Fixo Local');
 INSERT INTO `expr_alias` VALUES (2,'Celular Local - VC1');
 INSERT INTO `expr_alias` VALUES (3,'Fixo DDD');
 INSERT INTO `expr_alias` VALUES (4,'Celular Interurbano - VC2/VC3');
 
+--
+-- Default values expression alias
+--
 INSERT INTO `expr_alias_expression` VALUES (1,'[2-5]XXXXXXX');
 INSERT INTO `expr_alias_expression` VALUES (2,'[6-9]XXXXXXX');
 INSERT INTO `expr_alias_expression` VALUES (3,'0|XX[2-5]XXXXXXX');
 INSERT INTO `expr_alias_expression` VALUES (4,'0|XX[6-9]XXXXXXX');
 
+--
+-- Default group extension
+--
 INSERT INTO groups VALUES ('all',null);
 INSERT INTO groups VALUES ('admin','all');
 INSERT INTO groups VALUES ('users','all');
 INSERT INTO groups VALUES ('NULL',null);
 
+--
+-- Default contacts group
+--
 INSERT INTO `contacts_group` VALUES (1, 'Default');
 
+--
+-- Default cost center
+--
 INSERT INTO `ccustos` VALUES ('1','E','ENTRADAS','Ligacoes de Entrada');
 INSERT INTO `ccustos` VALUES ('2','S','SAIDAS','Ligacoes de Saida');
 INSERT INTO `ccustos` VALUES ('5','O','FUNCIONALIDADES','Funcionalidades do Sistema');
@@ -43,6 +67,9 @@ INSERT INTO `ccustos` VALUES ('5.05','O','Pausa de Agente - Fim','Pausa de Agent
 INSERT INTO `ccustos` VALUES ('5.10','O','Emergencias','Ligacoes para telefones de Emergencia (190, 192, 191, etc)');
 INSERT INTO `ccustos` VALUES ('9','O','Internas','Ligacoes Internas entre Ramais');
 
+--
+-- Default sounds
+--
 INSERT INTO `sounds` VALUES ('fpm-calm-river.wav','Som de Musica em Espera - Calm River','2008-07-25 10:51:42','MOH','default');
 INSERT INTO `sounds` VALUES ('fpm-sunshine.wav','Som de Musica em Espera - Sunshine','2008-07-25 10:51:56','MOH','default');
 INSERT INTO `sounds` VALUES ('fpm-world-mix.wav','Som de Musica em Espera - World Mix','2008-07-25 10:52:13','MOH','default');
@@ -209,11 +236,28 @@ INSERT INTO `sounds` VALUES ('queue-seconds.wav','Filas - Segundos','2008-08-12 
 INSERT INTO `sounds` VALUES ('queue-thereare.wav','Filas - Sua chamada é a','2008-08-12 08:48:21','AST','');
 INSERT INTO `sounds` VALUES ('queue-youarenext.wav','Filas - Sua chamada é a primeira da fila','2008-08-12 08:48:44','AST','');
 
+--
+-- Default user admin
+--
 INSERT INTO profiles (name, created, updated) VALUES ('default',now(),now());
 INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('admin','0192023a7bbd73250516f069df18b500','suporte@opens.com.br',1,now(),now());
 
+--
+-- Default pickup group
+--
 INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES
 (1, 'GERAL');
 
+--
+-- Default queue group
+--
 INSERT INTO `group_queues` (name) VALUES ('Default');
+
+--
+-- Default rule 
+--
+INSERT INTO `regras_negocio` VALUES (1,0,'Internas - Ramal para Ramal','G:all','G:all','00:00:00-23:59:59','sun,mon,tue,wed,thu,fri,sat',0,1,0,0);
+INSERT INTO `regras_negocio_actions` VALUES (1,0,'PBX_Rule_Action_CCustos'),(1,1,'PBX_Rule_Action_DiscarRamal');
+INSERT INTO `regras_negocio_actions_config` VALUES (1,0,'ccustos','9'),(1,1,'allow_voicemail','false'),(1,1,'dial_flags','twk'),(1,1,'dial_timeout','60'),(1,1,'diff_ring','false'),(1,1,'dont_overflow','false'),(1,1,'resolv_agent','false');
+
 

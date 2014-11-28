@@ -1,26 +1,33 @@
--- MySQL dump 10.13  Distrib 5.1.53, for slackware-linux-gnu (i486)
---
--- Host: localhost    Database: snep25
--- ------------------------------------------------------
--- Server version	5.1.53
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as
+ *  published by the Free Software Foundation, either version 3 of
+ *  the License, or (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+ */
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES latin1 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/**
+ * Default cnl data  
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
+ */
 
 --
--- Dumping data for table `ars_operadora`
+-- Default operators of Brazil
 --
-
 LOCK TABLES `ars_operadora` WRITE;
-/*!40000 ALTER TABLE `ars_operadora` DISABLE KEYS */;
 INSERT INTO `ars_operadora` VALUES (1,'51 BRASIL TELECOMUNICACOES LTD'),
 (2,'Aerotech'),
 (3,'ALPAMAYO TELECOMUNICACOES E PA'),
@@ -81,9 +88,8 @@ INSERT INTO `ars_operadora` VALUES (1,'51 BRASIL TELECOMUNICACOES LTD'),
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ars_estado`
+-- Default states of Brazil
 --
-
 LOCK TABLES `ars_estado` WRITE;
 /*!40000 ALTER TABLE `ars_estado` DISABLE KEYS */;
 INSERT INTO `ars_estado` VALUES ('AC','Acre'),
@@ -117,9 +123,8 @@ INSERT INTO `ars_estado` VALUES ('AC','Acre'),
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ars_cidade`
+-- Default citys of Brazil
 --
-
 LOCK TABLES `ars_cidade` WRITE;
 /*!40000 ALTER TABLE `ars_cidade` DISABLE KEYS */;
 INSERT INTO `ars_cidade` VALUES (10653,'ABADIA DE GOIAS'),
@@ -5182,9 +5187,8 @@ INSERT INTO `ars_cidade` VALUES (10653,'ABADIA DE GOIAS'),
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ars_ddd`
+-- Default DDD of Brazil
 --
-
 LOCK TABLES `ars_ddd` WRITE;
 /*!40000 ALTER TABLE `ars_ddd` DISABLE KEYS */;
 INSERT INTO `ars_ddd` VALUES ('62','GO',10653),
@@ -10245,9 +10249,8 @@ INSERT INTO `ars_ddd` VALUES ('62','GO',10653),
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ars_prefixo`
+-- Default prefixs of Brazil
 --
-
 LOCK TABLES `ars_prefixo` WRITE;
 /*!40000 ALTER TABLE `ars_prefixo` DISABLE KEYS */;
 INSERT INTO `ars_prefixo` VALUES (113187,15079,1),
@@ -29289,12 +29292,3 @@ INSERT INTO `ars_prefixo` VALUES (113187,15079,1),
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2011-01-24 10:31:09

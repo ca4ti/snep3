@@ -15,16 +15,14 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
 
---
--- Table structure for table `agentes`
---
-CREATE TABLE IF NOT EXISTS `agentes` (
-  `agentid` int(11) NOT NULL default '0',
-  `name` varchar(100) NOT NULL default '',
-  `agentpassword` varchar(50) NOT NULL default '',
-  `horario` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`agentid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/**
+ * Database structure
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
+ */
 
 --
 -- Table structure for table `expr_alias`
@@ -34,6 +32,7 @@ CREATE TABLE IF NOT EXISTS expr_alias (
     `name` VARCHAR(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `expr_alias_expression`
 --
@@ -42,6 +41,7 @@ CREATE TABLE IF NOT EXISTS expr_alias_expression (
     `expression` VARCHAR(200) NOT NULL,
     FOREIGN KEY (`aliasid`) REFERENCES expr_alias(`aliasid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `regras_negocio`
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   mailing boolean NOT NULL default false
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `regras_negocio_actions`
 --
@@ -69,6 +70,7 @@ CREATE TABLE IF NOT EXISTS regras_negocio_actions (
   PRIMARY KEY(regra_id, prio),
   FOREIGN KEY (regra_id) REFERENCES regras_negocio(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `regras_negocio_actions_config`
@@ -82,6 +84,7 @@ CREATE TABLE IF NOT EXISTS regras_negocio_actions_config (
   FOREIGN KEY (regra_id, prio) REFERENCES regras_negocio_actions (regra_id, prio) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `registry`
 --
@@ -91,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `registry` (
     `value` VARCHAR(250),
     PRIMARY KEY (`context`,`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `ccustos`
@@ -102,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `ccustos` (
   `descricao` varchar(250) default NULL,
   PRIMARY KEY  (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `cdr`
@@ -128,24 +133,6 @@ CREATE TABLE IF NOT EXISTS `cdr` (
   KEY `accountcode` (`accountcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --
--- -- Table structure for table `cdr_compactado`
--- --
--- CREATE TABLE IF NOT EXISTS `cdr_compactado` (
---   `userfield` varchar(255) default NULL,
---   `arquivo` varchar(255) default NULL,
---   `data` date default NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Table structure for table `events`
---
-CREATE TABLE IF NOT EXISTS `events` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `timestamp` datetime NOT NULL default '0000-00-00 00:00:00',
-  `event` longtext,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `grupos`
@@ -156,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
   UNIQUE KEY `cod_grupo` (`cod_grupo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `oper_ccustos`
 --
@@ -165,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `oper_ccustos` (
   PRIMARY KEY  (`operadora`,`ccustos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `oper_contas`
 --
@@ -173,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `oper_contas` (
   `conta` int(11) NOT NULL,
   PRIMARY KEY  (`operadora`,`conta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `operadoras`
@@ -189,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `operadoras` (
   PRIMARY KEY  (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `groups`
 --
@@ -197,6 +188,7 @@ CREATE TABLE IF NOT EXISTS groups (
     inherit varchar(50),
     FOREIGN KEY (inherit) REFERENCES groups(name) ON UPDATE CASCADE
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `peers`
@@ -268,6 +260,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   FOREIGN KEY (`pickupgroup`) REFERENCES grupos(`cod_grupo`) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `services_log`
 --
@@ -279,15 +272,6 @@ CREATE TABLE IF NOT EXISTS `services_log` (
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `permissoes`
---
--- CREATE TABLE IF NOT EXISTS `permissoes` (
---   `cod_rotina` int(11) NOT NULL default '0',
---   `cod_usuario` int(11) NOT NULL default '0',
---   `permissao` char(1) NOT NULL default 'S',
---   PRIMARY KEY  (`cod_rotina`,`cod_usuario`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `queue_log`
@@ -307,6 +291,7 @@ CREATE TABLE IF NOT EXISTS queue_log (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `queue_members`
 --
@@ -321,6 +306,7 @@ CREATE TABLE IF NOT EXISTS `queue_members` (
   UNIQUE KEY `queue_interface` (`queue_name`,`interface`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `queue_peers`
 --
@@ -330,6 +316,7 @@ CREATE TABLE IF NOT EXISTS `queue_peers` (
   PRIMARY KEY  (`ramal`,`fila`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `group_queues`
 --
@@ -338,6 +325,7 @@ CREATE TABLE IF NOT EXISTS `group_queues` (
   `name` varchar(120) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `queues`
@@ -384,6 +372,7 @@ CREATE TABLE IF NOT EXISTS `queues` (
   PRIMARY KEY  (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `members_group_queues`
 --
@@ -396,6 +385,7 @@ CREATE TABLE IF NOT EXISTS `members_group_queues` (
   CONSTRAINT `fk_id_group` FOREIGN KEY (`id_group` ) REFERENCES `group_queues` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `queues_agent`
 --
@@ -405,14 +395,6 @@ CREATE TABLE IF NOT EXISTS `queues_agent` (
   `penalty` VARCHAR(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `rotinas`
---
--- CREATE TABLE IF NOT EXISTS `rotinas` (
---   `cod_rotina` int(11) NOT NULL default '0',
---   `desc_rotina` varchar(50) NOT NULL default '',
---   PRIMARY KEY  (`cod_rotina`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `sounds`
@@ -425,6 +407,7 @@ CREATE TABLE IF NOT EXISTS `sounds` (
   `secao` varchar(30) NOT NULL,
   PRIMARY KEY  (`arquivo`,`tipo`,`secao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `tarifas`
@@ -442,6 +425,7 @@ CREATE TABLE IF NOT EXISTS `tarifas` (
   UNIQUE KEY `operadora` (`operadora`,`ddi`,`ddd`,`prefixo`,`cidade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `tarifas_valores`
 --
@@ -454,6 +438,7 @@ CREATE TABLE IF NOT EXISTS `tarifas_valores` (
   `vpc` float NOT NULL default '0',
   PRIMARY KEY  (`codigo`,`data`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `trunks`
@@ -487,6 +472,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `time_history`
 --
@@ -502,13 +488,7 @@ CREATE TABLE IF NOT EXISTS `time_history` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
---
--- Table structure for table `vinculos`
---
--- CREATE TABLE IF NOT EXISTS `vinculos` (
---   `ramal` varchar(80) default NULL,
---   `cod_usuario` varchar(80) default NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `voicemail_messages`
@@ -528,6 +508,7 @@ CREATE TABLE IF NOT EXISTS `voicemail_messages` (
   PRIMARY KEY  (`id`),
   KEY `dir` (`dir`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `voicemail_users`
@@ -562,6 +543,7 @@ CREATE TABLE IF NOT EXISTS `voicemail_users` (
   KEY `mailbox_context` (`mailbox`,`context`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `lista_abandono`
 --
@@ -579,29 +561,6 @@ CREATE TABLE IF NOT EXISTS `lista_abandono` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `permissoes_vinculos`
---
--- CREATE TABLE IF NOT EXISTS `permissoes_vinculos` (
---   `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
---   `id_peer` VARCHAR( 100 ) NOT NULL ,
---   `tipo` CHAR( 1 ) NOT NULL,
---   `id_vinculado` VARCHAR( 100 ) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Table structure for table `alertas`
---
--- CREATE TABLE IF NOT EXISTS `alertas` (
---   `recurso` VARCHAR( 20 ) NOT NULL ,
---   `tipo` VARCHAR( 10 ) NOT NULL ,
---   `tme` INT( 10 ) NOT NULL ,
---   `sla` INT( 10 ) NOT NULL ,
---   `item` VARCHAR( 20 ) NOT NULL ,
---   `alerta` VARCHAR( 255 ) NOT NULL ,
---   `destino` VARCHAR( 255 ) NOT NULL ,
---   `ativo` TINYINT( 1 ) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `ars_operadora`
@@ -611,6 +570,7 @@ CREATE TABLE IF NOT EXISTS ars_operadora (
     `name` varchar(30) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `ars_estado`
 --
@@ -619,6 +579,7 @@ CREATE TABLE IF NOT EXISTS ars_estado (
     `name` varchar(30) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `ars_cidade`
 --
@@ -626,6 +587,7 @@ CREATE TABLE IF NOT EXISTS ars_cidade (
     `id` integer primary key auto_increment,
     `name` varchar(50) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `ars_ddd`
@@ -639,6 +601,7 @@ CREATE TABLE IF NOT EXISTS ars_ddd (
     foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `ars_prefixo`
 --
@@ -651,6 +614,7 @@ CREATE TABLE IF NOT EXISTS ars_prefixo (
     foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `contacts_group`
 --
@@ -659,6 +623,7 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `contacts_names`
@@ -677,19 +642,6 @@ CREATE TABLE IF NOT EXISTS `contacts_names` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `validation`
---
-CREATE TABLE IF NOT EXISTS `validation` (
-  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `message` longtext,
-  `checksum` varchar(40) DEFAULT NULL,
-  `blockView` tinyint(1) DEFAULT '0',
-  `blockAst` tinyint(1) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- NOVA ESTRUTURA ADICIONADA / TIAGO
 
 --
 -- Table structure for table `contacts_phone`
@@ -703,6 +655,7 @@ CREATE TABLE IF NOT EXISTS `contacts_phone` (
   CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `profiles`
 --
@@ -714,6 +667,7 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `permissions`
 --
@@ -724,6 +678,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
 
 --
 -- Table structure for table `users`
@@ -741,6 +696,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `fk_user_profile` FOREIGN KEY (`profile_id` ) REFERENCES `profiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `profiles_permissions`
 --
@@ -755,6 +711,7 @@ CREATE TABLE IF NOT EXISTS `profiles_permissions` (
   KEY `profile_id` (`profile_id`),
   CONSTRAINT `fk_user_profiles` FOREIGN KEY (`profile_id` ) REFERENCES `profiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `users_permissions`
@@ -771,6 +728,7 @@ CREATE TABLE IF NOT EXISTS `users_permissions` (
   CONSTRAINT `fk_user_users` FOREIGN KEY (`user_id` ) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
 -- Table structure for table `binds`
 --
@@ -786,6 +744,7 @@ CREATE TABLE IF NOT EXISTS `binds` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `binds_peer_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `password_recovery`

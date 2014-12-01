@@ -355,23 +355,11 @@ class CallsReportController extends Zend_Controller_Action {
             }
         }
 
-        /* Verificando existencia de vinculos no ramal */
-        $name = $_SESSION['name_user'];
-        $sql = "SELECT id_peer, id_vinculado FROM permissoes_vinculos WHERE id_peer ='$name'";
-        $result = $db->query($sql)->fetchObject();
-
-        $vinculo_table = "";
-        $vinculo_where = "";
-        if ($result) {
-            $vinculo_table = " ,permissoes_vinculos ";
-            $vinculo_where = " ( permissoes_vinculos.id_peer='{$result->id_peer}' AND (cdr.src = permissoes_vinculos.id_vinculado OR cdr.dst = permissoes_vinculos.id_vinculado) ) AND ";
-        }
-
         /* Clausula do where: periodos inicial e final                                */
         $dia_inicial = "$formated_init_day $formated_init_time:00";
         $dia_final = "$formated_final_day $formated_final_time:59";
 
-        $date_clause = " ( calldate >= '$dia_inicial'";
+        $date_clause = " AND ( calldate >= '$dia_inicial'";
         $date_clause .=" AND calldate <= '$dia_final' )  ";
 
         $CONDICAO = $date_clause;
@@ -529,8 +517,8 @@ class CallsReportController extends Zend_Controller_Action {
           Montar lista de Totais por tipo de Status */
         try {
             unset($duration, $billsec);
-            $sql_ctds = "SELECT " . $SELECT . " FROM cdr, ccustos $vinculo_table ";
-            $sql_ctds .= " WHERE (cdr.accountcode = ccustos.codigo) AND $vinculo_where " . $CONDICAO;
+            $sql_ctds = "SELECT " . $SELECT . " FROM cdr, ccustos ";
+            $sql_ctds .= " WHERE (cdr.accountcode = ccustos.codigo) " . $CONDICAO;
             $sql_ctds .= ($ramaissrc === null ? '' : $ramaissrc) . ($ramaisdst === null ? '' : $ramaisdst);
             $sql_ctds .= " GROUP BY userfield ORDER BY calldate, userfield";
 
@@ -728,8 +716,8 @@ class CallsReportController extends Zend_Controller_Action {
         }
 
         /* Define um SQL de Exibicao no Template, agrupado e com ctdor de agrupamentos */
-        $sql_chamadas = "SELECT count(userfield) as qtdade," . $SELECT . " FROM cdr, ccustos $vinculo_table ";
-        $sql_chamadas .= " WHERE (cdr.accountcode = ccustos.codigo) AND $vinculo_where " . $CONDICAO;
+        $sql_chamadas = "SELECT count(userfield) as qtdade," . $SELECT . " FROM cdr, ccustos ";
+        $sql_chamadas .= " WHERE (cdr.accountcode = ccustos.codigo) " . $CONDICAO;
         $sql_chamadas .= ($ramaissrc === null ? '' : $ramaissrc) . ($ramaisdst === null ? '' : $ramaisdst);
 
         switch ($ordernar) {

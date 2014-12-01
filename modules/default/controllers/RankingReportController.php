@@ -139,9 +139,9 @@ class RankingReportController extends Zend_Controller_Action {
      */
     protected function getQuery($data, $exportCsv = false) {
 
-        $init_day = explode(" ", $formData['period']['init_day']);
-        $final_day = explode(" ", $formData['period']['till_day']);
-
+        $init_day = explode(" ", $data['period']['init_day']);
+        $final_day = explode(" ", $data['period']['till_day']);
+        
         $formated_init_day = new Zend_Date($init_day[0]);
         $formated_init_day = $formated_init_day->toString('yyyy-MM-dd');
         $formated_init_time = $init_day[1];
@@ -150,22 +150,20 @@ class RankingReportController extends Zend_Controller_Action {
         $formated_final_day = $formated_final_day->toString('yyyy-MM-dd');
         $formated_final_time = $final_day[1];
 
-        $fromDay = $formated_init_day;
-        $tillDay = $formated_final_day;
-        $fromHour = $formated_init_time;
-        $tillHour = $formated_final_time;
-
+        $fromDay = $formated_init_day." ".$formated_init_time;
+        $tillDay = $formated_final_day." ". $formated_final_time;
+        
         $rankType = $data["rank"]["type"];
         $rankOrigins = $data["rank"]["origin"];
         $rankView = $data["rank"]["view"];
 
-        $config = Zend_Registry::get('config');
         $db = Zend_Registry::get('db');
-
-        $dateClause = " ( calldate >= '{$fromDay->get($dateFormat)}'";
-        $dateClause.=" AND calldate <= '{$tillDay->get($dateFormat)} 23:59:59'"; //'
-        $dateClause.=" AND DATE_FORMAT(calldate,'%T') >= '$fromHour:00'";
-        $dateClause.=" AND DATE_FORMAT(calldate,'%T') <= '$tillHour:59') ";
+        $config = Zend_Registry::get('config');
+        
+        $dateClause = " ( calldate >= '$fromDay'";
+        $dateClause.=" AND calldate <= '$tillDay'"; //'
+        //$dateClause.=" AND DATE_FORMAT(calldate,'%T') >= '$fromHour:00'";
+        //$dateClause.=" AND DATE_FORMAT(calldate,'%T') <= '$tillHour:59') ";
         $whereCond = " WHERE $dateClause";
 
         $prefixInout = $config->get('prefix_inout');
@@ -202,24 +200,10 @@ class RankingReportController extends Zend_Controller_Action {
             $condDstExp .= " AND ";
         }
         $whereCond .= " AND ( " . substr($condDstExp, 0, strlen($condDstExp) - 4) . " ) ";
-
-        /* Vinc */
-        $name = Zend_Auth::getInstance()->getIdentity();
-        $sql = "SELECT id_peer, id_vinculado FROM permissoes_vinculos WHERE id_peer ='$name'";
-        $result = $db->query($sql)->fetchObject();
-
-        $vincTable = "";
-        $vincWhere = "";
-
-        if ($result) {
-            $vincTable = " ,permissoes_vinculos ";
-            $vincWhere = " AND ( permissoes_vinculos.id_peer='{$result->id_peer}' AND (cdr.src = permissoes_vinculos.id_vinculado OR cdr.dst = permissoes_vinculos.id_vinculado) ) ";
-        }
-
         $whereCond .= " AND ( locate('ZOMBIE',channel) = 0 ) ";
 
         $sql = "SELECT cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.userfield ";
-        $sql .= " FROM cdr JOIN peers on cdr.src = peers.name" . $vincTable . $whereCond . " " . $vincWhere . " ORDER BY calldate,userfield,cdr.amaflags";
+        $sql .= " FROM cdr JOIN peers on cdr.src = peers.name" . $whereCond . ") ORDER BY calldate,userfield,cdr.amaflags";
 
         $rankData = array();
 
@@ -424,10 +408,11 @@ class RankingReportController extends Zend_Controller_Action {
     public function viewAction() {
 
         $formData = $this->_request->getParams();
-        $reportData = $this->getQuery($formData);
 
-
+        $reportData = $this->getQuery($formData,false);
+        
         if ($reportData) {
+
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                         $this->view->translate("Reports"),
                         $this->view->translate("Call Ranking"),

@@ -16,6 +16,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
         <?php
         $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+
         ?>
     </head>
     <body>
@@ -48,13 +49,15 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                         if ($homepage) {
                             echo $homepage;
                         } else {
-                            echo $this->translate("Found no help in this language");
+                            $homepage = file_get_contents('/var/www/snep/modules/default/help/' . $locale . '/error.html');
+                            echo  $homepage;
                         }
                         ?>
 
                         <br>
                         <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
                     </div>
+                    
                     <ul class="navmenu">
                         <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>
                         <li id="default_modules" onclick="modules('maisinfo');"><a href="#"><?php echo $this->translate("Modules"); ?></a>
@@ -66,6 +69,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                             <?php echo Snep_Menu::getMasterInstance()->renderChildrenModule(); ?>
                         </ul>  
                     </div>
+                    
 
                 </div>
             <?php endif; ?>

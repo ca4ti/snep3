@@ -187,9 +187,7 @@ class Snep_Menu {
         foreach ($this->getChildren() as $child) {
             if (substr($child->id, 0, 7) == 'default') {
                 $html .= $child->render();
-            } else {
-                $html['module'] = $child->renderModule();
-            }
+            } 
         }
 
         return $html;
@@ -203,11 +201,9 @@ class Snep_Menu {
         $html = "";
 
         foreach ($this->getChildren() as $child) {
-            if (substr($child->id, 0, 7) == 'default') {
-                $teste = $child->render();
-            } else {
+            if (substr($child->id, 0, 7) != 'default') {
                 $html .= $child->renderModule();
-            }
+            } 
         }
         return $html;
     }
@@ -266,3 +262,4 @@ class Snep_Menu {
     }
 
 }
+

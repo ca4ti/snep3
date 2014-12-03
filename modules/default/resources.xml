@@ -67,15 +67,6 @@
         <resource id="record-report" label="Search records"></resource>
     </group>
 
-    <group id="carrier" label="Carrier">
-        <resource id="carrier" label="Carrier">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="billing" label="Billing">
-            <resource id="write"></resource>
-        </resource>
-    </group>
-
     <group id="routing" label="Routing">
         <resource id="route" label="Routes">
             <resource id="write"></resource>

@@ -195,22 +195,6 @@
 
     <others>
         <elements>
-            <charging>
-                <type>Checkbox</type>
-                <options>
-                    <label>View Charging</label>
-                    <description>Yes</description>
-                </options>
-            </charging>
-
-            <show_records>
-                <type>Checkbox</type>
-                <options>
-                    <label>View recording files</label>
-                    <description>Yes</description>
-                </options>
-            </show_records>
-
 		<!--<graph_type>
 		    <type>radio</type>
 		    <options>

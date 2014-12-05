@@ -300,8 +300,6 @@ class CallsReportController extends Zend_Controller_Action {
         }
 
         $call_type = $formData['calls']['type'];
-        $view_files = $formData['others']['show_records'];
-        $view_tarif = $formData['others']['charging'];
         // $graph_type	= $formData['others']['graph_type'];
         $rel_type = $formData['others']['report_type'];
 
@@ -511,7 +509,6 @@ class CallsReportController extends Zend_Controller_Action {
 
         /* Montagem do SELECT de Consulta */
         $SELECT = "ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,\"%d/%m/%Y\") AS key_dia, date_format(calldate,\"%d/%m/%Y %H:%i:%s\") AS dia, src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate ";
-        $tot_tarifado = 0;
 
         /* Consulta de sql para verificar quantidade de registros selecionados e
           Montar lista de Totais por tipo de Status */
@@ -574,15 +571,6 @@ class CallsReportController extends Zend_Controller_Action {
 
                             $tot_bil += $val['billsec'];
                             $tot_dur += $val['duration'];
-                            if ($view_tarif) {
-                                $valor = money_format('%.2n', $my_object->fmt_tarifa(
-                                                array("a" => $val['dst'],
-                                            "b" => $val['billsec'],
-                                            "c" => $val['accountcode'],
-                                            "d" => $val['calldate']), "A")
-                                );
-                                $tot_tarifado += $valor;
-                            }
                             break;
                         case "NO ANSWER":
                             if ($acao == 'grafico') {
@@ -631,15 +619,6 @@ class CallsReportController extends Zend_Controller_Action {
                                 $tot_ans++;
                                 $tot_bil += $val['billsec'];
                                 $tot_dur += $val['duration'];
-                                if ($view_tarif) {
-                                    $valor = money_format('%.2n', $my_object->fmt_tarifa(
-                                                    array("a" => $val['dst'],
-                                                "b" => $val['billsec'],
-                                                "c" => $val['accountcode'],
-                                                "d" => $val['calldate']), "A")
-                                    );
-                                    $tot_tarifado += $valor;
-                                }
                             }
                             break;
                         case "NO ANSWER":
@@ -692,9 +671,7 @@ class CallsReportController extends Zend_Controller_Action {
                 "billsec" => $tot_bil,
                 "duration" => $tot_dur,
                 "espera" => $tot_wait,
-                "oth" => $tot_oth,
-                "tot_tarifado" => $tot_tarifado);
-            // "tot_tarifado"=>number_format($tot_tarifado,2,",","."));
+                "oth" => $tot_oth);
         } else {
 
             if (count($tot_fai) == 0 && count($tot_bus) == 0 &&
@@ -737,8 +714,6 @@ class CallsReportController extends Zend_Controller_Action {
         $defaultNS = new Zend_Session_Namespace('call_sql');
         $defaultNS->sql = $sql_chamadas;
         $defaultNS->totais = $totais;
-        $defaultNS->view_tarif = $view_tarif;
-        $defaultNS->view_files = $view_files;
         $defaultNS->status = $status;
         if (isset($contas)) {
             $defaultNS->contas = $contas;
@@ -843,7 +818,6 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->calls = $this->view->translate("Calls");
         $this->view->totals_sub = $this->view->translate("Totals");
         $this->view->times = $this->view->translate("Times");
-        $this->view->tot_tariffed = $this->view->translate("Total tariffed");
 
         $this->view->answered = $this->view->translate("Answered");
         $this->view->nanswered = $this->view->translate("Not Answered");
@@ -851,10 +825,9 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->failure = $this->view->translate("Failed");
         $this->view->other = $this->view->translate("Other");
 
-        $this->view->tarrifation = $this->view->translate("Charging");
+        
         $this->view->wait = $this->view->translate("Waiting");
         $this->view->sub_total = $this->view->translate("Subtotal");
-        $this->view->gravation = $this->view->translate("Records");
 
         $this->view->back = $this->view->translate("Back");
 
@@ -867,11 +840,7 @@ class CallsReportController extends Zend_Controller_Action {
 
 
         $this->view->totals = $defaultNS->totais;
-
-        $this->view->tariffed = $defaultNS->view_tarif;
-        $this->view->files = $defaultNS->view_files;
         $this->view->status = $defaultNS->status;
-        $this->view->compress_files = $this->view->translate("Compress selected files");
 
         $this->view->duration_call = $format->fmt_segundos(
                 array("a" => $defaultNS->totais['duration'], "b" => 'hms')
@@ -989,15 +958,6 @@ class CallsReportController extends Zend_Controller_Action {
                 }
 
                 $item['nome'] = $item['tipo'] . " : " . $item['codigo'] . " - " . $item['nome'];
-
-                if ($defaultNS->view_tarif) {
-                    $item['rate'] = $format->fmt_tarifa(array("a" => $item['dst'],
-                        "b" => $item['billsec'],
-                        "c" => $item['accountcode'],
-                        "d" => $item['calldate'],
-                        "e" => $item['tipo']));
-                }
-
                 $item['src'] = $format->fmt_telefone(array("a" => $item['src']));
                 $item['dst'] = $format->fmt_telefone(array("a" => $item['dst']));
 
@@ -1005,23 +965,10 @@ class CallsReportController extends Zend_Controller_Action {
                 $item['billsec'] = $format->fmt_segundos(array("a" => $item['billsec'], "b" => 'hms'));
                 $item['duration'] = $format->fmt_segundos(array("a" => $item['duration'], "b" => 'hms'));
 
-
-                if ($defaultNS->view_files) {
-                    $filePath = Snep_Manutencao::arquivoExiste($item['calldate'], $item['userfield']);
-                    $item['file_name'] = $item['userfield'] . ".wav";
-
-                    if ($filePath) {
-                        $item['file_path'] = $filePath;
-                    } else {
-                        $item['file_path'] = 'N.D.';
-                    }
-                }
-
                 array_push($listItems, $item);
             }
 
             $this->view->call_list = $listItems;
-            $this->view->compact_success = $this->view->translate("The files were compressed successfully! Wait for the download start.");
             $this->renderScript('calls-report/analytical-report.phtml');
         }
         return;
@@ -1070,30 +1017,6 @@ class CallsReportController extends Zend_Controller_Action {
         }
 
         return $cidade;
-    }
-
-    /**
-     * compactAction - compact recording files
-     */
-    public function compactAction() {
-
-        $config = Zend_Registry::get('config');
-        $this->_helper->layout->disableLayout();
-
-        $zip = new ZipArchive();
-        $path = $config->ambiente->path_voz;
-        $fileName = date("d-m-Y-h-i") . ".zip";
-        $zip->open($path . $fileName, ZIPARCHIVE::CREATE);
-
-        $files = $this->_request->getParam('files');
-        $arrFiles = explode(',', $files);
-
-        foreach ($arrFiles as $file) {
-            $zip->addFile($path . $file, $file);
-        }
-
-        $zip->close();
-        $this->view->path = '/snep/arquivos/' . $fileName;
     }
 
     /**

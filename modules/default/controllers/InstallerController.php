@@ -213,7 +213,7 @@ class InstallerController extends Zend_Controller_Action {
 
             $snep_data = $form->getValue("snep");
             if ($snep_data['password'] !== $snep_data['confirmpassword']) {
-                $snep_form->getElement('confirmpassword')->addError($this->view->translate("A confirmação de senha não é igual a senha informada"));
+                $snep_form->getElement('confirmpassword')->addError($this->view->translate("The confirmation password does not match the requested password"));
                 $form_isValid = false;
             }
 

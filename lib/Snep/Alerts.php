@@ -137,7 +137,7 @@ class Snep_Alerts {
                 $mail->setBodyText( $alerta['message'] );
                 $mail->setFrom( $mail );
                 $mail->addTo( $alerta['destino'] );
-                $mail->setSubject( $this->translate('Alerta de Fila') );
+                $mail->setSubject( $this->translate('Queue Alert') );
                 $mail->send();                                 
                 
             }            
@@ -148,7 +148,7 @@ class Snep_Alerts {
             $mail->setBodyText( $alerta['message'] );
             $mail->setFrom( $config->system->mail );
             $mail->addTo( $alerta['destino'] );
-            $mail->setSubject( $this->translate('Alerta de Fila') );
+            $mail->setSubject( $this->translate('Queue Alert') );
             $mail->send();            
         }
     }

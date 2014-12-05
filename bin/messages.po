@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-05 14:14-0200\n"
+"POT-Creation-Date: 2014-12-05 16:23-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,8 +75,6 @@ msgstr ""
 msgid " minutes"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 msgid "#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#"
 msgstr ""
@@ -85,10 +83,8 @@ msgstr ""
 msgid "' '"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
-msgid "'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm."
+msgid "'%value%' is not a valid date, the format is dd/mm/aaaa hh:mm."
 msgstr ""
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:59
@@ -170,14 +166,6 @@ msgstr ""
 msgid "1"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/info.xml
-#: /var/www/snep-1.4/modules/loguser/info.xml
-#: /var/www/snep-1.4/modules/billing/info.xml
-msgid "1.0"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/ranking_report.xml
 msgid "10"
@@ -191,8 +179,6 @@ msgstr ""
 msgid "12"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 msgid "16"
 msgstr ""
@@ -248,16 +234,6 @@ msgstr ""
 msgid "</b></font><br>Your code will expire on: "
 msgstr ""
 
-#: ../modules/default/controllers/InstallerController.php:216
-msgid "A confirmação de senha não é igual a senha informada"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/installed.phtml:10
-msgid ""
-"A senha para o usuário Admin foi redefinida na instalação, guarde-a com "
-"segurança."
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:6
 msgid "ATTENTION"
 msgstr ""
@@ -289,9 +265,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:14
 #: ../modules/default/views/scripts/users/index.phtml:17
 #: ../modules/default/views/scripts/extensions/index.phtml:26
-#: ../modules/billing/views/scripts/carrier/index.phtml:15
-#: ../modules/billing/views/scripts/billing/index.phtml:22
-#: ../modules/billing/views/scripts/billing/edit.phtml:102
 msgid "Actions"
 msgstr ""
 
@@ -326,9 +299,6 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:99
 #: ../modules/default/controllers/ProfilesController.php:90
 #: ../modules/default/controllers/MusicOnHoldController.php:68
-#: ../modules/billing/views/scripts/billing/edit.phtml:157
-#: ../modules/billing/controllers/BillingController.php:82
-#: ../modules/billing/controllers/CarrierController.php:73
 #: /var/www/snep-1.4/configs/titleOptions.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Add"
@@ -336,10 +306,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:15
 msgid "Add Action"
-msgstr ""
-
-#: ../modules/billing/controllers/CarrierController.php:62
-msgid "Add Carrier"
 msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:90
@@ -455,86 +421,14 @@ msgstr ""
 msgid "Addressee"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:29
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:31
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:44
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:29
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:31
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:44
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:30
-msgid "Adicionada em: "
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:29
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:29
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:35
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:29
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:29
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:35
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:33
-msgid "Adicionado em: "
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:30
-msgid "Adicionou arquivo de som"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:36
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:36
-msgid "Adicionou centro de custo"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:31
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:31
-msgid "Adicionou expressão"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:30
-msgid "Adicionou fila"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:33
-msgid "Adicionou grupo de ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:30
-msgid "Adicionou ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:45
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:45
-msgid "Adicionou regra"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:32
-msgid "Adicionou tarifa"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:34
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:34
-msgid "Adicionou tronco"
-msgstr ""
-
-#: ../modules/default/controllers/CallsReportController.php:135
-#: ../modules/default/controllers/ServicesReportController.php:133
-msgid "Administradores"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsGroupsController.php:129
 #: ../modules/default/controllers/ExtensionsGroupsController.php:227
 msgid "Administrator"
 msgstr ""
 
+#: ../modules/default/controllers/CallsReportController.php:135
 #: ../modules/default/controllers/ExtensionsGroupsController.php:53
+#: ../modules/default/controllers/ServicesReportController.php:133
 msgid "Administrators"
 msgstr ""
 
@@ -564,15 +458,13 @@ msgstr ""
 msgid "Alert sound"
 msgstr ""
 
-#: ../lib/Snep/Alerts.php:140 ../lib/Snep/Alerts.php:151
-msgid "Alerta de Fila"
-msgstr ""
-
 #: /var/www/snep-1.4/configs/menu.xml
 msgid "Alias de Expressão Regular"
 msgstr ""
 
+#: ../modules/default/controllers/CallsReportController.php:141
 #: ../modules/default/controllers/ExtensionsGroupsController.php:56
+#: ../modules/default/controllers/ServicesReportController.php:139
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "All"
 msgstr ""
@@ -608,7 +500,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/cost_center.xml
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions_groups.xml
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
 msgid "Alnum"
 msgstr ""
 
@@ -631,11 +522,6 @@ msgstr ""
 msgid "Answered"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:56
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:56
-msgid "Antes"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Anually"
 msgstr ""
@@ -644,16 +530,6 @@ msgstr ""
 #: ../modules/default/controllers/CallsReportController.php:870
 #: ../modules/default/controllers/RouteController.php:59
 msgid "Any"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:71
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:71
-msgid "Ap. Conferência"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:72
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:72
-msgid "Ap. Gravação"
 msgstr ""
 
 #: ../modules/default/actions/ExecuteApp.php:73
@@ -677,18 +553,6 @@ msgstr ""
 msgid "Are you sure you want to remove this record?"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:63
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:73
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:63
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:73
-msgid "Arquivo de som"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Arquivos de som"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:68
 msgid "Asterisk"
 msgstr ""
@@ -709,22 +573,12 @@ msgstr ""
 msgid "Asterisk Status"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:88
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:88
-msgid "Ativa"
-msgstr ""
-
 #: ../modules/default/views/scripts/action-configs/edit.phtml:12
 msgid "Atualizado com sucesso"
 msgstr ""
 
 #: /var/www/snep-1.4/configs/menu.xml
 msgid "Atualização Cnl"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Até"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:196
@@ -755,67 +609,10 @@ msgstr ""
 msgid "Audio: You're next"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:74
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:74
-msgid "Aut. Reversa"
-msgstr ""
-
 #: ../modules/default/controllers/AuthController.php:107
 msgid "Authentication failure"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:111
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:111
-msgid "Ação"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:52
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:52
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:55
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:52
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:58
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:60
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:70
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:53
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:56
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:52
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:52
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:52
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:58
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:60
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:70
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:56
-msgid "Ação:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:101
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:103
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:102
-#: ../loguser/views/scripts/log-user/view.phtml:62
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:96
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:116
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:108
-#: ../loguser/views/scripts/log-user/view-sintetic.phtml:67
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:114
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:143
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:100
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:132
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:101
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:103
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:102
-#: ../modules/loguser/views/scripts/log-user/view.phtml:62
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:96
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:116
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:108
-#: ../modules/loguser/views/scripts/log-user/view-sintetic.phtml:67
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:114
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:143
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:100
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:132
 #: ../modules/default/views/layouts/layout.phtml:58
 #: ../modules/default/views/scripts/ip-status/asterisk-error.phtml:17
 #: ../modules/default/views/scripts/trunks/error.phtml:16
@@ -868,10 +665,6 @@ msgstr ""
 msgid "Bem vindo ao SNEP!"
 msgstr ""
 
-#: ../modules/billing/controllers/BillingController.php:20
-#: ../modules/billing/controllers/BillingController.php:266
-#: /var/www/snep-1.4/modules/billing/resources.xml
-#: /var/www/snep-1.4/modules/billing/info.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Billing"
 msgstr ""
@@ -894,10 +687,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/khomp_links.xml
 msgid "Boards"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/billing/forms/billing.xml
-msgid "Brasil"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:824
@@ -1008,25 +797,13 @@ msgstr ""
 msgid "Calls in the queue awaiting"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:112
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:112
-msgid "Campos"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
 msgid "Can users join this queue even if there's no agents online?"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:66
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:66
-msgid "Canal"
 msgstr ""
 
 #: ../lib/Snep/Form/Filter.php:58 ../lib/Snep/Form/Element/Submit.php:77
 #: ../modules/default/views/scripts/contacts/csv.phtml:64
 #: ../modules/default/views/scripts/simulator/index.phtml:52
-#: ../modules/billing/views/scripts/billing/edit.phtml:169
-#: ../modules/billing/views/scripts/billing/add.phtml:167
 msgid "Cancel"
 msgstr ""
 
@@ -1051,38 +828,12 @@ msgid "Cannot remove. The following routes are using this trunk: "
 msgstr ""
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:65
-#: ../modules/billing/views/scripts/billing/edit.phtml:29
-#: ../modules/billing/views/scripts/billing/add.phtml:24
-#: ../modules/billing/controllers/BillingController.php:19
-#: ../modules/billing/controllers/BillingController.php:55
-#: ../modules/billing/controllers/BillingController.php:81
-#: ../modules/billing/controllers/BillingController.php:187
-#: ../modules/billing/controllers/CarrierController.php:19
-#: ../modules/billing/controllers/CarrierController.php:20
-#: ../modules/billing/controllers/CarrierController.php:72
-#: ../modules/billing/controllers/CarrierController.php:113
-#: ../modules/billing/controllers/CarrierController.php:174
-#: /var/www/snep-1.4/modules/billing/resources.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Carrier"
 msgstr ""
 
-#: ../modules/billing/controllers/BillingController.php:129
-msgid "Carrier not selected "
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:1008
 msgid "Cellphone"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Centro de Custos"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:82
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:82
-msgid "Centro de custos"
 msgstr ""
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:57
@@ -1126,39 +877,16 @@ msgstr ""
 msgid "Choose the services"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:74
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:74
-msgid "Cidade - Estado"
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:814
 #: ../modules/default/controllers/ContactsController.php:68
 #: ../modules/default/controllers/ContactsController.php:393
 #: ../modules/default/controllers/ContactsController.php:456
-#: ../modules/billing/views/scripts/billing/edit.phtml:62
-#: ../modules/billing/views/scripts/billing/add.phtml:91
-#: ../modules/billing/controllers/BillingController.php:58
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "City"
 msgstr ""
 
-#: ../modules/billing/views/scripts/billing/edit.phtml:78
-#: ../modules/billing/views/scripts/billing/add.phtml:115
-#: ../modules/billing/controllers/BillingController.php:60
-msgid "City Code"
-msgstr ""
-
-#: ../modules/billing/controllers/BillingController.php:115
-msgid "City Code not numeric"
-msgstr ""
-
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:19
 msgid "Class"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:65
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:65
-msgid "Classe de música em espera"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/resources.xml
@@ -1179,7 +907,6 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:155
 #: ../modules/default/controllers/ProfilesController.php:67
 #: ../modules/default/controllers/RouteController.php:108
-#: ../modules/billing/controllers/CarrierController.php:50
 #: /var/www/snep-1.4/modules/default/forms/cost_center.xml
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "Code"
@@ -1217,13 +944,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "Codec 3"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:67
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:71
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:67
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:71
-msgid "Codecs"
 msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:355
@@ -1282,11 +1002,6 @@ msgstr ""
 msgid "Confirmação de Senha"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:77
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:77
-msgid "Cont. Qualidade"
-msgstr ""
-
 #: ../modules/default/views/scripts/route/add_edit.phtml:13
 #: ../modules/default/controllers/ContactGroupsController.php:36
 #: ../modules/default/controllers/ContactGroupsController.php:87
@@ -1327,11 +1042,6 @@ msgstr ""
 msgid "Context"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:66
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:66
-msgid "Contexto"
-msgstr ""
-
 #: ../modules/default/views/scripts/installer/diagnostic.phtml:28
 msgid "Continuar assim mesmo"
 msgstr ""
@@ -1342,16 +1052,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Control Type"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/resources.xml
-#: /var/www/snep-1.4/modules/loguser/resources.xml
-msgid "Controle de Usuario"
-msgstr ""
-
-#: ../loguser/controllers/LogUserController.php:28
-#: ../modules/loguser/controllers/LogUserController.php:28
-msgid "Controle de usuÁrio"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:812
@@ -1374,8 +1074,6 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:37
 #: ../modules/default/controllers/CostCenterController.php:98
 #: ../modules/default/controllers/CostCenterController.php:193
-#: ../modules/billing/controllers/CarrierController.php:87
-#: ../modules/billing/controllers/CarrierController.php:144
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
@@ -1384,21 +1082,6 @@ msgstr ""
 
 #: ../modules/default/controllers/CostCenterController.php:178
 msgid "Cost-center_csv_"
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:43
-#: ../modules/billing/views/scripts/billing/add.phtml:56
-#: ../modules/billing/controllers/BillingController.php:56
-msgid "Country"
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:71
-#: ../modules/billing/views/scripts/billing/add.phtml:106
-msgid "Country Code"
-msgstr ""
-
-#: ../modules/billing/controllers/BillingController.php:120
-msgid "Country Code not numeric"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
@@ -1418,16 +1101,6 @@ msgstr ""
 msgid "Cut on pipe '|'"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:70
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:70
-msgid "Código"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:59
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:59
-msgid "Código da tarifa:"
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:1011
 msgid "D.D.I"
 msgstr ""
@@ -1436,18 +1109,8 @@ msgstr ""
 msgid "DB Delete Error: "
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:77
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:77
-msgid "DDD"
-msgstr ""
-
 #: ../modules/default/views/scripts/contacts/elements/phone.phtml:1
 msgid "DDD + Number. Example: 4899999999"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:76
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:76
-msgid "DDI"
 msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:384
@@ -1456,13 +1119,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
 msgid "DND"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:68
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:75
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:68
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:75
-msgid "DTMF"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -1477,29 +1133,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "DTML dial mode number"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:50
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:50
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:53
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:50
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:31
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:56
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:58
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:68
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:51
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:50
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:50
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:50
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:31
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:56
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:58
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:68
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:51
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:54
-msgid "Dados"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
@@ -1528,8 +1161,6 @@ msgstr ""
 msgid "Deactivated"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:44
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:44
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
 msgid "Debug"
 msgstr ""
@@ -1618,10 +1249,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/index.phtml:47
 #: ../modules/default/controllers/ContactGroupsController.php:214
 #: ../modules/default/controllers/SoundFilesController.php:251
-#: ../modules/billing/views/scripts/carrier/index.phtml:40
-#: ../modules/billing/views/scripts/billing/index.phtml:63
-#: ../modules/billing/controllers/BillingController.php:267
-#: ../modules/billing/controllers/CarrierController.php:175
 msgid "Delete"
 msgstr ""
 
@@ -1631,11 +1258,6 @@ msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:196
 msgid "Delete Sound Files?"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:53
-msgid "Depois"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:18
@@ -1653,15 +1275,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:64
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:73
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:64
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:73
-msgid "Descrição"
-msgstr ""
-
 #: ../modules/default/views/scripts/sound-files/index.phtml:68
-#: ../modules/billing/views/scripts/billing/index.phtml:61
 msgid "Deseja remover este item?"
 msgstr ""
 
@@ -1685,11 +1299,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "Destination Group"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:84
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:84
-msgid "Destino"
 msgstr ""
 
 #: ../modules/default/views/scripts/route/index.phtml:13
@@ -1754,11 +1363,6 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:208
 #: ../modules/default/controllers/KhompLinksController.php:219
 msgid "Dialing"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:86
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:86
-msgid "Dias da Semana"
 msgstr ""
 
 #: ../modules/default/actions/DiscarRamal.php:185
@@ -1826,26 +1430,12 @@ msgstr ""
 msgid "Do you really wish to remove this item?"
 msgstr ""
 
-#: ../modules/billing/views/scripts/carrier/index.phtml:38
-msgid "Do you wish to remove this record?"
-msgstr ""
-
 #: ../modules/default/actions/ActionLoop.php:79
 msgid "Does a loop in actions."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Domain"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:79
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:79
-msgid "Domínio"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:47
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:47
-msgid "Duplicada em: "
 msgstr ""
 
 #: ../modules/default/views/scripts/route/index.phtml:40
@@ -1855,11 +1445,6 @@ msgstr ""
 #: ../modules/default/controllers/RouteController.php:280
 #, php-format
 msgid "Duplicate Route %s"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:48
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:48
-msgid "Duplicou regra"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:811
@@ -1903,11 +1488,6 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:194
 #: ../modules/default/controllers/ProfilesController.php:128
 #: ../modules/default/controllers/MusicOnHoldController.php:125
-#: ../modules/billing/views/scripts/carrier/index.phtml:34
-#: ../modules/billing/views/scripts/billing/index.phtml:57
-#: ../modules/billing/views/scripts/billing/edit.phtml:127
-#: ../modules/billing/controllers/BillingController.php:188
-#: ../modules/billing/controllers/CarrierController.php:114
 #: /var/www/snep-1.4/configs/titleOptions.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Edit"
@@ -1949,43 +1529,6 @@ msgstr ""
 msgid "Edit trunk %s"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:33
-msgid "Editou centro de custo"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:28
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:28
-msgid "Editou expressão"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:30
-msgid "Editou grupo de ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:32
-msgid "Editou parâmetros"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:42
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:42
-msgid "Editou regra"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:29
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:29
-msgid "Editou tarifa"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:31
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:31
-msgid "Editou tronco"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:47
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:47
 #: /var/www/snep-1.4/modules/default/forms/users.xml
 msgid "Email"
 msgstr ""
@@ -2030,8 +1573,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/pagination.phtml:18
 #: ../modules/default/views/scripts/pagination.phtml:20
-#: ../modules/billing/views/scripts/pagination.phtml:18
-#: ../modules/billing/views/scripts/pagination.phtml:20
 msgid "End"
 msgstr ""
 
@@ -2108,95 +1649,8 @@ msgstr ""
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:64
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:63
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:66
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:62
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:69
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:64
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:63
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:66
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:62
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:69
-msgid "Evento"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "Ex: 1000-1050;1060;1063;1070-1100"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:49
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:49
-msgid "Exceções para Destinos"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:34
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:50
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:34
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:50
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:33
-msgid "Excluida em: "
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:35
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:38
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:36
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:35
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:38
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:36
-msgid "Excluido em: "
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:33
-msgid "Excluiu arquivo de som"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:39
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:39
-msgid "Excluiu centro de custo"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:34
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:34
-msgid "Excluiu expressão"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:33
-msgid "Excluiu fila"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:36
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:36
-msgid "Excluiu grupo de ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:33
-msgid "Excluiu ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:51
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:51
-msgid "Excluiu regra"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:35
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:35
-msgid "Excluiu tarifa"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:37
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:37
-msgid "Excluiu tronco"
 msgstr ""
 
 #: ../modules/default/actions/ExecuteApp.php:39
@@ -2245,23 +1699,6 @@ msgstr ""
 
 #: ../modules/default/controllers/ExpressionAliasController.php:65
 msgid "Expressions"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:65
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:65
-msgid "Expressão"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:67
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:67
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Expressão Regular"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:74
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:74
-msgid "Expressão regular"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:158
@@ -2382,18 +1819,6 @@ msgstr ""
 msgid "Falha ao conectar: %s"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:64
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:75
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:64
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:75
-msgid "Fila"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Filas"
-msgstr ""
-
 #: ../modules/default/views/scripts/sound-files/index.phtml:20
 #: ../modules/default/controllers/MusicOnHoldController.php:227
 msgid "File"
@@ -2467,15 +1892,6 @@ msgstr ""
 msgid "Format witch the recorded files will be stored"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:74
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:74
-msgid "Formato de Gravação"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "Fragmentation Time"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:140
 #: ../modules/default/views/scripts/index/index.phtml:168
 #: ../modules/default/controllers/KhompLinksController.php:77
@@ -2513,11 +1929,6 @@ msgstr ""
 msgid "From:"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:24
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:24
-msgid "G: Grupo de ramais"
-msgstr ""
-
 #: ../modules/default/controllers/QueuesController.php:130
 #: ../modules/default/controllers/QueuesController.php:283
 #: ../modules/default/controllers/ParametersController.php:60
@@ -2545,11 +1956,6 @@ msgstr ""
 msgid "Graphic"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:87
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:87
-msgid "Gravação"
-msgstr ""
-
 #: ../modules/default/views/scripts/contacts/csv.phtml:50
 #: ../modules/default/views/scripts/users/permission.phtml:11
 #: ../modules/default/controllers/ContactsController.php:328
@@ -2565,47 +1971,10 @@ msgstr ""
 msgid "Group contacts"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Grupo de Ramal"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:76
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:76
-msgid "Grupo de ramal"
-msgstr ""
-
 #: ../modules/default/controllers/KhompLinksController.php:214
 msgid "Hanging Up"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:53
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:53
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:56
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:53
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:33
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:59
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:61
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:71
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:54
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:57
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:56
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:53
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:33
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:59
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:61
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:71
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:57
-msgid "Hora:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:45
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:78
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:45
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:78
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid "Host"
 msgstr ""
@@ -2649,66 +2018,8 @@ msgstr ""
 msgid "IP Status"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:54
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:54
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:57
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:54
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:34
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:60
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:62
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:72
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:55
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:58
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:57
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:34
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:60
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:62
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:72
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:58
-msgid "IP:"
-msgstr ""
-
 #: ../modules/default/views/scripts/ip-status/index.phtml:158
 msgid "Iax Trunks"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:52
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:52
-msgid "Id da expressão:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:51
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:51
-msgid "Id da fila:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:69
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:69
-msgid "Id da regra:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:51
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:51
-msgid "Id do Arquivo de som:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:57
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:57
-msgid "Id do Centro de custo:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:51
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:51
-msgid "Id do ramal:"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:55
-msgid "Id do tronco:"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -2725,18 +2036,10 @@ msgstr ""
 msgid "Import CSV"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "In seconds"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "Inband"
-msgstr ""
-
-#: ../modules/billing/controllers/BillingController.php:71
-msgid "Incluir Tarifa"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:80
@@ -2764,8 +2067,6 @@ msgstr ""
 msgid "Init with"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:76
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:76
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Insecure"
 msgstr ""
@@ -2866,11 +2167,6 @@ msgstr ""
 msgid "Krecord"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:84
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:84
-msgid "L. Canais"
-msgstr ""
-
 #: ../modules/default/actions/DiscarTronco.php:356
 msgid "Last call to"
 msgstr ""
@@ -2883,11 +2179,6 @@ msgstr ""
 
 #: ../modules/default/actions/Cadeado.php:99
 msgid "Leave blank to use extensions password."
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:21
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:21
-msgid "Legenda de Origem e Destino:"
 msgstr ""
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:88
@@ -2934,18 +2225,6 @@ msgstr ""
 msgid "Log Files"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/info.xml
-#: /var/www/snep-1.4/modules/loguser/info.xml
-msgid "Log User"
-msgstr ""
-
-#: ../loguser/controllers/LogUserController.php:27
-#: ../modules/loguser/controllers/LogUserController.php:27
-#: /var/www/snep-1.4/loguser/resources.xml
-#: /var/www/snep-1.4/modules/loguser/resources.xml
-msgid "Log user"
-msgstr ""
-
 #: ../modules/default/controllers/AuthController.php:36
 #: ../modules/default/controllers/AuthController.php:38
 msgid "Login"
@@ -2962,11 +2241,6 @@ msgstr ""
 
 #: ../modules/default/actions/ActionLoop.php:63
 msgid "Loop"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:72
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:72
-msgid "M. de ramais"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:46
@@ -3062,11 +2336,6 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:69
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:69
-msgid "Membros"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:134
 msgid "Memory Usage"
 msgstr ""
@@ -3088,18 +2357,6 @@ msgstr ""
 msgid "Minute Control"
 msgstr ""
 
-#: ../modules/billing/views/scripts/billing/edit.phtml:101
-#: ../modules/billing/views/scripts/billing/add.phtml:152
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "Minute Fee for Mobile"
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:100
-#: ../modules/billing/views/scripts/billing/add.phtml:145
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "Minute Fee for Residencial"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Minutes"
@@ -3111,26 +2368,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/music_on_hold.xml
 msgid "Mode"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:28
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:41
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:27
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:28
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:41
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:27
-msgid "Modificada em: "
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:29
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:20
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:32
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:30
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:29
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:20
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:32
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:30
-msgid "Modificado em: "
 msgstr ""
 
 #: ../modules/default/views/layouts/layout.phtml:63
@@ -3211,15 +2448,6 @@ msgstr ""
 msgid "MySQL"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/billing/info.xml
-msgid "Módulo de Tarifação do Snep"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/info.xml
-#: /var/www/snep-1.4/modules/loguser/info.xml
-msgid "Módulo de controle de usuário"
-msgstr ""
-
 #: ../modules/default/controllers/RankingReportController.php:385
 msgid "N. ANSWERD"
 msgstr ""
@@ -3228,8 +2456,6 @@ msgstr ""
 msgid "N. UNANSWERD"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:81
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:81
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "NAT"
@@ -3271,7 +2497,6 @@ msgstr ""
 #: ../modules/default/controllers/ProfilesController.php:68
 #: ../modules/default/controllers/ProfilesController.php:178
 #: ../modules/default/controllers/ExtensionsController.php:110
-#: ../modules/billing/controllers/CarrierController.php:51
 #: /var/www/snep-1.4/modules/default/forms/contact_groups.xml
 #: /var/www/snep-1.4/modules/default/forms/music_on_hold.xml
 #: /var/www/snep-1.4/modules/default/forms/expression_alias.xml
@@ -3281,7 +2506,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/cost_center.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
 msgid "Name"
 msgstr ""
 
@@ -3301,10 +2525,6 @@ msgstr ""
 #: ../modules/default/controllers/ProfilesController.php:105
 #: ../modules/default/controllers/ProfilesController.php:149
 msgid "Name already exists."
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:140
-msgid "New Adjustment"
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:380
@@ -3367,31 +2587,6 @@ msgstr ""
 msgid "No rule found."
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:65
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:67
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:71
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:82
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:66
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:69
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:65
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:67
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:71
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:82
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:66
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:69
-msgid "Nome"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:43
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:43
-msgid "Nome da Emp."
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:54
-msgid "Nome do grupo:"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsGroupsController.php:55
 #: ../modules/default/controllers/ExtensionsGroupsController.php:131
 #: ../modules/default/controllers/ExtensionsGroupsController.php:229
@@ -3438,48 +2633,6 @@ msgstr ""
 msgid "Numbers separated by ( . ). EX: 5.04"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:48
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:48
-msgid "Nº de linhas"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:93
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:95
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:93
-#: ../loguser/views/scripts/log-user/view.phtml:17
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:88
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:107
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:99
-#: ../loguser/views/scripts/log-user/view-sintetic.phtml:54
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:106
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:135
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:91
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:124
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:93
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:95
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:93
-#: ../modules/loguser/views/scripts/log-user/view.phtml:17
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:88
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:107
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:99
-#: ../modules/loguser/views/scripts/log-user/view-sintetic.phtml:54
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:106
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:135
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:91
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:124
-msgid "Não existem dados neste período"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/installed.phtml:6
-msgid ""
-"O SNEP foi instalado com sucesso em seu sistema, clique no botão abaixo para "
-"ir a tela de login."
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/installed.phtml:3
-msgid "O SNEP foi instalado com sucesso."
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid ""
 "O usuário informado deverá ter a permissão de criar\n"
@@ -3504,17 +2657,8 @@ msgstr ""
 msgid "On going"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/info.xml
-#: /var/www/snep-1.4/modules/loguser/info.xml
 #: /var/www/snep-1.4/modules/default/info.xml
-#: /var/www/snep-1.4/modules/billing/info.xml
 msgid "OpenS Tecnologia"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:73
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:73
-#: /var/www/snep-1.4/modules/billing/forms/billing.xml
-msgid "Operadora"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
@@ -3523,11 +2667,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:10
 msgid "Order"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:83
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:83
-msgid "Origem"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:335
@@ -3579,22 +2718,12 @@ msgstr ""
 msgid "Outgoing Call"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:73
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:73
-msgid "P. Gravação"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:109
 msgid "PBX Statistics"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Padlock"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:75
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:75
-msgid "Pais"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
@@ -3615,18 +2744,8 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Parametros"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:166
 msgid "Partition"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:42
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:42
-msgid "Parâmetros"
 msgstr ""
 
 #: ../modules/default/views/scripts/auth/login.phtml:13
@@ -3664,16 +2783,6 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:76
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:76
-msgid "Path Backup"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:75
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:75
-msgid "Path Gravação"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 msgid "Path where to store the audio files"
 msgstr ""
@@ -3701,11 +2810,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
 msgid "Period from:"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Periodo"
 msgstr ""
 
 #: ../modules/default/views/scripts/profiles/index.phtml:49
@@ -3767,33 +2871,6 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:82
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:82
-msgid "Porta"
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:85
-#: ../modules/billing/views/scripts/billing/add.phtml:131
-#: ../modules/billing/controllers/BillingController.php:59
-msgid "Prefix"
-msgstr ""
-
-#: ../modules/billing/controllers/BillingController.php:125
-msgid "Prefix not numeric"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:78
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:78
-msgid "Prefixo"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:81
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:110
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:81
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:110
-msgid "Prioridade"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
@@ -3822,11 +2899,6 @@ msgstr ""
 msgid "Próximo"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:83
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:83
-msgid "Qualidade"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Qualification time"
 msgstr ""
@@ -3847,6 +2919,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ip-status/index.phtml:58
 #: ../modules/default/views/scripts/queues-groups/members.phtml:11
 msgid "Queue"
+msgstr ""
+
+#: ../lib/Snep/Alerts.php:140 ../lib/Snep/Alerts.php:151
+msgid "Queue Alert"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
@@ -3887,22 +2963,10 @@ msgstr ""
 msgid "Queues_csv_"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:22
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:22
-msgid "R: Ramal"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "RFC-2833"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:78
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:78
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Ramal"
 msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:141
@@ -3979,18 +3043,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:121
 msgid "Registered Trunks"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:80
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:96
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:80
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:96
-msgid "Regra"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Regras"
 msgstr ""
 
 #: ../modules/default/controllers/ActionConfigsController.php:95
@@ -4207,11 +3259,6 @@ msgstr ""
 msgid "Rule: %s %s"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:26
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:26
-msgid "S: Sem destino"
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:806
 msgid "SEQ"
 msgstr ""
@@ -4247,10 +3294,6 @@ msgstr ""
 msgid "SOURCE"
 msgstr ""
 
-#: ../modules/billing/views/scripts/billing/edit.phtml:168
-msgid "Salvar"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Same on both servers"
 msgstr ""
@@ -4264,7 +3307,6 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/members.phtml:53
 #: ../modules/default/views/scripts/contacts/csv.phtml:63
 #: ../modules/default/controllers/CnlController.php:92
-#: ../modules/billing/views/scripts/billing/add.phtml:166
 msgid "Save"
 msgstr ""
 
@@ -4285,8 +3327,6 @@ msgstr ""
 msgid "Seconds left to alert"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/route.xml
@@ -4552,26 +3592,13 @@ msgstr ""
 
 #: ../modules/default/views/scripts/pagination.phtml:4
 #: ../modules/default/views/scripts/pagination.phtml:6
-#: ../modules/billing/views/scripts/pagination.phtml:4
-#: ../modules/billing/views/scripts/pagination.phtml:6
 msgid "Start"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "Start charging Time"
-msgstr ""
-
-#: ../modules/billing/views/scripts/billing/edit.phtml:99
-msgid "Starts from"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:815
 #: ../modules/default/controllers/ContactsController.php:69
 #: ../modules/default/controllers/ContactsController.php:394
 #: ../modules/default/controllers/ContactsController.php:457
-#: ../modules/billing/views/scripts/billing/edit.phtml:51
-#: ../modules/billing/views/scripts/billing/add.phtml:66
-#: ../modules/billing/controllers/BillingController.php:57
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "State"
 msgstr ""
@@ -4588,8 +3615,6 @@ msgstr ""
 #: ../modules/default/controllers/IpStatusController.php:38
 #: ../modules/default/controllers/ErrorsKhompController.php:51
 #: ../modules/default/controllers/RecordReportController.php:222
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
@@ -4609,8 +3634,6 @@ msgstr ""
 msgid "Strategy"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 #: /var/www/snep-1.4/modules/default/forms/cost_center.xml
@@ -4688,11 +3711,6 @@ msgstr ""
 msgid "System Status"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:25
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:25
-msgid "T: Tronco"
-msgstr ""
-
 #: ../modules/default/views/scripts/trunks/index.phtml:30
 msgid "TDM"
 msgstr ""
@@ -4707,28 +3725,6 @@ msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:388
 msgid "TIME TOTAL UNANSWERD"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:72
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:88
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:72
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:88
-msgid "Tarifa"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:79
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:79
-msgid "Tarifa celular"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:80
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:80
-msgid "Tarifa fixo"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Tarifas"
 msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:93
@@ -4755,6 +3751,20 @@ msgstr ""
 
 #: ../modules/default/controllers/ParametersController.php:50
 msgid "The File includes/setup.conf does not have permission to be modified."
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/installed.phtml:6
+msgid ""
+"The SNEP was successfully installed on your system, click the button below "
+"to go to the login screen."
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/installed.phtml:3
+msgid "The SNEP was successfully installed."
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:216
+msgid "The confirmation password does not match the requested password"
 msgstr ""
 
 #: ../modules/default/controllers/ContactGroupsController.php:281
@@ -4818,6 +3828,12 @@ msgstr ""
 msgid "The page you are looking for was not found or does not exists."
 msgstr ""
 
+#: ../modules/default/views/scripts/installer/installed.phtml:10
+msgid ""
+"The password for the Admin user has been reset in the installation, store it "
+"safely."
+msgstr ""
+
 #: ../modules/default/controllers/ExpressionAliasController.php:99
 #: ../modules/default/controllers/ExpressionAliasController.php:160
 msgid ""
@@ -4832,10 +3848,6 @@ msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:407
 msgid "There is no contacts group registered."
-msgstr ""
-
-#: ../modules/billing/controllers/BillingController.php:145
-msgid "This bill is already set"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/users.xml
@@ -4907,17 +3919,6 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:68
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:65
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:72
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:70
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:68
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:65
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:72
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:70
-msgid "Tipo"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "To"
 msgstr ""
@@ -4944,13 +3945,6 @@ msgstr ""
 msgid "To:"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:141
-#: ../modules/default/controllers/ServicesReportController.php:139
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Todos"
-msgstr ""
-
 #: ../modules/default/views/scripts/ranking-report/view.phtml:30
 #: ../modules/default/views/scripts/ranking-report/view.phtml:33
 #: ../modules/default/views/scripts/index/index.phtml:139
@@ -4964,11 +3958,6 @@ msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:819
 msgid "Totals"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "Troncos"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
@@ -5056,11 +4045,6 @@ msgstr ""
 msgid "Unused"
 msgstr ""
 
-#: ../modules/billing/views/scripts/billing/add.phtml:148
-#: ../modules/billing/views/scripts/billing/add.phtml:155
-msgid "Use dot for decimal"
-msgstr ""
-
 #: ../modules/default/views/scripts/index/index.phtml:141
 #: ../modules/default/views/scripts/index/index.phtml:169
 msgid "Used"
@@ -5091,6 +4075,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: ../modules/default/controllers/CallsReportController.php:138
 #: ../modules/default/controllers/ExtensionsGroupsController.php:54
 #: ../modules/default/controllers/UsersController.php:38
 #: ../modules/default/controllers/UsersController.php:95
@@ -5098,6 +4083,7 @@ msgstr ""
 #: ../modules/default/controllers/UsersController.php:246
 #: ../modules/default/controllers/UsersController.php:394
 #: ../modules/default/controllers/ProfilesController.php:207
+#: ../modules/default/controllers/ServicesReportController.php:136
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Users"
 msgstr ""
@@ -5108,12 +4094,6 @@ msgid ""
 "of users with these permissions is necessary to make editing user."
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:46
-#: ../loguser/views/scripts/log-user/exp-analytic.phtml:56
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:77
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:46
-#: ../modules/loguser/views/scripts/log-user/exp-analytic.phtml:56
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:77
 #: ../modules/default/views/scripts/installer/installed.phtml:15
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid "Usuário"
@@ -5123,49 +4103,13 @@ msgstr ""
 msgid "Usuário ou senha recusada pelo servidor Asterisk"
 msgstr ""
 
-#: ../loguser/views/scripts/log-user/ramal-analytic.phtml:55
-#: ../loguser/views/scripts/log-user/fila-analytic.phtml:55
-#: ../loguser/views/scripts/log-user/gramal-analytic.phtml:58
-#: ../loguser/views/scripts/log-user/som-analytic.phtml:55
-#: ../loguser/views/scripts/log-user/parameter-analytic.phtml:35
-#: ../loguser/views/scripts/log-user/cc-analytic.phtml:61
-#: ../loguser/views/scripts/log-user/tarifa-analytic.phtml:63
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:73
-#: ../loguser/views/scripts/log-user/tronco-analytic.phtml:59
-#: ../modules/loguser/views/scripts/log-user/ramal-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/fila-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/gramal-analytic.phtml:58
-#: ../modules/loguser/views/scripts/log-user/som-analytic.phtml:55
-#: ../modules/loguser/views/scripts/log-user/parameter-analytic.phtml:35
-#: ../modules/loguser/views/scripts/log-user/cc-analytic.phtml:61
-#: ../modules/loguser/views/scripts/log-user/tarifa-analytic.phtml:63
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:73
-#: ../modules/loguser/views/scripts/log-user/tronco-analytic.phtml:59
-msgid "Usuário:"
-msgstr ""
-
-#: ../modules/default/controllers/CallsReportController.php:138
-#: ../modules/default/controllers/ServicesReportController.php:136
-msgid "Usuários"
-msgstr ""
-
 #: ../modules/default/controllers/RouteController.php:167
 msgid "Valid times"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:85
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:85
-msgid "Validade"
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:82
 #, php-format
 msgid "Validity: %s"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:113
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:113
-msgid "Valores"
 msgstr ""
 
 #: /var/www/snep-1.4/configs/dashboard.xml
@@ -5221,10 +4165,6 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../modules/billing/views/scripts/billing/edit.phtml:24
-msgid "Warning: Changes to existing fees, influence on the report."
-msgstr ""
-
 #: ../modules/default/views/scripts/auth/recuperation.phtml:8
 msgid ""
 "We sent an email to you containing the code for the redefinition of your "
@@ -5259,11 +4199,6 @@ msgstr ""
 #: ../modules/default/controllers/MusicOnHoldController.php:49
 #: /var/www/snep-1.4/modules/default/forms/music_on_hold.xml
 msgid "Without buffer quiet"
-msgstr ""
-
-#: ../loguser/views/scripts/log-user/regra-analytic.phtml:23
-#: ../modules/loguser/views/scripts/log-user/regra-analytic.phtml:23
-msgid "X: Qualquer"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -5439,11 +4374,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/ranking_report.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "dd/mm/aaaa"
-msgstr ""
-
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
-msgid "dd/mm/yyyy hh:mm"
 msgstr ""
 
 #: /var/www/snep-1.4/configs/menu.xml
@@ -5772,8 +4702,6 @@ msgstr ""
 msgid "read"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 #: /var/www/snep-1.4/modules/default/forms/users.xml
@@ -5830,7 +4758,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
-#: /var/www/snep-1.4/modules/billing/forms/billing.xml
 msgid "select"
 msgstr ""
 
@@ -5878,8 +4805,6 @@ msgstr ""
 msgid "sound-files/index"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/contact_groups.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/queueGroup.xml
@@ -5900,8 +4825,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/extensions_groups.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
-#: /var/www/snep-1.4/modules/billing/forms/billing.xml
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
 msgid "text"
 msgstr ""
 
@@ -5913,8 +4836,6 @@ msgstr ""
 msgid "tit_logger"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/forms/log-user.xml
-#: /var/www/snep-1.4/modules/loguser/forms/log-user.xml
 #: /var/www/snep-1.4/modules/default/forms/contact_groups.xml
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/queueGroup.xml
@@ -5940,8 +4861,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
 #: /var/www/snep-1.4/modules/default/forms/contact_groups_migration.xml
-#: /var/www/snep-1.4/modules/billing/forms/billing.xml
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
 msgid "true"
 msgstr ""
 
@@ -5963,10 +4882,6 @@ msgstr ""
 msgid "ulaw"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/billing/forms/carrier.xml
-msgid "use dot for decimal"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "users"
@@ -5986,10 +4901,7 @@ msgstr ""
 msgid "write"
 msgstr ""
 
-#: /var/www/snep-1.4/loguser/info.xml
-#: /var/www/snep-1.4/modules/loguser/info.xml
 #: /var/www/snep-1.4/modules/default/info.xml
-#: /var/www/snep-1.4/modules/billing/info.xml
 msgid "www.sneplivre.com.br"
 msgstr ""
 

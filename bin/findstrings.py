@@ -23,7 +23,6 @@ def escape(string):
 def parse(file):
     """Parses XML files for what we need"""
     file = os.path.realpath(file)
-
     tree = ElementTree()
     tree.parse(file)
 
@@ -34,6 +33,10 @@ def parse(file):
                 print('msgid "%s"\nmsgstr ""' % escape(child.text))
                 print('')
             if "label" in child.attrib:
+                print("#: %s" % file)
+                print('msgid "%s"\nmsgstr ""' % escape(child.attrib['label']))
+                print('')
+            if "desc" in child.attrib:
                 print("#: %s" % file)
                 print('msgid "%s"\nmsgstr ""' % escape(child.attrib['label']))
                 print('')
@@ -77,6 +80,7 @@ def main():
     if root_dir != None:
         for root, dirs, files in os.walk(root_dir):
             for file in files:
+                print file
                 if file[-4:] == ".xml":
                     parse("%s/%s" % (root.strip('/'), file))
     else:

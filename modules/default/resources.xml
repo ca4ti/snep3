@@ -16,48 +16,56 @@
 
     <group id="status" label="Status">
         
-        <resource id="index" label="System"></resource>
-        <resource id="khomp-links" label="Khomp Links"></resource>
         <resource id="ip-status" label="IP Status"></resource>
+        <resource id="khomp-links" label="Khomp Links"></resource>
         <resource id="errors-khomp" label="Errors Khomp Links"></resource>
         <resource id="logs" label="Logs"></resource>
     </group>
 
     <group id="manage" label="Manage">
-        <resource id="cost-center" label="Cost Center">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="contacts" label="Contacts">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="contact-groups" label="Contact Groups">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="queues" label="Queues">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="queues-groups" label="Queues Groups">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="extensions-groups" label="Extension Groups">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="pickup-groups" label="Pickup Groups">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="extensions" label="Extensions">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="conference-rooms" label="Conference Rooms"></resource>
-        <resource id="trunks" label="Trunks">
-            <resource id="write"></resource>
-        </resource>
+
         <resource id="users" label="Users">
             <resource id="write"></resource>
         </resource>
         <resource id="profiles" label="Profiles">
             <resource id="write"></resource>
         </resource>
+        
+         <resource id="extensions" label="Extensions">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="extensions-groups" label="Extension Groups">
+            <resource id="write"></resource>
+        </resource>
+
+        <resource id="cost-center" label="Cost Center">
+            <resource id="write"></resource>
+        </resource>
+
+        <resource id="trunks" label="Trunks">
+            <resource id="write"></resource>
+        </resource>
+        
+        <resource id="contacts" label="Contacts">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="contact-groups" label="Contact Groups">
+            <resource id="write"></resource>
+        </resource>
+
+        <resource id="queues" label="Queues">
+            <resource id="write"></resource>
+        </resource>
+        <resource id="queues-groups" label="Queues Groups">
+            <resource id="write"></resource>
+        </resource>
+        
+        <resource id="pickup-groups" label="Pickup Groups">
+            <resource id="write"></resource>
+        </resource>
+       
+        <resource id="conference-rooms" label="Conference Rooms"></resource>
+        
     </group>
     
     <group id="reports" label="Reports">

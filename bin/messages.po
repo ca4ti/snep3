@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-05 16:23-0200\n"
+"POT-Creation-Date: 2014-12-08 15:14-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -459,7 +459,7 @@ msgid "Alert sound"
 msgstr ""
 
 #: /var/www/snep-1.4/configs/menu.xml
-msgid "Alias de Expressão Regular"
+msgid "Alias Regular Expression"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:141
@@ -573,12 +573,8 @@ msgstr ""
 msgid "Asterisk Status"
 msgstr ""
 
-#: ../modules/default/views/scripts/action-configs/edit.phtml:12
-msgid "Atualizado com sucesso"
-msgstr ""
-
-#: /var/www/snep-1.4/configs/menu.xml
-msgid "Atualização Cnl"
+#: ../modules/default/controllers/InstallerController.php:198
+msgid "Asterisk configuration"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:196
@@ -657,14 +653,6 @@ msgstr ""
 msgid "Backup Files Path"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/default/forms/installer.xml
-msgid "Banco de Dados"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/index.phtml:8
-msgid "Bem vindo ao SNEP!"
-msgstr ""
-
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Billing"
 msgstr ""
@@ -687,6 +675,10 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/khomp_links.xml
 msgid "Boards"
+msgstr ""
+
+#: ../modules/default/controllers/ActionConfigsController.php:95
+msgid "Business Rules » Standard Settings » "
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:824
@@ -976,16 +968,8 @@ msgstr ""
 msgid "Conference Rooms"
 msgstr ""
 
-#: ../modules/default/controllers/InstallerController.php:198
-msgid "Configuração do Asterisk"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:199
-msgid "Configuração do Banco de Dados"
-msgstr ""
-
 #: ../modules/default/views/scripts/installer/index.phtml:16
-msgid "Configuração do acesso a Banco de Dados, Asterisk"
+msgid "Configuration of access to the database, Asterisk"
 msgstr ""
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:26
@@ -996,10 +980,6 @@ msgstr ""
 #: ../modules/default/controllers/ParametersController.php:36
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Configure"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/default/forms/installer.xml
-msgid "Confirmação de Senha"
 msgstr ""
 
 #: ../modules/default/views/scripts/route/add_edit.phtml:13
@@ -1043,7 +1023,7 @@ msgid "Context"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/diagnostic.phtml:28
-msgid "Continuar assim mesmo"
+msgid "Continue"
 msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:94
@@ -1143,6 +1123,14 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: /var/www/snep-1.4/modules/default/forms/installer.xml
+msgid "Database"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:199
+msgid "Database configuration"
+msgstr ""
+
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:17
 msgid "Date"
 msgstr ""
@@ -1223,10 +1211,6 @@ msgid ""
 "nonono ; nono)"
 msgstr ""
 
-#: ../modules/default/views/scripts/installer/index.phtml:17
-msgid "Definição da senha do Administrador"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Delay Qualification"
 msgstr ""
@@ -1275,10 +1259,6 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: ../modules/default/views/scripts/sound-files/index.phtml:68
-msgid "Deseja remover este item?"
-msgstr ""
-
 #: ../modules/default/views/scripts/ranking-report/view.phtml:11
 #: ../modules/default/controllers/CallsReportController.php:160
 #: ../modules/default/controllers/CallsReportController.php:809
@@ -1315,6 +1295,9 @@ msgid "Destiny: %s"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/index.phtml:15
+msgid "Diagnosis System"
+msgstr ""
+
 #: /var/www/snep-1.4/configs/menu.xml
 msgid "Diagnóstico do Sistema"
 msgstr ""
@@ -1428,6 +1411,10 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:44
 #: ../modules/default/views/scripts/users/index.phtml:43
 msgid "Do you really wish to remove this item?"
+msgstr ""
+
+#: ../modules/default/views/scripts/sound-files/index.phtml:68
+msgid "Do you want to remove this item?"
 msgstr ""
 
 #: ../modules/default/actions/ActionLoop.php:79
@@ -1796,8 +1783,18 @@ msgstr ""
 msgid "Failed"
 msgstr ""
 
+#: ../modules/default/views/scripts/installer/error.phtml:1
+msgid "Failed to Install SNEP"
+msgstr ""
+
 #: ../modules/default/views/scripts/index/index.phtml:22
 msgid "Failed to connect to server Asterisk"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:230
+#: ../modules/default/controllers/InstallerController.php:241
+#, php-format
+msgid "Failed to connect: %s"
 msgstr ""
 
 #: ../lib/Snep/InterfaceConf.php:47 ../lib/Snep/InterfaceConf.php:50
@@ -1807,16 +1804,6 @@ msgstr ""
 
 #: ../modules/default/controllers/SimulatorController.php:132
 msgid "Failure on trial to dial extension %: non existent extension"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/error.phtml:1
-msgid "Falha ao Instalar o SNEP"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:230
-#: ../modules/default/controllers/InstallerController.php:241
-#, php-format
-msgid "Falha ao conectar: %s"
 msgstr ""
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:20
@@ -1948,6 +1935,10 @@ msgstr ""
 msgid "Go to Context"
 msgstr ""
 
+#: ../modules/default/views/scripts/installer/installed.phtml:22
+msgid "Go to SNEP"
+msgstr ""
+
 #: ../modules/default/actions/GoContext.php:55
 msgid "Go to a Context"
 msgstr ""
@@ -2071,16 +2062,16 @@ msgstr ""
 msgid "Insecure"
 msgstr ""
 
-#: ../modules/default/controllers/InstallerController.php:192
-msgid "Instalador » Configuração"
-msgstr ""
-
 #: ../modules/default/controllers/InstallerController.php:166
 msgid "Installation completed"
 msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:54
 msgid "Installer Snep"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:192
+msgid "Installer » Configuration"
 msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:126
@@ -2135,10 +2126,6 @@ msgstr ""
 msgid "Inválid format"
 msgstr ""
 
-#: ../modules/default/views/scripts/installer/installed.phtml:22
-msgid "Ir para o SNEP"
-msgstr ""
-
 #: /var/www/snep-1.4/modules/default/forms/ranking_report.xml
 msgid "Just numbers"
 msgstr ""
@@ -2165,6 +2152,10 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 msgid "Krecord"
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/index.phtml:14
+msgid "Language selection and location"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:356
@@ -2536,6 +2527,10 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
+#: ../modules/default/views/scripts/installer/diagnostic.phtml:31
+msgid "Next"
+msgstr ""
+
 #: ../modules/default/controllers/QueuesController.php:151
 #: ../modules/default/controllers/QueuesController.php:163
 #: ../modules/default/controllers/QueuesController.php:309
@@ -2633,12 +2628,6 @@ msgstr ""
 msgid "Numbers separated by ( . ). EX: 5.04"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/default/forms/installer.xml
-msgid ""
-"O usuário informado deverá ter a permissão de criar\n"
-"                        tabelas no banco de dados informado."
-msgstr ""
-
 #: ../modules/default/actions/DiscarTronco.php:142
 msgid "Ommit origin (only for Khomp KGSM)"
 msgstr ""
@@ -2658,7 +2647,7 @@ msgid "On going"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/info.xml
-msgid "OpenS Tecnologia"
+msgid "Opens Technology"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
@@ -2679,10 +2668,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "Originated"
-msgstr ""
-
-#: ../modules/default/controllers/ContactsController.php:549
-msgid "Os seguintes registros do CSV contem dados nulos::<br/>"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:826
@@ -2749,6 +2734,8 @@ msgid "Partition"
 msgstr ""
 
 #: ../modules/default/views/scripts/auth/login.phtml:13
+#: ../modules/default/views/scripts/installer/installed.phtml:16
+#: /var/www/snep-1.4/modules/default/forms/installer.xml
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/users.xml
@@ -2769,6 +2756,10 @@ msgstr ""
 #: ../modules/default/controllers/AuthController.php:175
 #: ../modules/default/controllers/AuthController.php:177
 msgid "Password Recovery"
+msgstr ""
+
+#: /var/www/snep-1.4/modules/default/forms/installer.xml
+msgid "Password confirmation"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:52
@@ -2893,10 +2884,6 @@ msgstr ""
 #: ../modules/default/controllers/ProfilesController.php:272
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Profiles"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/diagnostic.phtml:31
-msgid "Próximo"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -3043,10 +3030,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:121
 msgid "Registered Trunks"
-msgstr ""
-
-#: ../modules/default/controllers/ActionConfigsController.php:95
-msgid "Regras de Negócio » Configurações Padrão » "
 msgstr ""
 
 #: ../modules/default/views/scripts/route/add_edit.phtml:11
@@ -3283,11 +3266,11 @@ msgid "SLA"
 msgstr ""
 
 #: ../lib/Snep/Alerts.php:146
-msgid "SNEP - A fila"
+msgid "SNEP - The Queue"
 msgstr ""
 
 #: ../lib/Snep/Alerts.php:135
-msgid "SNEP - A fila "
+msgid "SNEP - the Queue "
 msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:383
@@ -3356,10 +3339,6 @@ msgstr ""
 msgid "Select the file"
 msgstr ""
 
-#: ../modules/default/views/scripts/installer/index.phtml:14
-msgid "Seleção de idioma e localização"
-msgstr ""
-
 #: ../modules/default/views/scripts/auth/redefine.phtml:19
 msgid "Send"
 msgstr ""
@@ -3381,7 +3360,6 @@ msgstr ""
 msgid "Sending SMS"
 msgstr ""
 
-#: ../modules/default/views/scripts/installer/installed.phtml:16
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid "Senha"
 msgstr ""
@@ -3422,6 +3400,10 @@ msgstr ""
 
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Services Used"
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/index.phtml:17
+msgid "Set Password Administrator"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
@@ -3468,10 +3450,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
 msgid "Silent time before connecting the agent to a caller"
-msgstr ""
-
-#: ../modules/default/controllers/MusicOnHoldController.php:196
-msgid "Sim"
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:51
@@ -3682,10 +3660,6 @@ msgstr ""
 msgid "Synthetic"
 msgstr ""
 
-#: /var/www/snep-1.4/modules/default/resources.xml
-msgid "System"
-msgstr ""
-
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "System Diagnosis"
 msgstr ""
@@ -3737,7 +3711,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/inspector/index.phtml:21
 #: ../modules/default/views/scripts/installer/diagnostic.phtml:27
-msgid "Testar Novamente"
+msgid "Test again"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/expression_alias.xml
@@ -3794,6 +3768,10 @@ msgstr ""
 msgid "The files were compressed successfully! Wait for the download start."
 msgstr ""
 
+#: ../modules/default/controllers/ContactsController.php:549
+msgid "The following CSV records contain null data::<br/>"
+msgstr ""
+
 #: ../modules/default/controllers/SoundFilesController.php:361
 msgid ""
 "The following files do not exist in the directory and will be excluded from "
@@ -3832,6 +3810,10 @@ msgstr ""
 msgid ""
 "The password for the Admin user has been reset in the installation, store it "
 "safely."
+msgstr ""
+
+#: /var/www/snep-1.4/modules/default/forms/installer.xml
+msgid "The user must have permission to create tables in the informed database"
 msgstr ""
 
 #: ../modules/default/controllers/ExpressionAliasController.php:99
@@ -4045,6 +4027,14 @@ msgstr ""
 msgid "Unused"
 msgstr ""
 
+#: /var/www/snep-1.4/configs/menu.xml
+msgid "Update Cnl"
+msgstr ""
+
+#: ../modules/default/views/scripts/action-configs/edit.phtml:12
+msgid "Updated successfully"
+msgstr ""
+
 #: ../modules/default/views/scripts/index/index.phtml:141
 #: ../modules/default/views/scripts/index/index.phtml:169
 msgid "Used"
@@ -4055,9 +4045,11 @@ msgstr ""
 #: ../modules/default/views/scripts/auth/login.phtml:8
 #: ../modules/default/views/scripts/auth/recuperation.phtml:12
 #: ../modules/default/views/scripts/auth/redefine.phtml:13
+#: ../modules/default/views/scripts/installer/installed.phtml:15
 #: ../modules/default/views/scripts/users/permission.phtml:12
 #: ../modules/default/controllers/ExtensionsGroupsController.php:130
 #: ../modules/default/controllers/ExtensionsGroupsController.php:228
+#: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid "User"
 msgstr ""
 
@@ -4068,6 +4060,10 @@ msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:90
 msgid "User or password invalid"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:227
+msgid "User password or refused by the Asterisk server"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
@@ -4094,13 +4090,8 @@ msgid ""
 "of users with these permissions is necessary to make editing user."
 msgstr ""
 
-#: ../modules/default/views/scripts/installer/installed.phtml:15
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
 msgid "Usuário"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:227
-msgid "Usuário ou senha recusada pelo servidor Asterisk"
 msgstr ""
 
 #: ../modules/default/controllers/RouteController.php:167
@@ -4123,20 +4114,6 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
 msgid "Virtual"
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/diagnostic.phtml:4
-msgid ""
-"Você deve corrigir possíveis erros destacados em vermelho por esse passo da "
-"instalação. É importante que todos os erros sejam corrigidos para que o SNEP "
-"funcione corretamente. Usuários avançados podem pular essa parte da "
-"instalação se desejarem, esse diagnóstico pode ser acessado de dentro do "
-"sistema pelo menu <strong>Configurações</strong> > <strong>Diagnóstico </"
-"strong>."
-msgstr ""
-
-#: ../modules/default/views/scripts/installer/index.phtml:11
-msgid "Você será conduzido na instalação do SNEP."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
@@ -4183,8 +4160,12 @@ msgstr ""
 msgid "Week Days"
 msgstr ""
 
+#: ../modules/default/views/scripts/installer/index.phtml:8
+msgid "Welcome to SNEP!"
+msgstr ""
+
 #: ../modules/default/controllers/IndexController.php:40
-msgid "Welcome to Snep, <b>"
+msgid "Welcome to Snep"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -4210,6 +4191,7 @@ msgstr ""
 #: ../modules/default/controllers/QueuesController.php:162
 #: ../modules/default/controllers/QueuesController.php:308
 #: ../modules/default/controllers/QueuesController.php:318
+#: ../modules/default/controllers/MusicOnHoldController.php:196
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/sound_files.xml
 #: /var/www/snep-1.4/modules/default/forms/khomp_links.xml
@@ -4234,6 +4216,19 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/trunk_error.phtml:1
 msgid "You don't have trunks registered in your system."
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/diagnostic.phtml:4
+msgid ""
+"You must correct any errors highlighted in red for this step of the "
+"installation. It is important that all errors are corrected for the SNEP "
+"work properly. Advanced users can skip this part of the installation if you "
+"wish, this diagnosis can be accessed from within the system menu choice "
+"<strong>Settings</strong> > <strong>Diagnostics </strong>."
+msgstr ""
+
+#: ../modules/default/views/scripts/installer/index.phtml:11
+msgid "You will be taken in the installation of SNEP"
 msgstr ""
 
 #: ../modules/default/controllers/SoundFilesController.php:371

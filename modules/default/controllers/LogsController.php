@@ -63,7 +63,7 @@ class LogsController extends Zend_Controller_Action {
         $realtime->setValue('no');
 
         $submit = $form->getElement("submit");
-        $submit->setLabel("Log Search");
+        $submit->setLabel("Log");
 
         $this->initLogFile();
         $this->view->form = $form;

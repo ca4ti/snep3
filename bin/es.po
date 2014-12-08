@@ -3,25 +3,25 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Snep v-1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-08 16:20-0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-12-08 18:11-0300\n"
+"Last-Translator: Tiago <tiago.zimmermann@opens.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-Bookmarks: -1,493,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
-msgid ""
-"\tThis warning is being delivered to you because Snep detected the usage of "
-"a trunk marked with your email.\n"
-msgstr ""
+msgid "\tThis warning is being delivered to you because Snep detected the usage of a trunk marked with your email.\n"
+msgstr "\tEsta advertencia se está entregando a usted porque Snep detecta el uso de un tronco marcado con su correo electrónico.\n"
 
 #: ../modules/default/actions/DiscarTronco.php:355
 msgid ""
@@ -35,15 +35,15 @@ msgstr ""
 
 #: ../modules/default/controllers/ServicesReportController.php:244
 msgid " - Activated"
-msgstr ""
+msgstr "- Activado"
 
 #: ../modules/default/controllers/ServicesReportController.php:246
 msgid " - Deactivated"
-msgstr ""
+msgstr "- Desactivado"
 
 #: ../inspectors/Sounds.php:82
 msgid " Subfolders not found "
-msgstr ""
+msgstr " Subcarpetas que no se encuentra"
 
 #: ../modules/default/controllers/ContactsController.php:469
 #: ../modules/default/controllers/QueuesController.php:567
@@ -55,25 +55,25 @@ msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:59
 msgid " dias, "
-msgstr ""
+msgstr "día,"
 
 #: ../modules/default/views/scripts/index/index.phtml:16
 msgid " for more information"
-msgstr ""
+msgstr "para más información"
 
 #: ../modules/default/controllers/IndexController.php:57
 #: ../modules/default/controllers/IndexController.php:61
 msgid " hour(s), "
-msgstr ""
+msgstr "hora(s),"
 
 #: ../inspectors/Sounds.php:82
 msgid " in "
-msgstr ""
+msgstr "en"
 
 #: ../modules/default/controllers/IndexController.php:57
 #: ../modules/default/controllers/IndexController.php:61
 msgid " minutes"
-msgstr ""
+msgstr "acta"
 
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 msgid "#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#"
@@ -85,11 +85,11 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 msgid "'%value%' is not a valid date, the format is dd/mm/aaaa hh:mm."
-msgstr ""
+msgstr "'%value%' no es una fecha válida, el formato es dd / mm / AAAA hh: mm."
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:59
 msgid "( Only numbers)"
-msgstr ""
+msgstr "( Sólo los números )"
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:24
 msgid "(GSM)"
@@ -232,19 +232,19 @@ msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:201
 msgid "</b></font><br>Your code will expire on: "
-msgstr ""
+msgstr "</b></font><br>Su código expirará el:"
 
 #: ../modules/default/views/scripts/index/index.phtml:6
 msgid "ATTENTION"
-msgstr ""
+msgstr "Atención"
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:9
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #: ../modules/default/actions/ActionLoop.php:91
 msgid "Action index"
-msgstr ""
+msgstr "Índice Acción"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:18
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:20
@@ -266,11 +266,11 @@ msgstr ""
 #: ../modules/default/views/scripts/users/index.phtml:17
 #: ../modules/default/views/scripts/extensions/index.phtml:26
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:71
 msgid "Actions to execute"
-msgstr ""
+msgstr "Acciones a ejecutar"
 
 #: ../modules/default/controllers/KhompLinksController.php:62
 #: ../modules/default/controllers/KhompLinksController.php:63
@@ -278,16 +278,16 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:167
 #: ../modules/default/controllers/ServicesReportController.php:251
 msgid "Activated"
-msgstr ""
+msgstr "Activado"
 
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
 msgid "Activated/Deactivated"
-msgstr ""
+msgstr "Activado/Desactivado"
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:14
 #: ../modules/default/views/scripts/route/index.phtml:11
 msgid "Active"
-msgstr ""
+msgstr "Activar"
 
 #: ../lib/Snep/Form.php:90
 #: ../modules/default/controllers/QueuesGroupsController.php:102
@@ -302,181 +302,181 @@ msgstr ""
 #: /var/www/snep-1.4/configs/titleOptions.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Add"
-msgstr ""
+msgstr "Agregar"
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:15
 msgid "Add Action"
-msgstr ""
+msgstr "Agregar Acción"
 
 #: ../modules/default/controllers/ContactsController.php:90
 msgid "Add Contact"
-msgstr ""
+msgstr "Añadir contacto"
 
 #: ../modules/default/controllers/ContactGroupsController.php:76
 msgid "Add Contact Group"
-msgstr ""
+msgstr "Agregar Grupo de Contacto"
 
 #: ../modules/default/controllers/CostCenterController.php:86
 msgid "Add Cost Center"
-msgstr ""
+msgstr "Agregar Centro de Coste"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:48
 #: ../modules/default/controllers/ExpressionAliasController.php:82
 msgid "Add Expression Alias"
-msgstr ""
+msgstr "Agregar Expresión Alias"
 
 #: ../modules/default/controllers/ExtensionsController.php:131
 #: ../modules/default/controllers/ExtensionsController.php:146
 msgid "Add Extension"
-msgstr ""
+msgstr "Agregar Extensión"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:102
 msgid "Add Extension Group"
-msgstr ""
+msgstr "Agregar Grupo de extensiones"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:115
 msgid "Add Extension Groups"
-msgstr ""
+msgstr "Agregar Grupo de extensiones"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:254
 #: ../modules/default/controllers/MusicOnHoldController.php:269
 msgid "Add File"
-msgstr ""
+msgstr "Agregar Expediente"
 
 #: ../modules/default/controllers/QueuesController.php:484
 msgid "Add Member"
-msgstr ""
+msgstr "Agregar Miembro"
 
 #: /var/www/snep-1.4/configs/titleOptions.xml
 msgid "Add Multiple"
-msgstr ""
+msgstr "Agregar Múltiple"
 
 #: ../modules/default/controllers/ExtensionsController.php:128
 msgid "Add Multiple Extensions"
-msgstr ""
+msgstr "Agregar Múltiple Extensiones"
 
 #: ../modules/default/controllers/ExtensionsController.php:774
 msgid "Add Multiples Extensions"
-msgstr ""
+msgstr "Agregar Múltiple Extensiones"
 
 #: ../modules/default/controllers/PickupGroupsController.php:88
 #: ../modules/default/controllers/PickupGroupsController.php:101
 msgid "Add Pickup Group"
-msgstr ""
+msgstr "Agregar Grupo de captura"
 
 #: ../modules/default/controllers/ProfilesController.php:79
 msgid "Add Profiles"
-msgstr ""
+msgstr "Agregar perfiles"
 
 #: ../modules/default/controllers/QueuesController.php:85
 msgid "Add Queue"
-msgstr ""
+msgstr "Agregar Cola"
 
 #: ../modules/default/controllers/QueuesController.php:97
 msgid "Add Queues"
-msgstr ""
+msgstr "Agregar Colas"
 
 #: ../modules/default/controllers/QueuesGroupsController.php:89
 msgid "Add Queues Group"
-msgstr ""
+msgstr "Agregar Grupo de Colas"
 
 #: ../modules/default/controllers/RouteController.php:338
 msgid "Add Route"
-msgstr ""
+msgstr "Agregar Ruta"
 
 #: ../modules/default/controllers/RouteController.php:130
 msgid "Add Rule"
-msgstr ""
+msgstr "Agregar Reglas"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:57
 msgid "Add Session"
-msgstr ""
+msgstr "Agregar Sesión"
 
 #: ../modules/default/controllers/SoundFilesController.php:95
 msgid "Add Sound File"
-msgstr ""
+msgstr "Agregar Archivo de Sonido"
 
 #: ../modules/default/controllers/TrunksController.php:142
 msgid "Add Trunk"
-msgstr ""
+msgstr "Agregar Tronco"
 
 #: ../modules/default/controllers/UsersController.php:84
 msgid "Add User"
-msgstr ""
+msgstr "Agregar usuario"
 
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Add multiple"
-msgstr ""
+msgstr "Agregar múltiple"
 
 #: /var/www/snep-1.4/configs/titleOptions.xml
 msgid "Add page to Dashboard"
-msgstr ""
+msgstr "Agregar la página de Dashboard"
 
 #: ../modules/default/controllers/ContactsController.php:392
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "Address"
-msgstr ""
+msgstr "Dirección"
 
 #: ../modules/default/actions/EmailAction.php:65
 msgid "Addressee"
-msgstr ""
+msgstr "Dirección"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:129
 #: ../modules/default/controllers/ExtensionsGroupsController.php:227
 msgid "Administrator"
-msgstr ""
+msgstr "Administrador"
 
 #: ../modules/default/controllers/CallsReportController.php:135
 #: ../modules/default/controllers/ExtensionsGroupsController.php:53
 #: ../modules/default/controllers/ServicesReportController.php:133
 msgid "Administrators"
-msgstr ""
+msgstr "Administradores"
 
 #: ../modules/default/controllers/TrunksController.php:208
 #: ../modules/default/controllers/ExtensionsController.php:687
 msgid "Advanced"
-msgstr ""
+msgstr "Avanzado"
 
 #: ../modules/default/controllers/QueuesController.php:148
 #: ../modules/default/controllers/QueuesController.php:306
 msgid "Advanced Configuration"
-msgstr ""
+msgstr "Configuración avanzada"
 
 #: ../modules/default/controllers/QueuesController.php:410
 msgid "Agent:"
-msgstr ""
+msgstr "Agente:"
 
 #: ../modules/default/actions/DiscarTronco.php:143
 msgid "Alert email"
-msgstr ""
+msgstr "Email de alerta"
 
 #: ../modules/default/actions/DiscarTronco.php:221
 msgid "Alert repetition rate"
-msgstr ""
+msgstr "Tasa de repetición Alerta"
 
 #: ../modules/default/actions/DiscarTronco.php:222
 msgid "Alert sound"
-msgstr ""
+msgstr "Sonido de alerta"
 
 #: /var/www/snep-1.4/configs/menu.xml
 msgid "Alias Regular Expression"
-msgstr ""
+msgstr "Alias de expresiones regulares"
 
 #: ../modules/default/controllers/CallsReportController.php:141
 #: ../modules/default/controllers/ExtensionsGroupsController.php:56
 #: ../modules/default/controllers/ServicesReportController.php:139
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:39
 msgid "All Files"
-msgstr ""
+msgstr "Todos los archivos"
 
 #: ../modules/default/controllers/ContactsController.php:320
 #: ../modules/default/controllers/ContactsController.php:478
 msgid "All Groups"
-msgstr ""
+msgstr "Todos los Grupos"
 
 #: ../modules/default/views/scripts/users/permission.phtml:49
 #: ../modules/default/views/scripts/users/permission.phtml:52
@@ -484,11 +484,11 @@ msgstr ""
 #: ../modules/default/views/scripts/users/permission.phtml:62
 #: ../modules/default/views/scripts/users/permission.phtml:65
 msgid "Allow"
-msgstr ""
+msgstr "Permitir"
 
 #: ../modules/default/actions/DiscarRamal.php:181
 msgid "Allow voicemail"
-msgstr ""
+msgstr "Permitir correo de voz"
 
 #: /var/www/snep-1.4/modules/default/forms/contact_groups.xml
 #: /var/www/snep-1.4/modules/default/forms/music_on_hold.xml
@@ -508,19 +508,19 @@ msgstr ""
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "Analytic"
-msgstr ""
+msgstr "Analítico"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:28
 #: ../modules/default/views/scripts/ranking-report/view.phtml:31
 msgid "Answerd"
-msgstr ""
+msgstr "Respondidos"
 
 #: ../modules/default/controllers/CallsReportController.php:822
 #: ../modules/default/controllers/CallsReportController.php:937
 #: ../modules/default/controllers/RecordReportController.php:249
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "Answered"
-msgstr ""
+msgstr "Respondido"
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Anually"
@@ -726,7 +726,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:54
 msgid "CPU"
-msgstr ""
+msgstr "UPC"
 
 #: /var/www/snep-1.4/modules/default/forms/ranking_report.xml
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
@@ -793,7 +793,8 @@ msgstr ""
 msgid "Can users join this queue even if there's no agents online?"
 msgstr ""
 
-#: ../lib/Snep/Form/Filter.php:58 ../lib/Snep/Form/Element/Submit.php:77
+#: ../lib/Snep/Form/Filter.php:58
+#: ../lib/Snep/Form/Element/Submit.php:77
 #: ../modules/default/views/scripts/contacts/csv.phtml:64
 #: ../modules/default/views/scripts/simulator/index.phtml:52
 msgid "Cancel"
@@ -1206,9 +1207,7 @@ msgid "Defines how many lines you want per page of report"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
-msgid ""
-"Defines what destinations will be excluded from reports (Sintax: nono ; "
-"nonono ; nono)"
+msgid "Defines what destinations will be excluded from reports (Sintax: nono ; nonono ; nono)"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
@@ -1392,11 +1391,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:161
 msgid "Disk Usage"
-msgstr ""
+msgstr "Uso Del Disco"
 
 #: ../modules/default/views/scripts/index/index.phtml:40
 msgid "Distribution"
-msgstr ""
+msgstr "Distribución"
 
 #: ../modules/default/actions/Rewrite.php:92
 msgid "Do not cut"
@@ -1575,9 +1574,7 @@ msgid "Enter"
 msgstr ""
 
 #: ../modules/default/views/scripts/auth/redefine.phtml:9
-msgid ""
-"Enter your user to send a redefinition of the password to your registered "
-"email "
+msgid "Enter your user to send a redefinition of the password to your registered email "
 msgstr ""
 
 #: ../inspectors/AGI.php:110
@@ -1797,7 +1794,8 @@ msgstr ""
 msgid "Failed to connect: %s"
 msgstr ""
 
-#: ../lib/Snep/InterfaceConf.php:47 ../lib/Snep/InterfaceConf.php:50
+#: ../lib/Snep/InterfaceConf.php:47
+#: ../lib/Snep/InterfaceConf.php:50
 #, php-format
 msgid "Failed to open file %s with write permission."
 msgstr ""
@@ -2132,7 +2130,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:47
 msgid "Kernel"
-msgstr ""
+msgstr "Núcleo"
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
@@ -2289,7 +2287,7 @@ msgstr ""
 #: ../modules/default/controllers/ExtensionsController.php:772
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Manage"
-msgstr ""
+msgstr "Entradas"
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Manual"
@@ -2329,7 +2327,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:134
 msgid "Memory Usage"
-msgstr ""
+msgstr "Uso de la memoria"
 
 #: ../modules/default/actions/EmailAction.php:67
 msgid "Message"
@@ -2364,7 +2362,7 @@ msgstr ""
 #: ../modules/default/views/layouts/layout.phtml:63
 #: ../modules/default/views/scripts/index/index.phtml:84
 msgid "Modules"
-msgstr ""
+msgstr "Módulos"
 
 #: /var/www/snep-1.4/modules/default/forms/route.xml
 msgid "Monday"
@@ -2705,7 +2703,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:109
 msgid "PBX Statistics"
-msgstr ""
+msgstr "PBX Estadística"
 
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 msgid "Padlock"
@@ -2908,7 +2906,8 @@ msgstr ""
 msgid "Queue"
 msgstr ""
 
-#: ../lib/Snep/Alerts.php:140 ../lib/Snep/Alerts.php:151
+#: ../lib/Snep/Alerts.php:140
+#: ../lib/Snep/Alerts.php:151
 msgid "Queue Alert"
 msgstr ""
 
@@ -3026,11 +3025,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:114
 msgid "Registered Extensions"
-msgstr ""
+msgstr "Extensiones registrados"
 
 #: ../modules/default/views/scripts/index/index.phtml:121
 msgid "Registered Trunks"
-msgstr ""
+msgstr "Troncos Registrados"
 
 #: ../modules/default/views/scripts/route/add_edit.phtml:11
 msgid "Regular Expression"
@@ -3205,7 +3204,7 @@ msgstr ""
 #: ../modules/default/controllers/SimulatorController.php:38
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
-msgid "	"
+msgid "\t"
 msgstr ""
 
 #: ../modules/default/controllers/ActionConfigsController.php:35
@@ -3512,9 +3511,7 @@ msgid "Socket connection to the server is not available at the moment."
 msgstr ""
 
 #: ../modules/default/controllers/ErrorController.php:52
-msgid ""
-"Some internal error occured while processing your request. Please contact "
-"the system administrator and report this incident."
+msgid "Some internal error occured while processing your request. Please contact the system administrator and report this incident."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
@@ -3666,7 +3663,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:35
 msgid "System Information"
-msgstr ""
+msgstr "Información del sistema"
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 msgid "System Language"
@@ -3728,9 +3725,7 @@ msgid "The File includes/setup.conf does not have permission to be modified."
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:6
-msgid ""
-"The SNEP was successfully installed on your system, click the button below "
-"to go to the login screen."
+msgid "The SNEP was successfully installed on your system, click the button below to go to the login screen."
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:3
@@ -3750,8 +3745,7 @@ msgid "The extension group will be deleted. Are you sure?."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/services_report.xml
-msgid ""
-"The extension list must follow the format from this example. EX: 8000;8001"
+msgid "The extension list must follow the format from this example. EX: 8000;8001"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:404
@@ -3759,9 +3753,7 @@ msgid "The file already exists"
 msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:283
-msgid ""
-"The file must be separated by commas. Header is optional and columns can be "
-"associated in the next screen."
+msgid "The file must be separated by commas. Header is optional and columns can be associated in the next screen."
 msgstr ""
 
 #: ../modules/default/controllers/RecordReportController.php:289
@@ -3773,15 +3765,11 @@ msgid "The following CSV records contain null data::<br/>"
 msgstr ""
 
 #: ../modules/default/controllers/SoundFilesController.php:361
-msgid ""
-"The following files do not exist in the directory and will be excluded from "
-"the database."
+msgid "The following files do not exist in the directory and will be excluded from the database."
 msgstr ""
 
 #: ../modules/default/controllers/SoundFilesController.php:368
-msgid ""
-"The following files were found in the directory and will be registered in "
-"the database."
+msgid "The following files were found in the directory and will be registered in the database."
 msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:393
@@ -3789,9 +3777,7 @@ msgid "The following members make use of this queue, remove before deleting:"
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsController.php:601
-msgid ""
-"The following routes use this extension, modify them prior to remove this "
-"extension"
+msgid "The following routes use this extension, modify them prior to remove this extension"
 msgstr ""
 
 #: ../modules/default/controllers/ContactGroupsController.php:241
@@ -3807,9 +3793,7 @@ msgid "The page you are looking for was not found or does not exists."
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:10
-msgid ""
-"The password for the Admin user has been reset in the installation, store it "
-"safely."
+msgid "The password for the Admin user has been reset in the installation, store it safely."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
@@ -3818,9 +3802,7 @@ msgstr ""
 
 #: ../modules/default/controllers/ExpressionAliasController.php:99
 #: ../modules/default/controllers/ExpressionAliasController.php:160
-msgid ""
-"Their alias has invalid character. Accents are not allowed, empty value "
-"between the keys, blanks and special characters except( # % | . - _ )"
+msgid "Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:322
@@ -3852,20 +3834,16 @@ msgid "This group does not have any contacts"
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:382
-msgid ""
-"This groups has extensions associated. Select another group for these "
-"extensions. "
+msgid "This groups has extensions associated. Select another group for these extensions. "
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:388
-msgid ""
-"This is the only group and it has extensions associated. You can migrate "
-"these extensions to a new group."
+msgid "This is the only group and it has extensions associated. You can migrate these extensions to a new group."
 msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:7
 msgid "This software is in Alpha stage. Its unstable and may contain defects."
-msgstr ""
+msgstr "Este software se encuentra en fase alfa. Él es inestable y puede contener errores."
 
 #: /var/www/snep-1.4/modules/default/forms/route.xml
 msgid "Thursday"
@@ -3914,9 +3892,7 @@ msgid "To mantain this data accurate, this page is automatically refreshed"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
-msgid ""
-"To witch context the call must go when the caller dial any number while "
-"waiting"
+msgid "To witch context the call must go when the caller dial any number while waiting"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
@@ -3978,7 +3954,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/index/index.phtml:61
 msgid "Turn-on Time"
-msgstr ""
+msgstr "Tiempo de activación"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:17
 #: ../modules/default/views/scripts/ip-status/index.phtml:26
@@ -4085,9 +4061,7 @@ msgid "Users"
 msgstr ""
 
 #: ../modules/default/views/scripts/profiles/index.phtml:41
-msgid ""
-"Users who do not have individual permissions are listed. To change the group "
-"of users with these permissions is necessary to make editing user."
+msgid "Users who do not have individual permissions are listed. To change the group of users with these permissions is necessary to make editing user."
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/installer.xml
@@ -4129,9 +4103,7 @@ msgid "Waiting"
 msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:68
-msgid ""
-"Want to display information of source and destination of the call in the "
-"body of the email?"
+msgid "Want to display information of source and destination of the call in the body of the email?"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
@@ -4143,9 +4115,7 @@ msgid "Warning"
 msgstr ""
 
 #: ../modules/default/views/scripts/auth/recuperation.phtml:8
-msgid ""
-"We sent an email to you containing the code for the redefinition of your "
-"password"
+msgid "We sent an email to you containing the code for the redefinition of your password"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:127
@@ -4166,7 +4136,7 @@ msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:40
 msgid "Welcome to Snep, "
-msgstr ""
+msgstr "Bienvenido a Snep,"
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Without Authentication"
@@ -4200,9 +4170,7 @@ msgid "Yes"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:188
-msgid ""
-"You are removing a music on hold class, it has some audio files attached to "
-"it."
+msgid "You are removing a music on hold class, it has some audio files attached to it."
 msgstr ""
 
 #: ../modules/default/views/scripts/permission/error-unset.phtml:8
@@ -4219,12 +4187,7 @@ msgid "You don't have trunks registered in your system."
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/diagnostic.phtml:4
-msgid ""
-"You must correct any errors highlighted in red for this step of the "
-"installation. It is important that all errors are corrected for the SNEP "
-"work properly. Advanced users can skip this part of the installation if you "
-"wish, this diagnosis can be accessed from within the system menu choice "
-"<strong>Settings</strong> > <strong>Diagnostics </strong>."
+msgid "You must correct any errors highlighted in red for this step of the installation. It is important that all errors are corrected for the SNEP work properly. Advanced users can skip this part of the installation if you wish, this diagnosis can be accessed from within the system menu choice <strong>Settings</strong> > <strong>Diagnostics </strong>."
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/index.phtml:11
@@ -4737,7 +4700,7 @@ msgstr ""
 
 #: /var/www/snep-1.4/configs/menu.xml
 msgid "routes"
-msgstr ""
+msgstr "rutas"
 
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "seconds"
@@ -4909,3 +4872,4 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/index.phtml:17
 msgid "Áudio"
 msgstr ""
+

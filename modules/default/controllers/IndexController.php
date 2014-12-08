@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action {
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
 
-        $this->view->breadcrumb = $this->view->translate("Welcome to Snep") . $username ;
+        $this->view->breadcrumb = $this->view->translate("Welcome to Snep, ") . $username ;
 
         // Direcionando para o "snep antigo"
         $config = Zend_Registry::get('config');

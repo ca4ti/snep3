@@ -4143,10 +4143,6 @@ msgstr "Dias da Semana"
 msgid "Welcome to SNEP!"
 msgstr "Bem-vindo ao SNEP!"
 
-#: ../modules/default/controllers/IndexController.php:40
-msgid "Welcome to Snep"
-msgstr "Bem-vindo ao Snep, "
-
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Without Authentication"
 msgstr "Sem Autenticação"

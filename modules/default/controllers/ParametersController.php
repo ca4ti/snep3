@@ -119,6 +119,7 @@ class ParametersController extends Zend_Controller_Action {
         $languages = array();
         $languageElement = $locale_form->getElement("language");
         $available_languages = Snep_Locale::getInstance()->getAvailableLanguages();
+        
         foreach ($locale->getTranslationList("language", Snep_Locale::getInstance()->getLanguage()) as $lcode => $language) {
             if (in_array($lcode, $available_languages)) {
                 $languageElement->addMultiOption($lcode, ucfirst($language));
@@ -254,6 +255,22 @@ class ParametersController extends Zend_Controller_Action {
         $configFile = APPLICATION_PATH . "/includes/setup.conf";
         $config = new Zend_Config_Ini($configFile, null, true);
         $config->system->language = "pt_BR";
+        $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+            'filename' => $configFile));
+        $writer->write();
+
+        $module = $_GET["module"];
+        $this->_redirect($module);
+    }
+
+    /**
+     * esAction - Modify linguage for espanhol
+     */
+    public function esAction() {
+
+        $configFile = APPLICATION_PATH . "/includes/setup.conf";
+        $config = new Zend_Config_Ini($configFile, null, true);
+        $config->system->language = "es_es";
         $writer = new Zend_Config_Writer_Ini(array('config' => $config,
             'filename' => $configFile));
         $writer->write();

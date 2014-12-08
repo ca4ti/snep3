@@ -6,18 +6,17 @@
             <username>
                 <type>text</type>
                 <options>
-                    <label>Usuário</label>
+                    <label>User</label>
                     <required>true</required>
                     <description>
-                        O usuário informado deverá ter a permissão de criar
-                        tabelas no banco de dados informado.
+                        The user must have permission to create tables in the informed database
                     </description>
                 </options>
             </username>
             <password>
                 <type>password</type>
                 <options>
-                    <label>Senha</label>
+                    <label>Password</label>
                     <required>true</required>
                     <renderpassword>true</renderpassword>
                 </options>
@@ -25,7 +24,7 @@
             <dbname>
                 <type>text</type>
                 <options>
-                    <label>Banco de Dados</label>
+                    <label>Database</label>
                     <value>snep</value>
                     <required>true</required>
                 </options>
@@ -101,7 +100,7 @@
             <confirmpassword>
                 <type>password</type>
                 <options>
-                    <label>Confirmação de Senha</label>
+                    <label>Password confirmation</label>
                     <required>true</required>
                     <validators>
                         <alnum>

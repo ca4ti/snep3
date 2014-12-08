@@ -189,14 +189,14 @@ class InstallerController extends Zend_Controller_Action {
         $this->view->error = $inspect['Permissions'];
 
         $this->view->hideMenu = true;
-        $this->view->breadcrumb = $this->view->translate("Instalador » Configuração");
+        $this->view->breadcrumb = $this->view->translate("Installer » Configuration");
         $form_config = new Zend_Config_Xml("./modules/default/forms/installer.xml");
 
         $form = new Snep_Form();
         $form->setAction($this->getFrontController()->getBaseUrl() . '/installer/configure');
 
-        $asterisk_form = new Snep_Form_SubForm($this->view->translate("Configuração do Asterisk"), $form_config->asterisk);
-        $database_form = new Snep_Form_SubForm($this->view->translate("Configuração do Banco de Dados"), $form_config->database);
+        $asterisk_form = new Snep_Form_SubForm($this->view->translate("Asterisk configuration"), $form_config->asterisk);
+        $database_form = new Snep_Form_SubForm($this->view->translate("Database configuration"), $form_config->database);
         $snep_form = new Snep_Form_SubForm($this->view->translate("Senha do Administrador"), $form_config->snep);
 
         $form->addSubForm($database_form, "database");
@@ -224,10 +224,10 @@ class InstallerController extends Zend_Controller_Action {
                 try {
                     $asterisk->connect();
                 } catch (Asterisk_Exception_Auth $ex) {
-                    $asterisk_form->getElement('secret')->addError($this->view->translate("Usuário ou senha recusada pelo servidor Asterisk"));
+                    $asterisk_form->getElement('secret')->addError($this->view->translate("User password or refused by the Asterisk server"));
                     $form_isValid = false;
                 } catch (Asterisk_Exception_CantConnect $ex) {
-                    $asterisk_form->getElement('server')->addError($this->view->translate("Falha ao conectar: %s", $ex->getMessage()));
+                    $asterisk_form->getElement('server')->addError($this->view->translate("Failed to connect: %s", $ex->getMessage()));
                     $form_isValid = false;
                 }
             }
@@ -238,7 +238,7 @@ class InstallerController extends Zend_Controller_Action {
                 try {
                     $db->getConnection();
                 } catch (Zend_Db_Exception $ex) {
-                    $database_form->getElement('hostname')->addError($this->view->translate("Falha ao conectar: %s", $ex->getMessage()));
+                    $database_form->getElement('hostname')->addError($this->view->translate("Failed to connect: %s", $ex->getMessage()));
                     $form_isValid = false;
                 }
             }

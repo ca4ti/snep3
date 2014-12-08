@@ -45,7 +45,7 @@
     <item id="routing" label="menu_rules" uri="route" resourceid="48">
         <item uri="route" label="routes"></item>
         <item uri="gestao/default_actions_configs.php" label="default_configs"></item>
-        <item uri="gestao/expression_alias.php" label="Alias de Expressão Regular"></item>
+        <item uri="gestao/expression_alias.php" label="Alias Regular Expression"></item>
     </item>
 
     <item id="configs" label="menu_config" resourceid="60">
@@ -53,7 +53,7 @@
         <item uri="src/rel_sounds.php" label="menu_sounds"></item>
         <item uri="gestao/rel_musiconhold.php" label="menu_musiconhold"></item>
         <item uri="inspector" label="Diagnóstico do Sistema"></item>
-        <item uri="cnl" label="Atualização Cnl"></item>
+        <item uri="cnl" label="Update Cnl"></item>
     </item>
 
     <item id="logout" label="menu_sair" uri="auth/logout" ></item>

@@ -132,7 +132,7 @@ class Snep_Alerts {
             $email = explode(",", $alerta['destino']);
             foreach($email as $mail) {
                 
-                $msg = $this->translate("SNEP - A fila ") . $alerta['recurso'];
+                $msg = $this->translate("SNEP - the Queue ") . $alerta['recurso'];
                 $mail = new Zend_Mail();
                 $mail->setBodyText( $alerta['message'] );
                 $mail->setFrom( $mail );
@@ -143,7 +143,7 @@ class Snep_Alerts {
             }            
         }else{
 
-            $msg = $this->translate("SNEP - A fila") . $alerta['recurso'];
+            $msg = $this->translate("SNEP - The Queue") . $alerta['recurso'];
             $mail = new Zend_Mail();
             $mail->setBodyText( $alerta['message'] );
             $mail->setFrom( $config->system->mail );

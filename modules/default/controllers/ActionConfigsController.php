@@ -92,7 +92,7 @@ class ActionConfigsController extends Zend_Controller_Action {
 
                 $action->setDefaultConfig($registry->getAllValues());
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
-                $this->view->breadcrumb = $this->view->translate("Regras de Negócio » Configurações Padrão » " . $action->getName());
+                $this->view->breadcrumb = $this->view->translate("Business Rules » Standard Settings » " . $action->getName());
                 $actionForm = $actionConfig->getForm();
                 $actionForm->getElement('cancel')->setAttrib("onclick", "location.href='{$this->getFrontController()->getBaseUrl()}/action-configs/'");
                 $actionForm->getElement('cancel')->setLabel('Voltar');

@@ -193,7 +193,7 @@ class MusicOnHoldController extends Zend_Controller_Action {
         $form->addElement($name);
 
         $check = new Zend_Form_Element_Checkbox('remove');
-        $check->setLabel($this->view->translate("Delete Sound Files?"))->setDescription($this->view->translate('Sim'));
+        $check->setLabel($this->view->translate("Delete Sound Files?"))->setDescription($this->view->translate('Yes'));
         $form->addElement($check);
 
         if ($this->_request->getPost()) {

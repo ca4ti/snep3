@@ -45,7 +45,9 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                     <div id="containerDiv">
                         <?php
                         $locale = Zend_Registry::get('config')->system->language;
+
                         $homepage = file_get_contents('/var/www/snep/modules/' . $module . '/help/' . $locale . '/' . $controller . '.html');
+
                         if ($homepage) {
                             echo $homepage;
                         } else {

@@ -270,7 +270,7 @@ class ParametersController extends Zend_Controller_Action {
 
         $configFile = APPLICATION_PATH . "/includes/setup.conf";
         $config = new Zend_Config_Ini($configFile, null, true);
-        $config->system->language = "es_es";
+        $config->system->language = "es";
         $writer = new Zend_Config_Writer_Ini(array('config' => $config,
             'filename' => $configFile));
         $writer->write();

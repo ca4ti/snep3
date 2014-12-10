@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep v-1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 16:20-0200\n"
-"PO-Revision-Date: 2014-12-09 17:16-0300\n"
+"POT-Creation-Date: 2014-12-10 09:30-0200\n"
+"PO-Revision-Date: 2014-12-10 09:31-0300\n"
 "Last-Translator: Tiago <tiago.zimmermann@opens.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -609,7 +609,7 @@ msgstr "Audio: Tú eres el siguiente"
 msgid "Authentication failure"
 msgstr "Fallo de autenticación"
 
-#: ../modules/default/views/layouts/layout.phtml:58
+#: ../modules/default/views/layouts/layout.phtml:60
 #: ../modules/default/views/scripts/ip-status/asterisk-error.phtml:17
 #: ../modules/default/views/scripts/trunks/error.phtml:16
 #: ../modules/default/views/scripts/trunks/asterisk-error.phtml:17
@@ -1184,7 +1184,7 @@ msgstr "Predeterminado de correo electrónico donde se enviarán las alertas par
 
 #: /var/www/snep-1.4/modules/default/info.xml
 msgid "Default module that provides basic features to Snep PBX."
-msgstr "Módulo por defecto que proporciona funciones básicas para Snep PBX."
+msgstr "Módulo por defecto que proporciona funciones básicas para Snep PBX"
 
 #: /var/www/snep-1.4/modules/default/forms/music_on_hold.xml
 msgid "Default path"
@@ -1669,6 +1669,10 @@ msgstr "Exportación CSV"
 msgid "Export PDF"
 msgstr "Exportación PDF"
 
+#: ../lib/Snep/CsvIE.php:161
+msgid "Export to CSV"
+msgstr "Exportación CSV"
+
 #: ../modules/default/views/scripts/route/add_edit.phtml:18
 #: ../modules/default/controllers/ExpressionAliasController.php:42
 #: ../modules/default/controllers/ExpressionAliasController.php:81
@@ -2044,6 +2048,10 @@ msgstr "Entrante"
 msgid "Incoming Call"
 msgstr "llamada entrante"
 
+#: ../modules/default/views/scripts/index/index.phtml:128
+msgid "Indexed Rules"
+msgstr "Reglas Indexadas"
+
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
@@ -2359,7 +2367,7 @@ msgstr ""
 msgid "Mode"
 msgstr "Modo"
 
-#: ../modules/default/views/layouts/layout.phtml:63
+#: ../modules/default/views/layouts/layout.phtml:65
 #: ../modules/default/views/scripts/index/index.phtml:84
 msgid "Modules"
 msgstr "Módulos"
@@ -3196,7 +3204,6 @@ msgstr "Tiempo de llamada por agente"
 msgid "Ringing"
 msgstr "Zumbido"
 
-#: ../modules/default/views/scripts/index/index.phtml:128
 #: ../modules/default/controllers/RouteController.php:83
 #: ../modules/default/controllers/RouteController.php:218
 #: ../modules/default/controllers/RouteController.php:279
@@ -3204,8 +3211,8 @@ msgstr "Zumbido"
 #: ../modules/default/controllers/SimulatorController.php:38
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
-msgid "\t"
-msgstr ""
+msgid "Routes"
+msgstr "Rutas"
 
 #: ../modules/default/controllers/ActionConfigsController.php:35
 #: ../modules/default/controllers/ExpressionAliasController.php:41
@@ -3913,6 +3920,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ranking-report/view.phtml:20
 msgid "Total Time"
 msgstr "Tiempo Total"
+
+#: ../lib/Snep/CsvIE.php:162
+msgid "Total entries to be exported: "
+msgstr "Total de entradas a exportar"
 
 #: ../modules/default/controllers/CallsReportController.php:819
 msgid "Totals"

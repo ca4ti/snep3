@@ -158,13 +158,15 @@ class Snep_CsvIE {
             $total = $db->fetchOne("SELECT COUNT(*) AS count FROM $this->table");
         }
 
+        $label = Snep_Locale::getInstance()->getZendTranslate()->translate("Export to CSV");
+        $label2 = Snep_Locale::getInstance()->getZendTranslate()->translate("Total entries to be exported: ");
+
         return '<form enctype="" action="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getModuleName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getControllerName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getActionName() . '/download/true" method="post">' .
                 '<div class="zend_form" id="form_ie">' .
-                '<h4><span>Exportar CSV</span><br><br></h4>' .
-                'Total de cadastros a serem exportados: <b>' . $total . '</b>' .
+                '<h4><span>'.$label.'</span><br><br></h4>' .
+                $label2 . '<b>' . $total . '</b>' .
                 '<div class="menus">' .
                 '<br><br><input type="submit" style="width:100px;" name="submit" id="submit" title="Download" value="Download">' .
-                ' <a href="../">  <input type="submit" style="width:100px;" name="submit" id="submit" title="Voltar" value="Voltar">' .
                 '</div>' .
                 '</div>' .
                 '</div>' .

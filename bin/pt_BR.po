@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep v-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 15:14-0200\n"
-"PO-Revision-Date: 2014-12-08 15:15-0300\n"
+"POT-Creation-Date: 2014-12-10 09:30-0200\n"
+"PO-Revision-Date: 2014-12-10 09:30-0300\n"
 "Last-Translator: Tiago <tiago.zimmermann@opens.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -611,7 +611,7 @@ msgstr "Áudio: Você é o próximo da fila"
 msgid "Authentication failure"
 msgstr "Falha na Autenticação"
 
-#: ../modules/default/views/layouts/layout.phtml:58
+#: ../modules/default/views/layouts/layout.phtml:60
 #: ../modules/default/views/scripts/ip-status/asterisk-error.phtml:17
 #: ../modules/default/views/scripts/trunks/error.phtml:16
 #: ../modules/default/views/scripts/trunks/asterisk-error.phtml:17
@@ -753,7 +753,7 @@ msgstr "Ranking de Ligação"
 msgid "Call Rankings"
 msgstr "Ranking de Ligação"
 
-#: ../modules/default/controllers/ParametersController.php:132
+#: ../modules/default/controllers/ParametersController.php:133
 msgid "Call Recording Configuration"
 msgstr "Configuração da Gravação de Ligação"
 
@@ -1671,6 +1671,10 @@ msgstr "Exportar para CSV"
 msgid "Export PDF"
 msgstr "Exportar para PDF"
 
+#: ../lib/Snep/CsvIE.php:161
+msgid "Export to CSV"
+msgstr "Exportar para CSV"
+
 #: ../modules/default/views/scripts/route/add_edit.phtml:18
 #: ../modules/default/controllers/ExpressionAliasController.php:42
 #: ../modules/default/controllers/ExpressionAliasController.php:81
@@ -2046,6 +2050,10 @@ msgstr "Entrada"
 msgid "Incoming Call"
 msgstr "Ligação de Entrada"
 
+#: ../modules/default/views/scripts/index/index.phtml:128
+msgid "Indexed Rules"
+msgstr "Regras Cadastradas"
+
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
@@ -2114,7 +2122,7 @@ msgstr "Arquivo inválido"
 msgid "Invalid column count on line %d"
 msgstr "Contagem inválida de colunas na linha %d"
 
-#: ../modules/default/controllers/ParametersController.php:173
+#: ../modules/default/controllers/ParametersController.php:174
 msgid "Invalid path"
 msgstr "Caminho Inválido"
 
@@ -2361,7 +2369,7 @@ msgstr "MixMonitor"
 msgid "Mode"
 msgstr "Modo"
 
-#: ../modules/default/views/layouts/layout.phtml:63
+#: ../modules/default/views/layouts/layout.phtml:65
 #: ../modules/default/views/scripts/index/index.phtml:84
 msgid "Modules"
 msgstr "Módulos"
@@ -3208,10 +3216,6 @@ msgstr "Chamando"
 msgid "Routes"
 msgstr "Rotas"
 
-#: ../modules/default/views/scripts/index/index.phtml:128
-msgid "Routes"
-msgstr "Rotas Registradas"
-
 #: ../modules/default/controllers/ActionConfigsController.php:35
 #: ../modules/default/controllers/ExpressionAliasController.php:41
 #: ../modules/default/controllers/ExpressionAliasController.php:80
@@ -3923,6 +3927,10 @@ msgstr "Total"
 msgid "Total Time"
 msgstr "Tempo Total"
 
+#: ../lib/Snep/CsvIE.php:162
+msgid "Total entries to be exported: "
+msgstr "Total de dados a serem exportados:"
+
 #: ../modules/default/controllers/CallsReportController.php:819
 msgid "Totals"
 msgstr "Totais"
@@ -3953,7 +3961,7 @@ msgstr "Tipo de tronco"
 msgid "Trunks"
 msgstr "Troncos"
 
-#: ../modules/default/controllers/ParametersController.php:157
+#: ../modules/default/controllers/ParametersController.php:158
 msgid "Trunks Configuration"
 msgstr "Configuração dos Troncos"
 
@@ -4142,6 +4150,10 @@ msgstr "Dias da Semana"
 #: ../modules/default/views/scripts/installer/index.phtml:8
 msgid "Welcome to SNEP!"
 msgstr "Bem-vindo ao SNEP!"
+
+#: ../modules/default/controllers/IndexController.php:40
+msgid "Welcome to Snep, "
+msgstr "Bem-vindo ao SNEP, "
 
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 msgid "Without Authentication"

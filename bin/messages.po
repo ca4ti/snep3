@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 16:20-0200\n"
+"POT-Creation-Date: 2014-12-10 09:30-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -609,7 +609,7 @@ msgstr ""
 msgid "Authentication failure"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:58
+#: ../modules/default/views/layouts/layout.phtml:60
 #: ../modules/default/views/scripts/ip-status/asterisk-error.phtml:17
 #: ../modules/default/views/scripts/trunks/error.phtml:16
 #: ../modules/default/views/scripts/trunks/asterisk-error.phtml:17
@@ -1672,6 +1672,10 @@ msgstr ""
 msgid "Export PDF"
 msgstr ""
 
+#: ../lib/Snep/CsvIE.php:161
+msgid "Export to CSV"
+msgstr ""
+
 #: ../modules/default/views/scripts/route/add_edit.phtml:18
 #: ../modules/default/controllers/ExpressionAliasController.php:42
 #: ../modules/default/controllers/ExpressionAliasController.php:81
@@ -2046,6 +2050,10 @@ msgstr ""
 msgid "Incoming Call"
 msgstr ""
 
+#: ../modules/default/views/scripts/index/index.phtml:128
+msgid "Indexed Rules"
+msgstr ""
+
 #: /var/www/snep-1.4/modules/default/forms/trunks.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
 #: /var/www/snep-1.4/modules/default/forms/extensionsMulti.xml
@@ -2361,7 +2369,7 @@ msgstr ""
 msgid "Mode"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:63
+#: ../modules/default/views/layouts/layout.phtml:65
 #: ../modules/default/views/scripts/index/index.phtml:84
 msgid "Modules"
 msgstr ""
@@ -3197,7 +3205,6 @@ msgstr ""
 msgid "Ringing"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:128
 #: ../modules/default/controllers/RouteController.php:83
 #: ../modules/default/controllers/RouteController.php:218
 #: ../modules/default/controllers/RouteController.php:279
@@ -3205,7 +3212,7 @@ msgstr ""
 #: ../modules/default/controllers/SimulatorController.php:38
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
-msgid "	"
+msgid "Routes"
 msgstr ""
 
 #: ../modules/default/controllers/ActionConfigsController.php:35
@@ -3936,6 +3943,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ranking-report/view.phtml:16
 #: ../modules/default/views/scripts/ranking-report/view.phtml:20
 msgid "Total Time"
+msgstr ""
+
+#: ../lib/Snep/CsvIE.php:162
+msgid "Total entries to be exported: "
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:819

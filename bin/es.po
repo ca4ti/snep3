@@ -463,7 +463,6 @@ msgid "Alias Regular Expression"
 msgstr "Alias de expresiones regulares"
 
 #: ../modules/default/controllers/CallsReportController.php:141
-#: ../modules/default/controllers/ExtensionsGroupsController.php:56
 #: ../modules/default/controllers/ServicesReportController.php:139
 #: /var/www/snep-1.4/modules/default/forms/calls_report.xml
 msgid "All"

@@ -20,6 +20,7 @@ echo $this->render('filter.phtml');
     if($this->extensionsgroups):
         foreach($this->extensionsgroups as $cha => $val ): ?>
             <?php ($c ? $c = 0 : $c = 1 ); ?>
+            
             <tr class="c<?php echo $c ?>">
                 <td>
                     <b>

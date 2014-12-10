@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 09:30-0200\n"
+"POT-Creation-Date: 2014-12-10 16:51-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid " Subfolders not found "
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:469
+#: ../modules/default/controllers/ContactsController.php:479
 #: ../modules/default/controllers/QueuesController.php:567
 #: ../modules/default/controllers/RankingReportController.php:451
 #: ../modules/default/controllers/CostCenterController.php:178
@@ -139,8 +139,11 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/cost_center.xml
 #: /var/www/snep-1.4/modules/default/forms/extensions.xml
-#: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "/^(([0-9]\\.?)+)$/"
+msgstr ""
+
+#: /var/www/snep-1.4/modules/default/forms/contacts.xml
+msgid "/^[0-9]{2}.[0-9]{3}-[0-9]{3}$/"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/users.xml
@@ -168,6 +171,7 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/record_report.xml
 #: /var/www/snep-1.4/modules/default/forms/ranking_report.xml
+#: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "10"
 msgstr ""
 
@@ -206,7 +210,6 @@ msgid "4"
 msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/route.xml
-#: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "5"
 msgstr ""
 
@@ -224,10 +227,6 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 msgid "8"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/default/forms/contacts.xml
-msgid "9"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:201
@@ -291,7 +290,7 @@ msgstr ""
 
 #: ../lib/Snep/Form.php:90
 #: ../modules/default/controllers/QueuesGroupsController.php:102
-#: ../modules/default/controllers/ContactsController.php:103
+#: ../modules/default/controllers/ContactsController.php:106
 #: ../modules/default/controllers/ContactGroupsController.php:88
 #: ../modules/default/controllers/UsersController.php:96
 #: ../modules/default/controllers/TrunksController.php:360
@@ -308,7 +307,7 @@ msgstr ""
 msgid "Add Action"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:90
+#: ../modules/default/controllers/ContactsController.php:93
 msgid "Add Contact"
 msgstr ""
 
@@ -412,7 +411,7 @@ msgstr ""
 msgid "Add page to Dashboard"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:392
+#: ../modules/default/controllers/ContactsController.php:402
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "Address"
 msgstr ""
@@ -473,8 +472,8 @@ msgstr ""
 msgid "All Files"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:320
-#: ../modules/default/controllers/ContactsController.php:478
+#: ../modules/default/controllers/ContactsController.php:330
+#: ../modules/default/controllers/ContactsController.php:488
 msgid "All Groups"
 msgstr ""
 
@@ -807,7 +806,7 @@ msgstr ""
 msgid "Cannot remove. The following routes are using this expression alias: "
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:312
+#: ../modules/default/controllers/ExtensionsGroupsController.php:316
 msgid "Cannot remove. The following routes are using this extensions group: "
 msgstr ""
 
@@ -870,9 +869,9 @@ msgid "Choose the services"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:814
-#: ../modules/default/controllers/ContactsController.php:68
-#: ../modules/default/controllers/ContactsController.php:393
-#: ../modules/default/controllers/ContactsController.php:456
+#: ../modules/default/controllers/ContactsController.php:71
+#: ../modules/default/controllers/ContactsController.php:403
+#: ../modules/default/controllers/ContactsController.php:466
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "City"
 msgstr ""
@@ -891,7 +890,7 @@ msgstr ""
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:13
 #: ../modules/default/views/scripts/route/index.phtml:10
 #: ../modules/default/controllers/PickupGroupsController.php:75
-#: ../modules/default/controllers/ContactsController.php:454
+#: ../modules/default/controllers/ContactsController.php:464
 #: ../modules/default/controllers/ContactGroupsController.php:64
 #: ../modules/default/controllers/UsersController.php:68
 #: ../modules/default/controllers/TrunksController.php:129
@@ -904,7 +903,7 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:141
+#: ../modules/default/controllers/ContactsController.php:144
 msgid "Code already exists"
 msgstr ""
 
@@ -938,7 +937,7 @@ msgstr ""
 msgid "Codec 3"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:355
+#: ../modules/default/controllers/ContactsController.php:365
 msgid "Column Association"
 msgstr ""
 
@@ -997,11 +996,11 @@ msgid "Contact Groups"
 msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:36
-#: ../modules/default/controllers/ContactsController.php:102
-#: ../modules/default/controllers/ContactsController.php:183
-#: ../modules/default/controllers/ContactsController.php:280
-#: ../modules/default/controllers/ContactsController.php:353
-#: ../modules/default/controllers/ContactsController.php:423
+#: ../modules/default/controllers/ContactsController.php:105
+#: ../modules/default/controllers/ContactsController.php:188
+#: ../modules/default/controllers/ContactsController.php:290
+#: ../modules/default/controllers/ContactsController.php:363
+#: ../modules/default/controllers/ContactsController.php:433
 #: ../modules/default/controllers/ContactGroupsController.php:106
 #: ../modules/default/controllers/ContactGroupsController.php:162
 #: /var/www/snep-1.4/modules/default/resources.xml
@@ -1009,7 +1008,7 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:469
+#: ../modules/default/controllers/ContactsController.php:479
 msgid "Contacts_csv_"
 msgstr ""
 
@@ -1226,9 +1225,9 @@ msgstr ""
 #: ../modules/default/views/scripts/cost-center/index.phtml:37
 #: ../modules/default/views/scripts/contact-groups/index.phtml:42
 #: ../modules/default/views/scripts/sound-files/index.phtml:70
-#: ../modules/default/views/scripts/contacts/index.phtml:46
+#: ../modules/default/views/scripts/contacts/index.phtml:47
 #: ../modules/default/views/scripts/route/index.phtml:45
-#: ../modules/default/views/scripts/extensions-groups/index.phtml:49
+#: ../modules/default/views/scripts/extensions-groups/index.phtml:50
 #: ../modules/default/views/scripts/users/index.phtml:45
 #: ../modules/default/views/scripts/extensions/index.phtml:47
 #: ../modules/default/controllers/ContactGroupsController.php:214
@@ -1236,7 +1235,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:302
+#: ../modules/default/controllers/ExtensionsGroupsController.php:306
 msgid "Delete Extension Groups"
 msgstr ""
 
@@ -1382,7 +1381,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:390
+#: ../modules/default/controllers/ContactsController.php:400
 msgid "Discard"
 msgstr ""
 
@@ -1408,7 +1407,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/profiles/index.phtml:56
 #: ../modules/default/views/scripts/cost-center/index.phtml:35
-#: ../modules/default/views/scripts/contacts/index.phtml:44
+#: ../modules/default/views/scripts/contacts/index.phtml:45
 #: ../modules/default/views/scripts/users/index.phtml:43
 msgid "Do you really wish to remove this item?"
 msgstr ""
@@ -1462,13 +1461,13 @@ msgstr ""
 #: ../modules/default/views/scripts/cost-center/index.phtml:31
 #: ../modules/default/views/scripts/contact-groups/index.phtml:36
 #: ../modules/default/views/scripts/sound-files/index.phtml:64
-#: ../modules/default/views/scripts/contacts/index.phtml:40
+#: ../modules/default/views/scripts/contacts/index.phtml:41
 #: ../modules/default/views/scripts/route/index.phtml:35
-#: ../modules/default/views/scripts/extensions-groups/index.phtml:44
+#: ../modules/default/views/scripts/extensions-groups/index.phtml:45
 #: ../modules/default/views/scripts/users/index.phtml:37
 #: ../modules/default/views/scripts/extensions/index.phtml:41
 #: ../modules/default/controllers/QueuesGroupsController.php:191
-#: ../modules/default/controllers/ContactsController.php:184
+#: ../modules/default/controllers/ContactsController.php:189
 #: ../modules/default/controllers/ContactGroupsController.php:140
 #: ../modules/default/controllers/UsersController.php:156
 #: ../modules/default/controllers/SoundFilesController.php:197
@@ -1657,8 +1656,8 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:87
-#: ../modules/default/controllers/ContactsController.php:424
+#: ../modules/default/controllers/ContactsController.php:90
+#: ../modules/default/controllers/ContactsController.php:434
 #: ../modules/default/controllers/QueuesController.php:82
 #: ../modules/default/controllers/UsersController.php:81
 #: ../modules/default/controllers/UsersController.php:395
@@ -1726,8 +1725,8 @@ msgstr ""
 #: ../modules/default/controllers/ExtensionsGroupsController.php:49
 #: ../modules/default/controllers/ExtensionsGroupsController.php:114
 #: ../modules/default/controllers/ExtensionsGroupsController.php:205
-#: ../modules/default/controllers/ExtensionsGroupsController.php:301
-#: ../modules/default/controllers/ExtensionsGroupsController.php:358
+#: ../modules/default/controllers/ExtensionsGroupsController.php:305
+#: ../modules/default/controllers/ExtensionsGroupsController.php:362
 #: /var/www/snep-1.4/modules/default/resources.xml
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "Extension Groups"
@@ -1953,8 +1952,8 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contacts/csv.phtml:50
 #: ../modules/default/views/scripts/users/permission.phtml:11
-#: ../modules/default/controllers/ContactsController.php:328
-#: ../modules/default/controllers/ContactsController.php:459
+#: ../modules/default/controllers/ContactsController.php:338
+#: ../modules/default/controllers/ContactsController.php:469
 #: ../modules/default/controllers/RouteController.php:57
 #: ../modules/default/controllers/ExtensionsController.php:111
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
@@ -2025,9 +2024,9 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:84
-#: ../modules/default/controllers/ContactsController.php:281
-#: ../modules/default/controllers/ContactsController.php:354
+#: ../modules/default/controllers/ContactsController.php:87
+#: ../modules/default/controllers/ContactsController.php:291
+#: ../modules/default/controllers/ContactsController.php:364
 msgid "Import CSV"
 msgstr ""
 
@@ -2117,7 +2116,7 @@ msgstr ""
 msgid "Invalid archive"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:381
+#: ../modules/default/controllers/ContactsController.php:391
 #, php-format
 msgid "Invalid column count on line %d"
 msgstr ""
@@ -2256,14 +2255,14 @@ msgstr ""
 #: ../modules/default/controllers/ExtensionsGroupsController.php:48
 #: ../modules/default/controllers/ExtensionsGroupsController.php:113
 #: ../modules/default/controllers/ExtensionsGroupsController.php:204
-#: ../modules/default/controllers/ExtensionsGroupsController.php:300
-#: ../modules/default/controllers/ExtensionsGroupsController.php:357
+#: ../modules/default/controllers/ExtensionsGroupsController.php:304
+#: ../modules/default/controllers/ExtensionsGroupsController.php:361
 #: ../modules/default/controllers/ContactsController.php:35
-#: ../modules/default/controllers/ContactsController.php:101
-#: ../modules/default/controllers/ContactsController.php:182
-#: ../modules/default/controllers/ContactsController.php:279
-#: ../modules/default/controllers/ContactsController.php:352
-#: ../modules/default/controllers/ContactsController.php:422
+#: ../modules/default/controllers/ContactsController.php:104
+#: ../modules/default/controllers/ContactsController.php:187
+#: ../modules/default/controllers/ContactsController.php:289
+#: ../modules/default/controllers/ContactsController.php:362
+#: ../modules/default/controllers/ContactsController.php:432
 #: ../modules/default/controllers/QueuesController.php:36
 #: ../modules/default/controllers/QueuesController.php:95
 #: ../modules/default/controllers/QueuesController.php:246
@@ -2347,7 +2346,7 @@ msgstr ""
 msgid "Migrate Contacts"
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:359
+#: ../modules/default/controllers/ExtensionsGroupsController.php:363
 msgid "Migrate Extension Group"
 msgstr ""
 
@@ -2483,9 +2482,9 @@ msgstr ""
 #: ../modules/default/controllers/ExtensionsGroupsController.php:90
 #: ../modules/default/controllers/ExtensionsGroupsController.php:124
 #: ../modules/default/controllers/ExtensionsGroupsController.php:222
-#: ../modules/default/controllers/ContactsController.php:67
-#: ../modules/default/controllers/ContactsController.php:391
-#: ../modules/default/controllers/ContactsController.php:455
+#: ../modules/default/controllers/ContactsController.php:70
+#: ../modules/default/controllers/ContactsController.php:401
+#: ../modules/default/controllers/ContactsController.php:465
 #: ../modules/default/controllers/QueuesController.php:66
 #: ../modules/default/controllers/QueuesController.php:554
 #: ../modules/default/controllers/ContactGroupsController.php:65
@@ -2513,7 +2512,7 @@ msgstr ""
 #: ../modules/default/controllers/QueuesGroupsController.php:124
 #: ../modules/default/controllers/QueuesGroupsController.php:217
 #: ../modules/default/controllers/ExtensionsGroupsController.php:161
-#: ../modules/default/controllers/ExtensionsGroupsController.php:260
+#: ../modules/default/controllers/ExtensionsGroupsController.php:261
 #: ../modules/default/controllers/QueuesController.php:213
 #: ../modules/default/controllers/ContactGroupsController.php:116
 #: ../modules/default/controllers/ContactGroupsController.php:177
@@ -2526,8 +2525,8 @@ msgstr ""
 msgid "Name already exists."
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:380
-#: ../modules/default/controllers/ExtensionsGroupsController.php:386
+#: ../modules/default/controllers/ExtensionsGroupsController.php:384
+#: ../modules/default/controllers/ExtensionsGroupsController.php:390
 msgid "New Group"
 msgstr ""
 
@@ -2570,7 +2569,7 @@ msgstr ""
 msgid "No entries found!."
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:136
+#: ../modules/default/controllers/ContactsController.php:139
 #: ../modules/default/controllers/UsersController.php:127
 msgid "No group selected"
 msgstr ""
@@ -2823,12 +2822,12 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:169
-#: ../modules/default/controllers/ContactsController.php:396
+#: ../modules/default/controllers/ContactsController.php:174
+#: ../modules/default/controllers/ContactsController.php:406
 msgid "Phone"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:460
+#: ../modules/default/controllers/ContactsController.php:470
 msgid "Phones"
 msgstr ""
 
@@ -3061,7 +3060,7 @@ msgstr ""
 msgid "Remove Multiple"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:81
+#: ../modules/default/controllers/ContactsController.php:84
 msgid "Remove multiple"
 msgstr ""
 
@@ -3334,11 +3333,11 @@ msgstr ""
 msgid "Select a Khomp channel from the list"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:476
+#: ../modules/default/controllers/ContactsController.php:486
 msgid "Select a contact group to export."
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:318
+#: ../modules/default/controllers/ContactsController.php:328
 msgid "Select a contact group to remove your contacts."
 msgstr ""
 
@@ -3581,9 +3580,9 @@ msgid "Start"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:815
-#: ../modules/default/controllers/ContactsController.php:69
-#: ../modules/default/controllers/ContactsController.php:394
-#: ../modules/default/controllers/ContactsController.php:457
+#: ../modules/default/controllers/ContactsController.php:72
+#: ../modules/default/controllers/ContactsController.php:404
+#: ../modules/default/controllers/ContactsController.php:467
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "State"
 msgstr ""
@@ -3752,7 +3751,7 @@ msgstr ""
 msgid "The excluded group has associated contacts."
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:340
+#: ../modules/default/controllers/ExtensionsGroupsController.php:344
 msgid "The extension group will be deleted. Are you sure?."
 msgstr ""
 
@@ -3765,7 +3764,7 @@ msgstr ""
 msgid "The file already exists"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:283
+#: ../modules/default/controllers/ContactsController.php:293
 msgid ""
 "The file must be separated by commas. Header is optional and columns can be "
 "associated in the next screen."
@@ -3775,7 +3774,7 @@ msgstr ""
 msgid "The files were compressed successfully! Wait for the download start."
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:549
+#: ../modules/default/controllers/ContactsController.php:559
 msgid "The following CSV records contain null data::<br/>"
 msgstr ""
 
@@ -3835,7 +3834,7 @@ msgstr ""
 msgid "There are no extensions in the selected group."
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:407
+#: ../modules/default/controllers/ContactsController.php:417
 msgid "There is no contacts group registered."
 msgstr ""
 
@@ -3858,13 +3857,13 @@ msgstr ""
 msgid "This group does not have any contacts"
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:382
+#: ../modules/default/controllers/ExtensionsGroupsController.php:386
 msgid ""
 "This groups has extensions associated. Select another group for these "
 "extensions. "
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:388
+#: ../modules/default/controllers/ExtensionsGroupsController.php:392
 msgid ""
 "This is the only group and it has extensions associated. You can migrate "
 "these extensions to a new group."
@@ -4197,7 +4196,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: ../modules/default/controllers/ExtensionsGroupsController.php:344
+#: ../modules/default/controllers/ExtensionsGroupsController.php:348
 #: ../modules/default/controllers/QueuesController.php:150
 #: ../modules/default/controllers/QueuesController.php:162
 #: ../modules/default/controllers/QueuesController.php:308
@@ -4246,16 +4245,16 @@ msgstr ""
 msgid "Your files are synchronized"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:70
+#: ../modules/default/controllers/ContactsController.php:73
 msgid "ZIP Code"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:395
+#: ../modules/default/controllers/ContactsController.php:405
 #: /var/www/snep-1.4/modules/default/forms/contacts.xml
 msgid "Zip Code"
 msgstr ""
 
-#: ../modules/default/controllers/ContactsController.php:458
+#: ../modules/default/controllers/ContactsController.php:468
 msgid "ZipCode"
 msgstr ""
 

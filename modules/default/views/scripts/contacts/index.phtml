@@ -26,6 +26,7 @@ echo $this->render('filter.phtml');
     $c = 0;
     if($this->contacts):
         foreach($this->contacts as $contact ): ?>
+
             <?php ($c ? $c = 0 : $c = 1 ); ?>
             <tr class="c<?php echo $c ?>">
                 <td class="numeric"> <b> <?php echo $contact['ide'] ?> </b> </td>
@@ -33,8 +34,8 @@ echo $this->render('filter.phtml');
                 <td> <?php echo $contact['name'] ?> </td>
                 <td> <?php echo $contact['city'] ?> </td>
                 <td> <?php echo $contact['state'] ?> </td>
-                <td> <?php echo $contact['cep'] ?> </td>
-                <td class="numeric"><?php echo $contact['phone'] ?></td>
+                <td> <?php echo ($contact['cep'] != "")? $this->formatter->fmt_cep($contact['cep']) : " "; ?> </td>
+                <td class="numeric"><?php echo ($contact['phone'] != "")? $this->formatter->fmt_telefone(array("a" =>$contact['phone'])) : " "; ?></td>
                 <td class="action">
                     <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $contact['ide'] ?>">
                         <?php echo $this->translate('Edit')?>

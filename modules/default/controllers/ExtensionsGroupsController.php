@@ -251,11 +251,12 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             $form_isValid = $form->isValid($_POST);
 
             $dados = $this->_request->getParams();
+
             $idGroup = $dados['id'];
 
             $newId = Snep_ExtensionsGroups_Manager::getName($dados['name']);
             
-            if (count($newId) > 1) {
+            if (count($newId) > 1 && $dados['id'] != $dados['name']) {
                 $form_isValid = false;
                 $form->getElement('name')->addError($this->view->translate('Name already exists.'));
             }
@@ -275,6 +276,9 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
                         Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $dados['name'], 'group' => 'all'));
                     }
                 }
+
+                Snep_ExtensionsGroups_Manager::editGroup($dados);
+                
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {

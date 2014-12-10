@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+include ("includes/functions.php");
 /**
  * Contacts Controller
  *
@@ -60,6 +60,9 @@ class ContactsController extends Zend_Controller_Action {
         $paginator->setCurrentPageNumber($this->view->page);
         $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
 
+        $formatter = new Formata();
+
+        $this->view->formatter = $formatter;
         $this->view->contacts = $paginator;
         $this->view->pages = $paginator->getPages();
         $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
@@ -142,8 +145,10 @@ class ContactsController extends Zend_Controller_Action {
                 $form_isValid = false;
             }
 
-            if ($form_isValid) {
+            if ($form_isValid) {    
 
+                $rm = array(".","-");
+                $_POST['zipcode'] = str_replace($rm, "", $_POST['zipcode']);
                 Snep_Contacts_Manager::add($_POST);
                 $numbers = explode(",", $_POST['phoneValue']);
                 foreach ($numbers as $key => $phone) {
@@ -221,7 +226,10 @@ class ContactsController extends Zend_Controller_Action {
         ( isset($contact['state']) ? $state->setValue($contact['state']) : null );
 
         $zipcode = $form->getElement('zipcode');
-        ( isset($contact['cep']) ? $zipcode->setValue($contact['cep']) : null );
+
+        $formatter = new Formata();
+        
+        (($contact['cep'] != "") ? $zipcode->setValue($formatter->fmt_cep($contact['cep'])) : null );
 
         $this->view->form = $form;
 
@@ -233,6 +241,8 @@ class ContactsController extends Zend_Controller_Action {
 
             if ($form_isValid) {
 
+                $rm = array(".","-");
+                $dados['zipcode'] = str_replace($rm, "", $dados['zipcode']);
                 Snep_Contacts_Manager::edit($dados);
                 Snep_Contacts_Manager::removePhone($id);
 

@@ -37,12 +37,14 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
                         </li>
                     </ul>
 
-                    <!-- Help --> 
-                    <div>
-                        <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
-                    </div>
+                    <?php if($controller != "index"){?>
 
-                    <div id="containerDiv">
+                        <!-- Help --> 
+                        <div>
+                            <a id="lightboxLink" href="javascript:void(0);"><img src="/snep/imagens/help.png" class="right"></a>
+                        </div>
+                        
+                        <div id="containerDiv">
                         <?php
                         $locale = Zend_Registry::get('config')->system->language;
 
@@ -58,7 +60,9 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
 
                         <br>
                         <a id="closeLink" href="javascript:void(0);"><?php echo $this->translate("Back"); ?></a><br><br>
-                    </div>
+                        </div>
+
+                    <?php } ?>    
                     
                     <ul class="navmenu">
                         <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>

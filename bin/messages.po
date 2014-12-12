@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 16:51-0200\n"
+"POT-Creation-Date: 2014-12-12 10:12-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,14 +53,18 @@ msgstr ""
 msgid " dd-MM-yyyy_hh'h'mm'm' "
 msgstr ""
 
+#: ../modules/default/controllers/IndexController2.php:59
 #: ../modules/default/controllers/IndexController.php:59
 msgid " dias, "
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:16
+#: ../modules/default/views/scripts/index2/index.phtml:16
+#: ../modules/default/views/scripts/index/index.phtml:24
 msgid " for more information"
 msgstr ""
 
+#: ../modules/default/controllers/IndexController2.php:57
+#: ../modules/default/controllers/IndexController2.php:61
 #: ../modules/default/controllers/IndexController.php:57
 #: ../modules/default/controllers/IndexController.php:61
 msgid " hour(s), "
@@ -70,6 +74,8 @@ msgstr ""
 msgid " in "
 msgstr ""
 
+#: ../modules/default/controllers/IndexController2.php:57
+#: ../modules/default/controllers/IndexController2.php:61
 #: ../modules/default/controllers/IndexController.php:57
 #: ../modules/default/controllers/IndexController.php:61
 msgid " minutes"
@@ -233,7 +239,7 @@ msgstr ""
 msgid "</b></font><br>Your code will expire on: "
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:6
+#: ../modules/default/views/scripts/index2/index.phtml:6
 msgid "ATTENTION"
 msgstr ""
 
@@ -552,7 +558,7 @@ msgstr ""
 msgid "Are you sure you want to remove this record?"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:68
+#: ../modules/default/views/scripts/index2/index.phtml:68
 msgid "Asterisk"
 msgstr ""
 
@@ -608,7 +614,7 @@ msgstr ""
 msgid "Authentication failure"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:60
+#: ../modules/default/views/layouts/layout.phtml:62
 #: ../modules/default/views/scripts/ip-status/asterisk-error.phtml:17
 #: ../modules/default/views/scripts/trunks/error.phtml:16
 #: ../modules/default/views/scripts/trunks/asterisk-error.phtml:17
@@ -723,7 +729,8 @@ msgstr ""
 msgid "CNL Update"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:54
+#: ../modules/default/views/scripts/index2/index.phtml:54
+#: ../modules/default/views/scripts/index/index.phtml:72
 msgid "CPU"
 msgstr ""
 
@@ -786,10 +793,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:60
 msgid "Calls in the queue awaiting"
-msgstr ""
-
-#: /var/www/snep-1.4/modules/default/forms/queues.xml
-msgid "Can users join this queue even if there's no agents online?"
 msgstr ""
 
 #: ../lib/Snep/Form/Filter.php:58 ../lib/Snep/Form/Element/Submit.php:77
@@ -1389,11 +1392,12 @@ msgstr ""
 msgid "Discard header"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:161
+#: ../modules/default/views/scripts/index2/index.phtml:161
+#: ../modules/default/views/scripts/index/index.phtml:58
 msgid "Disk Usage"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:40
+#: ../modules/default/views/scripts/index2/index.phtml:40
 msgid "Distribution"
 msgstr ""
 
@@ -1631,7 +1635,8 @@ msgstr ""
 msgid "Errors Khomp Links"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:12
+#: ../modules/default/views/scripts/index2/index.phtml:12
+#: ../modules/default/views/scripts/index/index.phtml:20
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr ""
 
@@ -1790,7 +1795,8 @@ msgstr ""
 msgid "Failed to Install SNEP"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:22
+#: ../modules/default/views/scripts/index2/index.phtml:22
+#: ../modules/default/views/scripts/index/index.phtml:30
 msgid "Failed to connect to server Asterisk"
 msgstr ""
 
@@ -1851,7 +1857,7 @@ msgstr ""
 msgid "Filter by"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:144
+#: ../modules/default/views/scripts/index2/index.phtml:144
 msgid "Fisical Memory"
 msgstr ""
 
@@ -1882,8 +1888,8 @@ msgstr ""
 msgid "Format witch the recorded files will be stored"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:140
-#: ../modules/default/views/scripts/index/index.phtml:168
+#: ../modules/default/views/scripts/index2/index.phtml:140
+#: ../modules/default/views/scripts/index2/index.phtml:168
 #: ../modules/default/controllers/KhompLinksController.php:77
 #: ../modules/default/controllers/KhompLinksController.php:87
 #: ../modules/default/controllers/KhompLinksController.php:91
@@ -2049,7 +2055,7 @@ msgstr ""
 msgid "Incoming Call"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:128
+#: ../modules/default/views/scripts/index2/index.phtml:128
 msgid "Indexed Rules"
 msgstr ""
 
@@ -2137,7 +2143,7 @@ msgstr ""
 msgid "Just numbers"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:47
+#: ../modules/default/views/scripts/index2/index.phtml:47
 msgid "Kernel"
 msgstr ""
 
@@ -2334,7 +2340,11 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:134
+#: ../modules/default/views/scripts/index/index.phtml:65
+msgid "Memory"
+msgstr ""
+
+#: ../modules/default/views/scripts/index2/index.phtml:134
 msgid "Memory Usage"
 msgstr ""
 
@@ -2368,8 +2378,9 @@ msgstr ""
 msgid "Mode"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:65
-#: ../modules/default/views/scripts/index/index.phtml:84
+#: ../modules/default/views/layouts/layout.phtml:69
+#: ../modules/default/views/scripts/index2/index.phtml:84
+#: ../modules/default/views/scripts/index/index.phtml:86
 msgid "Modules"
 msgstr ""
 
@@ -2442,7 +2453,7 @@ msgstr ""
 msgid "Music on hold loop timer"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:75
+#: ../modules/default/views/scripts/index2/index.phtml:75
 msgid "MySQL"
 msgstr ""
 
@@ -2525,6 +2536,10 @@ msgstr ""
 msgid "Name already exists."
 msgstr ""
 
+#: ../modules/default/views/scripts/index/index.phtml:79
+msgid "Network"
+msgstr ""
+
 #: ../modules/default/controllers/ExtensionsGroupsController.php:384
 #: ../modules/default/controllers/ExtensionsGroupsController.php:390
 msgid "New Group"
@@ -2574,7 +2589,7 @@ msgstr ""
 msgid "No group selected"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:101
+#: ../modules/default/views/scripts/index2/index.phtml:101
 msgid "No modules instaled."
 msgstr ""
 
@@ -2710,7 +2725,8 @@ msgstr ""
 msgid "Outgoing Call"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:109
+#: ../modules/default/views/scripts/index2/index.phtml:109
+#: ../modules/default/views/scripts/index/index.phtml:93
 msgid "PBX Statistics"
 msgstr ""
 
@@ -2736,7 +2752,7 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:166
+#: ../modules/default/views/scripts/index2/index.phtml:166
 msgid "Partition"
 msgstr ""
 
@@ -3031,11 +3047,11 @@ msgstr ""
 msgid "Redirect to context %s"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:114
+#: ../modules/default/views/scripts/index2/index.phtml:114
 msgid "Registered Extensions"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:121
+#: ../modules/default/views/scripts/index2/index.phtml:121
 msgid "Registered Trunks"
 msgstr ""
 
@@ -3485,7 +3501,7 @@ msgid ""
 "                        Example: 300-312 ; 333-335"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:167
+#: ../modules/default/views/scripts/index2/index.phtml:167
 msgid "Size"
 msgstr ""
 
@@ -3645,7 +3661,7 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:150
+#: ../modules/default/views/scripts/index2/index.phtml:150
 msgid "Swap Memory"
 msgstr ""
 
@@ -3670,7 +3686,9 @@ msgstr ""
 msgid "System Diagnosis"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:35
+#: ../modules/default/views/scripts/index2/index.phtml:35
+#: ../modules/default/views/scripts/index/index.phtml:51
+#: ../modules/default/views/scripts/index/index.phtml:136
 msgid "System Information"
 msgstr ""
 
@@ -3869,7 +3887,7 @@ msgid ""
 "these extensions to a new group."
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:7
+#: ../modules/default/views/scripts/index2/index.phtml:7
 msgid "This software is in Alpha stage. Its unstable and may contain defects."
 msgstr ""
 
@@ -3935,7 +3953,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:30
 #: ../modules/default/views/scripts/ranking-report/view.phtml:33
-#: ../modules/default/views/scripts/index/index.phtml:139
+#: ../modules/default/views/scripts/index2/index.phtml:139
 msgid "Total"
 msgstr ""
 
@@ -3986,15 +4004,15 @@ msgstr ""
 msgid "Tuesday"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:61
+#: ../modules/default/views/scripts/index2/index.phtml:61
 msgid "Turn-on Time"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:17
+#: ../modules/default/views/scripts/index2/index.phtml:138
 #: ../modules/default/views/scripts/ip-status/index.phtml:26
 #: ../modules/default/views/scripts/ip-status/index.phtml:123
 #: ../modules/default/views/scripts/ip-status/index.phtml:164
-#: ../modules/default/views/scripts/index/index.phtml:138
 #: ../modules/default/views/scripts/trunks/index.phtml:12
 #: ../modules/default/controllers/ExtensionsGroupsController.php:128
 #: ../modules/default/controllers/ExtensionsGroupsController.php:226
@@ -4045,8 +4063,8 @@ msgstr ""
 msgid "Updated successfully"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:141
-#: ../modules/default/views/scripts/index/index.phtml:169
+#: ../modules/default/views/scripts/index2/index.phtml:141
+#: ../modules/default/views/scripts/index2/index.phtml:169
 msgid "Used"
 msgstr ""
 
@@ -4092,6 +4110,10 @@ msgstr ""
 #: ../modules/default/controllers/ServicesReportController.php:136
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Users"
+msgstr ""
+
+#: /var/www/snep-1.4/modules/default/forms/queues.xml
+msgid "Users can enter the queue without Agents Present?"
 msgstr ""
 
 #: ../modules/default/views/scripts/profiles/index.phtml:41
@@ -4174,6 +4196,7 @@ msgstr ""
 msgid "Welcome to SNEP!"
 msgstr ""
 
+#: ../modules/default/controllers/IndexController2.php:40
 #: ../modules/default/controllers/IndexController.php:40
 msgid "Welcome to Snep, "
 msgstr ""
@@ -4437,7 +4460,8 @@ msgstr ""
 msgid "file:/var/www/snep-1.4/index.php"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:14
+#: ../modules/default/views/scripts/index2/index.phtml:14
+#: ../modules/default/views/scripts/index/index.phtml:22
 msgid "here"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep v-1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 10:12-0200\n"
-"PO-Revision-Date: 2014-12-12 10:18-0300\n"
+"POT-Creation-Date: 2014-12-12 11:32-0200\n"
+"PO-Revision-Date: 2014-12-12 11:39-0300\n"
 "Last-Translator: Tiago <tiago.zimmermann@opens.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -58,8 +58,8 @@ msgstr ""
 msgid " dias, "
 msgstr "día,"
 
-#: ../modules/default/views/scripts/index2/index.phtml:16
 #: ../modules/default/views/scripts/index/index.phtml:24
+#: ../modules/default/views/scripts/index1/index.phtml:16
 msgid " for more information"
 msgstr "para más información"
 
@@ -239,7 +239,7 @@ msgstr ""
 msgid "</b></font><br>Your code will expire on: "
 msgstr "</b></font><br>Su código expirará el:"
 
-#: ../modules/default/views/scripts/index2/index.phtml:6
+#: ../modules/default/views/scripts/index1/index.phtml:6
 msgid "ATTENTION"
 msgstr "Atención"
 
@@ -558,7 +558,7 @@ msgstr "¿Seguro que quieres eliminar esta extensión?"
 msgid "Are you sure you want to remove this record?"
 msgstr "¿Seguro que quieres eliminar este registro?"
 
-#: ../modules/default/views/scripts/index2/index.phtml:68
+#: ../modules/default/views/scripts/index1/index.phtml:68
 msgid "Asterisk"
 msgstr ""
 
@@ -729,8 +729,8 @@ msgstr "CNL Archivo"
 msgid "CNL Update"
 msgstr "CNL actualización"
 
-#: ../modules/default/views/scripts/index2/index.phtml:54
-#: ../modules/default/views/scripts/index/index.phtml:72
+#: ../modules/default/views/scripts/index/index.phtml:150
+#: ../modules/default/views/scripts/index1/index.phtml:54
 msgid "CPU"
 msgstr "UPC"
 
@@ -1067,6 +1067,10 @@ msgstr "Centro de Coste"
 msgid "Cost-center_csv_"
 msgstr ""
 
+#: ../modules/default/views/scripts/users/index.phtml:14
+msgid "Created"
+msgstr "Creado"
+
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
 msgid "Critical"
 msgstr "Crítico"
@@ -1391,12 +1395,16 @@ msgstr "Descartar"
 msgid "Discard header"
 msgstr "Encabezado Deseche"
 
-#: ../modules/default/views/scripts/index2/index.phtml:161
-#: ../modules/default/views/scripts/index/index.phtml:58
+#: ../modules/default/views/scripts/index/index.phtml:57
+msgid "Disk"
+msgstr ""
+
+#: ../modules/default/views/scripts/index1/index.phtml:161
 msgid "Disk Usage"
 msgstr "Uso Del Disco"
 
-#: ../modules/default/views/scripts/index2/index.phtml:40
+#: ../modules/default/views/scripts/index/index.phtml:142
+#: ../modules/default/views/scripts/index1/index.phtml:40
 msgid "Distribution"
 msgstr "Distribución"
 
@@ -1632,8 +1640,8 @@ msgstr "Error: Los siguientes archivos no son modificables por el sistema:"
 msgid "Errors Khomp Links"
 msgstr "Errores Khomp Links"
 
-#: ../modules/default/views/scripts/index2/index.phtml:12
 #: ../modules/default/views/scripts/index/index.phtml:20
+#: ../modules/default/views/scripts/index1/index.phtml:12
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr "Se detectaron errores en la configuración del SNEP, haga clic en"
 
@@ -1792,8 +1800,8 @@ msgstr "Fracasado"
 msgid "Failed to Install SNEP"
 msgstr "Error al Instalar SNEP"
 
-#: ../modules/default/views/scripts/index2/index.phtml:22
 #: ../modules/default/views/scripts/index/index.phtml:30
+#: ../modules/default/views/scripts/index1/index.phtml:22
 msgid "Failed to connect to server Asterisk"
 msgstr "No se pudo conectar al servidor Asterisk"
 
@@ -1855,7 +1863,7 @@ msgstr "Filtro"
 msgid "Filter by"
 msgstr "Filtrar Por"
 
-#: ../modules/default/views/scripts/index2/index.phtml:144
+#: ../modules/default/views/scripts/index1/index.phtml:144
 msgid "Fisical Memory"
 msgstr "Memoria Fisica"
 
@@ -1886,8 +1894,8 @@ msgstr "¿Has olvidado tu contraseña?"
 msgid "Format witch the recorded files will be stored"
 msgstr "Formato bruja se almacenará los archivos grabados"
 
-#: ../modules/default/views/scripts/index2/index.phtml:140
-#: ../modules/default/views/scripts/index2/index.phtml:168
+#: ../modules/default/views/scripts/index1/index.phtml:140
+#: ../modules/default/views/scripts/index1/index.phtml:168
 #: ../modules/default/controllers/KhompLinksController.php:77
 #: ../modules/default/controllers/KhompLinksController.php:87
 #: ../modules/default/controllers/KhompLinksController.php:91
@@ -2053,7 +2061,7 @@ msgstr "Entrante"
 msgid "Incoming Call"
 msgstr "llamada entrante"
 
-#: ../modules/default/views/scripts/index2/index.phtml:128
+#: ../modules/default/views/scripts/index1/index.phtml:128
 msgid "Indexed Rules"
 msgstr "Reglas Indexadas"
 
@@ -2141,7 +2149,8 @@ msgstr "Formato no válido"
 msgid "Just numbers"
 msgstr "Sólo números"
 
-#: ../modules/default/views/scripts/index2/index.phtml:47
+#: ../modules/default/views/scripts/index/index.phtml:146
+#: ../modules/default/views/scripts/index1/index.phtml:47
 msgid "Kernel"
 msgstr "Núcleo"
 
@@ -2338,11 +2347,11 @@ msgstr "Miembro"
 msgid "Members"
 msgstr "Miembros"
 
-#: ../modules/default/views/scripts/index/index.phtml:65
+#: ../modules/default/views/scripts/index/index.phtml:64
 msgid "Memory"
 msgstr "Memoria "
 
-#: ../modules/default/views/scripts/index2/index.phtml:134
+#: ../modules/default/views/scripts/index1/index.phtml:134
 msgid "Memory Usage"
 msgstr "Uso de la memoria"
 
@@ -2377,8 +2386,8 @@ msgid "Mode"
 msgstr "Modo"
 
 #: ../modules/default/views/layouts/layout.phtml:69
-#: ../modules/default/views/scripts/index2/index.phtml:84
-#: ../modules/default/views/scripts/index/index.phtml:86
+#: ../modules/default/views/scripts/index/index.phtml:85
+#: ../modules/default/views/scripts/index1/index.phtml:84
 msgid "Modules"
 msgstr "Módulos"
 
@@ -2449,9 +2458,9 @@ msgstr "La clase de música en espera ya existe"
 
 #: /var/www/snep-1.4/modules/default/forms/queues.xml
 msgid "Music on hold loop timer"
-msgstr "Time Loop Music on hold "
+msgstr "Intervalo de repetición de mensajes a la persona que llama"
 
-#: ../modules/default/views/scripts/index2/index.phtml:75
+#: ../modules/default/views/scripts/index1/index.phtml:75
 msgid "MySQL"
 msgstr ""
 
@@ -2534,7 +2543,7 @@ msgstr "Nombre"
 msgid "Name already exists."
 msgstr "El nombre ya existe."
 
-#: ../modules/default/views/scripts/index/index.phtml:79
+#: ../modules/default/views/scripts/index/index.phtml:78
 msgid "Network"
 msgstr "Rede"
 
@@ -2587,7 +2596,7 @@ msgstr "No se encontraron entradas !"
 msgid "No group selected"
 msgstr "Ningún grupo seleccionado"
 
-#: ../modules/default/views/scripts/index2/index.phtml:101
+#: ../modules/default/views/scripts/index1/index.phtml:101
 msgid "No modules instaled."
 msgstr "No hay módulos Instalada."
 
@@ -2723,8 +2732,8 @@ msgstr "Saliente"
 msgid "Outgoing Call"
 msgstr "Llamada Saliente"
 
-#: ../modules/default/views/scripts/index2/index.phtml:109
-#: ../modules/default/views/scripts/index/index.phtml:93
+#: ../modules/default/views/scripts/index/index.phtml:92
+#: ../modules/default/views/scripts/index1/index.phtml:109
 msgid "PBX Statistics"
 msgstr "PBX Estadística"
 
@@ -2750,7 +2759,7 @@ msgstr ""
 msgid "Parameters"
 msgstr "Parámetros"
 
-#: ../modules/default/views/scripts/index2/index.phtml:166
+#: ../modules/default/views/scripts/index1/index.phtml:166
 msgid "Partition"
 msgstr "Tabique"
 
@@ -2893,6 +2902,10 @@ msgstr "Prioritario"
 #: /var/www/snep-1.4/modules/default/forms/route.xml
 msgid "Priority"
 msgstr "Prioridad"
+
+#: ../modules/default/views/scripts/index/index.phtml:71
+msgid "Process"
+msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/users.xml
 msgid "Profile"
@@ -3046,11 +3059,11 @@ msgstr "Contraseña Redefinición - SNEP"
 msgid "Redirect to context %s"
 msgstr "Redirigir a contexto %s"
 
-#: ../modules/default/views/scripts/index2/index.phtml:114
+#: ../modules/default/views/scripts/index1/index.phtml:114
 msgid "Registered Extensions"
 msgstr "Extensiones registrados"
 
-#: ../modules/default/views/scripts/index2/index.phtml:121
+#: ../modules/default/views/scripts/index1/index.phtml:121
 msgid "Registered Trunks"
 msgstr "Troncos Registrados"
 
@@ -3310,6 +3323,7 @@ msgstr "Sábado"
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:81
 #: ../modules/default/views/scripts/queues-groups/members.phtml:53
 #: ../modules/default/views/scripts/contacts/csv.phtml:63
+#: ../modules/default/views/scripts/cnl/index.phtml:16
 #: ../modules/default/controllers/CnlController.php:92
 msgid "Save"
 msgstr "Guardar"
@@ -3500,7 +3514,7 @@ msgid ""
 "                        Example: 300-312 ; 333-335"
 msgstr ""
 
-#: ../modules/default/views/scripts/index2/index.phtml:167
+#: ../modules/default/views/scripts/index1/index.phtml:167
 msgid "Size"
 msgstr "Tamaño"
 
@@ -3658,7 +3672,7 @@ msgstr "Sufijo"
 msgid "Sunday"
 msgstr "Domingo"
 
-#: ../modules/default/views/scripts/index2/index.phtml:150
+#: ../modules/default/views/scripts/index1/index.phtml:150
 msgid "Swap Memory"
 msgstr "Memoria swap"
 
@@ -3679,13 +3693,17 @@ msgstr "Sincronizar archivos"
 msgid "Synthetic"
 msgstr "Sintético"
 
+#: ../modules/default/views/scripts/index/index.phtml:50
+#, fuzzy
+msgid "System"
+msgstr "Logs del sistema"
+
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "System Diagnosis"
 msgstr "Sistema de Diagnóstico"
 
-#: ../modules/default/views/scripts/index2/index.phtml:35
-#: ../modules/default/views/scripts/index/index.phtml:51
-#: ../modules/default/views/scripts/index/index.phtml:136
+#: ../modules/default/views/scripts/index/index.phtml:135
+#: ../modules/default/views/scripts/index1/index.phtml:35
 msgid "System Information"
 msgstr "Información del sistema"
 
@@ -3865,7 +3883,7 @@ msgstr "Este grupo ha extensiones asociado. Seleccionar otro grupo de estas exte
 msgid "This is the only group and it has extensions associated. You can migrate these extensions to a new group."
 msgstr "Este es el único grupo y se ha asociado extensiones. Puede migrar estas extensiones a un nuevo grupo."
 
-#: ../modules/default/views/scripts/index2/index.phtml:7
+#: ../modules/default/views/scripts/index1/index.phtml:7
 msgid "This software is in Alpha stage. Its unstable and may contain defects."
 msgstr "Este software se encuentra en fase alfa. Él es inestable y puede contener errores."
 
@@ -3929,7 +3947,7 @@ msgstr "Para:"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:30
 #: ../modules/default/views/scripts/ranking-report/view.phtml:33
-#: ../modules/default/views/scripts/index2/index.phtml:139
+#: ../modules/default/views/scripts/index1/index.phtml:139
 msgid "Total"
 msgstr ""
 
@@ -3980,16 +3998,16 @@ msgstr "Configuración del tronco"
 msgid "Tuesday"
 msgstr "Martes"
 
-#: ../modules/default/views/scripts/index2/index.phtml:61
+#: ../modules/default/views/scripts/index1/index.phtml:61
 msgid "Turn-on Time"
 msgstr "Tiempo de activación"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:17
-#: ../modules/default/views/scripts/index2/index.phtml:138
 #: ../modules/default/views/scripts/ip-status/index.phtml:26
 #: ../modules/default/views/scripts/ip-status/index.phtml:123
 #: ../modules/default/views/scripts/ip-status/index.phtml:164
 #: ../modules/default/views/scripts/trunks/index.phtml:12
+#: ../modules/default/views/scripts/index1/index.phtml:138
 #: ../modules/default/controllers/ExtensionsGroupsController.php:128
 #: ../modules/default/controllers/ExtensionsGroupsController.php:226
 #: ../modules/default/controllers/CostCenterController.php:156
@@ -4035,12 +4053,16 @@ msgstr "No usado"
 msgid "Update Cnl"
 msgstr "Atualización de CNL"
 
+#: ../modules/default/views/scripts/users/index.phtml:15
+msgid "Updated"
+msgstr "Actualizado"
+
 #: ../modules/default/views/scripts/action-configs/edit.phtml:12
 msgid "Updated successfully"
 msgstr "Actualizado con éxito"
 
-#: ../modules/default/views/scripts/index2/index.phtml:141
-#: ../modules/default/views/scripts/index2/index.phtml:169
+#: ../modules/default/views/scripts/index1/index.phtml:141
+#: ../modules/default/views/scripts/index1/index.phtml:169
 msgid "Used"
 msgstr "Usado"
 
@@ -4423,8 +4445,8 @@ msgstr ""
 msgid "file:/var/www/snep-1.4/index.php"
 msgstr ""
 
-#: ../modules/default/views/scripts/index2/index.phtml:14
 #: ../modules/default/views/scripts/index/index.phtml:22
+#: ../modules/default/views/scripts/index1/index.phtml:14
 msgid "here"
 msgstr "aquí"
 
@@ -4909,9 +4931,3 @@ msgstr ""
 
 #~ msgid "Caller ID"
 #~ msgstr "Nombre"
-
-#~ msgid "Created"
-#~ msgstr "Creado"
-
-#~ msgid "Updated"
-#~ msgstr "Actualizado"

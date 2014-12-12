@@ -1,7 +1,7 @@
 <?php
 
 
-    require 'libs/autoloader.php';
+    require 'lib/Snep/Dashboard/autoloader.php';
 
     $available_modules = array(
         'bandwidth',
@@ -13,22 +13,16 @@
         'lastlog',
         'loadavg',
         'mem',
-        'memcached',
         'netstat',
         'numberofcores',
         'online',
         'phpinfo',
         'ping',
         'ps',
-        'sabnzbd',
         'speed',
-        'swap',
         'time',
         'uptime',
-        'users',
-        'where',
-		'arp',
-		'redis_status'
+        'users'
     );
 
 

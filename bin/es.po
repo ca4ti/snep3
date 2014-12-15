@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep v-1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 11:32-0200\n"
-"PO-Revision-Date: 2014-12-12 11:39-0300\n"
+"POT-Creation-Date: 2014-12-15 09:16-0200\n"
+"PO-Revision-Date: 2014-12-15 09:59-0300\n"
 "Last-Translator: Tiago <tiago.zimmermann@opens.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid " dias, "
 msgstr "día,"
 
-#: ../modules/default/views/scripts/index/index.phtml:24
+#: ../modules/default/views/scripts/index/index.phtml:20
 #: ../modules/default/views/scripts/index1/index.phtml:16
 msgid " for more information"
 msgstr "para más información"
@@ -315,7 +315,7 @@ msgstr "Agregar Acción"
 
 #: ../modules/default/controllers/ContactsController.php:93
 msgid "Add Contact"
-msgstr "Añadir contacto"
+msgstr "Agregar contacto"
 
 #: ../modules/default/controllers/ContactGroupsController.php:76
 msgid "Add Contact Group"
@@ -558,6 +558,7 @@ msgstr "¿Seguro que quieres eliminar esta extensión?"
 msgid "Are you sure you want to remove this record?"
 msgstr "¿Seguro que quieres eliminar este registro?"
 
+#: ../modules/default/views/scripts/index/index.phtml:146
 #: ../modules/default/views/scripts/index1/index.phtml:68
 msgid "Asterisk"
 msgstr ""
@@ -580,7 +581,7 @@ msgstr "Estado del Asterisk"
 
 #: ../modules/default/controllers/InstallerController.php:198
 msgid "Asterisk configuration"
-msgstr "Asterisnk Configuración"
+msgstr "Asterisk Configuración"
 
 #: ../lib/PBX/Rule/ActionConfig.php:196
 msgid "Audio"
@@ -729,7 +730,7 @@ msgstr "CNL Archivo"
 msgid "CNL Update"
 msgstr "CNL actualización"
 
-#: ../modules/default/views/scripts/index/index.phtml:150
+#: ../modules/default/views/scripts/index/index.phtml:138
 #: ../modules/default/views/scripts/index1/index.phtml:54
 msgid "CPU"
 msgstr "UPC"
@@ -781,6 +782,10 @@ msgstr "Estado de la llamada"
 #: ../modules/default/controllers/RecordReportController.php:219
 msgid "Call's date"
 msgstr "Llamado de fecha"
+
+#: ../modules/default/views/scripts/extensions/index.phtml:23
+msgid "Caller ID"
+msgstr "Nombre"
 
 #: ../modules/default/controllers/CallsReportController.php:38
 #: ../modules/default/controllers/CallsReportController.php:177
@@ -884,6 +889,14 @@ msgstr "Ciudad"
 msgid "Class"
 msgstr "Clase"
 
+#: ../modules/default/views/scripts/index/index.phtml:100
+msgid "Close All Widgets"
+msgstr "Cerrar Todo Widgets"
+
+#: ../modules/default/views/scripts/index/index.phtml:95
+msgid "Closed Widgets"
+msgstr "Cerrar Widgets"
+
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Cnl Update"
 msgstr "Cnl Atualización"
@@ -983,7 +996,7 @@ msgstr "Configuración de acceso a la base de datos, Asterisk"
 #: ../modules/default/controllers/ParametersController.php:36
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Configure"
-msgstr ""
+msgstr "Configurar"
 
 #: ../modules/default/views/scripts/route/add_edit.phtml:13
 #: ../modules/default/controllers/ContactGroupsController.php:36
@@ -1066,10 +1079,6 @@ msgstr "Centro de Coste"
 #: ../modules/default/controllers/CostCenterController.php:178
 msgid "Cost-center_csv_"
 msgstr ""
-
-#: ../modules/default/views/scripts/users/index.phtml:14
-msgid "Created"
-msgstr "Creado"
 
 #: /var/www/snep-1.4/modules/default/forms/logs.xml
 msgid "Critical"
@@ -1170,11 +1179,11 @@ msgstr ""
 
 #: /var/www/snep-1.4/modules/default/resources.xml
 msgid "Default Config"
-msgstr "Default Config"
+msgstr "Configuración Predeterminada"
 
 #: ../modules/default/controllers/ActionConfigsController.php:36
 msgid "Default Configs"
-msgstr ""
+msgstr "Configuración Predeterminada"
 
 #: /var/www/snep-1.4/modules/default/forms/setup.conf.xml
 msgid "Default E-mail"
@@ -1395,15 +1404,16 @@ msgstr "Descartar"
 msgid "Discard header"
 msgstr "Encabezado Deseche"
 
-#: ../modules/default/views/scripts/index/index.phtml:57
+#: ../modules/default/views/scripts/index/index.phtml:53
+#: ../modules/default/views/scripts/index/index.phtml:165
 msgid "Disk"
-msgstr ""
+msgstr "Disco"
 
-#: ../modules/default/views/scripts/index1/index.phtml:161
+#: ../modules/default/views/scripts/index1/index.phtml:164
 msgid "Disk Usage"
 msgstr "Uso Del Disco"
 
-#: ../modules/default/views/scripts/index/index.phtml:142
+#: ../modules/default/views/scripts/index/index.phtml:130
 #: ../modules/default/views/scripts/index1/index.phtml:40
 msgid "Distribution"
 msgstr "Distribución"
@@ -1640,7 +1650,7 @@ msgstr "Error: Los siguientes archivos no son modificables por el sistema:"
 msgid "Errors Khomp Links"
 msgstr "Errores Khomp Links"
 
-#: ../modules/default/views/scripts/index/index.phtml:20
+#: ../modules/default/views/scripts/index/index.phtml:16
 #: ../modules/default/views/scripts/index1/index.phtml:12
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr "Se detectaron errores en la configuración del SNEP, haga clic en"
@@ -1800,7 +1810,7 @@ msgstr "Fracasado"
 msgid "Failed to Install SNEP"
 msgstr "Error al Instalar SNEP"
 
-#: ../modules/default/views/scripts/index/index.phtml:30
+#: ../modules/default/views/scripts/index/index.phtml:26
 #: ../modules/default/views/scripts/index1/index.phtml:22
 msgid "Failed to connect to server Asterisk"
 msgstr "No se pudo conectar al servidor Asterisk"
@@ -1863,7 +1873,7 @@ msgstr "Filtro"
 msgid "Filter by"
 msgstr "Filtrar Por"
 
-#: ../modules/default/views/scripts/index1/index.phtml:144
+#: ../modules/default/views/scripts/index1/index.phtml:146
 msgid "Fisical Memory"
 msgstr "Memoria Fisica"
 
@@ -1894,8 +1904,9 @@ msgstr "¿Has olvidado tu contraseña?"
 msgid "Format witch the recorded files will be stored"
 msgstr "Formato bruja se almacenará los archivos grabados"
 
-#: ../modules/default/views/scripts/index1/index.phtml:140
-#: ../modules/default/views/scripts/index1/index.phtml:168
+#: ../modules/default/views/scripts/index/index.phtml:222
+#: ../modules/default/views/scripts/index1/index.phtml:142
+#: ../modules/default/views/scripts/index1/index.phtml:171
 #: ../modules/default/controllers/KhompLinksController.php:77
 #: ../modules/default/controllers/KhompLinksController.php:87
 #: ../modules/default/controllers/KhompLinksController.php:91
@@ -2006,6 +2017,8 @@ msgstr "ID de expresiones regulares"
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:121
 #: ../modules/default/views/scripts/ip-status/index.phtml:162
+#: ../modules/default/views/scripts/index/index.phtml:74
+#: ../modules/default/views/scripts/index/index.phtml:258
 #: ../modules/default/views/scripts/trunks/index.phtml:30
 msgid "IP"
 msgstr ""
@@ -2111,6 +2124,14 @@ msgstr "Tipo de interfaz"
 msgid "Internal Error"
 msgstr "Error interno"
 
+#: ../modules/default/views/scripts/index/index.phtml:67
+msgid "Internet"
+msgstr "Internet"
+
+#: ../modules/default/views/scripts/index/index.phtml:236
+msgid "Internet Speed"
+msgstr "velocidad de Internet"
+
 #: ../modules/default/controllers/CallsReportController.php:67
 #: ../modules/default/controllers/CallsReportController.php:72
 #: ../modules/default/controllers/RankingReportController.php:67
@@ -2149,7 +2170,7 @@ msgstr "Formato no válido"
 msgid "Just numbers"
 msgstr "Sólo números"
 
-#: ../modules/default/views/scripts/index/index.phtml:146
+#: ../modules/default/views/scripts/index/index.phtml:134
 #: ../modules/default/views/scripts/index1/index.phtml:47
 msgid "Kernel"
 msgstr "Núcleo"
@@ -2213,6 +2234,10 @@ msgstr "Estado del enlace"
 #: ../modules/default/controllers/KhompLinksController.php:50
 msgid "Links"
 msgstr "Enlaces"
+
+#: ../modules/default/views/scripts/index/index.phtml:188
+msgid "Livre"
+msgstr ""
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:17
 msgid "Loading"
@@ -2347,11 +2372,12 @@ msgstr "Miembro"
 msgid "Members"
 msgstr "Miembros"
 
-#: ../modules/default/views/scripts/index/index.phtml:64
+#: ../modules/default/views/scripts/index/index.phtml:60
+#: ../modules/default/views/scripts/index/index.phtml:206
 msgid "Memory"
 msgstr "Memoria "
 
-#: ../modules/default/views/scripts/index1/index.phtml:134
+#: ../modules/default/views/scripts/index1/index.phtml:136
 msgid "Memory Usage"
 msgstr "Uso de la memoria"
 
@@ -2386,7 +2412,8 @@ msgid "Mode"
 msgstr "Modo"
 
 #: ../modules/default/views/layouts/layout.phtml:69
-#: ../modules/default/views/scripts/index/index.phtml:85
+#: ../modules/default/views/scripts/index/index.phtml:81
+#: ../modules/default/views/scripts/index/index.phtml:272
 #: ../modules/default/views/scripts/index1/index.phtml:84
 msgid "Modules"
 msgstr "Módulos"
@@ -2460,6 +2487,7 @@ msgstr "La clase de música en espera ya existe"
 msgid "Music on hold loop timer"
 msgstr "Intervalo de repetición de mensajes a la persona que llama"
 
+#: ../modules/default/views/scripts/index/index.phtml:150
 #: ../modules/default/views/scripts/index1/index.phtml:75
 msgid "MySQL"
 msgstr ""
@@ -2542,10 +2570,6 @@ msgstr "Nombre"
 #: ../modules/default/controllers/ProfilesController.php:149
 msgid "Name already exists."
 msgstr "El nombre ya existe."
-
-#: ../modules/default/views/scripts/index/index.phtml:78
-msgid "Network"
-msgstr "Rede"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:384
 #: ../modules/default/controllers/ExtensionsGroupsController.php:390
@@ -2675,6 +2699,10 @@ msgstr "En curso"
 msgid "On going"
 msgstr "En curso"
 
+#: ../modules/default/views/scripts/index/index.phtml:103
+msgid "Open All Widgets"
+msgstr "Abre todos los widgets"
+
 #: /var/www/snep-1.4/modules/default/info.xml
 msgid "Opens Technology"
 msgstr "Opens Tecnología"
@@ -2732,7 +2760,7 @@ msgstr "Saliente"
 msgid "Outgoing Call"
 msgstr "Llamada Saliente"
 
-#: ../modules/default/views/scripts/index/index.phtml:92
+#: ../modules/default/views/scripts/index/index.phtml:88
 #: ../modules/default/views/scripts/index1/index.phtml:109
 msgid "PBX Statistics"
 msgstr "PBX Estadística"
@@ -2759,7 +2787,8 @@ msgstr ""
 msgid "Parameters"
 msgstr "Parámetros"
 
-#: ../modules/default/views/scripts/index1/index.phtml:166
+#: ../modules/default/views/scripts/index/index.phtml:174
+#: ../modules/default/views/scripts/index1/index.phtml:169
 msgid "Partition"
 msgstr "Tabique"
 
@@ -2902,10 +2931,6 @@ msgstr "Prioritario"
 #: /var/www/snep-1.4/modules/default/forms/route.xml
 msgid "Priority"
 msgstr "Prioridad"
-
-#: ../modules/default/views/scripts/index/index.phtml:71
-msgid "Process"
-msgstr ""
 
 #: /var/www/snep-1.4/modules/default/forms/users.xml
 msgid "Profile"
@@ -3514,7 +3539,7 @@ msgid ""
 "                        Example: 300-312 ; 333-335"
 msgstr ""
 
-#: ../modules/default/views/scripts/index1/index.phtml:167
+#: ../modules/default/views/scripts/index1/index.phtml:170
 msgid "Size"
 msgstr "Tamaño"
 
@@ -3672,7 +3697,7 @@ msgstr "Sufijo"
 msgid "Sunday"
 msgstr "Domingo"
 
-#: ../modules/default/views/scripts/index1/index.phtml:150
+#: ../modules/default/views/scripts/index1/index.phtml:152
 msgid "Swap Memory"
 msgstr "Memoria swap"
 
@@ -3693,16 +3718,15 @@ msgstr "Sincronizar archivos"
 msgid "Synthetic"
 msgstr "Sintético"
 
-#: ../modules/default/views/scripts/index/index.phtml:50
-#, fuzzy
+#: ../modules/default/views/scripts/index/index.phtml:46
+#: ../modules/default/views/scripts/index/index.phtml:123
 msgid "System"
-msgstr "Logs del sistema"
+msgstr "Sistema"
 
 #: /var/www/snep-1.4/configs/dashboard.xml
 msgid "System Diagnosis"
 msgstr "Sistema de Diagnóstico"
 
-#: ../modules/default/views/scripts/index/index.phtml:135
 #: ../modules/default/views/scripts/index1/index.phtml:35
 msgid "System Information"
 msgstr "Información del sistema"
@@ -3947,7 +3971,9 @@ msgstr "Para:"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:30
 #: ../modules/default/views/scripts/ranking-report/view.phtml:33
-#: ../modules/default/views/scripts/index1/index.phtml:139
+#: ../modules/default/views/scripts/index/index.phtml:181
+#: ../modules/default/views/scripts/index/index.phtml:215
+#: ../modules/default/views/scripts/index1/index.phtml:141
 msgid "Total"
 msgstr ""
 
@@ -3998,6 +4024,7 @@ msgstr "Configuración del tronco"
 msgid "Tuesday"
 msgstr "Martes"
 
+#: ../modules/default/views/scripts/index/index.phtml:142
 #: ../modules/default/views/scripts/index1/index.phtml:61
 msgid "Turn-on Time"
 msgstr "Tiempo de activación"
@@ -4007,7 +4034,7 @@ msgstr "Tiempo de activación"
 #: ../modules/default/views/scripts/ip-status/index.phtml:123
 #: ../modules/default/views/scripts/ip-status/index.phtml:164
 #: ../modules/default/views/scripts/trunks/index.phtml:12
-#: ../modules/default/views/scripts/index1/index.phtml:138
+#: ../modules/default/views/scripts/index1/index.phtml:140
 #: ../modules/default/controllers/ExtensionsGroupsController.php:128
 #: ../modules/default/controllers/ExtensionsGroupsController.php:226
 #: ../modules/default/controllers/CostCenterController.php:156
@@ -4053,16 +4080,13 @@ msgstr "No usado"
 msgid "Update Cnl"
 msgstr "Atualización de CNL"
 
-#: ../modules/default/views/scripts/users/index.phtml:15
-msgid "Updated"
-msgstr "Actualizado"
-
 #: ../modules/default/views/scripts/action-configs/edit.phtml:12
 msgid "Updated successfully"
 msgstr "Actualizado con éxito"
 
-#: ../modules/default/views/scripts/index1/index.phtml:141
-#: ../modules/default/views/scripts/index1/index.phtml:169
+#: ../modules/default/views/scripts/index/index.phtml:218
+#: ../modules/default/views/scripts/index1/index.phtml:143
+#: ../modules/default/views/scripts/index1/index.phtml:172
 msgid "Used"
 msgstr "Usado"
 
@@ -4445,7 +4469,7 @@ msgstr ""
 msgid "file:/var/www/snep-1.4/index.php"
 msgstr ""
 
-#: ../modules/default/views/scripts/index/index.phtml:22
+#: ../modules/default/views/scripts/index/index.phtml:18
 #: ../modules/default/views/scripts/index1/index.phtml:14
 msgid "here"
 msgstr "aquí"
@@ -4929,5 +4953,11 @@ msgstr "si"
 msgid "Áudio"
 msgstr ""
 
-#~ msgid "Caller ID"
-#~ msgstr "Nombre"
+#~ msgid "Created"
+#~ msgstr "Creado"
+
+#~ msgid "Network"
+#~ msgstr "Rede"
+
+#~ msgid "Updated"
+#~ msgstr "Actualizado"

@@ -265,39 +265,6 @@ dashboard.getRam = function () {
     });
 };
 
-dashboard.getMemcached = function () {
-    moduleData("memcached", function (data) {
-
-        var i;
-        var max = 0, read = 0, written = 0, used = 0;
-        for(i=0;i<data.length;i++) {
-            var parts = data[i].split(":") ;
-            if (parts[0] == 'limit_maxbytes') {
-                max = parts[1]/1024/1024;
-            } else if (parts[0] == 'bytes_read') {
-                read = parts[1]/1024/1024;
-            } else if (parts[0] == 'bytes_written') {
-                written = parts[1]/1024/1024;
-            } else {
-                used = parts[1]/1024/1024;
-            }
-        }
-        used = Math.round(used);
-        max = Math.round(max);
-
-        var free = Math.round(max - used);
-        var per_used = Math.round((used / max) * 100);
-        var per_free = Math.round((free / max) * 100);
-
-        $("#memcached-total").text(max);
-        $("#memcached-used").text(used);
-        $("#memcached-free").text(free);
-
-        $("#memcached-free-per").text(per_free);
-        $("#memcached-used-per").text(per_used);
-    });
-};
-
 dashboard.getDf = function () {
     moduleData("df", function (data) {
         var table = $("#df_dashboard");
@@ -322,60 +289,6 @@ dashboard.getDf = function () {
             sPaginationType: "full_numbers",
             bFilter: false,
             bAutoWidth: true,
-            bInfo: false
-        }).fadeIn();
-    });
-};
-
-dashboard.getArp = function () {
-    moduleData("arp", function (data) {
-        var table = $("#arp_dashboard");
-        var ex = document.getElementById("arp_dashboard");
-        if ($.fn.DataTable.fnIsDataTable(ex)) {
-            table.hide().dataTable().fnClearTable();
-            table.dataTable().fnDestroy();
-        }
-
-        table.dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Address" },
-                { sTitle: "HWtype" },
-                { sTitle: "HWaddress"},
-                { sTitle: "Flags Mask" },
-                { sTitle: "Iface"}
-            ],
-            iDisplayLength: 5,
-            bPaginate: true,
-            bFilter: false,
-            bAutoWidth: false,
-            bInfo: false
-        }).fadeIn();
-    });
-};
-
-dashboard.getWhereIs = function () {
-    moduleData("where", function (data) {
-        var table = $("#whereis_dashboard");
-        var ex = document.getElementById("whereis_dashboard");
-        if ($.fn.DataTable.fnIsDataTable(ex)) {
-            table.hide().dataTable().fnClearTable();
-            table.dataTable().fnDestroy();
-        }
-
-        table.dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Software" },
-                { sTitle: "Installation" }
-            ],
-            sPaginationType: "full_numbers",
-            iDisplayLength: 5,
-            bFilter: false,
-            aaSorting: [
-                [1, "desc"]
-            ],
-            bAutoWidth: false,
             bInfo: false
         }).fadeIn();
     });
@@ -479,56 +392,9 @@ dashboard.getSabspeed = function () {
 
     refreshIcon.addClass('icon-spin');
 
-    moduleData('sabnzbd', function(data) {
-        // round the speed (float to int);
-        // dependent on value of AS, calculate speed in MB or KB ps
-        result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
-        // update rate of speed on widget
-        rateDownstream.text(result['downstream']);
-
-        refreshIcon.removeClass('icon-spin');
-    });
-
     // update unit value in widget
     var leadDownstream = rateDownstream.next(".lead");
     leadDownstream.text(AS ? "MB/s" : "KB/s");
-};
-
-dashboard.getLoadAverage = function () {
-    moduleData("loadavg", function (data) {
-        $("#cpu-1min").text(data[0][0]);
-        $("#cpu-5min").text(data[1][0]);
-        $("#cpu-15min").text(data[2][0]);
-        $("#cpu-1min-per").text(data[0][1]);
-        $("#cpu-5min-per").text(data[1][1]);
-        $("#cpu-15min-per").text(data[2][1]);
-    });
-    this.fillElement("numberofcores", $("#core-number"));
-};
-
-dashboard.getDnsmasqLeases = function () {
-    moduleData("dhcpleases", function (data) {
-        var table = $("#dnsmasqleases_dashboard");
-        var ex = document.getElementById("dnsmasqleases_dashboard");
-        if ($.fn.DataTable.fnIsDataTable(ex)) {
-            table.hide().dataTable().fnClearTable();
-            table.dataTable().fnDestroy();
-        }
-
-        table.dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Expires At" },
-                { sTitle: "MAC Address" },
-                { sTitle: "IP Address", sType: "ip-address" },
-                { sTitle: "Hostname" }
-            ],
-            bPaginate: false,
-            bFilter: false,
-            bAutoWidth: true,
-            bInfo: false
-        }).fadeIn();
-    });
 };
 
 dashboard.getBandwidth = function () {
@@ -543,59 +409,6 @@ dashboard.getBandwidth = function () {
         refreshIcon.removeClass('icon-spin');
     });
 
-};
-
-dashboard.getSwaps = function () {
-    moduleData("swap", function (data) {
-        var table = $("#swap_dashboard");
-        var ex = document.getElementById("swap_dashboard");
-        if ($.fn.DataTable.fnIsDataTable(ex)) {
-            table.hide().dataTable().fnClearTable();
-            table.dataTable().fnDestroy();
-        }
-
-        table.dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Filename" },
-                { sTitle: "Type"},
-                { sTitle: "Size", sType: "file-size" },
-                { sTitle: "Used", sType: "file-size" },
-                { sTitle: "Priority"}
-            ],
-	    iDisplayLength: 5,
-            bPaginate: true,
-            bFilter: false,
-            bAutoWidth: true,
-            bInfo: false
-        }).fadeIn();
-
-    });
-
-};
-
-
-dashboard.redis = function () {
-    moduleData("redis_status", function (data) {
-
-        if (data.length == 0)
-		{
-			$('#redis-installed').addClass('hide');
-			$('#redis-not').removeClass('hide');
-		}
-		else
-		{
-			$('#version-info').html(data['redis_version']);
-			$('#cc-info').html(data['connected_clients']);
-			$('#cs-info').html(data['connected_slaves']);
-			$('#memory-info').html(data['used_memory_human']);
-			$('#totc-info').html(data['total_connections_received']);
-			$('#totcp-info').html(data['total_commands_processed']);
-
-			$('#redis-installed').removeClass('hide');
-			$('#redis-not').addClass('hide');
-		}
-	});
 };
 
 /**
@@ -615,23 +428,16 @@ dashboard.getAll = function () {
 dashboard.fnMap = {
     all: dashboard.getAll,
     ram: dashboard.getRam,
-    memcached: dashboard.getMemcached,
     ps: dashboard.getPs,
     df: dashboard.getDf,
     os: dashboard.getOs,
     users: dashboard.getUsers,
     online: dashboard.getOnline,
     lastlog: dashboard.getLastLog,
-    whereis: dashboard.getWhereIs,
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
     sabspeed: dashboard.getSabspeed,
-    cpu: dashboard.getLoadAverage,
     netstat: dashboard.getNetStat,
-    dnsmasqleases: dashboard.getDnsmasqLeases,
     bandwidth: dashboard.getBandwidth,
-    ping: dashboard.getPing,
-    swap: dashboard.getSwaps,
-    arp: dashboard.getArp,
-	redis: dashboard.redis
+    ping: dashboard.getPing
 };

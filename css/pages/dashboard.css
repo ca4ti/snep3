@@ -324,13 +324,13 @@ h6.bigstats {
 .dataTable { margin-bottom:0px; }
 
 .pulse {
-   background:#19bc9c;
-   border:1px solid #19bc9c;
+   background:#f7a850;
+   border:1px solid #f7a850;
    color:white;
 }
 
 .pulse-border {
-   border-color:#19bc9c;
+   border-color:#f7a850;
 }
 
 .navbar {

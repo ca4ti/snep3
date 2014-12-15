@@ -11,7 +11,6 @@
         'ip',
         'issue',
         'lastlog',
-        'loadavg',
         'mem',
         'netstat',
         'numberofcores',

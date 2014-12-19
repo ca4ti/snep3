@@ -119,6 +119,9 @@ class CallsReportController extends Zend_Controller_Action {
 
         $finalDay->addValidator($validatorDate);
 
+        $destination = new Snep_Form_SubForm($this->view->translate("Destination"), $form_xml->destination);
+		$dstchannel = $destination->getElement('dstchannel');
+
         $order = $period->getElement('order');
         $order->setValue('data');
         $form->addSubForm($period, "period");
@@ -203,20 +206,7 @@ class CallsReportController extends Zend_Controller_Action {
 
         $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
         $form->removeElement('cancel');
-        /*
-          $form->addElement(new Zend_Form_Element_Submit("submit_graph",
-          array("label" => $this->view->translate("Exibir Gráfico"))
-          ));
-          $buttonCsv = new Zend_Form_Element_Submit("submit_csv", array("label" => $this->view->translate("Exportar CSV")));
-
-          $buttonCsv->setOrder(5004);
-
-          $buttonCsv->addDecorator(array("closetd" => 'HtmlTag'), array('tag' => 'td', 'closeOnly' => true, 'placement' => Zend_Form_Decorator_Abstract::APPEND));
-          $buttonCsv->addDecorator(array("closetr" => 'HtmlTag'), array('tag' => 'tr', 'closeOnly' => true, 'placement' => Zend_Form_Decorator_Abstract::APPEND));
-
-          $form->addElement($buttonCsv);
-
-         */
+        
         return $form;
     }
 
@@ -400,7 +390,7 @@ class CallsReportController extends Zend_Controller_Action {
         }
         if (isset($SRC)) {
             if (isset($DST)) {
-                $CONDICAO .= " OR " . $SRC = substr($SRC, 4);
+                $CONDICAO .= " AND " . $SRC = substr($SRC, 4);
             } else {
                 $CONDICAO .= $SRC;
             }
@@ -508,7 +498,7 @@ class CallsReportController extends Zend_Controller_Action {
         $CONDICAO .= " AND ( locate('ZOMBIE',channel) = 0 ) ";
 
         /* Montagem do SELECT de Consulta */
-        $SELECT = "ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,\"%d/%m/%Y\") AS key_dia, date_format(calldate,\"%d/%m/%Y %H:%i:%s\") AS dia, src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate ";
+        $SELECT = "ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,\"%d/%m/%Y\") AS key_dia, date_format(calldate,\"%d/%m/%Y %H:%i:%s\") AS dia, src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate, dstchannel ";
 
         /* Consulta de sql para verificar quantidade de registros selecionados e
           Montar lista de Totais por tipo de Status */
@@ -519,6 +509,21 @@ class CallsReportController extends Zend_Controller_Action {
             $sql_ctds .= ($ramaissrc === null ? '' : $ramaissrc) . ($ramaisdst === null ? '' : $ramaisdst);
             $sql_ctds .= " GROUP BY userfield ORDER BY calldate, userfield";
 
+
+            //Busca Por agente na fila para contagem
+            $arrDst = " AND dstchannel like '%";
+            if (isset($dstchannel) != "") {
+                if (strpos($dstchannel, ",")) {
+
+                    $arrDst .= str_replace(",", "%' or dstchannel like '%", $dstchannel);
+                    $arrDst.="%' And";
+                } else {
+                    $arrDst.= $dstchannel . "%' ";
+                }
+
+                $sql_ctds .=$arrDst;
+            }
+            $sql_ctds .= " GROUP BY userfield ORDER BY calldate, userfield";
             if ($acao == "grafico") {
                 $tot_fai = $tot_bus = $tot_ans = $tot_noa = $tot_oth = array();
             } else {
@@ -528,6 +533,7 @@ class CallsReportController extends Zend_Controller_Action {
             $flag_ini = True; // Flag para controle do 1o. registro lido
             $userfield = "XXXXXXX";  // Flag para controle do Userfield
             unset($result);
+
 
             foreach ($db->query($sql_ctds) as $row) {
 
@@ -559,6 +565,7 @@ class CallsReportController extends Zend_Controller_Action {
                 if ($row['uniqueid'] == '') {
                     continue;
                 }
+
 
                 /* Varre o array da chamada com mesmo userfield                        */
                 foreach ($result as $val) {
@@ -707,23 +714,45 @@ class CallsReportController extends Zend_Controller_Action {
             case "dst":
                 $ordernar = "  dst, calldate ";
                 break;
+            default :
+                $ordernar = " calldate ";
+                break;
         }
 
-        $sql_chamadas .= " GROUP BY userfield ORDER BY $ordernar ";
+        $arrDst = " AND dstchannel like '%";
+        if (isset($dstchannel)   != "") {
+            if (strpos($dstchannel, ",")) {
 
+                $arrDst .= str_replace(",", "%' or dstchannel like '%", $dstchannel);
+                $arrDst.="%' And";
+            } else {
+                $arrDst.= $dstchannel . "%' ";
+            }
+
+            $sql_chamadas .=$arrDst;
+        }
+        $sql_chamadas .= " GROUP BY userfield ORDER BY $ordernar ";
         $defaultNS = new Zend_Session_Namespace('call_sql');
         $defaultNS->sql = $sql_chamadas;
+
         $defaultNS->totais = $totais;
-        $defaultNS->status = $status;
+        if (isset($status))
+            $defaultNS->status = $status;
         if (isset($contas)) {
             $defaultNS->contas = $contas;
         }
         $defaultNS->report_type = $rel_type;
+
         $defaultNS->src = $src;
         $defaultNS->groupsrc = $groupsrc;
+
         $defaultNS->dst = $dst;
         $defaultNS->groupdst = $groupdst;
-        $defaultNS->sub_title = $this->view->translate($formData['period']['initDay'] . " - " . $formData['period']['initDay']);
+
+        $defaultNS->sub_title = $this->view->translate($formData['period']['initDay'] . " - " . $formData['period']['finalDay']);
+
+        $_SESSION['callsreport']['init'] = $dia_inicial;
+        $_SESSION['callsreport']['end'] = $dia_final;
 
         $row = $db->query($sql_chamadas)->fetchAll();
 
@@ -732,6 +761,8 @@ class CallsReportController extends Zend_Controller_Action {
         }
 
         $defaultNS->row = $row;
+        $_SESSION["row"] = $row;
+        
         if (count($defaultNS->row) == 0) {
             $this->view->error = $this->view->translate("No entries found!");
             $this->_helper->viewRenderer('error');
@@ -742,14 +773,78 @@ class CallsReportController extends Zend_Controller_Action {
             case 'relatorio':
                 $this->reportAction();
                 break;
-            /* case 'grafico':
-              $this->graphAction();
-              break;
-              case 'csv':
-              $this->csvAction();
-              break;
-             */
+            
         }
+    }
+
+    /**
+     * graphicAction - Monta gráfico do relatório
+     */
+    public function graphicAction() {
+        
+        $title = $_SESSION["call_sql"]['sub_title'];
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Reports"),
+                    $this->view->translate("Graphic"),
+                    $title));
+        
+        $row = $_SESSION["row"];
+        
+        $totals = array("ANSWERED" => 0, "NO ANSWER" => 0, "BUSY" => 0, "FAILED" => 0);
+        $type = array("S" => 0, "E" => 0, "O" => 0);
+        $values = array();
+
+        foreach($row as $key => $value){
+            
+            ($values[$value["key_dia"]]['ANSWERED'] == NULL) ?  0 : $values[$value["key_dia"]]['ANSWERED'] ;
+            ($values[$value["key_dia"]]['NO ANSWER'] == NULL) ?  0 : $values[$value["key_dia"]]['NO ANSWER'] ;
+            ($values[$value["key_dia"]]['BUSY'] == NULL) ?  0 : $values[$value["key_dia"]]['BUSY'] ;
+            ($values[$value["key_dia"]]['FAILED'] == NULL) ?  0 : $values[$value["key_dia"]]['FAILED'] ;
+                        
+            // Calls number
+            if($value['disposition'] == 'ANSWERED'){
+                $totals['ANSWERED']++;
+                $values[$value["key_dia"]]['ANSWERED']++;
+
+            }elseif($value['disposition'] == 'NO ANSWER'){
+                $totals['NO ANSWER']++;
+                $values[$value["key_dia"]]['NO ANSWER']++;
+            
+            }elseif($value['disposition'] == 'BUSY'){
+                $totals['BUSY']++;
+                $values[$value["key_dia"]]['BUSY']++;
+            
+            }elseif($value['disposition'] == 'FAILED'){
+                $totals['FAILED']++;
+                $values[$value["key_dia"]]['FAILED']++;
+            }
+
+            if($value['tipo'] == 'S'){
+                $type['S']++;
+            }elseif($value['tipo'] == 'E'){
+                $type['E']++;
+            }else{
+                $type['O']++;
+            }
+
+        }
+        
+        $cont = 0 ;
+        foreach($values as $date => $item){
+            
+            $array[$cont][] = $date;
+            $array[$cont][] = ($item['ANSWERED'] == NULL) ? 0 : $item['ANSWERED'];
+            $array[$cont][] = ($item['NO ANSWER'] == NULL) ? 0 : $item['NO ANSWER'];
+            $array[$cont][] = ($item['BUSY'] == NULL) ? 0 : $item['BUSY'];
+            $array[$cont][] = ($item['FAILED'] == NULL) ? 0 : $item['FAILED'];
+            $cont++;
+        }
+
+        $this->view->totals = $totals;
+        $this->view->period = $array;
+        $this->view->type = $type;
+                
     }
 
     /**
@@ -807,6 +902,7 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->calldate = $this->view->translate("Call's date");
         $this->view->origin = $this->view->translate("Source");
         $this->view->destination = $this->view->translate("Destination");
+        $this->view->operator = $this->view->translate("Operator");
         $this->view->callstatus = $this->view->translate("Status");
         $this->view->duration = $this->view->translate("Duration");
         $this->view->conversation = $this->view->translate("Conversation");
@@ -838,10 +934,11 @@ class CallsReportController extends Zend_Controller_Action {
                     $this->view->translate("Calls"),
                     $defaultNS->sub_title));
 
-
         $this->view->totals = $defaultNS->totais;
         $this->view->status = $defaultNS->status;
 
+        $this->view->sql = $defaultNS->sql;
+        
         $this->view->duration_call = $format->fmt_segundos(
                 array("a" => $defaultNS->totais['duration'], "b" => 'hms')
         );

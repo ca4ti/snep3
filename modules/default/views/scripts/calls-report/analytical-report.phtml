@@ -5,7 +5,10 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 ?>
 
 <div>
-<form name="tabela" id="tabela">
+<form name="tabela" id="tabela" action="<?php echo $this->url(array("controller" => "calls-report", "action" => "graphic"), null, true); ?>" METHOD="post">
+		<div class="graphic">
+        <input type="submit" value="<?php echo $this->translate("Graphic"); ?>" />
+    	</div>
   <input type="hidden" value="" id="selected" />
      <table align="center">
 	   <thead>
@@ -14,6 +17,7 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
                   <td class="cen"><?php echo $this->calldate; ?></td>
                   <td class="esq"><?php echo $this->origin; ?></td>
                   <td class="esq"><?php echo $this->destination; ?></td>
+                  <td class="esq"><?php echo $this->operator; ?></td>
                   <td class="esq"><?php echo $this->callstatus; ?></td>
                   <td class="esq"><?php echo $this->duration; ?></td>
                   <td class="esq"><?php echo $this->conversation; ?></td>
@@ -37,6 +41,18 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 					<td>
 						<?php echo $callsList['dst']; ?> 
 					</td>
+					<td>
+                            <?php
+                                if (preg_match("/Local/i", $callsList['dstchannel'])) {
+                                    echo strTok(str_replace('Local/', '', $callsList['dstchannel']), "@");
+                                }
+                                if(isset($callsList['operador'])) {
+                                    echo $callsList['dstchannel'];
+                                } else {
+                                    echo "";    
+                                }
+                            ?> 
+                        </td>
 					<td>
 						<?php echo $callsList['disposition']; ?> 
 					</td>

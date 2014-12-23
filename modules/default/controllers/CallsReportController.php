@@ -523,7 +523,7 @@ class CallsReportController extends Zend_Controller_Action {
 
                 $sql_ctds .=$arrDst;
             }
-            $sql_ctds .= " GROUP BY userfield ORDER BY calldate, userfield";
+            
             if ($acao == "grafico") {
                 $tot_fai = $tot_bus = $tot_ans = $tot_noa = $tot_oth = array();
             } else {
@@ -533,10 +533,9 @@ class CallsReportController extends Zend_Controller_Action {
             $flag_ini = True; // Flag para controle do 1o. registro lido
             $userfield = "XXXXXXX";  // Flag para controle do Userfield
             unset($result);
-
-
+            
             foreach ($db->query($sql_ctds) as $row) {
-
+                
                 /* Incializa array se tipo = grafico                                   */
                 $key_dia = $row['key_dia'];
 
@@ -551,6 +550,7 @@ class CallsReportController extends Zend_Controller_Action {
 
                 /*  Faz verificacoes para contabilizar valores dentro do mesmo userfield
                   So vai contabilziar resultados por userfield */
+
                 if ($userfield != $row['userfield']) {
                     if ($flag_ini) {
                         $result[$row['uniqueid']] = $row;

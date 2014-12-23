@@ -42,50 +42,47 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                 <ul>
                     <li>
 
-                        <a class="js-smoothscroll" href="#refresh-os">
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/server_status_icon.png" width="40" height="40">
+                        <a class="js-smoothscroll" href="#refresh-os"><i class="icon-dashboard"></i>
                             <span><?php echo $this->translate("System"); ?></span>
                         </a>
                     </li>
-                    
                     <li>
+                        <a class="js-smoothscroll" href="#refresh-df"><i class="icon-list-alt"></i><span>Disk</span></a>
+                    </li>
+                    <!--<li>
                         <a class="js-smoothscroll" href="#refresh-df">
                             <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/storage_icon.png" width="36" height="36">
                             <span><?php echo $this->translate("Disk"); ?></span>
                         </a>
-                    </li>
+                    </li> -->
                     
                     <li>
-                        <a class="js-smoothscroll" href="#refresh-ip">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/ip.png" width="37" height="40">
+                        <a class="js-smoothscroll" href="#refresh-ip"><i class="icon-info-sign"></i>
                             <span><?php echo $this->translate("IP"); ?></span>
                         </a>
                     </li>
 
                     <li>
-                        <a class="js-smoothscroll" href="#refresh-ram">
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/memory_icon.png" width="51" height="40">
+                        <a class="js-smoothscroll" href="#refresh-ram"><i class="icon-list-alt"></i>
                             <span><?php echo $this->translate("Memory"); ?></span>
                         </a>
                     </li>
 
                     <li>
                         <a class="js-smoothscroll" href="#refresh-modules">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/modules_icon.png" width="37" height="40">
+                        <i class="icon-group"></i>
                             <span><?php echo $this->translate("Modules"); ?></span>
                         </a>
                     </li>
 
                     <li>
-                        <a class="js-smoothscroll" href="#refresh-ispeed">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/network.png" width="37" height="40">
+                        <a class="js-smoothscroll" href="#refresh-ispeed"><i class="icon-info-sign"></i>
                             <span><?php echo $this->translate("Internet"); ?></span>
                         </a>
                     </li>
                     
                     <li>
-                        <a class="js-smoothscroll" href="#refresh-statistics">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/stats_icon.png" width="37" height="40">
+                        <a class="js-smoothscroll" href="#refresh-statistics"><i class="icon-dashboard"></i>
                             <span><?php echo $this->translate("PBX Statistics"); ?></span>
                         </a>
                     </li>
@@ -114,13 +111,10 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
         <div class="container">
             <div id="widgets" class="row">
                 
-                <div class="span4">
+                <div class="span5">
                     <div id="general-info-widget" class="widget widget-table action-table">
-                        <div class="widget-header" >
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/server_status_icon.png" width="30" height="30">
-                                <h3>
-                                    <?php echo $this->translate("System"); ?>
-                                </h3> 
+                        <div class="widget-header" ><i class="icon-dashboard"></i>
+                                <h3><?php echo $this->translate("System"); ?></h3> 
                                 <div id="refresh-os" class="btn icon-refresh js-refresh-info"></div>   
                         </div>
                         
@@ -157,7 +151,20 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                     </div>
                 </div>  
 
-                <div class="span5">
+                <div class="span7">
+                    <div id="disk-usage-widget" class="widget widget-table">
+                        <div class="widget-header">
+                            <i class="icon-list"></i>
+                            <h3><?php echo $this->translate("Disk"); ?></h3>
+                            <div id="refresh-df" class="btn icon-refresh js-refresh-info"></div>
+                        </div>
+                        <div class="widget-content">
+                            <table id="df_dashboard" class="table table-hover table-condensed table-bordered"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="span5">
                     <div id="disk-usage-widget" class="widget widget-table">
                         <div class="widget-header">
                             <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/storage_icon.png" width="30" height="30">
@@ -197,12 +204,12 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                             </div>
                         </div>
                     </div>   
-                </div>    
+                </div>  -->  
                 
                 <div class="span3">
-                    <div id="ip-widget" class="widget widget-table">
+                    <div id="ip-widget">
                         <div class="widget-header">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/ip.png" width="30" height="30">
+                        <i class="icon-info-sign"></i>
                             <h3><?php echo $this->translate("IP"); ?></h3>
                             <div id="refresh-ip" class="btn icon-refresh js-refresh-info"></div>
                         </div>
@@ -214,8 +221,7 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
 
                 <div class="span3">
                     <div id="ram-widget" class="widget widget-nopad">
-                        <div class="widget-header">
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/memory_icon.png" width="30" height="30">
+                        <div class="widget-header"><i class="icon-list-alt"></i>
                             <h3><?php echo $this->translate("Memory"); ?></h3>
                             <div id="refresh-ram" class="btn icon-refresh js-refresh-info"></div>
                         </div>
@@ -244,11 +250,8 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
 
                 <div class="span5">
                     <div id="modules-widget" class="widget widget-table action-table">
-                        <div class="widget-header" >
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/modules_icon.png" width="30" height="30">
-                                <h3>
-                                    <?php echo $this->translate("Modules"); ?>
-                                </h3> 
+                        <div class="widget-header" ><i class="icon-group"></i>
+                                <h3><?php echo $this->translate("Modules"); ?></h3> 
                                 <div id="refresh-modules" class="btn icon-refresh js-refresh-info"></div>   
                         </div>
 
@@ -271,8 +274,7 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
 
                 <div class="span4">
                     <div id="internet-speed-widget" class="widget widget-table">
-                        <div class="widget-header">
-                        <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/network.png" width="30" height="30">
+                        <div class="widget-header"><i class="icon-info-sign"></i>
                             <h3><?php echo $this->translate("Internet Speed"); ?></h3>
                             <div id="refresh-ispeed" class="btn js-refresh-info"><span class="icon-refresh"></span></div>
                         </div>
@@ -293,12 +295,9 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
 
                 <div class="span4">
                     <div id="statistics-widget" class="widget widget-table action-table">
-                        <div class="widget-header" >
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/stats_icon.png" width="30" height="30">
-                                <h3>
-                                    <?php echo $this->translate("PBX Statistics"); ?>
-                                </h3> 
-                                <div id="refresh-statistics" class="btn icon-refresh js-refresh-info"></div>   
+                        <div class="widget-header" ><i class="icon-dashboard"></i>
+                            <h3><?php echo $this->translate("PBX Statistics"); ?></h3> 
+                            <div id="refresh-statistics" class="btn icon-refresh js-refresh-info"></div>   
                         </div>
 
                         <div class="widget-content">

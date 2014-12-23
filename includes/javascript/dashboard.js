@@ -285,7 +285,7 @@ dashboard.getDf = function () {
                 { sTitle: "Mounted" }
             ],
 	    iDisplayLength: 5,
-            bPaginate: true,
+            bPaginate: false,
             sPaginationType: "full_numbers",
             bFilter: false,
             bAutoWidth: true,
@@ -311,40 +311,11 @@ dashboard.getIp = function () {
                 { sTitle: "IP" }
             ],
             iDisplayLength: 5,
-            bPaginate: true,
-            sPaginationType: "two_button",
+            bPaginate: false,
             bFilter: false,
             bAutoWidth: true,
             bInfo: false
         }).fadeIn();
-    });
-};
-
-dashboard.getPing = function () {
-    var refreshIcon = $('#refresh-ping .icon-refresh');
-    refreshIcon.addClass('icon-spin');
-
-    moduleData("ping", function (data) {
-        destroy_dataTable("ping_dashboard");
-
-        $("#ping_dashboard").dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Host" },
-                { sTitle: "Time (in ms)" }
-            ],
-            aaSorting: [
-                [0, "desc"]
-            ],
-            bPaginate: true,
-            sPaginationType: "full_numbers",
-            bFilter: true,
-            sDom: "lrtip",
-            bAutoWidth: false,
-            bInfo: false
-        }).fadeIn();
-
-        refreshIcon.removeClass('icon-spin');
     });
 };
 

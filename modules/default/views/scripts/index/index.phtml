@@ -49,12 +49,6 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                     <li>
                         <a class="js-smoothscroll" href="#refresh-df"><i class="icon-list-alt"></i><span>Disk</span></a>
                     </li>
-                    <!--<li>
-                        <a class="js-smoothscroll" href="#refresh-df">
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/storage_icon.png" width="36" height="36">
-                            <span><?php echo $this->translate("Disk"); ?></span>
-                        </a>
-                    </li> -->
                     
                     <li>
                         <a class="js-smoothscroll" href="#refresh-ip"><i class="icon-info-sign"></i>
@@ -163,49 +157,7 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="span5">
-                    <div id="disk-usage-widget" class="widget widget-table">
-                        <div class="widget-header">
-                            <img alt="" src="<?php echo $this->baseUrl(); ?>/imagens/index/storage_icon.png" width="30" height="30">
-                            <h3><?php echo $this->translate("Disk"); ?></h3>
-                            <div id="refresh-df" class="btn icon-refresh js-refresh-info"></div>
-                            
-                            <div class="widget-content">
-                                <div class="big-stats-container">
-                                    <div class="widget-content">
-                                        <div class="cf big_stats">
-                                    
-                                            <div class="stat">
-                                                <i class="icon-#"><?php echo $this->translate("Partition"); ?></i> 
-                                                <?php foreach ($this->indexData["space"] as $key => $value) { ?>
-                                                    <br><span><?php echo $value["mount_point"]; ?></span>
-                                                <?php } ?>
-                                            </div>
-
-                                            <div class="stat">
-                                                <i class="icon-#"><?php echo $this->translate("Total"); ?></i> 
-                                                <?php foreach ($this->indexData["space"] as $key => $value) { ?>
-                                                    <br><span><?php echo sprintf("%.2f", ($value["size"] / 1048576)); ?></span>
-                                                <?php } ?>
-                                            </div>
-
-                                            <div class="stat">
-                                                <i class="icon-#"><?php echo $this->translate("Livre"); ?></i> 
-                                                <?php foreach ($this->indexData["space"] as $key => $value) { ?>
-                                                    <br><span><?php echo sprintf("%.2f", ($value["free"] / 1048576)) ?></span>
-                                                    <?php echo "(".(100 - $value["percent"])."%)";?>
-                                                    
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>   
-                </div>  -->  
-                
+                  
                 <div class="span3">
                     <div id="ip-widget">
                         <div class="widget-header">
@@ -219,7 +171,7 @@ $this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/remove
                     </div>
                 </div> 
 
-                <div class="span3">
+                <div class="span4">
                     <div id="ram-widget" class="widget widget-nopad">
                         <div class="widget-header"><i class="icon-list-alt"></i>
                             <h3><?php echo $this->translate("Memory"); ?></h3>

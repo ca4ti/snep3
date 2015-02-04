@@ -16,10 +16,9 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'Zend/Controller/Action.php';
+require_once 'lib/Zend/Controller/Action.php';
 require_once "includes/AsteriskInfo.php";
-require_once 'includes/functions.php';
-
+require_once 'includes/functions.php';;
 
 /**
  * Services controller.
@@ -128,43 +127,7 @@ class SystemstatusController extends Zend_Controller_Action {
                 'percent' => floatval($sysInfo->memory->swap->core->total) > 0 ? round(floatval($sysInfo->memory->swap->core->used) / floatval($sysInfo->memory->swap->core->total) * 100) : 0
             );
 
-            $deviceArray = $sysInfo->mounts->mount;
-            foreach ($deviceArray as $mount) {
-                $systemInfo['space'][] = array(
-                    'mount_point' => $mount["mountpoint"],
-                    'size' => $this->byte_convert(floatval($mount["size"])),
-                    'free' => $this->byte_convert(floatval($mount["free"])),
-                    'percent' => floatval($mount["size"]) > 0 ? round((floatval($mount["used"]) / floatval($mount["size"])) * 100) : 0
-                );
-            }
-
-            $sqlN = "select count(*) from";
-            $select = $db->query($sqlN . ' peers');
-            $result = $select->fetch();
-
-            $systemInfo['num_peers'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' trunks');
-            $result = $select->fetch();
-
-            $systemInfo['num_trunks'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' regras_negocio');
-            $result = $select->fetch();
-
-            $systemInfo['num_routes'] = $result['count(*)'];
-
-            $netArray = $sysInfo->net->interface;
-            $count = 0;
-
-            foreach ($netArray as $board) {
-                if ($count < 6) {
-                    $systemInfo['net'][] = array(
-                        'device' => $board["device"],
-                        'up' => $board["state"]);
-                    $count++;
-                }
-            }
+            $systemInfo['space'] = $this->sys_fsinfo();
 
             $systemInfo['modules'] = array();
             $modules = Snep_Modules::getInstance()->getRegisteredModules();
@@ -202,6 +165,63 @@ class SystemstatusController extends Zend_Controller_Action {
         for ($i = 0; $size >= $notation && $i < (count($types) - 1 ); $size /= $notation, $i++)
             ;
         return(round($size, $precision) . ' ' . ($notation == 1000 ? $types[$i] : $types_i[$i]));
+    }
+
+    /**
+     * sys_fsinfo
+     * @return type
+     */
+    private function sys_fsinfo() {
+        $df = $this->execute_program('df', '-kP');
+        $mounts = explode("\n", $df);
+        $fstype = array();
+        if ($fd = fopen('/proc/mounts', 'r')) {
+            while ($buf = fgets($fd, 4096)) {
+                list($dev, $mpoint, $type) = preg_split('/\s+/', trim($buf), 4);
+                $fstype[$mpoint] = $type;
+                $fsdev[$dev] = $type;
+            }
+            fclose($fd);
+        }
+
+        for ($i = 1; $i < sizeof($mounts); $i++) {
+            $ar_buf = preg_split('/\s+/', $mounts[$i], 6);
+            if ($fstype[$ar_buf[5]] == "tmpfs")
+                continue;
+            $results[$i - 1] = array();
+
+            $results[$i - 1]['disk'] = $ar_buf[0];
+            $results[$i - 1]['size'] = $ar_buf[1];
+            $results[$i - 1]['used'] = $ar_buf[2];
+            $results[$i - 1]['free'] = $ar_buf[3];
+            $results[$i - 1]['percent'] = round(($results[$i - 1]['used'] * 100) / $results[$i - 1]['size']) . '%';
+            $results[$i - 1]['mount_point'] = $ar_buf[5];
+            ($fstype[$ar_buf[5]]) ? $results[$i - 1]['fstype'] = $fstype[$ar_buf[5]] : $results[$i - 1]['fstype'] = $fsdev[$ar_buf[0]];
+        }
+
+        return $results;
+    }
+    
+    /**
+     * execute_program
+     * @param <string> $program
+     * @param <string> $params
+     * @return type
+     */
+    private function execute_program($program, $params) {
+        $path = array('/bin/', '/sbin/', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin');
+        $buffer = '';
+        while ($cur_path = current($path)) {
+            if (is_executable("$cur_path/$program")) {
+                if ($fp = popen("$cur_path/$program $params", 'r')) {
+                    while (!feof($fp)) {
+                        $buffer .= fgets($fp, 4096);
+                    }
+                    return trim($buffer);
+                }
+            }
+            next($path);
+        }
     }
     
     /**

@@ -156,36 +156,6 @@
         <div class="statusColumn">
             <div class="statusBlock">
                 <div class="iconHolder">
-                    <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/ip_icon_status_bar.png">
-                </div>
-                <div class="contentHolder">
-                    <h2><?php echo $this->translate("PBX Statistics"); ?></h2>
-                    <table>
-                    <tr>
-                        <th><?php echo $this->translate("Registered Extensions"); ?></th>
-                        <td> <?php echo $this->indexData["num_peers"]; ?></td>
-                    </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th><?php echo $this->translate("Registered Trunks"); ?></th>
-                            <td> <?php echo $this->indexData["num_trunks"]; ?></td>
-                        </tr>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th><?php echo $this->translate("Routes"); ?></th>
-                            <td> <?php echo $this->indexData["num_routes"]; ?></td>
-                        </tr>
-                    </table>
-
-                </div>      
-            </div>
-            
-            <div class="statusBlock">
-                <div class="iconHolder">
                     <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/memory_icon_status_bar.png">
                 </div>
                 <div class="contentHolder">
@@ -330,7 +300,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="statusBlock">
                 <div class="iconHolder">
                     <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/drive_space_status.png">

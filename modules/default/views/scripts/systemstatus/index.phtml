@@ -1,4 +1,4 @@
-
+    
 <div id="containerStatus">
     <div id="statusTopo">
         <div class="expand">
@@ -15,18 +15,7 @@
                     }
                     ?><span>Asterisk</span>
                 </li>
-                <li>
-                    <?php  
-                    if ($this->indexData['cc'] != false){
-                        if($this->indexData['cc'] == "Ativado"){
-                        echo "<div class='statusIndicator green'></div>";
-                    }else{
-                        echo "<div class='statusIndicator red'></div>";
-                        $this->error = 1;
-                    }                    
-                    ?><span>Scripts ler_queues</span>
-                    <?php } ?>
-                </li>
+                
                 <li>
                     <?php
                     if ($this->indexData["usage"] <= 50){
@@ -133,56 +122,7 @@
                             <td> <?php echo $this->indexData["mysql"]; ?></td>
                         </tr>
                     </table>
-                     <table>
-                        <tr>
-                            <th><?php echo $this->translate("Voice File"); ?></th>
-                            <td><?php echo $this->translate("File number: "); ?> 
-                                <?php echo $this->indexData["num_arqvoz"]; ?>
-                          <!--       <?php echo $this->translate(" - "); ?>
-                            <?php echo $this->translate("Size number: "); ?> 
-                                <?php echo $this->indexData["spc_arqvoz"]; ?></td> -->
-                        </tr>
-                    </table>
-                     <table>
-                        <tr>
-                            <th><?php echo $this->translate("Date"); ?></th>
-                            <td> <?php echo $this->indexData["data"]; ?></td>
-                        </tr>
-                    </table>
 
-                    <table>
-                        <tr>
-                            <th><?php /*echo $this->translate("Network Devices"); ?></th>
-
-                            <?php 
-
-
-                                    foreach ($this->indexData["net"] as $board) {
-                                        echo '<td>';       
-                                        echo ' <div class="statusIndicator">';
-
-                                    $classColor = '';
-                                    if ($board['up'] == 'up'){
-                                        $classColor = "green";
-                                    }
-                                    else if ($board['up'] == 'down'){
-                                        $classColor = "red";
-                                    }
-                                    else{
-                                        $classColor = "yellow";
-                                    }
-                                    ?>
-                                    <div class="bar_inner <?php echo $classColor; ?>"  style="width: 100%;">
-                                        <div class="bar_text">
-                                            <?php echo $board['device']; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <?php } */ ?>
-                        </tr>
-                    </table>
-                    
                 </div>
             </div>
             <div class="statusBlock">
@@ -211,27 +151,7 @@
                     ?>
                 </div>
             </div>
-            <div class="statusBlock">
-                <div class="iconHolder">
-                    <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/system_status_icon_status_bar.png">
-                </div>
-                <div class="contentHolder">
-                    <h2><?php echo $this->translate("System Diagnosis."); ?></h2>
-                        <div class="inspect">
-                            <?php
-                                    echo "<ul>";
-                                        foreach( $this->inspect as $key => $value ) {
-                                            /*if ($value['error']) {
-                                                echo "<li style=\"background-color: #ff5656\"> <pre> {$value['message']} </pre> </li>";
-                                            }*/
-                                            $status = ( $value['error'] ? 'red' : 'green');
-                                            echo " <li> <div class='statusIndicator $status'></div> {$value['name']} </li> ";
-                                        }
-                                    echo "</ul>";
-                            ?>
-                        </div>
-                </div>
-            </div>
+            
         </div>
         <div class="statusColumn">
             <div class="statusBlock">
@@ -239,47 +159,31 @@
                     <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/ip_icon_status_bar.png">
                 </div>
                 <div class="contentHolder">
-                    <h2><?php echo $this->translate("IP Status"); ?></h2>
+                    <h2><?php echo $this->translate("PBX Statistics"); ?></h2>
                     <table>
                     <tr>
-                        <th><?php echo $this->translate("SIP Extensions"); ?></th>
-                        <td> 
-                            <?php if(isset($this->indexData["sip_peers"])) 
-                                echo $this->indexData["sip_peers"]; 
-                            else 
-                                echo "Asterisk disconnected" ?>
-                        </td>
+                        <th><?php echo $this->translate("Registered Extensions"); ?></th>
+                        <td> <?php echo $this->indexData["num_peers"]; ?></td>
                     </tr>
                     </table>
 
                     <table>
                         <tr>
-                            <th><?php echo $this->translate("SIP Channels"); ?></th>
-                            <td> 
-                                <?php if(isset($this->indexData["sip_channels"])) 
-                                    echo $this->indexData["sip_channels"]; 
-                                else 
-                                    echo "Asterisk disconnected" ?>
-                            </td>
+                            <th><?php echo $this->translate("Registered Trunks"); ?></th>
+                            <td> <?php echo $this->indexData["num_trunks"]; ?></td>
                         </tr>
                     </table>
 
                     <table>
                         <tr>
-                            <th><?php echo $this->translate("IAX 2 Extensions"); ?></th>
-                            <td> 
-                                <?php if(isset($this->indexData["iax2_peers"])) 
-                                    echo $this->indexData["iax2_peers"]; 
-                                else 
-                                    echo "Asterisk disconnected" ?>
-                            </td>
+                            <th><?php echo $this->translate("Routes"); ?></th>
+                            <td> <?php echo $this->indexData["num_routes"]; ?></td>
                         </tr>
                     </table>
-                </div>
-                
-                
-                       
+
+                </div>      
             </div>
+            
             <div class="statusBlock">
                 <div class="iconHolder">
                     <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/memory_icon_status_bar.png">
@@ -426,6 +330,7 @@
                     </table>
                 </div>
             </div>
+            
             <div class="statusBlock">
                 <div class="iconHolder">
                     <img alt="" src="<?php echo $this->baseUrl(); ?>/modules/default/img/drive_space_status.png">

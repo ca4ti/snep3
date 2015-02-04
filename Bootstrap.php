@@ -63,10 +63,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headTitle('SNEP');
 
         $view->headLink()->setStylesheet($view->baseUrl() . "/css/main.css");
+        $view->headLink()->setStylesheet($view->baseUrl() . "/css/services.css");
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
+        $view->headScript()->appendFile($view->baseUrl() . "/includes/jquery-1.7.2.js", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/prototype.js", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/functions.js", 'text/javascript');
-
+        $view->headScript()->appendFile($view->baseUrl() . "/includes/geral.js", 'text/javascript');
 
         //List installed modules to be used on the modules menu
         $systemInfo['modules'] = array();

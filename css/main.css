@@ -26,6 +26,7 @@ pre {
     margin: 0 auto -34px;
 }
 
+/*
 #footer, .push {
     height: 32px;
 }
@@ -54,6 +55,17 @@ pre {
 
 #footer_version {
     float:right;
+} */
+
+/*RODAPÉ (SERVIÇOS)*/
+
+div#footer{
+    width: 960px;
+    margin-left: 50%;
+    position: fixed;
+    left: -480px;
+    display: table;
+    top: -1000px;
 }
 
 body {

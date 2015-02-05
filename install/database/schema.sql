@@ -620,6 +620,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
+  `dashboard` text NOT NULL ,
   `profile_id` INT NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,

@@ -127,8 +127,21 @@ class SystemstatusController extends Zend_Controller_Action {
                 'percent' => floatval($sysInfo->memory->swap->core->total) > 0 ? round(floatval($sysInfo->memory->swap->core->used) / floatval($sysInfo->memory->swap->core->total) * 100) : 0
             );
 
-            $systemInfo['space'] = $this->sys_fsinfo();
-
+            $repeat = array();
+            $cont = 0;
+            foreach($this->sys_fsinfo() as $key => $partition){
+                
+                // verifica valores duplicados de disco
+                $repeat[$partition['mount_point']] += 1; 
+                
+                foreach($repeat as $x => $value){
+                    if($partition['mount_point'] == $x && $value == 1){
+                        $systemInfo['space'][$cont] = $partition;
+                        $cont++;
+                    }
+                }  
+            }
+            
             $systemInfo['modules'] = array();
             $modules = Snep_Modules::getInstance()->getRegisteredModules();
             foreach ($modules as $module) {
@@ -201,7 +214,7 @@ class SystemstatusController extends Zend_Controller_Action {
 
         return $results;
     }
-    
+
     /**
      * execute_program
      * @param <string> $program

@@ -48,11 +48,21 @@ cd /usr/src/asterisk*
 ./configure 
 ```
 Ajustando compilacao do Asterisk
+
+```
+#!bash
+
 make menuselect
+```
+
 a) selecione a opção: **Voicemail Build Options**
+
 b) marque a opção:   [*] ODBC_STORAGE
+
 c) tecle **ESC** 2 vezes
+
 d) tecle **S** para confirmar alterações
+
 e) Execute os comandos:
 ```
 #!bash

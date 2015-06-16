@@ -38,7 +38,14 @@ tar xvf asterisk-13-current.tar.gz
 ```
 
 ## Ajustando o PHP ##
-Habilite o php-cgi para receber parâmetros, inserindo "On" no parametro register_argc_argv no arquivo /etc/php5/cgi/php.ini
+Habilite o php-cgi para receber parâmetros, inserindo "On" no parametro register_argc_argv no arquivo /etc/php5/cgi/php.ini.
+Reinicie o apache
+```
+#!bash
+
+/etc/init.d/apache2 restart
+```
+
 
 ## Compilando o Asterisk ##
 ```

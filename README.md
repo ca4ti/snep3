@@ -121,7 +121,7 @@ cd /etc/apache2/sites-enabled/
 ln -s /var/www/html/snep/install/snep.apache2 001-snep
 
 cd /var/spool/asterisk/
-rm -f monitor
+rm -rf monitor
 ln -sf /var/www/html/snep/arquivos monitor
 ```
 

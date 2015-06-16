@@ -44,7 +44,7 @@ Habilite o php-cgi para receber parâmetros, inserindo "On" no parametro registe
 ```
 #!bash
 
-cd /usr/src/asterisk-13-current
+cd /usr/src/asterisk*
 ./configure --disable-xmldoc
 make
 make instal
@@ -160,5 +160,3 @@ Arquivo: /etc/odbcinst.ini
   --> modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
 Arquivo: /etc/odbc.ini	   
   --> modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
-
- 

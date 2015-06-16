@@ -149,7 +149,7 @@ mkdir -p snep_2/tmp
 mkdir -p snep_2/backup
 mkdir -p snep_3/tmp
 mkdir -p snep_3/backup
-chown -R www-data.www-data 
+chown -R www-data.www-data *
 
 cd /usr/src
 wget -c http://www.sneplivre.com.br/downloads/asterisk-sounds.tgz
@@ -159,7 +159,7 @@ mkdir -p pt_BR/tmp
 mkdir -p pt_BR/backup
 mkdir -p tmp
 mkdir -p backup
-chown -R www-data:www-data 
+chown -R www-data:www-data *
 
 mkdir -p /var/www/html/snep/sounds
 cd /var/www/html/snep/sounds/

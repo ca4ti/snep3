@@ -78,6 +78,15 @@ make
 make install
 ```
 
+## Criando o inicializador do Asterisk ##
+```
+#!bash
+
+cp /usr/src/asterisk-13.4.0/contrib/init.d/rc.debian.asterisk /etc/init.d/asterisk
+chmod +X /etc/init.d/asterisk
+update-rc.d asterisk defaults
+```
+
 ## Instalando o SNEP ##
 ```
 #!bash

@@ -85,7 +85,8 @@ make install
 cd /var/www/html
 mkdir snep
 cd snep
-git clone __seu_repositorio_snep_ (veja instruções de como  clonar um repositório)
+git clone __seu_fork_do_snep__ .
+Exemplo: git clone https://dacod@bitbucket.org/dacod/snep-3_ast13.git .
 ```
 
 ## Ajuste nas permissões ##

@@ -87,6 +87,19 @@ chmod +X /etc/init.d/asterisk
 update-rc.d asterisk defaults
 ```
 
+## Ajustando o inicializador do asterisk ##
+Edit o arquivo **/etc/init.d/asterisk** e ajuste as seguintes linha para o conteúdo descrito a seguir:
+
+```
+#!bash
+
+DAEMON=/usr/sbin/asterisk
+ASTVARRUNDIR=/var/run/asterisk
+ASTETCDIR=/etc/asterisk
+```
+
+
+
 ## Instalando o SNEP ##
 ```
 #!bash

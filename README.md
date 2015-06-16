@@ -183,14 +183,14 @@ Após a instalação, é preciso efetuar as seguintes modificações no linux:
 
 **Caso seu sistema seja 32 bits:**
 Arquivo: /etc/odbcinst.ini	
-  --> modificar caminho para: /usr/lib/i386-linux-gnu/odbc/libmyodbc.so
+  --> em **Driver**, modificar caminho para: /usr/lib/i386-linux-gnu/odbc/libmyodbc.so
 Arquivo: /etc/odbc.ini	
-  --> modificar caminho para: /usr/lib/i386-linux-gnu/odbc/libmyodbc.so
+  --> em **Driver**, modificar caminho para: /usr/lib/i386-linux-gnu/odbc/libmyodbc.so
 
  
 
 **Caso seu sistema seja 64 bits:**
 Arquivo: /etc/odbcinst.ini  
-  --> modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
+  --> em **Driver**, modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
 Arquivo: /etc/odbc.ini	   
-  --> modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so
+  --> em **Driver**, modificar caminho para: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so

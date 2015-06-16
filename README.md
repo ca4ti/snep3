@@ -85,7 +85,6 @@ make install
 cd /var/www/html
 mkdir snep
 cd snep
-git init
 git clone __seu_repositorio_snep_ (veja instruções de como  clonar um repositório)
 ```
 

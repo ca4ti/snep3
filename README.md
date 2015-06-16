@@ -90,10 +90,15 @@ Exemplo: git clone https://dacod@bitbucket.org/dacod/snep-3_ast13.git .
 ```
 *Para mais informações sobre o git/clone veja o tutorial : Guia de contribuições para o SNEP 3*
 
-## Ajuste nas permissões ##
+## Ajustando as permissões ##
+```
+#!bash
+
 cd /var/www/html 
 chown -R www-data.www-data snep
 chmod -R 775 snep
+```
+
 
 ## Ajustando os diretórios ##
 ```

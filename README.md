@@ -22,7 +22,7 @@ apt-get install mysql-server
 ```
 #!bash
 
-apt-get install unixodbc unixodbc-dev libmyodbc odbcinst1debian2 libcurl3 libncurses5-dev 
+apt-get install unixodbc unixodbc-dev libmyodbc odbcinst1debian2 libcurl3 libncurses5-dev git
 apt-get install php5 php5-cgi php5-mysql php5-gd php5-curl build-essential lshw libjansson-dev
 apt-get install libssl-dev sox sqlite3 libsqlite3-dev libapache2-mod-php5 libxml2-dev uuid-dev
 ```

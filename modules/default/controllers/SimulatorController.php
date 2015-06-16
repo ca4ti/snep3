@@ -34,7 +34,6 @@ class SimulatorController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Routes"),
                     $this->view->translate("Simulator")));
 
@@ -46,12 +45,15 @@ class SimulatorController extends Zend_Controller_Action {
         $this->view->trunks = $trunks;
         if ($this->_request->getPost()) {
 
+
             $formData = $this->_request->getParams();
+
             $extension = isset($formData['dst']) && $formData['dst'] != "" ? $formData['dst'] : 's';
             $srcType = isset($formData['srcType']) ? $formData['srcType'] : NULL;
             $trunk = isset($formData['trunk']) ? $formData['trunk'] : NULL;
             $caller = isset($formData['caller']) && $formData['caller'] != "" ? $formData['caller'] : "unknown";
             $time = isset($formData['time']) ? $formData['time'] : NULL;
+            $date = ($formData['week'] == 'current') ? NULL : $formData['week'];
 
             $dialplan = new PBX_Dialplan_Verbose();
 
@@ -59,9 +61,8 @@ class SimulatorController extends Zend_Controller_Action {
                 try {
                     $srcObj = PBX_Usuarios::get($caller);
                 } catch (PBX_Exception_NotFound $ex) {
-                    $this->view->error = $this->view->translate($ex->getMessage());
-                    $this->view->back = $this->view->translate("Back");
-                    $this->renderScript('simulator/error.phtml');
+                    $this->view->error_message = $this->view->translate($ex->getMessage());
+                    $this->renderScript('error/sneperror.phtml');
                     return;
                 }
                 $channel = $srcObj->getInterface()->getCanal();
@@ -88,12 +89,15 @@ class SimulatorController extends Zend_Controller_Action {
                 $dialplan->setTime($time);
             }
 
+            if($date){
+                $dialplan->setDate($date);
+            }
+
             try {
                 $dialplan->parse();
             } catch (PBX_Exception_NotFound $ex) {
-                $this->view->error = $this->view->translate("No rule found.");
-                $this->view->back = $this->view->translate("Back");
-                $this->renderScript('simulator/error.phtml');
+                $this->view->error_message = $this->view->translate("No rule found.");
+                $this->renderScript('error/sneperror.phtml');
                 return;
             }
 
@@ -161,8 +165,22 @@ class SimulatorController extends Zend_Controller_Action {
                         "actions" => $actions);
                 }
 
-                $input = array("caller" => $caller, "dst" => $extension, "time" => $dialplan->getLastExecutionTime());
+                if($date == NULL){
+                    $date = $this->view->translate("Current Day");
+                }else{
+                    $table = array('mon'=> $this->view->translate('Monday'), 
+                               'tue'=> $this->view->translate('Tuesday'), 
+                               'wed'=> $this->view->translate('Wednesday'), 
+                               'thu'=> $this->view->translate('Thursday'), 
+                               'fri'=> $this->view->translate('Friday'), 
+                               'sat'=> $this->view->translate('Saturday'), 
+                               'sun'=> $this->view->translate('Sunday'));
 
+                    $date = strtr($date, $table);
+                }
+
+                $input = array("caller" => $caller, "dst" => $extension, "time" => $dialplan->getLastExecutionTime(),"date" => $date);
+                
                 $this->view->input = $input;
                 $this->view->result = $result;
             }

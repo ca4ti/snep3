@@ -213,5 +213,26 @@ class Snep_Locale {
         return $this->availableLanguages;
     }
 
+     /**
+     * Returns the locale in datepicker format
+     *
+     * @param <string>  Zend locale
+     * @return <string> Date Picker Locale
+     */
+    public static function getDatePickerLocale($locale) {
+        switch ($locale) {
+            case "pt_BR":
+                return "pt-br";
+                break;
+            case "es" :
+                return "es";
+                break;
+            default :
+                return "";
+                break;
+
+        }
+    }
+
     protected function __clone() {}
 }

@@ -5,43 +5,9 @@
     Description: General scripts
 */
 
-/*modulesMenu slider function*/
-
 var loc = window.location;
 var pathName = loc.pathname.substring(0, loc.pathname.indexOf('index.php'));
 
-/*
-jQuery(document).ready(function(){
-    var width = -(jQuery('#moduleMenuSlider').width()-43);
-    var moduleMenu = jQuery('#moduleMenuContainer');
-    moduleMenu.css({'marginRight': width});
-    jQuery('.expand').click(function(){
-        if (jQuery(moduleMenu).css('marginRight') != '0px'){
-            jQuery(moduleMenu).stop().animate({'marginRight': 0}, 500);
-            jQuery('.expand', moduleMenu).html('<a href="#">&raquo;</a>');
-        }else {
-            jQuery(moduleMenu).stop().animate({'marginRight': width}, 500, function(){jQuery('.expand', moduleMenu).html('<a href="#">&laquo; mais</a>');});
-            jQuery(moduleMenu).click(function(){mostrarMenu(moduleMenu);});
-        }
-    });
-    
-    jQuery('.navMenu > li').click(function(){
-        var subMenu = "";
-        jQuery("li", this).each(function(){ subMenu += "<div class='submenu'>"+jQuery(this).html()+"</div>"; });
-        subMenu = "<div class='titleTop'>"+ jQuery("a", this).eq(0).html() +"<a href='"+pathName+"index.php/default/auth/logout' class='option'><img src='"+pathName+"modules/default/img/exit_icon.png'/><span>Logout</span></a></div>"+subMenu;
-        jQuery("#content").stop().fadeTo(250, 0, function(){jQuery(this).html(subMenu).fadeTo(150, 1);});
-    });
-    
-    
-    
-    jQuery('.moduleMenu > li:nth-child(n+2)').click(function(){
-        var subMenu = "";
-        jQuery("li", this).each(function(){ subMenu += "<div class='submenu'>"+jQuery(this).html()+"</div>"; });
-        subMenu = "<div class='titleTop'>"+ jQuery("a", this).eq(0).html() +"<a href='"+pathName+"index.php/default/auth/logout' class='option'><img src='"+pathName+"modules/default/img/exit_icon.png'/><span>Logout</span></a></div>"+subMenu;
-        jQuery("#content").stop().fadeTo(250, 0, function(){jQuery(this).html(subMenu).fadeTo(150, 1);});
-    });
-});
-/*end of modulesMenu slider*/
 
 /*services footer*/
 
@@ -49,37 +15,35 @@ var servicesState = 0;
 
 function servicesSlider(){
    
-    var footer = jQuery('#footer');
-    var opened = jQuery(window).height() - jQuery(footer).height();
-    var closed = jQuery(window).height() - 45;
+    var right = jQuery('#statusbar');
+    var opened = jQuery(window).width() - jQuery(right).width() + 20;
+    var closed = jQuery(window).width() - 50;
+    console.log(opened);
+    console.log(closed);
     if (servicesState == 1){
         servicesRefresh();
-        footer.stop().animate({'top': opened}, 500);
+        right.stop().animate({'left': opened}, 400);
     }else{
         servicesRefresh();
-        footer.stop().animate({'top': closed}, 500);
+        right.stop().animate({'left': closed}, 400);
     }
 }
 
 function servicesRefresh(){
-    
-
     var get = jQuery.get(pathName+'index.php/systemstatus/', function(data) {
-        jQuery('#footer_content').html(data);
+        jQuery('#statusbar_content').html(data);
     });
-    //1 minuto
-   // get.complete(function(){setTimeout(servicesRefresh, 60000)});
 }
 
-function servicesReposition(){
-    
-    var top = jQuery(window).height() - 45;
-    var footer = jQuery('#footer');
-    footer.css({'top': top});
+function servicesReposition(){    
+    var left = jQuery(window).width() - 50;
+    var statusbar = jQuery('#statusbar');
+    statusbar.css({'left': left});
 }
 
 jQuery(document).ready(function(){
-    jQuery('#footer').click(function(){
+    jQuery('#statusbar').click(function(){
+
         if (servicesState == 0){
             servicesState = 1;
         }else{
@@ -87,10 +51,10 @@ jQuery(document).ready(function(){
         }
         servicesSlider();
     });
-    jQuery("#footer_content").mouseenter(function(){
-        jQuery(this).stop().fadeTo(500, 1);
+    jQuery("#statusbar_content").mouseenter(function(){
+        jQuery(this).stop().fadeTo(400, 1);
     }).mouseleave(function(){
-        jQuery(this).stop().fadeTo(500, 0.8);
+        jQuery(this).stop().fadeTo(400, 0.8);
     }).fadeTo(250, 0.8);
 });
 
@@ -101,8 +65,8 @@ jQuery(window).resize(servicesReposition);
 /*end of services footer*/
 
 
-var imgtrue = pathName+"modules/default/img/active_button.png";
-var imgfalse = pathName+"modules/default/img/off_button.png";
+// var imgtrue = pathName+"imagens/true.png";
+// var imgfalse = pathName+"imagens/false.png";
 
 jQuery(document).ready(function(e) {
     /* tolabel*/
@@ -286,7 +250,7 @@ jQuery(document).ready(function(){
 
 //put cursor on first input on each screen
 jQuery(document).ready(function(){
-    jQuery('input[type=text]').eq(0).not(".hasDatepicker").focus();
+    jQuery('input[type=text]').eq(0).not(".snep-datetimepicker").focus();
 
     jQuery('#content td .alterar').attr('title', "Alterar");
     jQuery('#content td .configurar').attr('title', "Configurar");

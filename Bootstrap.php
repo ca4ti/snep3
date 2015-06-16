@@ -52,6 +52,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return Zend_View
      */
     protected function _initViewHelpers() {
+        
         // Initialize view
         $this->bootstrap('layout');
         $layout = $this->getResource('layout');
@@ -59,15 +60,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $view->doctype('HTML5');
         $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+        
+
         $view->headTitle()->setSeparator(' - ');
         $view->headTitle('SNEP');
 
-        $view->headLink()->setStylesheet($view->baseUrl() . "/css/main.css");
-        $view->headLink()->setStylesheet($view->baseUrl() . "/css/services.css");
+        $view->headLink()->setStylesheet($view->baseUrl() . "/css/systemstatus.css");
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
-        $view->headScript()->appendFile($view->baseUrl() . "/includes/jquery-1.7.2.js", 'text/javascript');
-        $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/prototype.js", 'text/javascript');
-        $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/functions.js", 'text/javascript');
+        $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/jquery.min.js", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/geral.js", 'text/javascript');
 
         //List installed modules to be used on the modules menu
@@ -81,6 +81,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 "description" => $module->getDescription()
             );
         }
+
         $view->indexData = $systemInfo;
         // Return it, so that it can be stored by the bootstrap
         return $view;

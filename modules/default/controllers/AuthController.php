@@ -40,14 +40,7 @@ class AuthController extends Zend_Controller_Action {
         $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
         $config = Zend_Registry::get('config');
-        if (trim($config->ambiente->db->host) == "") {
-            
-            if (Zend_Auth::getInstance()->hasIdentity()) {
-                Zend_Auth::getInstance()->clearIdentity();
-            }
-            $this->_redirect("installer/");
-        }
-
+        
         if (isset($_GET["recuperation"])) {
             $this->view->message = $this->view->translate("Password successfully recovered");
             $this->view->msgclass = 'sucess';
@@ -60,6 +53,7 @@ class AuthController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
+
             // Filter information of user
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
@@ -101,7 +95,21 @@ class AuthController extends Zend_Controller_Action {
                         $_SESSION['active_user'] = $extension->name;
                         $_SESSION['vinculos_user'] = "";
 
-                        $this->_redirect('/');
+                        $registered = $db->query("SELECT uuid,registered_itc,noregister FROM itc_register")->fetch();
+
+                        $_SESSION['registered'] = $registered['registered_itc'];
+                        $_SESSION['uuid'] = $registered['uuid'];
+                        $_SESSION['noregister'] = $registered['noregister'];
+                        
+                        if(!isset($_SESSION['uuid'])){
+                            
+                            $v4uuid = self::v4();
+                            $_SESSION['uuid'] = $v4uuid;
+                            Snep_Auth_Manager::adduuid($v4uuid); 
+
+                        }
+
+                        $this->_redirect('/');                        
                         break;
                     default:
                         $this->view->message = $this->view->translate('Authentication failure');
@@ -110,6 +118,37 @@ class AuthController extends Zend_Controller_Action {
                 }
             }
         }
+
+        $layout = Zend_Layout::getMvcInstance();        
+        $layout->setLayout('login');
+        
+    }
+
+    /**
+     * v4 - Create hash uuidV4
+     */
+    public static function v4() {
+
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+
+          // 32 bits for "time_low"
+          mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+
+          // 16 bits for "time_mid"
+          mt_rand(0, 0xffff),
+
+          // 16 bits for "time_hi_and_version",
+          // four most significant bits holds version number 4
+          mt_rand(0, 0x0fff) | 0x4000,
+
+          // 16 bits, 8 bits for "clk_seq_hi_res",
+          // 8 bits for "clk_seq_low",
+          // two most significant bits holds zero and one for variant DCE1.1
+          mt_rand(0, 0x3fff) | 0x8000,
+
+          // 48 bits for "node"
+          mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 
     /**
@@ -122,19 +161,22 @@ class AuthController extends Zend_Controller_Action {
                     $this->view->translate("Password Recovery")));
         $this->view->hideMenu = true;
 
+        $layout = Zend_Layout::getMvcInstance();        
+        $layout->setLayout('login');
+
         if (isset($_GET['param'])) {
             $this->view->msgclass = 'sucess';
-            $this->view->message = $this->view->translate("We've sent an access code to the email: " . base64_decode($_GET['param']));
+            $this->view->message = $this->view->translate("We've sent an access code to the email:" ). base64_decode($_GET['param']);
         }
 
         if ($this->_request->isPost()) {
 
-            $f = new Zend_Filter_StripTags();
             $data = array();
-            $data['user'] = $f->filter($this->_request->getPost('user'));
-            $data['password'] = $f->filter($this->_request->getPost('password'));
-            $data['newpassword'] = $f->filter($this->_request->getPost('newpassword'));
-            $data['code'] = $f->filter($this->_request->getPost('code'));
+            $data['user'] = $_POST['username'];
+            $data['password'] = $_POST['password'];
+            $data['newpassword'] = $_POST['newpassword'];
+            $data['code'] = $_POST['code'];
+
 
             if (Snep_Auth_Manager::getUser($data['user']) == false) {
                 $this->view->msgclass = 'failure';
@@ -178,10 +220,12 @@ class AuthController extends Zend_Controller_Action {
         $this->view->hideMenu = true;
         $this->view->msgclass = 'failure';
 
+        $layout = Zend_Layout::getMvcInstance();        
+        $layout->setLayout('login');
+
         if ($this->_request->isPost()) {
 
-            $f = new Zend_Filter_StripTags();
-            $username = $f->filter($this->_request->getPost('user'));
+            $username = $_POST["username"];
 
             $user = Snep_Auth_Manager::getUser($username);
             $date = date("Y-m-d H:i:s");
@@ -198,7 +242,13 @@ class AuthController extends Zend_Controller_Action {
                 $expiration = date('d/m/Y G:i:s', strtotime($user['expiration']));
                 $config = Zend_Registry::get('config');
                 $client = $config->ambiente->emp_nome;
-                $msg = $this->view->translate("You asked for resetting your password the user <b>$username</b> on PABX <b>$client</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>" . $code . "</b></font><br>Your code will expire on: " . $expiration . "<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
+
+                $msg = $this->view->translate("You asked for resetting your password the user <b>").$username;
+                $msg .= $this->view->translate("</b> on PABX <b>").$client;
+                $msg .= $this->view->translate("</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>") . $code;
+                $msg .= $this->view->translate("</b></font><br>Your code will expire on: ") . $expiration;
+                $msg .= $this->view->translate("<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
+                
                 $subject = $this->view->translate("Redefinition password - SNEP");
 
                 Snep_Auth_Manager::sendEmail($user, $msg, $subject);

@@ -26,8 +26,8 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2011 OpenS Tecnologia
- * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
+ * @copyright Copyright (c) 2011 Opens Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  * 
  */
 class Snep_Csv {
@@ -42,7 +42,7 @@ class Snep_Csv {
      * @param <bool> $header
      * @return string 
      */
-    public function generate($data, $header = true) {
+    public function generate($data, $header) {
 
         $indexes = null;
         $values = null;
@@ -67,7 +67,7 @@ class Snep_Csv {
                 $headers[$i] = $i;
             }
         }
-
+        $output = "" ;
         if ($header) {
             $output = implode(",", $headers) . "\n";
         }

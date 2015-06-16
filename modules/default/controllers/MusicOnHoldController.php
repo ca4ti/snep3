@@ -28,34 +28,46 @@
 class MusicOnHoldController extends Zend_Controller_Action {
 
     /**
-     * indexAction - List all Music on Hold sounds
+     * Initial settings of the class
      */
-    public function indexAction() {
+    public function init() {
 
-        $objInspector = new Snep_Inspector('Sounds');
-        $this->view->error = array_pop($objInspector->getInspects());
-
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Configure"),
-                    $this->view->translate("Music on Hold Sessions")));
-
-        $this->view->url = $this->getFrontController()->getBaseUrl() . "/" .
-                $this->getRequest()->getControllerName();
-
-        $this->view->modes = array('files' => $this->view->translate('Directory'),
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+        $this->modes = array(
+            'files' => $this->view->translate('Directory'),
             'mp3' => $this->view->translate('MP3'),
             'quietmp3' => $this->view->translate('Normal'),
             'mp3nb' => $this->view->translate('Without buffer'),
             'quietmp3nb' => $this->view->translate('Without buffer quiet'),
-            'custom' => $this->view->translate('Custom application'));
+            'custom' => $this->view->translate('Custom application')
+            );
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+        $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
+    }
+
+    /**
+     * indexAction - List all Music on Hold sounds
+     */
+    public function indexAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Music on Hold Sessions")));
 
         Snep_SoundFiles_Manager::syncFiles();
 
-        $this->view->sections = Snep_SoundFiles_Manager::getClasses();
+        $sections = Snep_SoundFiles_Manager::getClasses();
 
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add Session"),
-                "css" => "include"));
+        if(empty($sections)){
+            $this->view->error_message = $this->view->translate("You do not have registered session. <br><br> Click 'Add Session' to make the first registration
+");
+        }
+
+        $this->view->sections = $sections;
+
     }
 
     /**
@@ -67,41 +79,47 @@ class MusicOnHoldController extends Zend_Controller_Action {
                     $this->view->translate("Music on Hold Sessions"),
                     $this->view->translate("Add")));
 
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/music_on_hold.xml"));
-        $form->getElement('base')->setAttrib('readonly', true);
+        $viewModes = "";
+        foreach($this->modes as $key => $value){
+            $viewModes .= "<option value='".$key . "'>".$value." </option>\n";
+
+        }
+        //Define the action and load form
+        $this->view->modes = $viewModes ;
+        $this->view->action = "add" ;
+        $this->renderScript( 'music-on-hold/addedit.phtml' );
 
         if ($this->_request->getPost()) {
 
-            $class = $_POST;
+            $dados = $this->_request->getParams();
             $classes = Snep_SoundFiles_Manager::getClasses();
-            $form_isValid = $form->isValid($_POST);
+            $form_isValid = true;
 
-            if ($class['base'] != '/var/lib/asterisk/moh/') {
-                $form->getElement('name')->addError(
-                        $this->view->translate('Inválid Path'));
-
+            if ($dados['base'] != '/var/lib/asterisk/moh/') {
+                $this->view->error_message = $this->view->translate('Invalid Path');
+                $this->renderScript('error/sneperror.phtml');
                 $form_isValid = false;
             }
 
-            if (file_exists($class['directory'])) {
-                $form->getElement('directory')->addError(
-                        $this->view->translate('Directory already exists'));
+            if (file_exists($dados['directory'])) {
+                $this->view->error_message = $this->view->translate('Directory already exists');
+                $this->renderScript('error/sneperror.phtml');
                 $form_isValid = false;
             }
 
             foreach ($classes as $name => $item) {
 
-                if ($item['name'] == $class['name']) {
-                    $form->getElement('name')->addError(
-                            $this->view->translate('Music on hold class already exists'));
-
+                if ($item['name'] == $dados['name']) {
+                    $this->view->error_message = $this->view->translate('Music on hold class already exists');
+                    $this->renderScript('error/sneperror.phtml');
                     $form_isValid = false;
                 }
-                $fullPath = $class['base'] . $class['directory'];
-                if ($item['directory'] == $fullPath) {
-                    $form->getElement('directory')->addError(
-                            $this->view->translate('Directory already exists'));
 
+                $fullPath = $dados['base'] . $dados['directory'];
+                
+                if ($item['directory'] == $fullPath) {
+                    $this->view->error_message = $this->view->translate('Directory already exists');
+                    $this->renderScript('error/sneperror.phtml');
                     $form_isValid = false;
                 }
             }
@@ -112,7 +130,7 @@ class MusicOnHoldController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-        $this->view->form = $form;
+        
     }
 
     /**
@@ -127,50 +145,41 @@ class MusicOnHoldController extends Zend_Controller_Action {
         $file = $this->_request->getParam("file");
         $data = Snep_SoundFiles_Manager::getClasse($file);
 
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/music_on_hold.xml"));
-        $form->getElement('name')->setValue($data['name']);
-        $form->getElement('mode')->setValue($data['mode']);
+        $viewModes = "";
+        foreach($this->modes as $key => $value){
+            $viewModes .= ($key == $data['mode']) ? "<option value='".$key . "' selected >".$value." </option>\n": "<option value='".$key . "'>".$value." </option>\n";
+        }
+
+        $this->view->modes = $viewModes;
 
         $directory = explode("/", $data['directory']);
         $directoryName = array_pop($directory);
 
-        $form->getElement('base')->setAttrib('readonly', true)->setValue(implode("/", $directory) . '/');
-        $form->getElement('directory')->setValue($directoryName)->setRequired(true);
+        $this->view->directoryName = $directoryName;
+        $originalName = $data['name'];
+        
+        $this->view->file = $data;
 
-        $originalName = new Zend_Form_Element_Hidden('originalName');
-        $originalName->setValue($data['name']);
-
-        $form->addElement($originalName);
-
-        /* $form->setElementDecorators(array(
-          'ViewHelper',
-          'Description',
-          'Errors',
-          array(array('elementTd' => 'HtmlTag'), array('tag' => 'td')),
-          array('Label', array('tag' => 'th')),
-          array(array('elementTr' => 'HtmlTag'), array('tag' => 'tr', 'class'=>"snep_form_element"))
-          ));
-         */
+        //Define the action and load form
+        $this->view->disabled = 'disabled';
+        $this->view->action = "edit" ;
+        $this->renderScript( 'music-on-hold/addedit.phtml' );
 
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
-            if ($form_isValid) {
+            $class = array(
+                'name' => $_POST['name'],
+                'mode' => $_POST['mode'],
+                'directory' => $_POST['base'] . $_POST['directory']);
 
-                $class = array('name' => $_POST['name'],
-                    'mode' => $_POST['mode'],
-                    'directory' => $_POST['base'] . $_POST['directory']);
-
-                $originalName = $_POST['originalName'];
-
-                Snep_SoundFiles_Manager::editClass($originalName, $class);
-                $this->_redirect($this->getRequest()->getControllerName());
-            }
+            
+            Snep_SoundFiles_Manager::editClass($originalName, $class);
+            $this->_redirect($this->getRequest()->getControllerName());
+            
         }
-        $this->view->file = $data;
-        $this->view->form = $form;
+
     }
 
     /**
@@ -186,30 +195,19 @@ class MusicOnHoldController extends Zend_Controller_Action {
 
         $this->view->class = Snep_SoundFiles_Manager::getClasse($file);
         $this->view->message = $this->view->translate("You are removing a music on hold class, it has some audio files attached to it.");
-
-        $form = new Snep_Form();
-        $name = new Zend_Form_Element_Hidden('name');
-        $name->setValue($file);
-        $form->addElement($name);
-
-        $check = new Zend_Form_Element_Checkbox('remove');
-        $check->setLabel($this->view->translate("Delete Sound Files?"))->setDescription($this->view->translate('Yes'));
-        $form->addElement($check);
-
+        $this->view->confirmation = $this->view->translate("Delete Sound Files?");
+        $this->view->id = $file;
+        
         if ($this->_request->getPost()) {
-
-            $form_isValid = $form->isValid($_POST);
-            $dados = $this->_request->getParams();
-
-            if ($form_isValid) {
-                if ($_POST['remove']) {
-                    $class = Snep_SoundFiles_Manager::getClasse($_POST['name']);
-                    Snep_SoundFiles_Manager::removeClass($class);
-                }
-                $this->_redirect($this->getRequest()->getControllerName());
+            
+            if ($_POST['delete']) {
+                $class = Snep_SoundFiles_Manager::getClasse($_POST['customerid']);
+                Snep_SoundFiles_Manager::removeClass($class);
             }
+            $this->_redirect($this->getRequest()->getControllerName());
+            
         }
-        $this->view->form = $form;
+        
     }
 
     /**
@@ -228,7 +226,15 @@ class MusicOnHoldController extends Zend_Controller_Action {
                     $file));
 
         $class = Snep_SoundFiles_Manager::getClasse($file);
-        $this->view->files = Snep_SoundFiles_Manager::getClassFiles($class);
+        $files = Snep_SoundFiles_Manager::getClassFiles($class);
+        
+        if(empty($files)){
+            $this->view->error_message = $this->view->translate("You do not have registered file. <br><br> Click 'Add File' to make the first registration
+");
+            
+        }
+
+        $this->view->files = $files;
 
         $arrayInf = array('data' => null,
             'descricao' => $this->view->translate('Not Found'),
@@ -247,13 +253,7 @@ class MusicOnHoldController extends Zend_Controller_Action {
 
         ( isset($errors) ? $this->view->error = array('error' => true, 'message' => $errors) : false);
 
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/",
-                "display" => $this->view->translate("Back"),
-                "css" => "back"),
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/addfile/class/{$class['name']}",
-                "display" => $this->view->translate("Add File"),
-                "css" => "include"),
-        );
+        
     }
 
     /**
@@ -266,28 +266,14 @@ class MusicOnHoldController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Music on Hold Sessions"),
-                    $this->view->translate("Add File"),
-                    $className));
+                    $this->view->translate("Add File")));
 
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/sound_files.xml"));
-
-        $file = new Zend_Form_Element_File('file');
-        $file->setLabel($this->view->translate('Sound File'))
-                ->addValidator(new Zend_Validate_File_Extension(array('wav', 'gsm')))
-                ->removeDecorator('DtDdWrapper')
-                ->setIgnore(true);
-
-        $form->addElement($file);
-
-        $section = new Zend_Form_Element_Hidden('section');
-        $section->setValue($class['name']);
-        $form->addElement($section);
-        $form->removeElement('type');
-
+        $this->view->section = $class['name'];
+        
         if ($this->_request->getPost()) {
-
+           
             $class = Snep_SoundFiles_Manager::getClasse($_POST['section']);
-            $form_isValid = $form->isValid($_POST);
+            $form_isValid = true;
             $dados = $this->_request->getParams();
 
             $invalid = array('â', 'ã', 'á', 'à', 'ẽ', 'é', 'è', 'ê', 'í', 'ì', 'ó', 'õ', 'ò', 'ú', 'ù', 'ç', " ", '@', '!');
@@ -297,7 +283,8 @@ class MusicOnHoldController extends Zend_Controller_Action {
             $files = Snep_SoundFiles_Manager::get($originalName);
 
             if ($files) {
-                $file->addError($this->view->translate("File already exists"));
+                $this->view->error_message = $this->view->translate("File already exists");
+                $this->renderScript('error/sneperror.phtml');
                 $form_isValid = false;
             }
 
@@ -330,7 +317,7 @@ class MusicOnHoldController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName() . "/file/class/$className/");
             }
         }
-        $this->view->form = $form;
+        
     }
 
     /**
@@ -356,34 +343,12 @@ class MusicOnHoldController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Music on Hold Sessions"),
-                    $this->view->translate("Edit File"),
-                    $className));
+                    $this->view->translate("Edit File")));
 
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/sound_files.xml"));
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . "/editfile/file/$fileName/class/$class");
-
-        $file = new Zend_Form_Element_File('file');
-        $file->setLabel($this->view->translate('Sound File'))
-                ->addValidator(new Zend_Validate_File_Extension(array('wav', 'gsm')))
-                ->removeDecorator('DtDdWrapper')
-                ->setIgnore(true);
-
-        $form->addElement($file);
-        $form->getElement('description')->setValue($_files['descricao']);
-
-        $section = new Zend_Form_Element_Hidden('section');
-        $section->setValue($_files['secao']);
-        $form->addElement($section);
-
-        $originalName = new Zend_Form_Element_Hidden('originalName');
-        $originalName->setValue($fileName);
-        $form->addElement($originalName);
-
-        $originalPath = new Zend_Form_Element_Hidden('originalPath');
-        $originalPath->setValue($_files['full']);
-        $form->addElement($originalPath);
-
-        $form->removeElement('type');
+        $this->view->filename = $fileName;
+        $this->view->file = $_files;
+        $this->view->section = $_files['secao'];
+        $this->view->originalPath = $_files['full'];
 
         if ($this->_request->getPost()) {
 
@@ -399,9 +364,11 @@ class MusicOnHoldController extends Zend_Controller_Action {
                 $oldName = $_POST['originalName'];
                 $originalName = str_replace($invalid, $valid, $_FILES['file']['name']);
                 $files = Snep_SoundFiles_Manager::get($originalName);
+                $form_isValid = true;
 
                 if ($files) {
-                    $file->addError($this->view->translate("The file already exists"));
+                    $this->view->error_message = $this->view->translate("The file already exists");
+                    $this->renderScript('error/sneperror.phtml');
                     $form_isValid = false;
                 }
 
@@ -449,13 +416,16 @@ class MusicOnHoldController extends Zend_Controller_Action {
             $this->_redirect($this->getRequest()->getControllerName() . "/file/class/{$className['name']}/");
         }
 
-        $this->view->form = $form;
     }
 
     /**
      * removefileAction - Remove file
      */
     public function removefileAction() {
+        
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Music on Hold Sessions"),
+                    $this->view->translate("Delete File")));
 
         $file = $this->_request->getParam('file');
         $class = $this->_request->getParam('class');
@@ -463,18 +433,33 @@ class MusicOnHoldController extends Zend_Controller_Action {
         $className = Snep_SoundFiles_Manager::getClasse($class);
         $files = Snep_SoundFiles_Manager::getClassFiles($className);
 
-        foreach ($files as $name => $path) {
-            if ($file == $name) {
+        $this->view->id = $class;
+        $this->view->remove_title = $this->view->translate('Delete music on hold files.'); 
+        $this->view->remove_message = $this->view->translate('The music on hold files will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'music-on-hold'; 
+        $this->view->remove_action = 'removefile'; 
+        $this->renderScript('remove/remove.phtml');
+        $_SESSION['musiconhold'] = $files;
 
-                exec("rm {$path['full']} ");
+        if ($this->_request->getPost()) {
 
-                if (!file_exists($path['full'])) {
-                    Snep_SoundFiles_Manager::remove($name, $path['secao']);
+            $files = $_SESSION['musiconhold'];
+            
+            foreach ($files as $name => $path) {
+                if ($file == $name) {
+
+                    exec("rm {$path['full']} ");
+
+                    if (!file_exists($path['full'])) {
+                        Snep_SoundFiles_Manager::remove($name, $path['secao']);
+                    }
                 }
             }
+            
+            unset($_SESSION['musiconhold']);
+            $class = $_POST['id'];
+            $this->_redirect($this->getRequest()->getControllerName() . "/file/class/$class");
         }
-
-        $this->_redirect($this->getRequest()->getControllerName() . "/file/class/$class");
     }
 
 }

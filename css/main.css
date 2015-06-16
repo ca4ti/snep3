@@ -26,7 +26,6 @@ pre {
     margin: 0 auto -34px;
 }
 
-/*
 #footer, .push {
     height: 32px;
 }
@@ -34,13 +33,18 @@ pre {
 #footer {
     padding: 0px;
     clear: both;
+
     margin-top: 0px;
     border-top: 2px solid #F0C600;
+
     background-image: url('../imagens/footer_bg.png');
     color: #696969;
+
     line-height: 2em;
+
     font-weight: bold;
     font-size: 10px;
+
     height: 32px;
 }
 
@@ -55,17 +59,6 @@ pre {
 
 #footer_version {
     float:right;
-} */
-
-/*RODAPÉ (SERVIÇOS)*/
-
-div#footer{
-    width: 960px;
-    margin-left: 50%;
-    position: fixed;
-    left: -480px;
-    display: table;
-    top: -1000px;
 }
 
 body {
@@ -419,7 +412,7 @@ select
 }
 
 .navmenu ul li {
-    width: 200px;
+    width: 165px;
     float: left; /*For IE 7 lack of compliance*/
     display: block !important;
     display: inline; /*For IE*/

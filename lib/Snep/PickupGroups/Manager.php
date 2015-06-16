@@ -192,6 +192,7 @@ class Snep_PickupGroups_Manager {
             $db->rollBack();
             return $e;
         }
+        
     }
 
     /**

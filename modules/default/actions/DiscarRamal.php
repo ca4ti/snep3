@@ -184,6 +184,7 @@ class DiscarRamal extends PBX_Rule_Action {
         $TDial_flags = $i18n->translate("Dial Flags");
         $TDiffer = $i18n->translate("Differ ring");
         $TOverflow = $i18n->translate("Do not overflow (busy and no answer)");
+        $descramal = $i18n->translate("Leave blank to use the number from the destination.");
 
      if(class_exists("Agents_Manager")) {
             $agent_config = <<<AGENT_CONFIG
@@ -203,7 +204,7 @@ AGENT_CONFIG;
 <params>
     <ramal>
         <id>ramal</id>
-        <description>Deixe em branco para usar o numero vindo do destino.</description>
+        <description>$descramal</description>
         $ramal
     </ramal>
     <int>

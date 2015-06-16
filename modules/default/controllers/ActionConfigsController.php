@@ -32,7 +32,6 @@ class ActionConfigsController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Default Configs")
         ));
 
@@ -59,6 +58,7 @@ class ActionConfigsController extends Zend_Controller_Action {
     public function editAction() {
 
         $idAction = $this->getRequest()->getParam('id');
+        $this->view->idAction = $idAction;
 
         if (!class_exists($idAction)) {
             throw new PBX_Exception_BadArg("Invalid Argument");
@@ -88,15 +88,24 @@ class ActionConfigsController extends Zend_Controller_Action {
                         }
                     }
                     $this->view->success = true;
+                    $this->_redirect($this->getRequest()->getControllerName());
                 }
 
-                $action->setDefaultConfig($registry->getAllValues());
+                $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Default Configs"),
+                    $this->view->translate("Edit"),
+                    $this->view->translate($action->getName())));
+
+                
+                
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
-                $this->view->breadcrumb = $this->view->translate("Business Rules » Standard Settings » " . $action->getName());
                 $actionForm = $actionConfig->getForm();
-                $actionForm->getElement('cancel')->setAttrib("onclick", "location.href='{$this->getFrontController()->getBaseUrl()}/action-configs/'");
-                $actionForm->getElement('cancel')->setLabel('Voltar');
-                $this->view->form = $actionForm;
+                $this->view->dialtimeout = $actionForm->getValue('dial_timeout');
+                
+                $this->view->values = $registry->getAllValues();
+                
+
+
             
             } else {
                 throw new PBX_Exception_BadArg("No Configurable Action");

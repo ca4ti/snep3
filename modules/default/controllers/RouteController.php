@@ -78,19 +78,16 @@ class RouteController extends Zend_Controller_Action {
      * indexAction - List all Routes of the system
      */
     public function indexAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Routes")));
+
+        $config = Zend_Registry::get('config');
+        $lineNumber = $config->ambiente->linelimit;
 
         $db = Zend_Registry::get('db');
         $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio")
         );
-
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("`$field` like '%$query%'");
-        }
 
         $select->order("prio DESC");
         $select->order("id ASC");
@@ -101,44 +98,30 @@ class RouteController extends Zend_Controller_Action {
             $routes[$key]['destino'] = $this->cleanSrcDst($route['destino']);
         }
 
+        if(empty($routes)){
+            $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration
+");
+            
+        }
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
         $this->view->routes = $routes;
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $options = array(
-            "id" => $this->view->translate("Code"),
-            "origem" => $this->view->translate("Source"),
-            "destino" => $this->view->translate("Destiny"),
-            "desc" => $this->view->translate("Description"));
-
-        // Formulário de filtro.
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/route');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($options);
-        $filter->setFieldValue($this->_request->getParam('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(
-            array(
-                "url" => "{$this->view->baseUrl()}/index.php/simulator/",
-                "display" => $this->view->translate("Simulator"),
-                "css" => "debugger"
-            ),
-            array(
-                "url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add Rule"),
-                "css" => "include"
-            )
-        );
+        $this->view->lineNumber = $lineNumber;
+        $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
+        
+        
     }
 
     /**
      * getForm - Generate the form for routes
-     * @return Zend_Form
+     * @return <object> Zend_Form
      */
     protected function getForm() {
-
         if ($this->form === Null) {
             $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/route.xml");
             $form = new Snep_Form($form_xml);
@@ -153,18 +136,18 @@ class RouteController extends Zend_Controller_Action {
             $this->view->actions = $installed_actions;
 
             $src = new Snep_Form_Element_Html("route/elements/src.phtml", "src", false);
-            $src->setLabel($this->view->translate("Source"));
+            //$src->setLabel($this->view->translate("Source"));
             $src->setOrder(1);
             $form->addElement($src);
 
             $dst = new Snep_Form_Element_Html("route/elements/dst.phtml", "dst", false);
-            $dst->setLabel($this->view->translate("Destiny"));
+            //$dst->setLabel($this->view->translate("Destiny"));
             $dst->setOrder(2);
             $form->addElement($dst);
 
             $time = new Snep_Form_Element_Html("route/elements/time.phtml", "time", false);
             $time->setOrder(4);
-            $time->setLabel($this->view->translate("Valid times"));
+            //$time->setLabel($this->view->translate("Valid times"));
             $form->addElement($time);
 
             $form->addElement(new Snep_Form_Element_Html("route/elements/actions.phtml", "actions"));
@@ -208,15 +191,75 @@ class RouteController extends Zend_Controller_Action {
     }
 
     /**
+     * addAction - Action for adding a route
+     */
+    public function addAction() {
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Routes"),
+                    $this->view->translate("Add")
+        ));
+
+        $form = $this->getForm();
+        $form->getElement('week')->setValue(true);
+        $this->view->form = $form;
+
+
+
+        if ($this->getRequest()->isPost()) {
+            
+            if ($this->isValidPost()) {
+
+                $rule = $this->parseRuleFromPost();
+
+                PBX_Rules::register($rule);
+                
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    Snep_LogUser::salvalog("Adicionou Regra", $rule->getId(), 1);
+                    $add = Snep_Route::getRegra($rule->getId());
+                    Snep_Route::insertLogRegra("Adicionou Regra", $add);
+                }
+
+                $this->_redirect("route");
+                
+            } else {
+                $actions = "";
+                foreach ($this->forms as $id => $form) {
+                    $actions .= "addAction(" . json_encode(array(
+                                "id" => $id,
+                                "status" => $form['status'],
+                                "type" => $form['type'],
+                                "form" => $form['formData']
+                            )) . ")\n";
+                }
+                $actions .= "setActiveAction($('actions_list').firstChild)\n";
+
+                $this->view->rule_actions = $actions;
+
+                unset($_POST['actions_order']);
+                $rule = $this->parseRuleFromPost($_POST);
+                $this->populateFromRule($rule);
+            }
+        } else {
+            $this->view->dt_agirules = array(
+                "dst" => "dstObj.addItem();\n",
+                "src" => "origObj.addItem();\n",
+                "time" => "timeObj.addItem();\n",
+            );
+        }
+        
+        $this->renderScript('route/add_edit.phtml');
+    }
+
+    /**
      * editAction - Edit Route
      */
     public function editAction() {
 
         $id = $this->getRequest()->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Routes"),
-                    $this->view->translate("Edit Route %s", $id)));
+                    $this->view->translate("Edit")));
 
         $form = $this->getForm();
         $this->view->form = $form;
@@ -275,9 +318,8 @@ class RouteController extends Zend_Controller_Action {
 
         $id = $this->getRequest()->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Routes"),
-                    $this->view->translate("Duplicate Route %s", $id)));
+                    $this->view->translate("Duplicate")));
 
         try {
             $rule = PBX_Rules::get(mysql_escape_string($id));
@@ -322,61 +364,6 @@ class RouteController extends Zend_Controller_Action {
         if (!isset($actions)) {
             $actions = "getRuleActions({$rule->getId()});\n";
             $this->view->rule_actions = $actions;
-        }
-
-        $this->renderScript('route/add_edit.phtml');
-    }
-
-    /**
-     * AddAction - Action for adding a route
-     */
-    public function addAction() {
-
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
-                    $this->view->translate("Routes"),
-                    $this->view->translate("Add Route")));
-
-        $form = $this->getForm();
-        $form->getElement('week')->setValue(true);
-        $this->view->form = $form;
-
-        if ($this->getRequest()->isPost()) {
-            if ($this->isValidPost()) {
-                $rule = $this->parseRuleFromPost();
-                PBX_Rules::register($rule);
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvalog("Adicionou Regra", $rule->getId(), 1);
-                    $add = Snep_Route::getRegra($rule->getId());
-                    Snep_Route::insertLogRegra("Adicionou Regra", $add);
-                }
-
-                $this->_redirect("route");
-            } else {
-                $actions = "";
-                foreach ($this->forms as $id => $form) {
-                    $actions .= "addAction(" . json_encode(array(
-                                "id" => $id,
-                                "status" => $form['status'],
-                                "type" => $form['type'],
-                                "form" => $form['formData']
-                            )) . ")\n";
-                }
-                $actions .= "setActiveAction($('actions_list').firstChild)\n";
-                $this->view->rule_actions = $actions;
-
-                unset($_POST['actions_order']);
-                $rule = $this->parseRuleFromPost($_POST);
-                $this->populateFromRule($rule);
-            }
-        } else {
-            $this->view->dt_agirules = array(
-                "dst" => "dstObj.addItem();\n",
-                "src" => "origObj.addItem();\n",
-                "time" => "timeObj.addItem();\n",
-            );
         }
 
         $this->renderScript('route/add_edit.phtml');
@@ -497,6 +484,7 @@ class RouteController extends Zend_Controller_Action {
     protected function parseRuleFromPost($post = null) {
 
         $post = $post === null ? $_POST : $post;
+        
         $rule = new PBX_Rule();
 
         // Adicionando dias da semana
@@ -583,30 +571,37 @@ class RouteController extends Zend_Controller_Action {
     }
 
     /**
-     * deleteAction - Remove routes
+     * removeAction - Remove routes
      * @throws Zend_Controller_Action_Exception
      */
-    public function deleteAction() {
+    public function removeAction() {
 
-        $id = mysql_escape_string($this->getRequest()->getParam('id'));
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Routes"),
+                    $this->view->translate("Delete")));
 
-        try {
-            $rule = PBX_Rules::get($id);
-        } catch (PBX_Exception_NotFound $ex) {
-            throw new Zend_Controller_Action_Exception('Page not found.', 404);
+        $id = $this->_request->getParam('id');
+
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete Routes.'); 
+        $this->view->remove_message = $this->view->translate('The route will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'route'; 
+        $this->renderScript('remove/remove.phtml');
+
+        if($this->_request->getPost()) {
+          
+            $del = Snep_Route::getRegra($_POST['id']);
+            
+            PBX_Rules::delete($_POST['id']);
+
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+                Snep_LogUser::salvalog("Excluiu Regra", $_POST['id'], 1);
+                Snep_Route::insertLogRegra("Excluiu Regra", $del);
+            }
+
+            $this->_redirect("route");
         }
-
-        $del = Snep_Route::getRegra($rule->getId());
-
-        PBX_Rules::delete($id);
-
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-            Snep_LogUser::salvalog("Excluiu Regra", $rule->getId(), 1);
-            Snep_Route::insertLogRegra("Excluiu Regra", $del);
-        }
-
-        $this->_redirect("route");
     }
 
     /**

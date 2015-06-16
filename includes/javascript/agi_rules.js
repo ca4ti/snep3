@@ -42,12 +42,13 @@ function Field(id) {
         this.type = type;
         this.value = "";
         this.render();
-    }
+    };
 
     this.getHtml = function(objReference) {
         this.lastReference = objReference;
-        var html = '<span id="' + this.id + '">';
-        html += '<select class="campos" onchange="' + objReference + '.setType(this.value);">';
+
+        var html = '<span id="' + this.id + '" >';
+        html += '<select class="form-control route-sm-3" onchange="' + objReference + '.setType(this.value);">';
         var showfield = true;
         var i;
         for(i=0;i<this.typeList.length;i++) {
@@ -63,7 +64,7 @@ function Field(id) {
         html += "</select>";
 
         if(this.type === "T") { // Campo tronco
-            html += ' <select class="campos" onchange="' + objReference + '.value = this.value;">';
+            html += ' <select class="form-control route-sm-3" onchange="' + objReference + '.value = this.value;">';
             var selected = false;
             for(i=0; i < trunk_list.length; i++) {
                 if(trunk_list[i][0] === this.value) {
@@ -81,7 +82,7 @@ function Field(id) {
             html += "</select>";
         } // fim campo tronco
         else if(this.type === "G") { // Campo grupo
-            html += ' <select class="campos" onchange="' + objReference + '.value = this.value;">';
+            html += ' <select class="form-control route-sm-3" onchange="' + objReference + '.value = this.value;">';
             var selected = false;
             for(i=0; i < group_list.length; i++) {
                 if(group_list[i][0] === this.value) {
@@ -99,7 +100,7 @@ function Field(id) {
             html += "</select>";
         } // fim campo grupo
         else if(this.type === "CG") { // Campo grupo de contatos
-            html += ' <select class="campos" onchange="' + objReference + '.value = this.value;">';
+            html += ' <select class="form-control route-sm-3" onchange="' + objReference + '.value = this.value;">';
             var selected = false;
             for(i=0; i < contacts_group_list.length; i++) {
                 if(contacts_group_list[i][0] === this.value) {
@@ -117,7 +118,7 @@ function Field(id) {
             html += "</select>";
         } // fim campo grupo de contatos
         else if(this.type === "AL") {
-            html += ' <select class="campos" onchange="' + objReference + '.value = this.value;">';
+            html += ' <select class="form-control route-sm-3" onchange="' + objReference + '.value = this.value;">';
             var selected = false;
             for(i=0; i < alias_list.length; i++) {
                 if(alias_list[i][0] === this.value) {
@@ -135,7 +136,7 @@ function Field(id) {
             html += "</select>";
         }
         else if(showfield) {
-            html += ' <input class="campos required" onchange="' + objReference + '.value = this.value;" value="' + this.value + '" type="text" />';
+            html += ' <input class="form-control route-sm-3 required" onchange="' + objReference + '.value = this.value;" value="' + this.value + '" type="text" />';
         }
 
         html += "</span>";
@@ -175,8 +176,8 @@ copyPrototype(DstField, Field);
 function TimeField(id) {
     this.id        = id;
     this.value     = "";
-    this.startTime = '00:00';
-    this.endTime   = '23:59';
+    this.startTime = '00:00:00';
+    this.endTime   = '23:59:59';
     this.lastReference = null;
 
     this.render = function() {
@@ -186,8 +187,8 @@ function TimeField(id) {
     this.getHtml = function(objReference) {
         this.lastReference = objReference;
         var html = '<span id="' + this.id + '">';
-        html += '<input type="text" onchange="' + objReference + '.startTime = this.value;" value="'+this.startTime+'" class="campos required" maxlength="5" size="5" onblur="valid_valida(this)"  /> - ';
-        html += '<input type="text" onchange="' + objReference + '.endTime = this.value;" value="'+this.endTime+'" class=" campos required" maxlength="5" size="5" onblur="valid_valida(this)"  />';
+        html += '<input type="text" onchange="' + objReference + '.startTime = this.value;" value="'+this.startTime+'" class="campos required" maxlength="8" size="8" onblur="valid_valida(this)"  /> - ';
+        html += '<input type="text" onchange="' + objReference + '.endTime = this.value;" value="'+this.endTime+'" class=" campos required" maxlength="8" size="8" onblur="valid_valida(this)"  />';
         html += "</span>";
         return html;
     };
@@ -329,7 +330,7 @@ addAction = function(action_spec) {
     newAction.actionType  = action_spec.type;
     newAction.rawId       = action_spec.id;
 
-    caption = "<a href='#' onclick=\"removeAction($('" + action_spec.id + "')); return false;\" style='float:right'>remover</a>" + caption;
+    caption = "<a class='removeButton' href='#' onclick=\"removeAction($('" + action_spec.id + "')); return false;\"><img src='/snep/imagens/remover.png'></a>" + caption;
 
     newAction.innerHTML = caption;
 

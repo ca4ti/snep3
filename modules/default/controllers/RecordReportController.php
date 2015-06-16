@@ -23,8 +23,7 @@ include ("includes/functions.php");
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
+ * @copyright Copyright (c) 2010 OpenS Tecnologia
  */
 class RecordReportController extends Zend_Controller_Action {
 

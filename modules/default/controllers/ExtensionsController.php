@@ -32,36 +32,50 @@ class ExtensionsController extends Zend_Controller_Action {
      *
      * @var Zend_Form
      */
-    protected $form;
     protected $boardData;
 
     /**
      * preDispatch
      */
     public function preDispatch() {
-        $all_writable = true;
-        $files = array(
-            "snep-sip.conf" => false,
-            "snep-sip-trunks.conf" => false,
-            "snep-iax2.conf" => false,
-            "snep-iax2-trunks.conf" => false
-        );
 
-        $config = Zend_Registry::get('config');
-        $asteriskDirectory = $config->system->path->asterisk->conf;
-
-        foreach ($files as $file => $status) {
-            $files[$file] = is_writable($asteriskDirectory . "/snep/" . $file);
-            if ($files[$file] === false && $all_writable === true) {
-                $all_writable = false;
-            }
+        // Test Asterisk connection       
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
         }
 
-        $this->view->all_writable = $all_writable;
-        if (!$all_writable) {
-            $this->view->writable_files = $files;
+        // Read Khomp links
+        try {
+            $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
+         } catch (Exception $e) {
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');;
         }
     }
+
+
+    /**
+     * Initial settings of the class
+     */
+     public function init() {
+
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
+
+        $this->extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
+
+        $this->pickupGroups = Snep_PickupGroups_Manager::getAll();
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
+
 
     /**
      * indexAction - List extensions
@@ -69,11 +83,9 @@ class ExtensionsController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Extensions")));
 
-        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-
+        
         $db = Zend_Registry::get('db');
         $select = $db->select()->from("peers", array(
             "id" => "id",
@@ -83,54 +95,15 @@ class ExtensionsController extends Zend_Controller_Action {
             "group"));
         $select->where("peer_type='R'");
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("`$field` like '%$query%'");
+        $stmt = $db->query($select);
+        $data = $stmt->fetchAll(); 
+
+        if(empty($data)){
+            $this->view->error_message = $this->view->translate("You do not have registered extensions. <br><br> Click 'Add Extensions' ou 'Multi Add Extensions' to make the first registration");
         }
 
-        $this->view->order = Snep_Order::setSelect($select, array("name","callerid","canal","group"), $this->_request);
+        $this->view->extensions = $data;
 
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $paginator = new Zend_Paginator($paginatorAdapter);
-
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
-
-        $this->view->extensions = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->PAGE_URL = "/snep/index.php/extensions/index/";
-
-        $options = array("name" => $this->view->translate("Extension"),
-            "callerid" => $this->view->translate("Name"),
-            "group" => $this->view->translate("Group"));
-
-        $baseUrl = $this->getFrontController()->getBaseUrl();
-
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($baseUrl . '/extensions/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($options);
-        $filter->setFieldValue($this->_request->getParam('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
-                "display" => $this->view->translate("Export CSV"),
-                "css" => "back"),
-            array("url" => $baseUrl . "/extensions/multiadd",
-                "display" => $this->view->translate("Add Multiple Extensions"),
-                "css" => "includes"),
-            array("url" => $baseUrl . "/extensions/add",
-                "display" => $this->view->translate("Add Extension"),
-                "css" => "include")
-        );
     }
 
     /**
@@ -141,59 +114,86 @@ class ExtensionsController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add Extension")));
+                    $this->view->translate("Add")));
 
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->_redirect("/extensions/asterisk-error");
-            return;
-        }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
+        
+        $this->view->extenGroups  = $this->extenGroups;
+        $this->view->pickupGroups = $this->pickupGroups;
 
-        $this->view->form = $this->getForm();
 
-        if (!$this->view->all_writable) {
-            $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
-        }
+        // Mont codec's list and sets the default codec for each option
+        $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
+        foreach($codecsDefault as $key => $value){
+            $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec3 .= '<option value="'.$value.'"'.($value==="gsm"  ? " selected " : "").'>'.$value.'</option>\n';
+        } // END foreach
+        $this->view->codec1 = $codec1;
+        $this->view->codec2 = $codec2;
+        $this->view->codec3 = $codec3;
 
-        $this->view->boardData = $this->boardData;
+        // Mount trunks list
+        $this->view->trunks = Snep_Trunks_Manager::getData(); 
+        
+        // Khomp boards
+        $boardList = array();
+        $khompInfo = new PBX_Khomp_Info();
 
-        if ($this->getRequest()->isPost()) {
-
-            if ($this->view->form->isValid($_POST)) {
-                $postData = $this->_request->getParams();
-
-                if (key_exists('virtual_error', $postData)) {
-                    $this->view->error = "There's no trunks registered on the system. Try a different technology";
-                    $this->view->form->valid(false);
-                }
-
-                $ret = $this->execAdd($postData);
-
-                if (!is_string($ret)) {
-
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-
-                        $id = $_POST["extension"]["exten"];
-                        Snep_LogUser::salvaLog("Adicionou Ramal", $id, 5);
-                        $add = Snep_Extensions_Manager::getPeer($id);
-                        Snep_Extensions_Manager::insertLogRamal("ADD", $add);
+        if ($khompInfo->hasWorkingBoards()) {
+            foreach ($khompInfo->boardInfo() as $board) {   
+                if (preg_match("/FXS/", $board['model'])) {
+                    $channels = range(0, $board['channels']);
+                    foreach($channels as $key => $chan){
+                        $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan; 
                     }
-
-                    $this->_redirect('/extensions/');
-                } else {
-                    $this->view->error = $ret;
-                    $this->view->form->valid(false);
                 }
             }
         }
-        $this->renderScript("extensions/add_edit.phtml");
+        $this->view->boardData = $boardList;
+
+
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->view->techType = 'sip';
+
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+
+        // After POST
+        if ($this->getRequest()->isPost()) {
+            
+            $postData = $this->_request->getParams();
+
+            if (key_exists('virtual_error', $postData)) {
+                $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
+                $this->renderScript('error/sneperror.phtml');
+            }
+
+            $ret = $this->execAdd($postData);
+
+            if (!is_string($ret)) {
+
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    $id = $_POST["extension"]["exten"];
+                    Snep_LogUser::salvaLog("Adicionou Ramal", $id, 5);
+
+                    $add = Snep_Extensions_Manager::getPeer($id);
+                    Snep_Extensions_Manager::insertLogRamal("ADD", $add);
+                }
+
+                $this->_redirect('/extensions/');
+            } else {
+                $this->view->error_message = $ret;
+                $this->renderScript('error/sneperror.phtml');
+                $this->view->form->valid(false);
+            }
+            
+        }
     }
 
     /**
@@ -205,202 +205,213 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam("id");
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Edit %s", $id)));
+                    $this->view->translate("Edit")));
 
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->_redirect("/extensions/asterisk-error");
-            return;
-        }
-
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = $this->getForm();
-
-        if (!$this->view->all_writable) {
-            $form->getElement("submit")->setAttrib("disabled", "disabled");
-        }
-
-        $this->view->form = $form;
-        $this->view->boardData = $this->boardData;
-        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-
-        if ($this->getRequest()->isPost()) {
-            if ($this->view->form->isValid($_POST)) {
-                $postData = $this->_request->getParams();
-                $postData["extension"]["exten"] = $this->_request->getParam("id");
-
-                $ret = $this->execAdd($postData, true);
-
-                if (!is_string($ret)) {
-                    $this->_redirect('/extensions/');
-                } else {
-                    $this->view->error = $ret;
-                    $this->view->form->valid(false);
-                }
-            }
-        }
-
+        // Load data about exten
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
-
-        $name = $exten["name"];
-        $nameField = $form->getSubForm('extension')->getElement('exten');
-        $nameField->setValue($name);
-//        $nameField->setAttrib('readonly', true);
-//        $nameField->setAttrib('disabled', true);
-
+        $this->view->extension = $exten;
+            
+        // Groups       
+        $this->view->extenGroups = $this->extenGroups;
+        $this->view->pickupGroups = $this->pickupGroups;
+        
+        // Tech Type
         if (!$exten["canal"] || $exten["canal"] == 'INVALID' || substr($exten["canal"], 0, strpos($exten["canal"], '/')) == '') {
             $techType = 'manual';
         } else {
             $techType = strtolower(substr($exten["canal"], 0, strpos($exten["canal"], '/')));
         }
 
-        $form->getSubForm('technology')->getElement('type')->setValue($techType);
-
-        $password = $exten["password"];
-        $form->getSubForm('extension')->getElement('password')->setValue($password);
-        $form->getSubForm('extension')->getElement('password')->renderPassword = true;
-
-        $callerid = $exten["callerid"];
-        $form->getSubForm('extension')->getElement('name')->setValue($callerid);
-
-        $extenGroup = $exten["group"];
-        $form->getSubForm('extension')->getElement('exten_group')->setValue($extenGroup);
-
-        $pickupGroup = $exten["pickupgroup"];
-        $form->getSubForm('extension')->getElement('pickup_group')->setValue($pickupGroup);
-
-        $voiceMail = $exten["usa_vc"];
-        if ($voiceMail) {
-            $form->getSubForm('advanced')->getElement('voicemail')->setAttrib('checked', 'checked');
-        }
-
-        $email = $exten["email"];
-        $form->getSubForm('advanced')->getElement('email')->setValue($email);
-
-        $padlock = $exten["authenticate"];
-        if ($padlock) {
-            $form->getSubForm('advanced')->getElement('padlock')->setAttrib('checked', 'checked');
-        }
-
-        $cancallforward = $exten["cancallforward"];
-        if ($cancallforward == 'yes') {
-            $form->getSubForm('advanced')->getElement('cancallforward')->setAttrib('checked', 'checked');
-        }
+        $this->view->sip = "";
+        $this->view->iax2 = "";
+        $this->view->manual = "";
+        $this->view->virtual = "";
+        $this->view->khomp = "";
+        $this->view->techType   = $techType; //"selected";
+        $this->view->technology = $techType;
 
         $timeTotal = $exten["time_total"];
         if (!empty($timeTotal)) {
-            $form->getSubForm('advanced')->getElement('minute_control')->setAttrib('checked', 'checked');
-            $timeTotal = $timeTotal / 60;
-            $form->getSubForm('advanced')->getElement('timetotal')->setValue($timeTotal);
-            $ctrlType = $exten["time_chargeby"];
-            $form->getSubForm('advanced')->getElement('controltype')->setValue($ctrlType);
-        } else {
-            $form->getSubForm('advanced')->getElement('timetotal')->setAttrib('disabled', true);
-            $form->getSubForm('advanced')->getElement('timetotal')->setAttrib('readonly', true);
-            $form->getSubForm('advanced')->getElement('controltype')->setAttrib('disabled', true);
-            $form->getSubForm('advanced')->getElement('controltype')->setAttrib('readonly', true);
+        
+            $this->view->timetotal = $timeTotal / 60;
+            $this->view->controltype = $exten["time_chargeby"];
+
+            $this->view->Y = "";
+            $this->view->M = "";
+            $this->view->D = "";
+            $this->view->$exten["time_chargeby"] = "checked";
         }
 
         switch ($techType) {
+            
             case "sip":
-                $pass = $exten["secret"];
-                $simCalls = $exten["call-limit"];
-                $nat = $exten["nat"];
-                $qualify = $exten["qualify"];
-                $directmedia = $exten["directmedia"];
-                $typeIp = $exten["type"];
-                $dtmfMode = $exten["dtmfmode"];
-                $form->getSubForm('sip')->getElement('password')->setValue($pass);
-                $form->getSubForm('sip')->getElement('password')->renderPassword = true;
-                $form->getSubForm('sip')->getElement('calllimit')->setValue($simCalls);
-                $form->getSubForm('sip')->getElement('directmedia')->setValue($directmedia);
-                if ($nat == 'yes') {
-                    $form->getSubForm('sip')->getElement('nat')->setAttrib('checked', 'checked');
+            
+                $this->view->directmediayes = "";
+                $this->view->directmediano = "";
+                if($exten['directmedia'] == "yes"){
+                    $this->view->directmediayes = "checked";
+                }else{
+                    $this->view->directmediano = "checked";
                 }
-                if ($qualify == 'yes') {
-                    $form->getSubForm('sip')->getElement('qualify')->setAttrib('checked', 'checked');
-                }
-                $form->getSubForm('sip')->getElement('type')->setValue($typeIp);
-                $form->getSubForm('sip')->getElement('dtmf')->setValue($dtmfMode);
 
+                $this->view->typePeer = "";
+                $this->view->typeFriend = "";
+                if($exten['type'] == "peer"){
+                    $this->view->typePeer = "checked";
+                }else{
+                    $this->view->typeFriend = "checked";
+                }
+
+                $this->view->dtmfrf = "";
+                $this->view->dtmfinband = "";
+                $this->view->dtmfinfo = "";
+                if($exten['dtmfmode'] == "rfc2833"){
+                    $this->view->dtmfrf = "checked";
+                }elseif($exten['dtmfmode'] == "inband"){
+                    $this->view->dtmfinband = "checked";
+                }else{
+                    $this->view->dtmfinfo = "checked";
+                }
+                
+                $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
                 $codecs = explode(";", $exten['allow']);
-                $form->getSubForm('sip')->getElement('codec')->setValue($codecs[0]);
-                $form->getSubForm('sip')->getElement('codec1')->setValue($codecs[1]);
-                $form->getSubForm('sip')->getElement('codec2')->setValue($codecs[2]);
+
+                $codec1 = "";
+                $codec2 = "";
+                $codec3 = "";
+                foreach($codecsDefault as $key => $value){
+                    
+                    $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                    $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                    $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                             
+                }
+                
+                $this->view->codec1 = $codec1;
+                $this->view->codec2 = $codec2;
+                $this->view->codec3 = $codec3;
+
                 break;
 
             case "iax2":
-                $pass = $exten["secret"];
-                $simCalls = $exten["call-limit"];
-                $nat = $exten["nat"];
-                $qualify = $exten["qualify"];
-                $directmedia = $exten["directmedia"];
-                $typeIp = $exten["type"];
-                $dtmfMode = $exten["dtmfmode"];
-                $form->getSubForm('iax2')->getElement('password')->setValue($pass);
-                $form->getSubForm('iax2')->getElement('password')->renderPassword = true;
-                $form->getSubForm('iax2')->getElement('calllimit')->setValue($simCalls);
-                if ($nat == 'yes') {
-                    $form->getSubForm('iax2')->getElement('nat')->setAttrib('checked', 'checked');
-                }
-                if ($qualify == 'yes') {
-                    $form->getSubForm('iax2')->getElement('qualify')->setAttrib('checked', 'checked');
-                }
-                $form->getSubForm('iax2')->getElement('type')->setValue($typeIp);
-                $form->getSubForm('iax2')->getElement('dtmf')->setValue($dtmfMode);
-                $form->getSubForm('sip')->getElement('directmedia')->setValue($directmedia);
 
+                $this->view->directmediayes = "";
+                $this->view->directmediano = "";
+                if($exten['directmedia'] == "yes"){
+                    $this->view->directmediayes = "checked";
+                }else{
+                    $this->view->directmediano = "checked";
+                }
+
+                $this->view->typePeer = "";
+                $this->view->typeFriend = "";
+                if($exten['type'] == "peer"){
+                    $this->view->typePeer = "checked";
+                }else{
+                    $this->view->typeFriend = "checked";
+                }
+
+                $this->view->dtmfrf = "";
+                $this->view->dtmfinband = "";
+                $this->view->dtmfinfo = "";
+                if($exten['dtmfmode'] == "rfc2833"){
+                    $this->view->dtmfrf = "checked";
+                }elseif($exten['dtmfmode'] == "inband"){
+                    $this->view->dtmfinband = "checked";
+                }else{
+                    $this->view->dtmfinfo = "checked";
+                }
+
+                $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
                 $codecs = explode(";", $exten['allow']);
-                $form->getSubForm('iax2')->getElement('codec')->setValue($codecs[0]);
-                $form->getSubForm('iax2')->getElement('codec1')->setValue($codecs[1]);
-                $form->getSubForm('iax2')->getElement('codec2')->setValue($codecs[2]);
+
+                $codec1 = "";
+                $codec2 = "";
+                $codec3 = "";
+                foreach($codecsDefault as $key => $value){
+                    
+                    $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                    $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                    $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                             
+                }
+                
+                $this->view->codec1 = $codec1;
+                $this->view->codec2 = $codec2;
+                $this->view->codec3 = $codec3;
+
                 break;
 
             case "khomp":
+                
                 $khompInfo = substr($exten["canal"], strpos($exten["canal"], '/') + 1);
                 $khompBoard = substr($khompInfo, strpos($khompInfo, 'b') + 1, strpos($khompInfo, 'c') - 1);
                 $khompChannel = substr($khompInfo, strpos($khompInfo, 'c') + 1);
+                                
+                $boardList = array();
 
                 $khompInfo = new PBX_Khomp_Info();
 
                 if ($khompInfo->hasWorkingBoards()) {
                     foreach ($khompInfo->boardInfo() as $board) {
-                        if (preg_match("/KFXS/", $board['model'])) {
-                            $channels = range(0, $board['channels']);
-                            $form->getSubForm('khomp')->getElement('board')->addMultiOption($board['id'], $board['id']);
-                            $boardList[$board['id']] = $channels;
+                        
+                        if (preg_match("/FXS/", $board['model'])) {
 
-                            if ($board['id'] == $khompBoard) {
-                                foreach ($channels as $value) {
-                                    $form->getSubForm('khomp')->getElement('channel')->addMultiOption($value, $value);
-                                }
+                            $channels = range(0, $board['channels']);
+                            
+                            foreach($channels as $key => $chan){
+
+                                $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan; 
                             }
                         }
                     }
-                    $form->getSubForm('khomp')->getElement('board')->setValue($khompBoard);
-                    $form->getSubForm('khomp')->getElement('channel')->setValue($khompChannel);
                 }
+
+                $this->view->boardData = $boardList;
+                $this->view->khompChecked = 'b'.$khompBoard.'c'.$khompChannel;
+
                 break;
 
             case "virtual":
                 $virtualTrunk = substr($exten["canal"], strpos($exten["canal"], '/') + 1);
-                $form->getSubForm('virtual')->getElement('virtual')->setValue($virtualTrunk);
+
+                $trunks =  Snep_Trunks_Manager::getData();
+                $this->view->trunks = $trunks;
+                $this->view->trunkChecked = $virtualTrunk;
+                
                 break;
 
             case "manual":
                 $manualComp = substr($exten["canal"], strpos($exten["canal"], '/') + 1);
-                $form->getSubForm('manual')->getElement('manual')->setValue($manualComp);
+                $this->view->manual = $manualComp;
                 break;
         }
-        $this->renderScript("extensions/add_edit.phtml");
+
+        //Define the action and load form
+        $this->view->disabled = 'disabled';
+        $this->view->action = "edit" ;
+        
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+
+        // After POST
+        if ($this->getRequest()->isPost()) {
+            
+            $postData = $this->_request->getParams();
+            $postData["exten"] = $this->_request->getParam("id");
+
+            $ret = $this->execAdd($postData, true);
+
+            if (!is_string($ret)) {
+                $this->_redirect('/extensions/');
+            } else {
+                $this->view->error_message = $ret;
+                $this->renderScript('error/sneperror.phtml');;
+            }
+            
+        }
+
     }
 
     /**
@@ -409,13 +420,11 @@ class ExtensionsController extends Zend_Controller_Action {
      * @param <boolean> $update
      * @return type
      */
-    protected function execAdd($postData, $update = false) {
-
-        $formData = $postData;
+    protected function execAdd($formData, $update = false) {
 
         $db = Zend_Registry::get('db');
 
-        $exten = $formData["extension"]["exten"];
+        $exten = $formData["exten"];
         $sqlValidName = "SELECT * from peers where name = '$exten'";
         $selectValidName = $db->query($sqlValidName);
         $resultGetId = $selectValidName->fetch();
@@ -427,37 +436,50 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         $context = 'default';
-        $extenPass = $formData["extension"]["password"];
-        $extenName = $formData["extension"]["name"];
-        $extenGroup = $formData["extension"]["exten_group"];
-        $extenPickGrp = $formData["extension"]["pickup_group"] == '' ? "NULL" : $formData["extension"]["pickup_group"];
+        $extenPass = $formData["passwordpadlock"];
+        $extenName = $formData["name"];
+        $extenGroup = $formData["exten_group"];
+        $pickup_group = Snep_PickupGroups_Manager::getName($formData["pickup_group"]);
+
+        $extenPickGrp = $formData["pickup_group"] == '' ? "NULL" : $pickup_group["cod_grupo"];
         $peerType = "R";
 
-        $techType = $formData["technology"]["type"];
-        $secret = $formData[$techType]["password"];
-        $type = $formData[$techType]["type"];
-        $dtmfmode = $formData[$techType]["dtmf"];
-        $directmedia = $formData[$techType]["directmedia"];
-        $callLimit = $formData[$techType]["calllimit"];
+        $techType = $formData["technology"];    
+        
+        
+        $secret = (isset($formData["password"]))? $formData["password"]: ""; 
+        
+
+        $dtmfmode = (isset($formData["dtmf"]))? $formData["dtmf"]: "";
+        $directmedia = $formData["directmedia"];
+        $callLimit = $formData["calllimit"];
 
         $nat = 'no';
         if ($techType == 'sip' || $techType == 'iax2') {
-            if (key_exists('nat', $formData[$techType])) {
-                $nat = 'yes';
+            if (key_exists('nat', $formData)) {
+                $nat = 'comedia';
             }
         }
 
         $qualify = 'no';
         if ($techType == 'sip' || $techType == 'iax2') {
-            if (key_exists('qualify', $formData[$techType])) {
+            if (key_exists('qualify', $formData)) {
                 $qualify = 'yes';
             }
         }
 
+        $type = $formData['type'];
+      
+
         $channel = strtoupper($techType);
+
         if ($channel == "KHOMP") {
-            $khompBoard = $formData[$techType]['board'];
-            $khompChannel = $formData[$techType]['channel'];
+
+            $board = explode('c', $formData['channel']);
+            
+            $khompBoard = substr($board[0], 1);
+            $khompChannel = $board[1];
+            
             if ($khompBoard == null || $khompBoard == '') {
                 return $this->view->translate('Select a Khomp board from the list');
             }
@@ -466,42 +488,41 @@ class ExtensionsController extends Zend_Controller_Action {
             }
             $channel .= "/b" . $khompBoard . 'c' . $khompChannel;
         } else if ($channel == "VIRTUAL") {
-            $virtualInfo = $formData[$techType]['virtual'];
-            $channel .= "/" . $virtualInfo;
+            $channel .= "/" . (int)$formData["board"];
         } else if ($channel == "MANUAL") {
-            $manualManual = $formData[$techType]['manual'];
-            $channel .= "/" . $manualManual;
+            $manual = $formData['manual'];
+            $channel .= "/" . $manual;
         } else {
             $channel .= "/" . $exten;
         }
 
         $advVoiceMail = 'no';
-        if (key_exists("voicemail", $formData["advanced"])) {
+        if (key_exists("voicemail", $formData)) {
             $advVoiceMail = 'yes';
         } else {
             $advVoiceMail = 'no';
         }
 
         $advPadLock = '0';
-        if (key_exists("padlock", $formData["advanced"])) {
+        if (key_exists("padlock", $formData)) {
             $advPadLock = '1';
         } else {
             $advPadLock = '0';
         }
 
         $advCancallforward = 'no';
-        if ($formData["advanced"]["cancallforward"]) {
+        if ($formData["cancallforward"]) {
             $advCancallforward = 'yes';
         } else {
             $advCancallforward = 'no';
         }
 
         //if (key_exists("minute_control", $formData["advanced"])) {
-        if ($formData["advanced"]["minute_control"]) {
+        if ($formData["minute_control"]) {
             $advMinCtrl = true;
-            $advTimeTotal = $formData["advanced"]["timetotal"] * 60;
+            $advTimeTotal = $formData["timetotal"] * 60;
             $advTimeTotal = $advTimeTotal == 0 ? "NULL" : "'$advTimeTotal'";
-            $advCtrlType = $formData['advanced']['controltype'];
+            $advCtrlType = $formData['controltype'];
         } else {
             $advMinCtrl = false;
             $advTimeTotal = 'NULL';
@@ -516,10 +537,10 @@ class ExtensionsController extends Zend_Controller_Action {
             $sqlDefaultValues .= ",$value";
         }
 
-        $advEmail = $formData["advanced"]["email"];
+        $advEmail = $formData["email"];
 
         if ($techType == "sip" || $techType == "iax2") {
-            $allow = sprintf("%s;%s;%s", $formData[$techType]['codec'], $formData[$techType]['codec1'], $formData[$techType]['codec2']);
+            $allow = sprintf("%s;%s;%s", $formData['codec'], $formData['codec1'], $formData['codec2']);
         } else {
             $allow = "ulaw";
         }
@@ -572,11 +593,15 @@ class ExtensionsController extends Zend_Controller_Action {
     }
 
     /**
-     * deleteAction - Remove exetension
+     * removeAction - Remove exetension
      * @return type
      * @throws ErrorException
      */
-    public function deleteAction() {
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Extensions"),
+                    $this->view->translate("Delete")));
 
         $db = Zend_Registry::get('db');
         $id = $this->_request->getParam("id");
@@ -584,12 +609,14 @@ class ExtensionsController extends Zend_Controller_Action {
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-            $this->_redirect("/extensions/asterisk-error");
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');;
             return;
         }
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
 
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');;
         }
 
         //checks if the exten is used in the rule 
@@ -602,9 +629,9 @@ class ExtensionsController extends Zend_Controller_Action {
             foreach ($rules as $regra) {
                 $errMsg .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
             }
-            $this->view->error = $errMsg;
+            $this->view->error_message = $errMsg;
             $this->view->back = $this->view->translate("Back");
-            $this->_helper->viewRenderer('error');
+            $this->renderScript('error/sneperror.phtml');
         } else {
 
             //log-user
@@ -614,152 +641,97 @@ class ExtensionsController extends Zend_Controller_Action {
                 Snep_Extensions_Manager::insertLogRamal("DEL", $add);
             }
 
-            Snep_Extensions_Manager::remove($id);
-            Snep_Extensions_Manager::removeVoicemail($id);
+            $this->view->id = $id;
+            $this->view->remove_title = $this->view->translate('Delete Extension.'); 
+            $this->view->remove_message = $this->view->translate('The extension will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'extensions'; 
+            $this->renderScript('remove/remove.phtml');
 
-            try {
+            if ($this->_request->getPost()) {
                 
-            } catch (PDOException $e) {
-                $db->rollBack();
-                $this->view->error = $this->view->translate("DB Delete Error: ") . $e->getMessage();
-                $this->view->back = $this->view->translate("Back");
-                $this->_helper->viewRenderer('error');
-            }
+                Snep_Extensions_Manager::remove($_POST['id']);
+                Snep_Extensions_Manager::removeVoicemail($_POST['id']);
 
-            $return = Snep_InterfaceConf::loadConfFromDb();
-
-            If ($return != true) {
-                $this->view->error = $return;
-                $this->view->back = $this->view->translate("Back");
-                $this->_helper->viewRenderer('error');
-            }
-            $this->_redirect("default/extensions");
-        }
-    }
-
-    /**
-     * getForm
-     * @return <object> Snep_Form
-     */
-    protected function getForm() {
-
-        if ($this->form === Null) {
-            Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-            $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/extensions.xml");
-            $form = new Snep_Form();
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Extension"), $form_xml->extension), "extension");
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Interface Technology"), $form_xml->technology), "technology");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "sip"), "sip");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "iax2"), "iax2");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->manual, "manual"), "manual");
-            $subFormVirtual = new Snep_Form_SubForm(null, $form_xml->virtual, "virtual");
-            if (PBX_Trunks::getAll() == null) {
-                $subFormVirtual->removeElement('virtual');
-                $subFormVirtual->addElement(new Snep_Form_Element_Html("extensions/trunk_error.phtml", "err", false, null, "virtual_error"));
-            }
-            $form->addSubForm($subFormVirtual, "virtual");
-            $subFormKhomp = new Snep_Form_SubForm(null, $form_xml->khomp, "khomp");
-            $selectFill = $subFormKhomp->getElement('board');
-            $selectFill->addMultiOption(null, ' ');
-
-            // Monta informações para placas khomp
-            $boardList = array();
-
-            $khompInfo = new PBX_Khomp_Info();
-
-            if ($khompInfo->hasWorkingBoards()) {
-                foreach ($khompInfo->boardInfo() as $board) {
-                    if (preg_match("/KFXS/", $board['model'])) {
-                        $channels = range(0, $board['channels']);
-                        $selectFill->addMultiOption($board['id'], $board['id']);
-                        $boardList[$board['id']] = $channels;
-                    }
+                try {
+                    
+                } catch (PDOException $e) {
+                    $db->rollBack();
+                    $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
+                    $this->view->back = $this->view->translate("Back");
+                    $this->renderScript('error/sneperror.phtml');;
                 }
-                $subFormKhomp->getElement('channel')->setRegisterInArrayValidator(false);
-                $boardTmp = Zend_Json_Encoder::encode($boardList);
-                $this->boardData = $boardTmp;
-            } else {
-                $subFormKhomp->removeElement('board');
-                $subFormKhomp->removeElement('channel');
-                $subFormKhomp->addElement(new Snep_Form_Element_Html("extensions/khomp_error.phtml", "err", false, null, "khomp"));
-            }
-            $form->addSubForm($subFormKhomp, "khomp");
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Advanced"), $form_xml->advanced), "advanced");
-            $this->form = $form;
-        }
 
-        return $this->form;
-    }
+                $return = Snep_InterfaceConf::loadConfFromDb();
 
-    /**
-     * getmultiaddForm
-     * @return <object> Snep_Form
-     */
-    protected function getmultiaddForm() {
-
-        if ($this->form === Null) {
-            $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/extensionsMulti.xml");
-            $form = new Snep_Form();
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Extension"), $form_xml->extension), "extension");
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Interface Technology"), $form_xml->technology), "technology");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "sip"), "sip");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "iax2"), "iax2");
-            //$form->addSubForm(new Snep_Form_SubForm(null, $form_xml->manual, "manual"), "manual");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->virtual, "virtual"), "virtual");
-            $subFormKhomp = new Snep_Form_SubForm(null, $form_xml->khomp, "khomp");
-            $selectFill = $subFormKhomp->getElement('board');
-            $selectFill->addMultiOption(null, ' ');
-
-            // Monta informações para placas khomp
-            $boardList = array();
-
-            $khompInfo = new PBX_Khomp_Info();
-
-            if ($khompInfo->hasWorkingBoards()) {
-                foreach ($khompInfo->boardInfo() as $board) {
-                    if (preg_match("/KFXS/", $board['model'])) {
-                        $channels = range(0, $board['channels']);
-                        $selectFill->addMultiOption($board['id'], $board['id']);
-                        $boardList[$board['id']] = $channels;
-                    }
+                if ($return != true) {
+                    $this->view->error_message = $return;
+                    $this->renderScript('error/sneperror.phtml');;
                 }
-                //$subFormKhomp->getElement('channel')->setRegisterInArrayValidator(false);
-                $boardTmp = Zend_Json_Encoder::encode($boardList);
-                $this->boardData = $boardTmp;
-            } else {
-                $subFormKhomp->removeElement('board');
-                $subFormKhomp->removeElement('channel');
-                $subFormKhomp->addElement(new Snep_Form_Element_Html("extensions/khomp_error.phtml", "err", false, null, "khomp"));
+                $this->_redirect("default/extensions");
             }
-            $form->addSubForm($subFormKhomp, "khomp");
-            //$form->addSubForm(new Snep_Form_SubForm($this->view->translate("Advanced"), $form_xml->advanced), "advanced");
-            $this->form = $form;
         }
-        return $this->form;
     }
 
+
     /**
-     * exportAction - Export CSV
+     * multiremoveAction - Delete Extensions
      */
-    public function exportAction() {
+    public function multiremoveAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Extension"),
-                    $this->view->translate("Export")));
+                    $this->view->translate("Extensions"),
+                    $this->view->translate("Delete Multiples")));
 
-        $ie = new Snep_CsvIE('peers');
-        if ($this->_request->getParam('download')) {
-            $this->_helper->layout()->disableLayout();
-            $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->getRequest()->isPost()) {
+           
 
-            $ie->export();
-        } else {
+            $postData = $this->_request->getParams();
 
-            $this->view->form = $ie->exportResult();
-            $this->view->title = "Export";
-            $this->render('import-export');
+            $this->view->id = $postData["exten"];
+            $this->view->remove_title = $this->view->translate('Delete Extension Multiples.'); 
+            $this->view->remove_message = $this->view->translate('The extensions will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'extensions'; 
+            $this->renderScript('extensions/multiremove.phtml');
+            
+            if($_POST['id']){
+                
+                $range = explode(";", $_POST["id"]);
+                foreach ($range as $exten) {
+
+                    if ($this->view->error)
+                        break;
+                    
+                    if (is_numeric($exten)) {
+
+                        Snep_Extensions_Manager::remove($exten);
+                        Snep_Extensions_Manager::removeVoicemail($exten);
+                        
+                    } else {
+
+                        $exten = explode(";", $exten);
+
+                        foreach ($exten as $extension) {
+                            $rangeToAdd = explode('-', $extension);
+
+                            if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
+                                $i = $rangeToAdd[0];
+                                while ($i <= $rangeToAdd[1]) {
+
+                                    Snep_Extensions_Manager::remove($i);
+                                    Snep_Extensions_Manager::removeVoicemail($i);
+                                    $i++;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $this->_redirect("default/extensions");
+            }
+            
         }
     }
+    
 
     /**
      * multiaddAction - Add multi extensions
@@ -769,129 +741,124 @@ class ExtensionsController extends Zend_Controller_Action {
     public function multiaddAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add Multiples Extensions")));
 
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-            $this->_redirect("/extensions/asterisk-error");
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             return;
         }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
 
-        $this->view->form = $this->getmultiaddForm();
-        if (!$this->view->all_writable) {
-            $this->view->form->getElement("submit")->setAttrib("disabled", "disabled");
-        }
+        $extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
+        $pickupGroups = Snep_PickupGroups_Manager::getAll();
+        
+        $this->view->extenGroups = $extenGroups;
+        $this->view->pickupGroups = $pickupGroups;
 
         $this->view->boardData = $this->boardData;
 
+        // Monta SELECT de codecs e define o default para cada opcao
+        $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
+        foreach($codecsDefault as $key => $value){
+            $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec3 .= '<option value="'.$value.'"'.($value==="gsm"  ? " selected " : "").'>'.$value.'</option>\n';
+        }  // END foreach  
+        $this->view->codec1 = $codec1;
+        $this->view->codec2 = $codec2;
+        $this->view->codec3 = $codec3;     
+ 
+        $this->view->trunks = Snep_Trunks_Manager::getData(); 
+
+
         if ($this->getRequest()->isPost()) {
+
             $postData = $this->_request->getParams();
 
-            if ($this->view->form->isValid($_POST)) {
+            $range = explode(";", $postData["exten"]);
+            $this->view->error = "";
+            
+            //log-user
+            if (class_exists("Loguser_Manager")) {
 
-                $range = explode(";", $postData["extension"]["exten"]);
-                $this->view->error = "";
-                $khomp_iface = false;
-                if (strtoupper($postData["technology"]["type"]) == 'KHOMP') {
-                    $khompInfo = new PBX_Khomp_Info();
-                    $khompChannels = array();
-                    $khomp_iface = true;
-                    $boardInfo = $khompInfo->boardInfo($postData["khomp"]["board"]);
-                    for ($i = 0; $i < $boardInfo['channels']; $i++) {
-                        $khompChannels[$i] = $i; //"KHOMP/b{$boardInfo['id']}c$i";
-                    }
-                }
+                Snep_LogUser::salvaLog("Adicionou Ramais multiplos", $_POST["extension"]["exten"], 5);
+                $tech = $_POST["technology"];
+                $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
+                $add = array();
+                $add["name"] = $_POST["exten"];
+                $add["canal"] = $tech;
+                $add["allow"] = $codecs;
+                $add["dtmfmode"] = $_POST[$tech]["dtmf"];
+                $add["directmedia"] = $_POST[$tech]["directmedia"];
+                Snep_Extensions_Manager::insertLogRamal("ADD R", $add);
+            }
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
+            foreach ($range as $exten) {
 
-                    Snep_LogUser::salvaLog("Adicionou Ramais multiplos", $_POST["extension"]["exten"], 5);
-                    $tech = $_POST["technology"]["type"];
-                    $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
-                    $add = array();
-                    $add["name"] = $_POST["extension"]["exten"];
-                    $add["canal"] = $tech;
-                    $add["allow"] = $codecs;
-                    $add["dtmfmode"] = $_POST[$tech]["dtmf"];
-                    $add["directmedia"] = $_POST[$tech]["directmedia"];
-                    Snep_Extensions_Manager::insertLogRamal("ADD R", $add);
-                }
+                if ($this->view->error)
+                    break;
 
-                foreach ($range as $exten) {
+                if (is_numeric($exten)) {
 
-                    if ($this->view->error)
+                    $postData["exten"] = $exten;
+                    $postData["password"] = $exten . $exten;
+                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . '<' . $exten . '>';
+                    $postData["sip"]["password"] = $exten;
+                    $postData["iax"]["password"] = $exten;
+
+                    $ret = $this->execAdd($postData);
+
+                    if (is_string($ret)) {
+                        $this->view->error .= $exten . " - " . $ret;
                         break;
-
-                    if (is_numeric($exten)) {
-
-                        $postData["extension"]["exten"] = $exten;
-                        $postData["extension"]["password"] = $exten . $exten;
-                        $postData["extension"]["name"] = $this->view->translate("Extension ") . $exten . '<' . $exten . '>';
-                        $postData["sip"]["password"] = $exten;
-                        $postData["iax"]["password"] = $exten;
-
-                        $ret = $this->execAdd($postData);
-
-                        if (is_string($ret)) {
-                            $this->view->error = $exten . " - " . $ret;
-                            $this->view->form->valid(false);
-                            break;
-                        }
-                    } else {
-
-                        $exten = explode(";", $exten);
-
-                        foreach ($exten as $range) {
-                            $rangeToAdd = explode('-', $range);
-
-                            if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
-                                $i = $rangeToAdd[0];
-                                while ($i <= $rangeToAdd[1]) {
-
-                                    $postData["id"] = $i;
-                                    $postData["extension"]["exten"] = $i;
-                                    $postData["extension"]["password"] = $i . $i;
-                                    $postData["extension"]["name"] = $this->view->translate("Extension ") . $i . '<' . $i . '>';
-                                    $postData["sip"]["password"] = $i . $i;
-                                    $postData["iax2"]["password"] = $i . $i;
-
-                                    if ($khomp_iface && count($khompChannels) > 0) {
-                                        $channel = array_shift($khompChannels);
-                                        $postData["extension"]["khomp_channel"] = $channel;
-                                    }
-                                    $ret = $this->execAdd($postData);
-                                    $i++;
-
-                                    if (is_string($ret)) {
-                                        $this->view->error = $i . " - " . $ret;
-                                        $this->view->form->valid(false);
-                                        break;
-                                    }
-                                }
-                            }
-                            if ($this->view->error)
-                                break;
-                        }
                     }
-                }
-                if (!$this->view->error) {
-                    $this->_redirect('/extensions/');
+                } else {
+
+                    $exten = explode(";", $exten);
+
+                    foreach ($exten as $extension) {
+                        $rangeToAdd = explode('-', $extension);
+
+                        if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
+                            $i = $rangeToAdd[0];
+                            while ($i <= $rangeToAdd[1]) {
+
+                                $postData["id"] = $i;
+                                $postData["exten"] = $i;
+                                $postData["password"] = $i . $i;
+                                $postData["name"] = $this->view->translate("Extension ") . " " . $i . '<' . $i . '>';
+                                $postData["sip"]["password"] = $i . $i;
+                                $postData["iax2"]["password"] = $i . $i;
+
+                                $ret = $this->execAdd($postData);
+
+                                if (is_string($ret)) {
+                                    $this->view->error .= $i . " - " . $ret;
+                                    break;
+                                }
+                                $i++;
+                            }
+                        }
+                        if ($this->view->error)
+                            break;
+                    }
                 }
             }
-        }
-    }
 
-    /**
-     * asterisErrorAction
-     */
-    public function asteriskErrorAction() {
-        
+            if ($this->view->error) {
+                $this->view->error_message = $this->view->error ;
+                $this->renderScript('error/sneperror.phtml');
+            } else {
+                $this->_redirect("default/extensions");
+            }
+        }
+
     }
 
 }

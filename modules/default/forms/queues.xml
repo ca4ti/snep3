@@ -123,7 +123,8 @@
             <joinempty>
                   <type>radio</type>
                   <options>
-                      <label>Users can enter the queue without Agents Present?</label>
+                      <label>Can users join this queue even if there's no agents online?
+                      </label>
                   </options>
             </joinempty>
 

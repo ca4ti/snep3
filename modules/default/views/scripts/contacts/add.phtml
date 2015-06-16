@@ -1,7 +1,6 @@
 <?php
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/snep.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/maskZipcode.js');
 echo $this->form;
 ?>
 
@@ -23,14 +22,6 @@ echo $this->form;
 
     Event.observe($('contactsForm'), 'submit', atualizaValues);
 
-</script>
-
-<script type="text/javascript">
-    Event.observe(window, 'load', init, false);
-
-    function init() {
-        mask = new maskZipcode('zipcode');
-    }
 </script>
 
 

@@ -33,12 +33,28 @@ class QueuesGroupsController extends Zend_Controller_Action {
     protected $form;
 
     /**
+     * Initial settings of the class
+     */
+     public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        $this->queuesAll = Snep_QueuesGroups_Manager::getQueuesAll();
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
+
+
+    /**
      * indexAction - List all Queues groups
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Queues Groups")));
 
         $db = Zend_Registry::get('db');
@@ -49,46 +65,11 @@ class QueuesGroupsController extends Zend_Controller_Action {
 
         $select = $db->select()->from("group_queues");
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("`$field` like '%$query%'");
-        }
-
-        $this->view->order = Snep_Order::setSelect($select, array("id", "name"), $this->_request);
-
-
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $paginator = new Zend_Paginator($paginatorAdapter);
-
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
-
-        $this->view->queuesgroups = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/";
-        $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
-
-        $opcoes = array("name" => $this->view->translate("Name"));
-
-        // Filter Form 
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($opcoes);
-        $filter->setFieldValue($this->_request->getPost('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add",
-                "display" => $this->view->translate("Add Queues Group"),
-                "css" => "include"),
-        );
+        $stmt = $db->query($select);
+        $queuesGroup = $stmt->fetchAll(); 
+       
+        $this->view->queuesgroups = $queuesGroup;
+       
     }
 
     /**
@@ -97,19 +78,19 @@ class QueuesGroupsController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
             $this->view->translate("Queues Groups"),
             $this->view->translate("Add")));
+        
+        $this->view->nomembers = $this->queuesAll;
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("modules/default/forms/queueGroup.xml");
-        $form = new Snep_Form($form_xml->general);
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add');
-        
-        $form->getElement('name')->setLabel($this->view->translate('Name'));
-        
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+
+        //After POST
         if ($this->getRequest()->getPost()) {
-            $form_isValid = $form->isValid($_POST);
+
+            $form_isValid = true;
             $dados = $this->_request->getParams();
 
             $db = Zend_Registry::get('db');
@@ -121,19 +102,114 @@ class QueuesGroupsController extends Zend_Controller_Action {
             
             if ($resultGetId) {
                 $form_isValid = false;
-                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
+                $this->view->error_message = $this->view->translate("Name already exists.");
+                $this->renderScript('error/sneperror.phtml');
             }
 
             if ($form_isValid) {
                 $namegroup = array('nome' => $dados['name']);
                 $groupId = Snep_QueuesGroups_Manager::addGroup($namegroup);
 
+                $lastId = Snep_QueuesGroups_Manager::lastId();
+                
+                if($dados['duallistbox_group']){
+
+                    foreach ($dados['duallistbox_group'] as $key => $queue) {
+
+                        $queuesGroup = array('id_group' => $lastId,'id_queue' => $queue);
+                        $this->view->queue = Snep_QueuesGroups_Manager::addQueuesGroup($queuesGroup);
+                    }
+                }
+
                 $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
             }
             
         }
 
-        $this->view->form = $form;
+    }
+
+    /**
+     * editAction - Edit queus group
+     */
+    public function editAction() {
+        
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+            $this->view->translate("Queues Groups"),
+            $this->view->translate("Edit")));
+
+        $id = $this->_request->getParam('id');
+        $group = Snep_QueuesGroups_Manager::get($id);
+
+        $members = Snep_QueuesGroups_Manager::getMembers($id);
+
+        // Mount list member of the group
+        $membersAll = $nomembers = array();
+        foreach($this->queuesAll as $queue){
+            $_ismember = false ;
+            foreach($members as $value){
+                if ($queue['id'] === $value['id_queue']) {
+                    $_ismember = true ;
+                    break ;
+                }
+            }
+            if ($_ismember) {
+                array_push($membersAll, array('id' => $queue['id'], 'name' => $queue['name']));
+            } else {
+                array_push($nomembers, array('id' => $queue['id'], 'name' => $queue['name']));
+            }
+        }
+
+        $this->view->group = $group['name'];
+        $this->view->membersAll = $membersAll;
+        $this->view->nomembers = $nomembers;
+        
+        //Define the action and load form
+        $this->view->action = "edit" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+
+        // After POST
+        if ($this->_request->getPost()) {
+            
+            $form_isValid = true;
+
+            $dados = $this->_request->getParams();
+
+            $db = Zend_Registry::get('db');
+            $groupName = $dados['name'];
+
+            $sqlValidName = "SELECT * from group_queues where name = '$groupName'";
+            $selectValidName = $db->query($sqlValidName);
+            $resultGetId = $selectValidName->fetch();
+            
+            if ($resultGetId && $dados['name'] != $groupName) {
+                $form_isValid = false;
+                $this->view->error_message = $this->view->translate("Name already exists.");
+                $this->renderScript('error/sneperror.phtml');
+            }
+            
+            if ($form_isValid) {
+
+                
+                $this->view->group = Snep_QueuesGroups_Manager::editGroup(array('name' => $dados['name'], 'id' => $dados['id']));
+                
+                // Remove members
+                Snep_QueuesGroups_Manager::deleteMembers($id);
+
+                if($dados["duallistbox_group"]){
+
+                    foreach($dados["duallistbox_group"] as $key => $item){
+
+                        $queuesGroup = array('id_group' => $id,'id_queue' => $item);
+                        $this->view->queue = Snep_QueuesGroups_Manager::addQueuesGroup($queuesGroup);
+                        
+                    }
+                }
+
+                $this->_redirect($this->getRequest()->getControllerName());
+                
+            }
+        }
+
     }
 
     /**
@@ -142,7 +218,6 @@ class QueuesGroupsController extends Zend_Controller_Action {
     public function membersAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
             $this->view->translate("Queues Groups"),
             $this->view->translate("Members")));
 
@@ -181,64 +256,29 @@ class QueuesGroupsController extends Zend_Controller_Action {
     }
 
     /**
-     * editAction - Edit queus group
-     */
-    public function editAction() {
-        
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-            $this->view->translate("Manage"),
-            $this->view->translate("Queues Groups"),
-            $this->view->translate("Edit")));
-
-        $id = $this->_request->getParam('id');
-        $group = Snep_QueuesGroups_Manager::get($id);
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("modules/default/forms/queueGroup.xml");
-        $form = new Snep_Form($form_xml->general);
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . "/edit/group/$id");
-
-        $name = $form->getElement('name')->setValue($group['name']);
-
-        if ($this->_request->getPost()) {
-            $form_isValid = $form->isValid($_POST);
-
-            $dados = $this->_request->getParams();
-
-            $db = Zend_Registry::get('db');
-            $groupName = $dados['name'];
-
-            $sqlValidName = "SELECT * from group_queues where name = '$groupName'";
-            $selectValidName = $db->query($sqlValidName);
-            $resultGetId = $selectValidName->fetch();
-            
-            if ($resultGetId) {
-                $form_isValid = false;
-                $form->getElement('name')->addError($this->view->translate('Name already exists.'));
-            }
-            
-            if ($form_isValid) {
-                
-                $this->view->group = Snep_QueuesGroups_Manager::editGroup(array('name' => $dados['name'], 'id' => $dados['group']));
-                $this->_redirect($this->getRequest()->getControllerName());
-            }
-        }
-
-        $this->view->form = $form;
-    }
-
-    /**
-     * deleteAction - Delete queues group
+     * removeAction - Delete queues group
      * @throws Zend_Controller_Action_Exception
      */
-    public function deleteAction() {
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Queues Group"),
+                    $this->view->translate("Delete")));
 
         $id = $this->_request->getParam('id');
 
-        Snep_QueuesGroups_Manager::deleteMembers($id);
-        Snep_QueuesGroups_Manager::deleteGroup($id);
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete Queues Group.'); 
+        $this->view->remove_message = $this->view->translate('The queues group will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'queues-groups'; 
+        $this->renderScript('remove/remove.phtml');
 
-        $this->_redirect($this->getRequest()->getControllerName());
+        if ($this->_request->getPost()) {
+
+            Snep_QueuesGroups_Manager::deleteMembers($_POST['id']);
+            Snep_QueuesGroups_Manager::deleteGroup($_POST['id']);
+            $this->_redirect($this->getRequest()->getControllerName());
+        }
     }
 
 }

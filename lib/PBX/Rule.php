@@ -759,6 +759,7 @@ class PBX_Rule {
      * @return <boolean> validity
      */
     public function isValidTime($time = null, $week = null) {
+
         if ($time === null) {
             $time = date("H:i:s");
         }
@@ -770,6 +771,7 @@ class PBX_Rule {
         }
 
         if (in_array($week, $this->validWeekDays)) {
+            
             foreach ($this->getValidTimeList() as $validTimeRange) {
                 $validTimeRange = explode('-', $validTimeRange);
                 $start = $validTimeRange[0];

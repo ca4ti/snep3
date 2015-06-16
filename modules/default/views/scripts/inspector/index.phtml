@@ -1,24 +1,39 @@
-<div class="snep_form">
-    
-    <div class="inspect">
+<div class="row">
+        
     <?php
-            echo "<ul>";
-                foreach( $this->inspect as $key => $value ) {
+    foreach( $this->inspect as $key => $value ) {
+        if ($value['error']) { ?>
 
-                    $style = ( $value['error'] ? 'list_error' : 'list_no_error' );
+            <div class="col-sm-12">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <?php echo $value['name'];?>
+                    </div>
+                    <div class="panel-body">
+                        <pre><?php echo $value['message'];?></pre>
+                    </div>
+                </div>
+            </div>
 
-                    echo " <li class='$style' > {$value['name']} </li> ";
+        <?php }else{ ?>
 
-                    if ($value['error']) {
-                        echo "<li style=\"background-color: #FFEDED\"> <pre> {$value['message']} </pre> </li>";
-                    }
-                }
-            echo "</ul>";
-    ?>
+            <div class="col-sm-12">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <?php echo $value['name'];?>
+                    </div>
+                </div>
+            </div>    
+    
+        <?php } ?>
+    <?php } ?>
+
+    <div class="snep-body-footer-buttons">
+        <button type="button" class="btn btn-add btn-primary" onclick="location.reload(true)"><?php echo $this->translate("Test again"); ?></button>
+    
     </div>
 
-    <div style="width:170px; margin:0 auto;">
-        <button onclick="location.reload(true)"><?php echo $this->translate("Test again"); ?></button>
-    </div>
+    <br>
+
 
 </div>

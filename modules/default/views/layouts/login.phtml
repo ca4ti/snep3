@@ -1,0 +1,56 @@
+<?php 
+
+echo $this->doctype(); 
+
+$diretorio = getcwd() . "/imagens/login_backgrounds/";
+$ponteiro = opendir($diretorio);
+while ($nome_itens = readdir($ponteiro)) {
+    if ($nome_itens != "." && $nome_itens != "..")
+        $itens[] = $nome_itens;
+}
+$background = array_rand($itens, 1);
+?>
+<html>
+    <head>
+        <?php echo $this->headTitle() . "\n"; ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . "/css/login.css"); ?>
+        <?php echo $this->headLink() . "\n"; ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headStyle() . "\n"; ?>
+        <?php echo $this->headScript() . "\n"; ?>
+    </head>
+    <body style="background: url(<?php echo $this->baseUrl(); ?>/imagens/login_backgrounds/<?php echo $itens[$background]; ?>) no-repeat center center; background-size: cover ;">
+        <div id="loginLayout">
+            <div id="wrapper">
+                <div class="logo"></div>
+                <div class="content">
+                    <?php echo $this->layout()->content; ?>
+                </div>
+                <div id="powered">
+                    <table style="width: 100%">
+                        <tr> 
+                            <td><?php echo $this->translate("Powered by"); ?></td>
+                            <td><?php echo $this->translate("Licensed to"); ?></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="http://www.opens.com.br" target="_blank">
+                                    <div class="powered-icon">
+                                        <img src="<?php echo $this->baseUrl(); ?>/imagens/opens.png"/>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="http://www.kiper.com.br" target="_blank">
+                                    <div class="powered-icon">
+                                        <img src="<?php echo $this->baseUrl(); ?>/imagens/kiper-login.png"/>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -25,8 +25,9 @@ class Snep_Breadcrumb {
 
     public static function renderPath($path) {
         if (is_array($path)) {
-            $path[count($path)-1] = "<strong>" . strtoupper($path[count($path)-1]) . "</strong>";
+            $path[count($path)-1] = "<strong>" . $path[count($path)-1] . "</strong>";
             $data = implode(" » ", $path);
+            
             return $data;
         } else {
             return (string) $path;

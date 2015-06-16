@@ -99,6 +99,25 @@ class Snep_QueuesGroups_Manager {
     }
 
     /**
+     * Method to get a last id of queue 
+     * @return <int> 
+     */
+    public function lastId() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('group_queues', array(' max( floor( id ) ) as id'))
+                ->limit('1');
+
+        $stmt = $db->query($select);
+        $lastId = $stmt->fetch();
+        $return = $lastId['id'];
+
+        return $return;
+    }
+
+    /**
      * deleteMembers - Remove group members from the database based on his  ID.
      *
      * @param int $id

@@ -1,21 +1,48 @@
-<?
-$this->headScript()->appendFile($this->baseUrl() . '/includes/jquery-1.7.2.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/ui/jquery.ui.core.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/ui/jquery.ui.widget.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/ui/jquery.ui.mouse.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/ui/jquery.ui.sortable.js');
-$this->headLink()->appendStylesheet($this->baseUrl() . '/css/dashboard.css');
 
-//$title = new Snep_Title("Dashboard");
-//$title->addOption('edit', $this->baseUrl() . '/index.php/index/edit');
-//echo $title->getHtml();
-?>
+<div class="row snep-body-dashboard">
+	<div class="snep-body-top-buttons">
+        <div class="snep-body-dash-edit-button">  
+            <a class="btn btn-add btn-dashboard" href="<?php echo $this->baseUrl() ?>/index.php/index/add/ " role="button"><?php echo $this->translate("Edit Dashboard")?></a>        
+        </div>
+    </div>
+    <br />
+    
+    <?php 
+    foreach($this->dashboard as $value){ ?>
 
-<div class="dashboard">
-    <?php
-    $dashboard = $this->dashboard;
-    foreach($dashboard as $valor){
-        echo "<a href='".$this->baseUrl() ."/index.php/".(isset($valor['module']) && $valor['module'] ? $valor['module'] : "default")."/$valor[link]' class='$valor[modelo]'><img src='".$this->baseUrl() . "/modules/".(isset($valor['module']) && $valor['module'] ? $valor['module'] : "default")."/img/$valor[icone]' /><span>$valor[nome]</span><br/>$valor[descricao]</a>";
-    }
-    ?>
+    	<?php $link = $this->baseUrl() ."/index.php/".(isset($value['module']) && $value['module'] ? $value['module'] : "default");
+    	$link .= "/$value[link]";
+    	$class = $value['modelo'];
+        $font = $value['icone'][0];
+    	$icon = $this->baseUrl(). "/modules/".(isset($value['module']) && $value['module'] ? $value['module'] : "default")."/img/$value[icone]";
+    	?>
+    	
+    	<a class="dash" href="<?php echo $link; ?>">
+    	<div class="col-lg-3 col-md-4">
+		    <div class="panel panel-orange snep-panel-dashboard">
+		        <div class="panel-heading snep-panel-dashboard-head">
+		            <div class="row">
+
+		                <div class="col-xs-3 <?php echo $font?>" >
+		                    <i class="<?php echo $class; ?>"></i>
+		                </div>
+		                <div class="col-xs-9 text-right">
+		                    <div><?php echo $value['nome']?>
+		                    	<!-- <img src="<?php echo $icon;?>" /> -->
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+
+	            <div class="panel-footer">
+	                <span class="pull-left"><?php echo $value['descricao']?></span>
+	                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                <div class="clearfix"></div>
+	            </div>
+		        
+		    </div>
+		</div>
+		</a>
+
+    <?php } ?>
 </div>

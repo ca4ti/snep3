@@ -1,131 +1,387 @@
-<html>
-  <head>
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
+<?php 
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.min.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.pie.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.categories.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.resize.js');
+$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/graphic/flot/jquery.flot.time.js');
+?>
 
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
+<div class="row">
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(totalStatus);
-      google.setOnLoadCallback(totalType);
-      google.setOnLoadCallback(typeColumn);
-      google.setOnLoadCallback(typeLine);
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Data by Period')?>
+            </div>
 
-      <?php 
-          
-          foreach ($this->period as $value) {  
-              $values .= '[\''.$value[0].'\','.$value[1].','.$value[2].','.$value[3].','.$value[4].'],'; 
-          }
+            <div class="panel-body">
+                
+                <div id="content">
+                    <div id="placeholder" class="demo-placeholder"></div>
+                        <p id="choices"></p>
+                    
+                </div> 
 
-          $values = substr($values,0, -1); 
-      ?>
-      
-      function totalStatus() {
+            </div> 
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Totals')?>
+            </div>
 
-        var status = new google.visualization.DataTable();
-        status.addColumn('string', 'Topping');
-        status.addColumn('number', 'Slices');
-        status.addRows([
-          ['<?php echo $this->translate('Answered');?>', <?php echo $this->totals['ANSWERED'] ?>],
-          ['<?php echo $this->translate('No Answer');?>', <?php echo $this->totals['NO ANSWER'] ?>],
-          ['<?php echo $this->translate('Busy');?>', <?php echo $this->totals['BUSY'] ?>],
-          ['<?php echo $this->translate('Failed');?>', <?php echo $this->totals['FAILED'] ?>]
-        ]);
+            <div class="panel-body">
+                <div class="flot-chart">
+                    <div id="totals" class="demo-placeholder"></div>
+                    <div id="menu-graphic">
+                        <button class="btn btn-outline btn-add" id="totals-1"><?php echo $this->translate('Default Options')?></button>
+                        <button class="btn btn-outline btn-add" id="totals-2"><?php echo $this->translate('Rectangular Pie')?></button>
+                        <button class="btn btn-outline btn-add" id="totals-3"><?php echo $this->translate('Donut Hole')?></button>
+                       
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div> 
 
-        var options = {'title':'<?php echo $this->translate("Status")?>',
-                       'width':400,
-                       'height':270,
-                       'is3D' : true,
-                       'chartArea':{left:25,top:20,width:'90%',height:'75%'}};
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Type')?>
+            </div>
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(status, options);
-      }
+            <div class="panel-body">
+                <div class="flot-chart">
+                    <div id="type" class="demo-placeholder"></div>
+                    <div id="menu-graphic">
+                        <button class="btn btn-outline btn-add" id="type-1"><?php echo $this->translate('Default Options')?></button>
+                        <button class="btn btn-outline btn-add" id="type-2"><?php echo $this->translate('Rectangular Pie')?></button>
+                        <button class="btn btn-outline btn-add" id="type-3"><?php echo $this->translate('Donut Hole')?></button>
+                       
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    
 
-      function totalType() {
+</div>
 
-        var status = new google.visualization.DataTable();
-        status.addColumn('string', 'Topping');
-        status.addColumn('number', 'Slices');
-        status.addRows([
-          ['<?php echo $this->translate('Incoming');?>', <?php echo $this->type['E'] ?>],
-          ['<?php echo $this->translate('Outgoing ');?>', <?php echo $this->type['S'] ?>],
-          ['<?php echo $this->translate('Other');?>', <?php echo $this->type['O'] ?>],
-        ]);
+<script type="text/javascript">
 
-        var options = {'title':'<?php echo $this->translate("Cost Center")?>',
-                       'width':400,
-                       'height':270,
-                       'is3D' : true,
-                       'chartArea':{left:25,top:20,width:'90%',height:'75%'}};
+//TOTALS
+jQuery.noConflict();
+jQuery(function() {
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3dType'));
-        chart.draw(status, options);
-      }
+    var data = [
+        { 
+            label: '<?php echo $this->translate('Answered'); ?>',    
+            data: <?php echo $this->totals->ANSWERED ?>,
+            color: '#228B22'  
+        },
+        {
+            label: '<?php echo $this->translate('No Answer'); ?>',
+            data: <?php echo $this->totals->NOANSWER ?>,
+            color: '#EE3B3B'
+        },
+        {
+            label: '<?php echo $this->translate('Busy'); ?>',
+            data: <?php echo $this->totals->BUSY ?>,
+            color: '#EEC900'
+        },
+        {
+            label: '<?php echo $this->translate('Failed'); ?>',
+            data: <?php echo $this->totals->FAILED ?>,
+            color: '#660099'
+        }
+    ];
 
-     
-      function typeColumn() {
+    var totals = jQuery("#totals");
 
-        var data = google.visualization.arrayToDataTable([
-        ['<?php echo $this->translate('Date');?>',
-        '<?php echo $this->translate('Answered');?>', 
-        '<?php echo $this->translate('No Answer');?>',
-        '<?php echo $this->translate('Busy');?>',
-        '<?php echo $this->translate('Failed');?>' ], 
-        <?php echo $values; ?>
-      ]);
+    jQuery("#totals-1").click(function() {
+
+        totals.unbind();
+
+        jQuery.plot(totals, data, {
+            series: {
+                pie: { 
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 3/4,
+                        formatter: labelFormatter,
+                        background: { 
+                            opacity: 0.5,
+                            color: "#000"
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
+
+    jQuery("#totals-2").click(function() {
+
+        totals.unbind();
+
+        jQuery.plot(totals, data, {
+            series: {
+                pie: { 
+                    show: true,
+                    radius: 500,
+                    label: {
+                        show: true,
+                        radius: 3/4,
+                        formatter: labelFormatter,
+                        background: { 
+                            opacity: 0.5,
+                            color: "#000"
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
+
+    jQuery("#totals-3").click(function() {
+
+        totals.unbind();
         
-      var options = {
-        width: 900,
-        height: 500,
-        legend: { position: 'top', maxLines: 4 },
-        isStacked: true,
-        chartArea: {left:50,top:10,width:'98%',height:'80%'}
-      };
-          
-          var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        jQuery.plot(totals, data, {
+            series: {
+                pie: { 
+                    innerRadius: 0.5,
+                    show: true,
+                    label: {
+                        show: true,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
 
-          chart.draw(data, options);
+    // Show the initial default chart
+    jQuery("#totals-1").click();
+  
+});
 
-      }
+function labelFormatter(label, series) {
+    
+    return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + series.data[0][1] + "(" + Math.round(series.percent) + "%)</div>";
+}
 
-      function typeLine() {
-        var data = google.visualization.arrayToDataTable([
-        ['<?php echo $this->translate('Date');?>',
-        '<?php echo $this->translate('Answered');?>', 
-        '<?php echo $this->translate('No Answer');?>',
-        '<?php echo $this->translate('Busy');?>',
-        '<?php echo $this->translate('Failed');?>' ], 
-        <?php echo $values; ?>
-      ]);
+</script>
 
-        var options = {
-          vAxis: {minValue: 0},
-          chartArea: {left:40,top:10,width:'83%',height:'75%'}
-        };
+<script type="text/javascript">
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
+//TYPE
+jQuery.noConflict();
+jQuery(function() {
 
-    </script>
-  </head>
+    var data = [
+        { 
+            label: '<?php echo $this->translate('Incoming'); ?>',    
+            data: <?php echo $this->type->E; ?>,
+            color: '#228B22'  
+        },
+        {
+            label: '<?php echo $this->translate('Outgoing'); ?>',
+            data: <?php echo $this->type->S; ?>,
+            color: '#EE3B3B'
+        },
+        {
+            label: '<?php echo $this->translate('Other'); ?>',
+            data: <?php echo $this->type->O; ?>,
+            color: '#660099'
+        }
+    ];
 
-  <body>
-    <h2><?php echo $this->translate("Totals")?></h2>
-    <table> 
-        <tr> 
-          <td style="width: 350px"><div id="piechart_3d"></div></td>
-          <td style="width: 350px"><div id="piechart_3dType"></div></td> 
-        </tr> 
-    </table> 
-    <br>
-    <h2><?php echo $this->translate("States By Period")?></h2>
-    <br>
-    <div id="chart_div"></div>
-    <div id="chart_div2"></div>
+    var type = jQuery("#type");
+
+    jQuery("#type-1").click(function() {
+
+        type.unbind();
+
+        jQuery.plot(type, data, {
+            series: {
+                pie: { 
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 3/4,
+                        formatter: labelFormatter,
+                        background: { 
+                            opacity: 0.5,
+                            color: "#000"
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
+
+    jQuery("#type-2").click(function() {
+
+        type.unbind();
+
+        jQuery.plot(type, data, {
+            series: {
+                pie: { 
+                    show: true,
+                    radius: 500,
+                    label: {
+                        show: true,
+                        radius: 3/4,
+                        formatter: labelFormatter,
+                        background: { 
+                            opacity: 0.5,
+                            color: "#000"
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
+
+    jQuery("#type-3").click(function() {
+
+        type.unbind();
         
-  </body>
-</html>
+        jQuery.plot(type, data, {
+            series: {
+                pie: { 
+                    innerRadius: 0.5,
+                    show: true,
+                    label: {
+                        show: true,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: true
+            }
+        });
+    });
+
+    // Show the initial default chart
+    jQuery("#type-1").click();
+  
+});
+
+</script>
+
+<script type="text/javascript">
+
+jQuery.noConflict();
+jQuery(function() {
+
+    <?php   
+    $answered = '';
+    $noanswer = '';
+    $busy = '';
+    $failed = '';
+    foreach($this->calldate as $key => $value){
+        
+        $timestamp = strtotime(str_replace("/", "-", $key));
+        (isset($value->ANSWERED)) ? $answered .= '['.$timestamp.'000'.','.$value->ANSWERED.'],' : $answered .= '['.$timestamp.'000'.',0],' ;
+        (isset($value->NOANSWER)) ? $noanswer .= '['.$timestamp.'000'.','.$value->NOANSWER.'],' : $noanswer .= '['.$timestamp.'000'.',0],' ;
+        (isset($value->BUSY)) ? $busy .= '['.$timestamp.'000'.','.$value->BUSY.'],' : $busy .= '['.$timestamp.'000'.',0],' ;
+        (isset($value->FAILED)) ? $failed .= '['.$timestamp.'000'.','.$value->FAILED.'],' : $failed .= '['.$timestamp.'000'.',0],' ;
+           
+    }
+        $answered = substr($answered,0, -1); 
+        $noanswer = substr($noanswer,0, -1); 
+        $busy = substr($busy,0, -1); 
+        $failed = substr($failed,0, -1); 
+    ?>
+
+    var datasets = {
+        "answer": {
+            label: '<?php echo $this->translate('Answer'); ?>',
+            data: [<?php echo $answered; ?>]
+        },        
+        "noanswer": {
+            label: '<?php echo $this->translate('No Answer'); ?>',
+            data: [<?php echo $noanswer; ?>]
+        },
+        "busy": {
+            label: '<?php echo $this->translate('Busy'); ?>',
+            data: [<?php echo $busy; ?>]
+        },
+        "failed": {
+            label: '<?php echo $this->translate('Failed'); ?>',
+            data: [<?php echo $failed; ?>]
+        }
+    };
+   
+    // hard-code color indices to prevent them from shifting as
+    // countries are turned on/off
+    var i = 0;
+    jQuery.each(datasets, function(key, val) {
+        val.color = i;
+        ++i;
+    });
+
+    // insert checkboxes 
+    var choiceContainer = jQuery("#choices");
+    jQuery.each(datasets, function(key, val) {
+        choiceContainer.append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='" + key +
+            "' checked='checked' id='id" + key + "'></input>" +
+            "<label for='id" + key + "'>"
+            + val.label + "</label>");
+    });
+
+    choiceContainer.find("input").click(plotAccordingToChoices);
+
+    function plotAccordingToChoices() {
+
+        var data = [];
+
+        choiceContainer.find("input:checked").each(function () {
+            var key = jQuery(this).attr("name");
+            if (key && datasets[key]) {
+                data.push(datasets[key]);
+            }
+        });
+
+        if (data.length > 0) {
+            jQuery.plot("#placeholder", data, {
+                yaxis: {
+                    min: 0
+                },
+                lines: { show: true },
+                points: { show: true },
+                xaxis: { mode: "time", timeformat: "%d/%m/%y"}
+            });
+        }
+    }
+
+    plotAccordingToChoices();
+
+});
+
+</script>

@@ -164,7 +164,7 @@ class Snep_Users_Manager {
      * @return \Exception|boolean
      */
     public function addProfileByName($data) {
-
+        
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         $cond = $data['box'];

@@ -206,6 +206,7 @@ class Snep_ExtensionsGroups_Manager {
      */
     public function addExtensionsGroup($extensionsGroup) {
 
+
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
 

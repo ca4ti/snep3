@@ -41,6 +41,7 @@ class Snep_Form_Simple extends Snep_Form_Sectioned {
      * setButton
      */
     protected function setButton() {
+        
         $submit = new Zend_Form_Element_Submit("submit", array("label" => "Salvar"));
         $submit->removeDecorator('DtDdWrapper');
         $submit->addDecorator(array("opentd" => 'HtmlTag'), array('class' => 'form_control_left' , 'tag' => 'td' ));

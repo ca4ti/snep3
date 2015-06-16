@@ -1,28 +1,36 @@
-<form  action="<?php echo $this->url(array("controller" => "auth", "action" => "login"), null, true); ?>" METHOD="post">
-    <?php if ($this->message): ?>
+<link href="/snep/css/login.css" rel="stylesheet">
+<link href="/snep/css/bootstrap.min.css" rel="stylesheet">
+<div class="row">
+    <?php if($this->message): ?>
         <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
     <?php endif; ?>
-    <dl id="login_form">
 
-        <div class="form_element">
-            <dt><?php echo $this->translate("User"); ?>:</dt>
-            <dd><input type="text" size="30" id="exten" name="user"></dd>
-        </div>
 
-        <div class="form_element">
-            <dt><?php echo $this->translate("Password"); ?>:</dt>
-            <dd><input type="password" size="30" name="password" /></dd>
-        </div>
+    <form  action="<?php echo $this->url(array("controller" => "auth", "action" => "login"), null, true); ?>" METHOD="post">
+        <div id="login">
+            <dl id="login_form">
+                <div class="login_box">
 
-        <div class="form_element">
-            <dt></dt>
-            <dd><input type="submit" value="<?php echo $this->translate("Enter"); ?>" /></dd>
-        </div>
-        <?php $password_recovery = $this->translate("Forgot Password?"); ?>
-        <div class="login_password">
-            <?php echo "<a href=\"{$this->PAGE}\">$password_recovery<a/>"; ?>
-        </div>
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("User"); ?>:</dt>
+                        <input class="form-control" name="user" type="text" autofocus>
+                        </div>
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("Password"); ?>:</dt>
+                        <input class="form-control" name="password" type="password" value="">
+                    </div>
+                    <br />
+                    <div class="btn btn-lg btn-primary btn-block snep-login">
+                       <input type="submit" value="<?php echo $this->translate("Sign in"); ?>" />
+                    </div>
 
-    </dl>
-</form>
+                    <?php $password_recovery = $this->translate("Forgot Password?"); ?>
+                    
+                    <?php echo "<a class='login_password' href=\"{$this->PAGE}\">$password_recovery<a/>"; ?>
+                    
+                </div>
+            </dl>
+        </div>
+    </form>
+</div>    
 

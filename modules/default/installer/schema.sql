@@ -1,0 +1,811 @@
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as
+ *  published by the Free Software Foundation, either version 3 of
+ *  the License, or (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
+ */
+
+--
+-- Table structure for table `agentes`
+--
+CREATE TABLE IF NOT EXISTS `agentes` (
+  `agentid` int(11) NOT NULL default '0',
+  `name` varchar(100) NOT NULL default '',
+  `agentpassword` varchar(50) NOT NULL default '',
+  `horario` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`agentid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `expr_alias`
+--
+CREATE TABLE IF NOT EXISTS expr_alias (
+    `aliasid` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `expr_alias_expression`
+--
+CREATE TABLE IF NOT EXISTS expr_alias_expression (
+    `aliasid` INTEGER NOT NULL,
+    `expression` VARCHAR(200) NOT NULL,
+    FOREIGN KEY (`aliasid`) REFERENCES expr_alias(`aliasid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `regras_negocio`
+--
+CREATE TABLE IF NOT EXISTS regras_negocio (
+  id integer PRIMARY KEY auto_increment,
+  prio integer NOT NULL default 0,
+  `desc` varchar(255) default NULL,
+  origem text NOT NULL,
+  destino text NOT NULL,
+  validade text NOT NULL,
+  diasDaSemana varchar(30) NOT NULL DEFAULT "sun,mon,tue,wed,thu,fri,sat",
+  record boolean NOT NULL default false,
+  ativa boolean NOT NULL default true,
+  mailing boolean NOT NULL default false
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `regras_negocio_actions`
+--
+CREATE TABLE IF NOT EXISTS regras_negocio_actions (
+  regra_id integer NOT NULL,
+  prio integer NOT NULL,
+  `action` varchar(250) NOT NULL,
+  PRIMARY KEY(regra_id, prio),
+  FOREIGN KEY (regra_id) REFERENCES regras_negocio(id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `regras_negocio_actions_config`
+--
+CREATE TABLE IF NOT EXISTS regras_negocio_actions_config (
+  regra_id integer NOT NULL,
+  prio integer NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY(regra_id,prio,`key`),
+  FOREIGN KEY (regra_id, prio) REFERENCES regras_negocio_actions (regra_id, prio) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `registry`
+--
+CREATE TABLE IF NOT EXISTS `registry` (
+    `context` VARCHAR(50),
+    `key` VARCHAR(30),
+    `value` VARCHAR(250),
+    PRIMARY KEY (`context`,`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ccustos`
+--
+CREATE TABLE IF NOT EXISTS `ccustos` (
+  `codigo` char(7) NOT NULL,
+  `tipo` char(1) NOT NULL,
+  `nome` varchar(40) NOT NULL,
+  `descricao` varchar(250) default NULL,
+  PRIMARY KEY  (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `cdr`
+--
+CREATE TABLE IF NOT EXISTS `cdr` (
+  `calldate` datetime NOT NULL default '0000-00-00 00:00:00',
+  `clid` varchar(80) NOT NULL default '',
+  `src` varchar(80) NOT NULL default '',
+  `dst` varchar(80) NOT NULL default '',
+  `dcontext` varchar(80) NOT NULL default '',
+  `channel` varchar(80) NOT NULL default '',
+  `dstchannel` varchar(80) NOT NULL default '',
+  `lastapp` varchar(80) NOT NULL default '',
+  `lastdata` varchar(80) NOT NULL default '',
+  `duration` int(11) NOT NULL default '0',
+  `billsec` int(11) NOT NULL default '0',
+  `disposition` varchar(45) NOT NULL default '',
+  `amaflags` int(20) NOT NULL default '0',
+  `accountcode` varchar(20) NOT NULL default '',
+  `uniqueid` varchar(32) NOT NULL default '',
+  `userfield` varchar(255) NOT NULL default '',
+  KEY `calldate` (`calldate`),
+  KEY `dst` (`dst`),
+  KEY `accountcode` (`accountcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --
+-- -- Table structure for table `cdr_compactado`
+-- --
+-- CREATE TABLE IF NOT EXISTS `cdr_compactado` (
+--   `userfield` varchar(255) default NULL,
+--   `arquivo` varchar(255) default NULL,
+--   `data` date default NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `events`
+--
+CREATE TABLE IF NOT EXISTS `events` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `timestamp` datetime NOT NULL default '0000-00-00 00:00:00',
+  `event` longtext,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `grupos`
+--
+CREATE TABLE IF NOT EXISTS `grupos` (
+  `cod_grupo` integer NOT NULL auto_increment,
+  `nome` varchar(30) NOT NULL,
+  UNIQUE KEY `cod_grupo` (`cod_grupo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `oper_ccustos`
+--
+CREATE TABLE IF NOT EXISTS `oper_ccustos` (
+  `operadora` int(11) NOT NULL,
+  `ccustos` char(7) NOT NULL,
+  PRIMARY KEY  (`operadora`,`ccustos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `oper_contas`
+--
+CREATE TABLE IF NOT EXISTS `oper_contas` (
+  `operadora` int(11) NOT NULL,
+  `conta` int(11) NOT NULL,
+  PRIMARY KEY  (`operadora`,`conta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `operadoras`
+--
+CREATE TABLE IF NOT EXISTS `operadoras` (
+  `codigo` bigint(20) unsigned NOT NULL auto_increment,
+  `nome` varchar(50) NOT NULL,
+  `tpm` int(11) default '0',
+  `tdm` int(11) default '0',
+  `tbf` float default '0',
+  `tbc` float default '0',
+  `vpf` float NOT NULL default '0',
+  `vpc` float NOT NULL default '0',
+  PRIMARY KEY  (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `groups`
+--
+CREATE TABLE IF NOT EXISTS groups (
+    name varchar(50) PRIMARY KEY,
+    inherit varchar(50),
+    FOREIGN KEY (inherit) REFERENCES groups(name) ON UPDATE CASCADE
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `peers`
+--
+CREATE TABLE IF NOT EXISTS `peers` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(80) NOT NULL default '',
+  `password` VARCHAR(12) NOT NULL,
+  `accountcode` varchar(20) default NULL,
+  `amaflags` varchar(13) default NULL,
+  `callgroup` varchar(10) default NULL,
+  `callerid` varchar(80) default NULL,
+  `canreinvite` char(3) default 'no',
+  `context` varchar(80) default NULL,
+  `defaultip` varchar(15) default NULL,
+  `dtmfmode` varchar(7) default NULL,
+  `fromuser` varchar(80) default NULL,
+  `fromdomain` varchar(80) default NULL,
+  `fullcontact` varchar(80) default NULL,
+  `host` varchar(31) NOT NULL default '',
+  `insecure` varchar(4) default NULL,
+  `language` char(2) default 'br',
+  `mailbox` varchar(50) default NULL,
+  `md5secret` varchar(80) default '',
+  `nat` varchar(5) NOT NULL default 'no',
+  `deny` varchar(95) default NULL,
+  `permit` varchar(95) default NULL,
+  `mask` varchar(95) default NULL,
+  `pickupgroup` integer default NULL,
+  `port` varchar(5) NOT NULL default '',
+  `qualify` char(5) default NULL,
+  `restrictcid` char(1) default NULL,
+  `rtptimeout` char(3) default NULL,
+  `rtpholdtimeout` char(3) default NULL,
+  `secret` varchar(80) default NULL,
+  `type` varchar(6) NOT NULL default 'friend',
+  `username` varchar(80) NOT NULL default '',
+  `disallow` varchar(100) default 'all',
+  `allow` varchar(100) default 'ulaw;alaw;gsm',
+  `musiconhold` varchar(100) default NULL,
+  `regseconds` int(11) NOT NULL default '0',
+  `ipaddr` varchar(15) NOT NULL default '',
+  `regexten` varchar(80) NOT NULL default '',
+  `cancallforward` varchar(3) default 'yes',
+  `setvar` varchar(100) NOT NULL default '',
+  `email` varchar(255) default NULL,
+  `canal` varchar(255) default NULL,
+  `call-limit` varchar(4) default NULL,
+  `incominglimit` varchar(4) default NULL,
+  `outgoinglimit` varchar(4) default NULL,
+  `usa_vc` varchar(4) NOT NULL default 'no',
+  `peer_type` char(1) NOT NULL default 'R',
+  `credits` int(11) default NULL,
+  `authenticate` boolean not null default false,
+  `subscribecontext` varchar(40) default NULL,
+  `trunk` varchar(3) NOT NULL,
+  `group` varchar(50) NOT NULL DEFAULT 'users',
+  `time_total` int(11) default NULL,
+  `time_chargeby` char(1) default NULL,
+  `regserver` int(250) default NULL,
+  `dnd` BOOL NOT NULL DEFAULT '0',
+  `sigame` VARCHAR( 20 ) NULL ,
+  `directmedia` varchar(10),
+  `lastms` int(11) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `name_2` (`name`),
+  FOREIGN KEY (`group`) REFERENCES groups(`name`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  FOREIGN KEY (`pickupgroup`) REFERENCES grupos(`cod_grupo`) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `services_log`
+--
+CREATE TABLE IF NOT EXISTS `services_log` (
+  `date` datetime NOT NULL,
+  `peer` varchar(80) NOT NULL,
+  `service` varchar(50) NOT NULL,
+  `state` tinyint(1) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `permissoes`
+--
+-- CREATE TABLE IF NOT EXISTS `permissoes` (
+--   `cod_rotina` int(11) NOT NULL default '0',
+--   `cod_usuario` int(11) NOT NULL default '0',
+--   `permissao` char(1) NOT NULL default 'S',
+--   PRIMARY KEY  (`cod_rotina`,`cod_usuario`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `queue_log`
+--
+CREATE TABLE IF NOT EXISTS queue_log (
+  id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  time char(26) default NULL,
+  callid varchar(32) NOT NULL default '',
+  queuename varchar(32) NOT NULL default '',
+  agent varchar(32) NOT NULL default '',
+  event varchar(32) NOT NULL default '',
+  data1 varchar(100) NOT NULL default '',
+  data2 varchar(100) NOT NULL default '',
+  data3 varchar(100) NOT NULL default '',
+  data4 varchar(100) NOT NULL default '',
+  data5 varchar(100) NOT NULL default '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `queue_members`
+--
+CREATE TABLE IF NOT EXISTS `queue_members` (
+  `uniqueid` int(10) unsigned NOT NULL auto_increment,
+  `membername` varchar(40) default NULL,
+  `queue_name` varchar(128) default NULL,
+  `interface` varchar(128) default NULL,
+  `penalty` int(11) default NULL,
+  `paused` tinyint(1) default NULL,
+  PRIMARY KEY  (`uniqueid`),
+  UNIQUE KEY `queue_interface` (`queue_name`,`interface`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `queue_peers`
+--
+CREATE TABLE IF NOT EXISTS `queue_peers` (
+  `fila` varchar(80) NOT NULL default '',
+  `ramal` int(11) NOT NULL,
+  PRIMARY KEY  (`ramal`,`fila`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `queues`
+--
+CREATE TABLE IF NOT EXISTS `queues` (
+  `id` integer auto_increment,
+  `name` varchar(128) NOT NULL,
+  `musiconhold` varchar(128) default NULL,
+  `announce` varchar(128) default NULL,
+  `context` varchar(128) default NULL,
+  `timeout` int(11) default NULL,
+  `monitor_type` tinyint(1) default NULL,
+  `monitor_format` varchar(128) default NULL,
+  `queue_youarenext` varchar(128) default NULL,
+  `queue_thereare` varchar(128) default NULL,
+  `queue_callswaiting` varchar(128) default NULL,
+  `queue_holdtime` varchar(128) default NULL,
+  `queue_minutes` varchar(128) default NULL,
+  `queue_seconds` varchar(128) default NULL,
+  `queue_lessthan` varchar(128) default NULL,
+  `queue_thankyou` varchar(128) default NULL,
+  `queue_reporthold` varchar(128) default NULL,
+  `announce_frequency` int(11) default NULL,
+  `announce_round_seconds` int(11) default NULL,
+  `announce_holdtime` varchar(128) default NULL,
+  `retry` int(11) default NULL,
+  `wrapuptime` int(11) default NULL,
+  `maxlen` int(11) default NULL,
+  `servicelevel` int(11) default NULL,
+  `strategy` varchar(128) default NULL,
+  `joinempty` varchar(128) default NULL,
+  `leavewhenempty` varchar(128) default NULL,
+  `eventmemberstatus` tinyint(1) default NULL,
+  `eventwhencalled` tinyint(1) default NULL,
+  `reportholdtime` tinyint(1) default NULL,
+  `memberdelay` int(11) default NULL,
+  `weight` int(11) default NULL,
+  `timeoutrestart` tinyint(1) default NULL,
+  `periodic_announce` varchar(50) default NULL,
+  `periodic_announce_frequency` int(11) default NULL,
+  `max_call_queue` int(11) default '0',
+  `max_time_call` int(11) default '0',
+  `alert_mail` varchar(80) default NULL,
+  PRIMARY KEY  (`id`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `queues_agent`
+--
+CREATE TABLE IF NOT EXISTS `queues_agent` (
+  `agent_id` int(11) NOT NULL,
+  `queue` varchar(80) NOT NULL,
+  `penalty` VARCHAR(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `rotinas`
+--
+-- CREATE TABLE IF NOT EXISTS `rotinas` (
+--   `cod_rotina` int(11) NOT NULL default '0',
+--   `desc_rotina` varchar(50) NOT NULL default '',
+--   PRIMARY KEY  (`cod_rotina`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `sounds`
+--
+CREATE TABLE IF NOT EXISTS `sounds` (
+  `arquivo` varchar(50) NOT NULL,
+  `descricao` varchar(80) NOT NULL,
+  `data` datetime default NULL,
+  `tipo` char(3) NOT NULL default 'AST',
+  `secao` varchar(30) NOT NULL,
+  PRIMARY KEY  (`arquivo`,`tipo`,`secao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `tarifas`
+--
+CREATE TABLE IF NOT EXISTS `tarifas` (
+  `operadora` int(11) NOT NULL default '0',
+  `ddi` smallint(6) NOT NULL default '0',
+  `pais` varchar(30) NOT NULL default '',
+  `ddd` smallint(6) NOT NULL default '0',
+  `cidade` varchar(30) NOT NULL default '',
+  `estado` char(2) NOT NULL default '',
+  `prefixo` varchar(6) NOT NULL default '',
+  `codigo` int(11) NOT NULL auto_increment,
+  PRIMARY KEY  (`codigo`),
+  UNIQUE KEY `operadora` (`operadora`,`ddi`,`ddd`,`prefixo`,`cidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `tarifas_valores`
+--
+CREATE TABLE IF NOT EXISTS `tarifas_valores` (
+  `codigo` int(11) NOT NULL,
+  `data` datetime NOT NULL,
+  `vcel` float NOT NULL default '0',
+  `vfix` float NOT NULL default '0',
+  `vpf` float NOT NULL default '0',
+  `vpc` float NOT NULL default '0',
+  PRIMARY KEY  (`codigo`,`data`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `trunks`
+--
+CREATE TABLE IF NOT EXISTS `trunks` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(80) NOT NULL default '',
+  `accountcode` varchar(20) default NULL,
+  `callerid` varchar(80) default NULL,
+  `context` varchar(80) default NULL,
+  `dtmfmode` varchar(7) default NULL,
+  `insecure` varchar(20) default NULL,
+  `secret` varchar(80) default NULL,
+  `username` varchar(80) default NULL,
+  `allow` varchar(100) default 'g729;ilbc;gsm;ulaw;alaw',
+  `channel` varchar(255) default NULL,
+  `type` varchar(200) default NULL,
+  `trunktype` char(1) NOT NULL,
+  `host` varchar(31) default NULL,
+  `trunk_redund` int(11) default NULL,
+  `time_total` int(11) default NULL,
+  `time_chargeby` char(1) default NULL,
+  `dialmethod` VARCHAR(6) NOT NULL DEFAULT 'NORMAL',
+  `id_regex` VARCHAR(255) NULL,
+  `map_extensions` BOOLEAN DEFAULT FALSE,
+  `reverse_auth` BOOLEAN DEFAULT TRUE,
+  `dtmf_dial` BOOLEAN NOT NULL DEFAULT FALSE,
+  `dtmf_dial_number` VARCHAR(50) DEFAULT NULL,
+  `domain` VARCHAR( 250 ) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `time_history`
+--
+CREATE TABLE IF NOT EXISTS `time_history` (
+  `id` integer NOT NULL auto_increment,
+  `owner` integer NOT NULL,
+  `year` integer NOT NULL,
+  `month` integer,
+  `day` integer,
+  `used` integer NOT NULL default '0',
+  `changed` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `owner_type` char(1) NOT NULL default 'T',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+--
+-- Table structure for table `vinculos`
+--
+-- CREATE TABLE IF NOT EXISTS `vinculos` (
+--   `ramal` varchar(80) default NULL,
+--   `cod_usuario` varchar(80) default NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `voicemail_messages`
+--
+CREATE TABLE IF NOT EXISTS `voicemail_messages` (
+  `id` int(11) NOT NULL auto_increment,
+  `msgnum` int(11) NOT NULL default '0',
+  `dir` varchar(80) default '',
+  `context` varchar(80) default '',
+  `macrocontext` varchar(80) default '',
+  `callerid` varchar(40) default '',
+  `origtime` varchar(40) default '',
+  `duration` varchar(20) default '',
+  `mailboxuser` varchar(80) default '',
+  `mailboxcontext` varchar(80) default '',
+  `recording` longblob,
+  PRIMARY KEY  (`id`),
+  KEY `dir` (`dir`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `voicemail_users`
+--
+CREATE TABLE IF NOT EXISTS `voicemail_users` (
+  `uniqueid` int(11) NOT NULL auto_increment,
+  `customer_id` varchar(11) NOT NULL default '0',
+  `context` varchar(50) default '',
+  `mailbox` varchar(11) NOT NULL default '0',
+  `password` varchar(5) NOT NULL default '0',
+  `fullname` varchar(150) NOT NULL default '',
+  `email` varchar(50) NOT NULL default '',
+  `pager` varchar(50) default '',
+  `tz` varchar(10) NOT NULL default 'central24',
+  `attach` varchar(4) NOT NULL default 'yes',
+  `saycid` varchar(4) NOT NULL default 'yes',
+  `dialout` varchar(10) default '',
+  `callback` varchar(10) default '',
+  `review` varchar(4) NOT NULL default 'no',
+  `operator` varchar(4) NOT NULL default 'no',
+  `envelope` varchar(4) NOT NULL default 'no',
+  `sayduration` varchar(4) NOT NULL default 'no',
+  `saydurationm` tinyint(4) NOT NULL default '1',
+  `sendvoicemail` varchar(4) NOT NULL default 'no',
+  `delete` varchar(4) NOT NULL default 'no',
+  `nextaftercmd` varchar(4) NOT NULL default 'yes',
+  `forcename` varchar(4) NOT NULL default 'no',
+  `forcegreetings` varchar(4) NOT NULL default 'no',
+  `hidefromdir` varchar(4) NOT NULL default 'yes',
+  `stamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`uniqueid`),
+  KEY `mailbox_context` (`mailbox`,`context`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `lista_abandono`
+--
+CREATE TABLE IF NOT EXISTS `lista_abandono` (
+  `time` int(20) NOT NULL,
+  `data` varchar(150) NOT NULL,
+  `fila` varchar(150) NOT NULL,
+  `canal` varchar(150) NOT NULL,
+  `evento` varchar(150) NOT NULL,
+  `par1` varchar(30) NOT NULL,
+  `par2` varchar(30) NOT NULL,
+  `par3` varchar(30) NOT NULL,
+  `date` datetime NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `permissoes_vinculos`
+--
+-- CREATE TABLE IF NOT EXISTS `permissoes_vinculos` (
+--   `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+--   `id_peer` VARCHAR( 100 ) NOT NULL ,
+--   `tipo` CHAR( 1 ) NOT NULL,
+--   `id_vinculado` VARCHAR( 100 ) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `alertas`
+--
+-- CREATE TABLE IF NOT EXISTS `alertas` (
+--   `recurso` VARCHAR( 20 ) NOT NULL ,
+--   `tipo` VARCHAR( 10 ) NOT NULL ,
+--   `tme` INT( 10 ) NOT NULL ,
+--   `sla` INT( 10 ) NOT NULL ,
+--   `item` VARCHAR( 20 ) NOT NULL ,
+--   `alerta` VARCHAR( 255 ) NOT NULL ,
+--   `destino` VARCHAR( 255 ) NOT NULL ,
+--   `ativo` TINYINT( 1 ) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ars_operadora`
+--
+CREATE TABLE IF NOT EXISTS ars_operadora (
+    `id` integer primary key auto_increment,
+    `name` varchar(30) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ars_estado`
+--
+CREATE TABLE IF NOT EXISTS ars_estado (
+    `cod` char(2) primary key,
+    `name` varchar(30) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ars_cidade`
+--
+CREATE TABLE IF NOT EXISTS ars_cidade (
+    `id` integer primary key auto_increment,
+    `name` varchar(50) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ars_ddd`
+--
+CREATE TABLE IF NOT EXISTS ars_ddd (
+    `cod` char(2),
+    `estado` char(2),
+    `cidade` integer,
+    primary key (`cod`,`estado`,`cidade`),
+    foreign key (`estado`) references ars_estado(`cod`) on update cascade on delete restrict,
+    foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `ars_prefixo`
+--
+CREATE TABLE IF NOT EXISTS ars_prefixo (
+    `prefixo` integer,
+    `cidade` integer,
+    `operadora` integer,
+    primary key (`prefixo`,`cidade`,`operadora`),
+    foreign key (`operadora`) references ars_operadora(`id`) on update cascade on delete restrict,
+    foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `contacts_group`
+--
+CREATE TABLE IF NOT EXISTS `contacts_group` (
+  `id` integer NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `contacts_names`
+--
+CREATE TABLE IF NOT EXISTS `contacts_names` (
+  `id` integer NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(2) NOT NULL,
+  `cep` varchar(8) NOT NULL,
+  `group` integer NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `validation`
+--
+CREATE TABLE IF NOT EXISTS `validation` (
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `message` longtext,
+  `checksum` varchar(40) DEFAULT NULL,
+  `blockView` tinyint(1) DEFAULT '0',
+  `blockAst` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- NOVA ESTRUTURA ADICIONADA / TIAGO
+
+--
+-- Table structure for table `contacts_phone`
+--
+CREATE TABLE IF NOT EXISTS `contacts_phone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `contact_id` int NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contact_id` (`contact_id`),
+  CONSTRAINT `contacts_phone_refs_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contacts_names` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `profiles`
+--
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `permissions`
+--
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(11) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+--
+-- Table structure for table `users`
+--
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `profile_id` INT NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `profile_id` (`profile_id`),
+  CONSTRAINT `fk_user_profile` FOREIGN KEY (`profile_id` ) REFERENCES `profiles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `profiles_permissions`
+--
+CREATE TABLE IF NOT EXISTS `profiles_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_id` varchar(256) NOT NULL,
+  `profile_id` INT NOT NULL,
+  `allow` tinyint(1) NOT NULL default '0',
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `profile_id` (`profile_id`),
+  CONSTRAINT `fk_user_profiles` FOREIGN KEY (`profile_id` ) REFERENCES `profiles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `users_permissions`
+--
+CREATE TABLE IF NOT EXISTS `users_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` varchar(256) NOT NULL,
+  `allow` tinyint(1) NOT NULL default '0',
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `fk_user_users` FOREIGN KEY (`user_id` ) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `binds`
+--
+CREATE TABLE IF NOT EXISTS `binds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `peer_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `peer_id` (`peer_id`),
+  CONSTRAINT `binds_refs_peer_id` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `binds_peer_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `password_recovery`
+--
+CREATE TABLE IF NOT EXISTS `password_recovery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `created` datetime NOT NULL,
+  `expiration` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `password_recovery_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexing table `cdr`
+--
+CREATE INDEX cdr_clid ON cdr (clid(30));
+CREATE INDEX cdr_src ON cdr (src(30));
+CREATE INDEX cdr_dst ON cdr (dst(30));
+CREATE INDEX cdr_dcontext ON cdr (dcontext(30));
+CREATE INDEX cdr_channel ON cdr (channel(30));
+CREATE INDEX cdr_dstchannel ON cdr (dstchannel(50));
+CREATE INDEX cdr_lastapp ON cdr (lastapp(30));
+CREATE INDEX cdr_lastdata ON cdr (lastdata(50));
+CREATE INDEX cdr_disposition ON cdr (disposition(30));
+CREATE INDEX cdr_accountcode ON cdr (accountcode(20));
+CREATE INDEX cdr_uniqueid ON cdr (uniqueid(32));
+CREATE INDEX cdr_userfield ON cdr (userfield(120));
+
+--
+-- Indexing table 'lista_abandono'
+--
+CREATE INDEX lista_abandono_time ON lista_abandono (time);
+
+--
+-- Indexing table 'queue_log'
+--
+CREATE INDEX queue_log_time ON queue_log (time);
+CREATE INDEX queue_log_callid ON queue_log (callid);
+CREATE INDEX queue_log_queuename ON queue_log (queuename);
+CREATE INDEX queue_log_agent ON queue_log (agent);
+CREATE INDEX queue_log_event ON queue_log (event);

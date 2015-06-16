@@ -35,21 +35,29 @@ class IpStatusController extends Zend_Controller_Action {
      */
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Status"),
-                    $this->view->translate("IP Status")));
+                    $this->view->translate("Ip Status")));
 
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-            $this->_redirect("/ip-status/asterisk-error");
+            $this->view->error_message = $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             return;
         }
 
         if (!$data = ast_status("database show", "", True)) {
-            $this->_redirect("/ip-status/asterisk-error");
+            $this->view->error_message = $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             exit;
         }
 
+
+        // Peers  -  asterisk 11 show only registered peers
+        if (!$data = ast_status("database show", "", True)) {
+            $this->view->error_message = $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
+            exit;
+        }
         $lines = explode("\n", $data);
         $arr = array();
 
@@ -67,60 +75,11 @@ class IpStatusController extends Zend_Controller_Action {
             }
         }
 
-        /**
-         * ramalInfo
-         * @param <String> $ramal
-         * @return <string>
-         */
-        function ramalInfo($ramal) {
-            if ($ramal['tec'] == 'SIP') {
-                if (!$info = ast_status("sip show peer {$ramal['num']}", "", True)) {
-                    display_error($LANG['msg_nosocket'], true);
-                    exit;
-                }
 
-                $return = null;
-
-                $return = array();
-
-                if (preg_match("/(\d+)/", $info, $matches)) {
-                    $return['ramal'] = $matches[0];
-                }
-                else
-                    $return['ramal'] = 'Indeterminado';
-
-                $return['tipo'] = 'SIP';
-
-                $tmp = substr($info, strpos($info, 'Addr->IP'), +35);
-                if (preg_match("#[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}# ", $tmp, $matches)) {
-                    $return['ip'] = $matches[0];
-                }
-                else
-                    $return['ip'] = 'Indeterminado';
-
-                $tmp = substr($info, strpos($info, 'Status'), +40);
-                if (preg_match("#\((.*?)\)#", $tmp, $matches))
-                    $return['delay'] = $matches[0];
-                else
-                    $return['delay'] = '---';
-
-                $tmp = substr($info, strpos($info, 'Codec Order'), +50);
-                if (preg_match("#\((.*?)\)#", $tmp, $matches)) {
-                    $return['codec'] = $matches[0];
-                    $return['codec'] = str_replace(")", "", $return['codec']);
-                    $return['codec'] = str_replace("(", "", $return['codec']);
-                    $return['codec'] = str_replace("|", ", ", $return['codec']);
-                }
-                else
-                    $return['codec'] = '---';
-
-                return $return;
-            }
-        }
 
         $ramais = array();
         foreach ($lista as $ram) {
-            $swp = ramalInfo($ram);
+            $swp = $this->ramalInfo($ram);
 
             if ($swp['ramal'] != '') {
                 $ramais[] = $swp;
@@ -155,7 +114,8 @@ class IpStatusController extends Zend_Controller_Action {
             $troncos[$val]['latencia'] = "N.D.";
         }
         if (!$iax_trunk = ast_status("iax2 show peers", "", True)) {
-            display_error($LANG['msg_nosocket'], true);
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             exit;
         }
 
@@ -254,7 +214,8 @@ class IpStatusController extends Zend_Controller_Action {
             $troncos[$val]['latencia'] = "N.D.";
         }
         if (!$sip_trunk = ast_status("sip show peers", "", True)) {
-            display_error($LANG['msg_nosocket'], true);
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             exit;
         }
 
@@ -362,7 +323,8 @@ class IpStatusController extends Zend_Controller_Action {
         /* -------------------------------------------------------------------------------------- */
 
         if (!$codecs = ast_status("g729 show licenses", "", True)) {
-            display_error($LANG['msg_nosocket'], true);
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             exit;
         }
 
@@ -384,10 +346,55 @@ class IpStatusController extends Zend_Controller_Action {
     }
 
     /**
-     * asterisErrorAction
+     * ramalInfo
+     * @param <String> $ramal
+     * @return <string>
      */
-    public function asteriskErrorAction() {
-        
+    function ramalInfo($ramal) {
+        if ($ramal['tec'] == 'SIP') {
+            if (!$info = ast_status("sip show peer {$ramal['num']}", "", True)) {
+                $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+                $this->renderScript('error/sneperror.phtml');
+                exit;
+            }
+
+            $return = null;
+
+            $return = array();
+
+            if (preg_match("/(\d+)/", $info, $matches)) {
+                $return['ramal'] = $matches[0];
+            }
+            else
+                $return['ramal'] = 'Indeterminado';
+
+            $return['tipo'] = 'SIP';
+
+            $tmp = substr($info, strpos($info, 'Addr->IP'), +35);
+            if (preg_match("#[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}# ", $tmp, $matches)) {
+                $return['ip'] = $matches[0];
+            }
+            else
+                $return['ip'] = 'Indeterminado';
+
+            $tmp = substr($info, strpos($info, 'Status'), +40);
+            if (preg_match("#\((.*?)\)#", $tmp, $matches))
+                $return['delay'] = $matches[0];
+            else
+                $return['delay'] = '---';
+
+            $tmp = substr($info, strpos($info, 'Codec Order'), +50);
+            if (preg_match("#\((.*?)\)#", $tmp, $matches)) {
+                $return['codec'] = $matches[0];
+                $return['codec'] = str_replace(")", "", $return['codec']);
+                $return['codec'] = str_replace("(", "", $return['codec']);
+                $return['codec'] = str_replace("|", ", ", $return['codec']);
+            }
+            else
+                $return['codec'] = '---';
+
+            return $return;
+        }
     }
 
 }

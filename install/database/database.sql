@@ -24,10 +24,10 @@
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 
-CREATE DATABASE IF NOT EXISTS `snep25`;
+CREATE DATABASE IF NOT EXISTS `snep`;
 
 GRANT ALL PRIVILEGES ON * . * TO 'snep'@'localhost' IDENTIFIED BY 'sneppass' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 
-GRANT ALL PRIVILEGES ON `snep25` . * TO 'snep'@'localhost';
+GRANT ALL PRIVILEGES ON `snep` . * TO 'snep'@'localhost';
 
 FLUSH PRIVILEGES;

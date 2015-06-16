@@ -1,62 +1,109 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/src/scriptaculous.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/registrations.js');
-echo $this->render('filter.phtml');
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.core.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
+$this->headScript()->appendFile( $this->baseUrl() . '/includes/javascript/removeItem.js');
 ?>
 
-<table>
-   <thead>
-      <tr>
-         <th> <?php echo Snep_Order::getLink($this, 'Name', 'name') ?></th>
-         <th> <?php echo Snep_Order::getLink($this, 'Type', 'inherit') ?></th>
-         <th colspan="2" class="action"> <?php echo $this->translate('Actions') ?> </th>
-      </tr>
-   </thead>
-   <tbody>
-    <?php
-    $c = 0;
-    if($this->extensionsgroups):
-        foreach($this->extensionsgroups as $cha => $val ): ?>
-            <?php ($c ? $c = 0 : $c = 1 ); ?>
+<script src="/snep/includes/javascript/footable/footable.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.sort.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.filter.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.paginate.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/bootstrap-tab.js" type="text/javascript"></script>  
+
+<div id="row">
+    <div class="tab-content">
+        <div class="tab-pane active" id="demo">
+              <div class="snep-body-top-buttons">
+                <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Extension Group")?></a>
+                
+                <div class="snep-body-search">
+                    <?php if($this->key){ ?>
+                        <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  &nbsp;|&nbsp;  
+                    <?php } ?>
+                    <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
+                </div>
+            </div>
             
-            <tr class="c<?php echo $c ?>">
-                <td>
-                    <b>
-                        <?php if(array_key_exists($val['name'], $this->tra) ) : ?>
-                            <?php echo $this->tra[$val['name']]; ?>
-                        <?php else : ?>
-                           <?php echo $val['name']; ?>
-                        <?php endif ?>
-                    </b>
-                </td>
-                <td> 
-                        <?php if(array_key_exists($val['inherit'], $this->tra) ) : ?>
-                            <?php echo $this->tra[$val['inherit']]; ?>
-                        <?php else : ?>
-                           <?php echo $val['inherit']; ?>
-                        <?php endif ?>
+            <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
 
-                </td>
-                        <?php if( ! array_key_exists($val['name'], $this->tra) ) : ?>
-                            <td class="action">
-                                <a class="alterar" href='<?php echo $this->URL; ?>edit/id/<?php echo $val['name'] ?>'>
-                                    <?php echo $this->translate('Edit')?>
-                                </a>
-                            </td>
-                            <td class="action">
-                                <a class="excluir" href='<?php echo $this->URL; ?>delete/id/<?php echo $val['name']?>'>
-                                    <?php echo $this->translate("Delete"); ?>
-                                </a>
-                            </td>
-                            <?php else : ?>
-                            <td class="action"> </td>
-                            <td class="action"> </td>
-                            <?php endif ?>
-            </tr>
-        <?php endforeach ?>
-    <?php endif ?>
-</table>
+                <thead>
+                    <tr>
+                        <th><?php echo $this->translate('Name');?></th>
+                        <th class="text-center"><?php echo $this->translate('Type');?></th>
+                        <th class="text-center" colspan="2" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-<?php echo $this->render('pagination.phtml') ?>
+                    <?php if($this->extensionsgroups):
+                      foreach($this->extensionsgroups as $cha => $val ): ?>
+                                                            
+                          <tr>
+                              <td>
+                                  <b>
+                                      <?php if(array_key_exists($val['name'], $this->tra) ) : ?>
+                                          <?php echo $this->tra[$val['name']]; ?>
+                                      <?php else : ?>
+                                         <?php echo $val['name']; ?>
+                                      <?php endif ?>
+                                  </b>
+                              </td>
+                              <td class="text-center"> 
+                                      <?php if(array_key_exists($val['inherit'], $this->tra) ) : ?>
+                                          <?php echo $this->tra[$val['inherit']]; ?>
+                                      <?php else : ?>
+                                         <?php echo $val['inherit']; ?>
+                                      <?php endif ?>
+
+                              </td>
+                                  
+                              <?php $disabled = "";?>
+                              <?php if( array_key_exists($val['name'], $this->tra) ) : 
+                                  $disabled= "disabled"; 
+                              endif; ?>
+                                  
+                              <td align="center">
+                                  <a class="btn btn-edit btn-xs <?php echo $disabled ?>" href='<?php echo $this->url ?>/edit/id/<?php echo $val['name'] ?>' role="button"><?php echo $this->translate('Edit')?></a>
+                              </td>                                                  
+                              <td align="center">
+                                  <a class="btn btn-danger btn-xs <?php echo $disabled ?>" href='<?php echo $this->url; ?>/remove/id/<?php echo $val['name']?>'>
+                                          <?php echo $this->translate("Delete"); ?>
+                                  </a>
+                              </td>        
+                          </tr>
+                      <?php endforeach ?>
+                  <?php endif ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+
+                        <td colspan="6">
+                            <div class="paging">
+                                <ul class="pagination"></ul>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tfoot>
+            </table>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function () {
+        jQuery('table').footable().on('click', '.row', function(e) {
+            e.preventDefault(); 
+        });
+    });
+</script>
+
+
+
+
+ 
+

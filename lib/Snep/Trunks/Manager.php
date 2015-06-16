@@ -35,6 +35,22 @@ class Snep_Trunks_Manager {
     }
 
     /**
+     * Method to get all trunks
+     */
+    public function getData() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("trunks", array("id", "callerid"));
+
+        $stmt = $db->query($select);
+        $trunks = $stmt->fetchAll();
+
+        return $trunks;
+    }
+
+    /**
      * getValidation - checks if the queue is used in the rule 
      * @param <int> $id
      * @return <array>

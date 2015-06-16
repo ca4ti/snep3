@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   diasDaSemana varchar(30) NOT NULL DEFAULT "sun,mon,tue,wed,thu,fri,sat",
   record boolean NOT NULL default false,
   ativa boolean NOT NULL default true,
-  mailing boolean NOT NULL default false
+  mailing boolean NOT NULL default false,
+  from_dialer boolean NOT NULL default false
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -369,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `sounds` (
   `data` datetime default NULL,
   `tipo` char(3) NOT NULL default 'AST',
   `secao` varchar(30) NOT NULL,
+  `language` varchar(5) NOT NULL default 'pt_BR',
   PRIMARY KEY  (`arquivo`,`tipo`,`secao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -400,6 +402,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `dtmf_dial` BOOLEAN NOT NULL DEFAULT FALSE,
   `dtmf_dial_number` VARCHAR(50) DEFAULT NULL,
   `domain` VARCHAR( 250 ) NOT NULL,
+  `technology` VARCHAR( 20 ) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -495,57 +498,106 @@ CREATE TABLE IF NOT EXISTS `lista_abandono` (
 
 
 --
--- Table structure for table `ars_operadora`
+-- Table structure for table `core_cnl_country`
 --
-CREATE TABLE IF NOT EXISTS ars_operadora (
-    `id` integer primary key auto_increment,
-    `name` varchar(30) not null
+CREATE TABLE IF NOT EXISTS core_cnl_country (
+    `id` integer primary key,
+    `name` varchar(30) not null,
+    `code_2` varchar(2) not null,
+    `code_3` varchar(3) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
--- Table structure for table `ars_estado`
+-- Table structure for table `core_cnl_state`
 --
-CREATE TABLE IF NOT EXISTS ars_estado (
-    `cod` char(2) primary key,
-    `name` varchar(30) not null
+CREATE TABLE IF NOT EXISTS core_cnl_state (
+    `id` char(2),
+    `name` varchar(30) not null,
+    `country` integer,
+    primary key (`id`,`country`),
+    foreign key (`country`) references core_cnl_country(`id`) on update cascade on delete restrict
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
--- Table structure for table `ars_cidade`
+-- Table structure for table `core_cnl_city`
 --
-CREATE TABLE IF NOT EXISTS ars_cidade (
-    `id` integer primary key auto_increment,
-    `name` varchar(50) not null
+CREATE TABLE IF NOT EXISTS core_cnl_city (
+    `id` integer auto_increment,
+    `name` varchar(50) not null,
+    `state` varchar(2),
+    primary key (`id`,`state`),
+    foreign key (`state`) references core_cnl_state(`id`) on update cascade on delete restrict
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
--- Table structure for table `ars_ddd`
+-- Table structure for table `core_cnl_prefix`
 --
-CREATE TABLE IF NOT EXISTS ars_ddd (
-    `cod` char(2),
-    `estado` char(2),
-    `cidade` integer,
-    primary key (`cod`,`estado`,`cidade`),
-    foreign key (`estado`) references ars_estado(`cod`) on update cascade on delete restrict,
-    foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
+CREATE TABLE IF NOT EXISTS core_cnl_prefix (
+    `id` char(10),
+    `city` integer,
+    `country` integer,
+    `latitud` varchar(8),
+    `longitud` varchar(8),
+    `hemisphere` varchar(5),
+    primary key (`id`,`country`),
+    foreign key (`city`) references core_cnl_city(`id`) on update cascade on delete restrict,
+    foreign key (`country`) references core_cnl_country(`id`) on update cascade on delete restrict
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
---
--- Table structure for table `ars_prefixo`
---
-CREATE TABLE IF NOT EXISTS ars_prefixo (
-    `prefixo` integer,
-    `cidade` integer,
-    `operadora` integer,
-    primary key (`prefixo`,`cidade`,`operadora`),
-    foreign key (`operadora`) references ars_operadora(`id`) on update cascade on delete restrict,
-    foreign key (`cidade`) references ars_cidade(`id`) on update cascade on delete restrict
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Table structure for table `core_country`
+--
+CREATE TABLE IF NOT EXISTS `core_country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `acronym` varchar(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `core_state`
+--
+CREATE TABLE IF NOT EXISTS `core_state` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `acronym` varchar(4) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `acronym` (`acronym`),
+  UNIQUE KEY `name` (`name`),
+  KEY `core_state_d860be3c` (`country_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `core_city`
+--
+CREATE TABLE IF NOT EXISTS `core_city` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `core_city_5654bf12` (`state_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `contacts_group`
@@ -561,18 +613,19 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
 -- Table structure for table `contacts_names`
 --
 CREATE TABLE IF NOT EXISTS `contacts_names` (
-  `id` integer NOT NULL AUTO_INCREMENT,
+  `id` integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(80) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `state` varchar(2) NOT NULL,
+  `id_state` int(11),
+  `id_city` int(11),
   `cep` varchar(8) NOT NULL,
   `group` integer NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+  FOREIGN KEY (`id_state`) REFERENCES core_state(`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  FOREIGN KEY (`id_city`) REFERENCES core_city(`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
 --
@@ -663,17 +716,18 @@ CREATE TABLE IF NOT EXISTS `users_permissions` (
 
 
 --
--- Table structure for table `binds`
+-- Table structure for table `core_binds`
 --
-CREATE TABLE IF NOT EXISTS `binds` (
+CREATE TABLE IF NOT EXISTS `core_binds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `peer_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `peer_name` varchar(80) NOT NULL,
+  `type` enum('bound','nobound') NOT NULL, 
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `peer_id` (`peer_id`),
-  CONSTRAINT `binds_refs_peer_id` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`),
+  KEY `peer_name` (`peer_name`),
+  CONSTRAINT `binds_refs_peer_name` FOREIGN KEY (`peer_name`) REFERENCES `peers` (`name`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `binds_peer_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -693,6 +747,43 @@ CREATE TABLE IF NOT EXISTS `password_recovery` (
   CONSTRAINT `password_recovery_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+--
+-- Table structure for table `core_notifications`
+--
+CREATE TABLE IF NOT EXISTS `core_notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `read` boolean DEFAULT false,
+  `reading_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `itc_register`
+--
+CREATE TABLE IF NOT EXISTS `itc_register` (
+  `uuid` varchar(36) NOT NULL,
+  `client_key` varchar(60) NOT NULL,
+  `api_key` varchar(72) NOT NULL,
+  `created` datetime NOT NULL,
+  `registered_itc` boolean DEFAULT false,
+  `noregister` boolean DEFAULT false,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `itc_consumers`
+--
+CREATE TABLE IF NOT EXISTS `itc_consumers` (
+  `id_distro` int NOT NULL,
+  `id_service` int NOT NULL,
+  `name_service` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexing table `cdr`

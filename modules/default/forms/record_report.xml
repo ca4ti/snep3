@@ -13,7 +13,7 @@
                             <validator>regex</validator>
                             <options>
                                 <messages>
-                                    <regexNotMatch>'%value%' is not a valid date, the format is dd/mm/aaaa hh:mm.</regexNotMatch>
+                                    <regexNotMatch>'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm.</regexNotMatch>
                                 </messages>
                                 <pattern>#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#</pattern>
                             </options>
@@ -40,7 +40,7 @@
                             <validator>regex</validator>
                             <options>
                                 <messages>
-                                    <regexNotMatch>'%value%' is not a valid date, the format is dd/mm/aaaa hh:mm.</regexNotMatch>
+                                    <regexNotMatch>'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm.</regexNotMatch>
                                 </messages>
                                 <pattern>#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#</pattern>
                             </options>

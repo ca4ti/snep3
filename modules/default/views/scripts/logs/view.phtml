@@ -1,60 +1,85 @@
- <div class="bgfiltro" style="height: 30px; padding: 2px;">
-        <input style="float:right;" class="new_button" type="button" id="voltar" 
-	       value="<?php echo $this->back; ?>" onClick="javascript: history.go(-1)">
 
-        <span style="float:left;">
-            <strong><?php echo $this->exibition_mode; ?></strong>
-            <input type="radio" name="modo" checked id="modo" value="normal" onclick="visualiza(this.value);"> <?php echo $this->normal; ?>
-            <input type="radio" name="modo" id="modo" value="terminal" onclick="visualiza(this.value);"> <?php echo $this->terminal; ?>
-            <input type="radio" name="modo" id="modo" value="contraste" onclick="visualiza(this.value);"> <?php echo $this->contrast; ?>
-        </span>
-	<?php if ($this->mode == 'tail'): ?>
-	    <span style="float:left;margin: 7px 0 0 20px; ">
-                <strong><?php echo $this->lines; ?> :</strong>
-                <input type="text" name="n" value="30" class="campos" id="n" style="width: 30px;" />
-            </span>
-     <?php endif ?>
- </div>
 
-<div id="tail" style="border:1px solid #d2d2d2; padding: 4px">
+<div class="row">
+    <div class="bgfiltro" style="float: left; height: 30px; padding: 2px;">
+        <div class="form-group">
+  	        <?php if ($this->mode == 'normal'): ?>
+                <span>
+                    <?php echo $this->period; ?>     
+                    <br />   
+                </span>
+            <?php endif ?>
+            <?php echo $this->exibition_mode; ?>
+            <input type="radio" name="modo" id="modo" value="normal" checked> <?php echo $this->normal; ?>
+            <input type="radio" name="modo" id="modo" value="terminal" > <?php echo $this->terminal; ?>
+            <input type="radio" name="modo" id="modo" value="contrast" > <?php echo $this->contrast; ?>
+        </div>
+    </div>
+    <br /><br /><br />
+    <div id="tail" class="normal" >
+        <pre id="data" class="normal" style="height:380px; overflow:auto;">
+            <?php
 
-    <?php 
-    if ($this->mode != 'tail') {
-         foreach($this->result as $row) {
-             echo $row . "<br>";
-	 	 }
-    } else { ?>
-		<script>
-				status();
-				var periodicalExecuter = new PeriodicalExecuter(status, 1);
+            if ($this->mode === 'normal') {
 
-				function status() {
-					new Ajax.Updater("tail", "../logs/tail/",
-						{ parameters: { lines: $F('n') } });
-				}
-		</script>
-   <?php } ?>
+                $handle = fopen($this->file, "r") ;
+                if ($handle) {
+                    while (!feof($handle)) {
+                        $buffer = fgets($handle, 1024);
+                        //foreach($buffer as $row) {
+                              echo trim($buffer) ;
+                              echo "<br /> ";
+                              
+                        //}
+                    }
+                    fclose($handle);
+                }
+                
+            } else { ?>
+                <script type="text/javascript" src="/snep/includes/javascript/logtail.js"></script>
+                
+            <?php }?>
+        </pre>  
+    </div>
 
+   <br>
+  <div class="snep-body-footer-buttons">
+      <button type="button" class="btn btn-add btn-primary" onclick="javascript: history.go(-1)">
+        <?php echo $this->translate("Back"); ?>
+  </button>
+  
+  </div>
 </div>
+
 <script type="text/javascript">
-        function visualiza(valor) {
-            switch(valor) {
-                case "normal":
-                  $('tail').removeClassName('terminal');
-                  $('tail').removeClassName('contraste');
-                  $('tail').addClassName('normal');
-                  break;
-                case "terminal":
-                  $('tail').removeClassName('normal');
-                  $('tail').removeClassName('contraste');
-                  $('tail').addClassName('terminal');
-                  break;
-                case "contraste":
-                  $('tail').removeClassName('terminal');
-                  $('tail').removeClassName('normal');
-                  $('tail').addClassName('contraste');
-                  break;
-            }
-       }
+
+
+    jQuery.noConflict();
+    jQuery("input:radio[name=modo]").click(function(){
+        var value = jQuery(this).val() ;
+        switch(value) {
+            case "normal":
+              
+              jQuery('#data').removeClass('terminal');
+              jQuery('#data').removeClass('contraste');
+              jQuery('#data').addClass('normal');
+              break;
+            case "terminal":
+
+              jQuery('#data').removeClass('normal');
+              jQuery('#data').removeClass('contraste');
+              jQuery('#data').addClass('terminal');
+
+              break;
+            case "contrast":
+
+              jQuery('#data').removeClass('terminal');
+              jQuery('#data').removeClass('normal');
+              jQuery('#data').addClass('contraste');
+              break;
+        }
+    });
+
 </script>
+
 

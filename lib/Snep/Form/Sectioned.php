@@ -29,7 +29,7 @@ class Snep_Form_Sectioned extends Zend_Form {
 
     public function  __construct($options = null) {
         parent::__construct($options);
-
+        
         $this->setElementDecorators(array(
             'ViewHelper',
             'Description',

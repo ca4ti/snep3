@@ -155,7 +155,7 @@ class Snep_InterfaceConf {
                             }
                             $peers .= "\n";
                         }
-                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['username'] . ":" . $peer['secret'] . "@" . $peer['host'] . "\n" : "");
+                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['username'] . ":" . $peer['secret'] . "@" . $peer['host'] . ":". $peer['port'] . "\n" : "");
  
                     } elseif($tech != 'sip') {
                         /* Assemble Extension entries */

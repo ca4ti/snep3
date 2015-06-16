@@ -81,7 +81,7 @@
                             <validator>StringLength</validator>
                             <options>
                                 <min>1</min>
-                                <max>4</max>
+                                <max>3</max>
                             </options>
                             
                         </strlen>

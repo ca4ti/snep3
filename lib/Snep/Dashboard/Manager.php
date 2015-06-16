@@ -72,7 +72,7 @@ class Snep_Dashboard_Manager {
         $db = Zend_Registry::get('db');
         $db->update("users", array('dashboard' => serialize($itens_verificados)), "id = '$_SESSION[id_user]'");
     }
-    
+
     /**
      * add - Add item in the dashboard
      * @param <string> $id
@@ -111,6 +111,7 @@ class Snep_Dashboard_Manager {
             $result[$id]["descricao"] = $i18n->translate(strval($result[$id]["descricao"]));
             $id++;
         }
+        
 
         //reads resources.xml from aditional modules
         
@@ -127,10 +128,10 @@ class Snep_Dashboard_Manager {
         			$result[$id]["nome"] = $i18n->translate($module->getLabel());
         			$result[$id]["descricao"] = $i18n->translate($item->getLabel());
         			$result[$id]["link"] = str_replace("/snep/index.php/".$explode[0]."/", "", $item->getUri());
-        			$result[$id]["icone"] = $explode[0] . "_icon.png";
+        			$result[$id]["icone"] = $item->getFont();
         			$result[$id]["module"] = $explode[0];
         			$id++;
-        			
+
         		}
         	}
         }
@@ -153,6 +154,7 @@ class Snep_Dashboard_Manager {
 
         if (!is_array($dashboard) || !count($dashboard))
             return array();
+
         foreach ($dashboard as $key => $value) {
             if (is_array($value)) {
                 $dashboard[$key] = $value;
@@ -165,6 +167,7 @@ class Snep_Dashboard_Manager {
                 $dashboard[$key]['modelo'] = $value;
             }
         }
+
         return $dashboard;
     }
     
@@ -189,6 +192,38 @@ class Snep_Dashboard_Manager {
         } 
         
         return array_diff_key( Snep_Dashboard_Manager::getModelos() , $ids_key);
+    }
+
+    /**
+     * getKey - Get id of action
+     * @param <string> $nameModule
+     * @param <string> $nameController
+     * @param <string> $nameAction
+     * @return <string> $key
+     */
+    public function getKey($nameModule,$nameController,$nameAction){
+
+        $dashboard = self::getModelosNotUsed();
+        
+        foreach ($dashboard as $key => $value) {
+
+            if (!isset($value['module'])) {
+
+                $value['module'] = "";
+            }
+
+            if (
+                    (
+                    $value['module'] && $value['module'] == $nameModule || !$value['module'] && "default" == $nameModule
+                    ) && (
+                    FALSE !== strpos($value['link'], $nameController . "/" . $nameAction) || $nameController != "index" && $nameAction == "index" && $value['link'] == $nameController
+                    )
+            ) {
+                return $key;
+                break;
+            }
+        }
+
     }
 
 }

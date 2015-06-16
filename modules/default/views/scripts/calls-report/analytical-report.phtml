@@ -5,10 +5,7 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 ?>
 
 <div>
-<form name="tabela" id="tabela" action="<?php echo $this->url(array("controller" => "calls-report", "action" => "graphic"), null, true); ?>" METHOD="post">
-		<div class="graphic">
-        <input type="submit" value="<?php echo $this->translate("Graphic"); ?>" />
-    	</div>
+<form name="tabela" id="tabela">
   <input type="hidden" value="" id="selected" />
      <table align="center">
 	   <thead>
@@ -17,12 +14,32 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
                   <td class="cen"><?php echo $this->calldate; ?></td>
                   <td class="esq"><?php echo $this->origin; ?></td>
                   <td class="esq"><?php echo $this->destination; ?></td>
-                  <td class="esq"><?php echo $this->operator; ?></td>
                   <td class="esq"><?php echo $this->callstatus; ?></td>
                   <td class="esq"><?php echo $this->duration; ?></td>
                   <td class="esq"><?php echo $this->conversation; ?></td>
                   <td class="esq"><?php echo $this->cost_center; ?></td>
                   <td class="esq"><?php echo $this->city;?> - <?php echo $this->state;?></td>
+
+				  <?php if ($this->tariffed): ?>
+					 <td class="esq"><?php echo $this->tarrifation ?></td>
+				  <?php endif ?>
+
+				  <?php if ($this->files): ?>
+					  <td class="cen" colspan="3">
+						  <script>
+							  toggleAll = function(ref) {
+								  var boxes = $$('input[type="checkbox"]');
+
+								  for(box in boxes) {
+									  boxes[box].checked = ref.checked;
+								  }
+							  }
+						  </script>
+							<input type="checkbox" title="Selecionar Todos" onclick="toggleAll(this);">
+						  <?php echo $this->gravation; ?>
+					  </td>
+				<?php endif ?>
+
                </tr>
             </thead>
             <?php $c = 0; ?>
@@ -42,18 +59,6 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 						<?php echo $callsList['dst']; ?> 
 					</td>
 					<td>
-                            <?php
-                                if (preg_match("/Local/i", $callsList['dstchannel'])) {
-                                    echo strTok(str_replace('Local/', '', $callsList['dstchannel']), "@");
-                                }
-                                if(isset($callsList['operador'])) {
-                                    echo $callsList['dstchannel'];
-                                } else {
-                                    echo "";    
-                                }
-                            ?> 
-                        </td>
-					<td>
 						<?php echo $callsList['disposition']; ?> 
 					</td>
 					<td>
@@ -69,6 +74,31 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 						<?php echo $callsList['city'] ?>
 
 					</td>
+
+				  	<?php if ($this->tariffed): ?>
+					 <td>
+						<?php echo $callsList['rate']; ?>	 
+					 </td>
+				  	<?php endif ?>
+					
+					<?php if ($this->files): ?>
+						<td style="text-align:center">
+						 <?php if ($callsList['userfield'] != ""): ?>
+							<?php if ($callsList['file_path'] != 'N.D.'): ?>
+
+								  <input type="checkbox"  value="<?echo $callsList['file_name']; ?>">
+							      <a href="<?php echo $callsList['file_path']; ?>" class="link_esp_1">
+								    <img src="/snep/imagens/ouvir.png" />
+								  </a>
+							<?php else: ?>
+							   <img src="/snep/imagens/semaudio.png" />
+							<?php endif ?>
+						<?php else: ?>
+							---
+						<?php endif ?>
+						</td>
+				  	<?php endif ?>
+
 			<?php endforeach ?>
             </tr>
 
@@ -91,11 +121,54 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 					<?php echo $this->other;?>:&nbsp;
 					<b><?php echo $this->totals['oth'];?></b>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<?php if ($this->tariffed): ?>
+                         <?php echo $this->tot_tariffed;?>:&nbsp;
+						 <b><?php echo $this->totals['tot_tarifado']; ?></b>
+					<?php endif ?>
+
                </td>
             </tr>
          </table>
       </form>
 
-<?php echo $this->render('pagination.phtml');  ?>
+<?php echo $this->render('pagination.phtml'); 
 
+if ($this->files): ?>
+	<input class="button" type="button" value="<?php echo $this->compress_files ?>" OnClick="compactCheckeds();">
+
+	<script>
+    function compactCheckeds() {
+        var form=$('tabela');
+        var i=form.getElements('checkbox');
+        var dados = '';
+        i.each(function(item) {
+            if (item.checked) {
+                dados += item.value + ",";
+            }
+        });
+
+        var url = '/snep/index.php/default/calls-report/compact/';
+        var params = 'files='+ dados;
+        var retorno = new Ajax.Request (
+        url, {
+            method: 'get',
+            parameters: params,
+            onComplete: alerta
+        }
+    );
+    }
+
+    function alerta( arq) {
+        var arq = arq.responseText;
+        if(arq == 0) {
+            alert("Erro");
+        } else {
+            alert("<?php echo $this->compact_success?>");
+			window.location=arq;
+        }
+    }
+ 
+</script> 
+<?php endif ?>
 </div>

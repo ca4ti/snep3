@@ -1,1 +1,2 @@
-# This is my README
+O SNEP é um software PBX baseado em Asterisk e GNU/Linux licenciado sob GPL v2 capaz de rodar em pequenos hardwares com uma boa performance. 
+Possui diversos recursos de administração que darão flexibilidade, agilidade e produtividade na comunicação de voz das empresas. Pode ser customizado de acordo com a necessidade de cada negócio. Possui todas as funcionalidades de uma central telefônica de grande porte: Voice mail, gravação, roteamento avançado de ligações, cadeado, sem limites de ramais e muito mais. 

@@ -58,25 +58,29 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
                 $type = 'write';
             }
 
-            $result = Snep_Permission_Manager::get($group, ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
+            if($request->getActionName() == 'index' || $request->getActionName() == 'add' || $request->getActionName() == 'remove' || $request->getActionName() == 'edit' 
+                || $request->getActionName() == 'duplicate' || $request->getActionName() == 'multiremove' || $request->getActionName() == 'remove' || $request->getActionName() == 'multiadd'){
+                
+                $result = Snep_Permission_Manager::get($group, ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
 
-            $user = Snep_Permission_Manager::getUser($_SESSION['id_user'], ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
+                $user = Snep_Permission_Manager::getUser($_SESSION['id_user'], ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
 
-            // Verifica se usuario possui permissao individuais
-            if ($user != false) {
-                $result = $user;
-            }
+                // Verifica se usuario possui permissao individuais
+                if ($user != false) {
+                    $result = $user;
+                }
 
-            if ($request->getControllerName() == 'index' || $request->getControllerName() == 'auth' || $request->getControllerName() == 'installer' || $request->getControllerName() == 'error') {
-                return;
-            }
+                if ($request->getControllerName() == 'index' || $request->getControllerName() == 'auth' || $request->getControllerName() == 'installer' || $request->getControllerName() == 'error') {
+                    return;
+                }
 
-            if (!$result) {
-                $redirect = new Zend_Controller_Action_Helper_Redirector();
-                $redirect->gotoSimpleAndExit("error-unset", "permission", "default");
-            } elseif (!$result['allow']) {
-                $redirect = new Zend_Controller_Action_Helper_Redirector();
-                $redirect->gotoSimpleAndExit("error", "permission", "default");
+                if (!$result) {
+                    $redirect = new Zend_Controller_Action_Helper_Redirector();
+                    $redirect->gotoSimpleAndExit("error-unset", "permission", "default");
+                } elseif (!$result['allow']) {
+                    $redirect = new Zend_Controller_Action_Helper_Redirector();
+                    $redirect->gotoSimpleAndExit("error", "permission", "default");
+                }
             }
         }
     }

@@ -1,68 +1,101 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . "/css/index.css");
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeItem.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/selectBox.js');
-echo $this->render('filter.phtml');
+
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.core.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 ?>
 
-<table>
-    <thead>
-        <tr>
-            <th class="numeric"> <?php echo $this->translate('Code') ?> </th>
-            <th> <?php echo $this->translate('Name') ?> </th>
-            <th> <?php echo $this->translate('Created') ?> </th>
-            <th> <?php echo $this->translate('Updated') ?> </th>
-            <th colspan="4" class="action"> <?php echo $this->translate('Actions') ?> </th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $c = 0;
-        if ($this->profiles):
-            foreach ($this->profiles as $profile):
-                ?>
+<script src="/snep/includes/javascript/footable/footable.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.sort.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.filter.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.paginate.js" type="text/javascript"></script>   
+<script src="/snep/includes/javascript/footable/bootstrap-tab.js" type="text/javascript"></script>    
+<div class"row">
+    <div class="tab-content">
+        <div class="tab-pane active" id="demo">
+            <div class="snep-body-top-buttons">
+                <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Profile")?></a>
 
-                <?php ($c ? $c = 0 : $c = 1 ); ?>
-                <tr class="c<?php echo $c ?>">
-                    <td class="numeric"> <b> <?php echo $profile['id'] ?> </b> </td>
-                    <td> <?php echo $profile['name'] ?> </td>
-                    <td> <?php echo date('d/m/Y H:i:s', strtotime($profile['created'])) ?> </td>
-                    <td> <?php echo date('d/m/Y H:i:s', strtotime($profile['updated'])) ?> </td>
-                    <td class="action">
-                         <?php if ($profile['id'] != 1) { ?>
-                        <a class="alterar" href="<?php echo $this->url ?>/edit/id/<?php echo $profile['id'] ?>">
-                            <?php echo $this->translate('Edit') ?>
-                             <?php } ?>
-                        </a>
-                    </td>
+                <div class="snep-body-search">
+                    <?php if($this->key){ ?>
+                        <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  &nbsp;|&nbsp;  
+                    <?php } ?>
+                    <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
+                </div>
+            </div>
 
-                    <td class="action">
-                        <a class="membros" onclick="javascript:alert('<?=$this->translate("Users who do not have individual permissions are listed. To change the group of users with these permissions is necessary to make editing user.")?>')" href="<?php echo $this->url ?>/member/id/<?php echo $profile['id'] ?>">
-                            <?php echo $this->translate('Members') ?>
-                        </a>
-                    </td>
+            
+            <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
 
-                    <td class="action">
-                        <?php if ($profile['id'] != 1) { ?>
-                            <a class="permissao" href="<?php echo $this->url ?>/permission/id/<?php echo $profile['id'] ?>">
-                                <?php echo $this->translate('Permission') ?>
-                            </a>
-                        <?php } ?>
-                    </td>
+                <thead>
+                    <tr>
+                        <th class="text-center" data-type="numeric" data-sort-initial="true"><?php echo $this->translate('Code');?></th>
+                        <th><?php echo $this->translate('Name');?></th>
+                        <th class="text-center"><?php echo $this->translate('Created');?></th>
+                        <th class="text-center"><?php echo $this->translate('Updated');?></th>
+                        <th class="text-center" colspan="4" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                    <td class="action">
-                        <?php if ($profile['id'] != 1) { ?>
-                            <?php $this->remove_msg = $this->translate("Do you really wish to remove this item?"); ?>
-                            <span class="excluir" onclick="remove_item('<?php echo $this->url ?>', '<?php echo $profile['id'] ?>', '<?php echo $this->remove_msg ?>')">
-                                <?php echo $this->translate('Delete') ?>
-                            </span>
-                        <?php } ?>
-                    </td>
+                     <?php
+                        
+                    if ($this->profiles):
+                        foreach ($this->profiles as $profile):
+                            ?>
+                        
+                            <tr>
+                                <td class="text-center"> <b> <?php echo $profile['id'] ?> </b> </td>
+                                <td> <?php echo $profile['name'] ?> </td>
+                                <td class="text-center"> <?php echo date('d/m/Y H:i:s', strtotime($profile['created'])) ?> </td>
+                                <td class="text-center"> <?php echo date('d/m/Y H:i:s', strtotime($profile['updated'])) ?> </td>
+                                
+                                <?php if ($profile['id'] == 1) { 
+                                    $disabled= "disabled"; 
+                                }else{
+                                    $disabled = "";    
+                                }?>
 
-                </tr>
-            <?php endforeach ?>
-        <?php endif ?>
-</table>
+                                <td align="center">
+                                    <a class="btn btn-default btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/permission/id/<?php echo $profile['id'] ?>" role="button"><?php echo $this->translate('Permission')?></a>
+                                </td>
 
-<?php echo $this->render('pagination.phtml') ?>
+                                <td align="center">
+                                    <a class="btn btn-edit btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/edit/id/<?php echo $profile['id'] ?>" role="button"><?php echo $this->translate('Edit')?>
+                                        
+                                    </a>
+                                </td>
+                                    
+                                <td align="center">
+                                    <a class="btn btn-danger btn-xs <?php echo $disabled ?>" href="<?php echo $this->url ?>/remove/id/<?php echo $profile['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+
+                        <td colspan="8">
+                            <div class="paging">
+                                <ul class="pagination"></ul>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tfoot>
+            </table>
+            <br>
+        </div> <!-- demo -->
+    </div> <!-- tab-content -->
+</div> <!-- /.row -->
+
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function () {
+        jQuery('table').footable().on('click', '.row', function(e) {
+            e.preventDefault(); 
+        });
+    });
+</script>
+

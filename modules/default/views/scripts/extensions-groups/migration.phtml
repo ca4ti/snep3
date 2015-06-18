@@ -1,4 +1,42 @@
-<?php echo $this->message ?>
-<?php echo $this->form ?>
+<div class="row">
+	<form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "extensions-groups", "action" => "migration"), null, true); ?>" METHOD="post">
 
+        <div class="col-lg-12">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <?php echo $this->translate("Migrate Extension Group");?>
+                </div>
+                <div class="panel-body" align="center">
+                	<p><?php echo $this->message ?></p>
+                    <p><?php echo $this->form ?></p>
+                </div>
 
+                <div class="form-group">
+
+                	<label class="col-sm-12" align="center"><?php echo $this->translate("This groups has extensions associated. Select another group for these extensions.");?></label>
+
+                	<label class="col-sm-5 control-label"><?php echo $this->translate("Extension Group");?></label>
+                	<div class="col-sm-3">
+                		<select class="form-control" name="group" id="group" >
+                			<?php foreach($this->groups as $key => $group){ ?>
+					    		<option><?php echo $group;?></option>
+					    	<?php } ?>
+						</select>
+					</div>
+				</div>
+
+				<input type="hidden" name="customerid" value="<?php echo $this->id; ?>">
+				
+            </div>
+        </div>
+
+        <br>
+        <div class="snep-body-footer-buttons">
+            <button type="submit" class="btn btn-add" name="save" value="Save"><?php echo $this->translate("Save");?></button>
+            &nbsp;&nbsp;
+        	<a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+        </div>   
+       
+    	<br>
+	</form>
+</div>

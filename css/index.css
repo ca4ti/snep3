@@ -44,6 +44,14 @@ td, th {
     color: #000;
 }
 
+.graphic {
+    position:absolute;
+    top:110px;
+    right:14%;
+    margin:0px;
+    padding:0px;
+}
+
 .links a {
     display: inline-block;
     margin: 0;

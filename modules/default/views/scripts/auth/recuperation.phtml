@@ -1,38 +1,43 @@
-<form  action="<?php echo $this->url(array("controller" => "auth", "action" => "recuperation"), null, true); ?>" METHOD="post">
-    <?php if ($this->message): ?>
+<link href="/snep/css/login.css" rel="stylesheet">
+<link href="/snep/css/bootstrap.min.css" rel="stylesheet">
+<div class="row">
+    <?php if($this->message): ?>
         <span class="<?php echo $this->msgclass; ?>"><?php echo $this->message; ?></span>
     <?php endif; ?>
-    <dl id="login_form">
 
-        <div class="form_element">
-            <span class="<?php echo $this->msgclass; ?>"><?php echo $this->translate("We sent an email to you containing the code for the redefinition of your password"); ?></span>
+    <form  action="<?php echo $this->url(array("controller" => "auth", "action" => "recuperation"), null, true); ?>" METHOD="post">
+        <div id="login">
+            <dl id="login_form">
+                <div class="login_box">
+
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("Username"); ?>:</dt>
+                        <input class="form-control" name="username" type="text" autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("New Password"); ?>:</dt>
+                        <input class="form-control" name="password" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("Repeat New Password"); ?>:</dt>
+                        <input class="form-control" name="newpassword" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <dt><?php echo $this->translate("Code sent to your email"); ?>:</dt>
+                        <input class="form-control" name="code" type="text">
+                    </div>
+
+                    <br />
+
+                    <div class="btn btn-lg btn-primary btn-block snep-login">
+                       <input type="submit" value="<?php echo $this->translate("Save"); ?>" />
+                    </div>
+
+                </div>
+            </dl>
         </div>
-
-        <div class="form_element">
-            <dt><?php echo $this->translate("User"); ?>:</dt>
-            <dd><input type="text" size="35" name="user" /></dd>
-        </div>
-
-        <div class="form_element">
-            <dt><?php echo $this->translate("New password"); ?>:</dt>
-            <dd><input type="password" size="35" name="password" /></dd>
-        </div>
-
-        <div class="form_element">
-            <dt><?php echo $this->translate("Repeat new password"); ?>:</dt>
-            <dd><input type="password" size="35" name="newpassword" /></dd>
-        </div>
-
-        <div class="form_element">
-            <dt><?php echo $this->translate("Code sent to your email"); ?>:</dt>
-            <dd><input type="text" size="35" name="code" /></dd>
-        </div>
-
-
-        <div class="form_element">
-            <dt></dt>
-            <dd><input type="submit" value="<?php echo $this->translate("Enter"); ?>" /></dd>
-        </div>
-
-    </dl>
-</form>
+    </form>
+</div>    

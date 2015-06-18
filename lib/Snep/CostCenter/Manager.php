@@ -148,4 +148,25 @@ class Snep_CostCenter_Manager {
         $db->insert('logs_users', $insert_data);
     }
 
+
+    /**
+     * Method to get Cost Center in cdr by id
+     * @param int $id
+     * @return Array
+     */
+    public function getCdr($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("cdr")
+                ->where("cdr.accountcode = ?", $id)
+                ->limit(1);
+
+        $stmt = $db->query($select);
+        $cc = $stmt->fetch();
+
+        return $cc;
+    }
+
 }

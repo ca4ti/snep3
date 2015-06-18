@@ -1,23 +1,125 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . "/css/datepicker.css");
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/prototype-date-extensions.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/datepicker.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/enableField.js');
-
-$locale = str_replace("_", "-", Snep_Locale::getInstance()->getLocale());
-if( $locale == "en-US") { $locale = 'en_US'; }
-
-if( isset( $this->error ) ): ?>
-    <div class="error_box" > 
-        <?php echo  $this->error ?>
-    </div>
-<?php endif ?>
-
-<?php
-echo $this->form;
+    $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-datetimepicker.css" );
+    $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap.min.css" );
 ?>
-<script type="text/javascript">
-  new Control.DatePicker('period-init_day', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
-  new Control.DatePicker('period-till_day', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
-</script>
+<script src="/snep/includes/javascript/moment-with-locales.min.js" type="text/javascript" ></script>
+<script src="/snep/includes/javascript/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
+<div class="row">
+
+    <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "ranking-report", "action" => "index"), null, true); ?>" METHOD="post">
+        
+        <fieldset>
+            <legend><?php echo $this->translate("Period");?></legend>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("From");?></label>
+                <div class="col-sm-3">
+                    <div class='input-group'>
+                        <input type='text' class="snep-datetimepicker form-control" id='init_day' name="init_day" required/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("To");?></label>
+                <div class="col-sm-3">
+                    <div class='input-group'>
+                        <input type='text' class="snep-datetimepicker form-control" id='till_day' name="till_day" required/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        
+                    </div>               
+                </div>
+            </div>
+
+        </fieldset>
+        
+        <fieldset>
+            
+            <legend><?php echo $this->translate("Ranking Options");?></legend>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Ranking Type")?></label>
+                <div class="col-sm-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="num" value="num" checked><?php echo $this->translate("Quantity");?>
+                    </label>
+                    
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="time" value="time"><?php echo $this->translate("Time");?>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Show top by source ranking");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="showsource" id="showsource">
+                        <?php 
+                        for($cont=5; $cont<=20;$cont += 5){ ?>
+                            <option><?php echo $cont?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Show top by destiny");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="showdestiny" id="showdestiny">
+                        <?php 
+                        for($cont=5; $cont<=20;$cont += 5){ ?>
+                            <option><?php echo $cont?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-sm-3 control-label"><?php echo $this->translate("Report Type")?></label>
+            <div class="col-sm-4">
+                <label class="radio-inline">
+                    <input type="radio" name="out_type" id="lst" value="lst" checked><?php echo $this->translate("Screen");?>
+                </label>
+                
+                <label class="radio-inline">
+                    <input type="radio" name="out_type" id="csv" value="csv"><?php echo $this->translate("CSV");?>
+                </label>
+            </div>
+            
+            <div class="snep-body-footer-buttons">
+                    <button type="submit" class="btn btn-add" name="showreport" value="showreport"><?php echo $this->translate("Show Report");?></button>
+            </div>
+
+        </fieldset>
+            
+    </form>
+</div>
+
+<script type="text/javascript">
+
+jQuery.noConflict();
+jQuery(function () {
+    
+    jQuery('#init_day,#till_day').datetimepicker({
+        locale: "<?php echo $this->datepicker_locale; ?>",
+        sideBySide: true,
+        showClear: true,
+        showClose: true
+    });
+
+    jQuery("#init_day").on("dp.change",function (e) {
+        jQuery('#till_day').data("DateTimePicker").minDate(e.date);
+    });
+
+    jQuery("#till_day").on("dp.change",function (e) {
+        jQuery('#init_day').data("DateTimePicker").maxDate(e.date);
+    });
+});
+</script>

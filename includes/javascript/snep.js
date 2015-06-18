@@ -66,7 +66,7 @@ function MultiWx(id, elementType) {
      * TODA INFORMAÇÃO NÃO SALVA SERÁ PERDIDA
      */
     this.render = function() {
-        $(this.id).innerHTML = this.getHtml();
+        document.getElementById(this.id).innerHTML = this.getHtml();
     }
 
     this.getHtml = function() {
@@ -76,10 +76,10 @@ function MultiWx(id, elementType) {
             html += this.widgets[i].getHtml(this.id + 'Obj.widgets[' + i + ']');
 
             if(this.widgets.length > 1)
-                   html += '<input class="boxremove help" title="Remover Regra" type="button" onclick="' + this.id + 'Obj.rmItem(' + i + ')" />';
+                   html += '<input class="boxremove help" title="Remov" type="button" onclick="' + this.id + 'Obj.rmItem(' + i + ')" />';
 
             if(i == this.widgets.length - 1)
-                html += '<input class="boxadd help" title="Adicionar Regra"  style="height:18px;" type="button" onclick="' + this.id + 'Obj.addItem()" />';
+                html += '<input class="boxadd help" title="Add" type="button" onclick="' + this.id + 'Obj.addItem()" />';
 
             html += '</li>';
         }

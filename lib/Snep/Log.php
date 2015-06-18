@@ -17,7 +17,7 @@
  */
 
 /**
- * Classe que manipular os arquivos de log agi.log
+ * Classe que manipular os arquivos de log full.log
  *
  * @see Snep_Log
  *
@@ -36,119 +36,83 @@ class Snep_Log {
     private $hora_ini;
     private $hora_fim;
 
+
     // Contrutor da classe - Faz a leitura do arquivo de log.
     public function __construct($log, $arq) {
 
-        $arquivo = $log . '/'. $arq;
-        
-        if(file_exists($arquivo)) {
-            $this->log = file_get_contents($arquivo);
+        $this->arquivo = $log . '/'. $arq;
+
+        if(file_exists($this->arquivo)) {
+            return 'ok';
         }else{
               return 'error';
         }
     }
 
-    public function returnLog() {
-        return $this->log;
+    /**
+     * Function para filtar o Log por dia e hora
+     * 
+     * @param <string> dia_ini (MMM dd)
+     * @param <string> dia_fim (MMM dd)
+     * @param <string> hora_ini (hh:mm:ss)
+     * @param <string> hora_fim (hh:mm:ss)
+     * @return <array> 
+     *
+     */
+    public function grepLog($dia_ini, $dia_fim, $hora_ini, $hora_fim, $verbose, $others) {
+
+
+        // Gera arquivo temporario baseado nos parametros, dia, hora e verbose
+        $hora_ini = ($hora_ini === null ? "00:00:00": $hora_ini);
+        $hora_fim = ($hora_fim === null ? "23:59:59": $hora_fim);
+            
+        $cmd = "awk  '$0 >= \"[".$dia_ini." ".$hora_ini."\" && $0 <= \"[".$dia_fim." ".$hora_fim."\"'"  ;
+
+        if ($others != '') {
+            $cmd .= " | grep ".$others ;
+        }
+
+        if ($verbose != '') {
+            $cmd .= " | grep \"VERBOSE\[".$verbose."\]\"" ;
+        }
+
+        $file_output = "/tmp/snep-log-file-".date("Y-m-d-H-i-s").".txt";
+
+        $cmd .= " " . $this->arquivo . " > ".$file_output ;
+
+        exec($cmd) ;
+
+        if (file_exists($file_output) && is_readable($file_output) && filesize($file_output) > 0 ) {
+            return $file_output ;
+        } else { 
+            return 'error' ;
+        }
+        
     }
 
-    // Função para extrair um relatório conforme parametros passados.
-    public function getLog($dia_ini, $dia_fim, $hora_ini, $hora_fim, $st, $src, $dst) {
-        $this->dia_ini = $dia_ini;
-        $this->dia_fim = $dia_fim;
-        $this->hora_ini = $hora_ini;
-        $this->hora_fim = $hora_fim;
+
+    /**
+     * Função para extrair um array conforme parametros passados.
+     *
+     * @param <string> dia_ini (MMM dd)
+     * @param <string> dia_fim (MMM dd)
+     * @return <array>
+     */
+    public function getLog($src, $dst) {
+
         $this->status = $st;
         $this->src = $src;
         $this->dst = $dst;
 
         $this->log = explode("\n", $this->log);
 
-        $ano_ini = substr($this->dia_ini, 6,4);
-        $mes_ini = substr($this->dia_ini, 3,2);
-        $dia_ini = substr($this->dia_ini, 0,2);
-        $ano_fim = substr($this->dia_fim, 6,4);
-        $mes_fim = substr($this->dia_fim, 3,2);
-        $dia_fim = substr($this->dia_fim, 0,2);
-
- 
-        $result = array();
-        foreach($this->log as $valor) {
-            if(substr($valor,0,4) <= $ano_fim && substr($valor,0,4) >= $ano_ini) {
-                if(substr($valor,5,2) <= $mes_fim && substr($valor,5,4) >= $mes_ini) {
-                     if(substr($valor,8,2) <= $dia_fim && substr($valor,8,4) >= $dia_ini) {
-
-                        foreach($this->status as $status) {
-
-                            if($status == 'ALL') {
-                                    $result[] = $valor;                                    
-                            }else{
-                                switch (strpos($valor, $status)) {
-                                    case true:
-                                        $result[] = $valor;
-                                        break;
-
-                                    case false:
-                                        break;
-                                }
-                            }
-
-                        }
-
-                     }
-                }
-            }
-        }
-
-        // tratamento de origens e destinos
         
-        $filtro = array();
-        foreach($result as $filter) {
-            
-            // src
-            $filtrosrc = trim( substr($filter,28, strpos($filter, "->") - 28) );
-            if($this->src == $filtrosrc) {
-                $filtro[] = $filter;
-            }
+        exit;
 
-            // dst
-            $tmp = substr($filter, strpos($filter, "->") + 2);
-            $tmp2 = explode(" ", $tmp);
-            $filtrodst = trim( $tmp2[1] );
-            if($this->dst == $filtrodst) {
-                $filtro[]= $filter;
-            }
 
-            if($this->dst == '') {
-                $filtro[] = $filter;
-            }else{
-                if($this->src == '') {
-                    $filtro[] = $filter;
-                }
-            }
-
-        }
-
+        
         return $filtro;
         
     }
-    // Função que extraí do arquivo as ultimas linhas conforme passado por parametro.
-    public function getTail($n) {
-
-        $n = ( $n ? (int)$n : 30 );
-        $lines = explode("\n", self::returnLog() );
-
-        $linhas = count($lines);
-        $reverso = array_reverse($lines);
-       
-        unset($lines);
-        $tail = array();
-
-        for($i = 0; $i < $n; $i++) {
-             $tail[] = $reverso[$i];
-        }
-
-        return implode("<br />", array_reverse($tail));        
-    }
-
+    
 }

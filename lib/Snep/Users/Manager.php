@@ -164,7 +164,7 @@ class Snep_Users_Manager {
      * @return \Exception|boolean
      */
     public function addProfileByName($data) {
-
+        
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         $cond = $data['box'];
@@ -198,6 +198,25 @@ class Snep_Users_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->update("users", $update_data, "name = '{$name}'");
+    }
+
+    /**
+     * Method to get users by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("users", array("id", "name"))
+                ->where("users.name = ?", $name);
+
+        $stmt = $db->query($select);
+        $user = $stmt->fetch();
+
+        return $user;
     }
 
 }

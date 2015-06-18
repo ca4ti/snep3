@@ -2,272 +2,332 @@
 
 <!--
     Document   : dashboard.xml
-    Author     : Iago Uilian Benrdt, Rodrigo Cavichioli
+    Author     : Opens Tecnologia
 -->
 <dashboard>
-        <!--cadastros-->
-        <atalho>
-            <nome>Cost Center</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>cost-center/add</link>
-	</atalho>
-        <atalho>
-            <nome>Cost Center</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>cost-center/index</link>
+
+    <!--status-->
+    <atalho>
+        <nome>IP Status</nome>
+        <descricao>View</descricao>
+        <icone>sn-status-ip</icone>
+        <link>ip-status/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>System Diagnosis</nome>
+        <descricao>Edit</descricao>
+        <icone>sn-status-sistema</icone>
+        <link>inspector/index</link>
+    </atalho>
+        
+    <atalho>
+        <nome>Khomp Links</nome>
+        <descricao>View</descricao>
+        <icone>sn-links</icone>
+        <link>khomp-links/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>Khomp Links Errors</nome>
+        <descricao>View</descricao>
+        <icone>sn-erros-links</icone>
+        <link>errors-khomp/index</link>
+    </atalho>
+        
+    <atalho>
+        <nome>System Logs</nome>
+        <descricao>View</descricao>
+        <icone>sn-logs</icone>
+        <link>logs/index</link>
+    </atalho>
+    <!--fim status-->
+    
+    <!--cadastros-->
+    <atalho>
+        <nome>Cost Center</nome>
+        <descricao>Add</descricao>
+        <icone>sn-troncos</icone>
+        <link>cost-center/add</link>
 	</atalho>
         
-        <atalho>
-            <nome>Contacts</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>contacts/add</link>
-	</atalho>
-        <atalho>
-            <nome>Contacts</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>contacts/index</link>
+    <atalho>
+        <nome>Cost Center</nome>
+        <descricao>View</descricao>
+        <icone>sn-etiqueta</icone>
+        <link>cost-center/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Contact Groups</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>contact-groups/add</link>
+    <atalho>
+        <nome>Contacts</nome>
+        <descricao>Add</descricao>
+        <icone>sn-contatos</icone>
+        <link>contacts/add</link>
 	</atalho>
-        <atalho>
-            <nome>Contact Groups</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>contact-groups/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>Queues</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>queues/add</link>
-	</atalho>
-        <atalho>
-            <nome>Queues</nome>
-            <descricao>view</descricao>
-            <icone>snep_client.png</icone>
-            <link>queues/index</link>
+
+    <atalho>
+        <nome>Contacts</nome>
+        <descricao>View</descricao>
+        <icone>sn-contatos</icone>
+        <link>contacts/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Extensions</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>extensions/add</link>
+    <atalho>
+        <nome>Contact Groups</nome>
+        <descricao>Add</descricao>
+        <icone>sn-grupo-contatos</icone>
+        <link>contact-groups/add</link>
 	</atalho>
-        <atalho>
-            <nome>Extensions</nome>
-            <descricao>Add multiple</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>extensions/multiadd</link>
-	</atalho>
-        <atalho>
-            <nome>Extensions</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>extensions/index</link>
+
+    <atalho>
+        <nome>Contact Groups</nome>
+        <descricao>View</descricao>
+        <icone>sn-grupo-contatos</icone>
+        <link>contact-groups/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Extension Groups</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>extensions-groups/add</link>
+    <atalho>
+        <nome>Queues</nome>
+        <descricao>Add</descricao>
+        <icone>sn-filas</icone>
+        <link>queues/add</link>
 	</atalho>
-        <atalho>
-            <nome>Extension Groups</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>extensions-groups/index</link>
+    
+    <atalho>
+        <nome>Queues</nome>
+        <descricao>view</descricao>
+        <icone>sn-filas</icone>
+        <link>queues/index</link>
+	</atalho>
+
+    <atalho>
+        <nome>Queues Groups</nome>
+        <descricao>Add</descricao>
+        <icone>sn-grupo-filas</icone>
+        <link>queues-groups/add</link>
+    </atalho>
+    
+    <atalho>
+        <nome>Queues Groups</nome>
+        <descricao>view</descricao>
+        <icone>sn-grupo-filas</icone>
+        <link>queues-groups/index</link>
+    </atalho>
+        
+    <atalho>
+        <nome>Extensions</nome>
+        <descricao>Add</descricao>
+        <icone>sn-ramal</icone>
+        <link>extensions/add</link>
+	</atalho>
+
+    <atalho>
+        <nome>Extensions</nome>
+        <descricao>Add multiple</descricao>
+        <icone>sn-ramal</icone>
+        <link>extensions/multiadd</link>
+	</atalho>
+
+    <atalho>
+        <nome>Extensions</nome>
+        <descricao>View</descricao>
+        <icone>sn-ramal</icone>
+        <link>extensions/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Pickup Groups</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>pickup-groups/add</link>
+    <atalho>
+        <nome>Extension Groups</nome>
+        <descricao>Add</descricao>
+        <icone>sn-grupo-ramais</icone>
+        <link>extensions-groups/add</link>
 	</atalho>
-        <atalho>
-            <nome>Pickup Groups</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>pickup-groups/index</link>
+
+    <atalho>
+        <nome>Extension Groups</nome>
+        <descricao>View</descricao>
+        <icone>sn-grupo-ramais</icone>
+        <link>extensions-groups/index</link>
 	</atalho>
+
+    <atalho>
+        <nome>Pickup Groups</nome>
+        <descricao>Add</descricao>
+        <icone>sn-grupo-captura</icone>
+        <link>pickup-groups/add</link>
+	</atalho>
+
+    <atalho>
+        <nome>Pickup Groups</nome>
+        <descricao>View</descricao>
+        <icone>sn-grupo-captura</icone>
+        <link>pickup-groups/index</link>
+	</atalho>
+
+    <atalho>
+        <nome>Users</nome>
+        <descricao>Add</descricao>
+        <icone>sn-usuarios</icone>
+        <link>users/add</link>
+    </atalho>
+
+    <atalho>
+        <nome>Users</nome>
+        <descricao>View</descricao>
+        <icone>sn-usuarios</icone>
+        <link>users/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>Profiles</nome>
+        <descricao>Add</descricao>
+        <icone>sn-perfis</icone>
+        <link>profiles/add</link>
+    </atalho>
+
+    <atalho>
+        <nome>Profiles</nome>
+        <descricao>View</descricao>
+        <icone>sn-perfis</icone>
+        <link>profiles/index</link>
+    </atalho>
         
-        <atalho>
-            <nome>Trunks</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>trunks/add</link>
+    <atalho>
+        <nome>Trunks</nome>
+        <descricao>Add</descricao>
+        <icone>sn-troncos</icone>
+        <link>trunks/add</link>
 	</atalho>
-        <atalho>
-            <nome>Trunks</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>trunks/index</link>
+    <atalho>
+        <nome>Trunks</nome>
+        <descricao>View</descricao>
+        <icone>sn-troncos</icone>
+        <link>trunks/index</link>
 	</atalho>
-        
-        <atalho>
-            <nome>Carrier</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>carrier/add</link>
-	</atalho>
-        <atalho>
-            <nome>Carrier</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>carrier/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>Billing</nome>
-            <descricao>Add</descricao>
-            <icone>trunks_icon.png</icone>
-            <link>billing/add</link>
-	</atalho>
-        <atalho>
-            <nome>Billing</nome>
-            <descricao>View</descricao>
-            <icone>snep_client.png</icone>
-            <link>billing/index</link>
-	</atalho>
+
+    <atalho>
+        <nome>Conference Rooms</nome>
+        <descricao>View</descricao>
+        <icone>sn-conferencia</icone>
+        <link>conference-rooms/index</link>
+    </atalho>
+
         <!--fim cadastros-->
         
         <!--relatórios-->
-        <atalho>
-            <nome>Calls</nome>
-            <descricao>View</descricao>
-            <icone>report_icon.png</icone>
-            <link>calls-report/index</link>
+    <atalho>
+        <nome>Calls</nome>
+        <descricao>View</descricao>
+        <icone>sn-chamadas</icone>
+        <link>calls-report/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Call Ranking</nome>
-            <descricao>View</descricao>
-            <icone>report_icon.png</icone>
-            <link>ranking-report/index</link>
+    <atalho>
+        <nome>Call Ranking</nome>
+        <descricao>View</descricao>
+        <icone>sn-ranking</icone>
+        <link>ranking-report/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Services Used</nome>
-            <descricao>View</descricao>
-            <icone>report_icon.png</icone>
-            <link>services-report/index</link>
+    <atalho>
+        <nome>Services Used</nome>
+        <descricao>View</descricao>
+        <icone>sn-servicos</icone>
+        <link>services-report/index</link>
 	</atalho>
+
+    <atalho>
+        <nome>Search Records</nome>
+        <descricao>View</descricao>
+        <icone>sn-busca</icone>
+        <link>record-report/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>Export Data</nome>
+        <descricao>View</descricao>
+        <icone>sn-regras</icone>
+        <link>export-data/index</link>
+    </atalho>
         <!-- fim relatórios-->
+            
+    <!--regras de negócio-->
+    <atalho>
+        <nome>Routes</nome>
+        <descricao>View</descricao>
+        <icone>sn-regras</icone>
+        <link>route/index</link>
+	</atalho>
+
+    <atalho>
+        <nome>Routes</nome>
+        <descricao>Add</descricao>
+        <icone>sn-regras</icone>
+        <link>route/add</link>
+    </atalho>
         
-        <!--status-->
-        <atalho>
-            <nome>Khomp Links</nome>
-            <descricao>View</descricao>
-            <icone>links_icon.png</icone>
-            <link>khomp-links/index</link>
+    <atalho>
+        <nome>Simulator</nome>
+        <descricao>View</descricao>
+        <icone>sn-simulador-regra</icone>
+        <link>simulator/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>IP Status</nome>
-            <descricao>View</descricao>
-            <icone>links_icon.png</icone>
-            <link>ip-status/index</link>
+    <atalho>
+        <nome>Default Settings</nome>
+        <descricao>View</descricao>
+        <icone>sn-conf-padrao</icone>
+        <link>action-configs/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>Khomp Links Errors</nome>
-            <descricao>View</descricao>
-            <icone>links_icon.png</icone>
-            <link>errors-khomp/index</link>
+    <atalho>
+        <nome>Expression Aliases</nome>
+        <descricao>View</descricao>
+        <icone>sn-alias</icone>
+        <link>expression-alias/index</link>
 	</atalho>
         
-        <atalho>
-            <nome>System Logs</nome>
-            <descricao>View</descricao>
-            <icone>links_icon.png</icone>
-            <link>logs/index</link>
+    <atalho>
+        <nome>Expression Aliases</nome>
+        <descricao>Add</descricao>
+        <icone>sn-alias</icone>
+        <link>expression-alias/add</link>
 	</atalho>
+    <!--fim regras de negócio-->
         
-        <!--fim status-->
-        
-        <!--regras de negócio-->
-        <atalho>
-            <nome>Routes</nome>
-            <descricao>View</descricao>
-            <icone>queue_icon.png</icone>
-            <link>route/index</link>
+    <!--configurações-->
+    <atalho>
+        <nome>Parameters</nome>
+        <descricao>Edit</descricao>
+        <icone>sn-parametros</icone>
+        <link>parameters/index</link>
 	</atalho>
-        
-        <atalho>
-            <nome>Simulator</nome>
-            <descricao>View</descricao>
-            <icone>queue_icon.png</icone>
-            <link>simulator/index</link>
+
+    <atalho>
+        <nome>Sound Files</nome>
+        <descricao>View</descricao>
+        <icone>sn-arquivo-som</icone>
+        <link>sound-files/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>Sound Files</nome>
+        <descricao>Add</descricao>
+        <icone>sn-arquivo-som</icone>
+        <link>sound-files/add</link>
 	</atalho>
-        
-        <atalho>
-            <nome>Default Settings</nome>
-            <descricao>View</descricao>
-            <icone>queue_icon.png</icone>
-            <link>action-configs/index</link>
+    
+    <atalho>
+        <nome>Music On Hold</nome>
+        <descricao>View</descricao>
+        <icone>sn-som-espera</icone>
+        <link>music-on-hold/index</link>
+    </atalho>
+
+    <atalho>
+        <nome>Music On Hold</nome>
+        <descricao>Add</descricao>
+        <icone>sn-som-espera</icone>
+        <link>music-on-hold/add</link>
 	</atalho>
-        
-        <atalho>
-            <nome>Expression Aliases</nome>
-            <descricao>View</descricao>
-            <icone>queue_icon.png</icone>
-            <link>expression-alias/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>Expression Aliases</nome>
-            <descricao>Add</descricao>
-            <icone>queue_icon.png</icone>
-            <link>expression-alias/add</link>
-	</atalho>
-        <!--fim regras de negócio-->
-        
-        <!--configurações-->
-        <atalho>
-            <nome>Parameters</nome>
-            <descricao>Edit</descricao>
-            <icone>branch_icon.png</icone>
-            <link>parameters/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>Sound Files</nome>
-            <descricao>Edit</descricao>
-            <icone>branch_icon.png</icone>
-            <link>sound-files/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>Music On Hold</nome>
-            <descricao>Edit</descricao>
-            <icone>branch_icon.png</icone>
-            <link>music-on-hold/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>System Diagnosis</nome>
-            <descricao>Edit</descricao>
-            <icone>branch_icon.png</icone>
-            <link>inspector/index</link>
-	</atalho>
-        
-        <atalho>
-            <nome>CNL</nome>
-            <descricao>CNL Update</descricao>
-            <icone>branch_icon.png</icone>
-            <link>cnl/index</link>
-	</atalho>
-        <!--fim configurações-->
+            
 </dashboard>

@@ -21,20 +21,21 @@
  * Controller for REST services that aid RouteController
  *
  * @see RouteController
+ *
+ *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli Bassotto
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia
  */
 class RouteFormController extends Snep_Rest_Controller {
 
     /**
-     * get - Returns a action form.
-     * @param <Object> $data
+     * get - Returns a action form
+     * @param <object> $data
      * @return <array> $response
      */
     public function get($data) {
-
         if (!isset($data->mode) || ($data->mode != "new_action" && $data->mode != "get_rule_actions")) {
             throw new Snep_Rest_Exception_BadRequest("This service expects 'mode' parameter to be new_action or get_rule_actions.");
         }
@@ -45,15 +46,14 @@ class RouteFormController extends Snep_Rest_Controller {
             return $this->get_rule_actions($data);
         }
     }
-
+    
     /**
-     * new_action
+     * new_action - Add new action in rule
      * @param <object> $data
      * @return type
      * @throws Snep_Rest_Exception_BadRequest
      */
     protected function new_action($data) {
-
         if (!isset($data->id)) {
             throw new Snep_Rest_Exception_BadRequest("Missing or wrong parameter 'id'. You must specify an id for the new action form.");
         }
@@ -63,8 +63,8 @@ class RouteFormController extends Snep_Rest_Controller {
         if (!isset($data->type)) {
             throw new Snep_Rest_Exception_BadRequest("Missing parameter 'type'. You must specify the classname for the action.");
         }
-
         $classname = $data->type;
+
         $actions = PBX_Rule_Actions::getInstance();
 
         if ($actions->isRegistered($classname)) {
@@ -94,18 +94,18 @@ class RouteFormController extends Snep_Rest_Controller {
             "status" => "success",
             "type" => get_class($action),
             "label" => $action->getName(),
-            "form" => $form_html);
+            "form" => $form_html
+        );
     }
-
+    
     /**
      * get_rule_actions
      * @param <object> $data
-     * @return type
+     * @return string
      * @throws Snep_Rest_Exception_BadRequest
      * @throws Snep_Rest_Exception_NotFound
      */
     protected function get_rule_actions($data) {
-
         if (!isset($data->rule_id)) {
             throw new Snep_Rest_Exception_BadRequest("Missing or wrong parameter 'rule_id'.");
         }
@@ -141,7 +141,8 @@ class RouteFormController extends Snep_Rest_Controller {
                 "status" => "success",
                 "type" => get_class($action),
                 "label" => $action->getName(),
-                "form" => $form_html);
+                "form" => $form_html
+            );
         }
         return $actions;
     }

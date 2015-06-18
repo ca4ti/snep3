@@ -23,8 +23,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli Bassotto
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ErrorController extends Zend_Controller_Action {
     
@@ -60,7 +60,42 @@ class ErrorController extends Zend_Controller_Action {
 
         $this->view->exception = $errors->exception;
         $this->view->request   = $errors->request;
-        $this->view->hideMenu  = true;
+        // $this->view->hideMenu  = true;
         $this->view->headTitle($this->view->title, 'PREPEND');
+    }
+    /* 
+     * Cass to provide SNEP Error View
+     * Parameters: 
+     * 
+     * error_type : string, optional. Valid: alert | error (default = error)
+     * error_title: string, optional. (default  = "Error")
+     * error_message: string
+     * error_buttons: boolean, optional. (default = True)
+     *
+     * For instace from a view: 
+     *      echo $this->action( 'sneperror', 'error', null, array( 'error_type' => _type_', 
+            'error_title' => _title_, 'error_message' => _message_, 'error_butons' => _True/False_) );
+     * For instace from a controller: 
+     *      $this->view->error_message = $this->view->translate("Name already exists.");
+            $this->renderScript('error/sneperror.phtml');
+     */
+    public function sneperrorAction() {
+        $error_type = $this->_request->getParam('error_type') ;
+        $error_title = $this->_request->getParam('error_title') ;
+        $error_message = $this->_request->getParam('error_message') ;
+        $error_buttons = $this->_request->getParam('error_buttons') ;
+        
+        if (isset($error_type)) {
+            $this->view->error_type = $error_type ; 
+        }
+        if (isset($error_title)) {
+            $this->view->error_title = $error_title;
+        }
+        if (isset($error_message)) {
+            $this->view->error_message = $error_message;
+        }
+        if (isset($error_buttons)) {
+            $this->view->error_buttons = $error_buttons;
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -16,271 +16,322 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-require_once 'Zend/Controller/Action.php';
-require_once "includes/AsteriskInfo.php";
 
 /**
- * Index Controller
- *
- * @category  Snep
- * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * controller index
  */
 class IndexController extends Zend_Controller_Action {
-
+    
     /**
-     * indexAction 
+     * indexAction - List dashboard
      */
     public function indexAction() {
 
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
+        // checked if snep registred in itc
+        if( $_SESSION['registered'] != true && $_SESSION['noregister'] != true){
+            
+            $this->view->headTitle($this->view->translate("Register"));
+            $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                        $this->view->translate("Register")));
 
-        $this->view->breadcrumb = $this->view->translate("Welcome to Snep, <b>" . $username . "</b>.");
+            // Get configuration properties from Zend_Registry
+            $config = Zend_Registry::get('config');
 
-        // Direcionando para o "snep antigo"
-        $config = Zend_Registry::get('config');
-        $db = Zend_Registry::get('db');
+            $distro = $config->system->itc_distro;
+            $required_register = $config->system->itc_required;
 
-        if (trim($config->ambiente->db->host) == "") {
-            $this->_redirect("/installer/");
-        } else {
-            $systemInfo = array();
-            $execUptimeRaw = explode(",", exec("uptime"));
-            $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
-
-            if (strpos($uptimeRaw, "min") > 0) {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "min") + 3);
-            } elseif (strpos($uptimeRaw, ":") > 0) {
-                $uptimeTmp = explode(":", $uptimeRaw);
-                $systemInfo['uptime'] = $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            } else {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "day")) . $this->view->translate(' dias, ');
-                $uptimeTmp = explode(":", $execUptimeRaw[1]);
-                $systemInfo['uptime'].= $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
+            $viewnoregister = false;
+            if($required_register == "true"){
+                $viewnoregister = true;
             }
-            $systemInfo['uptime'] = trim($systemInfo['uptime']);
+            
+            $this->view->viewnoregister = $viewnoregister;
 
-            $systemInfo['asterisk'] = exec("/usr/sbin/asterisk -V ");
+            // Ping in ITC
+            $url = trim($config->system->itc_address);
+            $url .= "devices/ping/".$_SESSION['uuid'];
 
-            $systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
+            $http = curl_init($url);
 
-            if (file_exists("/etc/slackware-version")) {
-                exec("cat /etc/slackware-version", $linuxVer);
-                $systemInfo['linux_ver'] = $linuxVer[0];
-            } else {
-                exec("cat /etc/issue", $linuxVer);
-                $systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
+            curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
+            $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+            $http_response = curl_exec($http);
+            $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_close($http);
+
+            
+            switch ($httpcode) {
+                case 200:
+                    $this->view->country = Snep_Register_Manager::getCountry();                
+                    $this->view->state = Snep_Register_Manager::getState();                                
+                    break;
+                case 500:
+                    $this->view->error = $this->view->translate("Internal Server Error. Please try later");
+                    break;
+                case false:
+                    $this->view->error = $this->view->translate("To register your Snep you must be connected to an internet network. Check your connection and try again.");
+                    break;
+                default:
+                    $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                    break;
             }
 
-            try {
-                $astinfo = new AsteriskInfo();
-                $astVersionRaw = explode('@', $astinfo->status_asterisk("core show version", "", True));
-            } catch (Exception $e) {
+            $layout = Zend_Layout::getMvcInstance(); 
+            $layout->setLayout('register');
+
+            if ($this->_request->isPost()) {
+                  
+                // register User    
+                if($_POST['save'] == 'register'){
+                    
+                    unset($_POST['save']);
+
+                    $data = $_POST;
+                    $data['device_type_id'] = 1;
+                    $data['device_uuid'] = $_SESSION["uuid"];
+
+                    if($_POST['address']){
+                        $data['address'] = $_POST['address'] ;
+                    } 
+
+                    if($_POST['zipcode']){
+                        $data['zipcode'] = $_POST['zipcode'];
+                    } 
+
+                    if($_POST['phone']){
+                        $data['tel'] = $_POST['phone']; 
+                    } 
+
+                    if($_POST['cell']){
+                        $data['cel'] = $_POST['cell']; 
+                    } 
+                    
+                    if(isset($distro)){
+                        $data['distribution_id'] = $distro;
+                    }
+                    
+                    $content = json_encode($data);
+                    $url = trim($config->system->itc_address) . "auth/sign";
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+                    $json_response = curl_exec($curl);
+                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                    curl_close($curl);
+
+                    switch ($httpcode) {
+                        case 201:
+                            $this->view->confirm = true;                
+                            break;
+                        case 500:
+                            $this->view->error = $this->view->translate("Internal Server Error. Please try later");
+                            break;
+                        case 409:
+                            $this->view->error = $this->view->translate("User already exists.");
+                            break;
+                        case false:
+                            $this->view->error = $this->view->translate("Without internet connection.");
+                            break;
+                        default:
+                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            break;
+                    }
+                     
+                    $layout = Zend_Layout::getMvcInstance(); 
+                    $layout->setLayout('register'); 
+                    
+                }elseif($_POST['save'] == 'confirm'){
                 
-            }
-            if (!isset($astVersionRaw)) {
-                $this->view->erroast = true;
-            }
+                    unset($_POST['save']);
+                    $dado = $_POST;
+                    $dado['device_uuid'] = $_SESSION["uuid"];
 
-            $systemInfo['linux_kernel'] = exec("uname -sr");
+                    $content = json_encode($dado);
+                    $url = trim($config->system->itc_address) . "auth/confirm_hash";
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
 
-            $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
-            $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
-            $systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
+                    $json_response = curl_exec($curl);
+                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                    curl_close($curl);
+                    
+                    switch ($httpcode) {
+                        case 200:
+                            $data = json_decode($json_response);
+                            $api_key = $data->details->api_key;               
+                            $client_key = $data->details->client_key;
+                            Snep_Register_Manager::registerITC($api_key,$client_key); 
 
-            $systemInfo['memory'] = $this->sys_meminfo();
-            $systemInfo['space'] = $this->sys_fsinfo();
-
-            $sqlN = "select count(*) from";
-            $select = $db->query($sqlN . ' peers');
-            $result = $select->fetch();
-
-            $systemInfo['num_peers'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' trunks');
-            $result = $select->fetch();
-
-            $systemInfo['num_trunks'] = $result['count(*)'];
-
-            $select = $db->query($sqlN . ' regras_negocio');
-            $result = $select->fetch();
-
-            $systemInfo['num_routes'] = $result['count(*)'];
-
-            $systemInfo['modules'] = array();
-            $modules = Snep_Modules::getInstance()->getRegisteredModules();
-            foreach ($modules as $module) {
-                $systemInfo['modules'][] = array(
-                    "name" => $module->getName(),
-                    "version" => $module->getVersion(),
-                    "description" => $module->getDescription()
-                );
-            }
-
-            $this->view->indexData = $systemInfo;
-
-            // Creates Snep_Inspector Object
-            $objInspector = new Snep_Inspector();
-
-            // Get array with status of inspected system requirements
-            $inspect = $objInspector->getInspects();
-
-            // Verify errors
-            $this->view->error = false;
-            foreach ($inspect as $log => $message) {
-                if ($message['error'] == 1) {
-                    $this->view->error = true;
-                }
-            }
-
-            // Inspector url
-            $this->view->inspector = $this->getFrontController()->getBaseUrl() . '/inspector/';
-        }
-    }
-
-    /**
-     * sys_meminfo
-     * @return type
-     */
-    private function sys_meminfo() {
-        $results['ram'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
-        $results['swap'] = array('total' => 0, 'free' => 0, 'used' => 0, 'percent' => 0);
-        $results['devswap'] = array();
-
-        $bufr = $this->rfts('/proc/meminfo');
-
-        if ($bufr != "ERROR") {
-            $bufe = explode("\n", $bufr);
-            foreach ($bufe as $buf) {
-                if (preg_match('/^MemTotal:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['total'] = $ar_buf[1];
-                } else if (preg_match('/^MemFree:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['free'] = $ar_buf[1];
-                } else if (preg_match('/^Cached:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['cached'] = $ar_buf[1];
-                } else if (preg_match('/^Buffers:\s+(.*)\s*kB/i', $buf, $ar_buf)) {
-                    $results['ram']['buffers'] = $ar_buf[1];
-                }
-            }
-            $results['ram']['used'] = $results['ram']['total'] - $results['ram']['free'];
-            $results['ram']['percent'] = round(($results['ram']['used'] * 100) / $results['ram']['total']);
-            // values for splitting memory usage
-            if (isset($results['ram']['cached']) && isset($results['ram']['buffers'])) {
-                $results['ram']['app'] = $results['ram']['used'] - $results['ram']['cached'] - $results['ram']['buffers'];
-                $results['ram']['app_percent'] = round(($results['ram']['app'] * 100) / $results['ram']['total']);
-                $results['ram']['buffers_percent'] = round(($results['ram']['buffers'] * 100) / $results['ram']['total']);
-                $results['ram']['cached_percent'] = round(($results['ram']['cached'] * 100) / $results['ram']['total']);
-            }
-
-            $bufr = $this->rfts('/proc/swaps');
-            if ($bufr != "ERROR") {
-                $swaps = explode("\n", $bufr);
-                for ($i = 1; $i < (sizeof($swaps)); $i++) {
-                    if (trim($swaps[$i]) != "") {
-                        $ar_buf = preg_split('/\s+/', $swaps[$i], 6);
-                        $results['devswap'][$i - 1] = array();
-                        $results['devswap'][$i - 1]['dev'] = $ar_buf[0];
-                        $results['devswap'][$i - 1]['total'] = $ar_buf[2];
-                        $results['devswap'][$i - 1]['used'] = $ar_buf[3];
-                        $results['devswap'][$i - 1]['free'] = ($results['devswap'][$i - 1]['total'] - $results['devswap'][$i - 1]['used']);
-                        $results['devswap'][$i - 1]['percent'] = round(($ar_buf[3] * 100) / $ar_buf[2]);
-                        $results['swap']['total'] += $ar_buf[2];
-                        $results['swap']['used'] += $ar_buf[3];
-                        $results['swap']['free'] = $results['swap']['total'] - $results['swap']['used'];
-                        $results['swap']['percent'] = round(($results['swap']['used'] * 100) / $results['swap']['total']);
+                            //register distributions
+                            $distributions = $data->details->distributions;
+                            Snep_Register_Manager::addDistributions($distributions);
+                                
+                            $this->view->registerd = true;              
+                            break;
+                        case 500:
+                            $this->view->error = $this->view->translate("Internal Server Error. Please try later");
+                            break;
+                        case 409:
+                            $this->view->error = $this->view->translate("User already exists.");
+                            break;
+                        case false:
+                            $this->view->error = $this->view->translate("Without internet connection.");
+                            break;
+                        default:
+                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            break;
                     }
-                }
-            }
-        }
-        return $results;
-    }
 
-    /**
-     * rfts
-     * @param <string> $strFileName
-     * @param <int> $intLines
-     * @param <int> $intBytes
-     * @return <string>
-     */
-    private function rfts($strFileName, $intLines = 0, $intBytes = 4096) {
-        $strFile = "";
-        $intCurLine = 1;
-        if (file_exists($strFileName)) {
-            if ($fd = fopen($strFileName, 'r')) {
-                while (!feof($fd)) {
-                    $strFile .= fgets($fd, $intBytes);
-                    if ($intLines <= $intCurLine && $intLines != 0) {
-                        break;
-                    } else {
-                        $intCurLine++;
+                    $layout = Zend_Layout::getMvcInstance(); 
+                    $layout->setLayout('register'); 
+
+                }elseif($_POST['save'] == 'opensnep'){
+
+                    $title = $this->view->translate('Welcome to Intercomunexão.');
+                    $message = $this->view->translate('By registering your SNEP, you connect to the portal of Intercomunexão. Portal where you will have access to exclusive solutions, high-quality support and a constantly evolving technology. <br>Access: itc.opens.com.br');
+                    Snep_Notifications::addNotification($title,$message);
+
+                    // go to snep
+                    $_SESSION['registered'] = true;
+                    $this->_redirect('/');
+
+                }elseif($_POST['save'] == 'login'){
+                    
+                    // user already registered
+                    unset($_POST['save']);
+
+                    $config = Zend_Registry::get('config');
+                    $distro = $config->system->itc_distro;
+
+                    $data = $_POST;
+                    $data['device_type_id'] = 1;
+                    $data['device_uuid'] = $_SESSION["uuid"];
+
+                    if(isset($distro)){
+                        $data['distribution_id'] = $distro;
                     }
-                }
-                fclose($fd);
-            } else {
-                return "ERROR";
-            }
-        } else {
-            return "ERROR";
-        }
-        return $strFile;
-    }
 
-    /**
-     * sys_fsinfo
-     * @return type
-     */
-    private function sys_fsinfo() {
-        $df = $this->execute_program('df', '-kP');
-        $mounts = explode("\n", $df);
-        $fstype = array();
-        if ($fd = fopen('/proc/mounts', 'r')) {
-            while ($buf = fgets($fd, 4096)) {
-                list($dev, $mpoint, $type) = preg_split('/\s+/', trim($buf), 4);
-                $fstype[$mpoint] = $type;
-                $fsdev[$dev] = $type;
-            }
-            fclose($fd);
-        }
+                    $content = json_encode($data);
+                    $url = trim($config->system->itc_address) . "auth/slogin";
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+                    $json_response = curl_exec($curl);
+                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                    curl_close($curl);
+                    
+                    switch ($httpcode) {
+                        case 200:
+                            $data = json_decode($json_response);
 
-        for ($i = 1; $i < sizeof($mounts); $i++) {
-            $ar_buf = preg_split('/\s+/', $mounts[$i], 6);
-            if ($fstype[$ar_buf[5]] == "tmpfs")
-                continue;
-            $results[$i - 1] = array();
+                            $api_key = $data->details->api_key;               
+                            $client_key = $data->details->client_key;
 
-            $results[$i - 1]['disk'] = $ar_buf[0];
-            $results[$i - 1]['size'] = $ar_buf[1];
-            $results[$i - 1]['used'] = $ar_buf[2];
-            $results[$i - 1]['free'] = $ar_buf[3];
-            $results[$i - 1]['percent'] = round(($results[$i - 1]['used'] * 100) / $results[$i - 1]['size']) . '%';
-            $results[$i - 1]['mount_point'] = $ar_buf[5];
-            ($fstype[$ar_buf[5]]) ? $results[$i - 1]['fstype'] = $fstype[$ar_buf[5]] : $results[$i - 1]['fstype'] = $fsdev[$ar_buf[0]];
-        }
-
-        return $results;
-    }
-
-    /**
-     * execute_program
-     * @param <string> $program
-     * @param <string> $params
-     * @return type
-     */
-    private function execute_program($program, $params) {
-        $path = array('/bin/', '/sbin/', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin');
-        $buffer = '';
-        while ($cur_path = current($path)) {
-            if (is_executable("$cur_path/$program")) {
-                if ($fp = popen("$cur_path/$program $params", 'r')) {
-                    while (!feof($fp)) {
-                        $buffer .= fgets($fp, 4096);
+                            $distributions = $data->details->distributions;
+                            Snep_Register_Manager::addDistributions($distributions);
+                            Snep_Register_Manager::registerITC($api_key,$client_key); 
+                            $this->view->registerd = true;            
+                            break;
+                        case 500:
+                            $this->view->error = $this->view->translate("Internal Server Error. Please try later");
+                            break;
+                        case 401:
+                            $this->view->error = $this->view->translate("User or password incorrect.");
+                            break;
+                        case false:
+                            $this->view->error = $this->view->translate("Without internet connection.");
+                            break;
+                        default:
+                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            break;
                     }
-                    return trim($buffer);
+                     
+                    $layout = Zend_Layout::getMvcInstance(); 
+                    $layout->setLayout('register'); 
+                    
+                }elseif($_POST['save'] == 'noregister'){
+
+                    // no ITC register in time
+                    Snep_Register_Manager::noregister();
+                    $_SESSION['noregister'] = true; 
+                    $this->_redirect('/');
                 }
             }
-            next($path);
-        }
-    }
 
+        }else{
+
+            $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+            $this->view->translate("Dashboard")));
+
+            $modelos = Snep_Dashboard_Manager::getModelos();
+
+            if (isset($_GET['dashboard_add'])) {
+                Snep_Dashboard_Manager::add($_GET['dashboard_add']);
+            }
+            
+            $this->view->dashboard = Snep_Dashboard_Manager::getArray($modelos);
+            if(!$this->view->dashboard)$this->_helper->redirector('add', 'index');
+        }       
+    }
+    
+    /**
+     * addAction - Add item in dashboard
+     */
+    public function addAction() {
+        
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Dashboard"),
+                    $this->view->translate("Edit")));
+
+        $url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+
+        $usados = Snep_Dashboard_Manager::get();
+        $modelos = Snep_Dashboard_Manager::getModelos();
+
+        foreach($modelos aS $key=>$value){
+            
+            $array[$key]['name'] = $value['nome'];
+            $array[$key]['desc'] = $value['descricao'];
+        }
+
+        foreach($array as $id => $iten){
+            foreach($usados as $x => $used){
+                if($id == $used){
+                    $array[$id]['used'] = "checked";
+                }
+            }
+        }
+
+        $this->view->list = $array;        
+        if ($this->_request->getPost()) {
+            
+            $dados = $this->_request->getParams();
+            
+            foreach($dados['dash'] as $key => $enabled){
+                $dashboard[] = $key;
+            }
+
+            Snep_Dashboard_Manager::set($dashboard);
+            $this->_redirect($this->getRequest()->getControllerName());
+            
+        }        
+    }
+   
 }
+
+?>

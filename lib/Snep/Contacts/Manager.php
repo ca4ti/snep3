@@ -138,14 +138,18 @@ class Snep_Contacts_Manager {
         $insert_data = array('id' => $contact['id'],
             'name' => $contact['name'],
             'address' => $contact['address'],
-            'city' => $contact['city'],
-            'state' => $contact['state'],
+            'id_city' => $contact['city'],
+            'id_state' => $contact['state'],
             'cep' => $contact['zipcode'],
             'group' => $contact['group'],
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s'));
 
         $db->insert('contacts_names', $insert_data);
+        
+        $id = $db->lastInsertId();
+
+        return $id;
     }
 
     /**
@@ -227,8 +231,8 @@ class Snep_Contacts_Manager {
 
         $update_data = array('name' => $contact['name'],
             'address' => $contact['address'],
-            'city' => $contact['city'],
-            'state' => $contact['state'],
+            'id_city' => $contact['city'],
+            'id_state' => $contact['state'],
             'cep' => $contact['zipcode'],
             'group' => $contact['group'],
             'updated' => date('Y-m-d H:i:s'));

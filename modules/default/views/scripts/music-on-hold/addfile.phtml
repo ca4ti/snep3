@@ -1,5 +1,92 @@
-<?php if( $this->error['error'] ) : ?>
-        <div class="error_box"> <?php echo $this->error['message']  ?> </div>
-<?php endif ?>
+<div class="row">
+	                
+    <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "music-on-hold", "action" => "addfile"), null, true); ?>" method="post" enctype="multipart/form-data">
 
-<?php echo $this->form ?>
+        <div class="form-group">
+			<label class="col-sm-2 control-label" for="inputFile"><?php echo $this->translate("Sound File");?></label>
+            <div class="col-sm-6">
+				<input type="file" id="inputFile">
+            </div>
+		</div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Filename");?></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="filename" placeholder='<?php echo $this->translate("Filename")?>' />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Description");?></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="description" placeholder='<?php echo $this->translate("Description")?>' />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Converte to GSM")?></label>
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="gsm" id="gsm"/><?php echo $this->translate("Yes")?>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="section" value="<?php echo $this->section; ?>">
+
+        <br>
+        <div class="snep-body-footer-buttons">
+            <button type="submit" class="btn btn-add" name="save" value="Save"><?php echo $this->translate("Save");?></button>
+            &nbsp;&nbsp;&nbsp;
+        	<a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+        </div>
+    </form>
+
+</div>
+
+<script type="text/javascript">
+
+jQuery.noConflict();
+jQuery(document).ready(function(){ 
+    jQuery('#defaultForm').validate({
+        rules: {
+            filename: {
+                required: true,
+                minlength: 5,
+                maxlength: 30,
+                lettersAndNumbersOnly: true
+            },
+            description: {
+                required: true,
+                minlength: 5,
+                maxlength: 30,
+                lettersAndNumbersOnly: true
+            }
+        },
+        messages: {
+            filename: {
+                required: "<?php echo $this->translate('The filename is required'); ?>",
+                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
+                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only'); ?>" 
+            },
+            description: {
+                required: "<?php echo $this->translate('The description is required'); ?>",
+                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
+                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only'); ?>" 
+            }
+        },
+        highlight: function(element) {
+            jQuery(element).closest('.control-group').removeClass('success').addClass('error');
+        },
+        success: function(element) {
+            element
+            .text('OK!').addClass('valid')
+            .closest('.control-group').removeClass('error').addClass('success');
+        }
+    });
+}); 
+</script>

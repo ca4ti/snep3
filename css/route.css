@@ -1,0 +1,106 @@
+/* 
+    Document   : route.js
+    Created on : Apr 03, 2012, 03:32:25 PM
+    Author     : Iago Uilian Berndt
+    Description: Route scripts
+*/
+
+
+
+.snep-route-item {
+    /*float: left ;*/
+}
+.route-sm-3 {
+    width: 25% !important;
+    display: inline !important;
+}
+.route-sm-4 {
+    width: 33.3333% !important;
+    display: inline !important;
+}
+.route-sm-5 {
+    width: 41.6667% !important;
+    display: inline !important;
+}
+
+.snep-route label {
+    margin: 0 0 0 5px !important;
+    font-weight: normal;
+    vertical-align: middle;
+    padding-top: 5px;
+}
+.snep-route input[type="checkbox"],
+.snep-route input[type="radio"]{
+       margin: 0 5px 0 0px !important;
+}
+.snep-route input[type="text"] {
+    margin-left: 5px;
+}
+.snep-route select#prio, 
+.campos,
+.snep-route input[type="text"]  {
+    margin-left: 5px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    line-height: 1.42857;
+    font-size: 12px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    /*height: 34px;*/
+}
+.campos {
+    margin-left: 0px !important;
+}
+.snep-route,
+.snep-route input[type="text"],
+#routeForm .form-group {
+    margin-bottom: 0 !important;
+}
+#week-label, 
+#record-label,
+#prio-label{
+    margin-top: 15px;
+}
+
+.snep-route select#prio option {
+    vertical-align: middle;
+}
+
+input{
+	vertical-align: middle;
+}
+.snep_form input[size='5']{
+	width: 100px !important;
+}
+.snep_form input[size='10'], .snep_form input[size='4']{
+	width: 300px !important;
+}
+
+ul#dst, ul#time, ul#orig{
+	/*margin: 10px 10px 10px 0px;*/
+	/*padding: 10px;*/
+}
+/*.snep_form, .snep_form .line {
+	width: 680px !important;
+}*/
+.line .input label{	
+	/*padding: 10px;*/
+	border-radius:5px;
+	background-color: #F3F3F3;
+	border: solid 1px #CFCFCF;
+	display: table;
+	float: left;
+	margin-left: 13px;
+}
+/*.snep_form .label{
+	margin-left: 0px !important;
+}*/
+.errors{
+	list-style: none;
+	color: #D00;
+}
+[for=week-mon],
+[for=record-enable] {
+    margin-left: 0px !important;
+}

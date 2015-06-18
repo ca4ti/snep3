@@ -36,11 +36,13 @@ class Snep_Extensions {
      * @return Snep_Exten usuario
      */
     public function get($extensionId) {
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()->from('peers')->where("name = '$extensionId' AND peer_type='R'");
         $stmt = $db->query($select);
         $usuario = $stmt->fetchObject();
+
         if (!$usuario) {
             throw new PBX_Exception_NotFound("Usuario $extensionId nao encontrado");
         }
@@ -58,6 +60,7 @@ class Snep_Extensions {
      * @return Snep_Exten ramal criado a partir dos dados.
      */
     private function processExten($data) {
+
         $tech = substr($data->canal, 0, strpos($data->canal, '/'));
 
         if ($tech == "SIP" || $tech == "IAX2") {
@@ -79,6 +82,7 @@ class Snep_Extensions {
                 $interface = new PBX_Asterisk_Interface_IAX2($config);
             }
         } else if ($tech == "VIRTUAL") {
+            
             $exten_id = substr($data->canal, strpos($data->canal, '/') + 1);
             $trunk = PBX_Trunks::get(substr($data->canal, strpos($data->canal, '/') + 1));
             $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel" => $trunk->getInterface()->getCanal() . "/" . $exten_id));

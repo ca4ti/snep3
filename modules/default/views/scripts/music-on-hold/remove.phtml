@@ -1,6 +1,31 @@
+<div class="row">
+	<form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "music-on-hold", "action" => "remove"), null, true); ?>" METHOD="post">
+ 
+        <div class="col-lg-12">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <?php echo $this->translate("Delete Sound Files");?>
+                </div>
+                <div class="panel-body" align="center">
+                	<p><?php echo $this->message ?></p>
+                	<p><b><?php echo $this->confirmation ?></b></p>
+                </div>
 
-<div class="info_box">
-<?php echo $this->message; ?>
+				<input type="hidden" name="customerid" value="<?php echo $this->id; ?>">
+				
+            </div>
+        </div>
+
+        <br>
+        <div class="snep-body-footer-buttons">
+                <button type="submit" class="btn btn-add" name="delete" value="Delete"><?php echo $this->translate("Delete");?></button>
+                &nbsp;&nbsp;&nbsp;
+            	<a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+
+        </div>   
+
+	</form>
 </div>
 
-<?php echo $this->form; ?>
+
+

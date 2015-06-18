@@ -23,10 +23,26 @@
  * @category  Snep
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  * 
  */
 class UsersController extends Zend_Controller_Action {
+
+    /**
+     * Initial settings of the class
+     */
+     public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        // Add dashboard button
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
+        $this->profiles = Snep_Profiles_Manager::getAll();
+    }
 
     /**
      * indexAction - List all users
@@ -34,54 +50,18 @@ class UsersController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Users")));
-
-        $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
                 ->from(array("n" => "users"), array("id as ide", "name as nome", "email", "created", "updated"))
-                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name")
-                ->order('nome');
+                ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name");
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("n.`$field` like '%$query%'");
-        }
+        $stmt = $db->query($select);
+        $data = $stmt->fetchAll();  
+        
+        $this->view->users = $data;
 
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $paginator = new Zend_Paginator($paginatorAdapter);
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
-
-        $this->view->users = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
-
-        $opcoes = array("id" => $this->view->translate("Code"),
-            "name" => $this->view->translate("Name"));
-
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($opcoes);
-        $filter->setFieldValue($this->_request->getPost('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
-                "display" => $this->view->translate("Export CSV"),
-                "css" => "back"),
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add User"),
-                "css" => "include"));
     }
 
     /**
@@ -90,51 +70,38 @@ class UsersController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Users"),
                     $this->view->translate("Add")));
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
+        
+        $this->view->profiles = $this->profiles;
 
-        $profiles = Snep_Profiles_Manager::getAll();
-
-        foreach ($profiles as $group) {
-            $allGroups[$group['id']] = $group['name'];
-        }
-
-        if (count($profiles)) {
-            $form->getElement('group')->setMultiOptions($allGroups);
-        }
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         if ($this->_request->getPost()) {
 
-            if (empty($_POST['name'])) {
-                $form->getElement('name')->setRequired(true);
-            }
-            if (empty($_POST['password'])) {
-                $form->getElement('password')->setRequired(true);
-            }
-
-            if (empty($_POST['email'])) {
-                $form->getElement('email')->setRequired(true);
-            }
-
-            $form_isValid = $form->isValid($_POST);
-
-            if (empty($_POST['group'])) {
-                $form->getElement('group')->addError($this->view->translate('No group selected'));
-                $form_isValid = false;
-            }
-
             $dados = $this->_request->getParams();
+            $groupId = Snep_Profiles_Manager::getName($dados['group']);
+            $dados['group'] = $groupId['id'];
 
-            if ($form_isValid) {
+            $newId = Snep_Users_Manager::getName($dados['name']);
+            
+            if (count($newId) > 1) {
+                
+                $this->view->error_message = $this->view->translate('Name already exists.'); 
+                $this->renderScript('error/sneperror.phtml');
+                
+            }else{
+
                 Snep_Users_Manager::add($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
+
             }
+
         }
-        $this->view->form = $form;
+        
     }
 
     /**
@@ -143,70 +110,74 @@ class UsersController extends Zend_Controller_Action {
     public function editAction() {
         
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Users"),
                     $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
         $user = Snep_Users_Manager::get($id);
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/users.xml"));
-
-        $profile = Snep_Profiles_Manager::getAll();
-
-        foreach ($profile as $group) {
-            $allGroups[$group['id']] = $group['name'];
+        if($id == 1){
+            $this->view->disabled = 'disabled';
         }
-
+   
+        // Marks the already registered user profile
+        foreach($this->profiles as $key => $profile){
+            if ( $profile['id'] === $user['profile_id']) {
+                $this->profiles[$key]['selected'] = 'selected' ;
+            } else {
+                $this->profiles[$key]['selected'] = "" ;
+            }
+        }
+        // Id of the current profile
         $idProfile = $user["profile_id"];
+        
+        // Mount the view
+        $this->view->profiles = $this->profiles;
+        $this->view->user = $user;
 
-        if ($id != 1) {
-            $group = $form->getElement('group');
-            $group->setValue($user["profile_id"]);
+        //Define the action and load form
+        $this->view->action = "edit" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
-            $group = $form->getElement('group')->setMultiOptions($allGroups);
-            ( isset($user['group']) ? $group->setValue($user['group']) : null );
-        } else {
-            $form->removeElement('group');
-        }
-
-        $name = $form->getElement('name');
-        ( isset($user['name']) ? $name->setValue($user['name']) : null );
-
-        $password = $form->getElement('password');
-        ( isset($user['password']) ? $password->setValue($user['password']) : null );
-        $form->getElement('password')->renderPassword = true;
-
-        $email = $form->getElement('email');
-        ( isset($user['email']) ? $email->setValue($user['email']) : null );
 
         if ($this->_request->getPost()) {
-            $form_isValid = $form->isValid($_POST);
-            $dados = $this->_request->getParams();
 
-            if ($form_isValid) {
+            $dados = $this->_request->getParams();
+            
+            $newId = Snep_Users_Manager::getName($dados['name']);
+            
+            if (count($newId) > 1 && $user['name'] != $dados['name']) {
+                
+                $this->view->error_message = $this->view->translate('Name already exists.'); 
+                $this->renderScript('error/sneperror.phtml');
+
+            } else {
+               
                 $dados['created'] = $user['created'];
 
                 if (strlen($dados['password']) != 32) {
                     $dados['password'] = md5($dados['password']);
                 }
 
-                // Caso seja admin, recebe profile default
+                // User admin equals profile default
                 if ($id == 1) {
                     $dados['group'] = 1;
+                }else{
+                    $groupID = Snep_Profiles_Manager::getName($dados['group']);
+                    $dados['group'] = $groupID['id'];
                 }
 
-                // Ao editar grupo, o usuario perde as permissões individuais
+                // In the Group edition, the user loses the individual permissions
                 if ($idProfile != $dados['group']) {
                     Snep_Users_Manager::removePermission($id);
                 }
 
                 Snep_Users_Manager::edit($dados);
                 $this->_redirect($this->getRequest()->getControllerName());
+
             }
         }
-        $this->view->form = $form;
+        
     }
 
     /**
@@ -214,11 +185,25 @@ class UsersController extends Zend_Controller_Action {
      */
     public function removeAction() {
 
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Users"),
+                    $this->view->translate("Delete")));
+
         $id = $this->_request->getParam('id');
-        Snep_Users_Manager::removeRecovery($id);
-        Snep_Users_Manager::removePermission($id);
-        Snep_Users_Manager::remove($id);
-        $this->_redirect($this->getRequest()->getControllerName());
+
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete User.'); 
+        $this->view->remove_message = $this->view->translate('The user will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'users'; 
+        $this->renderScript('remove/remove.phtml');
+
+        if ($this->_request->getPost()) {
+
+            Snep_Users_Manager::removeRecovery($_POST['id']);
+            Snep_Users_Manager::removePermission($_POST['id']);
+            Snep_Users_Manager::remove($_POST['id']);
+            $this->_redirect($this->getRequest()->getControllerName());
+        }
     }
 
     /**
@@ -227,7 +212,6 @@ class UsersController extends Zend_Controller_Action {
     public function permissionAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Users"),
                     $this->view->translate("Permission")));
 
@@ -370,25 +354,69 @@ class UsersController extends Zend_Controller_Action {
     }
 
     /**
-     * exportAction - Export contacts for CSV file.
+     *  Edit bond
      */
-    public function exportAction() {
+    public function bondAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Users"),
-                    $this->view->translate("Export CSV")));
+                    $this->view->translate("Bond")));
 
-        $ie = new Snep_CsvIE('users');
-        if ($this->_request->getParam('download')) {
-            $this->_helper->layout()->disableLayout();
-            $this->_helper->viewRenderer->setNoRender(true);
+        $id = $this->_request->getParam('id');
+        $user = Snep_Users_Manager::get($id);
 
-            $ie->export();
-        } else {
-            $this->view->form = $ie->exportResult();
-            $this->view->title = "Export";
-            $this->render('export');
+        $this->view->user_name = $user['name'];
+        $this->view->id = $id;
+
+        $allPeers = Snep_Extensions_Manager::getAll();
+        $usersBond = Snep_Binds_Manager::getBond($id);
+
+        if($usersBond){
+            
+            // Type bond
+            if($usersBond[0]["type"] == 'bound'){
+                $this->view->typeBond = 'checked';
+            }else{
+                $this->view->typeNobond = 'checked';
+            }
+
+            // Array bond
+            foreach($usersBond as $key => $user){
+                $selectedUsers[]['name'] = $user["peer_name"];
+                foreach($allPeers as $x => $peer){
+                    if($user['peer_name'] == $peer['name']){
+                        unset($allPeers[$x]);
+                    }
+                }
+            }
+
+            $this->view->selected = $selectedUsers;
+            $this->view->peers = $allPeers;
+        
+        }else{
+
+            $this->view->peers = $allPeers;
+            $this->view->typeNobond = 'checked';
+
+        }
+
+        if ($this->_request->isPost()) {
+            
+            $data = $_POST;
+            
+            // removes bond extension
+            Snep_Binds_Manager::removeBond($data['id']);
+
+            //add bond extension
+            if($data['duallistbox_bond']){
+                foreach($data['duallistbox_bond'] as $key => $peer){
+
+                    Snep_Binds_Manager::addBond($data['id'],$data['bound'],$peer);
+
+                }
+            }
+            
+            $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
         }
     }
 

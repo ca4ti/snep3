@@ -18,38 +18,205 @@
  */
 
 /**
- * Expression Alias Controller. 
+ * Expression Alias Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2011 OpenS Tecnologia
- * @author    Lucas Ivan Seidenfus
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ExpressionAliasController extends Zend_Controller_Action {
 
+
     /**
-     *
-     * @var Zend_Form
+     * Initial settings of the class
      */
-    protected $form;
+    public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
 
     /**
      * indexAction
      */
     public function indexAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Expression Alias")));
 
         $aliases = PBX_ExpressionAliases::getInstance();
-        $this->view->aliases = $aliases->getAll();
+        $expressions = $aliases->getAll();
 
-        $this->view->filter = array(array("url" => $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/add',
-                "display" => $this->view->translate("Add Expression Alias"),
-                "css" => "include"),
-        );
+        if(empty($expressions)){
+            $this->view->error_message = $this->view->translate("You do not have registered expression alias. <br><br> Click 'Add Expression Alias' to make the first registration");
+        }
+
+        $this->view->aliases = $expressions;
+        
     }
 
+    
+
+    /**
+     * AddAction - Add expression alias
+     * @throws PBX_Exception_BadArg
+     */
+    public function addAction() {
+        
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Expression Alias"),
+                    $this->view->translate("Add")));
+
+        $this->view->expressions = array();    
+        $this->view->action = 'add';
+        $this->renderScript('expression-alias/addedit.phtml');
+
+        if ($this->getRequest()->isPost()) {
+
+            $expression = array(
+                "name" => $_POST['name'],
+                "expressions" => $_POST['aliasbox']);
+
+            $aliasesPersistency = PBX_ExpressionAliases::getInstance();
+
+
+            //validation
+            $form_isValid = true ;
+            foreach ($_POST['aliasbox'] as $key => $value) {
+                $valida = Snep_ValidateExpression::execute($value);
+                if (!$valida) {
+                    break ;
+                }
+            }
+            if (!$valida) {
+                $this->view->error_message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
+                $this->renderScript('error/sneperror.phtml');
+                $form_isValid = false;
+            }
+            if ($_POST["name"] == "" || $_POST["aliasbox"] == "") {
+                $this->view->error_message = $this->view->translate("Required value");
+                $this->renderScript('error/sneperror.phtml');
+                $form_isValid = false;
+            } 
+            if ($form_isValid) {
+             
+                try {
+                    $aliasesPersistency->register($expression);
+                    $this->_redirect($this->getRequest()->getControllerName());
+                } catch (Exception $ex) {
+                    $this->view->error_message = $ex->getMessage();
+                    $this->renderScript('error/sneperror.phtml');
+                }
+                
+            }
+        } 
+    }
+
+    /**
+     * editAction - Edit expression alias
+     */
+    public function editAction() {
+        
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Expression Alias"),
+                    $this->view->translate("Edit")));
+
+        $id = (int) $this->getRequest()->getParam('id');
+        
+        $aliasesPersistency = PBX_ExpressionAliases::getInstance();
+
+        $alias = $aliasesPersistency->get($id);
+        $this->view->alias = $alias;
+        $this->view->id = $id;
+        $this->view->expressions = $alias['expressions'];
+
+        $this->view->action = 'edit';
+        $this->renderScript('expression-alias/addedit.phtml');
+
+        if ($this->getRequest()->isPost()) {
+            
+            $expression = array(
+                "id" => $id,
+                "name" => $_POST['name'],
+                "expressions" => $_POST['aliasbox']);
+
+            //validation
+            $form_isValid = true ;
+            foreach ($_POST['aliasbox'] as $key => $value) {
+                $valida = Snep_ValidateExpression::execute($value);
+                if (!$valida) {
+                    break ;
+                }
+            }
+            if (!$valida) {
+                $this->view->error_message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
+                $this->renderScript('error/sneperror.phtml');
+                $form_isValid = false;
+            }
+            if ($_POST["name"] == "" || $_POST["aliasbox"] == "") {
+                $this->view->error_message = $this->view->translate("Required value");
+                $this->renderScript('error/sneperror.phtml');
+                $form_isValid = false;
+            } 
+            if ($form_isValid) {
+                    
+                try {
+                    $aliasesPersistency->update($expression);
+                    $this->_redirect($this->getRequest()->getControllerName());
+                } catch (Exception $ex) {
+                    $this->view->error_message = $ex->getMessage();
+                    $this->renderScript('error/sneperror.phtml');
+                }
+                    
+            }
+            
+        } 
+        
+    }
+
+    /**
+     * removeAction - Delete expression alias
+     */
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Expression Alias"),
+                    $this->view->translate("Delete")));
+
+        $id = $this->_request->getParam('id');
+
+        //verifica se grupo é usado em alguma regra
+        $regras =  Snep_ExpressionAliases_Manager::getValidation($id);
+        if (count($regras) > 0) {
+
+            $this->view->error_message = $this->view->translate("Cannot remove. The following routes are using this expression alias: ") . "<br />";
+            foreach ($regras as $regra) {
+                $this->view->error_message .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
+            }
+
+            $this->renderScript('error/sneperror.phtml');
+        }else{
+
+            $this->view->id = $id;
+            $this->view->remove_title = $this->view->translate('Delete Expression Alias.'); 
+            $this->view->remove_message = $this->view->translate('The expression alias will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'expression-alias'; 
+            $this->renderScript('remove/remove.phtml');
+
+            if ($this->_request->getPost()) {
+                
+                Snep_ExpressionAliases_Manager::delete($_POST['id']);
+                $this->_redirect($this->getRequest()->getControllerName());
+                
+            }
+        }
+    }
     /**
      * getForm
      * @return <obj>
@@ -69,158 +236,6 @@ class ExpressionAliasController extends Zend_Controller_Action {
             $this->form = $form;
         }
         return $this->form;
-    }
-
-    /**
-     * AddAction - Add expression alias
-     * @throws PBX_Exception_BadArg
-     */
-    public function addAction() {
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
-                    $this->view->translate("Expression Alias"),
-                    $this->view->translate("Add Expression Alias")));
-
-        $form = $this->getForm();
-        $this->view->form = $form;
-
-        if ($this->getRequest()->isPost()) {
-            $expression = array(
-                "name" => $_POST['name'],
-                "expressions" => explode(",", $_POST['exprValue'])
-            );
-            $aliasesPersistency = PBX_ExpressionAliases::getInstance();
-
-            //validation
-            $valida = Snep_ValidateExpression::execute($_POST['exprValue']);
-
-            if ($valida['status'] != false) {
-
-                $this->view->message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
-                $this->view->msgclass = 'failure';
-                header("refresh:7; ../expression-alias/add");
-            } else
-            if ($_POST["name"] == "" || $_POST["exprValue"] == "") {
-                $this->view->message = $this->view->translate("Required value");
-                $this->view->msgclass = 'failure';
-
-                header("refresh:2; ../expression-alias/add");
-            } else {
-                try {
-
-                    $aliasesPersistency->register($expression);
-                    $exprList = $expression['expressions'];
-                    $expr = "exprObj.addItem(" . count($exprList) . ");\n";
-
-                    foreach ($exprList as $index => $value) {
-                        $expr .= "exprObj.widgets[$index].value='{$value}';\n";
-                    }
-
-                    $this->view->dataExprAlias = $expr;
-                    $form = $this->getForm();
-                    $form->getElement('name')->setValue($_POST['name']);
-                } catch (Exception $ex) {
-                    throw new PBX_Exception_BadArg("Invalid Argument");
-                }
-                $this->_helper->redirector('index');
-            }
-        } else {
-            $this->view->dataExprAlias = "exprObj.addItem();\n";
-        }
-
-        $this->renderScript('expression-alias/add.phtml');
-    }
-
-    /**
-     * editAction - Edit expression alias
-     */
-    public function editAction() {
-        $id = (int) $this->getRequest()->getParam('id');
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
-                    $this->view->translate("Expression Alias"),
-                    $this->view->translate("Edit Expression Alias %s", $id)));
-
-        $form = $this->getForm();
-        $this->view->form = $form;
-        $aliasesPersistency = PBX_ExpressionAliases::getInstance();
-
-        if ($this->getRequest()->isPost()) {
-            $expression = array(
-                "id" => $id,
-                "name" => $_POST['name'],
-                "expressions" => explode(",", $_POST['exprValue'])
-            );
-
-            //validation
-            $valida = Snep_ValidateExpression::execute($_POST['exprValue']);
-
-            if ($valida['status'] != false) {
-
-                $this->view->message = $this->view->translate("Their alias has invalid character. Accents are not allowed, empty value between the keys, blanks and special characters except( # % | . - _ )");
-                $this->view->msgclass = 'failure';
-                header("refresh:7; ../expression-alias/edit/id/$id");
-            } else
-            if ($_POST["name"] == "" || $_POST["exprValue"] == "") {
-                $this->view->message = $this->view->translate("Required value");
-                $this->view->msgclass = 'failure';
-
-                header("refresh:2; ../expression-alias/edit/id/$id");
-            } else {
-
-                try {
-                    $aliasesPersistency->update($expression);
-                } catch (Exception $ex) {
-                    display_error($ex->getMessage(), true);
-                }
-                $this->_forward('index', 'expression-alias');
-            }
-        } else {
-
-            $alias = $aliasesPersistency->get($id);
-            $exprList = $alias['expressions'];
-            $expr = "exprObj.addItem(" . count($exprList) . ");\n";
-
-            foreach ($exprList as $index => $value) {
-                $expr .= "exprObj.widgets[$index].value='{$value}';\n";
-            }
-            $this->view->dataExprAlias = $expr;
-            $form = $this->getForm();
-            $form->getElement('name')->setValue($alias['name']);
-
-            $this->renderScript('expression-alias/edit.phtml');
-        }
-    }
-
-    /**
-     * deleteAction - Delete expression alias
-     */
-    public function deleteAction() {
-
-        if ($this->getRequest()->isGet()) {
-            $id = (int) $this->getRequest()->getParam('id');
-            $aliasesPersistency = PBX_ExpressionAliases::getInstance();
-
-            //verifica se grupo é usado em alguma regra
-            $regras = $aliasesPersistency->getValidation($id);
-
-            if (count($regras) > 0) {
-
-                $this->view->error = $this->view->translate("Cannot remove. The following routes are using this expression alias: ") . "<br />";
-                foreach ($regras as $regra) {
-                    $this->view->error .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
-                }
-
-                $this->_helper->viewRenderer('error');
-            } else {
-
-                $alias = $aliasesPersistency->get($id);
-                if ($alias !== null) {
-                    $aliasesPersistency->delete($id);
-                }
-                $this->_forward('index', 'expression-alias');
-            }
-        }
     }
 
 }

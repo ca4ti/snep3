@@ -35,18 +35,26 @@ class Snep_Form extends Zend_Form {
             'ViewHelper',
             'Description',
             'Errors',
-            array(array('elementTd' => 'HtmlTag'), array('tag' => 'td')),
-            array('Label', array('tag' => 'th')),
-            array(array('elementTr' => 'HtmlTag'), array('tag' => 'tr', 'class' => 'snep_form_element'))
+            array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'col-sm-6')),
+            array('Label', array('tag' => 'div', 'class' => 'col-sm-2 control-label')),
+            array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group snep-route'))
         ));
 
         $this->setDecorators(array(
             'FormElements',
-            array('HtmlTag', array('tag' => 'table')),
-            array('Form', array('class' => 'snep_form'))
+            array('HtmlTag', array('tag' => 'div', 'class' => 'form-group')),
+            array('Form', array('class' => 'form-horizontal')),
+            array('HtmlTag', array('tag' => 'div', 'class' => 'row'))
         ));
 
+        // foreach($this->getElements() as $element){
+
+        //         $element->setAttrib('class', 'form-control' . ($element->getAttrib('class') == '' ? '' :  ' ' . $element->getAttrib('class')));
+
+        // }
+
         $i18n = Zend_Registry::get("i18n");
+        
         $submit = new Snep_Form_Element_Submit("submit", array("label" => $i18n->translate("Save")));
         $submit->setOrder(1000);
         $this->addElement($submit);

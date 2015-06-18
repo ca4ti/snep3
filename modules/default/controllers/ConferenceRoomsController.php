@@ -22,7 +22,8 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ConferenceRoomsController extends Zend_Controller_Action {
 
@@ -46,7 +47,6 @@ class ConferenceRoomsController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Conference Rooms")));
 
         $config = Zend_Registry::get('config');
@@ -97,6 +97,12 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             }
         }
 
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
         $this->view->conferenceRooms = $salas;
         $this->view->costCenter = Snep_CostCenter_Manager::getAll();
 
@@ -105,7 +111,8 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $file_auth = "/etc/asterisk/snep/snep-authconferences.conf";
 
             if (!is_writable($file_conf) || !is_writable($file_auth)) {
-                throw new ErrorException($this->view->translate("File does not have editing permission"));
+                $this->view->error_message = $this->view->translate("File does not have editing permission");
+                $this->renderScript('error/sneperror.phtml');
                 return False;
             }
 
@@ -144,7 +151,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentConfe = ";----------------------------------------------------------------\n";
             $contentConfe .= "; Arquivo: snep-conferences.conf - Salasa de COnferencia\n";
             $contentConfe .= "; Sintaxe: exten => sala,1,Set(CHANNEL(language)=br)\n";
-            $contentConfe .= ";          exten => sala,n,Set(CDR(accountcode)=Conferencia)\n";
+            $contentConfe .= ";          exten => sala,n,Set(CHANNEL(accountcode)=Conferencia)\n";
             $contentConfe .= ";  (*)     exten => sala,n,Authenticate(senha em hash md5,a)\n";
             $contentConfe .= ";          exten => sala,n,Conference(\${EXTEN}/S)\n";
             $contentConfe .= ";          exten => sala,n,Hangup\n";
@@ -198,7 +205,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
                     if ($idActivate == $idCostCenter) {
 
-                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CDR(accountcode)=" . $valueCostCenter . ")\n";
+                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CHANNEL(accountcode)=" . $valueCostCenter . ")\n";
                         $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";
                         $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_JOIN_SOUND=beep)\n";
                         $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_MOH=default)\n";
@@ -233,7 +240,8 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                         }
                     }
                 }
-                $contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN},cM)\n";
+                $contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN})\n";
+                //$contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN},cM)\n";
                 $contentConfe .= "exten => " . $idActivate . ",n,Hangup\n";
                 $contentConfe .= "\n";
             }
@@ -243,7 +251,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
             $asterisk = PBX_Asterisk_AMI::getInstance();
             $asterisk->Command("module reload");
-            $this->_redirect($this->getRequest()->getControllerName());
+            $this->_redirect();
         }
     }
 

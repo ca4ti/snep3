@@ -23,7 +23,7 @@
  * @category  Snep
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  * 
  */
 class PermissionController extends Zend_Controller_Action {
@@ -39,8 +39,12 @@ class PermissionController extends Zend_Controller_Action {
             throw new Zend_Controller_Action_Exception('Page not found.', 404);
         }
 
-        if ($exten == 'error' || $exten == 'error-unset') {
-            $this->_redirect("default/" . $this->getRequest()->getControllerName() . '/' . $exten);
+        if ($exten == 'error' ) {
+            $this->view->error = $this->translate("You do not have permission to perform this action") ;
+            $this->renderScript('error/sneperror.phtml');
+        } elseif($exten == 'error-unset') {
+            $this->view->error = $this->translate("You do not have permission to perform this action") ;
+            $this->renderScript('error/sneperror.phtml');
         }
 
         try {
@@ -65,20 +69,6 @@ class PermissionController extends Zend_Controller_Action {
             $resources = array_merge_recursive($resources, $resource);
         }
         $this->view->resources = $resources;
-    }
-
-    /**
-     * errorAction
-     */
-    public function errorAction() {
-        
-    }
-
-    /**
-     * errorUnsetAction
-     */
-    public function errorUnsetAction() {
-        
     }
 
 }

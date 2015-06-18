@@ -1,88 +1,102 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . "/css/index.css");
-$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scriptaculous.js');
-$this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.core.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 ?>
-<table>
-    <thead>
-        <tr>
-            <th rowspan="2"> <?php echo $this->translate('Order') ?> </th>
-            <th rowspan="2"> <?php echo $this->translate('Destination') ?> 
-            <?php
-            if ($this->type == 'num') {
-                ?>
-                <th colspan="3"> <?php echo $this->translate('Quantity') ?> </th>
-                <th colspan="3"> <?php echo $this->translate('Total Time') ?> </th>
-                <?php
-            } else {
-                ?>
-                <th colspan="3"> <?php echo $this->translate('Total Time') ?> </th>
-                <th colspan="3"> <?php echo $this->translate('Quantity') ?> </th>
+<script src="/snep/includes/javascript/footable/footable.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.sort.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.filter.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/footable.paginate.js" type="text/javascript"></script>
+<script src="/snep/includes/javascript/footable/bootstrap-tab.js" type="text/javascript"></script>
 
-                <?php
-            }
-            ?>
-        </tr>
-        <tr>
-            <th> <?php echo $this->translate('Answerd') ?> </th>
-            <th> <?php echo $this->translate('Unanswerd') ?> </th>
-            <th> <?php echo $this->translate('Total') ?> </th>
-            <th> <?php echo $this->translate('Answerd') ?> </th>
-            <th> <?php echo $this->translate('Unanswerd') ?> </th>
-            <th> <?php echo $this->translate('Total') ?> </th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $count = 1;
-        foreach ($this->rank as $source => $numCal) {
-            ?>
-            <tr>
-                <td colspan="13">
-                    <strong>
-                        <h3>
-                    <div>
+<div class="row">
+    <div class="tab-content">
+        <div class="tab-pane active" id="demo">
+
+            <?php $count = 1;
+
+            foreach ($this->rank as $source => $numCal) { ?>
+
+                <table class="table demo table-bordered" data-filter="#filter">
+                    <thead>
+                       
+                        <tr>
+                            <td colspan="13">
+                                <strong>
+                                    <h3>
+                                <div>
+                                    <?php
+
+                                    echo $count . $this->translate(". Source: ") . $source;
+
+                                    foreach($this->totals as $src => $value){
+                                        if($source == $src){
+                                            echo '&nbsp;&nbsp;&nbsp;&nbsp;Total: <span class="textocampos">[' . $value . ']</span>';    
+                                        }
+                                    }?>
+                                </div>    
+                                        </h3>
+                                </strong>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th data-toggle="true" class="text-center" data-type="numeric" data-sort-initial="true"> <?php echo $this->translate('Order') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Destination') ?> 
+                            
+                            <th data-hide="phone,tablet" class="text-center"> <?php echo $this->translate('Answerd') ?> </th>
+                            <th data-hide="phone,tablet" class="text-center"> <?php echo $this->translate('Unanswerd') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Total') ?> </th>
+                            <th data-hide="phone,tablet" class="text-center"> <?php echo $this->translate('Answerd') ?> </th>
+                            <th data-hide="phone,tablet" class="text-center"> <?php echo $this->translate('Unanswerd') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Total') ?> </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+
                         <?php
-                        echo $count . $this->translate(". Source: ") . $source;
-                        if ($this->type == 'num')
-                            echo '&nbsp;&nbsp;&nbsp;&nbsp;Total: <span class="textocampos">[' . $this->countData[$source] . ']</span>';
-                        else
-                            echo '&nbsp;&nbsp;&nbsp;&nbsp;Total: <span class="textocampos">[' . $this->timeData[$source] . ']</span>';
-                        ?>
-                    </div>    
-                            </h3>
-                    </strong>
-                </td>
-            </tr>
-            <?php
-            $count2 = 1;
-                foreach ($numCal as $caller => $dest) {
-                    foreach ($dest as $destiny => $valueDest) {
-                        echo '<tr>';
-                        echo '<td class="cen">'.$count2.'</td>';
-                        echo '<td class="cen">'.$destiny.'</td>';
-                        if ($this->type == 'num'){
-                            echo '<td class="cen">'.(($valueDest['QA'])?$valueDest['QA'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['QN'])?$valueDest['QN'] : 0).'</td>';
-                            echo '<td class="cen"><strong>'.(($valueDest['QT'])?$valueDest['QT'] : 0).'<strong></td>';
-                            echo '<td class="cen">'.(($valueDest['TA'])?$valueDest['TA'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['TN'])?$valueDest['TN'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['TT'])?$valueDest['TT'] : 0).'</td>';
-                        }else{
-                            echo '<td class="cen">'.(($valueDest['TA'])?$valueDest['TA'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['TN'])?$valueDest['TN'] : 0).'</td>';
-                            echo '<td class="cen"><strong>'.(($valueDest['TT'])?$valueDest['TT'] : 0).'</strong></td>';
-                            echo '<td class="cen">'.(($valueDest['QA'])?$valueDest['QA'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['QN'])?$valueDest['QN'] : 0).'</td>';
-                            echo '<td class="cen">'.(($valueDest['QT'])?$valueDest['QT'] : 0).'</td>';
-                        }
-                           $count2++;
-                           echo '</tr>';
-                    }
-                }
-            $count++;
-        }
-        ?>
-    </tbody>
-</table>
+                        $count2 = 1;
+
+                            foreach ($numCal as $caller => $dest) { ?>
+                                    
+                                <tr>
+                                    <td class="text-center"><?php echo $count2 ?></td>
+                                    <td class="text-center"><?php echo $caller ?></td>
+                                
+                                <?php if ($this->type == 'num'){ ?>
+                                    <td class="text-center"><?php echo ((isset($dest->QA)) ? $dest->QA : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->QN)) ?$dest->QN : 0) ?></td>
+                                    <td class="text-center"><strong><?php echo ((isset($dest->QT)) ? $dest->QT : 0) ?><strong></td>
+                                    <td class="text-center"><?php echo ((isset($dest->TA)) ? $dest->TA : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->TN)) ? $dest->TN : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->TT)) ? $dest->TT : 0) ?></td>
+                                <?php }else{ ?>
+                                    <td class="text-center"><?php echo ((isset($dest->TA)) ? $dest->TA : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->TN)) ? $dest->TN : 0) ?></td>
+                                    <td class="text-center"><strong><?php echo ((isset($dest->TT)) ? $dest->TT : 0) ?></strong></td>
+                                    <td class="text-center"><?php echo ((isset($dest->QA)) ? $dest->QA : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->QN)) ? $dest->QN : 0) ?></td>
+                                    <td class="text-center"><?php echo ((isset($dest->QT)) ? $dest->QT : 0) ?></td>
+                                <?php }
+                                   $count2++; ?>
+                                </tr>   
+                            <?php }
+                        $count++; ?>
+
+                    </tbody>
+                </table><br>
+
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function () {
+        jQuery('table').footable().on('click', '.row', function(e) {
+            e.preventDefault(); 
+        });
+    });
+</script>

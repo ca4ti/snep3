@@ -1,33 +1,20 @@
-<?php
-/**
- *  This file is part of SNEP.
- *
- *  SNEP is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  SNEP is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
- */
-?>
 
 <?php
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/debugger.css" );
 ?>
+<script type="text/javascript" src="/snep/includes/javascript/formValidation.js"></script>
+<script type="text/javascript" src="/snep/includes/javascript/form/bootstrap.js"></script>
+<div class="row">
+    <form id="defaultForm" method="post" class="form-inline" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "simulator", "action" => "index"), null, true); ?>" METHOD="post">
 
-<form method="post" action="index">
-    <table style="width: 100%;">
-        <tr>
-            <td style="border-bottom:none; padding: 5px;">
-                <input type="hidden" name="acao" value="simulate" />
-                <label for="srcType"><?php echo $this->translate('Source') ?>:</label>
-                <select id="srcType" class="campos" name="srcType" onchange="if(this.value == 'trunk') $('trunk').show(); else $('trunk').hide();">
+        <input type="hidden" name="acao" value="simulate" />
+
+        <fieldset>
+            <legend><?php echo $this->translate("Source");?></legend>
+        
+            <div class="form-group">
+                <label for="srcType"><?php echo $this->translate("Source");?></label>
+                <select class="form-control" name="srcType" id="srcType" onChange="showDiv(this.value);">
                     <option <?php echo isset($_REQUEST['srcType']) && $_REQUEST['srcType'] == 'exten' ? "selected" : "" ?> value="exten"><?php echo $this->translate("Extension"); ?></option>
                     <option  <?php echo isset($_REQUEST['srcType']) && $_REQUEST['srcType'] == 'trunk' ? "selected" : "" ?> value="trunk"><?php echo $this->translate("Trunk"); ?></option>
                     <option  <?php echo isset($_REQUEST['srcType']) && $_REQUEST['srcType'] == 'undefined' ? "selected" : "" ?> value="undefined"><?php echo $this->translate("Undefined"); ?></option>
@@ -39,63 +26,121 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/debugger.css" );
                     }
                     ?>
                 </select>
-                <input type="text" name="caller" id="caller" class="campos" value="<?php echo isset($_REQUEST['caller']) ? $_REQUEST['caller'] : ""; ?>" />
-                       <label for="dst"><?php echo $this->translate('Destiny') ?>:</label>
-                    <input type="text" name="dst" class="campos" id="dst" value="<?php echo isset($_REQUEST['dst']) ? $_REQUEST['dst'] : ""; ?>" />
-                <label for="time"><?php echo $this->translate('Time') ?>:</label>
-                    <input type="text" size="5" name="time" id="time" class="campos" value="<?php echo isset($_REQUEST['time']) ? $_REQUEST['time'] : ""; ?>" /> (hh:mm)  
-            </td>
-        </tr>
-        <tr>
-            <td style="border-top:none; padding: 5px;">
-                <input type="submit" value="<?php echo $this->translate('Simulate') ?>" class="button">
-                <a id="voltar" class='snep_form_cancel' href="<?php echo $this->baseUrl() ?>/index.php/default/route"><?php echo $this->translate('Cancel') ?></a>
-            </td>
-        </tr>
-        <?php if ($this->result){ ?>
-        <tr>
-            <td>
-                <ul id="input">
-                    <li><strong><?php echo $this->translate('Source') ?>:</strong> <?php echo $this->input['caller'] ?></li>
-                    <li><strong><?php echo $this->translate('Destiny') ?>:</strong> <?php echo $this->input['dst']  ?></li>
-                    <li><strong><?php echo $this->translate('Time') ?>:</strong> <?php echo $this->input['time'] ?></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:left;">
-                <ul id="results">
-                   <?php foreach ($this->result as $key => $value) { ?>
-                    <li class="rule <?php echo $value['state'] ?>">
-                        <ul class="info">
-                            <li class="execute"><strong><?php echo $this->translate('Actions to execute') ?>:</strong>
-                                <ul>
-                                    <?php
-                                    foreach ($value["actions"] as $key2 => $valueAct) { ?>
-                                    <li><?php echo $valueAct ?></li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <li class="desc"><?php echo $this->translate("Rule: %s %s", $value['id'], $value['desc']); ?></li>
-                            <li class="caller"><?php echo $this->translate('Source: %s', $value['caller']);?></li>
-                            <li class="dst"><?php echo $this->translate('Destiny: %s', $value['dst']);?></li>
-                            <li class="valid"><?php echo $this->translate('Validity: %s', $value['valid']);?></li>
-                        </ul>
-                    <li>
-                        <?php } ?>
-                </ul>
-            </td>
-        </tr>
+            </div>
+
+            <!-- Trunks -->    
+            <div id="trunks" class="invisible">  
+                <div class="form-group">  
+                    <select class="form-control" name="trunk" id="trunk">
+                        <?php foreach ($this->trunks as $key => $value) {
+                            echo "<option value='$key' > $value </option>";
+                        } ?>
+                    </select>
+                </div>
+            </div>
+            <!-- /Trunks -->
+
+            <div id="extension" class="form-group">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="caller" id="caller"  placeholder="<?php echo $this->translate("Source");?>" value="<?php echo isset($_REQUEST['caller']) ? $_REQUEST['caller'] : ""; ?>"/>
+                </div>
+
+            </div>                
         
-        <tr>
-            <td>
-                <ul id="legenda">
-                    <li class="torun"><?php echo $this->translate('Rule that will be executed')?></li>
-                    <li class="outdated"><?php echo $this->translate('Rule invalid because of time')?></li>
-                    <li class="ignored"><?php echo $this->translate('Rule ignored by priority')?></li>
-                </ul>
-            </td>
-        </tr>
-         <?php } ?>
-    </table>
-</form>
+            <div class="form-group">
+                <label for="srcType"><?php echo $this->translate("For");?></label> 
+                <input type="text" class="form-control" name="dst" id="dst"  placeholder="<?php echo $this->translate("Destiny");?>" value="<?php echo isset($_REQUEST['dst']) ? $_REQUEST['dst'] : ""; ?>"/>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" name="week" id="week" ?>">
+                    <option value='current'><?php echo $this->translate("Current Day")?></option>
+                    <option value='mon'><?php echo $this->translate("Monday")?></option>
+                    <option value='tue'><?php echo $this->translate("Tuesday")?></option>
+                    <option value='wed'><?php echo $this->translate("Wednesday")?></option>
+                    <option value='thu'><?php echo $this->translate("Thursday")?></option>
+                    <option value='fri'><?php echo $this->translate("Friday")?></option>
+                    <option value='sat'><?php echo $this->translate("Saturday")?></option>
+                    <option value='sun'><?php echo $this->translate("Sunday")?></option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control" size="5" name="time" id="time" class="campos" value="<?php echo isset($_REQUEST['time']) ? $_REQUEST['time'] : ""; ?>" placeholder="hh:mm"/> 
+            </div>
+
+            <br><br>
+
+            <?php if ($this->result){ ?>
+                <tr>
+                    <td>
+                        <ul id="input">
+                            <li><strong><?php echo $this->translate('Source') ?>:</strong> <?php echo $this->input['caller'] ?></li>
+                            <li><strong><?php echo $this->translate('Destiny') ?>:</strong> <?php echo $this->input['dst']  ?></li>
+                            <li><strong><?php echo $this->translate('Time') ?>:</strong> <?php echo $this->input['time'] ?></li>
+                            <li><strong><?php echo $this->translate('Week Day') ?>:</strong> <?php echo $this->input['date'] ?></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;">
+                        <ul id="results">
+                           <?php foreach ($this->result as $key => $value) { ?>
+                            <li class="rule <?php echo $value['state'] ?>">
+                                <ul class="info">
+                                    <li class="execute"><strong><?php echo $this->translate('Actions to execute') ?>:</strong>
+                                        <ul>
+                                            <?php
+                                            foreach ($value["actions"] as $key2 => $valueAct) { ?>
+                                            <li><?php echo $valueAct ?></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                    <li class="desc"><?php echo $this->translate("Rule: %s %s", $value['id'], $value['desc']); ?></li>
+                                    <li class="caller"><?php echo $this->translate('Source: %s', $value['caller']);?></li>
+                                    <li class="dst"><?php echo $this->translate('Destiny: %s', $value['dst']);?></li>
+                                    <li class="valid"><?php echo $this->translate('Validity: %s', $value['valid']);?></li>
+                                </ul>
+                            <li>
+                                <?php } ?>
+                        </ul>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>
+                        <ul id="legenda">
+                            <li class="torun"><?php echo $this->translate('Rule that will be executed')?></li>
+                            <li class="outdated"><?php echo $this->translate('Rule invalid because of time')?></li>
+                            <li class="ignored"><?php echo $this->translate('Rule ignored by priority')?></li>
+                        </ul>
+                    </td>
+                </tr>
+            <?php } ?>
+    
+            <br><br>
+
+            <div class="snep-body-footer-buttons">
+                <button type="submit" class="btn btn-add" name="simulate" value="simulate"><?php echo $this->translate("Simulate");?></button>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+function showDiv(div){
+    
+    if(div == 'trunk'){
+        document.getElementById("trunks").className = "form-group visible";
+        document.getElementById("extension").className = "invisible";
+    }else{
+        document.getElementById("trunks").className = "invisible";
+        document.getElementById("extension").className = "form-group visible";
+    }
+}
+
+</script>

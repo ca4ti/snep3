@@ -398,7 +398,7 @@ class PBX_Rules {
             "diasDaSemana" => $diasDaSemana,
             "record" => $rule->isRecording()
         );
-
+        
         $db = Snep_Db::getInstance();
 
         $db->beginTransaction();

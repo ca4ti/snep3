@@ -18,7 +18,7 @@
 
 * Nova interface
 
-* Conectado com oa ITC  (www.intercomunexao.com.br)
+* Conectado com a ITC  (www.intercomunexao.com.br)
 
 * Novo sistema de controle de usuarios e permissões de acesso
 

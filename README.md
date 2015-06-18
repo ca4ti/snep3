@@ -11,7 +11,9 @@
 * Manual do usuário
 
 * Ajustes CSS 
+
 ---------------------------------
+
 **Release 1.0-alpha**
 
 * Nova interface

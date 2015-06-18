@@ -3,12 +3,17 @@
 * Tradução e revisão das traduções Pt-BR, EN, ES
 
 * Correção no comportamento do menu principal
+
 * Refatorar rotina de Rotas / Regras Negócio
+
 * Sistema de Ajuda on-line
+
 * Manual do usuário
+
 * Ajustes CSS 
 ---------------------------------
 **Release 1.0-alpha**
+
 * Nova interface
 
 * Conectado com oa ITC  (www.intercomunexao.com.br)

@@ -26,11 +26,16 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2011 OpenS Tecnologia
- * @author    Iago Uilian Berndt
+ * @copyright Copyright (c) 2015 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  *
  */
 class Snep_CsvIE {
+
+    /**
+     * Contem o select a ser exportado
+     */
+    public $select;
 
     /**
      * Contem a tabela a ser exportada
@@ -63,9 +68,8 @@ class Snep_CsvIE {
      * @param <string> $table tabela.
      * @param <string> $type tipo de estrutura.
      */
-    public function __construct($table, $type = null) {
+    public function __construct($type = null) {
 
-        $this->table = $table;
         $this->type = $type;
     }
 
@@ -108,38 +112,44 @@ class Snep_CsvIE {
     /**
      * export - Gera e imprime a csv
      */
-    public function export() {
+    public function export($select) {
+        
         $db = Zend_Registry::get('db');
 
-        $columns = $this->columns();
+        $select = "SELECT ". $_SESSION['exportData']['coluns']. " FROM " .$_SESSION['exportData']['table'] . " ORDER BY " . $_SESSION['exportData']['order'];
+        
+        $stmt = $db->query($select);
+        $values = $stmt->fetchAll();
+        
+        $reportData = array();
+        $columns = explode(',', $_SESSION['exportData']['coluns']);
+        
+        foreach($columns as $key => $colun){
+            $reportData['cols'][$colun] = $colun;
+        }
 
-        if ($this->type == "cartesiano") {
+        $reportData['data'] = $values;
 
-            $values = $db->fetchAll("SELECT * FROM {$this->table[0]}, {$this->table[1]} WHERE {$this->table[2]}");
-            $columns = array_merge($columns[0], $columns[1]);
-        } elseif ($this->type == "ignore") {
-            $values = $db->fetchAll("SELECT * FROM {$this->table[0]} WHERE {$this->table[1]}");
+
+
+        if ($reportData) {
+
+            //$this->_helper->layout->disableLayout();
+            $this->_helper->viewRenderer->setNoRender();
+            
+            $csv = new Snep_Csv();
+            $csvData = $csv->generate($reportData['data'], true, $reportData['cols']);
+
+            $dateNow = new Zend_Date();
+            $fileName = $this->view->translate($table.'_csv_') . $dateNow->toString($this->view->translate(" dd-MM-yyyy_hh'h'mm'm' ")) . '.csv';
+
+            header('Content-type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+            echo $csvData;
         } else {
-            $values = $db->fetchAll("SELECT * FROM $this->table");
+            $this->view->error = $this->view->translate("No records found.");
+            $this->renderScript('error/sneperror.phtml');
         }
-
-        $dateNow = new Zend_Date();
-
-        header('Content-type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . Zend_Controller_Front::getInstance()->getRequest()->getControllerName() . '_' . $dateNow->toString(" dd-MM-yyyy_hh'h'mm'm' ") . '.csv"');
-
-        $tmp = tmpfile();
-        fputcsv($tmp, $columns);
-        foreach ($values as $row) {
-            $data = array();
-            foreach ($columns as $value)
-                $data[] = str_replace(array('"', "'"), array('\\"', "\\'"), $row[$value]);
-            fputcsv($tmp, $data);
-        }
-        rewind($tmp);
-        while (FALSE != ($line = fgets($tmp)))
-            echo $line;
-        fclose($tmp);
     }
 
     /**
@@ -147,28 +157,29 @@ class Snep_CsvIE {
      * @return <string> html com o resultado da exportação
      */
     public function exportResult() {
+
+
         $db = Zend_Registry::get('db');
 
-        if ($this->type == "cartesiano") {
-            $total = $db->fetchOne("SELECT COUNT(*) AS count FROM {$this->table[0]}");
-        } elseif ($this->type == "ignore") {
-            $total = $db->fetchOne("SELECT COUNT(*) AS count FROM {$this->table[0]} WHERE {$this->table[1]}");
-            $total .= "<br/>" . $this->table[2] . ($db->fetchOne("SELECT COUNT(*) AS count FROM {$this->table[0]}") - $total);
-        } else {
-            $total = $db->fetchOne("SELECT COUNT(*) AS count FROM $this->table");
-        }
+        $table = $_SESSION['exportData']['table'];
+        $total = $db->fetchOne("SELECT COUNT(*) AS count FROM $table");
+
+        $label = Snep_Locale::getInstance()->getZendTranslate()->translate("Export to CSV");
+        $label2 = Snep_Locale::getInstance()->getZendTranslate()->translate("Total entries to be exported: ");
+        $download = Snep_Locale::getInstance()->getZendTranslate()->translate("Download");
+        $cancel = Snep_Locale::getInstance()->getZendTranslate()->translate("Cancel");
 
         return '<form enctype="" action="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getModuleName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getControllerName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getActionName() . '/download/true" method="post">' .
                 '<div class="zend_form" id="form_ie">' .
-                '<h4><span>Exportar CSV</span><br><br></h4>' .
-                'Total de cadastros a serem exportados: <b>' . $total . '</b>' .
-                '<div class="menus">' .
-                '<br><br><input type="submit" style="width:100px;" name="submit" id="submit" title="Download" value="Download">' .
-                ' <a href="../">  <input type="submit" style="width:100px;" name="submit" id="submit" title="Voltar" value="Voltar">' .
-                '</div>' .
-                '</div>' .
+                '   <h4><span>'.$label.'</span><br><br></h4>' .
+                    $label2 . '<b> ' . $total . '</b>' .
+                '   <div class="snep-body-footer-buttons">' .
+                '      <input type="submit" class="btn btn-add btn-primary" style="width:100px;" name="submit" id="submit" title="Download" value="'.$download.'">' .
+                '      &nbsp;&nbsp;&nbsp;<a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button">'.$cancel.'</a>' .
+                '   </div>' .
                 '</div>' .
                 '</form>';
+
     }
 
     /**
@@ -257,6 +268,43 @@ class Snep_CsvIE {
         } while ($line);
 
         return array("Importação realizada com sucesso", "$inserido cadastros inseridos <br/> " . ($pedido - $inserido) . " ignorados por repetição de identificação");
+    }
+
+
+    /**
+     * exportResult
+     * @return <string> html com o resultado da exportação
+     */
+    public function exportResultReport($selectcont) {
+
+
+        $db = Zend_Registry::get('db');
+
+        $result = $db->query($selectcont)->fetchAll();
+        
+        if(isset($result[0]['tot'])){
+            $total = $result[0]['tot'];    
+        }else{
+            $total = count($result);
+        }
+        
+        
+        $label = Snep_Locale::getInstance()->getZendTranslate()->translate("Export to CSV");
+        $label2 = Snep_Locale::getInstance()->getZendTranslate()->translate("Total entries to be exported: ");
+        $download = Snep_Locale::getInstance()->getZendTranslate()->translate("Download");
+        $cancel = Snep_Locale::getInstance()->getZendTranslate()->translate("Cancel");
+
+        return '<form enctype="" action="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getModuleName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getControllerName() . '/' . Zend_Controller_Front::getInstance()->getRequest()->getActionName() . '/download/true" method="post">' .
+                '<div class="zend_form" id="form_ie">' .
+                '   <h4><span>'.$label.'</span><br><br></h4>' .
+                    $label2 . '<b> ' . $total . '</b>' .
+                '   <div class="snep-body-footer-buttons">' .
+                '      <input type="submit" class="btn btn-add btn-primary" style="width:100px;" name="submit" id="submit" title="Download" value="'.$download.'">' .
+                '      &nbsp;&nbsp;&nbsp;<a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button">'.$cancel.'</a>' .
+                '   </div>' .
+                '</div>' .
+                '</form>';
+
     }
 
 }

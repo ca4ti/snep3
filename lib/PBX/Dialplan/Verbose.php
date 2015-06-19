@@ -45,6 +45,14 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     protected $execution_time;
 
     /**
+     * Dia em que a regra será executada.
+     * É usado para definir manualmente o dia de execução do Parsing.
+     * Útil para debug.
+     * @var <string> Date
+     */
+    protected $execution_date;
+
+    /**
      * Array com todas as regras que casam com a requisição.
      *
      * Nota: São armazenadas nessa lista também as regras que casam mas não tem
@@ -95,21 +103,27 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
         if (!isset($this->execution_time)) {
             $this->execution_time = date("H:i");
         }
+        
+        if (!isset($this->execution_date)) {
+            $this->execution_date = null;
+        }
 
         $this->foundRule = null;
         $this->matches = array();
 
         $rules = PBX_Rules::getAll();
+
         if (count($rules) > 0) {
             foreach ($rules as $rule) {
+
                 $rule->setRequest($this->request);
 
                 if ($rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isActive()) {
                     // Armazenando a regra válida (parcialmente)
                     $this->matches[] = $rule;
-
+                    
                     // Caso seja a primeira regra válida (e com tempo válido), ela é a que queremos executar
-                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time)) {
+                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time,$this->execution_date)) {
                         $this->foundRule = $rule;
                     }
                 }
@@ -130,6 +144,15 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
      */
     public function setTime($time) {
         $this->execution_time = $time;
+    }
+
+    /**
+     * setDate - Define manualmente o dia que será usado em consideração 
+     * na avaliação da regra. (Execution date)
+     * @param <string> $date Dia de execução da regra
+     */
+    public function setDate($date) {
+        $this->execution_date = $date;
     }
 
 }

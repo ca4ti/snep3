@@ -97,7 +97,7 @@ class Cadeado extends PBX_Rule_Action {
 
         $lbl_senha = $i18n->translate("Static Password");
         $lbl_desc = $i18n->translate("Leave blank to use extensions password.");
-        $lbl_ask_peer = $i18n->translate("Replace source extension with requested");
+        $lbl_ask_peer = $i18n->translate("Replace source extension");
         return <<<XML
 <params>
     <boolean>

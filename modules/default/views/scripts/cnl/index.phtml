@@ -1,25 +1,47 @@
-<?php
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
-?>
+<div class="row">
 
-<form enctype="multipart/form-data" action="<?php echo $this->formAction; ?>" method="post">
-    <div class="zend_form" style="text-align:center; padding-top: 20px;">
-        <label for="cnl" class="optional"><?php echo $this->translate("CNL File"); ?></label>
+     <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "cnl", "action" => "index"), null, true); ?>" method="post" enctype="multipart/form-data">
+        
+        
         <input type="hidden" name="MAX_FILE_SIZE" value="2097152" id="MAX_FILE_SIZE">
-        <input type="file" name="cnl" id="cnl">
-        <?php if (!$this->valid): ?>
-            <ul class="errors">
-                <li style="display:inline-block;"><?php echo $this->translate("File is not valid"); ?></li>
-            </ul>
-        <?php endif; ?>
-        <div class="menus" style="margin-top:15px; padding: 15px;">
-            <input type="submit" name="submit" id="submit" value="Save">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputFile">
+                <?php echo $this->translate("Select the File");?>
+            </label>
+            <div class="col-sm-6">
+                <input type="file" id="cnl" name="cnl">
+            </div>
         </div>
-    </div>
-</form>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Country");?></label>
+            <div class="col-sm-6">
+                <select class="form-control" name="country" id="country">
+                    <option value="0"><?php echo $this->translate("Select a country");?></option> 
+                    <?php foreach($this->countries as $key => $country){ ?>
+                        <option value="<?php echo $country['id']?>"><?php echo $country['name'];?></option> 
+                    <?php } ?>   
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Central type ");?></label>
+            <div class="col-sm-6">
+                <label class="radio-inline">
+                    <input type="radio" name="type" id="F" value="F" <?php echo $this->E;?>><?php echo $this->translate("Fix");?>
+                </label>
 
-<div align="center" id="frescura" style="display:none;">
-    <img src="<?php echo $this->pathweb ?>/imagens/ajax-loader2.gif" width="256" height="24" /><br />
-    <?php echo $this->translate("Please Wait..."); ?>
+                <label class="radio-inline">
+                    <input type="radio" name="type" id="M" value="M" <?php echo $this->S;?>><?php echo $this->translate("Mobile");?>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="snep-body-footer-buttons">
+            <button type="submit" class="btn btn-add" name="save" value="save"><?php echo $this->translate("Update");?></button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+        </div>
+    </form>
 </div>
-

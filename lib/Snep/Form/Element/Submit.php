@@ -68,13 +68,13 @@ class Snep_Form_Element_Submit extends Zend_Form_Element {
 
         $disabled = $this->getAttrib("disabled") === NULL ? "" : sprintf('disabled="%s"', $this->getAttrib("disabled"));
 
-        $content = sprintf('<input type="submit" value="%s" %s />', $this->_label, $disabled);
+        $content = sprintf('<br><div class="form-group"><div class="col-lg-4" align="center"><input type="submit" class="btn btn-add" value="%s" %s />', $this->_label, $disabled);
         if(Zend_Registry::isRegistered("cancel_url")) {
             $url = Zend_Registry::get("cancel_url");
         } else {
             $url = "javascript:history.back();";
         }
-        $content .= sprintf(' <a class="snep_form_cancel" href="%s">%s</a>', $url, $i18n->translate("Cancel"));
+        $content .= sprintf(' <a class="btn btn-outline btn-add" href="%s">%s</a></div></div><br>', $url, $i18n->translate("Cancel"));
         foreach ($this->getDecorators() as $decorator) {
             $decorator->setElement($this);
             $content = $decorator->render($content);
@@ -83,3 +83,4 @@ class Snep_Form_Element_Submit extends Zend_Form_Element {
     }
 
 }
+

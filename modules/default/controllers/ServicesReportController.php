@@ -22,7 +22,8 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2015 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ServicesReportController extends Zend_Controller_Action {
 
@@ -32,95 +33,15 @@ class ServicesReportController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Reports"),
-                    $this->view->translate("Services Use")));
+                            $this->view->translate("Reports"),
+                            $this->view->translate("Services Use")));
+
 
         $config = Zend_Registry::get('config');
 
         // Include Inpector class, for permission test
         include_once( $config->system->path->base . "/inspectors/Permissions.php" );
-        $test = new Permissions();
-        $response = $test->getTests();
-
-        $form = $this->getForm();
-
-        if ($this->_request->getPost()) {
-            $formIsValid = $form->isValid($_POST);
-            $formData = $this->_request->getParams();
-
-            $locale = Snep_Locale::getInstance()->getLocale();
-
-            if ($locale == 'en_US') {
-                $format = 'yyyy-MM-dd';
-            } else {
-                $format = Zend_Locale_Format::getDateFormat($locale);
-            }
-
-            $ini_date = explode(" ", $formData['period']['init_day']);
-            $final_date = explode(" ", $formData['period']['till_day']);
-
-            $ini_date_valid = Zend_Date::isDate($ini_date[0], $format);
-            $final_date_valid = Zend_Date::isDate($final_date[0], $format);
-
-            if (!$ini_date_valid) {
-                $iniDateElem = $form->getSubForm('period')->getElement('init_day');
-                $iniDateElem->addError($this->view->translate('Invalid Date'));
-                $formIsValid = false;
-            }
-            if (!$final_date_valid) {
-                $finalDateElem = $form->getSubForm('period')->getElement('till_day');
-                $finalDateElem->addError($this->view->translate('Invalid Date'));
-                $formIsValid = false;
-            }
-
-            if ($formIsValid) {
-                $reportType = $formData['service']['out_type'];
-                if ($reportType == 'csv') {
-                    $this->csvAction();
-                } else {
-                    $this->viewAction();
-                }
-            }
-        }
-        $this->view->form = $form;
-    }
-
-    /**
-     * getForm - Snep_Form
-     * @return <object> \Snep_Form
-     */
-    protected function getForm() {
-
-        $form = new Snep_Form();
-
-        // Set form action
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/services-report/index');
-
-        $form_xml = new Zend_Config_Xml('./modules/default/forms/services_report.xml');
-        $config = Zend_Registry::get('config');
-        $period = new Snep_Form_SubForm($this->view->translate("Period"), $form_xml->period);
-        $validatorDate = new Zend_Validate_Date(Zend_Locale_Format::getDateFormat(Zend_Registry::get('Zend_Locale')));
-
-        $locale = Snep_Locale::getInstance()->getLocale();
-        $now = Zend_Date::now();
-
-        if ($locale == 'en_US') {
-            $now = $now->toString('YYYY-MM-dd HH:mm');
-        } else {
-            $now = $now->toString('dd/MM/YYYY HH:mm');
-        }
-
-        $yesterday = Zend_Date::now()->subDate(1);
-        $initDay = $period->getElement('init_day');
-        $initDay->setValue($now);
-        //$initDay->addValidator($validatorDate);
-
-        $tillDay = $period->getElement('till_day');
-        $tillDay->setValue($now);
-        //$tillDay->addValidator($validatorDate);
-        $form->addSubForm($period, "period");
-
-        $exten = new Snep_Form_SubForm($this->view->translate("Extensions"), $form_xml->exten);
+        
         $groupLib = new Snep_GruposRamais();
         $groupsTmp = $groupLib->getAll();
 
@@ -129,133 +50,33 @@ class ServicesReportController extends Zend_Controller_Action {
 
             switch ($group['name']) {
                 case 'administrator':
-                    $groupsData[$this->view->translate('Administradores')] = $group['name'];
+                    $groupsData[$this->view->translate('Administrators')] = $group['name'];
                     break;
                 case 'users':
-                    $groupsData[$this->view->translate('Usuários')] = $group['name'];
+                    $groupsData[$this->view->translate('Users')] = $group['name'];
                     break;
                 case 'all':
-                    $groupsData[$this->view->translate('Todos')] = $group['name'];
+                    $groupsData[$this->view->translate('All')]  = $group['name'];
                     break;
                 default:
                     $groupsData[$group['name']] = $group['name'];
             }
         }
 
-        $selectGroup = $exten->getElement('group_select');
-        $selectGroup->addMultiOption(null, '----');
+        array_unshift($groupsData, "");
+        $this->view->group = $groupsData;
+        $test = new Permissions();
+        $response = $test->getTests();
 
-        foreach ($groupsData as $key => $value) {
-            $selectGroup->addMultiOption($value, $key);
+        $locale = Snep_Locale::getInstance()->getLocale();
+        $this->view->datepicker_locale =  Snep_Locale::getDatePickerLocale($locale) ;
+
+        if ($this->_request->getPost()) {
+
+            $this->viewAction();
+
         }
-
-        $selectGroup->setAttrib('onSelect', "enableField('exten-group_select', 'exten-exten_select');");
-
-        $form->addSubForm($exten, "exten");
-        $service = new Snep_Form_SubForm($this->view->translate("Services"), $form_xml->service);
-        $form->addSubForm($service, "service");
-        $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
-        $form->removeElement("cancel");
-
-        return $form;
-    }
-
-    /**
-     * getQuery
-     * @param <array> $data
-     * @param <boolean> $ExportCsv
-     * @return <string>
-     * @throws Zend_Exception
-     */
-    protected function getQuery($data, $ExportCsv = false) {
-
-        $fromDay = $data["period"]["init_day"];
-        $tillDay = $data["period"]["till_day"];
-
-        $extenList = $data["exten"]["exten_select"];
-        $extenGroup = $data["exten"]["group_select"];
-        $services = $data["service"]["serv_select"];
-        $state = $data["service"]["stat_select"];
-
-        $configFile = "./includes/setup.conf";
-        $config = new Zend_Config_Ini($configFile, null, true);
-
-        $srv = '';
-        if (count($services) > 0) {
-            foreach ($services as $service) {
-                $srv .= "'$service',";
-            }
-            $srv = " AND service IN (" . substr($srv, 0, -1) . ")";
-        }
-
-        $extenSrc = $extenDst = $cond = "";
-
-        if ($extenGroup) {
-            $origins = PBX_Usuarios::getByGroup($extenGroup);
-            if (count($origins) == 0) {
-                throw new Zend_Exception('Group not registered');
-            } else {
-                foreach ($origins as $ext) {
-                    $extenSrc .= "'{$ext->getNumero()}'" . ',';
-                }
-                $extenSrc = " AND peer in (" . trim($extenSrc, ',') . ") ";
-            }
-        } else if ($extenList) {
-
-            $extenList = explode(";", $extenList);
-            $list = '';
-
-            foreach ($extenList as $value) {
-                $list .= trim($value) . ',';
-            }
-            $extenSrc = " AND services_log.peer IN ('" . substr($list, 0, -1) . "') ";
-        }
-
-        $state_cnt = count($state);
-        if ($state_cnt == 2) {
-            $state = " ";
-        } else {
-            if ($state[0] == "D") {
-                $state = " AND services_log.state = '0' ";
-            }
-            if ($state[0] == "A") {
-                $state = " AND services_log.state = '1' ";
-            }
-        }
-
-        $dateClause = " ( date >= '{$fromDay}'";
-        $dateClause.=" AND date <= '{$tillDay}') "; //'
-        $cond .= " $dateClause ";
-
-        $sql = " SELECT *, DATE_FORMAT(date,'%d/%m/%Y %T') as date FROM services_log WHERE ";
-        $sql.= $cond . $state;
-        $sql.= ( $extenSrc ? $extenSrc : '');
-        $sql.= ( $srv ? $srv : '');
-
-        $db = Zend_Registry::get('db');
-        $stmt = $db->query($sql);
-        $dataTmp = $stmt->fetchAll();
-
-        foreach ($dataTmp as $key => $value) {
-            if (!$ExportCsv) {
-
-                if ($value['state'] == 1) {
-                    $dataTmp[$key]['state'] = $this->view->translate(' - Activated');
-                } else {
-                    $dataTmp[$key]['state'] = $this->view->translate(' - Deactivated');
-                }
-            } else {
-
-                if ($value['state'] == 1) {
-                    $dataTmp[$key]['state'] = $this->view->translate('Activated');
-                } else {
-                    $dataTmp[$key]['state'] = $this->view->translate('Deactivated');
-                }
-
-                $dataTmp[$key]['status'] = '"' . $value['status'] . '"';
-            }
-        }
-        return $dataTmp;
+        
     }
 
     /**
@@ -263,37 +84,103 @@ class ServicesReportController extends Zend_Controller_Action {
      */
     public function viewAction() {
 
-        if ($this->_request->getPost()) {
-            $formData = $this->_request->getParams();
-            $reportData = $this->getQuery($formData);
-            $_SESSION['formDataSRC'] = $formData;
-        } else {
-            $formData = $_SESSION['formDataSRC'];
-            $page = $this->_request->getParam(page);
-            $reportData = $this->getQuery($formData);
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $formData = $this->_request->getParams();
+        $line_limit = Zend_Registry::get('config')->ambiente->linelimit;
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                            $this->view->translate("Reports"),
+                            $this->view->translate("Services Use"),
+                            $formData['init_day'] . ' - ' . $formData['till_day']));
+        
+        // Check Bond
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+        $user = Snep_Users_Manager::getName($username);
+
+        $param = Snep_Reports::fmt_date($formData['init_day'],$formData['till_day']);
+
+        // Binds
+        if($user['id'] != '1'){
+        
+            $binds = Snep_Binds_Manager::getBond($user['id']);
+
+            if($binds){
+                $clausule = $binds[0]["type"];
+                $clausulepeer ='';
+                foreach($binds as $key => $value){
+                    $clausulepeer .= $value['peer_name'].'_';
+                }
+
+                $param['clausule'] = $clausule;
+                $param['clausulepeer'] = substr($clausulepeer, 0,-1);
+            }  
         }
 
-        if ($reportData) {
-            $this->view->breadcrumb = $this->view->translate("Reports » Services Use <br/> Period: {$formData["period"]["init_day"]} to {$formData["period"]["till_day"]} ");
-
-            $paginatorAdapter = new Zend_Paginator_Adapter_Array($reportData);
-            $paginator = new Zend_Paginator($paginatorAdapter);
-
-            if (!isset($page)) {
-                $paginator->setCurrentPageNumber($this->view->page);
-            } else {
-                $paginator->setCurrentPageNumber($page);
+        if(!isset($formData['serv_select'])){
+            $this->view->error_message = $this->view->translate("Select at least one service");
+            $this->renderScript('error/sneperror.phtml');
+            return;
+        }else{
+            foreach($formData['serv_select'] as $key => $value){
+                $param[$key] = true;
             }
-            $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
+        }
 
-            $this->view->report = $paginator;
-            $this->view->pages = $paginator->getPages();
-            $this->view->PAGE_URL = "/snep/index.php/{$this->getRequest()->getControllerName()}/view/";
-            $this->_helper->viewRenderer('view');
-        } else {
-            $this->view->error = $this->view->translate("No records found.");
-            $this->view->back = $this->view->translate("Back");
-            $this->_helper->viewRenderer('error');
+        if($formData['group_select'] != ""){
+            $param['group_select'] = $formData['group_select'];
+        }
+
+        if($formData['exten_select'] != ""){
+            $param['exten_select'] = $formData['exten_select'];
+        }
+
+        $service = 'ServicesReport';
+        $url = Snep_Services::getPathService($service);
+
+        $link = "";
+        foreach($param as $key => $value){
+            $link .= '&'.$key.'='.$value;
+        }
+
+        $service_url = $url.$link;
+
+        $this->view->service_url = $service_url;
+        
+        $http = curl_init($service_url);
+        $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+        
+        curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+        
+        $http_response = curl_exec($http);
+        $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+        
+        curl_close($http);
+
+        switch ($httpcode) {
+            case 200:
+                $data = json_decode($http_response);
+                
+                if($data->status == 'empty'){
+                    $this->view->error_message = $this->view->translate("No entries found");
+                    $this->renderScript('error/sneperror.phtml');
+                }else{
+
+                    $_SESSION[$user['name']]['service_report']['select'] = $data->select;
+                    $_SESSION[$user['name']]['service_report']['selectcount'] = $data->selectcount;
+                    $this->view->data = $data->totals;
+                    $this->view->lineNumber = $line_limit;
+                    $this->renderScript('services-report/view.phtml');
+                }
+                
+            break;
+            default:
+                $erro = $this->view->translate("Error "). $httpcode;
+                $erro .= $this->view->translate(". Please contact your system administrator");
+                $this->view->error_message = $erro;
+                $this->renderScript('error/sneperror.phtml');
+            break;
+
         }
     }
 
@@ -302,30 +189,68 @@ class ServicesReportController extends Zend_Controller_Action {
      */
     public function csvAction() {
 
-        if ($this->_request->getPost()) {
-            $formData = $this->_request->getParams();
-            $reportData = $this->getQuery($formData, true);
+        // Check Bond
+        $auth = Zend_Auth::getInstance();
+        $username = $auth->getIdentity();
+        $user = Snep_Users_Manager::getName($username);
 
-            if ($reportData) {
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Reports"),
+                    $this->view->translate("Services Use"),
+                    $this->view->translate("Export CSV")));
+
+        if ($this->_request->getParam('download')) {
+
+            $db = Zend_registry::get('db');
+
+            $stmt = $db->query($_SESSION[$user['name']]['service_report']['select']);
+
+            $header = array($this->view->translate('Date'),
+                            $this->view->translate('Peer'),
+                            $this->view->translate('Service'),
+                            $this->view->translate('State'),
+                            $this->view->translate('Status'));
+
+            $output = implode(",", $header) . "\n";
+                
+            while ($dado = $stmt->fetch()) {
+                
+                $indexes = null;
+                $values = null;
+                
+                $indexes = array_keys($dado);
+                $values .= preg_replace("/(\r|\n)+/", "", implode(",", $dado));
+                $values .= "\n";
+                $output .= $values;
+            }
+            
+            if ($output) {
+                
                 $this->_helper->layout->disableLayout();
                 $this->_helper->viewRenderer->setNoRender();
-
-                $csv = new Snep_Csv();
-                $csvData = $csv->generate($reportData, true);
+                
+                
+                $csvData = $output;
 
                 $dateNow = new Zend_Date();
-                $fileName = $this->view->translate('services_report_csv_') . $dateNow->toString($this->view->translate(" dd-MM-yyyy_hh'h'mm'm' ")) . '.csv';
+                $fileName = $this->view->translate('services_use').'_csv_' . $dateNow->toString("dd-MM-yyyy_hh'h'mm'm'") . '.csv';
 
                 header('Content-type: application/octet-stream');
                 header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
                 echo $csvData;
+
             } else {
                 $this->view->error = $this->view->translate("No records found.");
-                $this->view->back = $this->view->translate("Back");
-                $this->_helper->viewRenderer('error');
+                $this->renderScript('error/sneperror.phtml');
             }
+        } else {
+            
+            $ie = new Snep_CsvIE();
+            $this->view->form = $ie->exportResultReport($_SESSION[$user['name']]['service_report']['selectcount']);
+            $this->view->title = "Export";
+            $this->render('export');
         }
+        
     }
 
 }

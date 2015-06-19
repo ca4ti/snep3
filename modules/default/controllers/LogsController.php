@@ -22,7 +22,8 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class LogsController extends Zend_Controller_Action {
 
@@ -30,15 +31,9 @@ class LogsController extends Zend_Controller_Action {
      * indexAction - filter logs of system
      */
     public function indexAction() {
-        $this->view->breadcrumb = $this->view->translate("Status » System Logs ");
+
+        $this->view->breadcrumb = $this->view->translate("System Logs ");
         $config = Zend_Registry::get('config');
-
-        include( $config->system->path->base . "/inspectors/Permissions.php" );
-        $test = new Permissions();
-        $response = $test->getTests();
-
-        $form = new Snep_Form(new Zend_Config_Xml('./modules/default/forms/logs.xml', 'general', true));
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/logs/view');
 
         $locale = Snep_Locale::getInstance()->getLocale();
         $now = Zend_Date::now();
@@ -48,24 +43,12 @@ class LogsController extends Zend_Controller_Action {
         } else {
             $now = $now->toString('dd/MM/YYYY HH:mm');
         }
-
-        $initDay = $form->getElement('init_day');
-        $initDay->setValue($now);
-
-        $endDay = $form->getElement('end_day');
-        $endDay->setValue($now);
-
-        $status = $form->getElement('status');
-        $status->setValue('ALL');
-
-        $realtime = $form->getElement('real_time');
-        $realtime->setValue('no');
-
-        $submit = $form->getElement("submit");
-        $submit->setLabel("Log Search");
-
-        $this->initLogFile();
-        $this->view->form = $form;
+        
+        $this->view->datepicker_locale =  Snep_Locale::getDatePickerLocale($locale) ;
+        
+        if ($this->_request->getPost()) {
+            $this->viewAction();
+        }
     }
 
     /**
@@ -73,8 +56,7 @@ class LogsController extends Zend_Controller_Action {
      * @return <object> \Snep_Log
      */
     private function initLogFile() {
-        $log = new Snep_Log(Zend_Registry::get('config')->system->path->log, 'agi.log');
-
+        $log = new Snep_Log(Zend_Registry::get('config')->system->path->log, 'full');
         return $log;
     }
 
@@ -83,81 +65,64 @@ class LogsController extends Zend_Controller_Action {
      */
     public function viewAction() {
 
-        $log = $this->initLogFile();
-
-        $this->view->breadcrumb = $this->view->translate("Status » System Logs ");
-        $this->view->back = $this->view->translate("Back");
+         $formData = $this->_request->getParams();
+        
+        $this->view->breadcrumb = $this->view->translate("System Logs ");
         $this->view->exibition_mode = $this->view->translate("Exibition mode:");
         $this->view->normal = $this->view->translate("Normal");
         $this->view->terminal = $this->view->translate("Terminal");
         $this->view->contrast = $this->view->translate("Contrast");
 
-        if ($log != 'error') {
+        // Normal search mode
+        if ($formData['real_time'] === 'no') {
 
-            // Normal search mode
-            if (strcmp($this->_request->getParam('real_time'), 'yes')) {
+            $init_day = explode(" ", $formData['init_day']);
+            $final_day = explode(" ", $formData['end_day']);
 
-                $formData = $this->_request->getParams();
+            $formated_init_day = new Zend_Date($init_day[0]);
+            $formated_init_day = ucfirst($formated_init_day->toString('YYYY-MM-dd'));
+            $formated_init_time = $init_day[1];
 
-                $this->view->mode = 'normal';
-                $this->view->location = 'index';
+            $formated_final_day = new Zend_Date($final_day[0]);
+            $formated_final_day = ucfirst($formated_final_day->toString('YYYY-MM-dd'));
+            $formated_final_time = $final_day[1];
 
-                $init_day = explode(" ", $formData['init_day']);
-                $final_day = explode(" ", $formData['end_day']);
+            $log = $this->initLogFile();
 
-                $formated_init_day = new Zend_Date($init_day[0]);
-                $formated_init_day = $formated_init_day->toString('yyyy-MM-dd');
-                $formated_init_time = $init_day[1];
+            if ($log != 'error') {
 
-                $formated_final_day = new Zend_Date($final_day[0]);
-                $formated_final_day = $formated_final_day->toString('yyyy-MM-dd');
-                $formated_final_time = $final_day[1];
+                $result = $log->grepLog($formated_init_day, $formated_final_day, $formated_init_time, $formated_final_time, $formData['verbose'], $formData['others']);
 
-                $result = $log->getLog($formated_init_day, $formated_final_day, $formated_init_time, $formated_final_time, $this->_request->getPost('status'), $this->_request->getPost('source'), $this->_request->getPost('dest'));
-
-                if (count($result) > 0) {
-
-                    $this->view->result = $result;
+                if ($result != 'error') {
+                    
+                        $this->view->period = $this->view->translate("Period: "). $formData['init_day'] . " " . $this->view->translate("to") . " " . $formData['end_day']; 
+                        $this->view->file = $result;
+                        $this->view->mode = 'normal';
+                        $this->_helper->viewRenderer('view');
+                    
                 } else {
 
-                    $this->view->error = $this->view->translate("No entries found!");
-                    $this->_helper->viewRenderer('error');
+                    $this->view->error_message = $this->view->translate("No entries found!");
+                    $this->renderScript('error/sneperror.phtml');
                 }
 
-                // Tail log mode
             } else {
-                $this->view->mode = 'tail';
-                $this->view->location = '../../index';
-                $this->view->lines = $this->view->translate("Line numbers");
+
+                $this->view->error_message = $this->view->translate("The log file cannot be open!");
+                $this->renderScript('error/sneperror.phtml');
             }
-        } else {
-            $this->view->error = $this->view->translate("The log file cannot be open!");
-            $this->_helper->viewRenderer('error');
+        
+        } else {    // Tail log mode
+
+            $this->view->mode = 'tail';
+            $this->_helper->viewRenderer('view');
         }
     }
 
-    /**
-     * tailAction - List log system
+/**
+     * viewAction - List log system
      */
-    public function tailAction() {
-        $this->_helper->layout->disableLayout();
-
-        $this->view->lines = $this->view->translate("Line numbers");
-
-        $log = $this->initLogFile();
-        $lines = $this->_request->getParam('lines');
-
-        $this->view->lines = $lines;
-        $result = $log->getTail($lines);
-
-        $this->view->result = $result;
-    }
-
-    /**
-     * errorAction
-     */
-    public function errorAction() {
-        
-    }
+    public function getlogfileAction() {
+        }
 
 }

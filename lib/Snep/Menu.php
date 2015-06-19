@@ -65,6 +65,11 @@ class Snep_Menu {
     private $uri;
 
     /**
+     * @var string font for the resource
+     */
+    private $font;
+
+    /**
      * Base path for menu links
      * @var <string>
      */
@@ -119,10 +124,27 @@ class Snep_Menu {
     }
 
     /**
+     * getFont
+     * @return type
+     */
+    public function getFont() {
+        return $this->font;
+    }
+
+    /**
+     * setFont
+     * @param <string> $font
+     */
+    public function setFont($font) {
+        $this->font = $font;
+    }
+
+    /**
      * addChild - Add a child
      * @param Snep_Menu $child
      */
     public function addChild(Snep_Menu $child) {
+
         $item = $this->getChildById($child->getId());
         if ($item) {
             $item->setSubmenu(array_merge($item->getSubmenu(), $child->getSubmenu()));
@@ -166,6 +188,7 @@ class Snep_Menu {
      * @return string menu id
      */
     public function getId() {
+
         return $this->id;
     }
 
@@ -182,14 +205,12 @@ class Snep_Menu {
      * @return <string> HTML rendered children
      */
     public function renderChildren() {
+        
         $html = "";
-
         foreach ($this->getChildren() as $child) {
             if (substr($child->id, 0, 7) == 'default') {
                 $html .= $child->render();
-            } else {
-                $html['module'] = $child->renderModule();
-            }
+            } 
         }
 
         return $html;
@@ -203,11 +224,10 @@ class Snep_Menu {
         $html = "";
 
         foreach ($this->getChildren() as $child) {
-            if (substr($child->id, 0, 7) == 'default') {
-                $teste = $child->render();
-            } else {
+
+            if (substr($child->id, 0, 7) != 'default') {
                 $html .= $child->renderModule();
-            }
+            } 
         }
         return $html;
     }
@@ -225,6 +245,7 @@ class Snep_Menu {
      * @param <string> $label
      */
     public function setLabel($label) {
+
         $this->label = Snep_Locale::getInstance()->getZendTranslate()->translate($label);
         ;
     }
@@ -234,15 +255,26 @@ class Snep_Menu {
      * @return <string> HTML rendered menu
      */
     public function render() {
+        
         $html = "<li id=\"{$this->getId()}\">";
-        $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
+        $font = $this->getFont();
+                    
+        if(count(explode("_", $html)) == 2){
+
+            $html .= "<a href=\"{$this->getUri()}\">" . "<i class='$font fa-fw'></i> " . $this->getLabel() . "<span class='fa arrow'></span></a>";
+        }else{
+            $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
+        }   
+        
         if (count($this->getChildren()) > 0) {
-            $html .= "<ul>";
+            $html .= "<ul class=\"snep-menu-list\">";
             $html .= $this->renderChildren();
             $html .= "</ul>";
         }
 
         $html .= "</li>";
+
+
 
         return $html;
     }
@@ -256,13 +288,15 @@ class Snep_Menu {
         $html = "<li>";
         $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
         if (count($this->getChildren()) > 0) {
-            $html .= "<ul>";
+            $html .= "<ul class='nav nav-third-level'>";
             $html .= $this->renderChildrenModule();
             $html .= "</ul>";
         }
 
         $html .= "</li>";
+
         return $html;
     }
 
 }
+

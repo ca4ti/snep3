@@ -1,5 +1,4 @@
 <?php
-
 /*
  *  This file is part of SNEP.
  *
@@ -23,10 +22,25 @@
  * @category  Snep
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  * 
  */
 class ProfilesController extends Zend_Controller_Action {
+
+    /**
+     * Initial settings of the class
+     */
+     public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        // Add dashboard button
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
+    }
 
     /**
      * indexAction - List all profiles
@@ -34,138 +48,96 @@ class ProfilesController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Profiles")));
-
-        $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from(array("profiles"), array("id", "name", "created", "updated"))
-                ->order('id');
+                ->from(array("profiles"), array("id", "name", "created", "updated"));
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("profiles.`$field` like '%$query%'");
-        }
+        $stmt = $db->query($select);
+        $data = $stmt->fetchAll(); 
 
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $paginator = new Zend_Paginator($paginatorAdapter);
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
-
-        $this->view->profiles = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
-
-        $opcoes = array("id" => $this->view->translate("Code"),
-            "name" => $this->view->translate("Name"));
-
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($opcoes);
-        $filter->setFieldValue($this->_request->getPost('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add Profiles"),
-                "css" => "include"));
+        
+        $this->view->profiles = $data;
+        
     }
 
     /**
      *  AddAction - Add profile
      */
     public function addAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Profiles"),
                     $this->view->translate("Add")));
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/profiles.xml"));
-        $form->getElement('name')->setRequired(true);
 
+        $usersProfiles = array();
+
+        // Mount List users with not Profiles
+        $idlast = (int)Snep_Profiles_Manager::lastId() +1;  
+        $userNoprofile = Snep_Profiles_Manager::getUsersnotProfile($idlast);
+
+        // Retira da lista de usuarios, caso o mesmo possua permissao individual
+        foreach ($userNoprofile as $data) {
+   
+            $existPermission = Snep_Permission_Manager::existPermission($data['id']);
+
+            if ($existPermission == false) {
+                if (!isset($usersProfiles[$data['name']])) {
+                    $usersAll[$data['nome']] = "{$data['nome']}" . " - (" . $data['name'] . ")";
+                }
+            }
+        }
+        
+        $this->view->usersAll = $usersAll;
+
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+        
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
-            if ($form_isValid) {
+            $newId = Snep_Profiles_Manager::getName($dados['name']);
+
+            if (count($newId) > 1) {
+                $this->view->error_message = $this->view->translate('Name already exists.'); 
+                $this->renderScript('error/sneperror.phtml');
+            }else{
 
                 Snep_Profiles_Manager::add($dados);
                 $lastId = Snep_Profiles_Manager::lastId();
                 $dados['id'] = $lastId;
 
+                if (isset($dados['duallistbox_profile'])) {
+
+                    foreach ($dados['duallistbox_profile'] as $key => $box) {
+                        $data['id'] = $lastId;
+                        $data['box'] = $box;
+                        $this->view->users = Snep_Users_Manager::addProfileByName($data);
+                    }
+                }
+
                 $this->_redirect($this->getRequest()->getControllerName() . "/permission/id/$lastId?action=add");
             }
         }
 
-        $this->view->form = $form;
     }
 
     /**
      * editAction - Edit profiles
      */
     public function editAction() {
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Profiles"),
                     $this->view->translate("Edit")));
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("modules/default/forms/profiles.xml");
-        $form = new Snep_Form($form_xml);
-
         $id = $this->_request->getParam('id');
         $profile = Snep_Profiles_Manager::get($id);
-
-        $name = $form->getElement('name');
-        ( isset($profile['name']) ? $name->setValue($profile['name']) : null );
-
-        if ($this->_request->getPost()) {
-
-            $form_isValid = $form->isValid($_POST);
-            $dados = $this->_request->getParams();
-
-            if ($form_isValid) {
-                $dados['created'] = $profile['created'];
-
-                Snep_Profiles_Manager::edit($dados);
-
-                $data = array();
-                $data['id'] = $dados['id'];
-
-                $this->_redirect($this->getRequest()->getControllerName());
-            }
-        }
-        $this->view->form = $form;
-    }
-
-    /**
-     * memberAction - Add members to profile
-     */
-    public function memberAction() {
-
-        $id = $this->_request->getParam('id');
-        $profile = Snep_Profiles_Manager::get($id);
-
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Profiles"),
-                    $this->view->translate("Members"),
-                    $this->view->translate("Name"),
-                    $this->view->translate($profile['name'])));
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("modules/default/forms/member.xml");
-        $form = new Snep_Form($form_xml);
+        $this->view->profile = $profile;
 
         $usersProfiles = array();
 
@@ -187,47 +159,48 @@ class ProfilesController extends Zend_Controller_Action {
                 }
             }
         }
-
-        $this->view->objSelectBox = "users";
-        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Users'), $usersAll, $usersProfiles);
+        
+        $this->view->usersAll = $usersAll;
+        $this->view->userProfiles = $usersProfiles;
+        //Define the action and load form
+        $this->view->action = "edit" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
 
-            if ($form_isValid) {
+            $newId = Snep_Profiles_Manager::getName($dados['name']);
+
+            if (count($newId) > 1 && $profile['name'] != $dados['name']) {
+                $this->view->error_message = $this->view->translate('Name already exists.'); 
+                $this->renderScript('error/sneperror.phtml');
+            }else{
+
                 $dados['created'] = $profile['created'];
 
-                foreach (Snep_Profiles_Manager::getUsersProfiles($id) as $only) {
-
-                    $profileOnly['box'] = $only['name'];
-                    $profileOnly['id'] = $dados['id'];
-
-                    Snep_Users_Manager::addProfileByName($profileOnly);
-                }
+                Snep_Profiles_Manager::edit($dados);
 
                 $data = array();
                 $data['id'] = $dados['id'];
 
-                if (isset($dados['box_add'])) {
+                foreach($usersProfiles as $key => $userProfile){
+                    Snep_Users_Manager::removeProfileByName($key);
+                }
+              
+                if (isset($dados['duallistbox_profile'])) {
 
-                    foreach ($dados['box_add'] as $key => $box) {
+                    foreach ($dados['duallistbox_profile'] as $key => $box) {
                         $data['box'] = $box;
                         $this->view->users = Snep_Users_Manager::addProfileByName($data);
                     }
                 }
 
-                // Exclui membros na edição
-                if (isset($dados['box'])) {
-                    foreach ($dados['box'] as $item => $box) {
-                        Snep_Users_Manager::removeProfileByName($box, $data['id']);
-                    }
-                }
-                $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
+                $this->_redirect($this->getRequest()->getControllerName());
             }
+
         }
-        $this->view->form = $form;
+
     }
 
     /**
@@ -235,17 +208,30 @@ class ProfilesController extends Zend_Controller_Action {
      */
     public function removeAction() {
 
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Profiles"),
+                    $this->view->translate("Delete")));
+
         $id = $this->_request->getParam('id');
-        $members = Snep_Profiles_Manager::getUsersProfiles($id);
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete Profile.'); 
+        $this->view->remove_message = $this->view->translate('The profile will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'profiles'; 
+        $this->renderScript('remove/remove.phtml');
 
-        // migra membros para o profile default
-        foreach ($members as $item => $member) {
-            Snep_Profiles_Manager::migration($member);
+        if ($this->_request->getPost()) {
+        
+            $members = Snep_Profiles_Manager::getUsersProfiles($_POST['id']);
+
+            // migra membros para o profile default
+            foreach ($members as $item => $member) {
+                Snep_Profiles_Manager::migration($member);
+            }
+
+            Snep_Profiles_Manager::removePermission($_POST['id']);
+            Snep_Profiles_Manager::remove($_POST['id']);
+            $this->_redirect($this->getRequest()->getControllerName());
         }
-
-        Snep_Profiles_Manager::removePermission($id);
-        Snep_Profiles_Manager::remove($id);
-        $this->_redirect($this->getRequest()->getControllerName());
     }
 
     /**
@@ -253,8 +239,7 @@ class ProfilesController extends Zend_Controller_Action {
      */
     public function permissionAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Profiles"),
+                    $this->view->translate("Profile"),
                     $this->view->translate("Permission")));
 
         // verifica action add. Caso sim envia em seguida para permissões
@@ -263,11 +248,12 @@ class ProfilesController extends Zend_Controller_Action {
             $actionAdd = true;
         }
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form_xml = new Zend_Config_Xml("modules/default/forms/permission.xml");
-        $form = new Snep_Form($form_xml);
-
         $id = $this->_request->getParam('id');
+
+        $profile = Snep_Profiles_Manager::get($id);
+        $this->view->profile_name = $profile['name'];
+        
+
         $currentResources = Snep_Permission_Manager::getAllPermissions($id);
 
         $modules = Snep_Permission_Manager::getAll();
@@ -311,7 +297,7 @@ class ProfilesController extends Zend_Controller_Action {
                 }
             }
         }
-
+        
         $questionValid = new Zend_Validate_InArray(array('Yes'));
         $questionValid->setMessage('Yes is required!');
 
@@ -335,12 +321,13 @@ class ProfilesController extends Zend_Controller_Action {
                 }
             }
         }
+        
+        $this->view->resources = $resources;
+        $this->view->selected = $selected;
 
-        $form->setSelectBox($this->view->objSelectBox, $this->view->translate('Permission'), $resources, $selected);
-
+        // After Post
         if ($this->getRequest()->getPost()) {
-
-            $form_isValid = $form->isValid($_POST);
+            
             $dados = $this->_request->getParams();
 
             $update = array();
@@ -348,43 +335,26 @@ class ProfilesController extends Zend_Controller_Action {
 
             foreach ($resources as $key => $value) {
 
-                if (isset($dados['box_add'])) {
-                    if (array_search($key, $dados['box_add']) !== FALSE) {
+                if (isset($dados['duallistbox_permission'])) {
+                    if (array_search($key, $dados['duallistbox_permission']) !== FALSE) {
                         $update[$key] = true;
                     } else {
                         $update[$key] = false;
                     }
                 }
             }
+            
+            // Remove permission
+            Snep_Permission_Manager::removePermissionProfile($id);
 
-            Snep_Permission_Manager::update($update, $id);
-
-            // Adiciona permissões cadastradas antes da edição(Não estão na box_add)
-            if (isset($permissions)) {
-                foreach ($permissions as $item => $permission) {
-                    Snep_Permission_Manager::addPermissionOld($permission, $id);
-                }
+            foreach($dados['duallistbox_permission'] as $key => $permission){
+                Snep_Permission_Manager::addPermissionOld($permission, $id);     
             }
 
-            // Exclui permissão na edição
-            if (isset($dados['box'])) {
-
-                foreach ($dados['box'] as $item => $permission) {
-                    Snep_Permission_Manager::removePermissionOld($permission, $id);
-                }
-            }
-
-            if ($form_isValid) {
-
-                if ($actionAdd == true) {
-                    $this->_redirect($this->getRequest()->getControllerName() . "/member/id/$id");
-                } else {
-                    $this->_redirect($this->getRequest()->getControllerName());
-                }
-            }
+            $this->_redirect($this->getRequest()->getControllerName());
+            
         }
 
-        $this->view->form = $form;
     }
 
 }

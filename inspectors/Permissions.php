@@ -29,20 +29,16 @@
  */
 class Permissions extends Snep_Inspector_Test {
 
-    /**
-     * Array de arquivos a serem verificados.
-     * @var Array
-     */
-    public $paths = array('includes/setup.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          'sounds/moh' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          'sounds/pt_BR' => array('exists' => 1, 'writable' => 1, 'readable' => 1) );
 
     /**
      * Executa teste na criação do objeto.
      */
     public function __contruct() {
+
         self::getTests();
     }
+
+    
 
     /**
      * Realiza testes de permissões e dono do arquivo.
@@ -50,20 +46,29 @@ class Permissions extends Snep_Inspector_Test {
      */
     public function getTests() {
 
+         // Pega array do setup.conf do Zend_Registry.
+        $config = Zend_Registry::get('config');
+
+        // Pega language em uso
+        $lang = ($config->system->language === "en" ? "" : $config->system->language) ;
+
+        // Define array de paths a serem verificados
+        $paths = array('includes/setup.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
+                        'sounds/moh' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
+                        'sounds/'.$lang => array('exists' => 1, 'writable' => 1, 'readable' => 1) );
+
         // Registra erro como falso
         $result['permissions']['error'] = 0;
 
         // Inicia indice do array.
         $result['permissions']['message'] = '';
 
-        // Pega array do setup.conf do Zend_Registry.
-        $config = Zend_Registry::get('config');
-
+       
         // Pega registro path.base do setup.conf
         $core_path = $config->system->path->base . "/";
 
         // Percorre array de arquivos.
-        foreach($this->paths as $path => $permission) {
+        foreach($paths as $path => $permission) {
 
             // Verifica exigencia de existencia do arquivo.
             if($permission['exists']) {
@@ -71,7 +76,7 @@ class Permissions extends Snep_Inspector_Test {
                 if( ! file_exists( $core_path . $path ) ) {
                     // Não existindo arquivo concatena mensagem de erro
                     $result['permissions']['message'] .= " \n";
-                    $result['permissions']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path does not exists.") ."\n";
+                    $result['permissions']['message'] .= $core_path.$path . Zend_Registry::get("Zend_Translate")->translate(" does not exists.") ."\n";
                     // Seta erro como verdadeiro
                     $result['permissions']['error'] = 1;
 
@@ -82,7 +87,7 @@ class Permissions extends Snep_Inspector_Test {
                     if($permission['writable']) {
                         if( ! is_writable($core_path . $path) ) {
                             // Não existindo permissão de gravacao concatena mensagem de erro.
-                            $result['permissions']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path does not have permition to be modified.") ."\n";
+                            $result['permissions']['message'] .= $core_path.$path . Zend_Registry::get("Zend_Translate")->translate(" does not have permition to be modified.") ."\n";
                             // Seta erro como verdadeiro
                             $result['permissions']['error'] = 1;
                         }
@@ -93,7 +98,7 @@ class Permissions extends Snep_Inspector_Test {
                         if( ! is_readable($core_path . $path) ) {
                             // Não existindo permissão de leitura concatena mensagem de erro.
                             $result['permissions']['message'] .= " \n";
-                            $result['permissions']['message'] .= Zend_Registry::get("Zend_Translate")->translate(" $core_path$path does not have permition to be viewed.") ."\n";
+                            $result['permissions']['message'] .= $core_path.$path . Zend_Registry::get("Zend_Translate")->translate(" does not have permition to be viewed.") ."\n";
                             // Seta erro como falso.
                             $result['permissions']['error'] = 1;
                         }

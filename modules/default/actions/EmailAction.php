@@ -31,7 +31,8 @@ class EmailAction extends PBX_Rule_Action {
      * @return Nome da Ação
      */
     public function getName() {
-        return "Email";
+        return $this->i18n->translate("Email");
+
     }
 
     /**
@@ -47,7 +48,7 @@ class EmailAction extends PBX_Rule_Action {
      * @return Descrição de funcionamento ou objetivo
      */
     public function getDesc() {
-        return "Envia um email quando executada";
+        return $this->i18n->translate("Send an email when executed");
     }
 
     /**
@@ -65,7 +66,7 @@ class EmailAction extends PBX_Rule_Action {
         $dst = $i18n->translate("Addressee");
         $dstdesc = $i18n->translate("E-mail of addressee");
         $msg = $i18n->translate("Message");
-        $information = $i18n->translate("Want to display information of source and destination of the call in the body of the email?");
+        $information = $i18n->translate("display information of source and destination of the call in the body of the email?");
 
         return <<<XML
 <params>

@@ -1,22 +1,22 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
+//$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
 ?>
 <?php if($this->error): ?>
-    <div class="error_box">
+<!--     <div class="error_box">
         <?php echo $this->error; ?>
-    </div>
+    </div> -->
 <?php endif ?>
 
 <?php if($this->invalid): ?>
 
-<div style="text-align:center;">
+<!-- <div style="text-align:center;">
     <h2><?php echo $this->translate("Invalid File") ?></h2>
     <button type="button" onClick="history.back();"><?php echo $this->translate("Back"); ?></button>
-</div>
+</div> -->
 
 <?php else: ?>
 
-<form name="formulario" method="POST" action="<?php echo $this->url ?>/csvprocess" >
+<!-- <form name="formulario" method="POST" action="<?php echo $this->url ?>/csvprocess" >
     <table width="100%">
         <thead>
             <tr>
@@ -64,5 +64,78 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
             <input class="new_button" type="button" id="voltar" value="<?php echo $this->translate("Cancel"); ?>" onClick="history.back()" />
         </p>
     </div>
-</form>
+</form> -->
 <?php endif; ?>
+
+
+
+<script type="text/javascript" src="/snep/includes/javascript/formValidation.js"></script>
+<script type="text/javascript" src="/snep/includes/javascript/form/bootstrap.js"></script>
+    
+<div class="row">
+    <?php  if( isset( $this->error ) ): ?>
+
+        <div class="col-lg-4">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <?php echo $this->translate("Erro!");?>
+                </div>
+                <div class="panel-body">
+                    <pre><?php echo $this->error;?></pre>
+                </div>
+            </div>
+        </div>
+
+    <?php endif ?>
+
+    <?php if($this->invalid){ ?>
+    
+        <div class="col-lg-4">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <?php echo $this->translate("Erro!");?>
+                </div>
+                <div class="panel-body">
+                    <h2><?php echo $this->translate("Invalid File") ?></h2>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <div class="col-lg-4" align="center">
+                <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+            
+            </div>
+        </div>
+
+    <?php }else{ ?>
+        
+        <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "contacts", "action" => "csv"), null, true); ?>" METHOD="post">
+        
+
+            <div class="col-lg-4">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <?php echo $this->translate("Export Contacts");?>
+                    </div>
+                    <div class="panel-body" align="center">
+                        <p><?php echo $this->message;?></p>
+                        <br>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="file"><?php echo $this->translate("Input File");?></label>
+                            <input type="file" id="file" name="file">
+                        </div>
+                    </div>
+                </div>
+            </div>   
+            
+            <br>
+            <div class="snep-body-footer-buttons">
+                <button type="submit" class="btn btn-add" name="save" value="save"><?php echo $this->translate("Save");?></button>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+            </div>
+        </form>
+    <?php } ?>
+</div>

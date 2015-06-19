@@ -23,28 +23,80 @@ require_once "includes/AsteriskInfo.php";
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class TrunksController extends Zend_Controller_Action {
 
     /**
      * @var Zend_Form
      */
-    protected $form;
     protected $boardData;
+
+    /**
+     * preDispatch
+     */
+    public function preDispatch() {
+
+        // Test Asterisk connection       
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
+        }
+
+        // Read Khomp links
+        try {
+            $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
+         } catch (Exception $e) {
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');;
+        }
+    }
+
+    public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        // Add dashboard button
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+                                              Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
+        // Informações de placas khomp
+        $khomp_info = new PBX_Khomp_Info();
+        $khomp_boards = array();
+        if ($khomp_info->hasWorkingBoards()) {
+            foreach ($khomp_info->boardInfo() as $board) {
+                if (!preg_match("/FXS/", $board['model'])) {
+                    $khomp_boards["b" . $board['id']] = "{$board['id']} - " . $this->view->translate("Board") . " {$board['model']}";
+                    $id = "b" . $board['id'];
+                    if (preg_match("/E1/", $board['model'])) {
+                        for ($i = 0; $i < $board['links']; $i++)
+                            $khomp_boards["b" . $board['id'] . "l$i"] = $board['model'] . " - " . $this->view->translate("Link") . " $i";
+                    } else {
+                        for ($i = 0; $i < $board['channels']; $i++)
+                            $khomp_boards["b" . $board['id'] . "c$i"] = $board['model'] . " - " . $this->view->translate("Channel") . " $i";
+                    }
+                }
+            }
+            $this->khompBoards = $khomp_boards;           
+        }
+    }
 
     /**
      * indexAction
      */
     public function indexAction() {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Trunks")));
 
-        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+
 
         $db = Zend_Registry::get('db');
-        $select = "SELECT t.id, t.callerid, t.name, t.type, t.trunktype, t.time_chargeby, t.time_total,
+        $select = "SELECT t.id, t.callerid, t.name, t.technology, t.trunktype, t.time_chargeby, t.time_total,
                             (
                                 SELECT th.used
                                 FROM time_history AS th
@@ -59,29 +111,25 @@ class TrunksController extends Zend_Controller_Action {
                             ) as changed
                      FROM trunks as t ";
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select .= (" where t.`$field` like '%$query%'");
-        }
-
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-        $this->view->filtro = $this->_request->getParam('filtro');
-
         $datasql = $db->query($select);
         $trunks = $datasql->fetchAll();
+
+        if(empty($trunks)){
+            $this->view->error_message = $this->view->translate("You do not have registered trunks. <br><br> Click 'Add Trunk' to make the first registration
+");
+        }   
 
         foreach ($trunks as $id => $val) {
 
             $trunks[$id]['saldo'] = null;
 
-            if (!is_null($val['time_total'])) {
+            if (!is_null($val['time_total'] )) {
                 $ligacao = $val['changed'];
                 $anoLigacao = substr($ligacao, 6, 4);
                 $mesLigacao = substr($ligacao, 3, 2);
                 $diaLigacao = substr($ligacao, 0, 2);
-
+                $saldo = 0;
+                
                 switch ($val['time_chargeby']) {
                     case 'Y':
                         if ($anoLigacao == date('Y')) {
@@ -111,107 +159,336 @@ class TrunksController extends Zend_Controller_Action {
                         }
                         break;
                 }
-                $trunks[$id]['saldo'] = $saldo;
+
+                $trunks[$id]['saldo'] = gmdate("H:i:s", $saldo*60);
+                
             }
         }
 
-        $paginatorAdapter = new Zend_Paginator_Adapter_Array($trunks);
-        $paginator = new Zend_Paginator($paginatorAdapter);
+        $this->view->trunks = $trunks;
+            
+    }
 
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
 
-        $this->view->trunks = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
+    /**
+     * addAction - Add trunk
+     * @return type
+     * @throws ErrorException
+     * @throws Exception
+     */
+    public function addAction() {
 
-        $opcoes = array("name" => $this->view->translate("Code"),
-            "callerid" => $this->view->translate("Name"));
+        $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Trunks"),
+                    $this->view->translate("Add")));
 
-        // Formulário de filtro.
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($opcoes);
-        $filter->setFieldValue($this->_request->getPost('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
 
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add/",
-                "display" => $this->view->translate("Add Trunk"),
-                "css" => "include"));
+        // Mont codec's list and sets the default codec for each option
+        $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw");
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
+
+        foreach($codecsDefault as $key => $value){
+            $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
+            $codec3 .= '<option value="'.$value.'"'.($value==="gsm"  ? " selected " : "").'>'.$value.'</option>\n';
+        } // END foreach
+
+        $this->view->codec1 = $codec1;
+        $this->view->codec2 = $codec2;
+        $this->view->codec3 = $codec3;
+
+        // Informações de placas khomp
+        $boards = "";
+        foreach($this->khompBoards as $key => $value){
+
+            $boards .= '<option value="'.$key.'">'.$value.'</option>\n';
+        }
+        $this->view->boards = $boards;
+
+
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->view->techType = "snepsip";
+        $this->view->snepsip = 'selected' ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+
+        //After POSt
+        if ($this->getRequest()->isPost()) {
+
+            $form_isValid = true;
+            
+            // Trunk name validation
+            $newId = Snep_Trunks_Manager::getName($_POST['callerid']);
+
+            if (count($newId) > 1) {
+                $form_isValid = false;
+                $this->view->error_message = $this->view->translate('Name already exists.');
+                $this->renderScript('error/sneperror.phtml');
+            }
+
+            if ($form_isValid) {
+
+                // Mount array whith trunk data
+                $trunk_data = $this->preparePost();
+
+                $db = Snep_Db::getInstance();
+                $db->beginTransaction();
+                try {
+
+                    $db->insert("trunks", $trunk_data['trunk']);
+
+                    if ($trunk_data['trunk']['trunktype'] == "I") {
+
+                        $trunk_data['ip']["name"] = $trunk_data['trunk']["name"];
+
+                        $db->insert("peers", $trunk_data['ip']);
+                    }
+                    $db->commit();
+
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+
+                        $name = $trunk_data['callerid'];
+                        $id = Snep_Trunks_Manager::getId($name);
+                        Snep_LogUser::salvaLog("Adicionou tronco", $id["id"], 2);
+                        $add = Snep_Trunks_Manager::getTrunkLog($id["id"]);
+                        Snep_Trunks_Manager::insertLogTronco("ADD", $add);
+                    }
+                } catch (Exception $ex) {
+                    $db->rollBack();
+                    throw $ex;
+                }
+                Snep_InterfaceConf::loadConfFromDb();
+                $this->_redirect("trunks");
+            }
+        }
+
     }
 
     /**
-     * getForm - Snep_Form
-     * @return Snep_Form
+     * editAction - Edit trunk
+     * @return type
+     * @throws ErrorException
+     * @throws Exception
      */
-    protected function getForm() {
+    public function editAction() {
 
-        $this->form = null;
+        $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Trunks"),
+                    $this->view->translate("Edit trunk")));
 
-        if ($this->form === Null) {
+       $idTrunk = mysql_escape_string($this->getRequest()->getParam("trunk"));
 
-            $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/trunks.xml");
+        $db = Snep_Db::getInstance();
+        $trunk = $db->query("select * from trunks where id='$idTrunk'")->fetch();
+        $trunk['qualify_value'] = ""; 
 
-            $form = new Snep_Form();
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Trunk"), $form_xml->trunks), "trunks");
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Interface Technology"), $form_xml->technology), "technology");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->ip, "sip"), "sip");
+        if ($trunk['trunktype'] == "I") {
+            $ip_info = $db->query("select * from peers where name='{$trunk['name']}'")->fetch();
+            $this->view->infoTrunk = $ip_info;
 
-            $ip = new Snep_Form_SubForm(null, $form_xml->ip, "iax2");
-            $iax = new Snep_Form_SubForm(null, $form_xml->iax2, "iax2");
-            foreach ($iax as $_iax) {
-                $ip->addElement($_iax);
-            }
-            $form->addSubForm($ip, "iax2");
+            $type = $ip_info["type"];
+            $label = "type_".$type;
+            $this->view->$label = "checked";
 
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->snepsip, "snepsip"), "snepsip");
+            $qualify = $ip_info["qualify"];
+            $label = "qualify_".$qualify;
+            $this->view->$label = "checked";
 
-            $snepsip = new Snep_Form_SubForm(null, $form_xml->snepsip, 'snepiax2');
-            $snep_iax = new Snep_Form_SubForm(null, $form_xml->snepiax2, "snepiax2");
-            foreach ($snepsip as $_snepsip) {
-                $snep_iax->addElement($_snepsip);
-            }
-            $form->addSubForm($snep_iax, "snepiax2");
-            $form->addSubForm(new Snep_Form_SubForm(null, $form_xml->virtual, "virtual"), "virtual");
-
-            $subFormKhomp = new Snep_Form_SubForm(null, $form_xml->khomp, "khomp");
-            // Informações de placas khomp
-            $khomp_info = new PBX_Khomp_Info();
-            $khomp_boards = array();
-            if ($khomp_info->hasWorkingBoards()) {
-                foreach ($khomp_info->boardInfo() as $board) {
-                    if (!preg_match("/FXS/", $board['model'])) {
-                        $khomp_boards["b" . $board['id']] = "{$board['id']} - " . $this->view->translate("Board") . " {$board['model']}";
-                        $id = "b" . $board['id'];
-                        if (preg_match("/E1/", $board['model'])) {
-                            for ($i = 0; $i < $board['links']; $i++)
-                                $khomp_boards["b" . $board['id'] . "l$i"] = $board['model'] . " - " . $this->view->translate("Link") . " $i";
-                        } else {
-                            for ($i = 0; $i < $board['channels']; $i++)
-                                $khomp_boards["b" . $board['id'] . "c$i"] = $board['model'] . " - " . $this->view->translate("Channel") . " $i";
-                        }
-                    }
-                }
-                $subFormKhomp->getElement('board')->setMultiOptions($khomp_boards);
+            if ( $ip_info['qualify'] != 'yes' && $ip_info['qualify'] != 'no' ) {
+                $trunk['qualify_value'] = $ip_info['qualify'] ;
+                $this->view->qualify_specify = "checked";
             }
 
-            if (count($khomp_boards) == 0) {
-                $subFormKhomp->removeElement('board');
-                $subFormKhomp->addElement(new Snep_Form_Element_Html("extensions/khomp_error.phtml", "err", false, null, "khomp"));
-            }
-
-            $form->addSubForm($subFormKhomp, "khomp");
-
-            $form->addSubForm(new Snep_Form_SubForm($this->view->translate("Advanced"), $form_xml->advanced), "advanced");
-
-            $this->form = $form;
+            $this->view->nat = ($ip_info['nat'] === 'no') ? "" : "checked" ;
+            
         }
 
-        return $this->form;
+        // Trunk technology
+
+
+        $technologyTrunk = strtolower($trunk['technology']);
+        
+
+        $this->view->sip     = ($technologyTrunk === "sip" ? "selected" : "");
+        $this->view->iax2    = ($technologyTrunk === "iax2" ? "selected" : "");
+        $this->view->virtual = ($technologyTrunk === "virtual" ? "selected" : "");
+        $this->view->khomp = ($technologyTrunk === "khomp" ? "selected" : "");
+        $this->view->snepsip = ($technologyTrunk === "snepsip" ? "selected" : "");
+        $this->view->snepiax = ($technologyTrunk === "snepiax" ? "selected" : "");
+        $this->view->techType   = $technologyTrunk; //"selected";
+        $this->view->technology = $technologyTrunk;
+
+        $this->view->dtmf_dial = ($trunk['dtmf_dial'] == '0') ? "" : "checked" ;
+        $this->view->reverse_auth = ($trunk['reverse_auth'] == '0') ? "" : "checked" ;
+        $this->view->map_extensions = ($trunk['map_extensions'] == '0') ? "" : "checked" ;
+        $this->view->tempo = ($trunk['time_total'] > 0) ? "checked" : "" ;
+
+
+        $this->view->name = $trunk['name'];
+
+        $dialmethod = $trunk["dialmethod"];
+        $label = "dialmethod_".$dialmethod;
+        $this->view->$label = "checked";
+
+        $dtmf = $trunk["dtmfmode"];
+        $label = "dtmf_".$dtmf;
+        $this->view->$label = "checked";
+
+        $time_chargeby = $trunk['time_chargeby'];
+        $label = "chargeby_".$time_chargeby;
+        $this->view->$label = "checked";
+
+        $trunk['identifier'] = $trunk['username'];
+         
+        $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p");
+        $codecs = explode(";", $trunk['allow']);
+
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
+        foreach($codecsDefault as $key => $value){
+            
+            $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+            $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+            $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                     
+        }
+        
+        $this->view->codec1 = $codec1;
+        $this->view->codec2 = $codec2;
+        $this->view->codec3 = $codec3;
+        
+        // Khomp boards
+        $boards = "";
+        foreach($this->khompBoards as $key => $value){
+            $boards .= ("KHOMP/".$key == $trunk['channel']) ? '<option value="'.$key.'" selected>'.$value.'</option>\n' : '<option value="'.$key.'">'.$value.'</option>\n';
+        }
+
+        $this->view->boards = $boards;
+        $this->view->trunk = $trunk;
+        
+        //Define the action and load form
+        $this->view->action = "edit" ;
+        $this->view->disabled = "disabled" ; 
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
+        
+        //After POST
+        if ($this->getRequest()->isPost()) {
+
+            $form_isValid = true;
+            
+            $newId = Snep_Trunks_Manager::getName($_POST['callerid']);
+
+            if (count($newId) > 1 && $_POST['callerid'] != $trunk['callerid']) {
+                $form_isValid = false;
+                $this->view->error_message = $this->view->translate('Name already exists.');
+                $this->renderScript('error/sneperror.phtml');
+            }
+
+            if ($form_isValid) {
+
+                $trunk_data = $this->preparePost();
+
+                $db = Snep_Db::getInstance();
+                $db->beginTransaction();
+                try {
+                    $db->update("trunks", $trunk_data['trunk'], "id='$idTrunk'");
+                    if ($trunk_data['trunk']['trunktype'] == "I") {
+                        $db->update("peers", $trunk_data['ip'], "name='{$trunk_data['trunk']['name']}' and peer_type='T'");
+                    }
+                    $db->commit();
+
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+
+                        $name = $trunk_data['callerid'];
+                        $id = Snep_Trunks_Manager::getId($name);
+                        Snep_LogUser::salvaLog("Editou tronco", $id["id"], 2);
+                        $edit = Snep_Trunks_Manager::getTrunkLog($id["id"]);
+                        Snep_Trunks_Manager::insertLogTronco("NEW", $edit);
+                    }
+                } catch (Exception $ex) {
+                    $db->rollBack();
+                    throw $ex;
+                }
+                Snep_InterfaceConf::loadConfFromDb();
+                $this->_redirect("trunks");
+            }
+        }
     }
 
+    /**
+     * removeAction - Remove trunk
+     */
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Trunks"),
+                    $this->view->translate("Delete")));
+
+        $id = $this->_request->getParam("id");
+        $name = $this->_request->getParam("name");
+
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');       
+        }
+
+        $regras = Snep_Trunks_Manager::getValidation($id);
+        $rules_query = Snep_Trunks_Manager::getRules($id);
+
+        foreach ($rules_query as $rule) {
+            if (!in_array($rule, $regras)) {
+                $regras[] = $rule;
+            }
+        }
+
+        if (count($regras) > 0) {
+
+            $this->view->error_message = $this->view->translate("Cannot remove. The following routes are using this trunk: ") . "<br />";
+            foreach ($regras as $regra) {
+                $this->view->error_message .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
+            }
+            $this->renderScript('error/sneperror.phtml');
+        } else {
+
+            $this->view->id = $id;
+            $this->view->name = $name;
+            $this->view->remove_title = $this->view->translate('Delete Trunk.'); 
+            $this->view->remove_message = $this->view->translate('The trunk will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'trunks'; 
+            $this->renderScript('remove/remove.phtml');
+
+            if ($this->_request->getPost()) {
+             
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    Snep_LogUser::salvaLog("Excluiu tronco", $_POST['id'], 2);
+                    $add = Snep_Trunks_Manager::getTrunkLog($_POST['id']);
+                    Snep_Trunks_Manager::insertLogTronco("DEL", $add);
+                }
+
+                Snep_Trunks_Manager::remove($_POST['id']);
+                Snep_Trunks_Manager::removePeers($_POST['name']);
+
+                Snep_InterfaceConf::loadConfFromDb();
+                $this->_redirect("trunks");
+            }
+        }
+    }
+
+    
     /**
      * preparePost
      * @param <string> $post
@@ -220,10 +497,11 @@ class TrunksController extends Zend_Controller_Action {
     protected function preparePost($post = null) {
 
         $post = $post === null ? $_POST : $post;
-        $tech = $post['technology']['type'];
-        $trunktype = $post['technology']['type'] = strtoupper($tech);
-        $static_sections = array("trunks", "technology", "advanced", $tech);
-        $ip_trunks = array("sip", "iax2", "snepsip", "snepiax2");
+
+        $tech = $post['technology'];
+        $trunktype = $post['technology'] = strtoupper($tech);        
+        $ip_trunks = array("sip", "iax2", "snepsip", "snepiax");
+
         $trunk_fields = array(// Only allowed fields for trunks table
             "callerid",
             "type",
@@ -245,7 +523,8 @@ class TrunksController extends Zend_Controller_Action {
             "name",
             "allow",
             "id_regex",
-            "channel"
+            "channel",
+            "technology"
         );
 
         $ip_fields = array(// Only allowed fields for peers table
@@ -269,22 +548,47 @@ class TrunksController extends Zend_Controller_Action {
             "port"
         );
 
+        // Get las trunk id, because trunk.id is autoinccrement and trunk.name not is
         $sql = "SELECT name FROM trunks ORDER BY CAST(name as DECIMAL) DESC LIMIT 1";
         $row = Snep_Db::getInstance()->query($sql)->fetch();
 
-        $trunk_data = array(
-            "name" => trim($row['name'] + 1),
-            "context" => "default",
-            "trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"),
-        );
 
+        if ($this->view->action == "add") {  
+            $trunk_data = array(
+                "name" => trim($row['name'] + 1),
+                "context" => "default",
+                "trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"),
+            );
+        } else {
+            $trunk_data = array("trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"));
+        }
         foreach ($post as $section_name => $section) {
-            if (in_array($section_name, $static_sections)) {
-                $trunk_data = array_merge($trunk_data, $section);
-            }
+            $trunk_data[$section_name] = $section;
+        }
+        
+        
+        $trunk_data['dtmf_dial'] = ($post['dtmf_dial'] === "dtmf_dial" ? true : false) ;
+        $trunk_data['dtmf_dial_number'] = ($trunk_data['dtmf_dial'] ? $trunk_data['dtmf_dial_number'] : "");
+
+        $trunk_data['map_extensions'] = ($post['map_extensions'] === "map_extensions" ? true : false) ;
+
+        $trunk_data['reverse_auth'] = ($post['reverse_auth'] === "reverse_auth" ? true : false) ;
+
+        $trunk_data['nat'] = ($post['nat'] === "on" ? 'yes' : 'no') ;        
+        
+        $trunk_data['time_total'] = ($post['tempo'] === "tempo" ? $trunk_data['time_total'] : NULL);
+        $trunk_data['time_chargeby'] = ($post['tempo'] === "tempo" ? $trunk_data['time_chargeby'] : "");
+
+
+
+        // check type Qualify, (yes|no|specify)
+        if ($trunk_data['qualify'] === 'specify') {
+            $trunk_data['qualify'] = trim($trunk_data['qualify_value']);
         }
 
+
         if ($trunktype == "SIP" || $trunktype == "IAX2") {
+         
             $trunk_data['dialmethod'] = strtoupper($trunk_data['dialmethod']);
 
             if ($trunk_data['dialmethod'] == 'NOAUTH') {
@@ -295,11 +599,13 @@ class TrunksController extends Zend_Controller_Action {
 
             $trunk_data['id_regex'] = $trunktype . "/" . $trunk_data['username'];
             $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
-        } else if ($trunktype == "SNEPSIP" || $trunktype == "SNEPIAX2") {
+ 
+        } else if ($trunktype == "SNEPSIP" || $trunktype == "SNEPIAX") {
 
             $trunk_data['peer_type'] = $trunktype == "SNEPSIP" ? "peer" : "friend";
-            $trunk_data['username'] = $trunktype == "SNEPSIP" ? $trunk_data['host'] : $trunk_data['username'];
+            $trunk_data['username'] = $trunktype == "SNEPSIP" ? $trunk_data['host'] : $trunk_data['identifier'];
             $trunk_data['channel'] = $trunk_data['id_regex'] = substr($trunktype, 4) . "/" . $trunk_data['username'];
+ 
         } else if ($trunktype == "KHOMP") {
 
             $khomp_board = $trunk_data['board'];
@@ -345,243 +651,5 @@ class TrunksController extends Zend_Controller_Action {
         return array("trunk" => $trunk_data, "ip" => $ip_data);
     }
 
-    /**
-     * addAction - Add trunk
-     * @return type
-     * @throws ErrorException
-     * @throws Exception
-     */
-    public function addAction() {
-
-        $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Trunks"),
-                    $this->view->translate("Add")));
-
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->_redirect("/trunks/asterisk-error");
-            return;
-        }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = $this->getForm();
-
-        if ($this->getRequest()->isPost()) {
-            if ($this->form->isValid($_POST)) {
-                $trunk_data = $this->preparePost();
-
-                $db = Snep_Db::getInstance();
-                $db->beginTransaction();
-                try {
-                    $db->insert("trunks", $trunk_data['trunk']);
-                    if ($trunk_data['trunk']['trunktype'] == "I") {
-                        $db->insert("peers", $trunk_data['ip']);
-                    }
-                    $db->commit();
-
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-
-                        $name = $trunk_data['trunk']['callerid'];
-                        $id = Snep_Trunks_Manager::getId($name);
-                        Snep_LogUser::salvaLog("Adicionou tronco", $id["id"], 2);
-                        $add = Snep_Trunks_Manager::getTrunkLog($id["id"]);
-                        Snep_Trunks_Manager::insertLogTronco("ADD", $add);
-                    }
-                } catch (Exception $ex) {
-                    $db->rollBack();
-                    throw $ex;
-                }
-                Snep_InterfaceConf::loadConfFromDb();
-                $this->_redirect("trunks");
-            }
-        }
-
-        $this->view->form = $form;
-        $this->renderScript("trunks/add_edit.phtml");
-    }
-
-    /**
-     * populateFromTrunk
-     * @param <Snep_Form> $form
-     * @param <int> $trunk_id
-     */
-    protected function populateFromTrunk(Snep_Form $form, $trunk_id) {
-
-        $db = Snep_Db::getInstance();
-        $info = $db->query("select * from trunks where id='$trunk_id'")->fetch();
-        $form->getSubForm("trunks")->getElement("callerid")->setValue($info['callerid']);
-        $form->getSubForm("technology")->getElement("type")->setValue(strtolower($info['type']));
-
-        foreach ($form->getSubForm("advanced")->getElements() as $element) {
-            if (key_exists($element->getName(), $info)) {
-                $element->setValue($info[$element->getName()]);
-            }
-        }
-
-        foreach ($form->getSubForm(strtolower($info['type']))->getElements() as $element) {
-            if (key_exists($element->getName(), $info)) {
-                $element->setValue($info[$element->getName()]);
-            }
-        }
-
-        if ($info['trunktype'] == "I") {
-            $ip_info = $db->query("select * from peers where name='{$info['name']}'")->fetch();
-            foreach ($form->getSubForm(strtolower($info['type']))->getElements() as $element) {
-                if (key_exists($element->getName(), $ip_info)) {
-                    $element->setValue($ip_info[$element->getName()]);
-                }
-            }
-            if ($info['type'] == "SIP" || $info['type'] == "IAX2") {
-                $form->getSubForm(strtolower($info['type']))->getElement("dialmethod")->setValue(strtolower($info['dialmethod']));
-                $form->getSubForm(strtolower($info['type']))->getElement("peer_type")->setValue($ip_info['type']);
-            }
-        } else if ($info['type'] == "KHOMP" && $form->getSubForm("khomp")->getElement("board") != NULL) {
-            $form->getSubForm("khomp")->getElement("board")->setValue(substr($info['channel'], 6));
-        }
-    }
-
-    /**
-     * editAction - Edit trunk
-     * @return type
-     * @throws ErrorException
-     * @throws Exception
-     */
-    public function editAction() {
-
-        $id = mysql_escape_string($this->getRequest()->getParam("trunk"));
-        $this->view->breadcrumb = $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
-                    $this->view->translate("Trunks"),
-                    $this->view->translate("Edit trunk %s", $id)));
-
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->_redirect("/trunks/asterisk-error");
-            return;
-        }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
-
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-            $edit = Snep_Trunks_Manager::getTrunkLog($id);
-            Snep_Trunks_Manager::insertLogTronco("OLD", $edit);
-        }
-
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = $this->getForm();
-        $form->setAction($this->view->baseUrl() . "/index.php/trunks/edit/trunk/$id");
-
-        if ($this->getRequest()->isPost()) {
-            if ($this->form->isValid($_POST)) {
-                $trunk_data = $this->preparePost();
-
-                $sql = "SELECT name FROM trunks WHERE id='{$id}' LIMIT 1";
-                $name_data = Snep_Db::getInstance()->query($sql)->fetch();
-                $trunk_data['trunk']['name'] = $trunk_data['ip']['name'] = $name_data['name'];
-
-                $db = Snep_Db::getInstance();
-                $db->beginTransaction();
-                try {
-                    $db->update("trunks", $trunk_data['trunk'], "id='$id'");
-                    if ($trunk_data['trunk']['trunktype'] == "I") {
-                        $db->update("peers", $trunk_data['ip'], "name='{$trunk_data['trunk']['name']}' and peer_type='T'");
-                    }
-                    $db->commit();
-
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-
-                        $name = $trunk_data['trunk']['callerid'];
-                        $id = Snep_Trunks_Manager::getId($name);
-                        Snep_LogUser::salvaLog("Editou tronco", $id["id"], 2);
-                        $edit = Snep_Trunks_Manager::getTrunkLog($id["id"]);
-                        Snep_Trunks_Manager::insertLogTronco("NEW", $edit);
-                    }
-                } catch (Exception $ex) {
-                    $db->rollBack();
-                    throw $ex;
-                }
-                Snep_InterfaceConf::loadConfFromDb();
-                $this->_redirect("trunks");
-            }
-        }
-
-        $this->populateFromTrunk($form, $id);
-        $this->view->form = $form;
-        $this->renderScript("trunks/add_edit.phtml");
-    }
-
-    /**
-     * removeAction - Remove trunk
-     */
-    public function removeAction() {
-
-        $id = $this->_request->getParam("id");
-        $name = $this->_request->getParam("name");
-
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->_redirect("/trunks/asterisk-error");
-            return;
-        }
-        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
-
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
-
-        $regras = Snep_Trunks_Manager::getValidation($id);
-
-        $rules_query = Snep_Trunks_Manager::getRules($id);
-
-        foreach ($rules_query as $rule) {
-            if (!in_array($rule, $regras)) {
-                $regras[] = $rule;
-            }
-        }
-
-        if (count($regras) > 0) {
-
-            $this->view->error = $this->view->translate("Cannot remove. The following routes are using this trunk: ") . "<br />";
-            foreach ($regras as $regra) {
-                $this->view->error .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
-            }
-
-            $this->_helper->viewRenderer('error');
-        } else {
-
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-
-                Snep_LogUser::salvaLog("Excluiu tronco", $id, 2);
-                $add = Snep_Trunks_Manager::getTrunkLog($id);
-                Snep_Trunks_Manager::insertLogTronco("DEL", $add);
-            }
-
-            Snep_Trunks_Manager::remove($id);
-            Snep_Trunks_Manager::removePeers($name);
-
-            Snep_InterfaceConf::loadConfFromDb();
-            $this->_redirect("trunks");
-        }
-    }
-
-    /**
-     * asterisErrorAction
-     */
-    public function asteriskErrorAction() {
-        
-    }
 
 }

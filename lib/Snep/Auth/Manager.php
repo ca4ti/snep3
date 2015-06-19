@@ -120,6 +120,20 @@ class Snep_Auth_Manager {
         $db->update("users", $update_data, "name = '{$data['user']}'");
     }
 
+    /**
+     * adduuid - Add uuid
+     * @param <array> $uuid
+     */
+    public function adduuid($uuid) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('uuid' => $uuid,
+            'created' => date('Y-m-d H:i:s'));
+
+        $db->insert('itc_register', $insert_data);
+    }
+
 }
 
 ?>

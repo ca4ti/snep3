@@ -23,22 +23,10 @@ require_once "includes/AsteriskInfo.php";
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Henrique Grolli Bassotto
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class ErrorsKhompController extends Zend_Controller_Action {
-
-    /**
-     *
-     * @var Zend_Form
-     */
-    protected $form;
-
-    /**
-     *
-     * @var array
-     */
-    protected $forms;
 
     /**
      * indexAction
@@ -48,120 +36,97 @@ class ErrorsKhompController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Status"),
-                    $this->view->translate("Errors Khomp Links")
-        ));
+            $this->view->translate("Status"),
+            $this->view->translate("Khomp links errors")));
+
 
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-
-            $this->_redirect("/errors-Khomp/asterisk-error");
+            $this->view->error_message = $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
             return;
         }
 
-        $data = $astinfo->status_asterisk("database show", "", True);
-
-        if (!isset($data)) {
-
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
+        // Read list of khomp boards
 
         $data = $astinfo->status_asterisk("khomp summary concise", "", True);
 
         if (!isset($data)) {
 
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+            $this->view->error_message = $this->view->translate("No khomp boards installed.");
+            $this->renderScript('error/sneperror.phtml');
         }
-
         $lines = explode("\n", $data);
-
         $kchannels = array();
-        $ONLYGSM = False;
 
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
 
-            $this->_redirect("/khomp-links/khomp-error");
+            $this->view->error_message = $this->view->translate("No khomp boards installed.");
+            $this->renderScript('error/sneperror.phtml');
         }
 
         while (list($key, $val) = each($lines)) {
 
             $lin = explode(";", $val);
 
-            if (substr($lin[0], 0, 3) == "<K>") {
+            if (preg_match("/^<K> [0-9][0-9]$/",$lin[0])) {
 
-                $placa = substr($lin[0], 3);
-
-                if (isset($lin[4])) {
-
-                    if (substr($lin[1], 0, 4) != 'KGSM' && substr($lin[1], 0, 7) != 'KFXVoIP') {
-
-                        if ($lin[4] > 0) {
-
-                            for ($i = 0; $i <= $lin[4] - 1; $i++)
-                                $kchannels[$placa][$i] = $lin[1];
-                        } else {
-
-                            $kchannels[$placa][0] = $lin[1];
-                        }
-                    }
-                }
-            }
-
-            if (isset($lin[1])) {
-
-                if (substr($lin[1], 0, 4) == 'KGSM' || substr($lin[1], 0, 7) == 'KFXVoIP') {
-
-                    $ONLYGSM = TRUE;
-                }
+                $kchannels[(int)substr($lin[0], 3)] = $lin[1] . " (".$lin[2].") - ".(substr($lin[1],0,3)==="EBS" ? $lin[5] : $this->view->translate("On board")); 
             }
         }
 
-        if ($ONLYGSM && count($kchannels) == 0) {
-
-            throw new ErrorException($this->view->translate("Error"));
-        }
-
+        // Read khomp erros list
         if (!$data = $astinfo->status_asterisk("khomp links errors concise", "", True)) {
 
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
-        }
+            $this->view->error_message = $this->view->translate("No boards whith links was detected.");
+            $this->renderScript('error/sneperror.phtml');
 
-        $lines = explode("\n", $data);
-        $kstatus = array();
+        } else {
 
-        while (list($key, $val) = each($lines)) {
+            $lines = explode("\n", $data);
+            $kstatus = array();
 
-            $lin = explode(":", $val);
+            while (list($key, $val) = each($lines)) {
 
-            if (substr($lin[0], 0, 3) == "<K>") {
+                $lin = explode(":", $val);
 
-                $placa = substr($lin[0], 3);
-                $link = $lin[1];
-                $sts_name = $lin[2];
-                $sts_val = $lin[3];
-                $kstatus[$sts_name][$placa][$link] = $sts_val;
+                if (substr($lin[0], 0, 3) == "<K>") {
+
+                    $placa = substr($lin[0], 3);
+                    $link = $lin[1];
+                    $sts_name = $lin[2];
+                    $sts_val = $lin[3];
+                    $kstatus[(int)$placa][(int)$link][$sts_name] = $sts_val;
+                }
+            }
+
+            // Adjust array
+            foreach ($kchannels as $key => $value) {
+
+                if (!isset($kstatus[$key])) {
+                    $kstatus[$key][0] = NULL ;
+                }
+            }
+
+            if (is_null($kchannels) ) {
+                $this->view->error_message = $this->view->translate("No boards whith links was detected.");
+                $this->renderScript('error/sneperror.phtml');
+            } else {
+                $this->view->canais = $kchannels;
+                $this->view->status = $kstatus;
+
+                if ($this->_request->getPost()) {
+                    
+                    require_once "includes/AsteriskInfo.php";
+                    $astinfo = new AsteriskInfo();
+                    $astinfo->status_asterisk("khomp links errors clear", "", "");
+
+                    $this->_redirect($this->getRequest()->getControllerName());
+                    
+                }
             }
         }
-
-        $this->view->canais = $kchannels;
-        $this->view->status = $kstatus;
-
-        if ($this->_request->getPost()) {
-
-            require_once "includes/AsteriskInfo.php";
-            $astinfo = new AsteriskInfo();
-            $astinfo->status_asterisk("khomp links errors clear", "", "");
-
-            $this->_redirect($this->getRequest()->getControllerName());
-        }
-    }
-
-    /**
-     * asterisErrorAction
-     */
-    public function asteriskErrorAction() {
-        
     }
 
 }

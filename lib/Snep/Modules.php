@@ -132,6 +132,8 @@ class Snep_Modules {
 
         foreach ($resources as $element) {
             $id = (string) $element->attributes()->id;
+            $font = (string) $element->attributes()->font;
+            
 
             if ($id === null) {
                 throw new Exception("Resource object must contain id attribute.");
@@ -159,6 +161,7 @@ class Snep_Modules {
 
                 $menu_object = new Snep_Menu($menu_id);
                 $menu_object->setLabel((string) $element->attributes()->label);
+                $menu_object->setFont((string) $element->attributes()->font);
                 $menu_object->setUri($baseUrl . "/index.php/" . str_replace("_", "/", $resname));
 
                 $menu_parent_obj = $menu->getChildById($menu_parent);

@@ -23,20 +23,12 @@ require_once "includes/AsteriskInfo.php";
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class KhompLinksController extends Zend_Controller_Action {
 
-    /**
-     * @var Zend_Form
-     */
-    protected $form;
-
-    /**
-     * @var array
-     */
-    protected $forms;
-
+    
     /**
      * indexAction - List links khomp
      * @return type
@@ -45,16 +37,15 @@ class KhompLinksController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Status"),
-                    $this->view->translate("Links")));
-
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/khomp_links.xml"));
-        $form->getElement('submit')->setLabel($this->view->translate("Show Report"));
+            $this->view->translate("Status"),
+            $this->view->translate("Khomp boards"),
+            $this->view->translate("Show links / channels")));
 
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-            $this->_redirect("/khomp-links/asterisk-error");
+            $this->view->error_message = $e->getMessage();
+            $this->renderScript('error/sneperror.phtml');
             return;
         }
 
@@ -107,7 +98,8 @@ class KhompLinksController extends Zend_Controller_Action {
         $lst = '';
 
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
-            $this->_redirect("/khomp-links/khomp-error");
+            $this->view->error_message = $this->view->translate("No Khomp board installed.");;
+            $this->renderScript('error/sneperror.phtml');
         }
 
         while (list($key, $val) = each($lines)) {
@@ -126,22 +118,23 @@ class KhompLinksController extends Zend_Controller_Action {
             }
         }
 
-        $form->getElement('boards')->setMultioptions($boards);
-
         $this->view->placas = $boards;
-        $this->view->form = $form;
-
+        
+        $boards = "";
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
             $dados = $this->_request->getParams();
-
-            if ($form_isValid) {
-
-                $dados = $this->_request->getParams();
-                $boards = implode(",", $dados['boards']);
+            if (!isset($dados['boards'])) {
+                $this->view->error_message = $this->view->translate("No boards selected.");
+                $this->renderScript('error/sneperror.phtml');
+            } else {
+                foreach($dados['boards'] as $key => $value){
+                    $boards[] = $key;
+                }
+                $boards = implode(",", $boards);
                 $this->_redirect($this->getRequest()->getControllerName() . '/view/id/' . $dados['view'] . ',' . $dados['status'] . ',' . $boards);
-            }
+            }  
+            
         }
     }
 
@@ -152,6 +145,7 @@ class KhompLinksController extends Zend_Controller_Action {
     public function viewAction() {
 
         $data = $this->_request->getParam('id');
+        
         $placas = explode(',', $data);
 
         $tiporel = $placas[0];
@@ -199,7 +193,11 @@ class KhompLinksController extends Zend_Controller_Action {
             "kfxsDisabled" => $this->view->translate('Disabled'),
             "kfxsEnable" => $this->view->translate('Enabled'),
             "reserved" => $this->view->translate('Reserved'),
-            "ring" => $this->view->translate('Ringing'));
+            "ring" => $this->view->translate('Ringing'),
+            "[Unreacheable]" => $this->view->translate('Unreachable'),
+            "kgsmModemError" => $this->view->translate('Modem Error'),
+            "kgsmNotReady" => $this->view->translate('Initializing')
+            );
 
         $status_sintetico_khomp = array("unused" => $this->view->translate('Unused'),
             "ongoing" => $this->view->translate('On Going'),
@@ -230,17 +228,24 @@ class KhompLinksController extends Zend_Controller_Action {
             throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
         }
 
+        #Monta lista de Placas para exibir no Header da view
         $sumary = explode("\n", $data);
-        $gsm = array();
+        $boards = array();
 
         foreach ($sumary as $id => $iface) {
 
-            if (strpos($iface, "KGSM")) {
+            $t_board = explode(";", $iface);
 
-                $gsms = explode(";", $iface);
-                $id = substr($gsms[0], 4, 2);
-                $gsm[$id] = "yes";
-            }
+            if (preg_match("/^[0-9][0-9]$/",substr($t_board[0],4,2)) ) {
+
+                $t_board_id = substr($t_board[0], 4, 2);
+                $t_board_name = $t_board[1] ;
+                $t_board_serial = $t_board[2] ;
+                $t_board_ip = $t_board[5] ;
+            
+                $boards[$t_board_id] = $t_board_name . " ( " . $t_board_serial . " ) - " . $t_board_ip ;
+            }    
+
         }
 
         if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
@@ -271,7 +276,7 @@ class KhompLinksController extends Zend_Controller_Action {
         $cntEmCurso = 0;
         $cntChamando = 0;
         $cntReservado = 0;
-
+        $gsm=false;
         foreach ($links as $key => $val) {
 
             if ($link != substr($key, 1)) {
@@ -285,7 +290,7 @@ class KhompLinksController extends Zend_Controller_Action {
             }
 
             $lines = explode("\n", $data);
-
+            
             while (list($chave, $valor) = each($lines)) {
 
                 //if (substr($valor, 0, 1) === "B" && substr($valor, 3, 1) === "C") {
@@ -315,6 +320,7 @@ class KhompLinksController extends Zend_Controller_Action {
                         $st_sinal = $linha[4];
                         $st_opera = $linha[5];
                         $st_gsm = true;
+
                     } else {
                         $st_sinal = '';
                         $st_opera = '';
@@ -346,7 +352,6 @@ class KhompLinksController extends Zend_Controller_Action {
                     $this->view->translate("Status"),
                     $this->view->translate("Khomp Links")));
 
-        $this->view->gsm = $gsm;
         $this->view->dados = $links;
         $this->view->canais = $channels;
         $this->view->status_canais = $status_canais_khomp;
@@ -355,20 +360,8 @@ class KhompLinksController extends Zend_Controller_Action {
         $this->view->status = $statusk;
         $this->view->tiporel = $tiporel;
         $this->view->sintetic = $sintetic;
-    }
+        $this->view->sumary = $boards;
 
-    /**
-     * asterisErrorAction
-     */
-    public function asteriskErrorAction() {
-        
-    }
-
-    /**
-     * asterisErrorAction
-     */
-    public function khompErrorAction() {
-        
     }
 
 }

@@ -1,92 +1,117 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . "/css/index.css");
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.core.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 ?>
 
-<form method="post">
-    <table>
+<div class="row">
+    <form method="post">
+        <div class="tab-content">
+            <div class="tab-pane active" id="demo">
+                <?php if($this->key){ ?>
 
-        <thead>
-            <tr>
-                <th> <?php echo $this->translate('Code') ?> </th>
-                <th class="action"> <?php echo $this->translate('Active') ?> </th>
-                <th class="action"> <?php echo $this->translate('Recording') ?> </th>
-                <th> <?php echo $this->translate('Restricted Access') ?> </th>
-                <th> <?php echo $this->translate('Cost Center') ?> </th>
+                    <div class="snep-body-top-buttons">
+                    
+                        <div class="snep-body-search">
+                            <?php if($this->key){ ?>
+                                <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  
+                            <?php } ?>
+                            
+                        </div>
+                    
+                    </div>
+                <?php } ?>
+                           
+                <table class="table demo table-bordered" data-page-size=15>
 
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $c = 0;
+                    <thead>
+                        <tr>
+                            <th class="text-center"> <?php echo $this->translate('Code') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Active') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Recording') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Restricted Access') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Cost Center') ?> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            if ($this->conferenceRooms):
+                        <?php
+                        
+                        if ($this->conferenceRooms):
 
-                foreach ($this->conferenceRooms as $id => $conferenceRooms):
-                    ?>
+                            foreach ($this->conferenceRooms as $id => $conferenceRooms): ?>
 
-                    <?php ($c ? $c = 0 : $c = 1 ); ?>
-                    <tr class="c<?php echo $c ?>">
-                        <td class="numeric"> <b> <?php echo $conferenceRooms['id'] ?> </b> </td>
-                        <td class="action">
-                            <?php ( $conferenceRooms['status'] ? $chek = 'checked' : $chek = '') ?>
-                            <input type="checkbox" id="hab_<?php echo $conferenceRooms['id'] ?>" class="newcheck" onclick="habilita('<?php echo $conferenceRooms['id'] ?>');" <?php echo $chek ?> value="<?php $conferenceRooms['status'] ?>"  name="activate[<?php echo $conferenceRooms['id'] ?>]">
-                        </td>
-                        <td class="action">
-                            <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
+                                <tr>
+                                    <td class="numeric text-center"> <b> <?php echo $conferenceRooms['id'] ?> </b> </td>
+                                    <td class="action text-center">
+                                        <?php ( $conferenceRooms['status'] ? $chek = 'checked' : $chek = '') ?>
+                                        <input type="checkbox" id="hab_<?php echo $conferenceRooms['id'] ?>" class="newcheck" onclick="habilita('<?php echo $conferenceRooms['id'] ?>');" <?php echo $chek ?> value="<?php $conferenceRooms['status'] ?>"  name="activate[<?php echo $conferenceRooms['id'] ?>]">
+                                    </td>
+                                    <td class="action text-center">
+                                        <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
 
-                            <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
-                        </td>
-                        <td class="password">
+                                        <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
+                                    </td>
+                                    <td class="password text-left">
 
-                            <?php
-                            if (empty($conferenceRooms['authenticate'])) {
+                                        <?php
+                                        if (empty($conferenceRooms['authenticate'])) {
 
-                                $checked = '';
-                                $display = "style=\"display:none;\"";
-                            } else {
+                                            $checked = '';
+                                            $display = "style=\"display:none;\"";
+                                        } else {
 
-                                $checked = 'checked';
-                                $display = '';
-                            }
-                            ?>                    
-                            <input id="auth_<?php echo $conferenceRooms['id'] ?>" type='checkbox' disabled="true" <?php echo $checked ?> name='authenticate[<?php echo $conferenceRooms['id'] ?>]' onclick="pass('<?php echo $conferenceRooms['id'] ?>');">
-                            <?php echo $this->translate('Password Authentication') ?>
-                            <div id="box_<?php echo $conferenceRooms['id'] ?>"  <?php echo $display ?> >                        
-                                <input type="password" name="password[<?php echo $conferenceRooms['id'] ?>]" onkeydown = "BloqueiaComando(event)" onkeypress="return onlyDigit(event)"  value="<?php echo $conferenceRooms['authenticate'] ?>">
-                                <small> <?php echo $this->translate('( Only numbers)') ?></small>
-                            </div>
-                        </td>
+                                            $checked = 'checked';
+                                            $display = '';
+                                        }
+                                        ?>                    
+                                        <input id="auth_<?php echo $conferenceRooms['id'] ?>" type='checkbox' disabled="true" <?php echo $checked ?> name='authenticate[<?php echo $conferenceRooms['id'] ?>]' onclick="pass('<?php echo $conferenceRooms['id'] ?>');">
+                                        <?php echo $this->translate('Password Authentication') ?>
+                                        <div id="box_<?php echo $conferenceRooms['id'] ?>"  <?php echo $display ?> >                        
+                                            <input type="password" name="password[<?php echo $conferenceRooms['id'] ?>]" onkeydown = "BloqueiaComando(event)" onkeypress="return onlyDigit(event)"  value="<?php echo $conferenceRooms['authenticate'] ?>">
+                                            <small> <?php echo $this->translate('( Only numbers)') ?></small>
+                                        </div>
+                                    </td>
 
-                        <td>
-                            <select name="costCenter[<?php echo $conferenceRooms['id'] ?>]">
-                                <?php foreach ($this->costCenter as $chave => $costCenter): ?>
+                                    <td class="text-center" style="width: 250px ;" >
+                                        
+                                        <select style="width: 250px;" class="form-control" name="costCenter[<?php echo $conferenceRooms['id'] ?>]">
+                                            <?php foreach ($this->costCenter as $chave => $costCenter): ?>
 
-                                    <?php ( $conferenceRooms['ccustos'] == $costCenter['codigo'] ? $select = 'selected' : $select = '' ); ?>
+                                                <?php ( $conferenceRooms['ccustos'] == $costCenter['codigo'] ? $select = 'selected' : $select = '' ); ?>
 
-                                    <option value="<?php echo $costCenter['codigo'] ?>" <?php echo $select ?> >
-                                        <?php echo $costCenter['tipo'] . " : " . $costCenter['codigo'] . " - " . $costCenter['nome']; ?>
-                                    <?php endforeach ?>
-                            </select>
-                        </td>
+                                                <option value="<?php echo $costCenter['codigo'] ?>" <?php echo $select ?> >
+                                                    <?php echo $costCenter['tipo'] . " : " . $costCenter['codigo'] . " - " . $costCenter['nome']; ?>
+                                                <?php endforeach ?>
+                                        </select>
+                                       
+                                    </td>
 
-                    </tr>
-                <?php endforeach ?>
-            <?php endif ?>
-            <tr>
-                <td height="40" valign="middle" colspan="5">
-        <center>
-            <input type="submit" class="button" name="conference" value='<?php echo $this->translate('Save') ?>'/>
-        </center>
-        </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php endif ?>
+
+                    </tbody>
+                    
+                </table>
+                <br>
+                <div class="snep-body-footer-buttons">
+                    <input type="submit" class="btn btn-add btn-primary" name="conference" value='<?php echo $this->translate('Save') ?>'/>
+                </div>        
+            </div> <!-- demo -->
+        </div> <!-- tab-content -->
+    </form>
+</div> <!-- /.row -->    
+    
 
 <script type="text/javascript">
+jQuery.noConflict();
+  jQuery(function () {
+        jQuery('table').footable().on('click', '.row', function(e) {
+            e.preventDefault(); 
+        });
+    });
     function pass(id) {
         if (document.getElementById('box_' + id).style.display == '') {
             document.getElementById('box_' + id).style.display = 'none';

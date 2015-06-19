@@ -13,89 +13,91 @@
 <default>
     <resource id="error" order="allow"></resource>
     <resource id="installer" order="allow"></resource>
-
-    <group id="status" label="Status">
+    <group id="index" label="Dashboard" font="sn-dashboard">
+    </group>
+    <group id="status" label="Status" font="sn-status">
         
-        <resource id="index" label="System"></resource>
-        <resource id="khomp-links" label="Khomp Links"></resource>
-        <resource id="ip-status" label="IP Status"></resource>
-        <resource id="errors-khomp" label="Errors Khomp Links"></resource>
-        <resource id="logs" label="Logs"></resource>
+        <resource id="ip-status" label="IP Status" font="sn-status-ip"></resource>
+        <resource id="inspector" label="System Status" font="sn-status-sistema"></resource>
+        <resource id="khomp-links" label="Khomp boards" font="sn-links"></resource>
+        <resource id="errors-khomp" label="Khomp links errors" font="sn-erros-links"></resource>
+        <resource id="logs" label="Logs" font="sn-logs"></resource>
     </group>
 
-    <group id="manage" label="Manage">
-        <resource id="cost-center" label="Cost Center">
+    <group id="manage" label="Manage" font="sn-cadastros">
+
+        <resource id="cost-center" label="Cost Center" font="sn-etiqueta">
             <resource id="write"></resource>
         </resource>
-        <resource id="contacts" label="Contacts">
+
+         <resource id="contacts" label="Contacts" font="sn-contatos">
             <resource id="write"></resource>
         </resource>
-        <resource id="contact-groups" label="Contact Groups">
+        <resource id="contact-groups" label="Contact Groups" font="sn-grupo-contatos">
             <resource id="write"></resource>
         </resource>
-        <resource id="queues" label="Queues">
+
+        <resource id="queues" label="Queues" font="sn-filas">
             <resource id="write"></resource>
         </resource>
-        <resource id="extensions-groups" label="Extension Groups">
+        <resource id="queues-groups" label="Queues Groups" font="sn-grupo-filas">
             <resource id="write"></resource>
         </resource>
-        <resource id="pickup-groups" label="Pickup Groups">
+        
+         <resource id="extensions" label="Extensions" font="sn-ramal">
             <resource id="write"></resource>
         </resource>
-        <resource id="extensions" label="Extensions">
+        <resource id="extensions-groups" label="Extension Groups" font="sn-grupo-ramais">
             <resource id="write"></resource>
         </resource>
-        <resource id="conference-rooms" label="Conference Rooms"></resource>
-        <resource id="trunks" label="Trunks">
+        <resource id="pickup-groups" label="Pickup Groups" >
             <resource id="write"></resource>
         </resource>
-        <resource id="users" label="Users">
+       
+        <resource id="users" label="Users" font="sn-usuarios">
             <resource id="write"></resource>
         </resource>
-        <resource id="profiles" label="Profiles">
+        <resource id="profiles" label="Profiles" font="sn-perfis">
             <resource id="write"></resource>
         </resource>
+
+         <resource id="trunks" label="Trunks" font="sn-troncos">
+            <resource id="write"></resource>
+        </resource>
+
+        <resource id="conference-rooms" label="Conference Rooms" font="sn-conferencia"></resource>
+        
     </group>
     
-    <group id="reports" label="Reports">
-        <resource id="calls-report" label="Calls"></resource>
-        <resource id="ranking-report" label="Call Ranking"></resource>
-        <resource id="services-report" label="Services Use"></resource>
-        <resource id="record-report" label="Search records"></resource>
+    <group id="reports" label="Reports" font="sn-relatorios">
+        <resource id="calls-report" label="Calls" font="sn-chamadas"></resource>
+        <resource id="ranking-report" label="Call Ranking" font="sn-ranking"></resource>
+        <resource id="services-report" label="Services Use" font="sn-servicos"></resource>
+        <resource id="export-data" label="Export Data Table" font="sn-busca"></resource>
     </group>
 
-    <group id="carrier" label="Carrier">
-        <resource id="carrier" label="Carrier">
+    <group id="routing" label="Routing" font="sn-regras">
+        <resource id="route" label="Routes" font="sn-rotas">
             <resource id="write"></resource>
         </resource>
-        <resource id="billing" label="Billing">
+        <resource id="action-configs" label="Default Config" font="sn-conf-padrao">
             <resource id="write"></resource>
         </resource>
-    </group>
-
-    <group id="routing" label="Routing">
-        <resource id="route" label="Routes">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="action-configs" label="Default Config">
-            <resource id="write"></resource>
-        </resource>
-        <resource id="expression-alias" label="Expression Alias">
+        <resource id="expression-alias" label="Expression Alias" font="sn-alias">
             <resource id="write"></resource>
         </resource>
     </group>
 
-    <group id="configs" label="Configure" >
-        <resource id="parameters" label="Parameters"></resource>
-        <resource id="sound-files" label="Sound Files">
+    <group id="configs" label="Configuration" font="sn-configuracao">
+        <resource id="parameters" label="Parameters" font="sn-parametros"></resource>
+        <resource id="sound-files" label="Sound Files" font="sn-arquivo-som">
             <resource id="write"></resource>
         </resource>
-        <resource id="music-on-hold" label="Music on Hold">
+        <resource id="music-on-hold" label="Music on Hold" font="sn-som-espera">
             <resource id="write"></resource>
         </resource>
-        <resource id="inspector" label="System Status"></resource>
         <resource id="cnl" label="Cnl Update"></resource>
-    </group>
+    </group> 
 
     <resource id="auth" order="allow">
         <resource id="logout"></resource>

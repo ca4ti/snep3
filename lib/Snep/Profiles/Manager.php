@@ -229,6 +229,25 @@ class Snep_Profiles_Manager {
         return $profile['profile_id'];
     }
 
+    /**
+     * Method to get Profile by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("profiles", array("id", "name"))
+                ->where("profiles.name = ?", $name);
+
+        $stmt = $db->query($select);
+        $profile = $stmt->fetch();
+
+        return $profile;
+    }
+
 }
 
 ?>

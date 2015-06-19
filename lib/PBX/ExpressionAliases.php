@@ -127,8 +127,8 @@ class PBX_ExpressionAliases {
 
         $select = $db->select()
                 ->from('regras_negocio', array('id', 'desc'))
-                ->where("regras_negocio.origem LIKE ?", 'AL:' . $id)
-                ->orwhere("regras_negocio.destino LIKE ?", 'AL:' . $id);
+                ->where("regras_negocio.origem LIKE ?", '%AL:'.$id.'%')
+                ->orwhere("regras_negocio.destino LIKE ?", '%AL:'.$id.'%');
 
         $stmt = $db->query($select);
         $regras = $stmt->fetchall();
@@ -148,7 +148,7 @@ class PBX_ExpressionAliases {
         $db->insert("expr_alias", array("name" => $expression['name']));
         $id = $db->lastInsertId();
 
-        foreach ($expression['expressions'] as $expr) {
+        foreach ($expression['expressions'] as $key => $expr) {
             $data = array("aliasid" => $id, "expression" => $expr);
             $db->insert("expr_alias_expression", $data);
         }
@@ -196,7 +196,7 @@ class PBX_ExpressionAliases {
         $db->update("expr_alias", array("name" => $expression['name']), "aliasid='$id'");
         $db->delete("expr_alias_expression", "aliasid='$id'");
 
-        foreach ($expression['expressions'] as $expr) {
+        foreach ($expression['expressions'] as $key => $expr) {
             $data = array("aliasid" => $id, "expression" => $expr);
             $db->insert("expr_alias_expression", $data);
         }

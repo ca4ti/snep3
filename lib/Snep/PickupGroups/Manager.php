@@ -192,6 +192,7 @@ class Snep_PickupGroups_Manager {
             $db->rollBack();
             return $e;
         }
+        
     }
 
     /**
@@ -252,6 +253,25 @@ class Snep_PickupGroups_Manager {
             $db->rollBack();
             throw $e;
         }
+    }
+
+    /**
+     * Method to get pickup group by name
+     * @param <string> $id
+     * @return Array
+     */
+    public function getName($name) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from("grupos", array("cod_grupo", "nome"))
+                ->where("grupos.nome = ?", $name);
+
+        $stmt = $db->query($select);
+        $pgroup = $stmt->fetch();
+
+        return $pgroup;
     }
 
 }

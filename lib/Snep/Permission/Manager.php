@@ -162,27 +162,6 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * Method to add update all resources.
-     * @param <array> $resources
-     * @param <string> $group
-     */
-    public static function update($resources, $profile) {
-
-        $db = Zend_Registry::get('db');
-        $db->delete("profiles_permissions", "profile_id = '$profile'");
-        foreach ($resources as $key => $value) {
-            $db->insert('profiles_permissions', array(
-                "permission_id" => $key,
-                "profile_id" => $profile,
-                "created" => date('Y-m-d H:i:s'),
-                "updated" => date('Y-m-d H:i:s'),
-                "allow" => $value
-                    )
-            );
-        }
-    }
-
-    /**
      * update - Method to add permission
      * @param <array> $resource
      * @param <string> $id
@@ -201,15 +180,14 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * Method to remove permission
+     * Method to remove permission of profile
      * @param <array> $resource
      * @param <string> $id
      */
-    public static function removePermissionOld($permission, $id) {
+    public static function removePermissionProfile($id) {
 
         $db = Zend_Registry::get('db');
 
-        $where[] = "permission_id = '$permission'";
         $where[] = "profile_id = $id";
 
         $update_data = array('allow' => false,
@@ -217,6 +195,7 @@ class Snep_Permission_Manager {
 
         $db->update("profiles_permissions", $update_data, $where);
     }
+
 
     /**
      * Method list permissions

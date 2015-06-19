@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  This file is part of SNEP.
  *
@@ -16,14 +15,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 ini_set("max_execution_time", 180);
 
 /**
- * Cnl Controller
+ * CNL Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class CnlController extends Zend_Controller_Action {
 
@@ -38,114 +39,153 @@ class CnlController extends Zend_Controller_Action {
                     $this->view->translate("Configure"),
                     $this->view->translate("CNL Update")));
 
-        $config = Zend_Registry::get('config');
-        $this->view->pathweb = $config->system->path->web;
+        $this->view->pathweb = Zend_Registry::get('config')->system->path->web;
 
-        // verification procedure
-        $db = Zend_Registry::get('db');
-        $select = $db->select()
-                ->from('ars_estado');
-        $stmt = $select->query();
-        $result = $stmt->fetchAll();
-
-        // insert state data
-        if (count($result) < 26) {
-
-            $brStates = array('AC' => 'Acre', 'AL' => 'Alagoas', 'AM' => 'Amazonas', 'AP' => 'Amapá',
-                'BA' => 'Bahia', 'CE' => 'Ceará', 'DF' => 'Distrito Federal',
-                'ES' => 'Espírito Santo', 'GO' => 'Goiás', 'MA' => 'Maranhão',
-                'MG' => 'Minas Gerais', 'MS' => 'Mato Grosso do Sul',
-                'MT' => 'Mato Grosso', 'PA' => 'Pará', 'PB' => 'Paraíba',
-                'PE' => 'Pernambuco', 'PI' => 'Piauí', 'PR' => 'Paraná', 'RJ' => 'Rio de Janeiro',
-                'RN' => 'Rio Grande do Norte', 'RO' => 'Rondônia', 'RR' => 'Roraima',
-                'RS' => 'Rio Grande do Sul', 'SC' => 'Santa Catarina', 'SE' => 'Sergipe',
-                'SP' => 'São Paulo', 'TO' => 'Tocantins');
-
-            foreach ($brStates as $uf => $state) {
-
-                $db->beginTransaction();
-                try {
-                    $_state = array('cod' => $uf, 'name' => $state);
-                    $db->insert('ars_estado', $_state);
-                    $db->commit();
-                } catch (Exception $ex) {
-                    $db->rollBack();
-                    throw $ex;
-                }
-            }
-        }
-
-        $form = new Snep_Form();
-        $form->setAction($this->getFrontController()->getBaseUrl() . "/default/cnl/index");
-        $this->view->formAction = $this->getFrontController()->getBaseUrl() . "/default/cnl/index";
-
-        $element = new Zend_Form_Element_File('cnl');
-        $element->setLabel($this->view->translate('CNL File'))
-                ->setDestination('/tmp/')
-                ->setRequired(true);
-
-        $element->addValidator('Extension', false, array('bz2', 'tar.bz2'));
-        $element->removeDecorator('DtDdWrapper');
-        $form->addElement($element, 'cnl');
-
-        $form->getElement("submit")->setLabel($this->view->translate("Save"));
-        $form->setAttrib('enctype', 'multipart/form-data');
-
-        $this->view->valid = true;
+        // Get countries
+        $countries = Snep_Cnl::getCountries();
+        $this->view->countries = $countries ;
 
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
-            $this->view->valid = $form_isValid;
+            $data = $this->_request->getPost();
+            $country = $data['country'];
+            switch ($country){
+                case 76:
+                    $this->updateAction_76();
+                    break;
+            }
+                        
+        }
 
-            if ($form_isValid) {
-                $data = $_POST;
+    }
 
-                $adapter = new Zend_File_Transfer_Adapter_Http();
+    /**
+     * update Action only for Brazil telephon numbers
+     */
+    public function updateAction_76() {
 
-                if ($adapter->isValid()) {
-                    $adapter->receive();
-                    $fileName = $adapter->getFileName();
-                    exec("tar xjvf {$fileName} -C /tmp");
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Configure"),
+                    $this->view->translate("Updating CNL")));
 
-                    $json = file_get_contents(substr($fileName, 0, -8));
-                    $cnl = (Zend_Json_Decoder::decode($json, Zend_Json::TYPE_ARRAY));
 
-                    $data = $cnl["operadoras"];
-                    unset($cnl["operadoras"]);
+        $data = $this->_request->getPost();
 
-                    Snep_Cnl::delPrefixo();
-                    Snep_Cnl::delDDD();
-                    Snep_Cnl::delCidade();
-                    Snep_Cnl::delOperadora();
+        $country = $data['country'];
+        $c_type  = $data['type'];
+        
+        $adapter = new Zend_File_Transfer_Adapter_Http();
+        $adapter->setDestination('/tmp');
 
-                    foreach ($data as $carrier => $id) {
-                        Snep_Cnl::addOperadora($id, $carrier);
-                    }
+        if (!$adapter->receive()) {
+            $this->view->error_message = $adapter->getMessages();
+            $this->renderScript('error/sneperror.phtml');
+        } else {
+            $_fileName = $adapter->getFileName();
+            $file_name = str_replace("ZIP", "TXT",$_fileName) ;
+            // Verify shell command
+            if (`which unzip` && $_fileName != "") {  
+                exec("unzip {$_fileName} -d /tmp");   
+                $handle = fopen($file_name, "r") ;
 
-                    foreach ($cnl as $data => $id) {
-                        foreach ($id as $state => $es) {
-                            foreach ($es as $ddd => $d) {
-                                foreach ($d as $city => $pre) {
+                if ($handle) {
 
-                                    $cityId = Snep_Cnl::addCidade($city);
-                                    Snep_Cnl::addDDD($ddd, $state, $cityId);
-
-                                    foreach ($pre as $prefix => $op) {
-                                        Snep_Cnl::addPrefixo($prefix, $cityId, $op);
-                                    }
+                    // Read file line a line and create a array
+                    $prefixos = array() ;
+                    while (!feof($handle)) {
+                        $line = fgets($handle, 4096);
+                        if (strlen(trim($line))) {
+                            if ($c_type === "F") {
+                                $prefix = trim(substr($line,116,7));
+                                if (!array_key_exists($prefix, $prefixos)) {
+                                    $prefixos[$prefix] = array(
+                                        "state"     => trim(substr($line, 0, 2)),
+                                        "city"      => trim(substr($line, 61, 50)),
+                                        "latitud"   => trim(substr($line, 161, 8)),
+                                        "hemispher" => trim(substr($line, 169, 5)),
+                                        "longitud"  => trim(substr($line, 174, 8))
+                                    ) ;    
+                                }
+                            } elseif ($c_type === "M") {
+                                $prefix = trim(substr($line,0,7));
+                                Zend_debug::dump($prefix);
+                                if (!array_key_exists($prefix, $prefixos)) {
+                                    $prefixos[$prefix] = array(
+                                        "state"     => NULL,
+                                        "city"      => NULL,
+                                        "latitud"   => NULL,
+                                        "hemispher" => NULL,
+                                        "longitud"  => NULL
+                                    ) ;    
                                 }
                             }
                         }
-                    }
-                } else {
+                        
+                    } // end while
+                    fclose($handle);
+                    //Read Array and insert data into tables
+                    $log_errors = "" ;
 
-                    throw new ErrorException($this->view->translate("File format is not valid"));
+                    if (count($prefixos > 0)) {
+
+                        foreach ($prefixos as $prefix => $value) {
+                            if ($c_type === "F") {
+                                $state = $value['state'];
+                                $city_name = Snep_Cnl::parseName(utf8_encode($value['city'])) ;
+
+                                // Verify if state exist. If not, add
+                                if (!Snep_Cnl::getState($state,$country)) {
+                                    $log_errors .= $this->view->translate("State : ".$state." not found in database.")."<br />" ;
+                                    $res = Snep_Cnl::addState($state,$country) ;
+                                    if ($res != "") {
+                                        $this->view->error_message = $res;
+                                        $this->renderScript('error/sneperror.phtml'); 
+                                        break ;
+                                    }
+                                }
+                                // Verify if City exist. If not, add
+                                $city_code = Snep_Cnl::getCityCode($state,$city_name) ;
+                                if (is_null($city_code)) {
+                                    $log_errors .= $this->view->translate("City/State : ".$city_name ."/".$state." not found in database.")."<br />" ;
+                                    $city_code = Snep_Cnl::addCity($state,$city_name) ;
+
+                                    if (!is_numeric($city_code)) {
+                                        $this->view->error_message = $this->view->translate("City code not foun or invalid.")."<br />".$res;
+                                        $this->renderScript('error/sneperror.phtml'); 
+                                        break ;
+                                    } else {
+
+                                    }
+                                } else {
+                                    $city_code = $city_code['id'];
+                                }
+                            } elseif ($c_type === "M") {
+                                $city_code = NULL ;
+                            }
+                            // Verify if Prefix exist. If not, add
+                             if (!Snep_Cnl::getPrefix($prefix,$country)) {
+                                $res = Snep_Cnl::addPrefix($prefix,$country,$city_code,$value['latitud'],$value['longitud'],$value['hemispher']) ;
+                                if ($res != "") {
+                                    $this->view->error_message = $res;
+                                    $this->renderScript('error/sneperror.phtml'); 
+                                    break ;
+                                }
+                            }
+                        }
+                       
+                    } else {
+                        $this->view->error_message = $this->view->translate("No data found in the file");
+                        $this->renderScript('error/sneperror.phtml');        
+                    }
                 }
-                $this->_redirect($this->getRequest()->getControllerName());
+            } else {
+                $this->view->error_message = $this->view->translate("Program 'unzip' not installed or there was a problem with the file transfer");
+                $this->renderScript('error/sneperror.phtml');
             }
+            $this->_redirect($this->getRequest()->getControllerName());
         }
-        $this->view->form = $form;
+        
+
     }
 
 }

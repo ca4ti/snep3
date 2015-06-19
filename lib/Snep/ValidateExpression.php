@@ -38,14 +38,17 @@ class Snep_ValidateExpression {
      * @return <array>
      */
     public function execute($String) {
-        if (self::IdentificarChave($String)) {
-            return array("msg" => 'Voce deve possuir valor entre as chaves.', "status" => true);
+        if (trim($String) === "") {
+            return false ;
         }
-        if (self::IdentificarValidade($String)) {
-            return array("msg" => 'Sua álias possui caracter inválido.', "status" => true);
+        if (!self::IdentificarChave($String)) {
+            return false;
+        }
+        if (!self::IdentificarValidade($String)) {
+            return false;
         }
 
-        return array("msg" => 'valido.', "status" => false);
+        return true;
     }
 
     /**
@@ -61,9 +64,9 @@ class Snep_ValidateExpression {
         $quant_error = implode(Array_diff($array_char, $char_valido));
 
         if (strlen($quant_error) != '0') {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -87,9 +90,9 @@ class Snep_ValidateExpression {
         }
 
         if ($status == true) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 

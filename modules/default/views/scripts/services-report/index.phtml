@@ -1,25 +1,123 @@
 <?php
-$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/lib/prototype.js');
-$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scriptaculous.js');
-$this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
-$this->headLink()->appendStylesheet($this->baseUrl() . "/css/datepicker.css");
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/datepicker.js", 'text/javascript');
-$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/prototype-date-extensions.js", 'text/javascript');
-$locale = str_replace("_", "-", Snep_Locale::getInstance()->getLocale());
+    $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-datetimepicker.css" );
 ?>
-<?php
-echo $this->form;
-?>
-<script language="javascript" type="text/javascript">
-$( 'exten-group_select').observe ('change' , init);
+<script src="/snep/includes/javascript/moment-with-locales.min.js" type="text/javascript" ></script>
+<script src="/snep/includes/javascript/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<div class="row">
 
-function init() {    
-enableField('exten-group_select', 'exten-exten_select')
+    <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "services-report", "action" => "index"), null, true); ?>" METHOD="post">
+        
+        <fieldset>
+            <legend><?php echo $this->translate("Period");?></legend>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("From");?></label>
+                <div class="col-sm-3">
+                    <div class='input-group'>
+                        <input type='text' class="snep-datetimepicker form-control" id='init_day' name="init_day" required/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("To");?></label>
+                <div class="col-sm-3">
+                    <div class='input-group'>
+                        <input type='text' class="snep-datetimepicker form-control" id='till_day' name="till_day" required/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+        
+        <fieldset>
+            <legend><?php echo $this->translate("Extensions");?></legend>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("Group");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="group_select" id="group_select" onChange="checkgroup(this.value);">
+                        <?php 
+                        foreach($this->group as $key => $group){ ?>
+                            <option><?php echo $group?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("Extensions");?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="exten_select" id="exten_select" placeholder='<?php echo $this->translate("Separated by a comma")?>' />
+                </div>
+            </div>   
+
+
+        </fieldset>
+        
+        <fieldset>
+            
+            <legend><?php echo $this->translate("Services");?></legend>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("Choose the services")?></label>
+                <div class="col-sm-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="serv_select[SIGAME]" id="serv_select[SIGAME]" checked/><?php echo $this->translate("SIGAME")?>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="serv_select[DND]" id="serv_select[DND]" checked/><?php echo $this->translate("DND")?>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </fielset>
+
+        <br>
+         <div class="snep-body-footer-buttons">
+            <button type="submit" class="btn btn-add" name="showreport" value="showreport"><?php echo $this->translate("Show Report");?></button>
+        </div>
+
+    </form>
+</div>
+
+<script type="text/javascript">
+
+jQuery.noConflict();
+jQuery(function () {
+    
+    jQuery('#init_day,#till_day').datetimepicker({
+        locale: "<?php echo $this->datepicker_locale; ?>",
+        sideBySide: true,
+        showClear: true,
+        showClose: true
+    });
+
+    jQuery("#init_day").on("dp.change",function (e) {
+        jQuery('#till_day').data("DateTimePicker").minDate(e.date);
+    });
+
+    jQuery("#till_day").on("dp.change",function (e) {
+        jQuery('#init_day').data("DateTimePicker").maxDate(e.date);
+    });
+});
+
+function checkgroup(value){
+    
+    if(value != 0){   
+        document.getElementById("exten_select").setAttribute("disabled", true);
+    }else{
+        document.getElementById("exten_select").removeAttribute("disabled");
+    }
 }
-</script>
-<script type="text/javascript"> 
-  new Control.DatePicker('period-init_day', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
-  new Control.DatePicker('period-till_day', {icon: '<?php echo $this->baseUrl(); ?>/imagens/calendar.png', timePicker: true, timePickerAdjacent: true, locale: '<?php echo $locale; ?>'});
-</script>
- 
 
+</script>

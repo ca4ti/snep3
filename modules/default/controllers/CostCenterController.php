@@ -18,15 +18,28 @@
  */
 
 /**
- * Cost Center Controller
+ * Cost center Controller
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2010 OpenS Tecnologia
- * @author    Rafael Pereira Bozzetti
- * @edited    Tiago Zimmermann 28/03/2014
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class CostCenterController extends Zend_Controller_Action {
+
+    /**
+     * Initial settings of the class
+     */
+     public function init() {
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
 
     /**
      * List all Cost Center's
@@ -34,57 +47,30 @@ class CostCenterController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Cost Center")));
-        $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
 
+        
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from("ccustos", array("codigo", "tipo", "nome", "descricao"));
+                ->from("ccustos", array("codigo", "tipo", "nome", "descricao"))
+                ->order("codigo");
 
-        if ($this->_request->getPost('filtro')) {
-            $field = mysql_escape_string($this->_request->getPost('campo'));
-            $query = mysql_escape_string($this->_request->getPost('filtro'));
-            $select->where("`$field` like '%$query%'");
-        }
+        $stmt = $db->query($select);
+        $data = $stmt->fetchAll(); 
 
-        $this->view->types = array('E' => $this->view->translate('Incoming'),
+        if(empty($data)){
+            $this->view->error_message = $this->view->translate("You do not have registered cost centers. <br><br> Click 'Add cost center' to make the first registration
+");
+            
+        }   
+
+        $this->view->types = array(
+            'E' => $this->view->translate('Incoming'),
             'S' => $this->view->translate('Outgoing '),
             'O' => $this->view->translate('Other'));
+        
+        $this->view->costcenter = $data;
 
-        $page = $this->_request->getParam('page');
-        $this->view->page = ( isset($page) && is_numeric($page) ? $page : 1 );
-        $this->view->filtro = $this->_request->getParam('filtro');
-
-        $paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-        $paginator = new Zend_Paginator($paginatorAdapter);
-        $paginator->setCurrentPageNumber($this->view->page);
-        $paginator->setItemCountPerPage(Zend_Registry::get('config')->ambiente->linelimit);
-
-        $this->view->costcenter = $paginator;
-        $this->view->pages = $paginator->getPages();
-        $this->view->PAGE_URL = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/";
-
-        $opcoes = array("codigo" => $this->view->translate("Code"),
-            "nome" => $this->view->translate("Name"),
-            "descricao" => $this->view->translate("Description"));
-
-        $filter = new Snep_Form_Filter();
-        $filter->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $filter->setValue($this->_request->getPost('campo'));
-        $filter->setFieldOptions($opcoes);
-        $filter->setFieldValue($this->_request->getPost('filtro'));
-        $filter->setResetUrl("{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/index/page/$page");
-
-        $this->view->form_filter = $filter;
-        $this->view->filter = array(
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/export/",
-                "display" => $this->view->translate("Export CSV"),
-                "css" => "includes"),
-            array("url" => "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}/add",
-                "display" => $this->view->translate("Add Cost Center"),
-                "css" => "include"),
-        );
     }
 
     /**
@@ -93,26 +79,29 @@ class CostCenterController extends Zend_Controller_Action {
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Cost Center"),
                     $this->view->translate("Add")));
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/cost_center.xml"));
+        //Define the action and load form
+        $this->view->action = "add" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
+        // After POST
         if ($this->_request->getPost()) {
 
-            $form_isValid = $form->isValid($_POST);
+            $form_isValid = true;
+
             $dados = $this->_request->getParams();
             $newId = Snep_CostCenter_Manager::get($dados['id']);
 
             if (count($newId) > 1) {
                 $form_isValid = false;
-                $form->getElement('id')->addError($this->view->translate('Code already exists.'));
+                $this->view->error_message = $this->view->translate("Code already exists."); 
+                $this->renderScript('error/sneperror.phtml');
             }
 
             if ($form_isValid) {
-                $dados = $this->_request->getParams();
+                
                 Snep_CostCenter_Manager::add($dados);
 
                 //log-user
@@ -125,60 +114,6 @@ class CostCenterController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-        $this->view->form = $form;
-    }
-
-    /**
-     * Remove Cost Center's
-     */
-    public function removeAction() {
-
-        $id = $this->_request->getParam('id');
-
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Excluiu Centro de Custos", $id, 6);
-            $add = Snep_CostCenter_Manager::get($id);
-            Snep_CostCenter_Manager::insertLogCcustos("DEL", $add);
-        }
-        Snep_CostCenter_Manager::remove($id);
-    }
-
-    /**
-     * exportAction - Export cost center for CSV file.
-     */
-    public function exportAction() {
-
-        $costCenter = Snep_CostCenter_Manager::getAll();
-        $headers = array('codigo' => $this->view->translate('Code'),
-            'tipo' => $this->view->translate('Type'),
-            'nome' => $this->view->translate('Name'),
-            'descricao' => $this->view->translate('Description'));
-
-        foreach ($costCenter as $key => $cc) {
-
-            if ($cc["tipo"] == 'E') {
-                $costCenter[$key]["tipo"] = $this->view->translate('Incoming');
-            } elseif ($cc["tipo"] == 'S') {
-                $costCenter[$key]["tipo"] = $this->view->translate('Outgoing');
-            } else {
-                $costCenter[$key]["tipo"] = $this->view->translate('Other');
-            }
-        }
-
-        $csv = new Snep_Csv();
-        $csv_data = $csv->generate($costCenter, $headers);
-
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $dateNow = new Zend_Date();
-        $fileName = $this->view->translate('Cost-center_csv_') . $dateNow->toString($this->view->translate(" dd-MM-yyyy_hh'h'mm'm' ")) . '.csv';
-
-        header('Content-type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        echo $csv_data;
     }
 
     /**
@@ -186,24 +121,29 @@ class CostCenterController extends Zend_Controller_Action {
      */
     public function editAction() {
 
-        $id = $this->_request->getParam('id');
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Manage"),
                     $this->view->translate("Cost Center"),
                     $this->view->translate("Edit")));
 
+        $id = $this->_request->getParam('id');
         $costCenter = Snep_CostCenter_Manager::get($id);
+        
+        $this->view->E = "";
+        $this->view->S = "";
+        $this->view->O = "";
+        $this->view->$costCenter["tipo"] = "checked";
+        $this->view->costcenter = $costCenter;
 
-        Zend_Registry::set('cancel_url', $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/index');
-        $form = new Snep_Form(new Zend_Config_Xml("modules/default/forms/cost_center.xml"));
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName() . '/edit/id/' . $id);
-        $form->getElement('id')->setValue($costCenter['codigo'])->setAttrib('readonly', true);
-        $form->getElement('name')->setValue($costCenter['nome']);
-        $form->getElement('description')->setValue($costCenter['descricao']);
-        $form->getElement('type')->setValue($costCenter['tipo']);
+        //Define the action and load form
+        $this->view->action = "edit" ;
+        $this->view->disable = "disabled" ;
+        $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
+        // After POST
         if ($this->_request->getPost()) {
-            $form_isValid = $form->isValid($_POST);
+
+            $form_isValid = true;
+
             $dados = $this->_request->getParams();
 
             if ($form_isValid) {
@@ -224,7 +164,49 @@ class CostCenterController extends Zend_Controller_Action {
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-        $this->view->form = $form;
+        
+    }
+
+    /**
+     * Remove Cost Center's
+     */
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Delete")));
+
+        $id = $this->_request->getParam('id');
+
+        $cdr_data = Snep_CostCenter_Manager::getCdr($id);
+
+        if($cdr_data){
+
+            $this->view->error_message = $this->view->translate("You have data connections with this cost center, so this exclusion is not permitted."); 
+            $this->renderScript('error/sneperror.phtml');
+
+        }else{
+
+            $this->view->id = $id;
+            $this->view->remove_title = $this->view->translate('Delete Cost Center.'); 
+            $this->view->remove_message = $this->view->translate('The cost center will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'cost-center'; 
+            $this->renderScript('remove/remove.phtml');
+
+            if ($this->_request->getPost()) {
+
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+
+                    Snep_LogUser::salvaLog("Excluiu Centro de Custos", $_POST['id'], 6);
+                    $add = Snep_CostCenter_Manager::get($_POST['id']);
+                    Snep_CostCenter_Manager::insertLogCcustos("DEL", $add);
+                }
+                Snep_CostCenter_Manager::remove($_POST['id']);
+                $this->_redirect($this->getRequest()->getControllerName());
+            }
+
+        }
     }
 
 }

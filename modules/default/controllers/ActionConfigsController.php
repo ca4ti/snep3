@@ -1,22 +1,29 @@
 <?php
-
-/**
+/*
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  it under the terms of the GNU Lesser General Public License as
+ *  published by the Free Software Foundation, either version 3 of
+ *  the License, or (at your option) any later version.
  *
  *  SNEP is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  GNU Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
 
+/**
+ * Configuration Controller
+ *
+ * @category  Snep
+ * @package   Snep
+ * @copyright Copyright (c) 2014 OpenS Tecnologia
+ * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
+ */
 class ActionConfigsController extends Zend_Controller_Action {
 
     /**
@@ -25,7 +32,6 @@ class ActionConfigsController extends Zend_Controller_Action {
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Routing"),
                     $this->view->translate("Default Configs")
         ));
 
@@ -52,6 +58,7 @@ class ActionConfigsController extends Zend_Controller_Action {
     public function editAction() {
 
         $idAction = $this->getRequest()->getParam('id');
+        $this->view->idAction = $idAction;
 
         if (!class_exists($idAction)) {
             throw new PBX_Exception_BadArg("Invalid Argument");
@@ -61,6 +68,7 @@ class ActionConfigsController extends Zend_Controller_Action {
 
 
             if ($action->getDefaultConfigXML() != "") {
+            
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
 
                 if ($this->getRequest()->isPost()) {
@@ -80,15 +88,25 @@ class ActionConfigsController extends Zend_Controller_Action {
                         }
                     }
                     $this->view->success = true;
+                    $this->_redirect($this->getRequest()->getControllerName());
                 }
 
-                $action->setDefaultConfig($registry->getAllValues());
+                $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Default Configs"),
+                    $this->view->translate("Edit"),
+                    $this->view->translate($action->getName())));
+
+                
+                
                 $actionConfig = new PBX_Rule_ActionConfig($action->getDefaultConfigXML());
-                $this->view->breadcrumb = $this->view->translate("Regras de Negócio » Configurações Padrão » " . $action->getName());
                 $actionForm = $actionConfig->getForm();
-                $actionForm->getElement('cancel')->setAttrib("onclick", "location.href='{$this->getFrontController()->getBaseUrl()}/action-configs/'");
-                $actionForm->getElement('cancel')->setLabel('Voltar');
-                $this->view->form = $actionForm;
+                $this->view->dialtimeout = $actionForm->getValue('dial_timeout');
+                
+                $this->view->values = $registry->getAllValues();
+                
+
+
+            
             } else {
                 throw new PBX_Exception_BadArg("No Configurable Action");
             }

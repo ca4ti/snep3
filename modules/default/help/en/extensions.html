@@ -5,7 +5,7 @@ Class containing help text of the extensions
 * @category  Snep
 * @package   Snep
 * @copyright Copyright (c) 2014 OpenS Tecnologia
-* @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+* @author    Opens Tecnologia <desenvolvimento@opens.com.br>
 *
 -->
 
@@ -15,90 +15,81 @@ Class containing help text of the extensions
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h2>Ramais - Incluir / Editar</h2>
+        <h2>Extensions - Add / Edit</h2>
 
-        Esta rotina permite o cadastro/edição de um ramal no sistema. 
-        <br>Os ramais cadastrados devem estar entre a marge de variação do range de 
-        ramais configurado nos parâmetros do sistema.
-        <br><br><strong>Ramal:</strong> Define o código que identificará o ramal. 
-        <br><strong>Grupo de Ramal:</strong>
-        Define o grupo de Ramais qual o ramal pertence
-        <br><strong>Grupo de Captura:</strong> 
-        Grupo de Captura do qual o Ramal fará parte. Ramais 
-        em um mesmo grupo de captura permitem-se capturar ligaços uns dos outros.
+        This routine allows the registration / edit an extension in the system. 
+        <br>The registered extensions should be in the range of variation of marge extensions configured on the system parameters.
+        <br><br><strong>Extension:</strong> Defines the code that identifies the extension. 
+        <br><strong>Extension Group:</strong> Sets the group of extensions which the station belongs.
+        <br><strong>Pickpup Group:</strong> Capture group that the extension will be part. Extensions in the same pickup group allowed us to capture ligaços each other.
 
-        <br><br><strong>TECNOLOGIA DE INTERFACE</strong>
-        <br><strong>Tecnologia: </strong> 
-        Define qual tecnologia de canal o ramal irá usar para fazer/receber ligações.
+        <br><br><strong>INTERFACE TECHNOLOGY</strong>
+        <br><strong>Technology: </strong> 
+        Defines which channel technology the extension will use to make / receive calls.
         <br><strong>SIP/IAX: </strong>
-        Canais com tecnologia SIP ou IAX.
+        Channels with SIP or IAX technology.
         <br><strong>Khomp: </strong> 
-        Ramais de tecnologia Khomp.
+        Technology extensions Khomp.
         <br><strong>Virtual:</strong> 
-        Ramais com interfaces virtuais são mapeados em um 
-        tronco. Ao selecionar um tronco para a interface virtual do ramal, a ligação 
-        para ele será feita discando através do tronco para o numero do ramal.
+        Extensions with virtual interfaces are mapped in a trunk. When selecting a trunk interface to the virtual extension, the link to it will be made by dialing through the trunk to the extension number.
         <br><strong>Manual: </strong> 
-        Permite especificar qual canal/tecnologia será utlizada na 
-        criação do ramal .
+        Allows you to specify which channel / technology will be utlizada in creating the extension.
 
-        <br><br><strong>OPÇÕES SIP / IAX</strong>
-        <br><strong>Limite de chamadas simultâneas: </strong> 
-        Define o número máximo de chamadas simultaneas para este ramal.
+        <br><br><strong>OPTIONS SIP / IAX</strong>
+        <br><strong>Limit of simultaneous calls: </strong> 
+        Sets the maximum number of simultaneous calls to this extension.
         <br><strong>NAT: </strong> 
-        Define se a conexão do Ramal irá ou não através um NAT.
-        <br><strong>Controle de qualidade: </strong> 
-        Define se haverá ou não controle de qualidade nas ligações do Ramal.
+        Sets the branch connection will or not through a NAT.
+        <br><strong>Quality control: </strong> 
+        Sets whether or not quality control on the links Extension.
         <br><strong>Direct media:</strong> 
-        Define passagem ou não dos pacotes RTP pelo Asterisk.
-        <br><strong>Modo de DTMF: </strong> 
-        Define o tipo de tons freqüência utilizados na discagem.
+        Sets passage or not the RTP packets by Asterisk.
+        <br><strong>DTMF Mode: </strong> 
+        Sets the type of frequency tones used in dialing.
         <br><strong>CODECS: </strong>
-        Define a sequência dos CODECS que serão preferidos para o Ramal.
+        Define the sequence of CODECS to be preferred for Extension.
 
-        <br><br><strong>OPÇÃO KHOMP</strong>
-        <br><strong>Placa: </strong> 
-        Define quais das placas existentes no sistema o ramal fará parte.
-        <br><strong>Canal: </strong> 
-        Define qual canal da placa selecionada.
+        <br><br><strong>OPTIONS KHOMP</strong>
+        <br><strong>Board: </strong> 
+        Defines which of the boards in the extension system will be part.
+        <br><strong>Channel: </strong> 
+        Defines which channel of the selected card.
 
-        <br><br><strong>OPÇÃO VIRTUAL</strong>
-        <br><strong>Tronco: </strong>
-        Define o tronco a ser mapeado.
+        <br><br><strong>OPTION VIRTUAL</strong>
+        <br><strong>Trunk: </strong>
+        Sets the trunk to be mapped.
 
-        <br><br><strong>OPÇÃO MANUAL</strong>
+        <br><br><strong>OPTION MANUAL</strong>
         <br><strong>Manual: </strong>
-        Define o canal/tecnologia a ser utilizado.
+        Sets the channel / technology to be used.
 
-        <br><br><strong>AVANÇADO</strong>
-        <br><strong>Correio de voz: </strong> 
-        Define se o Ramal vai ou não utilizar Correio de Voz.
+        <br><br><strong>ADVANCED</strong>
+        <br><strong>Voicemail: </strong> 
+        Sets whether or not the branch will use Voice Mail.
         <br><strong>E-mail: </strong> 
-        Define um e-mail para o Ramal.
-        <br><strong>Bloqueio: </strong>
-        Cadeado para o ramal. Permite ou não efetuar chamadas.
-        <br><strong>Habilitar o siga-me: </strong>
-        Permite que o ramal possa efetuar o siga-me.
-        <br><strong>Controle de Minutos: </strong>
-        Define se vai ser estipulado um tempo para as ligações desse 
-        ramal ou não.
-        <br><strong>Tempo Total: </strong> 
-        Tempo total que o ramal pode ficar em ligação.
-        <br><strong>Tipo de Controle: </strong> 
-        Define se os minutos são controlados por ano, mes ou dia.
+        Defines an e-mail Extension.
+        <br><strong>Block: </strong>
+        Lock for the extension. Whether to allow outgoing calls.
+        <br><strong>Enable follow me: </strong>
+        Allows the extension to make follow me.
+        <br><strong>Minutes control: </strong>
+        Defines whether it will be stipulated time to the links that extension or not.
+        <br><strong>Full Time: </strong> 
+        Total time that the extension can be in connection.
+        <br><strong>Control Type: </strong> 
+        Sets whether the minutes are controlled by year, month or day.
         <br>
 
-        <h2>Ramais - Exportar CSV</h2>
+        <h2>Extensions - Export CSV</h2>
 
-        Esta rotina exporta dados dos ramais cadastrados para um arquivo .csv. 
+        This routine export data of registered extensions to a .csv file.
+        
+        <h2>Extensions - Add extensions</h2>
 
-        <h2>Contatos - Incluir ramais</h2>
-
-        Esta rotina inclui um range de ramais. O range pode ser separado 
-        por -(hifen) ou ;(ponto e virgula).
-        <br>Exemplo de ranges: 
-        <br>1000-1002 -> O sistema irá cadastrar os ramais 1000,1001 e 1002. 
-        <br>1000;1002 -> O sistema irá cadastrar os ramais 1000 e 1002.
+        This routine includes a range of extensions. The range can be separated by - (hyphen) or (semicolon).
+        <br>Example ranges: 
+        <br>1000-1002 -> The system will register the extensions 1000,1001 and 1002. 
+        <br>1000;1002 -> The system will register the extensions 1000 and 1002.
         <br>
 
     </body>

@@ -196,15 +196,6 @@ class PBX_Relatorio_Chamadas {
         // Eliminando features
         $select->where("dst not like '*%'");
 
-        // Elimintando dsts específicas
-        $config = Zend_Registry::get("config");
-        $dsts = "dst NOT IN (";
-        foreach (explode(";", $config->ambiente->dst_exceptions) as $badDst) {
-            $dsts .= "'$badDst',";
-        }
-        $dsts .= "'')";
-        $select->where($dsts);
-
         return $select;
     }
 

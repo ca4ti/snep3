@@ -95,15 +95,6 @@ class RankingReportService implements SnepService {
        
         $condDstExp = $where_exceptions = "";
         
-        $dstExceptions = $config->ambiente->dst_exceptions;
-        $dstExceptions = explode(";", $dstExceptions);
-
-        foreach ($dstExceptions as $valor) {
-            $condDstExp .= " dst != '$valor' ";
-            $condDstExp .= " AND ";
-        }
-
-        $where_exceptions .= " AND ( " . substr($condDstExp, 0, strlen($condDstExp) - 4) . " ) ";
         $where_exceptions .= " AND ( locate('ZOMBIE',channel) = 0 ) ";
 
         $select = "SELECT cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.userfield, cdr.uniqueid ";

@@ -68,7 +68,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headLink()->setStylesheet($view->baseUrl() . "/css/systemstatus.css");
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/jquery.min.js", 'text/javascript');
-        $view->headScript()->appendFile($view->baseUrl() . "/includes/geral.js", 'text/javascript');
+        $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
 
         //List installed modules to be used on the modules menu
         $systemInfo['modules'] = array();

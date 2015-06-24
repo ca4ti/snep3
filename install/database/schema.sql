@@ -504,7 +504,9 @@ CREATE TABLE IF NOT EXISTS core_cnl_country (
     `id` integer primary key,
     `name` varchar(30) not null,
     `code_2` varchar(2) not null,
-    `code_3` varchar(3) not null
+    `code_3` varchar(3) not null,
+    `language` varchar(5) not null,
+    `locale` varchar(5) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

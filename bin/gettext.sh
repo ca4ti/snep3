@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 echo "" > messages.po
 echo "Fase 1 : Arquivos php/phtml"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-22 08:58-0300\n"
+"POT-Creation-Date: 2015-06-24 14:31-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,32 +83,8 @@ msgstr ""
 msgid " minutes"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "#^[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}$#"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "' '"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm."
-msgstr ""
-
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:73
 msgid "( Only numbers)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "(depends on: /op-panel/ index1.php)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "(depends on: /op-panel/ index2.php)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "(depends on: /op-panel/ index3.php)"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:391
@@ -124,119 +100,32 @@ msgstr ""
 msgid ". Source: "
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "/(\\d{4}-\\d{4}[;]?)$/i"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "/(\\d{4}[;]?)$/i"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "/[[:digit:]]/i"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-msgid "/^(([0-9]?)+)$/"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "/^(([0-9]\\-?\\;?)+)$/"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-msgid "/^(([0-9]\\.?)+)$/"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$/i"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-msgid "/var/lib/asterisk/moh/"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "0"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "1"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "10"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "100"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/queues.xml
-msgid "12"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "16"
 msgstr ""
 
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "2"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "200"
-msgstr ""
-
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
 msgid "3"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/expression_alias.xml
-msgid "30"
 msgstr ""
 
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "4"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/contacts.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "5"
 msgstr ""
 
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "60"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "7"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "8"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-msgid "9"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:247
@@ -257,10 +146,6 @@ msgstr ""
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:216
-msgid "A confirmação de senha não é igual a senha informada"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:10
@@ -313,10 +198,6 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:159
 #: ../modules/default/controllers/KhompLinksController.php:160
 msgid "Activated"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "Activated/Deactivated"
 msgstr ""
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:31
@@ -447,7 +328,6 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:173
 #: ../modules/default/views/scripts/contacts/addedit.phtml:39
 #: ../modules/default/views/scripts/contacts/addedit.phtml:41
-#: /var/www/html/snep/modules/default/forms/contacts.xml
 msgid "Address"
 msgstr ""
 
@@ -457,6 +337,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:22
 msgid "Administrator"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:200
+msgid "Administrator password"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:55
@@ -509,7 +393,6 @@ msgstr ""
 #: ../modules/default/controllers/CallsReportController.php:61
 #: ../modules/default/controllers/ExtensionsGroupsController.php:54
 #: ../modules/default/controllers/ServicesReportController.php:59
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "All"
 msgstr ""
 
@@ -537,20 +420,6 @@ msgstr ""
 msgid "Allow voicemail"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups.xml
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions_groups.xml
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/profiles.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "Alnum"
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:434
 msgid "Amaflags"
 msgstr ""
@@ -558,10 +427,6 @@ msgstr ""
 #: ../modules/default/controllers/CallsReportController.php:277
 #: ../modules/default/views/scripts/calls-report/index.phtml:196
 #: ../modules/default/views/scripts/khomp-links/index.phtml:24
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "Analytic"
 msgstr ""
 
@@ -580,13 +445,11 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:135
 #: ../modules/default/views/scripts/calls-report/view.phtml:182
 #: ../modules/default/views/scripts/calls-report/view.phtml:206
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Answered"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:365
 #: ../modules/default/views/scripts/trunks/addedit.phtml:366
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Anually"
 msgstr ""
 
@@ -599,35 +462,32 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Application responsable of call recording"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Application responsable of the conference rooms on Snep."
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:103
 msgid "Asterisk"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:34
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:59
+msgid "Asterisk Manager connect"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:64
 msgid "Asterisk Socket IP"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:48
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:78
 msgid "Asterisk Socket IP password"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:41
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:71
 msgid "Asterisk Socket IP username"
 msgstr ""
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:54
 msgid "Asterisk Status"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:198
+msgid "Asterisk configuration"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:196
@@ -638,28 +498,19 @@ msgstr ""
 msgid "Audio Class"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:147
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Audio Files Format"
-msgstr ""
-
 #: ../modules/default/views/scripts/queues/addedit.phtml:136
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Audio: Number of calls waiting"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:151
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Audio: Thanks for waiting"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:121
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Audio: You're Here"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:106
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Audio: You're next"
 msgstr ""
 
@@ -716,13 +567,8 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:168
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:185
 msgid "Backup Files Path"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/installer.xml
-msgid "Banco de Dados"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/index.phtml:8
@@ -735,9 +581,6 @@ msgstr ""
 
 #: ../modules/default/controllers/TrunksController.php:74
 #: ../modules/default/views/scripts/trunks/addedit.phtml:269
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Board"
 msgstr ""
 
@@ -747,7 +590,6 @@ msgid "Board : "
 msgstr ""
 
 #: ../modules/default/views/scripts/khomp-links/index.phtml:5
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
 msgid "Boards"
 msgstr ""
 
@@ -759,10 +601,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/users/bond.phtml:19
 msgid "Bond Option"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/billing.xml
-msgid "Brasil"
 msgstr ""
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:212
@@ -786,7 +624,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:141
 #: ../modules/default/views/scripts/calls-report/view.phtml:184
 #: ../modules/default/views/scripts/calls-report/view.phtml:208
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Busy"
 msgstr ""
 
@@ -820,8 +657,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:35
 #: ../modules/default/views/scripts/ranking-report/index.phtml:92
 #: ../modules/default/views/scripts/services-report/view.phtml:21
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "CSV"
 msgstr ""
 
@@ -846,7 +681,7 @@ msgstr ""
 msgid "Call Rankings"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:125
+#: ../modules/default/views/scripts/parameters/index.phtml:156
 msgid "Call Recording Configuration"
 msgstr ""
 
@@ -859,12 +694,7 @@ msgstr ""
 msgid "Call Time"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "Call Type"
-msgstr ""
-
 #: ../modules/default/views/scripts/queues/addedit.phtml:68
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Call distribution strategy"
 msgstr ""
 
@@ -906,10 +736,6 @@ msgstr ""
 msgid "Calls in the queue awaiting"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/queues.xml
-msgid "Can users join this queue even if there's no agents online?"
-msgstr ""
-
 #: ../lib/Snep/CsvIE.php:170 ../lib/Snep/CsvIE.php:295
 #: ../lib/Snep/Form/Element/Submit.php:77 ../lib/Snep/Form/Filter.php:58
 #: ../modules/default/views/scripts/action-configs/edit.phtml:42
@@ -939,7 +765,7 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:43
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:44
 #: ../modules/default/views/scripts/music-on-hold/remove.phtml:23
-#: ../modules/default/views/scripts/parameters/index.phtml:192
+#: ../modules/default/views/scripts/parameters/index.phtml:209
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:35
 #: ../modules/default/views/scripts/profiles/addedit.phtml:35
 #: ../modules/default/views/scripts/profiles/permission.phtml:31
@@ -999,7 +825,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:215
 #: ../modules/default/views/scripts/extensions/index.phtml:48
 #: ../modules/default/views/scripts/khomp-links/view.phtml:53
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Channel"
 msgstr ""
 
@@ -1015,7 +840,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:217
 #: ../modules/default/views/scripts/trunks/addedit.phtml:219
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Channel Limit"
 msgstr ""
 
@@ -1029,17 +853,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:249
 #: ../modules/default/views/scripts/trunks/addedit.phtml:251
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Channel Technology"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Checkbox"
-msgstr ""
-
 #: ../modules/default/views/scripts/services-report/index.phtml:70
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "Choose the services"
 msgstr ""
 
@@ -1047,7 +864,6 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/addedit.phtml:60
 #: ../modules/default/views/scripts/contacts/addedit.phtml:80
 #: ../modules/default/views/scripts/contacts/index.phtml:43
-#: /var/www/html/snep/modules/default/forms/contacts.xml
 msgid "City"
 msgstr ""
 
@@ -1087,8 +903,6 @@ msgstr ""
 #: ../modules/default/views/scripts/route/index.phtml:60
 #: ../modules/default/views/scripts/trunks/index.phtml:38
 #: ../modules/default/views/scripts/users/index.phtml:33
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 msgid "Code"
 msgstr ""
 
@@ -1120,9 +934,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:113
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:199
 #: ../modules/default/views/scripts/trunks/addedit.phtml:169
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Codec 1"
 msgstr ""
 
@@ -1130,9 +941,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:122
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:208
 #: ../modules/default/views/scripts/trunks/addedit.phtml:178
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Codec 2"
 msgstr ""
 
@@ -1140,9 +948,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:131
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:217
 #: ../modules/default/views/scripts/trunks/addedit.phtml:187
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Codec 3"
 msgstr ""
 
@@ -1152,7 +957,6 @@ msgid "Communication Error"
 msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:9
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
 msgid "Company Name"
 msgstr ""
 
@@ -1160,12 +964,7 @@ msgstr ""
 msgid "Compress selected files"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Conference"
-msgstr ""
-
-#: ../modules/default/views/scripts/parameters/index.phtml:75
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:47
 msgid "Conference Application"
 msgstr ""
 
@@ -1177,14 +976,6 @@ msgstr ""
 
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Configuration"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:198
-msgid "Configuração do Asterisk"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:199
-msgid "Configuração do Banco de Dados"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/index.phtml:16
@@ -1199,10 +990,6 @@ msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:47
 msgid "Confirm"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/installer.xml
-msgid "Confirmação de Senha"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:60
@@ -1239,8 +1026,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:71
 #: ../modules/default/views/scripts/calls-report/index.phtml:108
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 msgid "Contains"
 msgstr ""
 
@@ -1258,7 +1043,6 @@ msgid "Contrast"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:363
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Control Type"
 msgstr ""
 
@@ -1269,10 +1053,6 @@ msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:430
 msgid "Conversation (seconds)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
-msgid "Convert to GSM"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:27
@@ -1299,7 +1079,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:233
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:34
 #: /var/www/html/snep/configs/dashboard.xml
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Cost Center"
 msgstr ""
@@ -1317,17 +1096,12 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/logs.xml
-msgid "Critical"
-msgstr ""
-
 #: ../modules/default/controllers/SimulatorController.php:169
 #: ../modules/default/views/scripts/simulator/index.phtml:58
 msgid "Current Day"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:46
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Custom application"
 msgstr ""
 
@@ -1352,7 +1126,6 @@ msgid "DDD + Number. Example: 4899999999"
 msgstr ""
 
 #: ../modules/default/views/scripts/services-report/index.phtml:77
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "DND"
 msgstr ""
 
@@ -1360,9 +1133,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:95
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:182
 #: ../modules/default/views/scripts/trunks/addedit.phtml:59
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "DTMF Mode"
 msgstr ""
 
@@ -1374,18 +1144,12 @@ msgstr ""
 msgid "DTMF dial mode number"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "DTML dial mode"
-msgstr ""
-
 #: ../modules/default/views/scripts/trunks/addedit.phtml:340
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "DTML dial mode number"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:373
 #: ../modules/default/views/scripts/trunks/addedit.phtml:374
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Daily"
 msgstr ""
 
@@ -1416,6 +1180,34 @@ msgstr ""
 msgid "Data by Period"
 msgstr ""
 
+#: ../modules/default/views/scripts/parameters/index.phtml:89
+msgid "Database"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:199
+msgid "Database configuration"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:86
+msgid "Database connect"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:98
+msgid "Database hostname"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:91
+msgid "Database name"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:112
+msgid "Database password"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:105
+msgid "Database username"
+msgstr ""
+
 #: ../modules/default/controllers/CallsReportController.php:425
 #: ../modules/default/controllers/ServicesReportController.php:208
 #: ../modules/default/views/scripts/calls-report/view.phtml:205
@@ -1426,17 +1218,12 @@ msgid "Date"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:424
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Day"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:57
 #: ../modules/default/controllers/KhompLinksController.php:164
 msgid "Deactivated"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/logs.xml
-msgid "Debug"
 msgstr ""
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:61
@@ -1456,8 +1243,7 @@ msgstr ""
 msgid "Default Configs"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:53
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:32
 msgid "Default E-mail"
 msgstr ""
 
@@ -1470,8 +1256,7 @@ msgstr ""
 msgid "Default Settings"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:56
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:35
 msgid "Default e-mail where the alerts will be sent to"
 msgstr ""
 
@@ -1480,12 +1265,10 @@ msgid "Default module that provides basic features to Snep PBX."
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:21
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Default path"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:182
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:199
 msgid "Default value for Qualify"
 msgstr ""
 
@@ -1497,19 +1280,8 @@ msgstr ""
 msgid "Define Cost Center to "
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:63
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:42
 msgid "Defines how many lines you want per page of report"
-msgstr ""
-
-#: ../modules/default/views/scripts/parameters/index.phtml:70
-msgid "Defines what destinations will be excluded from reports"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid ""
-"Defines what destinations will be excluded from reports (Sintax: nono ; "
-"nonono ; nono)"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/index.phtml:17
@@ -1517,7 +1289,6 @@ msgid "Definição da senha do Administrador"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:122
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Delay Qualification"
 msgstr ""
 
@@ -1652,9 +1423,7 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:22
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:24
 #: ../modules/default/views/scripts/sound-files/index.phtml:48
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
 msgid "Description"
 msgstr ""
 
@@ -1663,23 +1432,14 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/index.phtml:80
 #: ../modules/default/views/scripts/calls-report/view.phtml:54
 #: ../modules/default/views/scripts/ranking-report/view.phtml:45
-#: /var/www/html/snep/modules/default/forms/logs.xml
 msgid "Destination"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:68
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Destination Exceptions"
-msgstr ""
-
 #: ../modules/default/views/scripts/calls-report/index.phtml:94
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 msgid "Destination Extensions"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:83
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Destination Group"
 msgstr ""
 
@@ -1711,7 +1471,6 @@ msgid "Dial Flags"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:81
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Dial Method"
 msgstr ""
 
@@ -1756,8 +1515,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:138
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:81
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:168
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Direct Media"
 msgstr ""
 
@@ -1767,7 +1524,6 @@ msgid "Direct to queue %s"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:41
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Directory"
 msgstr ""
 
@@ -1777,13 +1533,11 @@ msgid "Directory already exists"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:28
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Directory name"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:86
 #: ../modules/default/controllers/KhompLinksController.php:193
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "Disabled"
 msgstr ""
 
@@ -1829,7 +1583,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:196
 #: ../modules/default/views/scripts/trunks/addedit.phtml:198
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Domain"
 msgstr ""
 
@@ -1854,14 +1607,6 @@ msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:429
 msgid "Duration (seconds)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-msgid "E"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-msgid "E-Mail"
 msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:67
@@ -1926,7 +1671,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:291
 #: ../modules/default/views/scripts/extensions/addedit.phtml:293
 #: ../modules/default/views/scripts/register/index.phtml:12
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "Email"
 msgstr ""
 
@@ -1934,31 +1678,14 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "EmailAddress"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Enable"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "Enable NAT"
-msgstr ""
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:125
 #: ../modules/default/views/scripts/extensions/addedit.phtml:129
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:74
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:161
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Enable delay qualification"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:325
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Enable follow-me"
 msgstr ""
 
@@ -1987,8 +1714,6 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:319
 #: ../modules/default/views/scripts/trunks/addedit.phtml:331
 #: ../modules/default/views/scripts/trunks/addedit.phtml:349
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Enabled"
 msgstr ""
 
@@ -2002,11 +1727,6 @@ msgstr ""
 #: ../modules/default/views/scripts/pagination.phtml:18
 #: ../modules/default/views/scripts/pagination.phtml:20
 msgid "End"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "End with"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:39
@@ -2025,8 +1745,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:67
 #: ../modules/default/views/scripts/calls-report/index.phtml:104
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 msgid "Equal"
 msgstr ""
 
@@ -2045,7 +1763,6 @@ msgstr ""
 
 #: ../modules/default/controllers/ErrorController.php:57
 #: ../modules/default/views/scripts/error/sneperror.phtml:18
-#: /var/www/html/snep/modules/default/forms/logs.xml
 msgid "Error"
 msgstr ""
 
@@ -2100,7 +1817,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:11
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:13
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Ex: 1000-1050;1060;1063;1070-1100"
 msgstr ""
 
@@ -2201,8 +1917,6 @@ msgstr ""
 #: ../modules/default/views/scripts/route/add_edit.phtml:34
 #: ../modules/default/views/scripts/services-report/view.phtml:35
 #: ../modules/default/views/scripts/simulator/index.phtml:18
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Extension"
 msgstr ""
 
@@ -2220,8 +1934,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/index.phtml:49
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:18
 #: ../modules/default/views/scripts/route/add_edit.phtml:31
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Extension Group"
 msgstr ""
 
@@ -2231,7 +1943,6 @@ msgid "Extension Groups"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:314
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Extension Mapping"
 msgstr ""
 
@@ -2247,11 +1958,6 @@ msgstr ""
 msgid "Extension:"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "ExtensionGroup"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsController.php:86
 #: ../modules/default/controllers/ExtensionsController.php:117
 #: ../modules/default/controllers/ExtensionsController.php:208
@@ -2262,7 +1968,6 @@ msgstr ""
 #: ../modules/default/views/scripts/services-report/index.phtml:41
 #: ../modules/default/views/scripts/services-report/index.phtml:56
 #: /var/www/html/snep/configs/dashboard.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Extensions"
 msgstr ""
@@ -2281,7 +1986,6 @@ msgid "Extensions Groups"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:11
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
 msgid "Extensions Range"
 msgstr ""
 
@@ -2292,6 +1996,12 @@ msgstr ""
 msgid "Fail"
 msgstr ""
 
+#: ../modules/default/controllers/InstallerController.php:230
+#: ../modules/default/controllers/InstallerController.php:241
+#, php-format
+msgid "Fail to connect: %s"
+msgstr ""
+
 #: ../modules/default/controllers/RecordReportController.php:254
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:96
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:336
@@ -2299,7 +2009,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:144
 #: ../modules/default/views/scripts/calls-report/view.phtml:185
 #: ../modules/default/views/scripts/calls-report/view.phtml:209
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Failed"
 msgstr ""
 
@@ -2314,12 +2023,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/installer/error.phtml:1
 msgid "Falha ao Instalar o SNEP"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:230
-#: ../modules/default/controllers/InstallerController.php:241
-#, php-format
-msgid "Falha ao conectar: %s"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:225
@@ -2357,18 +2060,12 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:12
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:14
 #: ../modules/default/views/scripts/sound-files/index.phtml:47
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
 msgid "Filename"
 msgstr ""
 
 #: ../lib/Snep/Form/Filter.php:53
 #: ../modules/default/views/scripts/logs/index.phtml:58
-#: /var/www/html/snep/modules/default/forms/filter.xml
 msgid "Filter"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/filter.xml
-msgid "Filter by"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:159
@@ -2401,7 +2098,6 @@ msgid "For the agent that answerd less calls (fewestcalls)"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:158
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Force reverse authentication"
 msgstr ""
 
@@ -2409,12 +2105,7 @@ msgstr ""
 msgid "Forgot Password?"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Format witch the recorded files will be stored"
-msgstr ""
-
 #: ../modules/default/views/scripts/carrier/index.phtml:14
-#: /var/www/html/snep/modules/default/forms/carrier.xml
 msgid "Fragmentation Time"
 msgstr ""
 
@@ -2437,8 +2128,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:159
 #: ../modules/default/views/scripts/trunks/addedit.phtml:152
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Friend"
 msgstr ""
 
@@ -2446,7 +2135,6 @@ msgstr ""
 #: ../modules/default/views/scripts/logs/index.phtml:29
 #: ../modules/default/views/scripts/ranking-report/index.phtml:16
 #: ../modules/default/views/scripts/services-report/index.phtml:14
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "From"
 msgstr ""
 
@@ -2458,19 +2146,6 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:108
 #: ../modules/default/views/scripts/trunks/addedit.phtml:110
 msgid "From User"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "From domain"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "From user"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "From:"
 msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:6
@@ -2487,7 +2162,6 @@ msgid "Go back to the last page"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:99
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Go to Context"
 msgstr ""
 
@@ -2511,17 +2185,11 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:42
 #: ../modules/default/views/scripts/services-report/index.phtml:44
 #: ../modules/default/views/scripts/users/permission.phtml:11
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "Group"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:19
 msgid "Group Type: "
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-msgid "Group contacts"
 msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/migration.phtml:14
@@ -2540,13 +2208,8 @@ msgstr ""
 msgid "High quality support"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/installer.xml
-msgid "Host"
-msgstr ""
-
-#: ../modules/default/views/scripts/parameters/index.phtml:32
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:62
+#: ../modules/default/views/scripts/parameters/index.phtml:96
 msgid "Hostname"
 msgstr ""
 
@@ -2565,20 +2228,15 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:75
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:48
 #: ../modules/default/views/scripts/trunks/addedit.phtml:32
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "IAX2"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:231
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "IAX2 Trunking"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:256
 #: ../modules/default/views/scripts/trunks/addedit.phtml:258
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "ID Regular Expression"
 msgstr ""
 
@@ -2602,7 +2260,6 @@ msgid "IP Status"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:300
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Identifier"
 msgstr ""
 
@@ -2643,7 +2300,6 @@ msgstr ""
 #: ../modules/default/views/scripts/queues/addedit.phtml:49
 #: ../modules/default/views/scripts/queues/addedit.phtml:63
 #: ../modules/default/views/scripts/queues/addedit.phtml:211
-#: /var/www/html/snep/modules/default/forms/carrier.xml
 msgid "In seconds"
 msgstr ""
 
@@ -2651,9 +2307,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:102
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:189
 #: ../modules/default/views/scripts/trunks/addedit.phtml:66
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Inband"
 msgstr ""
 
@@ -2663,7 +2316,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:198
 #: ../modules/default/views/scripts/calls-report/view.phtml:164
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:34
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 msgid "Incoming"
 msgstr ""
 
@@ -2676,20 +2328,11 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:106
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:193
 #: ../modules/default/views/scripts/trunks/addedit.phtml:70
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Info"
 msgstr ""
 
 #: ../modules/default/views/layouts/layout.phtml:153
 msgid "Information"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-msgid "Init with"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:199
@@ -2703,12 +2346,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:203
 #: ../modules/default/views/scripts/trunks/addedit.phtml:205
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Insecure"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:192
-msgid "Instalador » Configuração"
 msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:166
@@ -2717,6 +2355,10 @@ msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:54
 msgid "Installer Snep"
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:192
+msgid "Installer » Configuration"
 msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:126
@@ -2786,19 +2428,12 @@ msgstr ""
 msgid "Join the network of intercomunexao"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "Just numbers"
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:91
 msgid "Kernel"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:76
 #: ../modules/default/views/scripts/trunks/addedit.phtml:33
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Khomp"
 msgstr ""
 
@@ -2821,8 +2456,7 @@ msgstr ""
 msgid "Khomp links errors"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:133
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:164
 msgid "Krecord"
 msgstr ""
 
@@ -2901,7 +2535,7 @@ msgid "Local"
 msgstr ""
 
 #: ../modules/default/controllers/InstallerController.php:65
-#: ../modules/default/views/scripts/parameters/index.phtml:87
+#: ../modules/default/views/scripts/parameters/index.phtml:118
 msgid "Locale Configuration"
 msgstr ""
 
@@ -2934,7 +2568,6 @@ msgid "Loop"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:42
-#: ../modules/default/views/scripts/parameters/index.phtml:150
 msgid "MP3"
 msgstr ""
 
@@ -2946,7 +2579,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:78
 #: ../modules/default/views/scripts/extensions/addedit.phtml:258
 #: ../modules/default/views/scripts/extensions/addedit.phtml:260
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Manual"
 msgstr ""
 
@@ -2955,7 +2587,6 @@ msgid "Marks the call with a cost center."
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:11
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Maximum 12 characters"
 msgstr ""
 
@@ -2964,12 +2595,7 @@ msgid "Maximum Call Time"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:54
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Maximum number of calls waiting in the queue"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Meetme"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues-groups/members.phtml:12
@@ -3019,28 +2645,15 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:340
 #: ../modules/default/views/scripts/trunks/addedit.phtml:345
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Minute Control"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-msgid "Minute Fee for Mobile"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-msgid "Minute Fee for Residencial"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:358
 #: ../modules/default/views/scripts/trunks/addedit.phtml:358
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Minutes"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:131
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:162
 msgid "MixMonitor"
 msgstr ""
 
@@ -3049,7 +2662,6 @@ msgid "Mobile"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:12
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Mode"
 msgstr ""
 
@@ -3068,32 +2680,16 @@ msgstr ""
 msgid "Monday"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:132
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:163
 msgid "Monitor"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Month"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:369
 #: ../modules/default/views/scripts/trunks/addedit.phtml:370
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Monthly"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-msgid "Mp3"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "MultiCheckbox"
 msgstr ""
 
@@ -3102,7 +2698,6 @@ msgid "Music On Hold"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:16
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Music On Hold Class"
 msgstr ""
 
@@ -3131,7 +2726,6 @@ msgid "Music on hold class already exists"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:32
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Music on hold loop timer"
 msgstr ""
 
@@ -3142,18 +2736,11 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:101
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:58
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:146
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "NAT"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:284
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "NAT Optimization"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "NAT optimization"
 msgstr ""
 
 #: ../modules/default/controllers/CarrierController.php:66
@@ -3197,16 +2784,6 @@ msgstr ""
 #: ../modules/default/views/scripts/users/addedit.phtml:7
 #: ../modules/default/views/scripts/users/bond.phtml:10
 #: ../modules/default/views/scripts/users/index.phtml:34
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups.xml
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/expression_alias.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/profiles.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "Name"
 msgstr ""
 
@@ -3252,9 +2829,6 @@ msgstr ""
 #: ../modules/default/views/scripts/queues/addedit.phtml:203
 #: ../modules/default/views/scripts/trunks/addedit.phtml:129
 #: ../modules/default/views/scripts/trunks/addedit.phtml:235
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "No"
 msgstr ""
 
@@ -3358,8 +2932,6 @@ msgstr ""
 #: ../modules/default/controllers/LogsController.php:72
 #: ../modules/default/controllers/MusicOnHoldController.php:43
 #: ../modules/default/views/scripts/trunks/addedit.phtml:84
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Normal"
 msgstr ""
 
@@ -3368,7 +2940,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:138
 #: ../modules/default/views/scripts/calls-report/view.phtml:183
 #: ../modules/default/views/scripts/calls-report/view.phtml:207
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Not Answered"
 msgstr ""
 
@@ -3394,17 +2965,8 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:61
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:40
 msgid "Number of Lines"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-msgid "Numbers Only"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-msgid "Numbers only"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:230
@@ -3414,7 +2976,6 @@ msgid "Numbers only please"
 msgstr ""
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:12
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 msgid "Numbers separated by ( . ). EX: 5.04"
 msgstr ""
 
@@ -3428,18 +2989,8 @@ msgstr ""
 msgid "O SNEP foi instalado com sucesso."
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/installer.xml
-msgid ""
-"O usuário informado deverá ter a permissão de criar\n"
-"                        tabelas no banco de dados informado."
-msgstr ""
-
 #: ../modules/default/actions/DiscarTronco.php:142
 msgid "Ommit origin (only for Khomp KGSM)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "On / Off"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:203
@@ -3467,10 +3018,6 @@ msgstr ""
 msgid "Opens Technology"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/billing.xml
-msgid "Operadora"
-msgstr ""
-
 #: ../modules/default/views/scripts/calls-report/index.phtml:64
 #: ../modules/default/views/scripts/calls-report/index.phtml:101
 msgid "Option"
@@ -3480,8 +3027,7 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:142
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:173
 msgid "Options to the recording application"
 msgstr ""
 
@@ -3506,15 +3052,10 @@ msgstr ""
 msgid "Original Source"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "Originated"
-msgstr ""
-
 #: ../modules/default/controllers/CostCenterController.php:70
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:208
 #: ../modules/default/views/scripts/calls-report/view.phtml:166
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:42
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 msgid "Other"
 msgstr ""
 
@@ -3523,7 +3064,6 @@ msgid "Other filters"
 msgstr ""
 
 #: ../modules/default/controllers/RecordReportController.php:260
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Others"
 msgstr ""
 
@@ -3532,7 +3072,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:203
 #: ../modules/default/views/scripts/calls-report/view.phtml:165
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:38
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
 msgid "Outgoing"
 msgstr ""
 
@@ -3546,20 +3085,7 @@ msgid "Outgoing Call"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:298
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Padlock"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Panel 1 Tab"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Panel 2 Tab"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Panel 3 Tab"
 msgstr ""
 
 #: ../modules/default/controllers/ParametersController.php:36
@@ -3583,14 +3109,11 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:252
 #: ../modules/default/views/scripts/auth/login.phtml:19
 #: ../modules/default/views/scripts/extensions/addedit.phtml:87
-#: ../modules/default/views/scripts/parameters/index.phtml:46
+#: ../modules/default/views/scripts/parameters/index.phtml:76
+#: ../modules/default/views/scripts/parameters/index.phtml:110
 #: ../modules/default/views/scripts/trunks/addedit.phtml:101
 #: ../modules/default/views/scripts/trunks/addedit.phtml:103
 #: ../modules/default/views/scripts/users/addedit.phtml:12
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "Password"
 msgstr ""
 
@@ -3599,7 +3122,6 @@ msgid "Password Authentication"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:313
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Password Padlock"
 msgstr ""
 
@@ -3622,26 +3144,21 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:163
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:180
 msgid "Path where to store the audio files"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:170
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:187
 msgid "Path where to store the backup audio files"
 msgstr ""
 
 #: ../modules/default/controllers/ServicesReportController.php:209
 #: ../modules/default/views/scripts/extensions/addedit.phtml:155
 #: ../modules/default/views/scripts/trunks/addedit.phtml:148
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Peer"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:145
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Peer Type"
 msgstr ""
 
@@ -3650,12 +3167,6 @@ msgstr ""
 #: ../modules/default/views/scripts/ranking-report/index.phtml:13
 #: ../modules/default/views/scripts/services-report/index.phtml:11
 msgid "Period"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "Period from:"
 msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:98
@@ -3687,8 +3198,6 @@ msgstr ""
 #: ../modules/default/controllers/PickupGroupsController.php:219
 #: ../modules/default/views/scripts/extensions/addedit.phtml:44
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:28
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Pickup Group"
 msgstr ""
 
@@ -3698,11 +3207,6 @@ msgstr ""
 #: /var/www/html/snep/configs/dashboard.xml
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Pickup Groups"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "PickupGroup"
 msgstr ""
 
 #: ../modules/default/actions/Playback.php:52
@@ -3745,8 +3249,8 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:77
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:71
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:77
-#: ../modules/default/views/scripts/parameters/index.phtml:239
-#: ../modules/default/views/scripts/parameters/index.phtml:245
+#: ../modules/default/views/scripts/parameters/index.phtml:254
+#: ../modules/default/views/scripts/parameters/index.phtml:260
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:56
 #: ../modules/default/views/scripts/profiles/addedit.phtml:67
 #: ../modules/default/views/scripts/queues/addedit.phtml:250
@@ -3773,7 +3277,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:60
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:76
-#: ../modules/default/views/scripts/parameters/index.phtml:241
+#: ../modules/default/views/scripts/parameters/index.phtml:256
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:58
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:56
 msgid "Please enter letters and numbers only."
@@ -3809,8 +3313,8 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:78
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:72
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:78
-#: ../modules/default/views/scripts/parameters/index.phtml:240
-#: ../modules/default/views/scripts/parameters/index.phtml:246
+#: ../modules/default/views/scripts/parameters/index.phtml:255
+#: ../modules/default/views/scripts/parameters/index.phtml:261
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:57
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
 #: ../modules/default/views/scripts/queues/addedit.phtml:251
@@ -3834,7 +3338,7 @@ msgstr ""
 msgid "Please enter with code valid"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:261
+#: ../modules/default/views/scripts/parameters/index.phtml:276
 msgid "Please enter with numbers only."
 msgstr ""
 
@@ -3843,13 +3347,12 @@ msgstr ""
 msgid "Please enter with range valid"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:247
+#: ../modules/default/views/scripts/parameters/index.phtml:262
 msgid "Please enter with value valid."
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:210
 #: ../modules/default/views/scripts/trunks/addedit.phtml:212
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Port"
 msgstr ""
 
@@ -3861,12 +3364,6 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Prioritary"
-msgstr ""
-
 #: ../modules/default/views/scripts/route/index.phtml:65
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Priority"
@@ -3875,7 +3372,6 @@ msgstr ""
 #: ../modules/default/controllers/ProfilesController.php:242
 #: ../modules/default/views/scripts/users/addedit.phtml:26
 #: ../modules/default/views/scripts/users/index.phtml:37
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "Profile"
 msgstr ""
 
@@ -3911,23 +3407,18 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:138
 #: ../modules/default/views/scripts/trunks/addedit.phtml:140
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Qualification time"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:120
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:69
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:157
-#: ../modules/default/views/scripts/parameters/index.phtml:180
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:197
 msgid "Qualify"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:234
 #: ../modules/default/views/scripts/ranking-report/index.phtml:51
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
 msgid "Quantity"
 msgstr ""
 
@@ -3943,22 +3434,18 @@ msgid "Queue Alert"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:9
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Queue Name"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:216
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Queue Priority"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:61
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Queue Service Level Agreement (Used for statistics and monitoring)"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:84
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Queue notice audio"
 msgstr ""
 
@@ -3989,18 +3476,11 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:98
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:185
 #: ../modules/default/views/scripts/trunks/addedit.phtml:62
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "RFC-2833"
 msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:51
 msgid "Randomly (random)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "Range of Agents"
 msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:67
@@ -4013,7 +3493,6 @@ msgid "Ranking Options"
 msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:48
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
 msgid "Ranking Type"
 msgstr ""
 
@@ -4025,14 +3504,6 @@ msgstr ""
 msgid "Real Time"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/logs.xml
-msgid "Real time"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "Received"
-msgstr ""
-
 #: /var/www/html/snep/configs/titleOptions.xml
 msgid "Recharge the page"
 msgstr ""
@@ -4042,12 +3513,11 @@ msgstr ""
 msgid "Record"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:161
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:178
 msgid "Recorded Files Path"
 msgstr ""
 
-#: ../modules/default/controllers/ParametersController.php:167
+#: ../modules/default/controllers/ParametersController.php:174
 msgid "Recorded Files Path: Invalid path"
 msgstr ""
 
@@ -4056,13 +3526,11 @@ msgstr ""
 msgid "Recording"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:128
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:159
 msgid "Recording Application"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:139
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:170
 msgid "Recording Parameters"
 msgstr ""
 
@@ -4102,7 +3570,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:46
 #: ../modules/default/views/scripts/trunks/addedit.phtml:48
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Remote Host"
 msgstr ""
 
@@ -4154,10 +3621,6 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/index.phtml:193
 #: ../modules/default/views/scripts/khomp-links/index.phtml:21
 #: ../modules/default/views/scripts/ranking-report/index.phtml:85
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "Report Type"
 msgstr ""
 
@@ -4203,7 +3666,6 @@ msgid "Reset Counters"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:47
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Rest time for agent in between calls"
 msgstr ""
 
@@ -4272,7 +3734,6 @@ msgid "Rewriting source to %s"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:25
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Ring time per agent"
 msgstr ""
 
@@ -4338,16 +3799,12 @@ msgid "SEQ"
 msgstr ""
 
 #: ../modules/default/views/scripts/services-report/index.phtml:74
-#: /var/www/html/snep/modules/default/forms/services_report.xml
 msgid "SIGAME"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:74
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:47
 #: ../modules/default/views/scripts/trunks/addedit.phtml:31
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "SIP"
 msgstr ""
 
@@ -4368,7 +3825,6 @@ msgid "SNEP - the Queue "
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:302
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Same on both servers"
 msgstr ""
 
@@ -4399,7 +3855,7 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:36
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:41
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:42
-#: ../modules/default/views/scripts/parameters/index.phtml:190
+#: ../modules/default/views/scripts/parameters/index.phtml:207
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:33
 #: ../modules/default/views/scripts/profiles/addedit.phtml:33
 #: ../modules/default/views/scripts/profiles/permission.phtml:29
@@ -4455,12 +3911,7 @@ msgstr ""
 msgid "Seconds left to alert"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Select"
 msgstr ""
 
@@ -4566,23 +4017,12 @@ msgid "Sending SMS"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:16
-#: /var/www/html/snep/modules/default/forms/installer.xml
 msgid "Senha"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:200
-msgid "Senha do Administrador"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "Separate with ;"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:59
 #: ../modules/default/views/scripts/calls-report/index.phtml:96
 #: ../modules/default/views/scripts/services-report/index.phtml:58
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 msgid "Separated by a comma"
 msgstr ""
 
@@ -4593,10 +4033,6 @@ msgstr ""
 #: ../modules/default/controllers/ServicesReportController.php:210
 #: ../modules/default/views/scripts/services-report/view.phtml:37
 msgid "Service"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "Service State"
 msgstr ""
 
 #: ../modules/default/views/scripts/services-report/index.phtml:67
@@ -4619,12 +4055,7 @@ msgid "Settings"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:183
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Should calls be ejected from queue if all agents logout?"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "Show 'n' source ranking"
 msgstr ""
 
 #: ../modules/default/views/scripts/logs/index.phtml:77
@@ -4641,13 +4072,8 @@ msgstr ""
 msgid "Show Report"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "Show TOP 'n' by source"
-msgstr ""
-
 #: ../modules/default/views/scripts/parameters/index.phtml:21
 #: ../modules/default/views/scripts/parameters/index.phtml:23
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
 msgid "Show error message events if activated"
 msgstr ""
 
@@ -4693,7 +4119,6 @@ msgid "Signal Lost"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:209
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Silent time before connecting the agent to a caller"
 msgstr ""
 
@@ -4709,20 +4134,7 @@ msgid "Simulator"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:94
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Simultaneous Call Limit"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid ""
-"Sintax: ramal_inicial-ramal_final ; ramal_inicial-ramal_final\n"
-"                        Example: 300-312 ; 333-335 ; ..."
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid ""
-"Sintax:Init_Exten-Final_Exten ; Init_Exten-Final_Exten\n"
-"                        Example: 300-312 ; 333-335"
 msgstr ""
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:303
@@ -4730,7 +4142,6 @@ msgid "Size"
 msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:16
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
 msgid "Snep Debug"
 msgstr ""
 
@@ -4738,12 +4149,7 @@ msgstr ""
 msgid "Snep IAX"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Snep IAX2"
-msgstr ""
-
 #: ../modules/default/views/scripts/trunks/addedit.phtml:35
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Snep SIP"
 msgstr ""
 
@@ -4766,10 +4172,6 @@ msgstr ""
 msgid ""
 "Some internal error occured while processing your request. Please contact "
 "the system administrator and report this incident."
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "Sort Results"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:6
@@ -4803,18 +4205,14 @@ msgstr ""
 #: ../modules/default/views/scripts/simulator/index.phtml:16
 #: ../modules/default/views/scripts/simulator/index.phtml:46
 #: ../modules/default/views/scripts/simulator/index.phtml:79
-#: /var/www/html/snep/modules/default/forms/logs.xml
 msgid "Source"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:57
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 msgid "Source Extensions"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:46
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "Source Group"
 msgstr ""
 
@@ -4824,17 +4222,12 @@ msgid "Source: %s"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:132
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Specify"
 msgstr ""
 
 #: ../modules/default/views/scripts/pagination.phtml:4
 #: ../modules/default/views/scripts/pagination.phtml:6
 msgid "Start"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-msgid "Start charging Time"
 msgstr ""
 
 #: ../modules/default/views/scripts/carrier/index.phtml:13
@@ -4846,7 +4239,6 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/addedit.phtml:48
 #: ../modules/default/views/scripts/contacts/addedit.phtml:71
 #: ../modules/default/views/scripts/contacts/index.phtml:44
-#: /var/www/html/snep/modules/default/forms/contacts.xml
 msgid "State"
 msgstr ""
 
@@ -4869,8 +4261,6 @@ msgstr ""
 #: ../modules/default/views/scripts/ip-status/index.phtml:186
 #: ../modules/default/views/scripts/notifications/index.phtml:34
 #: ../modules/default/views/scripts/services-report/view.phtml:38
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Status"
 msgstr ""
@@ -4889,17 +4279,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/queues/index.phtml:39
 msgid "Strategy"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "StringLength"
 msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:65
@@ -4939,8 +4318,6 @@ msgstr ""
 #: ../modules/default/controllers/CallsReportController.php:334
 #: ../modules/default/views/scripts/calls-report/index.phtml:200
 #: ../modules/default/views/scripts/khomp-links/index.phtml:28
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
 msgid "Synthetic"
 msgstr ""
 
@@ -4948,13 +4325,11 @@ msgstr ""
 msgid "System Diagnosis"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:112
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:143
 msgid "System Language"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:101
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:132
 msgid "System Locale"
 msgstr ""
 
@@ -4988,10 +4363,6 @@ msgstr ""
 msgid "TDM"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "TDM/Virtual"
-msgstr ""
-
 #: ../modules/default/views/scripts/export-data/index.phtml:6
 msgid "Table"
 msgstr ""
@@ -5012,24 +4383,15 @@ msgstr ""
 msgid "Testar Novamente"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/expression_alias.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "Text"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:264
-msgid "The Destination Exceptions is required."
-msgstr ""
-
-#: ../modules/default/controllers/ParametersController.php:49
+#: ../modules/default/controllers/ParametersController.php:48
 msgid "The File includes/setup.conf does not have permission to be modified."
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:267
+#: ../modules/default/views/scripts/parameters/index.phtml:279
 msgid "The Recorded Files Path is required."
 msgstr ""
 
@@ -5086,7 +4448,7 @@ msgstr ""
 msgid "The email is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:256
+#: ../modules/default/views/scripts/parameters/index.phtml:271
 msgid "The email is required."
 msgstr ""
 
@@ -5112,11 +4474,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:438
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:274
 msgid "The extension is required"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid ""
-"The extension list must follow the format from this example. EX: 8000;8001"
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsController.php:646
@@ -5202,7 +4559,7 @@ msgstr ""
 msgid "The hash is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:244
+#: ../modules/default/views/scripts/parameters/index.phtml:259
 msgid "The hostname is required."
 msgstr ""
 
@@ -5210,7 +4567,7 @@ msgstr ""
 msgid "The last name is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:260
+#: ../modules/default/views/scripts/parameters/index.phtml:275
 msgid "The linelimit is required."
 msgstr ""
 
@@ -5240,12 +4597,16 @@ msgstr ""
 msgid "The name is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:238
+#: ../modules/default/views/scripts/parameters/index.phtml:253
 msgid "The name is required."
 msgstr ""
 
 #: ../modules/default/controllers/ErrorController.php:43
 msgid "The page you are looking for was not found or does not exists."
+msgstr ""
+
+#: ../modules/default/controllers/InstallerController.php:216
+msgid "The password confirmation is not equal to informed password"
 msgstr ""
 
 #: ../modules/default/views/layouts/loginregister.phtml:88
@@ -5257,7 +4618,7 @@ msgstr ""
 msgid "The password is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:253
+#: ../modules/default/views/scripts/parameters/index.phtml:268
 msgid "The password is required."
 msgstr ""
 
@@ -5322,7 +4683,7 @@ msgstr ""
 msgid "The username is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:250
+#: ../modules/default/views/scripts/parameters/index.phtml:265
 msgid "The username is required."
 msgstr ""
 
@@ -5339,21 +4700,6 @@ msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:366
 msgid "There is no contacts group registered."
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "This email is not valid"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "This field shoud contain only numbers"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "This field should contain numbers only"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/error-export.phtml:8
@@ -5374,16 +4720,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:55
 #: ../modules/default/views/scripts/simulator/index.phtml:81
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
 msgid "Time"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/index.phtml:42
 msgid "Time Credit (h:m:s)"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-msgid "Time Total"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:200
@@ -5399,8 +4740,7 @@ msgstr ""
 msgid "Timeout"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:90
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
+#: ../modules/default/views/scripts/parameters/index.phtml:121
 msgid "Timezone"
 msgstr ""
 
@@ -5412,17 +4752,12 @@ msgstr ""
 #: ../modules/default/views/scripts/logs/index.phtml:42
 #: ../modules/default/views/scripts/ranking-report/index.phtml:29
 #: ../modules/default/views/scripts/services-report/index.phtml:26
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
 msgid "To"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:30
 msgid ""
 "To confirm your registration, an email was sent with the confirmation key."
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-msgid "To group"
 msgstr ""
 
 #: ../modules/default/views/layouts/loginregister.phtml:31
@@ -5433,20 +4768,6 @@ msgstr ""
 msgid ""
 "To register your Snep you must be connected to an internet network. Check "
 "your connection and try again."
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/queues.xml
-msgid ""
-"To witch context the call must go when the caller dial any number while "
-"waiting"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "To:"
 msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:49
@@ -5466,10 +4787,6 @@ msgstr ""
 msgid "Totals"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "True"
-msgstr ""
-
 #: ../lib/PBX/Rule/ActionConfig.php:173
 #: ../modules/default/controllers/RouteController.php:60
 #: ../modules/default/views/scripts/extensions/addedit.phtml:236
@@ -5477,13 +4794,7 @@ msgstr ""
 #: ../modules/default/views/scripts/route/add_edit.phtml:35
 #: ../modules/default/views/scripts/simulator/index.phtml:19
 #: ../modules/default/views/scripts/trunks/addedit.phtml:7
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Trunk"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Trunk type"
 msgstr ""
 
 #: ../modules/default/controllers/TrunksController.php:94
@@ -5495,7 +4806,7 @@ msgstr ""
 msgid "Trunks"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:177
+#: ../modules/default/views/scripts/parameters/index.phtml:194
 msgid "Trunks Configuration"
 msgstr ""
 
@@ -5519,9 +4830,6 @@ msgstr ""
 #: ../modules/default/views/scripts/systemstatus/index.phtml:154
 #: ../modules/default/views/scripts/trunks/addedit.phtml:22
 #: ../modules/default/views/scripts/trunks/index.phtml:40
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Type"
 msgstr ""
 
@@ -5538,7 +4846,6 @@ msgid "Type Cost Center"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:363
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Type of control"
 msgstr ""
 
@@ -5638,18 +4945,21 @@ msgstr ""
 msgid "User or password invalid"
 msgstr ""
 
+#: ../modules/default/controllers/InstallerController.php:227
+msgid "User or password is not accepted by Asterisk"
+msgstr ""
+
 #: ../modules/default/controllers/CallsReportController.php:432
 msgid "Userfield"
 msgstr ""
 
 #: ../modules/default/views/scripts/auth/recuperation.phtml:14
 #: ../modules/default/views/scripts/auth/redefine.phtml:21
-#: ../modules/default/views/scripts/parameters/index.phtml:39
+#: ../modules/default/views/scripts/parameters/index.phtml:69
+#: ../modules/default/views/scripts/parameters/index.phtml:103
 #: ../modules/default/views/scripts/trunks/addedit.phtml:94
 #: ../modules/default/views/scripts/trunks/addedit.phtml:96
 #: ../modules/default/views/scripts/users/addedit.phtml:5
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Username"
 msgstr ""
 
@@ -5672,12 +4982,7 @@ msgid "Users can enter the queue without Agents Present?"
 msgstr ""
 
 #: ../modules/default/views/scripts/installer/installed.phtml:15
-#: /var/www/html/snep/modules/default/forms/installer.xml
 msgid "Usuário"
-msgstr ""
-
-#: ../modules/default/controllers/InstallerController.php:227
-msgid "Usuário ou senha recusada pelo servidor Asterisk"
 msgstr ""
 
 #: ../modules/default/views/scripts/route/elements/time.phtml:2
@@ -5702,24 +5007,13 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "View Charging"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "View recording files"
-msgstr ""
-
 #: ../modules/default/views/scripts/khomp-links/index.phtml:35
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
 msgid "View status of the channel?"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:77
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:49
 #: ../modules/default/views/scripts/trunks/addedit.phtml:34
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
 msgid "Virtual"
 msgstr ""
 
@@ -5746,26 +5040,15 @@ msgid "Você será conduzido na instalação do SNEP."
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:273
-#: /var/www/html/snep/modules/default/forms/extensions.xml
 msgid "Voicemail"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:154
-msgid "WAV"
-msgstr ""
-
 #: ../modules/default/views/scripts/queues/addedit.phtml:39
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Wait time until ringing all agents again"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:196
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "Warn agent the time that call waited in queue"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/logs.xml
-msgid "Warning"
 msgstr ""
 
 #: ../modules/default/views/layouts/loginregister.phtml:29
@@ -5809,17 +5092,14 @@ msgid ""
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:88
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Without Authentication"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:44
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Without buffer"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:45
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
 msgid "Without buffer quiet"
 msgstr ""
 
@@ -5840,10 +5120,6 @@ msgstr ""
 msgid "XX.XXX-XXX"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "Year"
-msgstr ""
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:141
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:84
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:171
@@ -5857,11 +5133,6 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:33
 #: ../modules/default/views/scripts/trunks/addedit.phtml:125
 #: ../modules/default/views/scripts/trunks/addedit.phtml:234
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
 msgid "Yes"
 msgstr ""
 
@@ -5975,7 +5246,7 @@ msgid "Your browser does not support the audio element."
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:462
-#: ../modules/default/views/scripts/parameters/index.phtml:257
+#: ../modules/default/views/scripts/parameters/index.phtml:272
 #: ../modules/default/views/scripts/register/index.phtml:89
 #: ../modules/default/views/scripts/users/addedit.phtml:81
 msgid "Your email address must be in the format of name@domain.com"
@@ -5993,7 +5264,6 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/addedit.phtml:91
 #: ../modules/default/views/scripts/contacts/addedit.phtml:93
 #: ../modules/default/views/scripts/contacts/index.phtml:45
-#: /var/www/html/snep/modules/default/forms/contacts.xml
 msgid "Zip Code"
 msgstr ""
 
@@ -6017,28 +5287,6 @@ msgstr ""
 msgid "action-configs/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "alaw"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-msgid "analitic"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "by data"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "by destination"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "by source"
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:461
 msgid "calls"
 msgstr ""
@@ -6049,23 +5297,6 @@ msgstr ""
 
 #: /var/www/html/snep/configs/titleOptions.xml
 msgid "chart_view_icon.png"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "checkbox"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-msgid "checked"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "codec"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
@@ -6088,27 +5319,12 @@ msgstr ""
 msgid "contacts/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-msgid "contactsForm"
-msgstr ""
-
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "cost-center/add"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "cost-center/index"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "dd/mm/YYYY hh:mm"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "dd/mm/aaaa"
 msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:69
@@ -6145,10 +5361,6 @@ msgstr ""
 msgid "expression-alias/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/expression_alias.xml
-msgid "expressionAliasForm"
-msgstr ""
-
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "extensions-groups/add"
 msgstr ""
@@ -6173,19 +5385,6 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-#: /var/www/html/snep/modules/default/forms/extensions_groups.xml
-#: /var/www/html/snep/modules/default/forms/member.xml
-#: /var/www/html/snep/modules/default/forms/permission.xml
-msgid "hidden"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "ilbc"
-msgstr ""
-
 #: /var/www/html/snep/configs/titleOptions.xml
 msgid "import_icon.png"
 msgstr ""
@@ -6200,7 +5399,6 @@ msgstr ""
 
 #: ../modules/default/actions/DiscarRamal.php:183
 #: ../modules/default/views/scripts/action-configs/edit.phtml:9
-#: /var/www/html/snep/modules/default/forms/queues.xml
 msgid "in seconds"
 msgstr ""
 
@@ -6220,28 +5418,12 @@ msgstr ""
 msgid "logs/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-msgid "lst"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "mp3"
-msgstr ""
-
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "music-on-hold/add"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "music-on-hold/index"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "no"
 msgstr ""
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:74
@@ -6261,14 +5443,6 @@ msgstr ""
 msgid "no trunk available"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "normal"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-msgid "num"
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:15
 msgid "off"
 msgstr ""
@@ -6279,17 +5453,6 @@ msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "parameters/index"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "password"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "peer"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
@@ -6324,23 +5487,6 @@ msgstr ""
 msgid "queues/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensions_groups.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "radio"
-msgstr ""
-
 #: ../modules/default/controllers/RankingReportController.php:206
 msgid "ranking"
 msgstr ""
@@ -6359,26 +5505,8 @@ msgstr ""
 msgid "record-report/index"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "regex"
-msgstr ""
-
 #: /var/www/html/snep/configs/titleOptions.xml
 msgid "report_view_icon.png"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "rfc2833"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
@@ -6391,24 +5519,6 @@ msgstr ""
 
 #: /var/www/html/snep/modules/default/forms/route.xml
 msgid "routeForm"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-msgid "seconds"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/billing.xml
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/filter.xml
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "select"
 msgstr ""
 
 #: /var/www/html/snep/configs/titleOptions.xml
@@ -6543,45 +5653,12 @@ msgstr ""
 msgid "sn-usuarios"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/installer.xml
-msgid "snep"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/queues.xml
-msgid "sound file played for the agent to indicate him about a new call"
-msgstr ""
-
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "sound-files/add"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "sound-files/index"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/billing.xml
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups.xml
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/extensions_groups.xml
-#: /var/www/html/snep/modules/default/forms/filter.xml
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/pickupGroup.xml
-#: /var/www/html/snep/modules/default/forms/profiles.xml
-#: /var/www/html/snep/modules/default/forms/queueGroup.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
-msgid "text"
 msgstr ""
 
 #: ../modules/default/actions/ActionLoop.php:93
@@ -6592,32 +5669,7 @@ msgstr ""
 msgid "to"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/billing.xml
-#: /var/www/html/snep/modules/default/forms/calls_report.xml
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups.xml
-#: /var/www/html/snep/modules/default/forms/contact_groups_migration.xml
-#: /var/www/html/snep/modules/default/forms/contacts.xml
-#: /var/www/html/snep/modules/default/forms/cost_center.xml
-#: /var/www/html/snep/modules/default/forms/expression_alias.xml
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensions_groups.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/installer.xml
-#: /var/www/html/snep/modules/default/forms/khomp_links.xml
-#: /var/www/html/snep/modules/default/forms/logs.xml
-#: /var/www/html/snep/modules/default/forms/music_on_hold.xml
-#: /var/www/html/snep/modules/default/forms/profiles.xml
-#: /var/www/html/snep/modules/default/forms/queueGroup.xml
-#: /var/www/html/snep/modules/default/forms/queues.xml
-#: /var/www/html/snep/modules/default/forms/ranking_report.xml
-#: /var/www/html/snep/modules/default/forms/record_report.xml
 #: /var/www/html/snep/modules/default/forms/route.xml
-#: /var/www/html/snep/modules/default/forms/services_report.xml
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-#: /var/www/html/snep/modules/default/forms/sound_files.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-#: /var/www/html/snep/modules/default/forms/users.xml
 msgid "true"
 msgstr ""
 
@@ -6627,21 +5679,6 @@ msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "trunks/index"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "ulaw"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/carrier.xml
-msgid "use dot for decimal"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-msgid "users"
 msgstr ""
 
 #: /var/www/html/snep/configs/dashboard.xml
@@ -6656,10 +5693,6 @@ msgstr ""
 msgid "view"
 msgstr ""
 
-#: /var/www/html/snep/modules/default/forms/setup.conf.xml
-msgid "wav"
-msgstr ""
-
 #: ../modules/default/controllers/ProfilesController.php:289
 #: ../modules/default/controllers/ProfilesController.php:309
 #: ../modules/default/controllers/UsersController.php:260
@@ -6668,10 +5701,4 @@ msgstr ""
 
 #: /var/www/html/snep/modules/default/info.xml
 msgid "www.sneplivre.com.br"
-msgstr ""
-
-#: /var/www/html/snep/modules/default/forms/extensions.xml
-#: /var/www/html/snep/modules/default/forms/extensionsMulti.xml
-#: /var/www/html/snep/modules/default/forms/trunks.xml
-msgid "yes"
 msgstr ""

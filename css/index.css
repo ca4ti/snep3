@@ -1,10 +1,23 @@
 /* 
-    Document   : index.css
-    Created on : Dec 2, 2010, 2:54:10 PM
-    Author     : Henrique Grolil Bassotto
-    Description:
-        Folha de estilos que descreve a aparência específica das telas de indíce
-*/
+ *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * CSS File - generic for any modules/default/views/scripts  
+ */
 
 table {
     width: 100%;

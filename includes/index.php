@@ -1,6 +1,8 @@
 <?php
 /**
- *  This file is part of SNEP.
+*  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
  */
 
 header("Location: ../index.php");

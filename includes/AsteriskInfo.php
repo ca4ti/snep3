@@ -1,6 +1,8 @@
 <?php
 /**
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +20,9 @@
 
 /**
  * Classe para coleta de informações sobre o asterisk.
- * Essa classe tem a inten��o de ser uma classe de compactibilidade para o
- * snep ou seja, ainda precisa ser reescrito algum c�digo de outras classes
- * para uma melhor utiliza��o do código, isso inclui a classe
+ * Essa classe tem a intencaoo de ser uma classe de compatibilidade para o
+ * snep ou seja, ainda precisa ser reescrito algum codigo de outras classes
+ * para uma melhor utilizacao do código, isso inclui a classe
  * AGI_AsteriskManager que precisa ser adaptada para Singleton
  */
 class AsteriskInfo {

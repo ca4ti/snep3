@@ -121,5 +121,11 @@ XML;
         if($result['result'] == -1) {
             throw new PBX_Rule_Action_Exception_StopExecution();
         }
+	$blind = $asterisk->get_variable("BLINDTRANSFER");
+	$asterisk->verbose($blind);
+	if($blind['result'] == 1) {
+	  $log->debug("Resultado da variavel BLINDTRANFER preenchida, ligacao transferida");
+	    throw new PBX_Rule_Action_Exception_StopExecution();
+	}
     }
 }

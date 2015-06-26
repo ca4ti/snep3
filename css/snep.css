@@ -124,7 +124,7 @@ b,strong {
 label.valid {
     width: 18px;
     height: 18px;
-    background: url(/snep/imagens/true.png) no-repeat;
+    background: url(/snep/images/true.png) no-repeat;
     display: inline-block;
     text-indent: -9999px;
     float: right;
@@ -627,7 +627,7 @@ ul.snep-menu-list{
     width: 30px;
     height: 30px;
     border: none;
-    background: url(/snep/imagens/add.png) no-repeat;
+    background: url(/snep/images/add.png) no-repeat;
     background-position: center;
     background-color: #F8F9FB;
     margin: 0px 0px 0px 5px;
@@ -1143,7 +1143,7 @@ span.snep-list-sounds{
     padding-left: 0;
 }
 .simpleplayer-play-control {
-    background-image: url('../imagens/play.png');
+    background-image: url('../images/play.png');
     display: block;
     width: 16px;
     height: 16px;
@@ -1151,10 +1151,10 @@ span.snep-list-sounds{
     position: relative;
 }
 .simpleplayer-play-control:hover {
-    background-image: url('../imagens/playing.png');
+    background-image: url('../images/playing.png');
 }
 .simpleplayer-stop-control {
-    background-image: url('../imagens/stop.png');
+    background-image: url('../images/stop.png');
     display: block;
     width: 16px;
     height: 16px;
@@ -1162,7 +1162,7 @@ span.snep-list-sounds{
     position: relative;
 }
 .simpleplayer-stop-control:hover {
-    background-image: url('../imagens/stoped.png');
+    background-image: url('../images/stoped.png');
 }
 .sound-file-player, .sound-file-player:before, .sound-file-player:after {
     -webkit-box-sizing: content-box;
@@ -1266,7 +1266,7 @@ span.snep-list-sounds{
     width: 30px;
     height: 30px;
     border: none;
-    background-image: url(/snep/imagens/remover.png);
+    background-image: url(/snep/images/remover.png);
     background-repeat: no-repeat;
     background-position: center;
     background-color: #F8F9FB;
@@ -1277,7 +1277,7 @@ span.snep-list-sounds{
     width: 30px;
     height: 30px;
     border: none;
-    background-image: url(/snep/imagens/adicionar.png);
+    background-image: url(/snep/images/adicionar.png);
     background-repeat: no-repeat;
     background-position: center;
     background-color: #F8F9FB;

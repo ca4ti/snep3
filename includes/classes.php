@@ -20,7 +20,7 @@
  * Classe Bar_Graph - Monta uma linha horizontal para exibicao grafica
  * Recebe : array($parrams), com os seguintes valores:
  *          a = Valor percentual
- * Retorna: Linha de "imagens"  que compoe uma barra horizontal do grafico
+ * Retorna: Linha de "images"  que compoe uma barra horizontal do grafico
  *----------------------------------------------------------------------------*/
 
 /**
@@ -42,16 +42,16 @@ class Bar_Graph {
         
         if ($a < 10) {
             $ret="<table class=subtable border=0 cellpadding=0 cellspacing=0 width=100%><tr>" ;
-            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../imagens/greenbar_middle.gif) repeat-x;">'."</td><td class=subtable style=".'"text-align:left;color: #000;font-weight: bold" '." width=".(100-$a)."%>$a%</td></tr></table>" ;
+            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../images/greenbar_middle.gif) repeat-x;">'."</td><td class=subtable style=".'"text-align:left;color: #000;font-weight: bold" '." width=".(100-$a)."%>$a%</td></tr></table>" ;
         } elseif ($a >= 10  && $a < 50) {
             $ret="<table class=subtable border=0 cellpadding=0 cellspacing=0 width=100%><tr>" ;
-            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../imagens/greenbar_middle.gif) repeat-x;text-align:right;color: #000;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
+            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../images/greenbar_middle.gif) repeat-x;text-align:right;color: #000;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
         } elseif ($a >= 50  && $a < 80) {
             $ret="<table class=subtable border=0 cellpadding=0 cellspacing=0 width=100%><tr>" ;
-            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../imagens/orangebar_middle.gif) repeat-x;text-align:right;color: #FFF;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
+            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../images/orangebar_middle.gif) repeat-x;text-align:right;color: #FFF;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
         } else {
             $ret="<table class=subtable border=0 cellpadding=0 cellspacing=0 width=100%><tr>" ;
-            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../imagens/redbar_middle.gif) repeat-x;text-align:right;color: #FFF;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
+            $ret.="<td class=subtable height=16 width=$a% style=".'"background: url(../images/redbar_middle.gif) repeat-x;text-align:right;color: #FFF;font-weight: bold">'."$a% </td><td class=subtable width=".(100-$a)."%></td></tr></table>" ;
         } 
 
        return $ret ;

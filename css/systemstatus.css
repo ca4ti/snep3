@@ -196,15 +196,15 @@ td.graphBar{
 }
 
 .bar_color_red { 
-    background: url(../imagens/status_level_bar_red.png) repeat-x;
+    background: url(../images/status_level_bar_red.png) repeat-x;
 }
 
 .bar_color_green { 
-    background: url(../imagens/status_level_bar_green.png) repeat-x;
+    background: url(../images/status_level_bar_green.png) repeat-x;
 }
 
 .bar_color_yellow { 
-    background: url(../imagens/status_level_bar_yellow.png) repeat-x;
+    background: url(../images/status_level_bar_yellow.png) repeat-x;
 
 }
 
@@ -217,15 +217,15 @@ div.statusIndicator{
 }
 
 .green{
-    background: url(../imagens/ok_icon_status_bar.png) transparent no-repeat;
+    background: url(../images/ok_icon_status_bar.png) transparent no-repeat;
 }
 
 .yellow{
-    background: url(../imagens/status_bar_attention_icon.png) transparent no-repeat;
+    background: url(../images/status_bar_attention_icon.png) transparent no-repeat;
 }
 
 .red{
-    background: url(../imagens/status_bar_alert_icon.png) transparent no-repeat;
+    background: url(../images/status_bar_alert_icon.png) transparent no-repeat;
 }
 
 /*error inspector*/

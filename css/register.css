@@ -22,7 +22,7 @@
 div.logoregister{
     width: 100%;
     height: 100px;
-    background: url(../imagens/snep-logo.png) transparent no-repeat top center;
+    background: url(../images/snep-logo.png) transparent no-repeat top center;
     position: relative ;
 }
 
@@ -37,7 +37,7 @@ div.register{
 }
 
 .registerbody{
-    background: url(../imagens/register.jpg) ;
+    background: url(../images/register.jpg) ;
 }
 .noregister {
     text-align: center;

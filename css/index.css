@@ -67,22 +67,22 @@ td, th {
 }
 
 .links .remove {
-    background: url("../imagens/menos.png") no-repeat center left;
+    background: url("../images/menos.png") no-repeat center left;
 }
 
 .links .include {
-    background: url("../imagens/include.png") no-repeat center left;
+    background: url("../images/include.png") no-repeat center left;
 }
 .links .back {
-    background: url("../imagens/back.png") no-repeat center left;
+    background: url("../images/back.png") no-repeat center left;
 }
 
 .links .refresh {
-    background: url("../imagens/refresh.png") no-repeat center left;
+    background: url("../images/refresh.png") no-repeat center left;
 }
 
 .links .includes {
-    background: url("../imagens/include_all.png") no-repeat center left;
+    background: url("../images/include_all.png") no-repeat center left;
 }
 
 .filtros {

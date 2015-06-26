@@ -65,8 +65,8 @@ jQuery(window).resize(servicesReposition);
 /*end of services footer*/
 
 
-// var imgtrue = pathName+"imagens/true.png";
-// var imgfalse = pathName+"imagens/false.png";
+// var imgtrue = pathName+"images/true.png";
+// var imgfalse = pathName+"images/false.png";
 
 jQuery(document).ready(function(e) {
     /* tolabel*/

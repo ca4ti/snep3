@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-24 15:39-0300\n"
-"PO-Revision-Date: 2015-06-24 15:52-0300\n"
+"PO-Revision-Date: 2015-06-24 16:02-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -867,7 +867,7 @@ msgstr "Chave do Cliente"
 
 #: /Users/fsomensi/Projects/snep/snep-3/snep-develop/modules/default/resources.xml
 msgid "Cnl Update"
-msgstr "Cnl Atualización"
+msgstr "Atualizar CNL"
 
 #: ..//modules/default/views/scripts/conference-rooms/index.phtml:30
 #: ..//modules/default/views/scripts/contact-groups/index.phtml:33
@@ -2559,7 +2559,7 @@ msgstr ""
 
 #: ..//modules/default/views/scripts/cnl/index.phtml:35
 msgid "Mobile"
-msgstr ""
+msgstr "Móvel"
 
 #: ..//modules/default/views/scripts/music-on-hold/addedit.phtml:12
 msgid "Mode"
@@ -2567,7 +2567,7 @@ msgstr "Modo"
 
 #: ..//modules/default/controllers/KhompLinksController.php:198
 msgid "Modem Error"
-msgstr ""
+msgstr "Erro de modem"
 
 #: ..//modules/default/views/layouts/layout.phtml:196
 #: ..//modules/default/views/scripts/systemstatus/index.phtml:118
@@ -2582,7 +2582,7 @@ msgstr "Segunda-feira"
 
 #: ..//modules/default/views/scripts/parameters/index.phtml:163
 msgid "Monitor"
-msgstr ""
+msgstr "Monitor"
 
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:369
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:370
@@ -3935,7 +3935,7 @@ msgstr "Mostra eventuais mensagens de erro se ativado"
 
 #: ..//modules/default/controllers/KhompLinksController.php:42
 msgid "Show links / channels"
-msgstr ""
+msgstr "Exibir links / canais"
 
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:73
 msgid "Show top by destiny"
@@ -5018,8 +5018,8 @@ msgid ""
 "You do not have registered expression alias. <br><br> Click 'Add Expression "
 "Alias' to make the first registration"
 msgstr ""
-"Você não possui alias de expressão registrados. <br> Clique em \"Adicionar "
-"Alias de Expressão\" para fazer seu primeiro registro \n"
+"Você não possui alias de expressão registrados. <br><br> Clique em "
+"\"Adicionar Alias de Expressão\" para fazer seu primeiro registro"
 
 #: ..//modules/default/controllers/ExtensionsController.php:102
 msgid ""

@@ -77,9 +77,8 @@ input{
 	width: 300px !important;
 }
 
-ul#dst, ul#time, ul#orig{
-	/*margin: 10px 10px 10px 0px;*/
-	/*padding: 10px;*/
+ul#dst > li, ul#orig > li, ul#time > li{
+	padding-bottom: 3px;
 }
 /*.snep_form, .snep_form .line {
 	width: 680px !important;

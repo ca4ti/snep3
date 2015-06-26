@@ -17,16 +17,18 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * AGI to provide group resolution
  */
 
 require_once('agi_base.php');
 
 if(!isset($argv[1]) || !is_numeric($argv[1])) {
-   $log->crit("Argumento invalido para primeiro argumento , $argv[1]. Espera-se um ramal");
+   $log->crit("resolv_group: Argument invalid for first parameter , $argv[1]. Wait a extension");
 }
 
 if(!isset($argv[2]) || !is_numeric($argv[2])) {
-   $log->crit("Argumento invalido para segundo argumento , $argv[2]. Espera-se um ramal");
+   $log->crit("resolv_group:: Argument invalid for second parameter , $argv[2]. Wait a extension");
 }
 
 if(isset($argv[3])) {
@@ -41,7 +43,7 @@ try {
     $ramal1 = PBX_Usuarios::get($argv[1]);
 }
 catch(PBX_Exception_NotFound $ex) {
-    $log->info("Ramal {$argv[1]} não encontrado.");
+    $log->info("Extension {$argv[1]} not fount.");
     $asterisk->set_variable($variable, '-1');
 }
 
@@ -49,7 +51,7 @@ try {
     $ramal2 = PBX_Usuarios::get($argv[2]);
 }
 catch(PBX_Exception_NotFound $ex) {
-    $log->info("Ramal {$argv[2]} não encontrado.");
+    $log->info("Extension {$argv[2]} not found.");
     $asterisk->set_variable($variable, '-1');
 }
 
@@ -57,10 +59,10 @@ $group1 = $ramal1->getGroup();
 $group2 = $ramal2->getGroup();
 
 if($group1 == $group2) {
-    $log->crit("Os ramais $ramal1 e $ramal2 pertencem ao mesmo grupo!");
+    $log->crit("The extensions $ramal1 and $ramal2 they are in the same group!");
     $asterisk->set_variable($variable, 'true');
 } else {
-    $log->crit("Os ramais $ramal1 e $ramal2 NAO pertencem ao mesmo grupo!");
+    $log->crit("The extensions $ramal1 and $ramal2 they are not in  the same group!");
     $asterisk->set_variable($variable, 'false');
     $asterisk->stream_file("beeperr");
     $asterisk->stream_file("beeperr");

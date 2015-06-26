@@ -16,10 +16,11 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Process signals from asterisk
  */
-// Tratamento de sinais vindos do asterisk
 
-// Controle da exibição de erros
+// Display errors control
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
@@ -38,11 +39,8 @@ $log = Snep_Logger::getInstance();
 $asterisk = PBX_Asterisk_AGI::getInstance();
 $db = Zend_Registry::get("db");
 $request = $asterisk->requestObj;
-// Adds the modules directory to the snep module system
-//require_once "Snep/Modules.php";
-//Snep_Modules::getInstance()->addPath(APPLICATION_PATH . "/modules");
 
-// Configuração das opções da linha de comando
+// Setting the command line options
 try {
     $opts = new Zend_Console_Getopt(array(
         'version|v' => 'Prints version.',

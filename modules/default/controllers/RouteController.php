@@ -609,6 +609,9 @@ class RouteController extends Zend_Controller_Action {
      */
     public function toogleAction() {
 
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
         $route = $this->getRequest()->getParam('route');
         $regras = PBX_Rules::get($route);
 

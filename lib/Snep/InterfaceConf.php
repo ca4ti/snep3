@@ -49,7 +49,7 @@ class Snep_InterfaceConf {
             if (!is_writable($trunkFileConf)) {
                 throw new PBX_Exception_IO($view->translate("Failed to open file %s with write permission.", $trunkFileConf));
             }
-            /* clean snep-sip.conf file */
+            /* clean .conf file */
             file_put_contents($extenFileConf, '');
 
             /* Register header on output string of the file */

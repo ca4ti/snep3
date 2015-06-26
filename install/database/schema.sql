@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `rtpholdtimeout` char(3) default NULL,
   `secret` varchar(80) default NULL,
   `type` varchar(6) NOT NULL default 'friend',
-  `username` varchar(80) NOT NULL default '',
+  `defaultuser` varchar(80) NOT NULL default '',
   `disallow` varchar(100) default 'all',
   `allow` varchar(100) default 'ulaw;alaw;gsm',
   `musiconhold` varchar(100) default NULL,

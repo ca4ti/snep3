@@ -115,9 +115,8 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add")));
+                    $this->view->translate("Add"))); 
 
-        
         $this->view->extenGroups  = $this->extenGroups;
         $this->view->pickupGroups = $this->pickupGroups;
 
@@ -399,6 +398,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             
             $postData = $this->_request->getParams();
+            
             $postData["exten"] = $this->_request->getParam("id");
 
             $ret = $this->execAdd($postData, true);
@@ -550,7 +550,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.=" SET name='$exten',password='$extenPass' , callerid='$extenName', ";
             $sql.= "context='$context',mailbox='$exten',qualify='$qualify',";
             $sql.= "secret='$secret',type='$type', allow='$allow', fromuser='$exten',";
-            $sql.= "username='$exten',fullcontact='',dtmfmode='$dtmfmode',";
+            $sql.= "defaultuser='$exten',fullcontact='',dtmfmode='$dtmfmode',";
             $sql.= "email='$advEmail', `call-limit`='$callLimit',";
             $sql.= "outgoinglimit='1', incominglimit='1',";
             $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
@@ -560,7 +560,7 @@ class ExtensionsController extends Zend_Controller_Action {
         } else {
             $sql = "INSERT INTO peers (";
             $sql.= "name, password,callerid,context,mailbox,qualify,";
-            $sql.= "secret,type,allow,fromuser,username,fullcontact,";
+            $sql.= "secret,type,allow,fromuser,defaultuser,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
             $sql.= "trunk, `group`, callgroup, time_total, cancallforward, directmedia, ";

@@ -28,12 +28,12 @@
 
                             <select class="form-control" name="exten_group" id="exten_group">
 
-                                <?php foreach($this->extenGroups as $key => $extenGroup){ ?>
-                                    
-                                    <?php if($extenGroup['name'] == $this->extension['group']){?>
-                                        <option selected><?php echo $extenGroup['name'];?></option>
+                                <?php foreach($this->extenGroups as $key => $extenGroup){ 
+                                    $name_view = strtolower($extenGroup['name']) === 'all' ? $this->translate('All') : $extenGroup['name'] ;
+                                    if($extenGroup['name'] == $this->extension['group']){?>
+                                        <option value="<?php echo $extenGroup['name'];?>" selected><?php echo $name_view;?></option>
                                     <?php }else{ ?>
-                                        <option ><?php echo $extenGroup['name'];?></option>
+                                        <option  value="<?php echo $extenGroup['name'];?>"><?php echo $name_view;?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select>

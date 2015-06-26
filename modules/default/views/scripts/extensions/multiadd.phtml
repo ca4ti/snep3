@@ -18,7 +18,9 @@
 
                     <select class="form-control" name="exten_group" id="exten_group">
                         <?php foreach($this->extenGroups as $key => $extenGroup){ ?>
-                            <option><?php echo $extenGroup['name'];?></option>
+                            <option  value="<?php echo $extenGroup['name'];?>">
+                                <?php echo (strtolower($extenGroup['name']) === 'all' ? $this->translate('All') : $extenGroup['name']) ;?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>

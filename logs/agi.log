@@ -249,3 +249,33 @@
 2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Cadeado
 2015-07-02T13:00:01-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 2-Queue
 2015-07-02T13:00:21-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 2-Queue
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000019) para 8000
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000019) para 1-ura
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T13:37:07-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000001a) para 8000
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000001a) para 1-ura
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T13:44:14-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue

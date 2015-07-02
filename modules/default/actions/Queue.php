@@ -86,6 +86,7 @@ class Queue extends PBX_Rule_Action {
         $i18n = $this->i18n;
         $queue = (isset($this->config['queue']))?"<value>{$this->config['queue']}</value>":"";
         $timeout = (isset($this->config['timeout']))?"<value>{$this->config['timeout']}</value>":"";
+        $options = (isset($this->config['options']))?"<value>{$this->config['options']}</value>":"";
 
         return <<<XML
 <params>
@@ -94,6 +95,12 @@ class Queue extends PBX_Rule_Action {
         <label>{$i18n->translate("Queue")}</label>
         $queue
     </queue>
+    <options>
+	<id>options</id>
+        <default>t</default>
+	$options
+	<label>{$i18n->translate("Queue Options")}</label>
+    </options>
 
     <int>
         <id>timeout</id>
@@ -117,7 +124,7 @@ XML;
         $log = Zend_Registry::get('log');
 
         $asterisk->answer();
-        $result = $asterisk->exec('Queue', array($this->config['queue'],'t','','',$this->config['timeout']));
+        $result = $asterisk->exec('Queue', array($this->config['queue'],$this->config['options'],'','',$this->config['timeout']));
         if($result['result'] == -1) {
             throw new PBX_Rule_Action_Exception_StopExecution();
         }

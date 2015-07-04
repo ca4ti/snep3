@@ -74,7 +74,7 @@ class Snep_ExtensionsGroups_Manager {
 
         $select = $db->select()
                 ->from('groups', array('name', 'inherit'))
-                ->where("name not in ('all','users','administrator') ");
+                ->where("name not in ('NULL', 'all') ");
 
         $stmt = $db->query($select);
         $extensionsGroup = $stmt->fetchAll();

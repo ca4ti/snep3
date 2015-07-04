@@ -61,11 +61,12 @@ class MusicOnHoldController extends Zend_Controller_Action {
 
         $sections = Snep_SoundFiles_Manager::getClasses();
 
+
         if(empty($sections)){
             $this->view->error_message = $this->view->translate("You do not have registered session. <br><br> Click 'Add Session' to make the first registration
 ");
         }
-
+        $this->view->modes = $this->modes;
         $this->view->sections = $sections;
 
     }

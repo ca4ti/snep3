@@ -302,7 +302,9 @@ class TrunksController extends Zend_Controller_Action {
                 $this->view->qualify_specify = "checked";
             }
 
-            $this->view->nat = ($ip_info['nat'] === 'no') ? "" : "checked" ;
+            $nat = $ip_info["nat"];
+            $label = "nat_".$nat;
+            $this->view->$label = "checked";            
             
         }
 
@@ -317,7 +319,7 @@ class TrunksController extends Zend_Controller_Action {
         $this->view->virtual = ($technologyTrunk === "virtual" ? "selected" : "");
         $this->view->khomp = ($technologyTrunk === "khomp" ? "selected" : "");
         $this->view->snepsip = ($technologyTrunk === "snepsip" ? "selected" : "");
-        $this->view->snepiax = ($technologyTrunk === "snepiax" ? "selected" : "");
+        $this->view->snepiax2 = ($technologyTrunk === "snepiax2" ? "selected" : "");
         $this->view->techType   = $technologyTrunk; //"selected";
         $this->view->technology = $technologyTrunk;
 
@@ -401,15 +403,6 @@ class TrunksController extends Zend_Controller_Action {
                     }
                     $db->commit();
 
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-
-                        $name = $trunk_data['callerid'];
-                        $id = Snep_Trunks_Manager::getId($name);
-                        Snep_LogUser::salvaLog("Editou tronco", $id["id"], 2);
-                        $edit = Snep_Trunks_Manager::getTrunkLog($id["id"]);
-                        Snep_Trunks_Manager::insertLogTronco("NEW", $edit);
-                    }
                 } catch (Exception $ex) {
                     $db->rollBack();
                     throw $ex;
@@ -499,8 +492,9 @@ class TrunksController extends Zend_Controller_Action {
         $post = $post === null ? $_POST : $post;
 
         $tech = $post['technology'];
-        $trunktype = $post['technology'] = strtoupper($tech);        
-        $ip_trunks = array("sip", "iax2", "snepsip", "snepiax");
+        $trunktype = $post['technology'] = strtoupper($tech);   
+
+        $ip_trunks = array("sip", "iax2", "snepsip", "snepiax2");
 
         $trunk_fields = array(// Only allowed fields for trunks table
             "callerid",
@@ -534,7 +528,7 @@ class TrunksController extends Zend_Controller_Action {
             "secret",
             "type",
             "allow",
-            "username",
+            "defaultuser",
             "dtmfmode",
             "fromdomain",
             "fromuser",
@@ -558,9 +552,12 @@ class TrunksController extends Zend_Controller_Action {
                 "name" => trim($row['name'] + 1),
                 "context" => "default",
                 "trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"),
+                "type" => $trunktype,
             );
         } else {
-            $trunk_data = array("trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"));
+            $trunk_data = array("trunktype" => (in_array($tech, $ip_trunks) ? "I" : "T"),
+            "type" => $trunktype,
+            );
         }
         foreach ($post as $section_name => $section) {
             $trunk_data[$section_name] = $section;
@@ -573,8 +570,6 @@ class TrunksController extends Zend_Controller_Action {
         $trunk_data['map_extensions'] = ($post['map_extensions'] === "map_extensions" ? true : false) ;
 
         $trunk_data['reverse_auth'] = ($post['reverse_auth'] === "reverse_auth" ? true : false) ;
-
-        $trunk_data['nat'] = ($post['nat'] === "on" ? 'yes' : 'no') ;        
         
         $trunk_data['time_total'] = ($post['tempo'] === "tempo" ? $trunk_data['time_total'] : NULL);
         $trunk_data['time_chargeby'] = ($post['tempo'] === "tempo" ? $trunk_data['time_chargeby'] : "");
@@ -585,7 +580,6 @@ class TrunksController extends Zend_Controller_Action {
         if ($trunk_data['qualify'] === 'specify') {
             $trunk_data['qualify'] = trim($trunk_data['qualify_value']);
         }
-
 
         if ($trunktype == "SIP" || $trunktype == "IAX2") {
          
@@ -600,11 +594,13 @@ class TrunksController extends Zend_Controller_Action {
             $trunk_data['id_regex'] = $trunktype . "/" . $trunk_data['username'];
             $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
  
-        } else if ($trunktype == "SNEPSIP" || $trunktype == "SNEPIAX") {
+        } else if ($trunktype === "SNEPSIP" || $trunktype === "SNEPIAX2") {
 
             $trunk_data['peer_type'] = $trunktype == "SNEPSIP" ? "peer" : "friend";
             $trunk_data['username'] = $trunktype == "SNEPSIP" ? $trunk_data['host'] : $trunk_data['identifier'];
             $trunk_data['channel'] = $trunk_data['id_regex'] = substr($trunktype, 4) . "/" . $trunk_data['username'];
+            $trunk_data['qualify'] = 'yes' ;    
+
  
         } else if ($trunktype == "KHOMP") {
 
@@ -638,6 +634,11 @@ class TrunksController extends Zend_Controller_Action {
             "type" => $trunk_data['peer_type'],
         );
         foreach ($trunk_data as $field => $value) {
+
+            if ($field === 'username') {
+                $ip_data['defaultuser'] = $value ;
+            }
+
             if (in_array($field, $ip_fields) && $field != "type") {
                 $ip_data[$field] = $value;
             }
@@ -647,6 +648,8 @@ class TrunksController extends Zend_Controller_Action {
             }
         }
         $ip_data["peer_type"] = "T";
+
+
 
         return array("trunk" => $trunk_data, "ip" => $ip_data);
     }

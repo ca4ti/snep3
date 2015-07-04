@@ -197,7 +197,11 @@ class PBX_Rule_ActionConfig {
         }
 
         $config = Zend_Registry::get('config');
-        foreach (scandir($config->system->path->asterisk->sounds) as $sound) {
+        $lang = $config->system->language ;
+        $language =  ($lang === "en" ? $language = "" : $language = $lang) ;
+        $path_sounds = $config->system->path->asterisk->sounds ;
+        $path_sounds .= '/' . $lang ;
+        foreach (scandir($path_sounds) as $sound) {
             if ($sound !== "." && $sound !== "..") {
                 $sound = pathinfo($sound);
                 $sound = $sound['filename'];
@@ -302,7 +306,7 @@ class PBX_Rule_ActionConfig {
     protected function parseInt($element) {
         $form_element = new Zend_Form_Element_Text((string) $element->id);
         $validate_ìnt = new Zend_Validate_Int();
-        $validate_ìnt->setMessage("Somente números inteiros");
+        $validate_ìnt->setMessage("Only integer numbers");
         $form_element->addValidator($validate_ìnt);
         $form_element->setLabel((string) $element->label);
         $form_element->setAttrib('size', $element->size);

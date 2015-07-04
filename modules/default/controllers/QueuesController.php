@@ -209,21 +209,17 @@ class QueuesController extends Zend_Controller_Action {
         $files = '/var/lib/asterisk/sounds/'.$this->language;
         if (file_exists($files)) {
 
-            $files = scandir($files);
             $sounds = array("" => "");
 
-            foreach ($files as $i => $value) {
-                if (substr($value, 0, 1) == '.') {
-                    unset($files[$i]);
-                    continue;
+            foreach (scandir($files) as $sound) {
+                if ($sound !== "." && $sound !== "..")  {
+                    $sound = pathinfo($sound);
+                    $value = $sound['filename'];
+                    $sounds[$value] = $value;
                 }
-                if (is_dir($files . '/' . $value)) {
-                    unset($files[$i]);
-                    continue;
-                }
-                $sounds[$value] = $value;
             }
         }
+
         $this->view->sounds = $sounds;
 
         
@@ -232,6 +228,8 @@ class QueuesController extends Zend_Controller_Action {
         foreach($this->section as $key => $session){
             $musiconhold .= ($key == $queue['musiconhold']) ? "<option value='".$key . "' selected >".$session." </option>\n": "<option value='".$key . "'>".$session." </option>\n";
         }
+
+        
         $this->view->musiconhold = $musiconhold;
        
         // Queue strategy available x registered
@@ -240,16 +238,18 @@ class QueuesController extends Zend_Controller_Action {
             $strategy .= ($key == $queue['strategy']) ? "<option value='".$key . "' selected >".$strateg." </option>\n": "<option value='".$key . "'>".$strateg." </option>\n";
 
         }
+
         $this->view->strategy = $strategy;
-       
+
         // Others queue definitions       
-        $this->view->$queue['joinempty'] = "checked";
+        $this->view->queue['joinempty'] = "checked";
         
         if($queue['leavewhenempty'] == "1"){
             $this->view->leavewhenemptyTrue = "checked";
         }else{
             $this->view->leavewhenemptyFalse = "checked";
         }
+
         
         if($queue['reportholdtime'] == "1"){
             $this->view->reportholdtimeTrue = "checked";
@@ -260,6 +260,7 @@ class QueuesController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->action = "edit" ;
         $this->view->disabled = "disabled";
+
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         // After POST

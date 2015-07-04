@@ -56,8 +56,8 @@ class PBX_Validate_Extension extends Zend_Validate_Abstract {
      * @var array
      */
     protected $_messageTemplates = array(
-            self::NOT_EXTEN    => "'%value%' não é um ramal cadastrado no Snep",
-            self::STRING_EMPTY => "Valor não pode ser nullo"
+            self::NOT_EXTEN    => "'%value%' It is not a registered extension in Snep",
+            self::STRING_EMPTY => "Value can not be null"
     );
 
     /**

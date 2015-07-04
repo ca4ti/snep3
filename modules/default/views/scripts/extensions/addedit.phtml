@@ -28,12 +28,11 @@
 
                             <select class="form-control" name="exten_group" id="exten_group">
 
-                                <?php foreach($this->extenGroups as $key => $extenGroup){ ?>
-                                    
-                                    <?php if($extenGroup['name'] == $this->extension['group']){?>
-                                        <option selected><?php echo $extenGroup['name'];?></option>
+                                <?php foreach($this->extenGroups as $key => $val){ 
+                                    if($val == $this->extension['group']){?>
+                                        <option value="<?php echo $key;?>" selected><?php echo $val;?></option>
                                     <?php }else{ ?>
-                                        <option ><?php echo $extenGroup['name'];?></option>
+                                        <option  value="<?php echo $key; ?>"><?php echo $val;?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select>
@@ -99,20 +98,27 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo $this->translate("NAT")?></label>
-                            <div class="col-sm-6">
-                                <div class="checkbox">
-                                    <?php if($this->extension['nat'] == 'yes'){?>
-                                        <label>
-                                            <input type="checkbox" name="nat" id="nat" checked/><?php echo $this->translate("Enabled NAT")?>
-                                        </label>
-                                    <?php }else{?>
-                                        <label>
-                                            <input type="checkbox" name="nat" id="nat"/><?php echo $this->translate("Enabled NAT")?>
-                                        </label>
-
-                                    <?php } ?>
-                                    
-                                </div>
+                            <div class="col-sm-7">
+                                <label class="radio-inline">
+                                    <input type="radio" name="nat" id="no" value="no" <?php echo $this->nat_no;?>>
+                                    no
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="nat" id="force_rport" value="force_rport" <?php echo $this->nat_force_rport;?>>
+                                    force_rport
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="nat" id="comedia" value="comedia" <?php echo $this->nat_comedia;?>>
+                                    comedia
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="nat" id="auto_force_rport" value="auto_force_rport" <?php echo $this->nat_auto_force_rport;?>>
+                                    auto_force_rport
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="nat" id="auto_comedia" value="auto_comedia" <?php echo $this->nat_auto_comedia;?>>
+                                    auto_comedia
+                                </label>
                             </div>
                         </div>
 
@@ -120,7 +126,7 @@
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Qualify")?></label>
                             <div class="col-sm-6">
                                 <div class="checkbox">
-                                    <?php if($this->extension['nat'] == 'yes'){?>
+                                    <?php if($this->extension['qualify'] === 'yes'){?>
                                         <label>
                                             <input type="checkbox" name="qualify" id="qualify" checked/><?php echo $this->translate("Enable delay qualification")?>
                                         </label>
@@ -138,11 +144,22 @@
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Direct Media")?></label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes; ?>><?php echo $this->translate("Yes");?>
+                                    <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes;?>>
+                                    yes
                                 </label>
                                 
                                 <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="no" value="no" <?php echo $this->directmediano; ?> ><?php echo $this->translate("No");?>
+                                    <input type="radio" name="directmedia" id="nonat" value="nonat" <?php echo $this->directmedianonat;?>
+                                    >
+                                    nonat
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="directmedia" id="update" value="update" <?php echo $this->directmediaupdate;?>>
+                                    update
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="directmedia" id="outgoing" value="outgoing" <?php echo $this->directmediaoutgoing;?>>
+                                    outgoing
                                 </label>
                             </div>
 
@@ -152,12 +169,18 @@
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Type")?></label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer; ?> ><?php echo $this->translate("Peer");?>
+                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer;?>>
+                                    peer
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type"  value="user" <?php echo $this->typeUser;?>>
+                                    user
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend;?>>
+                                    friend
                                 </label>
                                 
-                                <label class="radio-inline">
-                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend; ?>><?php echo $this->translate("Friend");?>
-                                </label>
                             </div>
                         </div>
 

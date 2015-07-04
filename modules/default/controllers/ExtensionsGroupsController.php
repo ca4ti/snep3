@@ -55,7 +55,7 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         $select = $db->select()
                 ->from("groups", array("name", "inherit"))
-                ->where("name not in ('all','users','administrator','NULL') ");
+                ->where("name not in ('all','NULL') ");
 
         $stmt = $db->query($select);
         $data = $stmt->fetchAll(); 

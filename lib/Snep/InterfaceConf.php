@@ -93,7 +93,7 @@ class Snep_InterfaceConf {
                         if ($trunk->type == "SNEPSIP") {
 
                             /* Assemble trunk entries */
-                            $peers .= '[' . $peer['username'] . "]\n";
+                            $peers .= '[' . $peer['defaultuser'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";
                             $peers .= 'context=' . $peer['context'] . "\n";
                             $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
@@ -106,10 +106,10 @@ class Snep_InterfaceConf {
                             $peers .= "\n";
                         } else if ($trunk->type == "SNEPIAX2") {
                             /* Assemble Extension entries */
-                            $peers .= '[' . $peer['username'] . "]\n";
+                            $peers .= '[' . $peer['defaultuser'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";
-                            $peers .= 'username=' . $peer['username'] . "\n";
-                            $peers .= 'secret=' . $peer['username'] . "\n";
+                            $peers .= 'username=' . $peer['defaultuser'] . "\n";
+                            $peers .= 'secret=' . $peer['defaultuser'] . "\n";
                             $peers .= 'context=' . $peer['context'] . "\n";
                             $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
                             $peers .= 'dtmfmode=' . ($peer['dtmfmode'] ? $peer['dtmfmode'] : "rfc2833") . "\n";
@@ -118,15 +118,16 @@ class Snep_InterfaceConf {
                             $peers .= 'nat=' . $peer['nat'] . "\n";
                             $peers .= 'disallow=' . $peer['disallow'] . "\n";
                             $peers .= 'allow=' . $allow . "\n";
+                            $peers .= 'trunk=yes' . "\n";
+                            $peers .= 'requirecalltoken=no' . "\n";
                             $peers .= "\n";
                         } else if ($trunk->dialmethod != "NOAUTH") {
                             /* Assemble trunk entries */
-                            $peers .= '[' . $peer['username'] . "]\n";
+                            $peers .= '[' . $peer['defaultuser'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";
                             $peers .= 'context=' . $peer['context'] . "\n";
                             $peers .= ( $peer['fromdomain'] != "") ? ('fromdomain=' . $peer['fromdomain'] . "\n") : "";
                             $peers .= ( $peer['fromuser'] != "") ? ('fromuser=' . $peer['fromuser'] . "\n") : "";
-                            $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
                             $peers .= 'dtmfmode=' . ($peer['dtmfmode'] ? $peer['dtmfmode'] : "rfc2833") . "\n";
                             $peers .= 'host=' . $peer['host'] . "\n";
                             $peers .= 'qualify=' . $peer['qualify'] . "\n";
@@ -150,12 +151,16 @@ class Snep_InterfaceConf {
                                 $peers .= 'trunk=' . $peer['trunk'] . "\n";
                             }
                             if ($trunk->reverse_auth) {
-                                $peers .= 'username=' . $peer['username'] . "\n";
+                                $peers .= 'defaultuser=' . $peer['defaultuser'] . "\n";
                                 $peers .= 'secret=' . $peer['secret'] . "\n";
                             }
                             $peers .= "\n";
                         }
-                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['username'] . ":" . $peer['secret'] . "@" . $peer['host'] . ":". $peer['port'] . "\n" : "");
+                        if ($peer['port'] != "") {
+                            $trunk_port = ':' . $peer['port'] . "\n";
+                        }
+                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "\n" : "");
+                        
  
                     } elseif($tech != 'sip') {
                         /* Assemble Extension entries */

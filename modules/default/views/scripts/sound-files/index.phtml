@@ -4,8 +4,6 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 
 $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.js");
-$this->headScript()->appendFile($this->baseUrl() .  '/includes/javascript/registrations.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeItem.js');
 
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
@@ -30,7 +28,8 @@ header('Cache-Control: max-age=0' );
                 
                 <div class="snep-body-search">
                     <?php if($this->key){ ?>
-                        <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  &nbsp;|&nbsp;  
+                        <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                        &nbsp;|&nbsp;  
                     <?php } ?>
                     <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
                 </div>

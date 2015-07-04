@@ -4,8 +4,6 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 
 $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.js");
-$this->headScript()->appendFile($this->baseUrl() .  '/includes/javascript/registrations.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeItem.js');
 
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
@@ -98,7 +96,9 @@ header('Cache-Control: max-age=0' );
 		                                            </audio>
 		                                        </td>
 		                                        <td class="text-center">
-		                                        	<a class="btn btn-down" href="<? echo $callsList->file_name; ?>" download="<? echo $callsList->userfield . ".wav"; ?>" role="button" title="Download"><span class="glyphicon glyphicon-download"></span></a>
+		                                        	<a class="btn btn-down" href="<?php echo $callsList->file_name; ?>" download="<?php echo $callsList->userfield . ".wav"; ?>" role="button" title="Download">
+		                                        		<span class="glyphicon glyphicon-download"></span>
+		                                        	</a>
 		                                        </td>    
 		                                            
 			                                <?php else: ?>

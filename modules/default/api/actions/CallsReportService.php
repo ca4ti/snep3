@@ -17,7 +17,6 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
 
-require_once '../../../includes/classes.php';
 require_once '../../../includes/functions.php';
 
 

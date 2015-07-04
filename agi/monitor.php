@@ -15,12 +15,14 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  
  */
  
 require_once('agi_base.php');
 
-// Definindo nome do arquivo de gravação.
-// Formato: Timestamp_aaaammdd_hhmm_src_dst.wav
+// Define filename record.
+// Format: Timestamp_aaaammdd_hhmm_src_dst.wav
 $filename = implode("_", array(
     time(),
     date("Ymd"),

@@ -1,2 +1,0 @@
-ALTER TABLE trunks ADD `dtmf_dial` BOOLEAN NOT NULL DEFAULT FALSE;
-ALTER TABLE trunks ADD `dtmf_dial_number` VARCHAR(50) DEFAULT NULL;

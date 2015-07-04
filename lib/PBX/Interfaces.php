@@ -48,14 +48,14 @@ class PBX_Interfaces {
      * @param <object> Snep_Interface $interface
      */
     public function addInterface($interface) {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
      * commit - Executa a inclusão no banco de dados
      */
     public function commit() {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
@@ -63,7 +63,7 @@ class PBX_Interfaces {
      * @param <string> id da interface a ser removida do banco de dados do snep.
      */
     public static function delete($interface_id) {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
@@ -73,7 +73,7 @@ class PBX_Interfaces {
      * @return PBX_Asterisk_Interface do tipo correspondente ao presente no banco
      */
     public static function get($id) {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
@@ -86,7 +86,7 @@ class PBX_Interfaces {
      * @return array associativo com as interfaces encontradas.
      */
     public static function getAll($tipo = 'all') {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
     
     /**
@@ -150,7 +150,7 @@ class PBX_Interfaces {
      * seja reconstruida a configuração real das mesmas
      */
     public static function reconfigure() {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
@@ -161,7 +161,7 @@ class PBX_Interfaces {
      * @return id que foi atribuido pelo banco a nova interface
      */
     public static function register($interface) {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 
     /**
@@ -180,6 +180,6 @@ class PBX_Interfaces {
      * interface de mesmo id.
      */
     public static function update($interface) {
-        throw new Exception("Nao suportado por essa versao do snep");
+        throw new Exception("Not supported by this version of Snep");
     }
 }

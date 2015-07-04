@@ -66,6 +66,13 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
 
         $this->extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
+        $this->view->extenGroups = array() ;
+        foreach ($this->extenGroups as $key => $value) {
+            $k = $v = $value['name'] ;
+            $v = strtolower($v) === 'admin' ? $this->view->translate('Administrator') : $v ;
+            $v = strtolower($v) === 'users' ? $this->view->translate('Users') : $v ;
+            $this->view->extenGroups[$k] = $v ;
+        }
 
         $this->pickupGroups = Snep_PickupGroups_Manager::getAll();
 
@@ -115,10 +122,8 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add")));
+                    $this->view->translate("Add"))); 
 
-        
-        $this->view->extenGroups  = $this->extenGroups;
         $this->view->pickupGroups = $this->pickupGroups;
 
 
@@ -159,6 +164,14 @@ class ExtensionsController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
+        $this->view->directmediayes = "checked";
+        $this->view->typeFriend = "checked";
+        $this->view->dtmfrf = "checked";
+        $this->view->nat_force_rport = 'checked' ;
+        $extension = array();
+        $extension['qualify'] = 'yes';
+        $this->view->extension = $extension;
+
 
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
@@ -175,16 +188,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $ret = $this->execAdd($postData);
 
             if (!is_string($ret)) {
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-
-                    $id = $_POST["extension"]["exten"];
-                    Snep_LogUser::salvaLog("Adicionou Ramal", $id, 5);
-
-                    $add = Snep_Extensions_Manager::getPeer($id);
-                    Snep_Extensions_Manager::insertLogRamal("ADD", $add);
-                }
 
                 $this->_redirect('/extensions/');
             } else {
@@ -214,7 +217,6 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->extension = $exten;
             
         // Groups       
-        $this->view->extenGroups = $this->extenGroups;
         $this->view->pickupGroups = $this->pickupGroups;
         
         // Tech Type
@@ -249,19 +251,37 @@ class ExtensionsController extends Zend_Controller_Action {
             case "sip":
             
                 $this->view->directmediayes = "";
-                $this->view->directmediano = "";
-                if($exten['directmedia'] == "yes"){
-                    $this->view->directmediayes = "checked";
-                }else{
-                    $this->view->directmediano = "checked";
+                $this->view->directmedianonat = "";
+                $this->view->directmediaupdate = "";
+                $this->view->directmediaoutgoing = "";
+                switch ($exten['directmedia']) {
+                    case "yes":
+                        $this->view->directmediayes = "checked";
+                        break;
+                    case "nonat":
+                        $this->view->directmedianonat = "checked";
+                        break;
+                    case "outgoing":
+                        $this->view->directmediaoutgoing = "checked";
+                        break;
+                    case "update":
+                        $this->view->directmediaupdate = "checked";
+                        break;
                 }
 
                 $this->view->typePeer = "";
                 $this->view->typeFriend = "";
-                if($exten['type'] == "peer"){
-                    $this->view->typePeer = "checked";
-                }else{
-                    $this->view->typeFriend = "checked";
+                $this->view->typeUser = "";
+                switch ($exten['type']) {
+                    case "peer" :
+                        $this->view->typePeer = "checked";
+                        break ;
+                    case "friend" :
+                        $this->view->typeFriend = "checked";
+                        break ;
+                    case "user" :
+                        $this->view->typeUser = "checked";
+                        break ;
                 }
 
                 $this->view->dtmfrf = "";
@@ -275,6 +295,10 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->dtmfinfo = "checked";
                 }
                 
+                $nat = $exten['nat'];
+                $label = "nat_".$nat;
+                $this->view->$label = "checked"; 
+
                 $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
                 $codecs = explode(";", $exten['allow']);
 
@@ -399,6 +423,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             
             $postData = $this->_request->getParams();
+
             $postData["exten"] = $this->_request->getParam("id");
 
             $ret = $this->execAdd($postData, true);
@@ -454,10 +479,11 @@ class ExtensionsController extends Zend_Controller_Action {
         $directmedia = $formData["directmedia"];
         $callLimit = $formData["calllimit"];
 
-        $nat = 'no';
         if ($techType == 'sip' || $techType == 'iax2') {
-            if (key_exists('nat', $formData)) {
+            if (!key_exists('nat', $formData)) {
                 $nat = 'comedia';
+            } else {
+                $nat = $formData['nat'] ;
             }
         }
 
@@ -469,7 +495,6 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         $type = $formData['type'];
-      
 
         $channel = strtoupper($techType);
 
@@ -550,7 +575,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.=" SET name='$exten',password='$extenPass' , callerid='$extenName', ";
             $sql.= "context='$context',mailbox='$exten',qualify='$qualify',";
             $sql.= "secret='$secret',type='$type', allow='$allow', fromuser='$exten',";
-            $sql.= "username='$exten',fullcontact='',dtmfmode='$dtmfmode',";
+            $sql.= "defaultuser='$exten',fullcontact='',dtmfmode='$dtmfmode',";
             $sql.= "email='$advEmail', `call-limit`='$callLimit',";
             $sql.= "outgoinglimit='1', incominglimit='1',";
             $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
@@ -560,7 +585,7 @@ class ExtensionsController extends Zend_Controller_Action {
         } else {
             $sql = "INSERT INTO peers (";
             $sql.= "name, password,callerid,context,mailbox,qualify,";
-            $sql.= "secret,type,allow,fromuser,username,fullcontact,";
+            $sql.= "secret,type,allow,fromuser,defaultuser,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
             $sql.= "trunk, `group`, callgroup, time_total, cancallforward, directmedia, ";
@@ -590,6 +615,7 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         Snep_InterfaceConf::loadConfFromDb();
+
     }
 
     /**
@@ -660,13 +686,13 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->back = $this->view->translate("Back");
                     $this->renderScript('error/sneperror.phtml');;
                 }
-
                 $return = Snep_InterfaceConf::loadConfFromDb();
 
                 if ($return != true) {
                     $this->view->error_message = $return;
                     $this->renderScript('error/sneperror.phtml');;
                 }
+
                 $this->_redirect("default/extensions");
             }
         }
@@ -751,12 +777,8 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->renderScript('error/sneperror.phtml');
             return;
         }
-
-        $extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
-        $pickupGroups = Snep_PickupGroups_Manager::getAll();
         
-        $this->view->extenGroups = $extenGroups;
-        $this->view->pickupGroups = $pickupGroups;
+        $this->view->pickupGroups = $this->pickupGroups;
 
         $this->view->boardData = $this->boardData;
 
@@ -784,20 +806,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $range = explode(";", $postData["exten"]);
             $this->view->error = "";
             
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-
-                Snep_LogUser::salvaLog("Adicionou Ramais multiplos", $_POST["extension"]["exten"], 5);
-                $tech = $_POST["technology"];
-                $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
-                $add = array();
-                $add["name"] = $_POST["exten"];
-                $add["canal"] = $tech;
-                $add["allow"] = $codecs;
-                $add["dtmfmode"] = $_POST[$tech]["dtmf"];
-                $add["directmedia"] = $_POST[$tech]["directmedia"];
-                Snep_Extensions_Manager::insertLogRamal("ADD R", $add);
-            }
 
             foreach ($range as $exten) {
 
@@ -808,9 +816,10 @@ class ExtensionsController extends Zend_Controller_Action {
 
                     $postData["exten"] = $exten;
                     $postData["password"] = $exten . $exten;
-                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . '<' . $exten . '>';
+                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . ' <' . $exten . '>';
                     $postData["sip"]["password"] = $exten;
                     $postData["iax"]["password"] = $exten;
+                    $postData['type'] = 'friend' ;
 
                     $ret = $this->execAdd($postData);
 
@@ -835,6 +844,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $postData["name"] = $this->view->translate("Extension ") . " " . $i . '<' . $i . '>';
                                 $postData["sip"]["password"] = $i . $i;
                                 $postData["iax2"]["password"] = $i . $i;
+                                $postData['type'] = 'friend' ;
 
                                 $ret = $this->execAdd($postData);
 

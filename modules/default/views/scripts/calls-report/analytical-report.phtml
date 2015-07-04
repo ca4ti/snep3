@@ -1,7 +1,6 @@
 <?php
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
 $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scriptaculous.js');
-$this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 ?>
 
 <div>
@@ -45,7 +44,7 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
             <?php $c = 0; ?>
 			<?php foreach( $this->call_list as $id => $callsList ): ?>
                         <?php ( $c ? $c = 0 : $c = 1 ); ?>
-				<tr  class="c<?php echo $c ?>" >
+				<tr  class="<?php echo $c ?>" >
 					<td>
 					  <?php echo $callsList['id']; ?>
 					</td>
@@ -74,24 +73,18 @@ $this->headScript()->appendFile('/snep/includes/javascript/registrations.js');
 						<?php echo $callsList['city'] ?>
 
 					</td>
-
-				  	<?php if ($this->tariffed): ?>
-					 <td>
-						<?php echo $callsList['rate']; ?>	 
-					 </td>
-				  	<?php endif ?>
 					
 					<?php if ($this->files): ?>
 						<td style="text-align:center">
 						 <?php if ($callsList['userfield'] != ""): ?>
 							<?php if ($callsList['file_path'] != 'N.D.'): ?>
 
-								  <input type="checkbox"  value="<?echo $callsList['file_name']; ?>">
+								  <input type="checkbox"  value="<?php echo $callsList['file_name']; ?>">
 							      <a href="<?php echo $callsList['file_path']; ?>" class="link_esp_1">
-								    <img src="/snep/imagens/ouvir.png" />
+								    <img src="/snep/images/ouvir.png" />
 								  </a>
 							<?php else: ?>
-							   <img src="/snep/imagens/semaudio.png" />
+							   <img src="/snep/images/semaudio.png" />
 							<?php endif ?>
 						<?php else: ?>
 							---

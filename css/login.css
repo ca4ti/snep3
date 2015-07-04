@@ -1,10 +1,24 @@
 /* 
-    Document   : login
-    Created on : Apr 10, 2012, 1:27:39 PM
-    Author     : rodrigoack
-    Description:
-        Purpose of the stylesheet follows.
-*/
+ *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  CSS File for login (modules/default/views/scripts/auth)
+ *                     (modules/default/views/layouts) 
+ */
 root{
     display: block;
     height: 100%;
@@ -64,7 +78,7 @@ div#wrapper{
 div.logo{
     width: 100%;
     height: 91px;
-    background: url(../imagens/snep-enterprise-login.png) transparent no-repeat;
+    background: url(../images/snep-enterprise-login.png) transparent no-repeat;
     margin: 50px 0 50px 50px;
 }
 

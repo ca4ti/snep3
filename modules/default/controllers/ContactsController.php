@@ -255,20 +255,7 @@ class ContactsController extends Zend_Controller_Action {
         }
     }
 
-    /**
-     * getForm
-     * @param <object> $form
-     * @return <object>
-     */
-    protected function getForm($form) {
 
-        $phoneField = new Snep_Form_Element_Html("contacts/elements/phone.phtml", "phone", false);
-        $phoneField->setLabel($this->view->translate("Phone"));
-        $phoneField->setOrder(9);
-        $form->addElement($phoneField);
-        $this->form = $form;
-        return $this->form;
-    }
 
     /**
      * multiRemoveAction - Remove various contacts

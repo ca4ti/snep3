@@ -106,7 +106,7 @@ class PBX_Relatorio_Chamadas {
         if (!file_exists($file)) {
             touch($file);
         } else if (!is_writable($file)) {
-            throw new PBX_Exception_IO("Nao e possivel escrever no arquivo $file, verifique permissoes.");
+            throw new PBX_Exception_IO("It is not possible to write to the file $file, verify permissions.");
         }
         $db = Zend_Registry::get('db');
 
@@ -195,15 +195,6 @@ class PBX_Relatorio_Chamadas {
 
         // Eliminando features
         $select->where("dst not like '*%'");
-
-        // Elimintando dsts específicas
-        $config = Zend_Registry::get("config");
-        $dsts = "dst NOT IN (";
-        foreach (explode(";", $config->ambiente->dst_exceptions) as $badDst) {
-            $dsts .= "'$badDst',";
-        }
-        $dsts .= "'')";
-        $select->where($dsts);
 
         return $select;
     }

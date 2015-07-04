@@ -1,7 +1,8 @@
 <?php
-
-/**
+/*
  *  This file is part of SNEP.
+ *  Para território Brasileiro leia LICENCA_BR.txt
+ *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +27,19 @@
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class SimulatorController extends Zend_Controller_Action {
+
+
+    /**
+     * Initial settings of the class
+     */
+    public function init() {
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
 
     /**
      * indexAction

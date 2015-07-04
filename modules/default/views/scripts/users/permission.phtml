@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-12 class="text-center"">
+    <div class="col-lg-12 text-center">
         <div class="panel panel-default">
             <form  action="<?php echo $this->url(array("controller" => "users", "action" => "permission"), null, true); ?>" METHOD="post">
                 <div class="panel-body">
@@ -15,8 +15,8 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                $enabled = '<img src="/snep/imagens/on.png" align="center" width="22" height="22" title="Habilitado";">';
-                                $disabled = '<img src="/snep/imagens/off.png" width="22" height="22" title="Desabilitado";">';
+                                $enabled = '<img src="/snep/images/on.png" align="center" width="22" height="22" title="Habilitado";">';
+                                $disabled = '<img src="/snep/images/off.png" width="22" height="22" title="Desabilitado";">';
                                 $c = 0;
                                 if ($this->user == true) {
                                     $param = 'user';

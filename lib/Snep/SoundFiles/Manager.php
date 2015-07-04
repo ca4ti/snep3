@@ -344,11 +344,11 @@ class Snep_SoundFiles_Manager {
             }
         }
 
-        $header = ";----------------------------------------------------------------\n ";
+        $header =  ";----------------------------------------------------------------\n ";
         $header .= "; Arquivo: snep-musiconhold.conf - Cadastro Musicas de Espera    \n";
-        $header .="; Sintaxe: [secao]                                               \n";
-        $header .=";          mode=modo de leitura do(s) arquivo(s)                 \n";
-        $header .=";          directory=onde estao os arquivos                      \n";
+        $header .= "; Sintaxe: [secao]                                               \n";
+        $header .= ";          mode=modo de leitura do(s) arquivo(s)                 \n";
+        $header .= ";          directory=onde estao os arquivos                      \n";
         $header .= ";          [application=aplicativo pra tocar o som] - opcional   \n";
         $header .= "; Include: em /etc/asterisk/musiconhold.conf                     \n";
         $header .= ";          include /etc/asterisk/snep/snep-musiconhold.conf      \n";
@@ -408,11 +408,11 @@ class Snep_SoundFiles_Manager {
             }
         }
 
-        $header = ";----------------------------------------------------------------\n ";
+        $header =  ";----------------------------------------------------------------\n ";
         $header .= "; Arquivo: snep-musiconhold.conf - Cadastro Musicas de Espera    \n";
-        $header .="; Sintaxe: [secao]                                               \n";
-        $header .=";          mode=modo de leitura do(s) arquivo(s)                 \n";
-        $header .=";          directory=onde estao os arquivos                      \n";
+        $header .= "; Sintaxe: [secao]                                               \n";
+        $header .= ";          mode=modo de leitura do(s) arquivo(s)                 \n";
+        $header .= ";          directory=onde estao os arquivos                      \n";
         $header .= ";          [application=aplicativo pra tocar o som] - opcional   \n";
         $header .= "; Include: em /etc/asterisk/musiconhold.conf                     \n";
         $header .= ";          include /etc/asterisk/snep/snep-musiconhold.conf      \n";

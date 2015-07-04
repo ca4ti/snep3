@@ -3,8 +3,6 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.js");
-$this->headScript()->appendFile($this->baseUrl() .  '/includes/javascript/registrations.js');
-$this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeItem.js');
 
 ?>
 
@@ -22,8 +20,8 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeI
                 <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Session")?></a>
 
                 <div class="snep-body-search">
-                        <?php if($this->key){ ?>
-                        <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  &nbsp;|&nbsp;  
+                    <?php if($this->key){ ?>
+                       <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>    &nbsp;|&nbsp;  
                     <?php } ?>
                     <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
                 </div>
@@ -45,22 +43,29 @@ $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/removeI
                     <tbody>
                         
                         <?php if($this->sections):
-                            foreach($this->sections as $class ): ?>
+                            foreach($this->sections as $class ): 
+                                if ($class['name'] === 'default') { 
+                                    $disabled= "disabled"; 
+                                } else {
+                                        $disabled = "";    
+                                }?>
                                 
                                 <tr>
                                     <td> <b> <?php echo $class['name'] ?> </b> </td>
                                     <td> <?php echo $class['directory'] ?> </td>
                                     <td> <?php echo $this->modes[$class['mode']] ?> </td>
                                     <td align="center">
-                                        <a class="btn btn-default btn-xs"  href="<?php echo $this->url ?>/file/class/<?php echo $class['name'] ?>" role="button"><?php echo $this->translate('All Files')?> 
+                                        <a class="btn btn-default btn-xs"  href="<?php echo $this->url ?>/file/class/<?php echo $class['name'] ?>" role="button"> <?php echo $this->translate('Audios')?> 
                                         </a>
                                     </td>
                                     <td align="center">
-                                        <a class="btn btn-edit btn-xs"  href="<?php echo $this->url ?>/edit/file/<?php echo $class['name'] ?>" role="button"><?php echo $this->translate('Edit')?> 
+                                        <a class="btn btn-edit btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/edit/file/<?php echo $class['name'] ?>" role="button">
+                                            <?php echo $this->translate('Edit')?> 
                                         </a>
                                     </td>
                                     <td align="center">
-                                        <a class="btn btn-danger btn-xs"  href="<?php echo $this->url ?>/remove/file/<?php echo $class['name'] ?>" role="button"><?php echo $this->translate('Delete')?> 
+                                        <a class="btn btn-danger btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/remove/file/<?php echo $class['name'] ?>" role="button" >
+                                            <?php echo $this->translate('Delete')?> 
                                         </a>
                                     </td>
                                 </tr>

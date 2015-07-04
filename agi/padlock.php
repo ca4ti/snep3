@@ -15,6 +15,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * AGI to provide padlock function
  */
 
 require_once('agi_base.php');
@@ -29,7 +31,7 @@ if(!$ramal->isLocked()) {
 else if($ramal->isLocked()){
     $auth = $asterisk->exec('AUTHENTICATE', array($ramal->getPassword(),'',strlen((string)$ramal->getPassword())));
     if($auth['result'] == -1) {
-        $log->info("Senha errada para desativar ramal $ramal");
+        $log->info("Incorrect password for de-activated extension: $ramal");
     }
     else {
         $db->update('peers', array("authenticate" => false), "name='{$ramal->getNumero()}'");

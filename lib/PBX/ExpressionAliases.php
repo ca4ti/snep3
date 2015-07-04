@@ -153,21 +153,6 @@ class PBX_ExpressionAliases {
             $db->insert("expr_alias_expression", $data);
         }
 
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Adicionou expressao regular", $id, 10);
-
-            $add["id"] = $id;
-            $add["name"] = $expression["name"];
-            $add["exp"] = "";
-            foreach ($expression['expressions'] as $expr) {
-
-                $add["exp"] .= $expr . "  ";
-            }
-            self::insertLogExpression("ADD", $add);
-        }
-
         try {
             $db->commit();
         } catch (Exception $ex) {
@@ -201,13 +186,6 @@ class PBX_ExpressionAliases {
             $db->insert("expr_alias_expression", $data);
         }
 
-        if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Editou expressao regular", $id, 10);
-            $add = self::getExpression($id);
-            self::insertLogExpression("NEW", $add);
-        }
-
         try {
             $db->commit();
         } catch (Exception $ex) {
@@ -222,14 +200,6 @@ class PBX_ExpressionAliases {
      */
     public function delete($id) {
         $db = Zend_Registry::get('db');
-
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Excluiu expressao regular", $id, 10);
-            $add = self::getExpression($id);
-            self::insertLogExpression("DEL", $add);
-        }
 
         $db->delete("expr_alias", "aliasid='$id'");
     }

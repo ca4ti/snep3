@@ -19,16 +19,17 @@
  */
 
 /**
- * Enviar para Fila
+ * Setar Centro de Custos.
  *
- * Ação que envia a ligação para uma fila de atendimento.
+ * Ação das regras do snep que define um centro de cusos para classificar a
+ * ligação.
  *
  * @category  Snep
  * @package   PBX_Rule_Action
  * @copyright Copyright (c) 2010 OpenS Tecnologia
  * @author    Henrique Grolli Bassotto
  */
-class Queue extends PBX_Rule_Action {
+class PBX_Rule_Action_CCustos extends PBX_Rule_Action {
 
     /**
      * @var Internacionalização
@@ -46,10 +47,10 @@ class Queue extends PBX_Rule_Action {
     /**
      * Retorna o nome da Ação. Geralmente o nome da classe.
      *
-     * @return Name da Ação
+     * @return Nome da Ação
      */
     public function getName() {
-        return $this->i18n->translate("Send to Queue");
+        return $this->i18n->translate("Definir Centro de Custos");
     }
 
     /**
@@ -58,7 +59,7 @@ class Queue extends PBX_Rule_Action {
      * @return Versão da classe
      */
     public function getVersion() {
-        return SNEP_VERSION;
+        return "1.0";
     }
 
     /**
@@ -75,7 +76,7 @@ class Queue extends PBX_Rule_Action {
      * @return Descrição de funcionamento ou objetivo
      */
     public function getDesc() {
-        return $this->i18n->translate("Send call to an answering queue");
+        return $this->i18n->translate("Define um centro de custos para classificação da ligação");
     }
 
     /**
@@ -83,33 +84,14 @@ class Queue extends PBX_Rule_Action {
      * @return String XML
      */
     public function getConfig() {
-        $i18n = $this->i18n;
-        $queue = (isset($this->config['queue']))?"<value>{$this->config['queue']}</value>":"";
-        $timeout = (isset($this->config['timeout']))?"<value>{$this->config['timeout']}</value>":"";
-        $options = (isset($this->config['options']))?"<value>{$this->config['options']}</value>":"";
+        $ccustos = (isset($this->config['ccustos']))?"<value>{$this->config['ccustos']}</value>":"";
 
         return <<<XML
 <params>
-    <queue>
-        <id>queue</id>
-        <label>{$i18n->translate("Queue")}</label>
-        $queue
-    </queue>
-    <options>
-	<id>options</id>
-        <default>t</default>
-	$options
-	<label>{$i18n->translate("Queue Options")}</label>
-    </options>
-
-    <int>
-        <id>timeout</id>
-        <default>180</default>
-        <label>{$i18n->translate("Timeout")}</label>
-        <size>4</size>
-        <unit>{$i18n->translate("in seconds")}</unit>
-        $timeout
-    </int>
+    <ccustos>
+        <id>ccustos</id>
+        $ccustos
+    </ccustos>
 </params>
 XML;
     }
@@ -117,22 +99,15 @@ XML;
     /**
      * Executa a ação. É chamado dentro de uma instancia usando AGI.
      *
-     * @param Asterisk_AGI $asterisk
-     * @param Asterisk_AGI_Request $request
+     * @param AGI $asterisk
+     * @param int $rule - A regra que chamou essa ação. É passado pra que
+     * a ação possa restaurar as configurações dela para essa regra. Esse parametro
+     * á opcional.
      */
     public function execute($asterisk, $request) {
         $log = Zend_Registry::get('log');
 
-        $asterisk->answer();
-        $result = $asterisk->exec('Queue', array($this->config['queue'],$this->config['options'],'','',$this->config['timeout']));
-        if($result['result'] == -1) {
-            throw new PBX_Rule_Action_Exception_StopExecution();
-        }
-	$blind = $asterisk->get_variable("BLINDTRANSFER");
-	$asterisk->verbose($blind);
-	if($blind['result'] == 1) {
-	  $log->debug("Resultado da variavel BLINDTRANFER preenchida, ligacao transferida");
-	    throw new PBX_Rule_Action_Exception_StopExecution();
-	}
+        $log->info("Definindo centro de custos para {$this->config['ccustos']}.");
+        $asterisk->set_variable('CDR(accountcode)', $this->config['ccustos']);
     }
 }

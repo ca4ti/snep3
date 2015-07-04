@@ -1,0 +1,281 @@
+2015-07-02T12:34:12-03:00 - 1000 -> 8000 - ERR (3):argv is not available, because ini option 'register_argc_argv' is set Off
+2015-07-02T12:34:12-03:00 - 1000 -> 8000 - ERR (3):
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000a) para 8000
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:44:04-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:44:04-03:00 - 1000 -> -ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:44:04-03:00 - 1000 -> -ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000a) para -ura
+2015-07-02T12:44:04-03:00 - 1000 -> -ura - INFO (6):Nenhuma regra valida para essa requisicao: No rule found for this request
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000b) para 8000
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:45:22-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000b) para 1-ura
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:45:29-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000c) para 8000
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:46:11-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000c) para 2-ura
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Executando regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:46:16-03:00 - 1000 -> 2-ura - INFO (6):Fim de execucao da regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000d) para 8000
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:46:39-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000d) para 6-ura
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - INFO (6):Executando regra 5:URA - Opção Inválida (Vai para o Comercial)
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:46:43-03:00 - 1000 -> 6-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000e) para 8000
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:47:03-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:47:07-03:00 - 1000 -> 0-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:47:07-03:00 - 1000 -> 0-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000e) para 0-ura
+2015-07-02T12:47:07-03:00 - 1000 -> 0-ura - INFO (6):Nenhuma regra valida para essa requisicao: No rule found for this request
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000f) para 8000
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:50:18-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000000f) para 1-ura
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:50:35-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T12:51:00-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000010) para 8000
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:57:50-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000010) para 2-ura
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Executando regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:57:54-03:00 - 1000 -> 2-ura - INFO (6):Fim de execucao da regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000011) para 8000
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:58:21-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000011) para 2-ura
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Executando regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Deviating to action 0.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 1-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 2-DiscarRamal
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Usuario 2-ura nao encontrado
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - DEBUG (7):Executing action 3-ActionLoop
+2015-07-02T12:58:23-03:00 - 1000 -> 2-ura - INFO (6):Fim de execucao da regra 4:URA - Opção 2 (Suporte)
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000012) para 8000
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:58:40-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000012) para 1-ura
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:58:42-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T12:59:02-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000013) para 8000
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T12:59:52-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000013) para 1-ura
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T12:59:55-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Cadeado
+2015-07-02T13:00:01-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 2-Queue
+2015-07-02T13:00:21-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 2-Queue
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000019) para 8000
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T13:37:00-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-00000019) para 1-ura
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:37:03-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T13:37:07-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000001a) para 8000
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Executando regra 2:Entrada da URA
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Recording with 'mixmonitor'
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - DEBUG (7):Executing action 1-GoContext
+2015-07-02T13:43:52-03:00 - 1000 -> 8000 - INFO (6):Fim de execucao da regra 2:Entrada da URA
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Identified source: 1000 (Snep_Exten)
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Tentativa de conexao de 1000 (SIP/1000-0000001a) para 1-ura
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Executando regra 3:URA - Opção 1 (Comercial)
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 0-Ccustos
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - INFO (6):Definindo centro de custos para 1.
+2015-07-02T13:44:00-03:00 - 1000 -> 1-ura - DEBUG (7):Executing action 1-Queue
+2015-07-02T13:44:14-03:00 - 1000 -> 1-ura - INFO (6):Stopping rule execution by action request: 1-Queue

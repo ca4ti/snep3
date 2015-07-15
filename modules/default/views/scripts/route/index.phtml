@@ -61,33 +61,30 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
             <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
                 <thead>
                     <tr>
-                        <th style="width: 10%;" class="text-center" data-type="numeric" ><?php echo $this->translate('Code');?></th>
-                        <th style="width: 8%;" class="text-center"><?php echo $this->translate('Active');?></th>
+                        <th style="width: 5%;" class="text-center" data-type="numeric" ><?php echo $this->translate('Id');?></th>
+                        <th style="width: 6%;" class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
                         <th><?php echo $this->translate('Source');?></th>
                         <th><?php echo $this->translate('Destiny');?></th>
                         <th><?php echo $this->translate('Description');?></th>
-                        <th style="width: 12%;" class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Priority');?></th>
-                        <th colspan="3" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                        <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
                     </tr>
                 </thead>
                 <tbody>
-
                     <?php foreach($this->routes as $route ): ?>
-                        
                         <tr>
-                            <td class="text-center"> <b> <?php echo $route['id'] ?> </b> </td>
-                            <td> 
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" data-toggle="toggle" data-size="small" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" >
-                                    </label>
-                                </div>
-                            </td>
+                            <th class="text-center" style="vertical-align: middle !important;"> <?php echo $route['id'] ?>  </th>
+                            <td class="text-center"> <?php echo $route['prio'] ?> </td>
                             <td> <?php echo $route['origem'] ?> </td>
                             <td> <?php echo $route['destino'] ?> </td>
                             <td> <?php echo $route['desc'] ?> </td>
-                            <td class="text-center"> <?php echo $route['prio'] ?> </td>
-                            <td align="center">
+                            <td> 
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" >
+                                    </label>
+                                </div>
+                            </td>
+                             <td align="center">
                                 <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
                                     <?php echo $this->translate('Duplicate')?>
                                 </a>

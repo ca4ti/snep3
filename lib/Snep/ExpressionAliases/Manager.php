@@ -71,5 +71,39 @@ class Snep_ExpressionAliases_Manager {
 
         return $regras;
     }
+    /**
+     * Method to get a Alias from id
+     * @param int $id
+     * @return Array
+     */
+    public function get($id) {
 
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+            ->from('expr_alias', array('aliasid', 'name'))
+            ->where("aliasid = ?", $id);
+
+        $stmt = $db->query($select);
+        $alias = $stmt->fetch();
+
+        return $alias;
+    }
+
+    /**
+     * Method to get all Alias 
+     * @return Array
+     */
+    public function getAll() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+            ->from('expr_alias') ;
+
+        $stmt = $db->query($select);
+        $alias = $stmt->fetchall();
+
+        return $alias;
+    }
 }

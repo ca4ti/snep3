@@ -66,6 +66,13 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
 
         $this->extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
+        $this->view->extenGroups = array() ;
+        foreach ($this->extenGroups as $key => $value) {
+            $k = $v = $value['name'] ;
+            $v = strtolower($v) === 'admin' ? $this->view->translate('Administrator') : $v ;
+            $v = strtolower($v) === 'users' ? $this->view->translate('Users') : $v ;
+            $this->view->extenGroups[$k] = $v ;
+        }
 
         $this->pickupGroups = Snep_PickupGroups_Manager::getAll();
 
@@ -117,7 +124,8 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add"))); 
 
-        $this->view->extenGroups  = $this->extenGroups;
+        
+
         $this->view->pickupGroups = $this->pickupGroups;
 
 
@@ -213,7 +221,6 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->extension = $exten;
             
         // Groups       
-        $this->view->extenGroups = $this->extenGroups;
         $this->view->pickupGroups = $this->pickupGroups;
         
         // Tech Type
@@ -398,7 +405,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             
             $postData = $this->_request->getParams();
-            
+
             $postData["exten"] = $this->_request->getParam("id");
 
             $ret = $this->execAdd($postData, true);
@@ -589,7 +596,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $stmt->execute();
         }
 
-        Snep_InterfaceConf::loadConfFromDb();
     }
 
     /**
@@ -661,12 +667,6 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->renderScript('error/sneperror.phtml');;
                 }
 
-                $return = Snep_InterfaceConf::loadConfFromDb();
-
-                if ($return != true) {
-                    $this->view->error_message = $return;
-                    $this->renderScript('error/sneperror.phtml');;
-                }
                 $this->_redirect("default/extensions");
             }
         }
@@ -751,12 +751,8 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->renderScript('error/sneperror.phtml');
             return;
         }
-
-        $extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
-        $pickupGroups = Snep_PickupGroups_Manager::getAll();
         
-        $this->view->extenGroups = $extenGroups;
-        $this->view->pickupGroups = $pickupGroups;
+        $this->view->pickupGroups = $this->pickupGroups;
 
         $this->view->boardData = $this->boardData;
 

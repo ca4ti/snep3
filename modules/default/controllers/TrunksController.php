@@ -260,7 +260,6 @@ class TrunksController extends Zend_Controller_Action {
                     $db->rollBack();
                     throw $ex;
                 }
-                Snep_InterfaceConf::loadConfFromDb();
                 $this->_redirect("trunks");
             }
         }
@@ -401,20 +400,11 @@ class TrunksController extends Zend_Controller_Action {
                     }
                     $db->commit();
 
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-
-                        $name = $trunk_data['callerid'];
-                        $id = Snep_Trunks_Manager::getId($name);
-                        Snep_LogUser::salvaLog("Editou tronco", $id["id"], 2);
-                        $edit = Snep_Trunks_Manager::getTrunkLog($id["id"]);
-                        Snep_Trunks_Manager::insertLogTronco("NEW", $edit);
-                    }
                 } catch (Exception $ex) {
                     $db->rollBack();
                     throw $ex;
                 }
-                Snep_InterfaceConf::loadConfFromDb();
+
                 $this->_redirect("trunks");
             }
         }
@@ -482,7 +472,6 @@ class TrunksController extends Zend_Controller_Action {
                 Snep_Trunks_Manager::remove($_POST['id']);
                 Snep_Trunks_Manager::removePeers($_POST['name']);
 
-                Snep_InterfaceConf::loadConfFromDb();
                 $this->_redirect("trunks");
             }
         }
@@ -534,7 +523,7 @@ class TrunksController extends Zend_Controller_Action {
             "secret",
             "type",
             "allow",
-            "username",
+            "defaultuser",
             "dtmfmode",
             "fromdomain",
             "fromuser",
@@ -638,6 +627,11 @@ class TrunksController extends Zend_Controller_Action {
             "type" => $trunk_data['peer_type'],
         );
         foreach ($trunk_data as $field => $value) {
+
+            if ($field === 'username') {
+                $ip_data['defaultuser'] = $value ;
+            }
+
             if (in_array($field, $ip_fields) && $field != "type") {
                 $ip_data[$field] = $value;
             }

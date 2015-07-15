@@ -51,23 +51,43 @@ class RouteController extends Zend_Controller_Action {
             "/^X$/",
             "/^T:/",
             "/^RX:/",
-            "/^R:/"
+            "/^R:/",
+            "/^AL:/",
+            "/^CG:/"
         );
         $replace = array(
-            $this->view->translate("Group") . " ",
+            $this->view->translate("Peer Group") . ": ",
             $this->view->translate("No Destiny"),
             $this->view->translate("Any"),
-            $this->view->translate("Trunk") . " ",
+            $this->view->translate("Trunk") . ": ",
             "",
-            $this->view->translate("Extension") . " ",
+            $this->view->translate("Extension") . ": ",
+            $this->view->translate("Alias RegEx") . ": ",
+            $this->view->translate("Contact Group") . ": ",
         );
 
         foreach ($item as $key => $entry) {
 
-            if (substr($entry, 0, 1) == "T") {
-                $entry = "T:" . PBX_Trunks::get(substr($entry, 2))->getName();
+            switch (substr($entry, 0, strpos($entry, ':'))) {
+                case "T" :
+                    $entry = "T:" . PBX_Trunks::get(substr($entry, 2))->getName();
+                    break;
+                case "CG" :
+                    $entry = Snep_ContactGroups_Manager::get(substr($entry, 3));
+                    $entry = "CG:" . $entry['name'];
+                    break;
+                case "G" :
+                    $entry = strtolower(substr($entry,2)) === "all" ? "G:".$this->view->translate('All') : $entry;
+                    $entry = strtolower(substr($entry,2)) === "admin" ? "G:".$this->view->translate('Administrator') : $entry;
+                    $entry = strtolower(substr($entry,2)) === "users" ? "G:".$this->view->translate('Users') : $entry;
+                    break;
+                case "AL" :
+                    $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));
+                    $entry = "CG:" . $entry['name'];
+                    break ;
             }
 
+            // Substitui a sigla por um nome
             $item[$key] = preg_replace($search, $replace, $entry);
         }
 
@@ -101,7 +121,6 @@ class RouteController extends Zend_Controller_Action {
         if(empty($routes)){
             $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration
 ");
-            
         }
 
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
@@ -154,12 +173,21 @@ class RouteController extends Zend_Controller_Action {
 
             $this->form = $form;
 
-            $groups = new Snep_GruposRamais();
-            $groups = $groups->getAll();
+           
+            $groups = Snep_ExtensionsGroups_Manager::getAllGroup();
             $group_list = "";
+            $group_list .= "[\"all\", \"{$this->view->translate('All')}\"],";
             foreach ($groups as $group) {
-                $group_list .= "[\"{$group['name']}\", \"{$group['name']}\"],";
+                if (strtolower($group['name']) === 'admin' ) {
+                    $name = $this->view->translate('Administrator') ;
+                } elseif (strtolower($group['name']) === 'users') {
+                    $name = $this->view->translate('Users') ;
+                } else {
+                    $name = $group['name'] ;
+                }
+                $group_list .= "[\"{$group['name']}\", \"{$name}\"],";
             }
+            
             $group_list = "[" . trim($group_list, ",") . "]";
 
             $this->view->group_list = $group_list;

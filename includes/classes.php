@@ -1,6 +1,6 @@
 <?php
 /*
-*  This file is part of SNEP.
+ *  This file is part of SNEP.
  *  Para território Brasileiro leia LICENCA_BR.txt
  *  All other countries read the following disclaimer
  *

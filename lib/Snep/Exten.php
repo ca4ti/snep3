@@ -101,7 +101,7 @@ class Snep_Exten extends Snep_Usuario {
         parent::__construct($numero, $callerid, $numero, $senha);
 
         if (!$interface instanceof PBX_Asterisk_Interface) {
-            throw new Exception("Tipo errado Snep_Exten::__construct() espera uma instancia da classe abstrata PBX_Asterisk_Interface");
+            throw new Exception("Error:  'Snep_Exten::__construct()' wait for a instancee of the abstract class: PBX_Asterisk_Interface");
         }
 
         $this->setInterface($interface);

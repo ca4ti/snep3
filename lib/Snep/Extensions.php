@@ -44,7 +44,7 @@ class Snep_Extensions {
         $usuario = $stmt->fetchObject();
 
         if (!$usuario) {
-            throw new PBX_Exception_NotFound("Usuario $extensionId nao encontrado");
+            throw new PBX_Exception_NotFound("User $extensionId not found");
         }
 
         $exten = $this->processExten($usuario);
@@ -97,7 +97,7 @@ class Snep_Extensions {
             if ($data->name == "admin")
                 $interface = new PBX_Asterisk_Interface_VIRTUAL(array("channel" => "admin"));
             else
-                throw new Exception("Tecnologia $tech desconhecida ou invalida.");
+                throw new Exception("Tecnology $tech invalid or unknown.");
         }
 
         $exten = new Snep_Exten($data->name, $data->password, $data->callerid, $interface);
@@ -165,7 +165,7 @@ class Snep_Extensions {
             $this->queueRegister($exten);
             $this->commit();
         } else {
-            throw new Exception("Transação pendente, 'commite' antes de adicionar um ramal diretamente.");
+            throw new Exception("Pendindg transaction, 'commmit' before add a extension.");
         }
     }
 
@@ -175,7 +175,7 @@ class Snep_Extensions {
      */
     public function queueRegister(Snep_Exten $exten) {
         if (array_key_exists($exten->getNumero(), $this->commitList)) {
-            throw new Exception("Ramal $exten já está na fila para inserção no banco.");
+            throw new Exception("Extension $exten is waiting  in the queue to insert in database.");
         }
 
         $this->commitPending = true;

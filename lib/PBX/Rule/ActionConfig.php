@@ -302,7 +302,7 @@ class PBX_Rule_ActionConfig {
     protected function parseInt($element) {
         $form_element = new Zend_Form_Element_Text((string) $element->id);
         $validate_ìnt = new Zend_Validate_Int();
-        $validate_ìnt->setMessage("Somente números inteiros");
+        $validate_ìnt->setMessage("Only integer numbers");
         $form_element->addValidator($validate_ìnt);
         $form_element->setLabel((string) $element->label);
         $form_element->setAttrib('size', $element->size);

@@ -106,7 +106,7 @@ class PBX_Relatorio_Chamadas {
         if (!file_exists($file)) {
             touch($file);
         } else if (!is_writable($file)) {
-            throw new PBX_Exception_IO("Nao e possivel escrever no arquivo $file, verifique permissoes.");
+            throw new PBX_Exception_IO("It is not possible to write to the file $file, verify permissions.");
         }
         $db = Zend_Registry::get('db');
 

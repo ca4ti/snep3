@@ -96,9 +96,6 @@ class AsteriskInfo {
     /**
      * Metodo que faz o tratamento dos eventos Agent, não deveria existir
      * já que essas informações deveriam vir em respostas e não em events.
-     * Mas como isso não está nas minhas mãos essa "gambiarra"(minha opinião)
-     * teve que ser implementada. Isso depende da implementação do AMI no
-     * Asterisk.
      * @param $event evento que está sendo processado
      * @param $param parametros que vieram com o evento
      * @return boolean - true se o processamento de eventos deve parar.

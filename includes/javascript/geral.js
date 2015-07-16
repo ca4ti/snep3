@@ -1,4 +1,19 @@
-/* 
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+
     Document   : geral.js
     Created on : Apr 03, 2012, 03:32:25 PM
     Author     : Iago Uilian Berndt, Rodrigo Cavichioli
@@ -162,84 +177,6 @@ function subTitle(select, icon){
     select.addClass("subtitle");
     select.prepend("<img src='"+icon+"'/>");
 }
-
-//dashboard confirm dialog
-function dashboardConfirm(link){
-    
-    background = jQuery('<div/>', {'class' : 'dashTint'});
-    box        = jQuery('<div/>', {'class' : 'dashBox'}).appendTo(background);
-    title      = jQuery('<div/>', {'class' : 'dashTitle'}).html('Dashboard').appendTo(box);
-    text       = jQuery('<div/>', {'class' : 'dashText'}).html('<span>Deseja adicionar o item à Dashboard?</span>').appendTo(box);
-    submit     = jQuery('<div/>', {'class' : 'dashSubmit'}).appendTo(box);  
-    
-    jQuery('<a/>', {
-      'href'  : link,
-      'class' : 'dashSend'
-    }).html('Enviar').appendTo(submit);
-    
-    jQuery('<a/>', {
-      'href'  : '#',
-      'class' : 'dashCancel'
-    }).html('Cancelar').appendTo(submit);
-    
-    background.fadeIn(500).appendTo(jQuery('body'));
-    
-    jQuery('.dashCancel').click(function(){
-       jQuery('.dashTint').fadeOut(500, function(){
-           jQuery(this).remove();
-       });
-    });
-}
-
-function dashboardForm(link){
-   
-    background = jQuery('<form/>', {'class' : 'dashTint', 'action': link, 'method':'post'});
-    box        = jQuery('<div/>', {'class' : 'dashBox'}).appendTo(background);
-                 jQuery('<div/>', {'class' : 'dashTitle'}).html('Adicionar filtro à Dashboard').appendTo(box);
-                 jQuery('<div/>', {'class' : 'dashText'}).html('<span>Nome:</span>').appendTo(box).append(jQuery("<input/>").attr({"type": "text", "maxlength": 15, "name":"nome"}));
-                 jQuery('<div/>', {'class' : 'dashText'}).html('<span>Descrição:</span>').appendTo(box).append(jQuery("<input/>").attr({"type": "text", "maxlength": 40, "name": "descricao"}));
-    submit     = jQuery('<div/>', {'class' : 'dashSubmit'}).appendTo(box);  
-    
-    jQuery('<a/>', {
-      'href'  : '#',
-      'class' : 'dashSend'
-    }).html('Enviar').click(function(){background.submit();}).appendTo(submit);
-    
-    jQuery('<a/>', {
-      'href'  : '#',
-      'class' : 'dashCancel'
-    }).html('Cancelar').appendTo(submit);
-    
-    background.fadeIn(500).appendTo(jQuery('body'));
-    
-    jQuery('.dashCancel').click(function(){
-       jQuery('.dashTint').fadeOut(500, function(){
-           jQuery(this).remove();
-       });
-    });
-}
-
-jQuery(document).ready(function(){
-   
-    jQuery('.option_dashboard').each(function(){
-        var link = jQuery(this).attr('href');
-        
-        jQuery(this).click(function(){
-            dashboardConfirm(link);
-        });
-        jQuery(this).attr('href', '#');
-    });
-    jQuery('.option_dashboardform').each(function(){
-        var link = jQuery(this).attr('href');
-        
-        jQuery(this).click(function(){
-            dashboardForm(link);
-        });
-        jQuery(this).attr('href', '#');
-    });
-});
-//end of dashboard confirm dialog
-
 
 // Help button
 /*

@@ -40,7 +40,7 @@ class PBX_Rule_Action_Exception_GoTo extends Exception {
      * @param <int> codigo $code
      */
     public function __construct($index, $code = 0) {
-        parent::__construct("Desviar para $index", $code);
+        parent::__construct("Move to $index", $code);
 
         $this->index = $index;
     }

@@ -89,7 +89,7 @@ final class PBX_Registry {
         if (isset($this->registryData[$key])) {
             return $this->registryData[$key];
         } else {
-            throw new PBX_Exception_NotFound("Chave não existe neste contexto");
+            throw new PBX_Exception_NotFound("Key not found in the context");
         }
     }
 

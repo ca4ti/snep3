@@ -55,7 +55,7 @@ class PBX_Usuarios {
         $stmt = $db->query($select);
         $usuario = $stmt->fetchObject();
         if (!$usuario) {
-            throw new PBX_Exception_NotFound("Usuario $userid nao encontrado");
+            throw new PBX_Exception_NotFound("User $userid not found");
         }
 
         $tech = substr($usuario->canal, 0, strpos($usuario->canal, '/'));
@@ -80,7 +80,7 @@ class PBX_Usuarios {
             $khomp_channel = substr($khomp_id, strpos($khomp_id, 'c') + 1);
             $interface = new PBX_Asterisk_Interface_KHOMP(array("board" => $khomp_board, "channel" => $khomp_channel));
         } else {
-            throw new Exception("Tecnologia $tech desconhecida ou invalida.");
+            throw new Exception("Tecnology $tech invalid or unknown.");
         }
 
         $user = new Snep_Exten($usuario->name, $usuario->password, $usuario->callerid, $interface);

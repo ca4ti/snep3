@@ -83,7 +83,7 @@ class PBX_Trunks {
         $stmt = $db->query($select);
         $rawTrunk = $stmt->fetchObject();
         if (!$rawTrunk) {
-            throw new PBX_Exception_NotFound("Tronco $id nao encontrado");
+            throw new PBX_Exception_NotFound("Trunk $id not found");
         }
 
         $tech = $rawTrunk->type;

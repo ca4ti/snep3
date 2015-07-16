@@ -64,7 +64,7 @@ class PBX_Rules {
         $regra_raw = $db->query($select)->fetchObject();
 
         if (!$regra_raw) {
-            throw new PBX_Exception_NotFound("Regra $id nao encontrada");
+            throw new PBX_Exception_NotFound("Rule $id not found");
         }
 
         $regra = new PBX_Rule();
@@ -78,7 +78,7 @@ class PBX_Rules {
             } else {
                 $info = explode(':', $src);
                 if (!is_array($info) OR count($info) != 2) {
-                    throw new PBX_Exception_DatabaseIntegrity("Valor errado para origem da regra de negocio $regra_raw->id: {$regra_raw->origem}");
+                    throw new PBX_Exception_DatabaseIntegrity("Wrong value to source of business rule $regra_raw->id: {$regra_raw->origem}");
                 }
                 $regra->addSrc(array("type" => $info[0], "value" => $info[1]));
             }
@@ -89,7 +89,7 @@ class PBX_Rules {
             } else {
                 $info = explode(':', $dst);
                 if (!is_array($info) OR count($info) != 2) {
-                    throw new PBX_Exception_DatabaseIntegrity("Valor errado para destino da regra de negocio $regra_raw->id: {$regra_raw->destino}");
+                    throw new PBX_Exception_DatabaseIntegrity("Wrong value to destiny of business rule $regra_raw->id: {$regra_raw->destino}");
                 }
                 $regra->addDst(array("type" => $info[0], "value" => $info[1]));
             }
@@ -199,7 +199,7 @@ class PBX_Rules {
         }
 
         if ($rule->getId() == -1) {
-            throw new PBX_Exception_BadArg("Regra nao possui um id valido.");
+            throw new PBX_Exception_BadArg("Rule does not a valid id.");
         }
 
         $srcs = "";

@@ -76,8 +76,7 @@ class AsteriskInfo {
             else {
                 return $cmd['data'];
             }
-        }
-        else {
+        } else {
             // Enviando requisição de status
             self::$asterisk->send_request($comando, array());
             // Enviando esse objeto para cuidar dos responses

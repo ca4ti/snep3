@@ -255,19 +255,37 @@ class ExtensionsController extends Zend_Controller_Action {
             case "sip":
             
                 $this->view->directmediayes = "";
-                $this->view->directmediano = "";
-                if($exten['directmedia'] == "yes"){
-                    $this->view->directmediayes = "checked";
-                }else{
-                    $this->view->directmediano = "checked";
+                $this->view->directmedianonat = "";
+                $this->view->directmediaupdate = "";
+                $this->view->directmediaoutgoing = "";
+                switch ($exten['directmedia']) {
+                    case "yes":
+                        $this->view->directmediayes = "checked";
+                        break;
+                    case "nonat":
+                        $this->view->directmedianonat = "checked";
+                        break;
+                    case "outgoing":
+                        $this->view->directmediaoutgoing = "checked";
+                        break;
+                    case "update":
+                        $this->view->directmediaupdate = "checked";
+                        break;
                 }
 
                 $this->view->typePeer = "";
                 $this->view->typeFriend = "";
-                if($exten['type'] == "peer"){
-                    $this->view->typePeer = "checked";
-                }else{
-                    $this->view->typeFriend = "checked";
+                $this->view->typeUser = "";
+                switch ($exten['type']) {
+                    case "peer" :
+                        $this->view->typePeer = "checked";
+                        break ;
+                    case "friend" :
+                        $this->view->typeFriend = "checked";
+                        break ;
+                    case "user" :
+                        $this->view->typeUser = "checked";
+                        break ;
                 }
 
                 $this->view->dtmfrf = "";

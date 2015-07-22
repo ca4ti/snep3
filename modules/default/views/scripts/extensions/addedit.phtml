@@ -137,11 +137,22 @@
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Direct Media")?></label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes; ?>><?php echo $this->translate("Yes");?>
+                                    <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes;?>>
+                                    yes
                                 </label>
                                 
                                 <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="no" value="no" <?php echo $this->directmediano; ?> ><?php echo $this->translate("No");?>
+                                    <input type="radio" name="directmedia" id="nonat" value="nonat" <?php echo $this->directmedianonat;?>
+                                    >
+                                    nonat
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="directmedia" id="update" value="update" <?php echo $this->directmediaupdate;?>>
+                                    update
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="directmedia" id="outgoing" value="outgoing" <?php echo $this->directmediaoutgoing;?>>
+                                    outgoing
                                 </label>
                             </div>
 
@@ -151,11 +162,17 @@
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Type")?></label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer; ?> ><?php echo $this->translate("Peer");?>
+                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer;?>>
+                                    peer
                                 </label>
                                 
                                 <label class="radio-inline">
-                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend; ?>><?php echo $this->translate("Friend");?>
+                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend;?>>
+                                    friend
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type"  value="user" <?php echo $this->typeUser;?>>
+                                    user
                                 </label>
                             </div>
                         </div>

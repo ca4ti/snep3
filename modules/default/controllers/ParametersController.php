@@ -52,14 +52,19 @@ class ParametersController extends Zend_Controller_Action {
         
         $this->view->config = $config;
         
-        $this->view->debug = false;    
+        $this->view->debug = false;
+        $this->view->hide_routes = false;    
         if($config->system->debug == "1"){
             $this->view->debug = true;
+        }
+        if($config->system->hide_routes == "1"){
+            $this->view->hide_routes = true;
         }
 
         $old_param = array();
         $old_param["emp_nome"] = $config->ambiente->emp_nome;
         $old_param["debug"] = $config->system->debug;
+        $old_param["hide_routes"] = $config->system->hide_routes;
         $old_param["ip_sock"] = $config->ambiente->ip_sock;
         $old_param["user_sock"] = $config->ambiente->user_sock;
         $old_param["email"] = $config->system->mail;
@@ -198,7 +203,11 @@ class ParametersController extends Zend_Controller_Action {
                 }else{
                     $config->system->debug = 0;
                 }
-                
+                if($formData['hide_routes'] == 'on'){
+                    $config->system->hide_routes = 1;    
+                }else{
+                    $config->system->hide_routes = 0;
+                }
                 $config->system->language = $formData['language'];
                 $config->system->locale = $formData['locale'];
                 $config->system->timezone = $formData['timezone'];

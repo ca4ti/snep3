@@ -13,16 +13,31 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("Snep Debug")?></label>
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Hidden Routes")?></label>
                 <div class="col-sm-8">
                     <div class="checkbox">
                     	<label>
-                    		<?php if($this->debug){?>
-                    			<input type="checkbox" name="debug" id="debug" checked/><?php echo $this->translate("Show error message events if activated")?>
+                    		<?php if($this->hide_routes){?>
+                    			<input type="checkbox" name="hide_routes" id="hide_routes" checked/>
                     		<?php }else{?>
-                    			<input type="checkbox" name="debug" id="debug"/><?php echo $this->translate("Show error message events if activated")?>
+                    			<input type="checkbox" name="hide_routes" id="hide_routes"/>
                     		<?php } ?>
-                            
+                            <?php echo $this->translate("Show / Hide deactivated routes")?>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Snep/PHP Debug")?></label>
+                <div class="col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <?php if($this->debug){?>
+                                <input type="checkbox" name="debug" id="debug" checked/>
+                            <?php }else{?>
+                                <input type="checkbox" name="debug" id="debug"/>
+                            <?php } ?>
+                            <?php echo $this->translate("Show error message events if activated")?>
                         </label>
                     </div>
                 </div>

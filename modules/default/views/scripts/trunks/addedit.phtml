@@ -141,16 +141,22 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $this->translate("Peer Type")?></label>
+                 <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo $this->translate("Type")?></label>
                     <div class="col-sm-6">
                         <label class="radio-inline">
-                            <input type="radio" name="peer_type" id="peer" value="peer" <?php echo $this->type_peer;?>><?php echo $this->translate("Peer");?>
+                            <input type="radio" name="peer_type" id="peer" value="peer" <?php echo $this->type_peer;?>>
+                            peer
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="peer_type" id="user" value="user" <?php echo $this->type_user;?>>
+                            user
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="peer_type" id="friend" value="friend" <?php echo $this->type_friend;?>>
+                            friend
                         </label>
                         
-                        <label class="radio-inline">
-                            <input type="radio" name="peer_type" id="friend" value="friend" <?php echo $this->type_friend;?>><?php echo $this->translate("Friend");?>
-                        </label>
                     </div>
                 </div>
 

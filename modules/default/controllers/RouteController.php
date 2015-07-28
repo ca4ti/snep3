@@ -104,11 +104,14 @@ class RouteController extends Zend_Controller_Action {
 
         $config = Zend_Registry::get('config');
         $lineNumber = $config->ambiente->linelimit;
+        $hide_routes = $config->system->hide_routes;
 
         $db = Zend_Registry::get('db');
         $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio")
         );
-
+        if ($hide_routes === "1") {
+            $select->where("ativa = '1'");
+        }
         $select->order("prio DESC");
         $select->order("id ASC");
 

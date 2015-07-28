@@ -42,6 +42,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
+
 require_once "Snep/Config.php";
 require_once "Snep/Logger.php";
 require_once "Snep/Locale.php";

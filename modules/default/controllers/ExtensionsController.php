@@ -124,8 +124,6 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add"))); 
 
-        
-
         $this->view->pickupGroups = $this->pickupGroups;
 
 
@@ -166,6 +164,14 @@ class ExtensionsController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
+        $this->view->directmediayes = "checked";
+        $this->view->typeFriend = "checked";
+        $this->view->dtmfrf = "checked";
+        $this->view->nat_force_rport = 'checked' ;
+        $extension = array();
+        $extension['qualify'] = 'yes';
+        $this->view->extension = $extension;
+
 
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
@@ -299,6 +305,10 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->dtmfinfo = "checked";
                 }
                 
+                $nat = $exten['nat'];
+                $label = "nat_".$nat;
+                $this->view->$label = "checked"; 
+
                 $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
                 $codecs = explode(";", $exten['allow']);
 
@@ -479,10 +489,11 @@ class ExtensionsController extends Zend_Controller_Action {
         $directmedia = $formData["directmedia"];
         $callLimit = $formData["calllimit"];
 
-        $nat = 'no';
         if ($techType == 'sip' || $techType == 'iax2') {
-            if (key_exists('nat', $formData)) {
+            if (!key_exists('nat', $formData)) {
                 $nat = 'comedia';
+            } else {
+                $nat = $formData['nat'] ;
             }
         }
 
@@ -494,7 +505,6 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         $type = $formData['type'];
-      
 
         $channel = strtoupper($techType);
 
@@ -614,6 +624,8 @@ class ExtensionsController extends Zend_Controller_Action {
             $stmt->execute();
         }
 
+        Snep_InterfaceConf::loadConfFromDb();
+
     }
 
     /**
@@ -682,6 +694,12 @@ class ExtensionsController extends Zend_Controller_Action {
                     $db->rollBack();
                     $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
                     $this->view->back = $this->view->translate("Back");
+                    $this->renderScript('error/sneperror.phtml');;
+                }
+                $return = Snep_InterfaceConf::loadConfFromDb();
+
+                if ($return != true) {
+                    $this->view->error_message = $return;
                     $this->renderScript('error/sneperror.phtml');;
                 }
 

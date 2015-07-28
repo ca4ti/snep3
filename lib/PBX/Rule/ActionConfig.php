@@ -197,7 +197,11 @@ class PBX_Rule_ActionConfig {
         }
 
         $config = Zend_Registry::get('config');
-        foreach (scandir($config->system->path->asterisk->sounds) as $sound) {
+        $lang = $config->system->language ;
+        $language =  ($lang === "en" ? $language = "" : $language = $lang) ;
+        $path_sounds = $config->system->path->asterisk->sounds ;
+        $path_sounds .= '/' . $lang ;
+        foreach (scandir($path_sounds) as $sound) {
             if ($sound !== "." && $sound !== "..") {
                 $sound = pathinfo($sound);
                 $sound = $sound['filename'];

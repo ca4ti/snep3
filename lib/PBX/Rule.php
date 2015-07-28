@@ -445,6 +445,7 @@ class PBX_Rule {
     public function execute($origem) {
         $asterisk = $this->asterisk;
         $log = Zend_Registry::get('log');
+	$lang = Zend_Registry::get('config')->system->language;
 
         $to_execute = true;
         try {
@@ -478,6 +479,7 @@ class PBX_Rule {
                     if ($event != 1 && $event != 2 && $event != 4) {
 
                         $log->info("User $origem have padlock enabled");
+			$asterisk->set_variable(CHANNEL(language)=$lang) ;
                         $asterisk->stream_file('ext-disabled');
                     } else {
                         // Efetua ligação caso agente não esteja pausado
@@ -492,6 +494,7 @@ class PBX_Rule {
                 $requester = $this->request->getSrcObj();
                 if ($requester instanceof Snep_Exten && $requester->isLocked()) {
                     $log->info("User $requester have padlock enabled");
+		    $asterisk->set_variable(CHANNEL(language)=$lang) ;
                     $asterisk->stream_file('ext-disabled');
                 } else {
                     if ($this->isRecording()) {

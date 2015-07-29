@@ -6,6 +6,16 @@ TODO
 - Manual do usuário
 - Ajustes CSS
 ---------------------------------
+Release 1.0-Betha-rc1
+- Ajustes diversos no SQL inicial e dados iniciais
+- Ajustes para leitura do arquivo de áudio de acordo com language selecionada
+- Adicionado controle para exibição ou não de regras desabilitadas (Parâmetros)
+- Novas opções para NAT e DirectMedia em ramais/troncos SIP
+- Removidas bibliotecas e arquivos não utilizados 
+- Inseridos comentários de LIcenca GPL em todos os arquivos .PHP
+- Renomeada pasta imagens para images 
+- Ajustes nas Strings de tradução
+---------------------------------
 Release 1.0-alpha
 - Nova interface
 - Conectado com oa ITC  (www.intercomunexao.com.br)

@@ -189,16 +189,6 @@ class ExtensionsController extends Zend_Controller_Action {
 
             if (!is_string($ret)) {
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-
-                    $id = $_POST["extension"]["exten"];
-                    Snep_LogUser::salvaLog("Adicionou Ramal", $id, 5);
-
-                    $add = Snep_Extensions_Manager::getPeer($id);
-                    Snep_Extensions_Manager::insertLogRamal("ADD", $add);
-                }
-
                 $this->_redirect('/extensions/');
             } else {
                 $this->view->error_message = $ret;
@@ -816,20 +806,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $range = explode(";", $postData["exten"]);
             $this->view->error = "";
             
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-
-                Snep_LogUser::salvaLog("Adicionou Ramais multiplos", $_POST["extension"]["exten"], 5);
-                $tech = $_POST["technology"];
-                $codecs = $_POST[$tech]["codec"] . ";" . $_POST[$tech]["codec1"] . ";" . $_POST[$tech]["codec2"] . ";" . $_POST[$tech]["codec3"];
-                $add = array();
-                $add["name"] = $_POST["exten"];
-                $add["canal"] = $tech;
-                $add["allow"] = $codecs;
-                $add["dtmfmode"] = $_POST[$tech]["dtmf"];
-                $add["directmedia"] = $_POST[$tech]["directmedia"];
-                Snep_Extensions_Manager::insertLogRamal("ADD R", $add);
-            }
 
             foreach ($range as $exten) {
 
@@ -840,9 +816,10 @@ class ExtensionsController extends Zend_Controller_Action {
 
                     $postData["exten"] = $exten;
                     $postData["password"] = $exten . $exten;
-                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . '<' . $exten . '>';
+                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . ' <' . $exten . '>';
                     $postData["sip"]["password"] = $exten;
                     $postData["iax"]["password"] = $exten;
+                    $postData['type'] = 'friend' ;
 
                     $ret = $this->execAdd($postData);
 
@@ -867,6 +844,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $postData["name"] = $this->view->translate("Extension ") . " " . $i . '<' . $i . '>';
                                 $postData["sip"]["password"] = $i . $i;
                                 $postData["iax2"]["password"] = $i . $i;
+                                $postData['type'] = 'friend' ;
 
                                 $ret = $this->execAdd($postData);
 

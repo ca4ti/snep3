@@ -118,8 +118,10 @@ jQuery(document).ready(function(e) {
         a.click(change);
         a.keypress(change);
         check.change(function(){
-            if(check.attr('checked'))div.attr('src', imgtrue);
-            else div.attr('src', imgfalse);
+            if(check.attr('checked'))
+                //div.attr('src', imgtrue);
+            else 
+                //div.attr('src', imgfalse);
         });
     });
     if(jQuery().multiselect){

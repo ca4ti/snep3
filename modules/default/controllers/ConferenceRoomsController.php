@@ -27,18 +27,7 @@
  */
 class ConferenceRoomsController extends Zend_Controller_Action {
 
-    /**
-     *
-     * @var Zend_Form
-     */
-    protected $form;
-
-    /**
-     *
-     * @var array
-     */
-    protected $forms;
-
+ 
     /**
      * indexAction - List Conference Rooms
      * @return <boolean>
@@ -251,7 +240,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
             $asterisk = PBX_Asterisk_AMI::getInstance();
             $asterisk->Command("module reload");
-            $this->_redirect();
+            $this->_redirect($this->getRequest()->getControllerName());
         }
     }
 

@@ -33,6 +33,7 @@
          <resource id="contacts" label="Contacts" font="sn-contatos">
             <resource id="write"></resource>
         </resource>
+
         <resource id="contact-groups" label="Contact Groups" font="sn-grupo-contatos">
             <resource id="write"></resource>
         </resource>
@@ -40,6 +41,7 @@
         <resource id="queues" label="Queues" font="sn-filas">
             <resource id="write"></resource>
         </resource>
+
         <resource id="queues-groups" label="Queues Groups" font="sn-grupo-filas">
             <resource id="write"></resource>
         </resource>
@@ -47,9 +49,11 @@
          <resource id="extensions" label="Extensions" font="sn-ramal">
             <resource id="write"></resource>
         </resource>
+
         <resource id="extensions-groups" label="Extension Groups" font="sn-grupo-ramais">
             <resource id="write"></resource>
         </resource>
+
         <resource id="pickup-groups" label="Pickup Groups" >
             <resource id="write"></resource>
         </resource>
@@ -57,6 +61,7 @@
         <resource id="users" label="Users" font="sn-usuarios">
             <resource id="write"></resource>
         </resource>
+
         <resource id="profiles" label="Profiles" font="sn-perfis">
             <resource id="write"></resource>
         </resource>
@@ -65,7 +70,9 @@
             <resource id="write"></resource>
         </resource>
 
-        <resource id="conference-rooms" label="Conference Rooms" font="sn-conferencia"></resource>
+        <resource id="conference-rooms" label="Conference Rooms" font="sn-conferencia">
+            <resource id="write"></resource>
+        </resource>
         
     </group>
     

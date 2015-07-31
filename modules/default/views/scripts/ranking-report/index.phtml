@@ -7,7 +7,24 @@
 
 <div class="row">
 
-    <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "ranking-report", "action" => "index"), null, true); ?>" METHOD="post">
+    <div class="tab-content">
+            <div class="tab-pane active" id="demo">
+                <?php if($this->key){ ?>
+                    <div class="snep-body-top-buttons">
+                        <div class="snep-body-search">
+                            <?php if($this->key){ 
+                                echo ""; 
+                                ?>
+                                <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 00px;" action="<?php echo $this->url(array("controller" => "ranking-report", "action" => "index"), null, true); ?>" METHOD="post">
         
         <fieldset>
             <legend><?php echo $this->translate("Period");?></legend>

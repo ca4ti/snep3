@@ -1,7 +1,4 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable.core.css" );
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/footable-demos.css" );
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap-glyphicons.css" );
 $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
 ?>
 
@@ -10,19 +7,15 @@ $this->headScript()->appendFile('/snep/includes/javascript/enableField.js');
         <div class="tab-content">
             <div class="tab-pane active" id="demo">
                 <?php if($this->key){ ?>
-
                     <div class="snep-body-top-buttons">
-                    
                         <div class="snep-body-search">
                             <?php if($this->key){ ?>
-                                <a class="btn btn-adddashboard" type="submit" href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" role="button"></a> <?php echo $this->translate("Dashboard")?>  
+                                <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
                             <?php } ?>
-                            
                         </div>
                     
                     </div>
                 <?php } ?>
-                           
                 <table class="table demo table-bordered" data-page-size=15>
 
                     <thead>

@@ -106,6 +106,7 @@ class Bootstrap {
         $config = Snep_Config::getConfig();
         $log = Snep_Logger::getInstance();
         Zend_Registry::set("log", $log);
+        Zend_Registry::set("config", $config);
 
         // Log em arquivo
         $writer = new Zend_Log_Writer_Stream($config->system->path->log . '/agi.log');

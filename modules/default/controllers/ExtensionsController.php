@@ -164,10 +164,10 @@ class ExtensionsController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
-        $this->view->directmediayes = "checked";
+        $this->view->directmedianonat = "checked";
         $this->view->typeFriend = "checked";
         $this->view->dtmfrf = "checked";
-        $this->view->nat_force_rport = 'checked' ;
+        $this->view->nat_no = 'checked' ;
         $extension = array();
         $extension['qualify'] = 'yes';
         $this->view->extension = $extension;
@@ -554,7 +554,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $advCtrlType = 'N';
         }
 
-        $defFielsExten = array("accountcode" => "''", "amaflags" => "''", "defaultip" => "''", "host" => "'dynamic'", "insecure" => "''", "language" => "'pt_BR'", "deny" => "''", "permit" => "''", "mask" => "''", "port" => "''", "restrictcid" => "''", "rtptimeout" => "''", "rtpholdtimeout" => "''", "musiconhold" => "'cliente'", "regseconds" => 0, "ipaddr" => "''", "regexten" => "''", "setvar" => "''", "disallow" => "'all'", "canreinvite" => "'no'");
+        $defFielsExten = array("accountcode" => "''", "amaflags" => "''", "defaultip" => "''", "host" => "'dynamic'", "insecure" => "''", "language" => "'pt_BR'", "deny" => "''", "permit" => "''", "mask" => "''", "port" => "''", "restrictcid" => "''", "rtptimeout" => "''", "rtpholdtimeout" => "''", "musiconhold" => "'cliente'", "regseconds" => 0, "ipaddr" => "''", "regexten" => "''", "setvar" => "''", "disallow" => "'all'");
 
         $sqlFieldsExten = $sqlDefaultValues = "";
         foreach ($defFielsExten as $key => $value) {

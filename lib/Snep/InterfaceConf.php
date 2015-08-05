@@ -96,7 +96,6 @@ class Snep_InterfaceConf {
                             $peers .= '[' . $peer['defaultuser'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";
                             $peers .= 'context=' . $peer['context'] . "\n";
-                            $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
                             $peers .= 'dtmfmode=' . ($peer['dtmfmode'] ? $peer['dtmfmode'] : "rfc2833") . "\n";
                             $peers .= 'host=' . $peer['host'] . "\n";
                             $peers .= 'qualify=' . ($peer['qualify'] == "no" ? "no" : "yes") . "\n";
@@ -111,7 +110,6 @@ class Snep_InterfaceConf {
                             $peers .= 'username=' . $peer['defaultuser'] . "\n";
                             $peers .= 'secret=' . $peer['defaultuser'] . "\n";
                             $peers .= 'context=' . $peer['context'] . "\n";
-                            $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
                             $peers .= 'dtmfmode=' . ($peer['dtmfmode'] ? $peer['dtmfmode'] : "rfc2833") . "\n";
                             $peers .= 'host=' . $peer['host'] . "\n";
                             $peers .= 'qualify=' . ($peer['qualify'] == "no" ? "no" : "yes") . "\n";
@@ -170,7 +168,6 @@ class Snep_InterfaceConf {
                         $peers .= 'host=' . $peer['host'] . "\n"; # dinamyc
                         $peers .= 'secret=' . $peer['secret'] . "\n";
                         $peers .= 'callerid=' . $peer['callerid'] . "\n";
-                        $peers .= 'canreinvite=' . $peer['canreinvite'] . "\n";
                         $peers .= 'dtmfmode=' . ($peer['dtmfmode'] ? $peer['dtmfmode'] : "rfc2833") . "\n";
                         $peers .= 'nat=' . $peer['nat'] . "\n";
                         $peers .= 'qualify=' . $peer['qualify'] . "\n";

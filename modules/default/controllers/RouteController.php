@@ -83,7 +83,7 @@ class RouteController extends Zend_Controller_Action {
                     break;
                 case "AL" :
                     $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));
-                    $entry = "CG:" . $entry['name'];
+                    $entry = "AL:" . $entry['name'];
                     break ;
             }
 

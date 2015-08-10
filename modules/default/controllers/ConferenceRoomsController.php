@@ -40,15 +40,15 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
         $config = Zend_Registry::get('config');
         $conf_app = $config->ambiente->conference_app;
+        $language = $config->system->language ;
 
         for ($i = 901; $i <= 915; $i++) {
 
             $salas[$i]["id"] = $i;
-            $salas[$i]["usa_auth"] = False;
             $salas[$i]["authenticate"] = "";
             $salas[$i]["status"] = 0;
             $salas[$i]["rec"] = False;
-            $salas[$i]["ccustos"] = "";
+            $salas[$i]["ccustos"] = "5.01";
         }
 
         exec('cat /etc/asterisk/snep/snep-authconferences.conf | grep "^[9][0-1][0-9]"', $senhas, $err);
@@ -56,7 +56,6 @@ class ConferenceRoomsController extends Zend_Controller_Action {
         foreach ($senhas as $value) {
             $line = explode(":", $value);
             $salas[$line[0]]["authenticate"] = $line[1];
-            $salas[$line[0]]["usa_auth"] = True;
         }
 
         //verifica se salas possuem gravacao
@@ -95,6 +94,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
         $this->view->conferenceRooms = $salas;
         $this->view->costCenter = Snep_CostCenter_Manager::getAll();
 
+        // After post
         if ($this->getRequest()->getPost()) {
             $file_conf = "/etc/asterisk/snep/snep-conferences.conf";
             $file_auth = "/etc/asterisk/snep/snep-authconferences.conf";
@@ -107,19 +107,14 @@ class ConferenceRoomsController extends Zend_Controller_Action {
 
             $linhas_conf = file($file_conf);
             $linhas_auth = file($file_auth);
-            $authenticate = $_POST['authenticate'];
 
             for ($i = 901; $i <= 915; $i++) {
                 $rec = $salas[$i]["rec"];
-                if (isset($authenticate[$i]) == 'on') {
-                    $password[$i] = $_POST['password'][$i];
-                } else {
-                    $password[$i] = '';
-                }
             }
 
             $costCenter = $_POST['costCenter'];
             $activate = $_POST['activate'];
+            $password = $_POST['password'];
             $rec = $_POST["rec"];
 
             $updateDate = "; Atualizado em:" . date('d/m/Y H:i:s') . "\n";
@@ -129,8 +124,8 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentAuth .= "; Sintaxe: codigo,senha(hash MD5)\n";
             $contentAuth .= "; Include: em /etc/asterisk/extensions.conf\n";
             $contentAuth .= ";      Ex: exten => _[7-9]XXXXXXX,n,Authenticate(/etc/asterisk/snep/snep-authenticate,am)\n";
-            $contentAuth .= "; Atualizado em:22/07/2008 14:28:53\n";
-            $contentAuth .= "; Copyright(c) 2008 Opens Tecnologia\n";
+            $contentAuth .= "; Atualizado em: $updateDate \n";
+            $contentAuth .= "; Copyright(c) 2015 Opens Tecnologia\n";
             $contentAuth .= ";-------------------------------------------------------------------------------\n";
             $contentAuth .= "; Os registros a Seguir sao gerados pelo Software SNEP. \n";
             $contentAuth .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de \n";
@@ -147,8 +142,8 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentConfe .= "; (*) = Linha Opcional - so aparece se usar senha\n";
             $contentConfe .= "; Include: em /etc/asterisk/extensions.conf\n";
             $contentConfe .= ";          include /etc/asterisk/snep/snep-conferences.conf\n";
-            $contentConfe .= "; Atualizado em:22/07/2008 14:28:53\n";
-            $contentConfe .= "; Copyright(c) 2008 Opens Tecnologia\n";
+            $contentConfe .= "; Atualizado em: $updateDate\n";
+            $contentConfe .= "; Copyright(c) 2015 Opens Tecnologia\n";
             $contentConfe .= ";----------------------------------------------------------------\n";
             $contentConfe .= "; Os registros a Seguir sao gerados pelo Software SNEP.\n";
             $contentConfe .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de\n";
@@ -157,7 +152,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentConfe .= "[conferences]\n";
             $contentConfe .= "\n";
             $contentConfe .= "; Next Lines = Default of System - don't change, please\n";
-            $contentConfe .= "exten => i,1,Set(CHANNEL(language)=br)\n";
+            $contentConfe .= "exten => i,1,Set(CHANNEL(language)=$language)\n";
             $contentConfe .= "exten => i,n,Playback(invalid)\n";
             $contentConfe .= "exten => i,n,Hangup\n";
             $contentConfe .= "\n";
@@ -166,40 +161,31 @@ class ConferenceRoomsController extends Zend_Controller_Action {
             $contentConfe .= "exten => H,1,Hangup\n";
             $contentConfe .= "\n";
 
-            foreach ($activate as $idActivate => $valueActivate) {
-                foreach ($password as $idPassword => $valuePassword) {
 
-                    if ($valuePassword <> "" && $idActivate == $idPassword) {
-                        if (strlen($valuePassword) != 32) {
-                            $valuePassword = md5($valuePassword);
-                        }
-                        $newPassword = $idPassword . ":" . $valuePassword . "\n";
-                        $contentAuth .= $newPassword;
+            foreach ($activate as $idActivate => $val) {
+                
+
+
+                $contentConfe .= ";SNEP(" . $idActivate . "): Room added by system\n";
+                $contentConfe .= "exten => " . $idActivate . ",1,Set(CHANNEL(language)=$language)\n";
+                
+                // Passwords
+                if ($password[$idActivate] <> "" ) {
+                    $valuePassword = $password[$idActivate] ;
+                    if (strlen($valuePassword) != 32) {
+                        $valuePassword = md5($valuePassword);
                     }
+                    $newPassword = $idActivate . ":" . $valuePassword . "\n";
+                    $contentAuth .= $newPassword;
+                    $contentConfe .= "exten => " . $idActivate . ",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
                 }
 
-                foreach ($costCenter as $idCostCenter => $valueCostCenter) {
-
-                    if ($idActivate == $idCostCenter) {
-                        $contentConfe .= ";SNEP(" . $idActivate . "): Room added by system\n";
-                        $contentConfe .= "exten => " . $idActivate . ",1,Set(CHANNEL(language)=pt_BR)\n";
-                    }
-
-                    foreach ($password as $idPassword => $valuePassword) {
-
-                        if ($idActivate == $idCostCenter && $idActivate == $idPassword && $valuePassword <> "") {
-                            $contentConfe .= "exten => " . $idActivate . ",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
-                        }
-                    }
-
-                    if ($idActivate == $idCostCenter) {
-
-                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CHANNEL(accountcode)=" . $valueCostCenter . ")\n";
-                        $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";
-                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_JOIN_SOUND=beep)\n";
-                        $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_MOH=default)\n";
-                    }
-                }
+                // Cost Center
+                $valueCostCenter = $costCenter[$idActivate]; 
+                $contentConfe .= "exten => " . $idActivate . ",n,Set(CHANNEL(accountcode)=" . $valueCostCenter . ")\n";
+                $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";
+                $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_JOIN_SOUND=beep)\n";
+                $contentConfe .= "exten => " . $idActivate . ",n,Set(CONFBRIDGE_MOH=default)\n";
 
                 $date = date("Y-m-d");
                 $hour = date("H");
@@ -223,14 +209,12 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                             $contentConfe .= '{EPOCH},,%Y%m%d_%H%M)}_$';
                             $contentConfe .= '{EXTEN:}_$';
                             $contentConfe .= "{CALLERID(num)}" . ")\n";
-
                             $contentConfe .= "exten => " . $_rec_ . ",n,MixMonitor($";
-                            $contentConfe .= "{gravacao}.wav)\n\n";
+                            $contentConfe .= "{gravacao}.wav)\n";
                         }
                     }
                 }
                 $contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN})\n";
-                //$contentConfe .= "exten => " . $idActivate . ",n,ConfBridge(\${EXTEN},cM)\n";
                 $contentConfe .= "exten => " . $idActivate . ",n,Hangup\n";
                 $contentConfe .= "\n";
             }

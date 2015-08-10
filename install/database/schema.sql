@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
 --
 -- Table structure for table `groups`
 --
-CREATE TABLE IF NOT EXISTS groups (
+CREATE TABLE IF NOT EXISTS `groups` (
     name varchar(50) PRIMARY KEY,
     inherit varchar(50),
     FOREIGN KEY (inherit) REFERENCES groups(name) ON UPDATE CASCADE
@@ -500,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `lista_abandono` (
 --
 -- Table structure for table `core_cnl_country`
 --
-CREATE TABLE IF NOT EXISTS core_cnl_country (
+CREATE TABLE IF NOT EXISTS `core_cnl_country` (
     `id` integer primary key,
     `name` varchar(30) not null,
     `code_2` varchar(2) not null,
@@ -606,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `core_city` (
 --
 CREATE TABLE IF NOT EXISTS `contacts_group` (
   `id` integer NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

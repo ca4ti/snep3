@@ -15,7 +15,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.min.css" ); 
 ?>
+<style>
+    .toggle.btn-xs {
+        min-width: 50px;
+    }
+    .checkbox label .toggle {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+</style>
+<script type="text/javascript" src="/snep/includes/javascript/bootstrap-toggle.min.js"></script>
 
 <div class="row">
     <div class="tab-content">
@@ -36,16 +47,14 @@
                     <thead>
                         <tr>
                             <th class="text-center"> <?php echo $this->translate('Code') ?> </th>
-                            <th class="text-center"> <?php echo $this->translate('Active') ?> </th>
-                            <th class="text-center"> <?php echo $this->translate('Recording') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Record') ?> </th>
                             <th class="text-center"> <?php echo $this->translate('Restricted Access') ?> </th>
-                            <th class="text-center"> <?php echo $this->translate('Cost Center') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Cost Center') ?>
+                            <th class="text-center"> <?php echo $this->translate('Active') ?> </th> </th>
                         </tr>
                     </thead>
                     <tbody>
-
                         <?php
-                        
                         if ($this->conferenceRooms):
 
                             foreach ($this->conferenceRooms as $id => $conferenceRooms): ?>
@@ -54,36 +63,20 @@
                                     <td class="numeric text-center"> 
                                         <b> <?php echo $conferenceRooms['id'] ?> </b> 
                                     </td>
-                                    <td class="action text-center">
-                                        <?php ( $conferenceRooms['status'] ? $chek = 'checked' : $chek = '') ?>
-                                        <input type="checkbox" id="hab_<?php echo $conferenceRooms['id'] ?>" class="newcheck" onclick="habilita('<?php echo $conferenceRooms['id'] ?>');" <?php echo $chek ?> value="<?php $conferenceRooms['status'] ?>"  name="activate[<?php echo $conferenceRooms['id'] ?>]">
-                                    </td>
+                                    
                                     <td class="action text-center">
                                         <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
 
                                         <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
                                     </td>
-                                    <td class="password text-left">
-
-                                        <?php
-                                        if (empty($conferenceRooms['authenticate'])) {
-
-                                            $checked = '';
-                                            $display = "style=\"display:none;\"";
-                                        } else {
-
-                                            $checked = 'checked';
-                                            $display = '';
-                                        } ?>                    
-                                        <input id="auth_<?php echo $conferenceRooms['id'] ?>" type='checkbox' disabled="true" <?php echo $checked ?> name='authenticate[<?php echo $conferenceRooms['id'] ?>]' onclick="pass('<?php echo $conferenceRooms['id'] ?>');">
-                                        <?php echo $this->translate('Password Authentication') ?>
-                                        <div id="box_<?php echo $conferenceRooms['id'] ?>"  <?php echo $display ?> >                        
+                                    <td class="password text-center" ">                   
+                                        <div>                        
                                             <input type="password" name="password[<?php echo $conferenceRooms['id'] ?>]"  onkeypress="return onlyDigit(event)"  value="<?php echo $conferenceRooms['authenticate'] ?>">
-                                            <small> <?php echo $this->translate('( Only numbers)') ?></small>
+                                            <small> <?php echo $this->translate('(Only numbers)') ?></small>
                                         </div>
                                     </td>
 
-                                    <td class="text-center" style="width: 250px ;" >
+                                    <td class="text-center"  >
                                         
                                         <select style="width: 250px;" class="form-control" name="costCenter[<?php echo $conferenceRooms['id'] ?>]">
                                             <?php foreach ($this->costCenter as $chave => $costCenter): ?>
@@ -94,6 +87,13 @@
                                                     <?php echo $costCenter['tipo'] . " : " . $costCenter['codigo'] . " - " . $costCenter['nome']; ?>
                                             <?php endforeach ?>
                                         </select>
+                                    </td>
+                                    <td align="center">
+                                        <div class="checkbox" >
+                                            <label>
+                                                <input type="checkbox" data-toggle="toggle"  <?php echo $conferenceRooms['status'] === 1 ? 'checked' : ''; ?> name="activate[<?php echo $conferenceRooms['id'] ?>]" value="<?php $conferenceRooms['status'] ?>" data-size="mini">
+                                            </label>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

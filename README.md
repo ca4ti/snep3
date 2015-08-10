@@ -24,9 +24,9 @@ FEITO - Parâmetros : Não altera a variável "country-code"
 - Tronco SNEPSip não funciona
 - Ajustar o /etc/hosts na instalação
 - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
-- Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tabela BD
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
-- Grupo de Contatos:  Trunca o nome (view x tabela BD)
+FEITO - Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tabela BD
+FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
 - Ramais:
   - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
   - Usa grupo Ramal = Administradores mas exibe como "Usuários"

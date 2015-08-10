@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:46-0300\n"
-"PO-Revision-Date: 2015-07-29 11:01-0300\n"
+"PO-Revision-Date: 2015-08-10 16:54-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Bookmarks: -1,493,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -92,7 +92,7 @@ msgstr " minutos"
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:73
 msgid "( Only numbers)"
-msgstr "Somente números"
+msgstr "(Somente números)"
 
 #: ../modules/default/controllers/CallsReportController.php:391
 #: ../modules/default/controllers/ExportDataController.php:56
@@ -510,7 +510,7 @@ msgstr "Áudio: Você é o próximo da fila"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:58
 msgid "Audios"
-msgstr ""
+msgstr "Áudios"
 
 #: ../modules/default/controllers/AuthController.php:115
 msgid "Authentication failure"
@@ -3365,7 +3365,7 @@ msgstr "Recarregar a página"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:63
 msgid "Record"
-msgstr "Registro"
+msgstr "Gravar"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:193
 msgid "Recorded Files Path"

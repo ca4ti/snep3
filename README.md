@@ -16,7 +16,7 @@
 - Relatório de serviços: incluir cadeado, agenda, etc
 - A opção NAT pode ser combinada (checkbox). Não é única (radiobox). Ver conceitos de cada opção, Definir DEFAULT.
 - Status do Sistema - não está exibindo o status dos troncos corretamente
-- Parâmetros : Não altera a variável "country-code"
+FEITO - Parâmetros : Não altera a variável "country-code"
 - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
 - Arrumar os ícones para enable/disable das permissões do usuário
 - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)

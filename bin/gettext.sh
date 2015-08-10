@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+#!/bin/sh -x
+
+=======
 #!/bin/sh
 #   This file is part of SNEP
 #   Para território Brasileiro leia LICENCA_BR.txt
@@ -16,6 +20,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
 #
+>>>>>>> 221a02d57496c9612c1efe371ec5c450f0cc0272
 echo "" > messages.po
 echo "Fase 1 : Arquivos php/phtml"
 find $1 -type f \( -name "*.php" -o -name "*.phtml" \) | grep -v ".git" | grep -v "Zend/" | xgettext --keyword=translate --language=PHP --from-code=utf-8 -j -f -;

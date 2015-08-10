@@ -184,7 +184,8 @@ class ParametersController extends Zend_Controller_Action {
 
             // Get country code 
             $db = Snep_Db::getInstance();
-            $country_code = $db->query("select id from core_cnl_country where locale='".$formData['locale']."'")->fetch();
+            $country_code = $db->query("select id from core_cnl_country where locale='".$formData['language']."'")->fetch();
+
             
             // Specific verification for propertie path_voice
             if (!file_exists($formData['path_voz'])) {

@@ -193,7 +193,7 @@ class ExtensionsController extends Zend_Controller_Action {
             } else {
                 $this->view->error_message = $ret;
                 $this->renderScript('error/sneperror.phtml');
-                $this->view->form->valid(false);
+
             }
             
         }
@@ -232,6 +232,7 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->virtual = "";
         $this->view->khomp = "";
         $this->view->techType   = $techType; //"selected";
+        $this->view->$techType = "selected";
         $this->view->technology = $techType;
 
         $timeTotal = $exten["time_total"];
@@ -295,9 +296,12 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->dtmfinfo = "checked";
                 }
                 
-                $nat = $exten['nat'];
-                $label = "nat_".$nat;
-                $this->view->$label = "checked"; 
+                $array_nat = explode(",",$exten['nat']);
+                foreach($array_nat as $key => $val) {
+                    $label = "nat_".$val;
+                    $this->view->$label = "checked";
+                }
+
 
                 $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
                 $codecs = explode(";", $exten['allow']);
@@ -471,7 +475,6 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $techType = $formData["technology"];    
         
-        
         $secret = (isset($formData["password"]))? $formData["password"]: ""; 
         
 
@@ -480,10 +483,19 @@ class ExtensionsController extends Zend_Controller_Action {
         $callLimit = $formData["calllimit"];
 
         if ($techType == 'sip' || $techType == 'iax2') {
-            if (!key_exists('nat', $formData)) {
-                $nat = 'comedia';
-            } else {
-                $nat = $formData['nat'] ;
+            $nat_types = array('no','comedia','force_rport','auto_comedia','auto_force_rport');
+            $nat = "" ; 
+            foreach ($nat_types as $key => $val) {
+                if (isset($formData['nat_'.$val])) {
+                    if ($nat === "") {
+                        $nat = $val ;
+                    } else {
+                        $nat .= ','.$val ;
+                    }
+                }
+            }
+            if ($nat === "") {
+                $nat = 'no';
             }
         }
 
@@ -494,6 +506,7 @@ class ExtensionsController extends Zend_Controller_Action {
             }
         }
 
+        // Type: friend, user, peer
         $type = $formData['type'];
 
         $channel = strtoupper($techType);

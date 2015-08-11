@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `language` char(2) default 'br',
   `mailbox` varchar(50) default NULL,
   `md5secret` varchar(80) default '',
-  `nat` varchar(16) NOT NULL default 'no',
+  `nat` varchar(100) NOT NULL default 'no',
   `deny` varchar(95) default NULL,
   `permit` varchar(95) default NULL,
   `mask` varchar(95) default NULL,

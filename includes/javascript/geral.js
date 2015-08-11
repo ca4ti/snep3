@@ -118,10 +118,13 @@ jQuery(document).ready(function(e) {
         a.click(change);
         a.keypress(change);
         check.change(function(){
-            if(check.attr('checked'))
+            if(check.attr('checked')) {
                 //div.attr('src', imgtrue);
-            else 
+                abc = 1;
+            } else {
                 //div.attr('src', imgfalse);
+                abc = 0 ;
+            }
         });
     });
     if(jQuery().multiselect){

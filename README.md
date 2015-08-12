@@ -15,7 +15,7 @@
 - Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
 - Relatório de serviços: incluir cadeado, agenda, etc
 FEITO - A opção NAT pode ser combinada (checkbox). Não é única (radiobox). Ver conceitos de cada opção, Definir DEFAULT.
-- Status do Sistema - não está exibindo o status dos troncos corretamente
+FEITO - Status do Sistema - não está exibindo o status dos troncos corretamente
 FEITO - Parâmetros : Não altera a variável "country-code"
 - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
 - Arrumar os ícones para enable/disable das permissões do usuário

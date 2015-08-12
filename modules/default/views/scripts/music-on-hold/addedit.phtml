@@ -4,7 +4,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label"><?php echo $this->translate("Name");?></label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value='<?php echo $this->file['name'];?>' <?php echo $this->disabled;?>/>
+                <input type="text" class="form-control" name="nome" id="nome" placeholder='<?php echo $this->translate("Name")?>' value='<?php echo $this->file['name'];?>' />
             </div>
         </div>
 
@@ -27,10 +27,10 @@
         <div class="form-group">
             <label class="col-sm-3 control-label"><?php echo $this->translate("Directory name");?></label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="directory" value='<?php echo $this->directoryName;?>'/>
+                <input type="text" class="form-control" name="directory" id="directory" value='<?php echo $this->directoryName;?>' <?php echo $this->disabled;?>/>
             </div>
         </div>
-        <input type="hidden" name="base" value='<?php echo "/var/lib/asterisk/moh/" ?>' />
+        <input type="hidden" name="directory" value='<?php echo $this->file['directory']; ?>' />
         <input type="hidden" name="name" value="<?php echo $this->file['name'];?>" />
         <div class="snep-body-footer-buttons">
             <button type="submit" class="btn btn-add" name="signup" value="Sign up"><?php echo $this->translate("Save");?></button>
@@ -45,19 +45,23 @@
 
 jQuery.noConflict();
 jQuery(document).ready(function(){ 
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-z]+$/i.test(value);
+        }, "<?php echo $this->translate('Please enter letters only'); ?>" ); 
     jQuery('#defaultForm').validate({
         rules: {
             name: {
                 required: true,
                 minlength: 3,
-                maxlength: 30
+                maxlength: 30,
+                lettersAndNumbersOnly: true
             },
 
             directory: {
                 required: true,
                 minlength: 3,
                 maxlength: 30,
-                lettersAndNumbersOnly: true
+                lettersonly: true
             }
         },
         messages: {
@@ -71,7 +75,7 @@ jQuery(document).ready(function(){
                 required: "<?php echo $this->translate('The directory name is required'); ?>",
                 minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
                 maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only'); ?>" 
+                lettersonly: "<?php echo $this->translate('Please enter letters only'); ?>" 
             }
         },
         highlight: function(element) {

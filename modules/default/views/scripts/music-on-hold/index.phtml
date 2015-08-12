@@ -36,8 +36,9 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
                         <tr>
                             <th> <?php echo $this->translate('Name') ?> </th>
                             <th> <?php echo $this->translate('Path') ?> </th>
-                            <th> <?php echo $this->translate('Type') ?> </th>
-                            <th colspan="4" class="action text-center" data-sort-ignore="true"> <?php echo $this->translate('Actions') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Type') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Files') ?> </th>
+                            <th colspan="3" class="action text-center" data-sort-ignore="true"> <?php echo $this->translate('Actions') ?> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,18 +54,19 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
                                 <tr>
                                     <td> <b> <?php echo $class['name'] ?> </b> </td>
                                     <td> <?php echo $class['directory'] ?> </td>
-                                    <td> <?php echo $this->modes[$class['mode']] ?> </td>
+                                    <td class="text-center"> <?php echo $this->modes[$class['mode']] ?> </td>
+                                    <td class="text-center"> <?php echo $class['count'] ?> </td>
                                     <td align="center">
-                                        <a class="btn btn-default btn-xs"  href="<?php echo $this->url ?>/file/class/<?php echo $class['name'] ?>" role="button"> <?php echo $this->translate('Audios')?> 
+                                        <a class="btn btn-default btn-xs"  href="<?php echo $this->url.'/file/section/'.$class['name'] ?>" role="button"> <?php echo $this->translate('Audios')?> 
                                         </a>
                                     </td>
                                     <td align="center">
-                                        <a class="btn btn-edit btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/edit/file/<?php echo $class['name'] ?>" role="button">
+                                        <a class="btn btn-edit btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url.'/edit/section/'.$class['name'] ?>" role="button">
                                             <?php echo $this->translate('Edit')?> 
                                         </a>
                                     </td>
                                     <td align="center">
-                                        <a class="btn btn-danger btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/remove/file/<?php echo $class['name'] ?>" role="button" >
+                                        <a class="btn btn-danger btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url.'/remove/section/'.$class['name'] ?>" role="button" >
                                             <?php echo $this->translate('Delete')?> 
                                         </a>
                                     </td>

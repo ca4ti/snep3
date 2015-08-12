@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `sounds` (
   `tipo` char(3) NOT NULL default 'AST',
   `secao` varchar(30) NOT NULL,
   `language` varchar(5) NOT NULL default 'pt_BR',
-  PRIMARY KEY  (`arquivo`,`tipo`,`secao`)
+  PRIMARY KEY  (`arquivo`,`tipo`,`secao`,`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

@@ -17,7 +17,7 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
         <div class="tab-pane active" id="demo">
 
             <div class="snep-body-top-buttons">
-                <a class="btn btn-add" href="<?php echo $this->url ?>/addfile/class/default " role="button"><?php echo $this->translate("Add File")?></a>
+                <a class="btn btn-add" href="<?php echo $this->url.'/addfile/section/'.$this->section;?> " role="button"><?php echo $this->translate("Add File")?></a>
                 <div class="snep-body-search">
                     <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
                 </div>
@@ -32,9 +32,9 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
                     <thead>
                         <tr>
                             <th> <?php echo $this->translate('Name') ?> </th>
-                            <th> <?php echo $this->translate('Date') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Last update') ?> </th>
                             <th> <?php echo $this->translate('Description') ?> </th>
-                            <th> <?php echo $this->translate('Class') ?> </th>
+                            <th class="text-center"> <?php echo $this->translate('Class') ?> </th>
                             <th colspan="4" class="action text-center" data-sort-ignore="true"> <?php echo $this->translate('Actions') ?> </th>
                         </tr>
                     </thead>
@@ -42,18 +42,17 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
                         
                         <?php if($this->files):
                             foreach($this->files as $file ): ?>
-                                                               
                                 <tr>
-                                    <td> <b> <?php echo $file['arquivo'] ?> </b> </td>
-                                    <td> <?php echo  ( $file['data'] ?  new Zend_Date( $file['data']) : '-' );  ?> </td>
+                                    <td><?php echo $file['arquivo'] ?> </td>
+                                    <td class="text-center"> <?php echo  ( $file['data'] ?  new Zend_Date( $file['data']) : '-' );  ?> </td>
                                     <td><?php echo $file['descricao'] ?> </td>
-                                    <td><?php echo $file['secao'] ?> </td>
+                                    <td class="text-center"><?php echo $file['secao'] ?> </td>
                                     <td align="center">
-                                        <a class="btn btn-edit btn-xs"  href="<?php echo $this->url ?>/editfile/file/<?php echo $file['arquivo']?>/class/<?php echo $file['secao']?>" role="button"><?php echo $this->translate('Edit')?> 
+                                        <a class="btn btn-edit btn-xs"  href="<?php echo $this->url . '/editfile/file/'. $file['arquivo'].'/class/'.$file['secao'];?>" role="button"><?php echo $this->translate('Edit')?> 
                                         </a>
                                     </td>
                                     <td align="center">
-                                        <a class="btn btn-danger btn-xs"  href="<?php echo $this->url ?>/removefile/file/<?php echo $file['arquivo']?>/class/<?php echo $file['secao']?>" role="button"><?php echo $this->translate('Delete')?> 
+                                        <a class="btn btn-danger btn-xs"  href="<?php echo $this->url.'/removefile/file/'.$file['arquivo'].'/class/'.$file['secao'];?>" role="button"><?php echo $this->translate('Delete')?> 
                                         </a>
                                     </td>
                                 </tr>
@@ -62,11 +61,15 @@ $this->headScript()->appendFile($this->baseUrl() .  "/includes/javascript/snep.j
                     </tbody>
                     <tfoot>
                         <tr>
-
                             <td colspan="7">
                                 <div class="paging">
                                     <ul class="pagination"></ul>
                                 </div>
+                                <form  action="<?php echo $this->url(array("controller" => "music-on-hold", "action" => "index"), null, true); ?>"  enctype="multipart/form-data">
+                                    <div class="snep-body-footer-buttons">
+                                         <button type="submit" class="btn btn-add" name="back" value="Back"><?php echo $this->translate("Back");?></button>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     </tfoot>

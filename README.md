@@ -33,7 +33,8 @@ FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
 - Estacionamento: Não funciona como está documentado (700). Rever documentação/definir novo padrão ou ajustar funcionamento padrão
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Status do sistema: Avisar que tem problemas de permissões, links etc
-- Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
+FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
+- Arquivos de Som do Asterisk - rever a rotina
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 - Music on Hold - ver os tipos de execucao no controlador

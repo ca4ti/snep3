@@ -167,7 +167,7 @@ class IpStatusController extends Zend_Controller_Action {
                     $troncos[$key]['status'] = $tr_val_ind[5];
                     $troncos[$key]['latencia'] = $peer_lat[1];
                 } else {
-                    // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
+                    // Se o tipo do tronco for VIRTUAL, BD nao tem Host e nem Username
                     if ($sis_type == "VIRTUAL") {
                         // Define como Username a 2a. parte do Channel
                         $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
@@ -248,10 +248,10 @@ class IpStatusController extends Zend_Controller_Action {
                 if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
                     continue;
                 }
-                // Array individual apra cada tronco
+                // Array individual para cada tronco
                 $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
 
-                $tr_user = $tr_val_ind[1];
+                $tr_user = $tr_val_ind[2];
                 $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
 
                 // Verifica latencia do tronco
@@ -265,11 +265,11 @@ class IpStatusController extends Zend_Controller_Action {
                 // E SE  o host do BD = Hostname do Asterisk  
                 // ENTÃO Define o status como sendo o State do Asterisk
                 if ($tr_user === $sis_user && $tr_host === $sis_host) {
-                    if ($tr_val_ind[3] === "Registered")
-                        $troncos[$key]['status'] = $tr_val_ind[3];
+                    if ($tr_val_ind[4] === "Registered")
+                        $troncos[$key]['status'] = $tr_val_ind[4];
                     else
-                        $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
-                    $troncos[$key]['latencia'] = $peer_lat;
+                        $troncos[$key]['status'] = $tr_val_ind[4] . ' ' . $tr_val_ind[4];
+                    	$troncos[$key]['latencia'] = $peer_lat;
                 } else {
                     // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
                     if ($sis_type == "VIRTUAL") {

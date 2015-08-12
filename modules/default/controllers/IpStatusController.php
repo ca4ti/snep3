@@ -167,7 +167,7 @@ class IpStatusController extends Zend_Controller_Action {
                     $troncos[$key]['status'] = $tr_val_ind[5];
                     $troncos[$key]['latencia'] = $peer_lat[1];
                 } else {
-                    // Se o tipo do tronco for VIRTUAL, BD nao tem Host e nem Username
+                    // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
                     if ($sis_type == "VIRTUAL") {
                         // Define como Username a 2a. parte do Channel
                         $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
@@ -218,7 +218,6 @@ class IpStatusController extends Zend_Controller_Action {
         // Trunk Sip
         $like = 'SIP%';
         $troncos = Snep_IpStatus_Manager::getTrunk($like);
-	
 
         // Popula troncos com itens faltantes do array
         foreach ($troncos as $val => $key) {
@@ -233,7 +232,7 @@ class IpStatusController extends Zend_Controller_Action {
 
         // Define array das linhas retornadas pelo Asterisk
         $trunksReg = explode("\n", ast_status("sip show registry", "", True));
-	
+
         foreach ($troncos as $key => $val) {
             $troncos[$key]['status'] = "";
             $troncos[$key]['latencia'] = "";
@@ -249,15 +248,14 @@ class IpStatusController extends Zend_Controller_Action {
                 if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
                     continue;
                 }
-                // Array individual para cada tronco
+                // Array individual apra cada tronco
                 $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
 
-                $tr_user = $tr_val_ind[2];
+                $tr_user = $tr_val_ind[1];
                 $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
 
                 // Verifica latencia do tronco
                 $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
-	
 
                 $sip_peer = explode("\n", ast_status("sip show peer $peer_user", "", True));
                 $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
@@ -267,11 +265,11 @@ class IpStatusController extends Zend_Controller_Action {
                 // E SE  o host do BD = Hostname do Asterisk  
                 // ENTÃO Define o status como sendo o State do Asterisk
                 if ($tr_user === $sis_user && $tr_host === $sis_host) {
-                    if ($tr_val_ind[4] === "Registered")
-                        $troncos[$key]['status'] = $tr_val_ind[4];
+                    if ($tr_val_ind[3] === "Registered")
+                        $troncos[$key]['status'] = $tr_val_ind[3];
                     else
                         $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
-                    	$troncos[$key]['latencia'] = $peer_lat;
+                    $troncos[$key]['latencia'] = $peer_lat;
                 } else {
                     // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
                     if ($sis_type == "VIRTUAL") {

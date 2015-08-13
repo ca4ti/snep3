@@ -208,8 +208,12 @@ class Formata {
  */
 function ast_status($comando, $quebra, $tudo = False) {
     require_once "AsteriskInfo.php";
-    $astinfo = new AsteriskInfo();
-    return $astinfo->status_asterisk($comando, $quebra, $tudo);
+    try {
+        $astinfo = new AsteriskInfo();
+        return $astinfo->status_asterisk($comando, $quebra, $tudo);
+    } catch (Exception $e) {
+        return $this->view->translate("Error! Failed to connect to server Asterisk.");
+    }
 }
 
 

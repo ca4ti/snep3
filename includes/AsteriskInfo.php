@@ -39,8 +39,18 @@ class AsteriskInfo {
         global $SETUP;
         // Verificando se já existe alguma conex�o
         if(!isset(self::$asterisk)) {
+
             // Criando a primeira instancia da conexão
-            self::$asterisk = PBX_Asterisk_AMI::getInstance();
+            try {
+                self::$asterisk = PBX_Asterisk_AMI::getInstance();
+                $res = false ;
+            } catch (Exception $e) {
+                $res = $e ;
+            }
+            if ($res) {
+                throw new Asterisk_Exception_CantConnect("Unable to connect to manager");
+            }
+
         }
     }
 

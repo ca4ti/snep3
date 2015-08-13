@@ -41,18 +41,19 @@ class TrunksController extends Zend_Controller_Action {
         // Test Asterisk connection       
         try {
             $astinfo = new AsteriskInfo();
+            // Read Khomp links
+            try {
+                $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
+             } catch (Exception $e) {
+                $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+                $this->renderScript('error/sneperror.phtml');;
+            }
         } catch (Exception $e) {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
 
-        // Read Khomp links
-        try {
-            $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
-         } catch (Exception $e) {
-            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
-            $this->renderScript('error/sneperror.phtml');;
-        }
+        
     }
 
     public function init() {
@@ -66,24 +67,30 @@ class TrunksController extends Zend_Controller_Action {
                                               Zend_Controller_Front::getInstance()->getRequest()->getActionName());
 
         // Informações de placas khomp
-        $khomp_info = new PBX_Khomp_Info();
-        $khomp_boards = array();
-        if ($khomp_info->hasWorkingBoards()) {
-            foreach ($khomp_info->boardInfo() as $board) {
-                if (!preg_match("/FXS/", $board['model'])) {
-                    $khomp_boards["b" . $board['id']] = "{$board['id']} - " . $this->view->translate("Board") . " {$board['model']}";
-                    $id = "b" . $board['id'];
-                    if (preg_match("/E1/", $board['model'])) {
-                        for ($i = 0; $i < $board['links']; $i++)
-                            $khomp_boards["b" . $board['id'] . "l$i"] = $board['model'] . " - " . $this->view->translate("Link") . " $i";
-                    } else {
-                        for ($i = 0; $i < $board['channels']; $i++)
-                            $khomp_boards["b" . $board['id'] . "c$i"] = $board['model'] . " - " . $this->view->translate("Channel") . " $i";
+        try {    
+            $khomp_info = new PBX_Khomp_Info();
+            $khomp_boards = array();
+            if ($khomp_info->hasWorkingBoards()) {
+                foreach ($khomp_info->boardInfo() as $board) {
+                    if (!preg_match("/FXS/", $board['model'])) {
+                        $khomp_boards["b" . $board['id']] = "{$board['id']} - " . $this->view->translate("Board") . " {$board['model']}";
+                        $id = "b" . $board['id'];
+                        if (preg_match("/E1/", $board['model'])) {
+                            for ($i = 0; $i < $board['links']; $i++)
+                                $khomp_boards["b" . $board['id'] . "l$i"] = $board['model'] . " - " . $this->view->translate("Link") . " $i";
+                        } else {
+                            for ($i = 0; $i < $board['channels']; $i++)
+                                $khomp_boards["b" . $board['id'] . "c$i"] = $board['model'] . " - " . $this->view->translate("Channel") . " $i";
+                        }
                     }
                 }
+                $this->khompBoards = $khomp_boards;           
             }
-            $this->khompBoards = $khomp_boards;           
+        } catch (Exception $e) {
+            
         }
+
+
     }
 
     /**

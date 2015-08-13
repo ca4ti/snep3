@@ -54,7 +54,7 @@ class KhompLinksController extends Zend_Controller_Action {
         try {
             $astinfo = new AsteriskInfo();
         } catch (Exception $e) {
-            $this->view->error_message = $e->getMessage();
+            $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
             return;
         }
@@ -231,11 +231,19 @@ class KhompLinksController extends Zend_Controller_Action {
             "5" => "B04", "6" => "B05", "7" => "B06", "8" => "B07");
 
         require_once "includes/AsteriskInfo.php";
-
-        $astinfo = new AsteriskInfo();
-
-        if (!$data = $astinfo->status_asterisk("khomp summary concise", "", True)) {
-            throw new ErrorException($this->view->translate("Socket connection to the server is not available at the moment."));
+;
+        try {
+            $astinfo = new AsteriskInfo();
+            // Read Khomp links
+            try {
+                $data = $astinfo->status_asterisk("khomp summary concise", "", True) ;
+            } catch (Exception $e) {
+                $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+                $this->renderScript('error/sneperror.phtml');;
+            }
+        } catch (Exception $e) {
+            $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
         }
 
         #Monta lista de Placas para exibir no Header da view

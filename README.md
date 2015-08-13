@@ -19,13 +19,14 @@ FEITO - Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tab
 FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
 FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
 FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
+FEITO - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
+
 
 
 *IMPORTANTES*
 - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
 - Tronco SNEPSip não funciona
 - Ajustar o /etc/hosts na instalação
-- Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
 - Ramais:
   - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
   - Usa grupo Ramal = Administradores mas exibe como "Usuários"

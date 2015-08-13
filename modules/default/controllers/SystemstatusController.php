@@ -131,7 +131,6 @@ class SystemstatusController extends Zend_Controller_Action {
             $astinfo = new AsteriskInfo();
             $astVersionRaw = explode('@', $astinfo->status_asterisk("core show version", "", True));
             preg_match('/Asterisk (.*) built/', $astVersionRaw[0], $astVersion);
-
         } catch (Exception $e) {
             
         }

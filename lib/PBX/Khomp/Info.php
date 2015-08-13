@@ -36,7 +36,16 @@ class PBX_Khomp_Info {
      * __construct
      */
     public function __construct() {
-        $this->asterisk = PBX_Asterisk_AMI::getInstance();
+        try {
+            $this->asterisk = PBX_Asterisk_AMI::getInstance();
+            $res = false ;
+        } catch (Exception $e) {
+            $res = $e ;
+        }
+        if ($res) {
+            throw new Asterisk_Exception_CantConnect("Unable to connect to manager");
+        }
+        
     }
 
     /**

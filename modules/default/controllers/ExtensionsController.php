@@ -42,18 +42,21 @@ class ExtensionsController extends Zend_Controller_Action {
         // Test Asterisk connection       
         try {
             $astinfo = new AsteriskInfo();
+            // Read Khomp links
+            try {
+                $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
+            } catch (Exception $e) {
+                $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+                $this->renderScript('error/sneperror.phtml');;
+            }
         } catch (Exception $e) {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
 
-        // Read Khomp links
-        try {
-            $data = $astinfo->status_asterisk("khomp links show concise", "", True) ;
-         } catch (Exception $e) {
-            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
-            $this->renderScript('error/sneperror.phtml');;
-        }
+
+
+        
     }
 
 

@@ -3,7 +3,7 @@
 - Tradução e revisão das traduções Pt-BR, EN, ES
 - Correção no comportamento do menu principal
 - Refatorar rotina de Rotas / Regras Negócio
-  - Separar por ABAS: Entradas, Saidas, Outras
+- Separar por ABAS: Entradas, Saidas, Outras
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
@@ -19,6 +19,7 @@ FEITO - Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tab
 FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
 FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
 FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
+FEITO - Relatório de serviços: incluir cadeado, agenda, etc
 
 
 *IMPORTANTES*
@@ -35,7 +36,6 @@ FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações
 - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 
 *RELEVANTES*
-- Relatório de serviços: incluir cadeado, agenda, etc
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
 - Arrumar os ícones para enable/disable das permissões do usuário

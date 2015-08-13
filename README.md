@@ -21,9 +21,9 @@ FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar 
 FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
 FEITO - Relatório de serviços: incluir cadeado, agenda, etc
 FEITO - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
+FEITO - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
 
 *IMPORTANTES*
-- Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
 - Tronco SNEPSip não funciona
 - Ajustar o /etc/hosts na instalação
 - Ramais:

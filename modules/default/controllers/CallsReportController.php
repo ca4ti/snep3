@@ -33,11 +33,16 @@ class CallsReportController extends Zend_Controller_Action {
      */
     public function init() {
 
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit; 
+        
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
             Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
             Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
             Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+        
+
     }
 
     /**
@@ -85,12 +90,6 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->datepicker_locale =  Snep_Locale::getDatePickerLocale($locale) ;
 
         if ($this->_request->getPost()) {
-
-            // if ($locale == 'en_US') {
-            //     $format = 'yyyy-MM-dd';
-            // } else {
-            //     $format = Zend_Locale_Format::getDateFormat($locale);
-            // }
             
             $this->viewAction();
            
@@ -100,9 +99,8 @@ class CallsReportController extends Zend_Controller_Action {
 
     public function viewAction(){
 
-        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
         $formData = $this->_request->getParams();
-        $line_limit = Zend_Registry::get('config')->ambiente->linelimit;
+        $line_limit = $this->view->lineNumber;
         $locale = false;
         $type = 'preview';
 

@@ -125,24 +125,15 @@
                 </div>
             </div>
 
+
         </fielset>
 
         <fieldset>
             
-            <legend><?php echo $this->translate("Other filters");?></legend>
+            <legend><?php echo $this->translate("Additional filters");?></legend>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("Cost Center");?></label>
-                <div class="col-sm-4">
-                    <select multiple class="form-control" name="costs_center[]" id="costs_center[]">
-                        <?php foreach($this->costs as $key => $cost){?>
-                        <option value='<?php echo $cost['codigo']?>'><?php echo $cost['tipo'].': ' .$cost['codigo'].' - '.$cost['nome'];?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
+            
+             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Status")?></label>
                 <div class="col-sm-6">
                     <div class="checkbox">
@@ -161,6 +152,19 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Cost Center");?></label>
+                <div class="col-sm-4">
+                    <select multiple class="form-control" name="costs_center[]" id="costs_center[]">
+                        <?php foreach($this->costs as $key => $cost){?>
+                        <option value='<?php echo $cost['codigo']?>'><?php echo $cost['tipo'].': ' .$cost['codigo'].' - '.$cost['nome'];?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+           
 
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Minimum Call Time");?></label>
@@ -184,7 +188,9 @@
                             <input type="checkbox" name="locale" id="locale" />
                             <?php echo $this->translate("Enabled")?>
                             &nbsp;&nbsp;&nbsp;
-                            <span style="color: red"><?php echo "( ". $this->translate("If enabled the query will be slower")." )"; ?></span>
+                            <small>
+                                <span style="color: red"><?php echo "( ". $this->translate("If enabled the query will be slower")." )"; ?></span>
+                            </small>
                         </label>
                     </div>
                 </div>
@@ -198,7 +204,9 @@
                             <input type="checkbox" name="record" id="record" />
                             <?php echo $this->translate("Enabled")?>
                             &nbsp;&nbsp;&nbsp;
-                            <span style="color: red"><?php echo "( ". $this->translate("If enabled the query will be slower")." )"; ?></span>
+                            <small>
+                                <span style="color: red"><?php echo "( ". $this->translate("If enabled the query will be slower")." )"; ?></span>
+                            </small>
                         </label>
                     </div>
                 </div>
@@ -235,6 +243,7 @@
         <div class="snep-body-footer-buttons">
            <button type="submit" class="btn btn-add" name="showreport" value="showreport"><?php echo $this->translate("Show Report");?></button>
         </div> 
+        <br />
     </form>
 </div> <!-- /.row -->
 

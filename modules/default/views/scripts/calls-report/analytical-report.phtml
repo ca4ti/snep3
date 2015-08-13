@@ -1,49 +1,47 @@
 <?php
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css" );
-$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scriptaculous.js');
+//$this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scriptaculous.js');
 ?>
 
 <div>
 <form name="tabela" id="tabela">
-  <input type="hidden" value="" id="selected" />
-     <table align="center">
-	   <thead>
-               <tr>
-                  <td class="cen"><?php echo $this->seq; ?></td>
-                  <td class="cen"><?php echo $this->calldate; ?></td>
-                  <td class="esq"><?php echo $this->origin; ?></td>
-                  <td class="esq"><?php echo $this->destination; ?></td>
-                  <td class="esq"><?php echo $this->callstatus; ?></td>
-                  <td class="esq"><?php echo $this->duration; ?></td>
-                  <td class="esq"><?php echo $this->conversation; ?></td>
-                  <td class="esq"><?php echo $this->cost_center; ?></td>
-                  <td class="esq"><?php echo $this->city;?> - <?php echo $this->state;?></td>
+    <input type="hidden" value="" id="selected" />
+        <table align="center">
+	        <thead>
+                <tr>
+                    <td class="cen"><?php echo $this->seq; ?></td>
+                    <td class="cen"><?php echo $this->calldate; ?></td>
+                    <td class="esq"><?php echo $this->origin; ?></td>
+                    <td class="esq"><?php echo $this->destination; ?></td>
+                    <td class="esq"><?php echo $this->callstatus; ?></td>
+                    <td class="esq"><?php echo $this->duration; ?></td>
+                    <td class="esq"><?php echo $this->conversation; ?></td>
+                    <td class="esq"><?php echo $this->cost_center; ?></td>
+                    <td class="esq"><?php echo $this->city;?> - <?php echo $this->state;?></td>
 
-				  <?php if ($this->tariffed): ?>
-					 <td class="esq"><?php echo $this->tarrifation ?></td>
-				  <?php endif ?>
+				    <?php if ($this->tariffed): ?>
+					   <td class="esq"><?php echo $this->tarrifation ?></td>
+				    <?php endif ?>
 
-				  <?php if ($this->files): ?>
-					  <td class="cen" colspan="3">
-						  <script>
-							  toggleAll = function(ref) {
-								  var boxes = $$('input[type="checkbox"]');
-
-								  for(box in boxes) {
-									  boxes[box].checked = ref.checked;
-								  }
-							  }
-						  </script>
+				    <?php if ($this->files): ?>
+					    <td class="cen" colspan="3">
+						    <script>
+							    toggleAll = function(ref) {
+								    var boxes = $$('input[type="checkbox"]');
+								    for(box in boxes) {
+									    boxes[box].checked = ref.checked;
+								    }
+							    }
+						    </script>
 							<input type="checkbox" title="Selecionar Todos" onclick="toggleAll(this);">
-						  <?php echo $this->gravation; ?>
-					  </td>
-				<?php endif ?>
-
-               </tr>
+						    <?php echo $this->gravation; ?>
+					    </td>
+				    <?php endif ?>
+                </tr>
             </thead>
             <?php $c = 0; ?>
 			<?php foreach( $this->call_list as $id => $callsList ): ?>
-                        <?php ( $c ? $c = 0 : $c = 1 ); ?>
+                <?php ( $c ? $c = 0 : $c = 1 ); ?>
 				<tr  class="<?php echo $c ?>" >
 					<td>
 					  <?php echo $callsList['id']; ?>
@@ -96,10 +94,10 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
             </tr>
 
 			<tr>
-               <td colspan="12">
-                  <b><?php echo $this->sub_total; ?>:</b>
+                <td colspan="12">
+                    <b><?php echo $this->sub_total; ?>:</b>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			   	   <?php echo $this->answered;?>:&nbsp;
+			   	    <?php echo $this->answered;?>:&nbsp;
 					<b><?php echo $this->totals['answered'];?></b>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<?php echo $this->nanswered;?>:&nbsp;
@@ -120,48 +118,47 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
 						 <b><?php echo $this->totals['tot_tarifado']; ?></b>
 					<?php endif ?>
 
-               </td>
+                </td>
             </tr>
-         </table>
-      </form>
+        </table>
+    </form>
 
-<?php echo $this->render('pagination.phtml'); 
+    <?php echo $this->render('pagination.phtml'); 
 
 if ($this->files): ?>
 	<input class="button" type="button" value="<?php echo $this->compress_files ?>" OnClick="compactCheckeds();">
 
 	<script>
-    function compactCheckeds() {
-        var form=$('tabela');
-        var i=form.getElements('checkbox');
-        var dados = '';
-        i.each(function(item) {
-            if (item.checked) {
-                dados += item.value + ",";
+        function compactCheckeds() {
+            var form=$('tabela');
+            var i=form.getElements('checkbox');
+            var dados = '';
+            i.each(function(item) {
+                if (item.checked) {
+                    dados += item.value + ",";
+                }
+            });
+
+            var url = '/snep/index.php/default/calls-report/compact/';
+            var params = 'files='+ dados;
+            var retorno = new Ajax.Request (
+            url, {
+                method: 'get',
+                parameters: params,
+                onComplete: alerta
             }
-        });
-
-        var url = '/snep/index.php/default/calls-report/compact/';
-        var params = 'files='+ dados;
-        var retorno = new Ajax.Request (
-        url, {
-            method: 'get',
-            parameters: params,
-            onComplete: alerta
+        );
         }
-    );
-    }
 
-    function alerta( arq) {
-        var arq = arq.responseText;
-        if(arq == 0) {
-            alert("Erro");
-        } else {
-            alert("<?php echo $this->compact_success?>");
-			window.location=arq;
+        function alerta( arq) {
+            var arq = arq.responseText;
+            if(arq == 0) {
+                alert("Erro");
+            } else {
+                alert("<?php echo $this->compact_success?>");
+    			window.location=arq;
+            }
         }
-    }
- 
-</script> 
+    </script> 
 <?php endif ?>
 </div>

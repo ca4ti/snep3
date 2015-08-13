@@ -12,32 +12,38 @@
   - Centros de Custos
 ---------------------------------
 **Bugs/Ajustes**
-- Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
-- Relatório de serviços: incluir cadeado, agenda, etc
-FEITO - A opção NAT pode ser combinada (checkbox). Não é única (radiobox). Ver conceitos de cada opção, Definir DEFAULT.
+FEITO - A opção NAT pode ser combinada (checkbox). Não é única (radiobox). 
 FEITO - Status do Sistema - não está exibindo o status dos troncos corretamente
 FEITO - Parâmetros : Não altera a variável "country-code"
-- Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
-- Arrumar os ícones para enable/disable das permissões do usuário
+FEITO - Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tabela BD
+FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
+FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
+FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações/fazer download está desalinhado
+
+
+*IMPORTANTES*
 - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
-- Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Tronco SNEPSip não funciona
 - Ajustar o /etc/hosts na instalação
 - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
-- Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
-FEITO - Centro de Custos - descrição com 30 casas somente (aumentar) / Ver tabela BD
-FEITO - Grupo de Contatos:  Trunca o nome (view x tabela BD)
 - Ramais:
   - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
   - Usa grupo Ramal = Administradores mas exibe como "Usuários"
 - Estacionamento: Não funciona como está documentado (700). Rever documentação/definir novo padrão ou ajustar funcionamento padrão
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
-- Status do sistema: Avisar que tem problemas de permissões, links etc
-FEITO - Musica de espera : Erro no Banco de dados, Erro ao gravar arquivo/criar sessão
 - Arquivos de Som do Asterisk - rever a rotina
-- Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
-- Music on Hold - ver os tipos de execucao no controlador
+
+*RELEVANTES*
+- Relatório de serviços: incluir cadeado, agenda, etc
+- Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
+- Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
+- Arrumar os ícones para enable/disable das permissões do usuário
+- Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
+- Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
+- Status do sistema: Avisar que tem problemas de permissões, links etc
+- Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
+- Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 ---------------------------------
 Release 1.0-Betha-rc1
 - Ajustes diversos no SQL inicial e dados iniciais

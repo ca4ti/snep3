@@ -27,6 +27,9 @@ if(!$ramal->isLocked()) {
     $db->update('peers', array("authenticate" => true), "name='{$ramal->getNumero()}'");
     $asterisk->answer();
     $asterisk->stream_file('activated');
+    // LOG insert
+    $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'LOCK', True, 'Cadeado ativado, ramal: {$ramal->getNumero()}')";
+    $db->query($sql);
 }
 else if($ramal->isLocked()){
     $auth = $asterisk->exec('AUTHENTICATE', array($ramal->getPassword(),'',strlen((string)$ramal->getPassword())));
@@ -37,5 +40,8 @@ else if($ramal->isLocked()){
         $db->update('peers', array("authenticate" => false), "name='{$ramal->getNumero()}'");
         $asterisk->answer();
         $asterisk->stream_file('de-activated');
+        // LOG insert
+        $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'LOCK', False, 'Cadeado desativado, ramal: {$ramal->getNumero()}')";
+        $db->query($sql);
     }
 }

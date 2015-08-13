@@ -108,6 +108,6 @@ XML;
         $log = Zend_Registry::get('log');
 
         $log->info("Definindo centro de custos para {$this->config['ccustos']}.");
-        $asterisk->set_variable('CDR(accountcode)', $this->config['ccustos']);
+        $asterisk->set_variable('CHANNEL(accountcode)', $this->config['ccustos']);
     }
 }

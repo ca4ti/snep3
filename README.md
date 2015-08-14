@@ -22,13 +22,13 @@ FEITO - Relatorio de chamadas:  não está paginando, css para ouvir gravações
 FEITO - Relatório de serviços: incluir cadeado, agenda, etc
 FEITO - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
 FEITO - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
+FEITO - Ramais Cadastro - Usa grupo Ramal = Usuários mas exibe sempre como "Administradores"
 
 *IMPORTANTES*
 - Tronco SNEPSip não funciona
 - Ajustar o /etc/hosts na instalação
 - Ramais:
   - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
-  - Usa grupo Ramal = Administradores mas exibe como "Usuários"
 - Estacionamento: Não funciona como está documentado (700). Rever documentação/definir novo padrão ou ajustar funcionamento padrão
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina
@@ -43,6 +43,8 @@ FEITO - Asterisk parado não dá mensagem de erro, a tela fica em branco somente
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
+- Cadastros diversos com senha - opcao para mostrar senha 
+- Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
 ---------------------------------
 Release 1.0-Betha-rc1
 - Ajustes diversos no SQL inicial e dados iniciais

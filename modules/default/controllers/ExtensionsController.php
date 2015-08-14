@@ -171,7 +171,14 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->typeFriend = "checked";
         $this->view->dtmfrf = "checked";
         $this->view->nat_no = 'checked' ;
-        $extension = array();
+        $extension = array("name" => "",
+            "callerid" => "",
+            "secret" => "",
+            "call-limit" => "",
+            "email" => "",
+            "password" => "",
+            "usa_vc" => "",
+            "cancallforward" => "");
         $extension['qualify'] = 'yes';
         $this->view->extension = $extension;
 

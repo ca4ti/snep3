@@ -36,8 +36,9 @@ class QueuesController extends Zend_Controller_Action {
         
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
 
-        $lang = Zend_Registry::get('config')->system->language;
-        $this->language =  ($lang === "en" ?  "" : $lang) ;
+        $this->language = Zend_Registry::get('config')->system->language;
+        $this->path_sounds = Zend_Registry::get('config')->system->path->asterisk->sounds."/".$this->language ;
+        
 
         $sections = new Zend_Config_Ini('/etc/asterisk/snep/snep-musiconhold.conf');
         $_section = array_keys($sections->toArray());
@@ -93,26 +94,7 @@ class QueuesController extends Zend_Controller_Action {
                     $this->view->translate("Add Queues")));
 
 
-        // Sound files available
-        $files = '/var/lib/asterisk/sounds/'.$this->language;
-        if (file_exists($files)) {
-
-            $files = scandir($files);
-            $sounds = array("" => "");
-
-            foreach ($files as $i => $value) {
-                if (substr($value, 0, 1) == '.') {
-                    unset($files[$i]);
-                    continue;
-                }
-                if (is_dir($files . '/' . $value)) {
-                    unset($files[$i]);
-                    continue;
-                }
-                $sounds[$value] = $value;
-            }
-        }
-        $this->view->sounds = $sounds;
+        $this->view->sounds = Snep_SoundFiles_Manager::getSounds(true);
 
         // Music on Hold available
         $musiconhold = "";
@@ -193,8 +175,6 @@ class QueuesController extends Zend_Controller_Action {
      */
     public function editAction() {
 
-        $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-
         $db = Zend_Registry::get('db');
         $id = $this->_request->getParam("id");
 
@@ -205,30 +185,13 @@ class QueuesController extends Zend_Controller_Action {
         $queue = Snep_Queues_Manager::get($id);
         $this->view->queue = $queue;
        
-        // Sound files available x registered
-        $files = '/var/lib/asterisk/sounds/'.$this->language;
-        if (file_exists($files)) {
+        $this->view->sounds = Snep_SoundFiles_Manager::getSounds(true);
 
-            $sounds = array("" => "");
-
-            foreach (scandir($files) as $sound) {
-                if ($sound !== "." && $sound !== "..")  {
-                    $sound = pathinfo($sound);
-                    $value = $sound['filename'];
-                    $sounds[$value] = $value;
-                }
-            }
-        }
-
-        $this->view->sounds = $sounds;
-
-        
         // Music On Hold available x registered
         $musiconhold = "";
         foreach($this->section as $key => $session){
             $musiconhold .= ($key == $queue['musiconhold']) ? "<option value='".$key . "' selected >".$session." </option>\n": "<option value='".$key . "'>".$session." </option>\n";
         }
-
         
         $this->view->musiconhold = $musiconhold;
        
@@ -236,7 +199,6 @@ class QueuesController extends Zend_Controller_Action {
         $strategy = "";
         foreach($this->strategies as $key => $strateg){
             $strategy .= ($key == $queue['strategy']) ? "<option value='".$key . "' selected >".$strateg." </option>\n": "<option value='".$key . "'>".$strateg." </option>\n";
-
         }
 
         $this->view->strategy = $strategy;

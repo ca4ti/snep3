@@ -1,17 +1,37 @@
+<?php
+
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
+<script src="/snep/includes/javascript/password.js"></script> 
 <div class="row">           
-    <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "users", "action" => $this->action), null, false); ?>" METHOD="post">
+    <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "users", "action" => $this->action), null, false); ?>" autocomplete="off">
         
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Username");?></label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->user['name']; ?>" />
+                <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->user['name']; ?>"  <?php echo $this->action === 'edit' ? 'readonly' : '';?> />
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Password");?></label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" name="password" placeholder='<?php echo $this->translate("Minimum 5 characters")?>' value="<?php echo $this->user['password']; ?>"/>
+                <input type="password" class="form-control" name="password" id="password" placeholder='<?php echo $this->translate("Minimum 5 characters")?>' value="<?php echo $this->user['password']; ?>"/>
             </div>
         </div>
 
@@ -25,11 +45,13 @@
         <div class="form-group">
         	<label class="col-sm-2 control-label"><?php echo $this->translate("Profile");?></label>
         	<div class="col-sm-6">
-        		<select class="form-control" name="group" id="group" value="<?php echo $this->user['groupname']; ?>">
-        			<?php foreach($this->profiles as $key => $profile){ ?>
-			    		<option <?php echo $profile['selected'];?>>
-                            <?php echo $profile['name'];?>
+        		<select class="form-control" name="profile_id" id="group" value="<?php echo $this->user['groupname']; ?>">
+        			<?php foreach($this->profiles as $key => $value){ 
+                        $selected = $value['id'] === $this->user['profile_id'] ? "selected" : "" ; ?>
+			    		<option value="<?php echo $value['id'];?>" <?php echo $selected;?>>
+                            <?php echo $value['name'];?>
                         </option>
+                
 			    	<?php } ?>
 				</select>
 			</div>
@@ -90,7 +112,23 @@ jQuery(document).ready(function(){
             .closest('.control-group').removeClass('error').addClass('success');
         }
     });
-}); 
+
+    <?php if ($this->action === 'add') { ?>
+
+        jQuery(function() {
+
+            jQuery('#password').password().on('show.bs.password', function(e) {
+            
+                jQuery('#methods').prop('checked', true);
+
+                }).on('hide.bs.password', function(e) {
+                    jQuery('#methods').prop('checked', false);
+                });
+                jQuery('#methods').click(function() {
+                    jQuery('#password').password('toggle');
+                });
+            });
+    <?php }?>
 </script>
 
 

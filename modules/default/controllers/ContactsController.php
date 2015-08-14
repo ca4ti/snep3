@@ -91,9 +91,16 @@ class ContactsController extends Zend_Controller_Action {
                     $this->view->translate("Add")));
 
         $this->view->contact_id = Snep_Contacts_Manager::getLastId();
+
+        foreach ($this->allGroups as $key=>$val) {
+            $this->allGroups[$key]['selected'] = "" ;
+        }
+
+        $this->allGroups['0']['selected']='selected';
         $this->view->contact_groups = $this->allGroups;
         $this->view->states = $this->states;
         $this->view->action = 'add';
+
         $this->renderScript('contacts/addedit.phtml');
 
 

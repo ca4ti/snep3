@@ -208,9 +208,11 @@ class TrunksController extends Zend_Controller_Action {
 
         // Informações de placas khomp
         $boards = "";
-        foreach($this->khompBoards as $key => $value){
+        if (isset($this->khompBoards)) {
+            foreach($this->khompBoards as $key => $value){
 
-            $boards .= '<option value="'.$key.'">'.$value.'</option>\n';
+                $boards .= '<option value="'.$key.'">'.$value.'</option>\n';
+            }
         }
         $this->view->boards = $boards;
 
@@ -372,8 +374,10 @@ class TrunksController extends Zend_Controller_Action {
         
         // Khomp boards
         $boards = "";
-        foreach($this->khompBoards as $key => $value){
-            $boards .= ("KHOMP/".$key == $trunk['channel']) ? '<option value="'.$key.'" selected>'.$value.'</option>\n' : '<option value="'.$key.'">'.$value.'</option>\n';
+        if (isset($this->khompBoards)){ 
+            foreach($this->khompBoards as $key => $value){
+                $boards .= ("KHOMP/".$key == $trunk['channel']) ? '<option value="'.$key.'" selected>'.$value.'</option>\n' : '<option value="'.$key.'">'.$value.'</option>\n';
+            }
         }
 
         $this->view->boards = $boards;

@@ -1,9 +1,28 @@
+<?php
+
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
+<script src="/snep/includes/javascript/password.js"></script> 
 <div class="row">
-    
     <section>
         <div class="col-sm-12">    
             
-            <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => $this->action), null, false); ?>" METHOD="post">
+            <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => $this->action), null, false); ?>"  autocomplete="off">
                         
                 <fieldset>
                     <legend><?php echo $this->translate('Extension');?></legend>    
@@ -18,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Name");?></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->extension['callerid'];?>"/>
+                            <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->extension['callerid'];?>" />
                         </div>
                     </div>
 
@@ -29,7 +48,7 @@
                             <select class="form-control" name="exten_group" id="exten_group">
 
                                 <?php foreach($this->extenGroups as $key => $val){ 
-                                    if($val == $this->extension['group']){?>
+                                    if($key == $this->extension['group']){?>
                                         <option value="<?php echo $key;?>" selected><?php echo $val;?></option>
                                     <?php }else{ ?>
                                         <option  value="<?php echo $key; ?>"><?php echo $val;?></option>
@@ -85,7 +104,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Password");?></label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" name="password" placeholder='' value="<?php echo $this->extension['secret'];?>"/>
+                                <input type="password" class="form-control" name="password" id="password" placeholder='' value="<?php echo $this->extension['secret'];?>"/>
                             </div>
                         </div>
 
@@ -342,9 +361,9 @@
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Password Padlock");?></label>
                         <div class="col-sm-6">
                             <?php if($this->extension['password'] != ''){?>
-                                <input type="password" class="form-control" name="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['password']?>"/>
+                                <input type="password" class="form-control" name="passwordpadlock" id="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['password']?>"/>
                             <?php }else{?>
-                                <input type="password" class="form-control" name="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' />
+                                <input type="password" class="form-control" name="passwordpadlock" id="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' />
                             <?php } ?>
                             
                         </div>
@@ -502,6 +521,34 @@
             }
         });
     }); 
+
+    jQuery(function() {
+
+        jQuery('#password').password().on('show.bs.password', function(e) {
+        
+            jQuery('#methods').prop('checked', true);
+
+            }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
+            });
+            jQuery('#methods').click(function() {
+                jQuery('#password').password('toggle');
+            });
+        });
+ 
+    jQuery(function() {
+        jQuery('#passwordpadlock').password().on('show.bs.password', function(e) {
+        
+            jQuery('#methods').prop('checked', true);
+
+            }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
+            });
+            jQuery('#methods').click(function() {
+                jQuery('#passwordpadlock').password('toggle');
+            });
+        });
+
 
     
     window.onload = function(){

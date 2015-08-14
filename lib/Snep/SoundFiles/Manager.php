@@ -542,9 +542,10 @@ class Snep_SoundFiles_Manager {
 
     /**
      * Get sound files
+     * @param boolean $flag - true = include a null sound in array, false=not include 
      * @return <array>
      */
-    public function getSounds() {
+    public function getSounds($flag=false) {
 
         $db = Zend_Registry::get('db');
         $this->lang = Zend_Registry::get('config')->system->language;
@@ -556,6 +557,14 @@ class Snep_SoundFiles_Manager {
 
         $stmt = $db->query($select);
         $sounds = $stmt->fetchall();
+        if ($flag) {
+            array_unshift($sounds, array ( "arquivo" => "",
+                "descricao" => "" ,
+                "data" => "",
+                "tipo" => "" ,
+                "secao" => "", 
+                "language" => ""));
+        } 
 
         return $sounds;
     }

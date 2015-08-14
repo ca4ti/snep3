@@ -25,14 +25,13 @@ FEITO - Asterisk parado não dá mensagem de erro, a tela fica em branco somente
 FEITO - Ramais Cadastro - Usa grupo Ramal = Usuários mas exibe sempre como "Administradores"
 FEITO - Tronco SNEPSip não funciona
 FEITO - Estacionamento: Não funciona como está documentado (700). Rever documentação/definir novo padrão ou ajustar funcionamento padrão
+FEITO - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
+FEITO - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 
 *IMPORTANTES*
 - Ajustar o /etc/hosts na instalação
-- Ramais:
-  - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina
-- Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 
 *RELEVANTES*
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.

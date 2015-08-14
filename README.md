@@ -10,6 +10,8 @@
 - Rever/redefinir conceitos/funcionalidades para:
   - Grupos de Ramais
   - Centros de Custos
+- Rotina das Notificações on-line (fonte/origem)
+
 ---------------------------------
 **Bugs/Ajustes**
 FEITO - A opção NAT pode ser combinada (checkbox). Não é única (radiobox). 
@@ -23,6 +25,8 @@ FEITO - Relatório de serviços: incluir cadeado, agenda, etc
 FEITO - Ajustar Regra de negócio padrão na instalação - Não cria ações para a Regra "Internas - Ramal a Ramal"
 FEITO - Asterisk parado não dá mensagem de erro, a tela fica em branco somente (Ex. Cadastro Ramais, troncos, etc)
 FEITO - Ramais Cadastro - Usa grupo Ramal = Usuários mas exibe sempre como "Administradores"
+FEITO - Arquivos de Som do Asterisk - rever a rotina
+FEITO - Estacionamento: Não funciona como está documentado (700). Novo padrão: #72
 FEITO - Tronco SNEPSip não funciona
 FEITO - Estacionamento: Não funciona como está documentado (700). Rever documentação/definir novo padrão ou ajustar funcionamento padrão
 FEITO - Cadeado : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
@@ -36,6 +40,7 @@ FEITO - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a
 *RELEVANTES*
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
+- Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arrumar os ícones para enable/disable das permissões do usuário
 - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
@@ -44,6 +49,10 @@ FEITO - Filas: Não funciona os anuncios ao chamador (tipo: Você é o proximo a
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Cadastros diversos com senha - opcao para mostrar senha 
 - Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
+- Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
+- Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
+- Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
+- Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 ---------------------------------
 Release 1.0-Betha-rc1
 - Ajustes diversos no SQL inicial e dados iniciais

@@ -14,14 +14,14 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="inputFile"><?php echo $this->translate("Select the File");?></label>
                 <div class="col-sm-6">
-                    <input type="file" id="inputFile" name="inputFile" value='<?php echo $this->sound['arquivo'];?>'>
+                    <input type="file" id="inputFile" name="inputFile" value='<?php echo $this->sound['arquivo'];?>'  >
                  </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Description");?></label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="description" placeholder='<?php echo $this->translate("Description")?>' value='<?php echo $this->sound['descricao'];?>'/>
+                <input type="text" class="form-control" name="description" id="description" placeholder='<?php echo $this->translate("Description")?>' value='<?php echo $this->sound['descricao'];?>'/>
             </div>
         </div>
 
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
             description: {
                 required: true,
                 minlength: 3,
-                maxlength: 50
+                maxlength: 80
             }
         },
         messages: {
@@ -88,5 +88,10 @@ jQuery(document).ready(function(){
             .closest('.control-group').removeClass('error').addClass('success');
         }
     });
+    jQuery('#inputFile').change(function() {
+        var filename = jQuery(this).val();
+        jQuery('#description').val(filename);
+    });
 }); 
+
 </script>

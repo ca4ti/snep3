@@ -363,7 +363,7 @@ class SoundFilesController extends Zend_Controller_Action {
         foreach ($listSounds as $fileInfo) {
             if($fileInfo->isDot()) 
                 continue;
-            $list_sounds[] = strtolower($fileInfo->getFilename());
+            $list_sounds[] = ($fileInfo->getFilename());
         }
 
 

@@ -26,6 +26,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 <select class="form-control" name="group" id="group" value="<?php echo $this->contact['group']; ?>">
 
                     <?php foreach($this->contact_groups as $group){ ?>
+                        
                         <option value="<?php echo $group['id'];?>" <?php echo $group['selected'];?>>
                             <?php echo $group['name'];?>
                         </option>

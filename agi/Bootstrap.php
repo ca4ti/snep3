@@ -15,8 +15,10 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
+
 // No output buffer for real time operations
 ob_implicit_flush(true);
+
 // Required for signal handling below
 declare(ticks = 1);
 
@@ -39,6 +41,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
     APPLICATION_PATH . '/lib',
     get_include_path(),
 )));
+
 
 require_once "Snep/Config.php";
 require_once "Snep/Logger.php";
@@ -84,7 +87,6 @@ class Bootstrap {
     }
 
     protected function startLocale() {
-        // Preciso melhorar isso
         $locale = Snep_Locale::getInstance();
         Zend_Registry::set("i18n", $locale->getZendTranslate());
     }
@@ -104,6 +106,7 @@ class Bootstrap {
         $config = Snep_Config::getConfig();
         $log = Snep_Logger::getInstance();
         Zend_Registry::set("log", $log);
+        Zend_Registry::set("config", $config);
 
         // Log em arquivo
         $writer = new Zend_Log_Writer_Stream($config->system->path->log . '/agi.log');

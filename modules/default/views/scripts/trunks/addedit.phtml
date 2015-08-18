@@ -1,3 +1,23 @@
+<?php
+
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
+<script src="/snep/includes/javascript/password.js"></script> 
 
 <div class="row">
 
@@ -33,7 +53,7 @@
                         <option value="khomp" <?php echo $this->khomp;?>><?php echo $this->translate("Khomp");?></option>
                         <option value="virtual" <?php echo $this->virtual;?>><?php echo $this->translate("Virtual");?></option>
                         <option value="snepsip" <?php echo $this->snepsip;?>><?php echo $this->translate("Snep SIP");?></option>
-                        <option value="snepiax" <?php echo $this->snepiax;?>><?php echo $this->translate("Snep IAX");?></option>
+                        <option value="snepiax2" <?php echo $this->snepiax2;?>><?php echo $this->translate("Snep IAX");?></option>
                         
                     </select>
                 </div>
@@ -100,7 +120,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("Password");?></label>
                     <div class="col-sm-6">
-                        <input type="password" class="form-control" name="secret" placeholder='<?php echo $this->translate("Password")?>' value='<?php echo $this->trunk['secret'] ?>'/>
+                        <input type="password" class="form-control" name="secret" id="secret" placeholder='<?php echo $this->translate("Password")?>' value='<?php echo $this->trunk['secret'] ?>'/>
                     </div>
                 </div>
 
@@ -141,16 +161,22 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $this->translate("Peer Type")?></label>
+                 <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo $this->translate("Type")?></label>
                     <div class="col-sm-6">
                         <label class="radio-inline">
-                            <input type="radio" name="peer_type" id="peer" value="peer" <?php echo $this->type_peer;?>><?php echo $this->translate("Peer");?>
+                            <input type="radio" name="peer_type" id="peer" value="peer" <?php echo $this->type_peer;?>>
+                            peer
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="peer_type" id="user" value="user" <?php echo $this->type_user;?>>
+                            user
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="peer_type" id="friend" value="friend" <?php echo $this->type_friend;?>>
+                            friend
                         </label>
                         
-                        <label class="radio-inline">
-                            <input type="radio" name="peer_type" id="friend" value="friend" <?php echo $this->type_friend;?>><?php echo $this->translate("Friend");?>
-                        </label>
                     </div>
                 </div>
 
@@ -282,19 +308,34 @@
             <div id = "nat">
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("NAT Optimization")?></label>
-                    <div class="col-sm-6">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="nat" id="nat" <?php echo $this->nat;?> /><?php echo $this->translate("Enabled")?>
-                            </label>
-                        </div>
+                    <div class="col-sm-7">
+                        <label class="radio-inline">
+                            <input type="radio" name="nat" id="no" value="no" <?php echo $this->nat_no;?>>
+                            no
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nat" id="force_rport" value="force_rport" <?php echo $this->nat_force_rport;?>>
+                            force_rport
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nat" id="comedia" value="comedia" <?php echo $this->nat_comedia;?>>
+                            comedia
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nat" id="auto_force_rport" value="auto_force_rport" <?php echo $this->nat_auto_force_rport;?>>
+                            auto_force_rport
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="nat" id="auto_comedia" value="auto_comedia" <?php echo $this->nat_auto_comedia;?>>
+                            auto_comedia
+                        </label>
                     </div>
                 </div>
             </div>    
             <!-- /NAT -->
 
             <!-- SnepIAX -->
-            <div id="snepiax" class="invisible">
+            <div id="snepiax2" class="invisible">
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("Identifier");?></label>
@@ -400,7 +441,7 @@
         document.getElementById("ip").className = "invisible";
         document.getElementById("khomp").className = "invisible";
         document.getElementById("virtual").className = "invisible";
-        document.getElementById("snepiax").className = "invisible";
+        document.getElementById("snepiax2").className = "invisible";
         
         if(div != 'iax2'){
             document.getElementById("iax2").className = "invisible";    
@@ -423,7 +464,7 @@
         if(div == 'snepsip'){
             document.getElementById("dtmfmode").className = "visible";
             document.getElementById("host").className = "visible";
-        }else if(div == 'snepiax'){
+        }else if(div == 'snepiax2'){
             document.getElementById("dtmfmode").className = "visible";
             document.getElementById("host").className = "visible";
             document.getElementById("nat").className = "visible";
@@ -451,7 +492,7 @@
                 },
                 identifier: {
                     required: function() {
-                        return jQuery("#technology").val() == "snepiax";
+                        return jQuery("#technology").val() == "snepiax2";
                     },
 
                 },
@@ -486,6 +527,19 @@
                 .text('OK!').addClass('valid')
                 .closest('.control-group').removeClass('error').addClass('success');
             }
+        });
+    });
+    jQuery(function() {
+
+        jQuery('#secret').password().on('show.bs.password', function(e) {
+        
+            jQuery('#methods').prop('checked', true);
+
+        }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
+        });
+        jQuery('#methods').click(function() {
+            jQuery('#secret').password('toggle');
         });
     });
 

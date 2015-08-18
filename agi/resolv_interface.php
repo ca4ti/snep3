@@ -15,25 +15,23 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * AGI to provide channel resolution of the extension
  */
 
-/**
- * @file Script agi que faz a resolução do canal (interface) de um ramal do snep
- */
-
-// Importando as configura��es para AGI's
+// Import AGI's configuration
 require_once("agi_base.php");
 
 if($argc != 3) {
-    $asterisk->verbose("Este scripts espera dois parametro, ramal e variavel");
+    $asterisk->verbose("resolv_interface: the script wait 2 parameters: extension and variable");
     exit(1);
 }
 
-// Procurando no banco pelo canal do peer
+// Search peer in database
 try {
     $ramal = PBX_Usuarios::get($argv[1]);
 } catch (Exception $e) {
-    $asterisk->verbose("[$requestid] Erro na resolucao de interface: " . $e->getMessage(), 1);
+    $asterisk->verbose("[$requestid] Error in interface reoslution: " . $e->getMessage(), 1);
     exit(1);
 }
 

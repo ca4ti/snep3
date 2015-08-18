@@ -45,7 +45,7 @@ class Snep_Users_Manager {
         $insert_data = array('name' => $user['name'],
             'password' => md5($user['password']),
             'email' => $user['email'],
-            'profile_id' => $user['group'],
+            'profile_id' => $user['profile_id'],
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s'));
 
@@ -151,7 +151,7 @@ class Snep_Users_Manager {
         $update_data = array('name' => $user['name'],
             'password' => $user['password'],
             'email' => $user['email'],
-            'profile_id' => $user['group'],
+            'profile_id' => $user['profile_id'],
             'created' => $user['created'],
             'updated' => date('Y-m-d H:i:s'));
 

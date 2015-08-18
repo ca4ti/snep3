@@ -228,7 +228,7 @@ class PBX_Rule {
         if (is_array($item) && isset($item['type']) && isset($item['value'])) {
             $this->dst[] = $item;
         } else {
-            throw new PBX_Exception_BadArg("Argumento invalido para adicao de destino na regra {$this->getId()}: {$this->getDesc()})");
+            throw new PBX_Exception_BadArg("Invalid argument for adding destination in the rule {$this->getId()}: {$this->getDesc()})");
         }
     }
 
@@ -247,7 +247,7 @@ class PBX_Rule {
         if (is_array($item) && isset($item['type']) && isset($item['value'])) {
             $this->src[] = $item;
         } else {
-            throw new PBX_Exception_BadArg("Argumento invalido para adicao de origem na regra {$this->getId()}: {$this->getDesc()})");
+            throw new PBX_Exception_BadArg("Invalid argument for adding source in the rule {$this->getId()}: {$this->getDesc()})");
         }
     }
 
@@ -276,7 +276,7 @@ class PBX_Rule {
         $weekDay = strtolower($weekDay);
 
         if (!in_array($weekDay, array("sun", "mon", "tue", "wed", "thu", "fri", "sat"))) {
-            throw new InvalidArgumentException("Dia da semana invalido");
+            throw new InvalidArgumentException("Weekday invalid");
         }
 
         if (!in_array($weekDay, $this->validWeekDays)) {
@@ -384,7 +384,7 @@ class PBX_Rule {
                 return $found;
                 break;
             default:
-                throw new PBX_Exception_BadArg("Tipo de expressao invalido '$type' para checagem de origem/destino, cheque a regra de negocio {$this->parsingRuleId}");
+                throw new PBX_Exception_BadArg("Type of expression invalid '$type' to check source/destiny. Verify the route {$this->parsingRuleId}");
         }
     }
 
@@ -445,6 +445,7 @@ class PBX_Rule {
     public function execute($origem) {
         $asterisk = $this->asterisk;
         $log = Zend_Registry::get('log');
+	$lang = Zend_Registry::get('config');
 
         $to_execute = true;
         try {
@@ -478,6 +479,7 @@ class PBX_Rule {
                     if ($event != 1 && $event != 2 && $event != 4) {
 
                         $log->info("User $origem have padlock enabled");
+			$asterisk->exec_setlanguage($lang);
                         $asterisk->stream_file('ext-disabled');
                     } else {
                         // Efetua ligação caso agente não esteja pausado
@@ -492,6 +494,7 @@ class PBX_Rule {
                 $requester = $this->request->getSrcObj();
                 if ($requester instanceof Snep_Exten && $requester->isLocked()) {
                     $log->info("User $requester have padlock enabled");
+		    $asterisk->exec_setlanguage($lang);
                     $asterisk->stream_file('ext-disabled');
                 } else {
                     if ($this->isRecording()) {
@@ -585,7 +588,7 @@ class PBX_Rule {
         if (isset($this->acoes[$index])) {
             return $this->acoes[$index];
         } else {
-            throw new PBX_Exception_NotFound("Nenhuma acao de indice $index na regra.");
+            throw new PBX_Exception_NotFound("No action index $index in the rule.");
         }
     }
 

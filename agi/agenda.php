@@ -17,6 +17,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  AGI to provide phone number in schedule 
  */
 
 require_once('agi_base.php');
@@ -24,7 +26,7 @@ require_once('agi_base.php');
 $action = substr($asterisk->request['agi_extension'],0,3);
 $entryid = substr($asterisk->request['agi_extension'],3);
 $log = Zend_Registry::get('log');
-$log->info("Connectando ligacao de " . $asterisk->request['agi_callerid'] . " para codigo " . $entryid . " da agenda.");
+$log->info("Calling from " . $asterisk->request['agi_callerid'] . " for schedule code " . $entryid . ".");
 
 try {
     $sql = "SELECT phone FROM contacts_phone WHERE contact_id='$entryid' limit 1";
@@ -35,9 +37,9 @@ try {
         
     }
     else {
-        $asterisk->verbose("[$requestid] Entrada encontrada nao valida!", 1);
+        $asterisk->verbose("Schedule: Invalid phone for code: [$requestid]!", 1);
     }
 }
 catch (Exception $ex) {
-    $asterisk->verbose("[$requestid] Agenda error: " . $ex->getMessage(), 1);
+    $asterisk->verbose("[$requestid] Schedule error: " . $ex->getMessage(), 1);
 }

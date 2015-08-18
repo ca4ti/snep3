@@ -138,7 +138,9 @@ XML;
 
             $request->setSrcObj($ramal);
             $request->origem = $ramal->getNumero();
-            $asterisk->set_variable("CALLERID(all)", $ramal->getNumero());
+            $asterisk->set_variable("CALLERID(num)", $ramal->getNumero());
+            $asterisk->set_variable("CALLERID(name)", $ramal->getNumero());
+            $asterisk->set_variable("CALLERID(ani)", $ramal->getNumero());
         }
 
         $senha = "";

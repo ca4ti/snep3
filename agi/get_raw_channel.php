@@ -15,17 +15,15 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * AGI to provide peer resolution based on the interface
  */
 
-/**
- * @file Script agi que faz a resolu��o do ramal do snep baseado na interface
- */
-
-// Importando as configura��es para AGI's
+// Import AGI configuration
 require_once("agi_base.php");
 
 if($argc < 2) {
-    $asterisk->verbose("Este scripts espera um nome de variavel como parametro");
+    $asterisk->verbose("This script wait a variable name as a parameter");
     exit(1);
 }
 

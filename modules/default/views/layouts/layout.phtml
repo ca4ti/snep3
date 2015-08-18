@@ -1,13 +1,13 @@
 <?php 
-    $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
+    //$this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/scriptaculous/src/scriptaculous.js", 'text/javascript');
 
     $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
     $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
 
     if($controller != 'auth'){
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
-        $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript//bootstrap.min.js');
-        $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.js');
+        $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
+        $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/sb-admin-2.js');
 
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
@@ -50,11 +50,11 @@
                     <!-- Header Logos -->
                     <div class="snep-navbar-logo">
                         <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/">
-                            <img src="<?php echo $this->baseUrl(); ?>/imagens/snep-enterprise.png">
+                            <img src="<?php echo $this->baseUrl(); ?>/images/snep-main-logo.png">
                         </a> 
                     </div>
                     <div class="snep-navbar-logo-powered">
-                        <img src="<?php echo $this->baseUrl(); ?>/imagens/powered-opens.png">
+                        <img src="<?php echo $this->baseUrl(); ?>/images/powered-opens.png">
                     </div>
                    
                 </div>
@@ -99,7 +99,7 @@
                                 <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=en">
                                     <div>
                                         <i></i>
-                                        <img class="img-circle" src="/snep/imagens/Eua.png" title="Click to change language to english">
+                                        <img class="img-circle" src="/snep/images/Eua.png" title="Click to change language to english">
                                     </div>
                                 </a>
                             </li>
@@ -108,7 +108,7 @@
                                 <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=pt_BR">
                                     <div>
                                         <i></i>
-                                        <img class="img-circle" src="/snep/imagens/Brazil.png" title="Clique para mudar o idioma para português">
+                                        <img class="img-circle" src="/snep/images/Brazil.png" title="Clique para mudar o idioma para português">
                                     </div>
                                 </a>
                             </li>
@@ -116,7 +116,7 @@
                             <li>
                                 <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=es">
                                     <div>
-                                        <i></i><img class="img-circle" src="/snep/imagens/es.png" title="Haga clic para cambiar el idioma a español">
+                                        <i></i><img class="img-circle" src="/snep/images/es.png" title="Haga clic para cambiar el idioma a español">
                                     </div>
                                 </a>
                             </li>

@@ -45,6 +45,7 @@ if (APPLICATION_ENV === "development") {
     require_once "Zend/Debug.php";
 }
 
+
 // Adds the modules directory to the snep module system
 require_once "Snep/Modules.php";
 Snep_Modules::getInstance()->addPath(APPLICATION_PATH . "/modules");

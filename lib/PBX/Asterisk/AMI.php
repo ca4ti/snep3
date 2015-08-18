@@ -54,11 +54,17 @@ class PBX_Asterisk_AMI extends Asterisk_AMI {
             );
             $asterisk = new Asterisk_AMI(null, $args);
 
-            $asterisk->connect();
-
-            self::$instance = $asterisk;
+            try {
+                $asterisk->connect();    
+                self::$instance = $asterisk;
+                $res = false ;
+            } catch (Exception $e) {
+                $res = $e ;
+            }
+            if ($res) {
+                throw new Asterisk_Exception_CantConnect("Unable to connect to manager");
+            }    
         }
-
         return self::$instance;
     }
 }

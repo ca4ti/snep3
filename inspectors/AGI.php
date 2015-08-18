@@ -42,8 +42,8 @@ class AGI extends Snep_Inspector_Test {
                           '/etc/asterisk/snep/snep-conferences.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-features.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-iax2.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          '/etc/asterisk/snep/snep-iax2-trunks.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          '/etc/asterisk/snep/snep-sip.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
+						  '/etc/asterisk/snep/snep-iax2-trunks.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
+						  '/etc/asterisk/snep/snep-sip.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-sip-trunks.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1)
     );
 

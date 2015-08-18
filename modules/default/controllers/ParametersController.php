@@ -27,6 +27,18 @@
  */
 class ParametersController extends Zend_Controller_Action {
 
+
+    /**
+     * Initial settings of the class
+     */
+    public function init() {
+
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
     /**
      * indexAction - List parameters
      */
@@ -35,14 +47,13 @@ class ParametersController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Parameters")));
 
-        // Get configuration properties from Zend_Registry
+        // Get configuration properties from Zend_Registry/exceptio
         $config = Zend_Registry::get('config');
 
         // Include Inpector class, for permission test
         include_once( $config->system->path->base . "/inspectors/Permissions.php" );
         $test = new Permissions();
         $response = $test->getTests();
-
         // Verify if there's any error, and if it's related to the setup.conf file
         if ($response['error'] && strpos($response['message'], "setup.conf") > 0) {
             // seta variavel verificada no template
@@ -53,19 +64,29 @@ class ParametersController extends Zend_Controller_Action {
         
         $this->view->config = $config;
         
-        $this->view->debug = false;    
+        $this->view->debug = false;
+        $this->view->hide_routes = false;    
         if($config->system->debug == "1"){
             $this->view->debug = true;
+        }
+        if($config->system->hide_routes == "1"){
+            $this->view->hide_routes = true;
         }
 
         $old_param = array();
         $old_param["emp_nome"] = $config->ambiente->emp_nome;
         $old_param["debug"] = $config->system->debug;
+        $old_param["hide_routes"] = $config->system->hide_routes;
         $old_param["ip_sock"] = $config->ambiente->ip_sock;
         $old_param["user_sock"] = $config->ambiente->user_sock;
         $old_param["email"] = $config->system->mail;
         $old_param["linelimit"] = $config->ambiente->linelimit;
-        $old_param["dst_exceptions"] = $config->ambiente->dst_exceptions;
+
+        $old_param["db.dbname"] = $config->ambiente->db->dbname;
+        $old_param["db.host"] = $config->ambiente->db->host;
+        $old_param["db.username"] = $config->ambiente->db->username;
+        $old_param["db.password"] = $config->ambiente->db->password;
+
         
         $conference[$config->ambiente->conference_app] = ""; 
         if(isset($conference['C'])){
@@ -148,19 +169,23 @@ class ParametersController extends Zend_Controller_Action {
         
         $this->view->true = "";
         $this->view->false = "";
-        $value = $config->general->record_mp3;
-        $this->view->$value = "checked";
-        $old_param["record_mp3"] = $config->general->record_mp3;
 
         $old_param["path_voz"] = $config->ambiente->path_voz;
         $old_param["path_voz_bkp"] = $config->ambiente->path_voz_bkp;
         $old_param["valor_controle_qualidade"] = $config->ambiente->valor_controle_qualidade;
+
+
 
         // Verify if the request is a post
         if ($this->_request->getPost()) {
 
             $formIsValid = true;
             $formData = $this->getRequest()->getParams();
+
+            // Get country code 
+            $db = Snep_Db::getInstance();
+            $country_code = $db->query("select id from core_cnl_country where locale='".$formData['language']."'")->fetch();
+
             
             // Specific verification for propertie path_voice
             if (!file_exists($formData['path_voz'])) {
@@ -191,18 +216,27 @@ class ParametersController extends Zend_Controller_Action {
                 }else{
                     $config->system->debug = 0;
                 }
-                
+                if($formData['hide_routes'] == 'on'){
+                    $config->system->hide_routes = 1;    
+                }else{
+                    $config->system->hide_routes = 0;
+                }
                 $config->system->language = $formData['language'];
                 $config->system->locale = $formData['locale'];
                 $config->system->timezone = $formData['timezone'];
+                $config->system->country_code = $country_code['id'];
 
                 $config->ambiente->ip_sock = $formData['ip_sock'];
                 $config->ambiente->user_sock = $formData['user_sock'];
                 $config->ambiente->pass_sock = $formData['pass_sock'];
                 $config->system->mail = $formData['mail'];
                 $config->ambiente->linelimit = $formData['linelimit'];
-                $config->ambiente->dst_exceptions = $formData['dst_exceptions'];
                 $config->ambiente->conference_app = $formData['conference_app'];
+
+                $config->ambiente->db->dbname = $formData['db_dbname'];
+                $config->ambiente->db->host = $formData['db_host'];
+                $config->ambiente->db->username = $formData['db_username'];
+                $config->ambiente->db->password = $formData['db_password'];
 
                 $config->general->record->application = $formData['application'];
                 $config->general->record->flag = $formData['flag'];
@@ -230,7 +264,7 @@ class ParametersController extends Zend_Controller_Action {
     }
 
     /**
-     * engAction - Modify linguage for english
+     * languageAction - Modify language 
      */
     public function languageAction() {
 

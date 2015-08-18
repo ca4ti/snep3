@@ -17,22 +17,19 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * @file Executável AGI SNEP.
  *
- * Executável AGI que faz o controle de ligações no dialplan do Asterisk.
+ * AGI executable that makes the function calls in the Asterisk dialplan. 
  *
- * Este aplicativo inicia o ambiente para que a biblioteca do snep possa
- * trabalhar no encaminhamento das ligações.
+ * This application starts the environment for the Snep library can work in routing connections.
+ *
  */
-// Tratamento de sinais vindos do asterisk
+// Processes the signals coming from asterisk
 declare(ticks = 1);
 if (function_exists('pcntl_signal')) {
     pcntl_signal(SIGHUP, SIG_IGN);
 }
 
-// Controle da exibição de erros
+// Controll errors display
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
@@ -49,7 +46,7 @@ $config = Snep_Config::getConfig();
 $log = Snep_Logger::getInstance();
 $asterisk = PBX_Asterisk_AGI::getInstance();
 
-// Configuração das opções da linha de comando
+// Line command option configuration
 try {
     $opts = new Zend_Console_Getopt(array(
         'version|v' => 'Prints version.',
@@ -63,7 +60,7 @@ try {
     exit;
 }
 
-// Imprime versão :)
+// Version print
 if ($opts->version) {
     echo "SNEP Version " . Zend_Registry::get('snep_version') . "\n";
     exit;
@@ -83,8 +80,9 @@ if ($opts->outgoing_number) {
 
 $log = Zend_Registry::get('log');
 $request = $asterisk->requestObj;
+
 // Primeira informação sobre a ligação
-$log->info("Tentativa de conexao de $request->origem ($request->channel) para $request->destino");
+$log->info("Connection attempt from $request->origem ($request->channel) to $request->destino");
 $origem = $request->origem;
 try {
     // Procurando por regra de negócio no banco de dados
@@ -93,8 +91,9 @@ try {
     $dialplan->parse();
 
     $regra = $dialplan->getLastRule();
+
 } catch (PBX_Exception_NotFound $ex) {
-    $log->info("Nenhuma regra valida para essa requisicao: " . $ex->getMessage());
+    $log->info("No rule found for this request: " . $ex->getMessage());
     if (!$opts->xfer) {
         $asterisk->answer();
         $asterisk->stream_file('invalid');
@@ -102,7 +101,7 @@ try {
     }
     exit();
 } catch (Exception $ex) {
-    $log->crit("Oops! Excecao ao resolver regra de negocio, contate o suporte tecnico");
+    $log->crit("Oops! Exception to resolv rules. Contact technical support.");
     $log->crit($ex);
     die();
 }
@@ -146,11 +145,11 @@ $regra->setRecordApp($config->general->record->application, array($recordPath . 
 $regra->setAsteriskInterface($asterisk);
 
 try {
-    $log->info("Executando regra {$regra->getId()}:$regra");
+    $log->info("Running the rule {$regra->getId()}:$regra");
     $regra->execute($origem);
-    $log->info("Fim de execucao da regra {$regra->getId()}:$regra");
+    $log->info("End of running the rule {$regra->getId()}:$regra");
 } catch (PBX_Exception_AuthFail $ex) {
-    $log->info("Falha na autenticacao do ramal.");
+    $log->info("Failed to authenticate the extension.");
 } catch (Exception $ex) {
     $log->crit($ex);
     die();

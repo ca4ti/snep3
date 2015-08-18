@@ -217,25 +217,5 @@ class ExpressionAliasController extends Zend_Controller_Action {
             }
         }
     }
-    /**
-     * getForm
-     * @return <obj>
-     */
-    protected function getForm() {
-
-        if ($this->form === Null) {
-            $form_xml = new Zend_Config_Xml(Zend_Registry::get("config")->system->path->base . "/modules/default/forms/expression_alias.xml");
-            $form = new Snep_Form($form_xml);
-
-
-            $exprField = new Snep_Form_Element_Html("expression-alias/elements/expr.phtml", "expr", false);
-            $exprField->setLabel($this->view->translate("Expressions"));
-            $exprField->setOrder(1);
-            $form->addElement($exprField);
-
-            $this->form = $form;
-        }
-        return $this->form;
-    }
 
 }

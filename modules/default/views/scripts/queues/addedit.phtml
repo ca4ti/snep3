@@ -76,7 +76,7 @@
         </fieldset>
 
         <fieldset>
-            <legend><?php echo $this->translate("Advanced Configuration");?></legend>
+            <legend><?php echo $this->translate("Advanced Configurations");?></legend>
 
         </fieldset>   
 
@@ -85,11 +85,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" name="announce" id="announce">
                         <?php foreach($this->sounds as $key => $sound){ 
-                        	if($key == $this->queue['announce']){?>
-                            	<option value='<?php echo $key?>' selected><?php echo $sound;?></option> 	
+                            $file_name = pathinfo($sound['arquivo'], PATHINFO_FILENAME) ;
+                        	if($file_name === $this->queue['announce']){?>
+                            	<option value='<?php echo $file_name?>' selected>
                             <?php }else{ ?>
-                            	<option value='<?php echo $key?>' ><?php echo $sound;?></option>
-                        	<?php } ?>
+                            	<option value='<?php echo $file_name?>'> 
+                        	<?php } 
+                            echo $sound['arquivo'] === "" ? "" : $sound['arquivo'].' ( '.$sound['descricao'].' )';?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -107,11 +110,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" name="queue_youarenext" id="queue_youarenext">
                         <?php foreach($this->sounds as $key => $sound){ 
-                            if($key == $this->queue['queue_youarenext']){?>
-                            	<option value='<?php echo $key?>' selected><?php echo $sound;?></option> 	
+                            $file_name = pathinfo($sound['arquivo'], PATHINFO_FILENAME) ;
+                            if($file_name === $this->queue['queue_youarenext']){?>
+                                <option value='<?php echo $file_name?>' selected>
                             <?php }else{ ?>
-                            	<option value='<?php echo $key?>' ><?php echo $sound;?></option>
-                        	<?php } ?>    
+                                <option value='<?php echo $file_name?>'> 
+                            <?php } 
+                            echo $sound['arquivo'] === "" ? "" : $sound['arquivo'].' ( '.$sound['descricao'].' )';?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -122,11 +128,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" name="queue_thereare" id="queue_thereare">
                         <?php foreach($this->sounds as $key => $sound){ 
-                            if($key == $this->queue['queue_thereare']){?>
-                            	<option value='<?php echo $key?>' selected><?php echo $sound;?></option> 	
+                            $file_name = pathinfo($sound['arquivo'], PATHINFO_FILENAME) ;
+                            if($file_name === $this->queue['queue_thereare']){?>
+                                <option value='<?php echo $file_name?>' selected>
                             <?php }else{ ?>
-                            	<option value='<?php echo $key?>' ><?php echo $sound;?></option>
-                        	<?php } ?> 
+                                <option value='<?php echo $file_name?>'> 
+                            <?php } 
+                            echo $sound['arquivo'] === "" ? "" : $sound['arquivo'].' ( '.$sound['descricao'].' )';?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -137,11 +146,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" name="queue_callswaiting" id="queue_callswaiting">
                         <?php foreach($this->sounds as $key => $sound){ 
-                            if($key == $this->queue['queue_callswaiting']){?>
-                            	<option value='<?php echo $key?>' selected><?php echo $sound;?></option> 	
+                            $file_name = pathinfo($sound['arquivo'], PATHINFO_FILENAME) ;
+                            if($file_name === $this->queue['queue_callswaiting']){?>
+                                <option value='<?php echo $file_name?>' selected>
                             <?php }else{ ?>
-                            	<option value='<?php echo $key?>' ><?php echo $sound;?></option>
-                        	<?php } ?> 
+                                <option value='<?php echo $file_name?>'> 
+                            <?php } 
+                            echo $sound['arquivo'] === "" ? "" : $sound['arquivo'].' ( '.$sound['descricao'].' )';?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -152,11 +164,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" name="queue_thankyou" id="queue_thankyou">
                         <?php foreach($this->sounds as $key => $sound){ 
-                            if($key == $this->queue['queue_thankyou']){?>
-                            	<option value='<?php echo $key?>' selected><?php echo $sound;?></option> 	
+                            $file_name = pathinfo($sound['arquivo'], PATHINFO_FILENAME) ;
+                            if($file_name === $this->queue['queue_thankyou']){?>
+                                <option value='<?php echo $file_name?>' selected>
                             <?php }else{ ?>
-                            	<option value='<?php echo $key?>' ><?php echo $sound;?></option>
-                        	<?php } ?> 
+                                <option value='<?php echo $file_name?>'> 
+                            <?php } 
+                            echo $sound['arquivo'] === "" ? "" : $sound['arquivo'].' ( '.$sound['descricao'].' )';?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>

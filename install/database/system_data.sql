@@ -28,17 +28,14 @@
 -- Default expression alias
 --
 INSERT INTO `expr_alias` VALUES (1,'Fixo Local');
-INSERT INTO `expr_alias` VALUES (2,'Celular Local - VC1');
-INSERT INTO `expr_alias` VALUES (3,'Fixo DDD');
-INSERT INTO `expr_alias` VALUES (4,'Celular Interurbano - VC2/VC3');
+INSERT INTO `expr_alias` VALUES (2,'Celular Local');
+INSERT INTO `expr_alias` VALUES (3,'Fixo LDN');
+INSERT INTO `expr_alias` VALUES (4,'Celular LDN');
 
 --
 -- Default values expression alias
 --
-INSERT INTO `expr_alias_expression` VALUES (1,'[2-5]XXXXXXX');
-INSERT INTO `expr_alias_expression` VALUES (2,'[6-9]XXXXXXX');
-INSERT INTO `expr_alias_expression` VALUES (3,'0|XX[2-5]XXXXXXX');
-INSERT INTO `expr_alias_expression` VALUES (4,'0|XX[6-9]XXXXXXX');
+INSERT INTO `expr_alias_expression` VALUES (1,'[2-5]XXXXXXX'),(2,'[6-9]XXXXXXX'),(3,'0|XX[2-5]XXXXXXX'),(3,'0XX|XX[2-5]XXXXXXX'),(4,'0|XX[6-9]XXXXXXX'),(4,'0XX|XX[6-9]XXXXXXX'),(4,'0|XX9[4-9]XXXXXXX'),(4,'0XX|XX9[4-9]XXXXXXX');
 
 --
 -- Default group extension

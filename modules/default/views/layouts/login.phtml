@@ -2,7 +2,7 @@
 
 echo $this->doctype(); 
 
-$diretorio = getcwd() . "/imagens/login_backgrounds/";
+$diretorio = getcwd() . "/images/login_backgrounds/";
 $ponteiro = opendir($diretorio);
 while ($nome_itens = readdir($ponteiro)) {
     if ($nome_itens != "." && $nome_itens != "..")
@@ -19,7 +19,7 @@ $background = array_rand($itens, 1);
         <?php echo $this->headStyle() . "\n"; ?>
         <?php echo $this->headScript() . "\n"; ?>
     </head>
-    <body style="background: url(<?php echo $this->baseUrl(); ?>/imagens/login_backgrounds/<?php echo $itens[$background]; ?>) no-repeat center center; background-size: cover ;">
+    <body style="background: url(<?php echo $this->baseUrl(); ?>/images/login_backgrounds/<?php echo $itens[$background]; ?>) no-repeat center center; background-size: cover ;">
         <div id="loginLayout">
             <div id="wrapper">
                 <div class="logo"></div>
@@ -35,7 +35,7 @@ $background = array_rand($itens, 1);
                             <td>
                                 <a href="http://www.opens.com.br" target="_blank">
                                     <div class="powered-icon">
-                                        <img src="<?php echo $this->baseUrl(); ?>/imagens/opens.png"/>
+                                        <img src="<?php echo $this->baseUrl(); ?>/images/opens.png"/>
                                     </div>
                                 </a>
                             </td>

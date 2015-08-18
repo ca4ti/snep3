@@ -1,9 +1,28 @@
+<?php
+
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
+<script src="/snep/includes/javascript/password.js"></script> 
 <div class="row">
-    
     <section>
         <div class="col-sm-12">    
             
-            <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => $this->action), null, false); ?>" METHOD="post">
+            <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => $this->action), null, false); ?>"  autocomplete="off">
                         
                 <fieldset>
                     <legend><?php echo $this->translate('Extension');?></legend>    
@@ -18,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Name");?></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->extension['callerid'];?>"/>
+                            <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value="<?php echo $this->extension['callerid'];?>" />
                         </div>
                     </div>
 
@@ -28,12 +47,11 @@
 
                             <select class="form-control" name="exten_group" id="exten_group">
 
-                                <?php foreach($this->extenGroups as $key => $extenGroup){ ?>
-                                    
-                                    <?php if($extenGroup['name'] == $this->extension['group']){?>
-                                        <option selected><?php echo $extenGroup['name'];?></option>
+                                <?php foreach($this->extenGroups as $key => $val){ 
+                                    if($key == $this->extension['group']){?>
+                                        <option value="<?php echo $key;?>" selected><?php echo $val;?></option>
                                     <?php }else{ ?>
-                                        <option ><?php echo $extenGroup['name'];?></option>
+                                        <option  value="<?php echo $key; ?>"><?php echo $val;?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select>
@@ -72,7 +90,7 @@
                             <select class="form-control" name="technology" id="technology" onChange="showDiv(this.value);" <?php echo $this->disabled;?> >
                                 
                                 <option value="sip" <?php echo $this->sip;?>><?php echo $this->translate("SIP");?></option>
-                                <option value="iax" <?php echo $this->iax2;?>><?php echo $this->translate("IAX2");?></option>
+                                <option value="iax2" <?php echo $this->iax2;?>><?php echo $this->translate("IAX2");?></option>
                                 <option value="khomp" <?php echo $this->khomp;?>><?php echo $this->translate("Khomp");?></option>
                                 <option value="virtual" <?php echo $this->virtual;?>><?php echo $this->translate("Virtual");?></option>
                                 <option value="manual" <?php echo $this->manual;?>><?php echo $this->translate("Manual");?></option>
@@ -81,12 +99,12 @@
                         </div>
                     </div>
 
-                    <!-- SIP -->    
+                    <!-- SIP/IAX -->    
                     <div id="sipiax" >
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Password");?></label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" name="password" placeholder='' value="<?php echo $this->extension['secret'];?>"/>
+                                <input type="password" class="form-control" name="password" id="password" placeholder='' value="<?php echo $this->extension['secret'];?>"/>
                             </div>
                         </div>
 
@@ -96,31 +114,67 @@
                                 <input type="text" class="form-control" name="calllimit" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['call-limit']?>"/>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><?php echo $this->translate("NAT")?></label>
-                            <div class="col-sm-6">
-                                <div class="checkbox">
-                                    <?php if($this->extension['nat'] == 'yes'){?>
+                        <div id="siponly">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo $this->translate("NAT")?></label>
+                                <div class="col-sm-7">
+                                    <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="nat" id="nat" checked/><?php echo $this->translate("Enabled NAT")?>
+                                            <input type="checkbox" name="nat_no" <?php echo $this->nat_no;?>/>
+                                            no
                                         </label>
-                                    <?php }else{?>
+                                        &nbsp;&nbsp;
                                         <label>
-                                            <input type="checkbox" name="nat" id="nat"/><?php echo $this->translate("Enabled NAT")?>
+                                            <input type="checkbox" name="nat_force_rport" <?php echo $this->nat_force_rport;?>/>
+                                            force-rport
                                         </label>
-
-                                    <?php } ?>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <input type="checkbox" name="nat_comedia" <?php echo $this->nat_comedia;?>/>
+                                            comedia
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <input type="checkbox" name="nat_auto_force_rport" <?php echo $this->nat_auto_force_rport;?>/>
+                                            auto-force-rport
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <label >
+                                            <input type="checkbox" name="nat_auto_comedia" <?php echo $this->nat_auto_comedia;?>/>
+                                            auto-comedia
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo $this->translate("Direct Media")?></label>
+                                <div class="col-sm-6">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes;?>>
+                                        yes
+                                    </label>
                                     
+                                    <label class="radio-inline">
+                                        <input type="radio" name="directmedia" id="nonat" value="nonat" <?php echo $this->directmedianonat;?>
+                                        >
+                                        nonat
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="directmedia" id="update" value="update" <?php echo $this->directmediaupdate;?>>
+                                        update
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="directmedia" id="outgoing" value="outgoing" <?php echo $this->directmediaoutgoing;?>>
+                                        outgoing
+                                    </label>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Qualify")?></label>
                             <div class="col-sm-6">
                                 <div class="checkbox">
-                                    <?php if($this->extension['nat'] == 'yes'){?>
+                                    <?php if($this->extension['qualify'] === 'yes'){?>
                                         <label>
                                             <input type="checkbox" name="qualify" id="qualify" checked/><?php echo $this->translate("Enable delay qualification")?>
                                         </label>
@@ -134,30 +188,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><?php echo $this->translate("Direct Media")?></label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="yes" value="yes" <?php echo $this->directmediayes; ?>><?php echo $this->translate("Yes");?>
-                                </label>
-                                
-                                <label class="radio-inline">
-                                    <input type="radio" name="directmedia" id="no" value="no" <?php echo $this->directmediano; ?> ><?php echo $this->translate("No");?>
-                                </label>
-                            </div>
-
-                        </div>
+                        
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><?php echo $this->translate("Type")?></label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer; ?> ><?php echo $this->translate("Peer");?>
+                                    <input type="radio" name="type"  value="peer" <?php echo $this->typePeer;?>>
+                                    peer
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type"  value="user" <?php echo $this->typeUser;?>>
+                                    user
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend;?>>
+                                    friend
                                 </label>
                                 
-                                <label class="radio-inline">
-                                    <input type="radio" name="type"  value="friend" <?php echo $this->typeFriend; ?>><?php echo $this->translate("Friend");?>
-                                </label>
                             </div>
                         </div>
 
@@ -313,9 +361,9 @@
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Password Padlock");?></label>
                         <div class="col-sm-6">
                             <?php if($this->extension['password'] != ''){?>
-                                <input type="password" class="form-control" name="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['password']?>"/>
+                                <input type="password" class="form-control" name="passwordpadlock" id="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['password']?>"/>
                             <?php }else{?>
-                                <input type="password" class="form-control" name="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' />
+                                <input type="password" class="form-control" name="passwordpadlock" id="passwordpadlock" placeholder='<?php echo $this->translate("Only numbers")?>' />
                             <?php } ?>
                             
                         </div>
@@ -474,10 +522,38 @@
         });
     }); 
 
+    jQuery(function() {
+
+        jQuery('#password').password().on('show.bs.password', function(e) {
+        
+            jQuery('#methods').prop('checked', true);
+
+            }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
+            });
+            jQuery('#methods').click(function() {
+                jQuery('#password').password('toggle');
+            });
+        });
+ 
+    jQuery(function() {
+        jQuery('#passwordpadlock').password().on('show.bs.password', function(e) {
+        
+            jQuery('#methods').prop('checked', true);
+
+            }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
+            });
+            jQuery('#methods').click(function() {
+                jQuery('#passwordpadlock').password('toggle');
+            });
+        });
+
+
     
     window.onload = function(){
         var div = '<?php echo $this->techType;?>';
-        showDiv(div)
+        showDiv(div) ;
     }
 
     function showDiv(div){
@@ -486,9 +562,13 @@
         document.getElementById("khomp").className = "invisible";
         document.getElementById("virtual").className = "invisible";
         document.getElementById("manual").className = "invisible";
+        document.getElementById("siponly").className = "invisible";
 
         if (div) {
-            if (div == "sip" || div == 'iax') {
+            if (div == 'sip') {
+                document.getElementById('siponly').className = "visible"; 
+            }
+            if (div == "sip" || div == 'iax2') {
                 div = "sipiax"
             }
             document.getElementById(div).className = "visible"; 

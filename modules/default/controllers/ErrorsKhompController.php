@@ -29,6 +29,17 @@ require_once "includes/AsteriskInfo.php";
 class ErrorsKhompController extends Zend_Controller_Action {
 
     /**
+     * Initial settings of the class
+     */
+    public function init() {
+        $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->view->key = Snep_Dashboard_Manager::getKey(
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+    }
+    
+    /**
      * indexAction
      * @return type
      * @throws ErrorException
@@ -117,10 +128,15 @@ class ErrorsKhompController extends Zend_Controller_Action {
                 $this->view->status = $kstatus;
 
                 if ($this->_request->getPost()) {
-                    
-                    require_once "includes/AsteriskInfo.php";
-                    $astinfo = new AsteriskInfo();
-                    $astinfo->status_asterisk("khomp links errors clear", "", "");
+                    try {
+                        require_once "includes/AsteriskInfo.php";
+                        $astinfo = new AsteriskInfo();
+                        $astinfo->status_asterisk("khomp links errors clear", "", "");
+                    } catch (Exception $e) {
+                        $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
+                        $this->renderScript('error/sneperror.phtml');
+                        
+                    }
 
                     $this->_redirect($this->getRequest()->getControllerName());
                     

@@ -30,11 +30,6 @@
  */
 class Snep_SoundFiles_Manager {
 
-    public function init() { 
-        $this->lang = Zend_Registry::get('config')->system->language;
-    }
-
-
     // --------------------------------------------------------------------------------------------
     // Functions for Sound Files 
     // --------------------------------------------------------------------------------------------
@@ -45,7 +40,7 @@ class Snep_SoundFiles_Manager {
      * @return <array> $sound
      */
     public function get($file,$lang = false) {
-
+        $this->lang = Zend_Registry::get('config')->system->language;
         if (!$lang) {
             $lang = $this->lang; 
         }
@@ -94,6 +89,7 @@ class Snep_SoundFiles_Manager {
      * @param Array $data
      */
     public function edit($file) {
+        $this->lang = Zend_Registry::get('config')->system->language;
 
         $db = Zend_Registry::get('db');
 
@@ -110,13 +106,14 @@ class Snep_SoundFiles_Manager {
      */
     public function remove($file, $class = false) {
 
+        $this->lang = Zend_Registry::get('config')->system->language;
         $db = Zend_Registry::get('db');
 
         $db->beginTransaction();
         if ($class) {
-            $db->delete('sounds', "arquivo = '$file' and secao = '$class'");
+            $db->delete('sounds', "arquivo = '$file' and secao = '$class' and tipo='MOH' and language = '$this->lang'");
         } else {
-            $db->delete('sounds', "arquivo = '$file' and language = '$this->lang'");
+            $db->delete('sounds', "arquivo = '$file' and tipo='AST' and language = '$this->lang'");
         }
 
         try {
@@ -140,9 +137,10 @@ class Snep_SoundFiles_Manager {
 
     public function addClass($class) {
 
+
         $classes = self::getClasses();
         $classes[$class['name']] = $class;
-
+        $todayDate = date("d/m/Y H:m:s");
         $header = ";----------------------------------------------------------------\n ";
         $header .= "; Arquivo: snep-musiconhold.conf - Cadastro Musicas de Espera    \n";
         $header .="; Sintaxe: [secao]                                               \n";
@@ -151,8 +149,8 @@ class Snep_SoundFiles_Manager {
         $header .= ";          [application=aplicativo pra tocar o som] - opcional   \n";
         $header .= "; Include: em /etc/asterisk/musiconhold.conf                     \n";
         $header .= ";          include /etc/asterisk/snep/snep-musiconhold.conf      \n";
-        $header .= "; Atualizado em: 26/05/2008 11:22:18                             \n";
-        $header .= "; Copyright(c) 2008 Opens Tecnologia                             \n";
+        $header .= "; Atualizado em: $todayDate                                      \n";
+        $header .= "; Copyright(c) 2015 Opens Tecnologia                             \n";
         $header .= ";----------------------------------------------------------------\n";
         $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.          \n";
         $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de    \n";
@@ -218,6 +216,39 @@ class Snep_SoundFiles_Manager {
     } 
 
     /**
+     * Get a MOH sound informations 
+     * @param <string> $file
+     * @param <string> $section
+     * @return <array> $sound:
+     *              arquivo => string
+     *              descricao => string
+     *              data => string
+     *              tipo => string
+     *              secao => string
+     *              language => string
+     */
+    public function getClassFile($file,$section) {
+        $this->lang = Zend_Registry::get('config')->system->language;
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('sounds')
+                ->where("sounds.arquivo = ?", $file)
+                ->where("sounds.secao = ?", $section)
+                ->where("sounds.tipo = 'MOH'")
+                ->where("sounds.language = ?", $this->lang);
+
+        try {
+            $stmt = $db->query($select);
+            $sound = $stmt->fetch();
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return $sound;
+    }
+    /**
      * Add a MOH sound
      * @param array $file
      * @return boolean
@@ -225,6 +256,7 @@ class Snep_SoundFiles_Manager {
     public function addClassFile($file) {
 
         $db = Zend_Registry::get('db');
+        $this->lang = Zend_Registry::get('config')->system->language;
 
         $insert_data = array('arquivo' => $file['arquivo'],
             'descricao' => $file['descricao'],
@@ -251,6 +283,7 @@ class Snep_SoundFiles_Manager {
     public function editClassFile($file) {
 
         $db = Zend_Registry::get('db');
+        $this->lang = Zend_Registry::get('config')->system->language;
 
         $insert_data = array('arquivo' => $file['arquivo'],
             'descricao' => $file['descricao'],
@@ -260,65 +293,39 @@ class Snep_SoundFiles_Manager {
             'secao' => $file['secao']);
 
         try {
-            $db->update('sounds', $insert_data, "arquivo='{$file['arquivo']}' and secao='{$file['secao']}'");
+            $db->update('sounds', $insert_data, "arquivo='{$file['arquivo']}' and secao='{$file['secao']}' and language='{$this->lang}' and tipo='MOH'");
         } catch (Exception $e) {
-
             return false;
         }
-
-        return $db->lastInsertId();
     }
 
     /**
-     * Get a list of sounds of thea MOH Class
-     * @param satring $class
-     * @return array
+     * Get a list of sounds of thea MOH Class from table 'sounds' - don't read directory (See function: syncFiles())
+     * @param string $class - Class/Section name
+     * @return array of sounds:
+     *              arquivo => string
+     *              descricao => string
+     *              data => string
+     *              tipo => string
+     *              secao => string
+     *              language => string
      */
-
     public function getClassFiles($class) {
 
-        $allClasses = Snep_SoundFiles_Manager::getClasses();
+        $this->lang = Zend_Registry::get('config')->system->language;
 
-        $classesFolder = array();
-        foreach ($allClasses as $id => $xclass) {
-            $classesFolder[$id] = $id;
-        }
+        $db = Zend_Registry::get('db');
 
-        if (file_exists($class['directory'])) {
-            $allFiles = array();
-            $files = array();
-            foreach (scandir($class['directory']) as $file) {
+        $select = $db->select()
+                ->from('sounds')
+                ->where("sounds.secao = ?", $class)
+                ->where("sounds.language = ?", $this->lang);
 
-                if (!preg_match("/^\.+.*/", $file) && !in_array($file, $classesFolder)) {
-                    if (preg_match("/^backup+.*/", $file)) {
-
-                        foreach (scandir($class['directory'] . '/' . $file) as $backup) {
-                            if (!preg_match("/^\.+.*/", $backup)) {
-                                //        $files[] = $class['directory'] .'/backup/'. $backup;
-                            }
-                        }
-                    } elseif (preg_match("/^tmp+.*/", $file)) {
-
-                        foreach (scandir($class['directory'] . '/' . $file) as $tmp) {
-                            if (!preg_match("/^\.+.*/", $tmp)) {
-                                //       $files[] = $class['directory'] .'/tmp/'. $tmp;
-                            }
-                        }
-                    } else {
-                        $files[$file] = $class['directory'] . '/' . $file;
-                        //$allFiles[$file] = $file;
-                    }
-                }
-            }
-
-
-            $resultado = array();
-            foreach ($files as $name => $file) {
-                $resultado[$name] = Snep_SoundFiles_Manager::get($name);
-                $resultado[$name]['full'] = $file;
-            }
-
-            return $resultado;
+        try {
+            $stmt = $db->query($select);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            return false;
         }
     }
 
@@ -339,21 +346,20 @@ class Snep_SoundFiles_Manager {
             if ($originalName === $item['name']) {
                 $classes[$class]['name'] = $newClass['name'];
                 $classes[$class]['mode'] = $newClass['mode'];
-                $directory = $classes[$class]['directory'];
                 $classes[$class]['directory'] = $newClass['directory'];
             }
         }
-
-        $header = ";----------------------------------------------------------------\n ";
+        $todayDate = date("d/m/Y H:m:s");
+        $header =  ";----------------------------------------------------------------\n ";
         $header .= "; Arquivo: snep-musiconhold.conf - Cadastro Musicas de Espera    \n";
-        $header .="; Sintaxe: [secao]                                               \n";
-        $header .=";          mode=modo de leitura do(s) arquivo(s)                 \n";
-        $header .=";          directory=onde estao os arquivos                      \n";
+        $header .= "; Sintaxe: [secao]                                               \n";
+        $header .= ";          mode=modo de leitura do(s) arquivo(s)                 \n";
+        $header .= ";          directory=onde estao os arquivos                      \n";
         $header .= ";          [application=aplicativo pra tocar o som] - opcional   \n";
         $header .= "; Include: em /etc/asterisk/musiconhold.conf                     \n";
         $header .= ";          include /etc/asterisk/snep/snep-musiconhold.conf      \n";
-        $header .= "; Atualizado em: 26/05/2008 11:22:18                             \n";
-        $header .= "; Copyright(c) 2008 Opens Tecnologia                             \n";
+        $header .= "; Atualizado em: $todayDate                             \n";
+        $header .= "; Copyright(c) 2015 Opens Tecnologia                             \n";
         $header .= ";----------------------------------------------------------------\n";
         $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.          \n";
         $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de    \n";
@@ -368,23 +374,9 @@ class Snep_SoundFiles_Manager {
             $body .= "directory=" . $classe['directory'] . "\n\n";
         }
 
-        if (!file_exists($newClass['directory'])) {
+        file_put_contents('/etc/asterisk/snep/snep-musiconhold.conf', $header . $body);
 
-            exec("mkdir {$newClass['directory']}");
-            exec("mkdir {$newClass['directory']}/tmp");
-            exec("mkdir {$newClass['directory']}/backup; ");
-
-            exec("cp  {$directory}/* {$newClass['directory']}/");
-            exec("cp  {$directory}/tmp/* {$newClass['directory']}/tmp/");
-            exec("cp  {$directory}/backup/* {$newClass['directory']}/backup/");
-
-            exec("rm -rf {$directory}");
-
-            file_put_contents('/etc/asterisk/snep/snep-musiconhold.conf', $header . $body);
-
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -407,17 +399,17 @@ class Snep_SoundFiles_Manager {
                 unset($classes[$class]);
             }
         }
-
-        $header = ";----------------------------------------------------------------\n ";
+        $todayDate = date("d/m/Y H:m:s");
+        $header =  ";----------------------------------------------------------------\n ";
         $header .= "; Arquivo: snep-musiconhold.conf - Cadastro Musicas de Espera    \n";
-        $header .="; Sintaxe: [secao]                                               \n";
-        $header .=";          mode=modo de leitura do(s) arquivo(s)                 \n";
-        $header .=";          directory=onde estao os arquivos                      \n";
+        $header .= "; Sintaxe: [secao]                                               \n";
+        $header .= ";          mode=modo de leitura do(s) arquivo(s)                 \n";
+        $header .= ";          directory=onde estao os arquivos                      \n";
         $header .= ";          [application=aplicativo pra tocar o som] - opcional   \n";
         $header .= "; Include: em /etc/asterisk/musiconhold.conf                     \n";
         $header .= ";          include /etc/asterisk/snep/snep-musiconhold.conf      \n";
-        $header .= "; Atualizado em: 26/05/2008 11:22:18                             \n";
-        $header .= "; Copyright(c) 2008 Opens Tecnologia                             \n";
+        $header .= "; Atualizado em: $todayDate                             \n";
+        $header .= "; Copyright(c) 2015 Opens Tecnologia                             \n";
         $header .= ";----------------------------------------------------------------\n";
         $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.          \n";
         $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de    \n";
@@ -438,16 +430,23 @@ class Snep_SoundFiles_Manager {
     // Functions for syncronize files with database
     // --------------------------------------------------------------------------------------------
     /**
-     * Get file list MOH sounds of the directory and update database
-     * @param array $file
+     * Get file list MOH/AST sounds of the directory and update database
+     * @param string $type : ast / moh
      */
-    public function syncFiles() {
+    public function syncFiles($type='ast') {
 
         $db = Zend_Registry::get('db');
+        $this->lang =  Zend_Registry::get('config')->system->language;
+        if ($type === 'moh') {
+            $this->base_dir = Zend_Registry::get('config')->system->path->asterisk->moh;    
+        } else {
+            $this->base_dir = Zend_Registry::get('config')->system->path->asterisk->sounds;
+        }
 
         $select = $db->select()
                 ->from('sounds')
-                ->where('sounds.tipo = ?', 'MOH');
+                ->where('sounds.tipo = ?',  strtoupper($type))
+                ->where('language = ?', $this->lang);
 
         try {
             $stmt = $db->query($select);
@@ -455,55 +454,64 @@ class Snep_SoundFiles_Manager {
         } catch (Exception $e) {
             return false;
         }
-
+        // Remove all sounds not found in $dir
         $_sound = array();
         foreach ($sounds as $sound) {
-            $_sound[$sound['arquivo']] = $sound['arquivo'];
+            if ($type === "moh") {
+                $dir = $sound['secao'] === 'default' ? $this->base_dir : $this->base_dir . '/' . $sound['secao'];
+            } else {
+                $dir = $base_dir.'/'.$lang;
+            }
+            if (file_exists($dir."/".$sound['arquivo'])) {
+                if ($type === "moh") {
+                    array_push($_sound,array($sound['secao'] => $sound['arquivo']));  
+                } else {
+                    $_sound[$sound['language']] = $sound['arquivo'];  
+                }
+            } else {
+                self::remove($sound['arquivo'],$sound['secao']) ;
+            }
         }
 
+        // MOH - Read moh directory and mount table registrys
+        // Mount directory list
+        if ($type === 'moh') {
+            $scanned_directory = array_diff(scandir($this->base_dir), array('..', '.', 'backup', 'tmp'));
+            $sections = array("default" => $dir) ;
+            foreach ($scanned_directory as $key => $value) {
+                if (is_dir($dir . '/' . $value)) {
+                    $sections[$value] = $dir.'/'.$value ;
+                    continue ;
+                } 
+            }
 
-        $allClasses = Snep_SoundFiles_Manager::getClasses();
-        $classesFolder = array();
-
-        foreach ($allClasses as $id => $xclass) {
-
-
-            $classesFolder[$id]['name'] = $xclass['name'];
-            $classesFolder[$id]['directory'] = $xclass['directory'];
-
-            if (file_exists($xclass['directory'])) {
-
-                $allFiles = array();
-                $files = array();
-                foreach (scandir($xclass['directory']) as $thisClass => $file) {
-
-                    if (!preg_match("/^\.+.*/", $file)) {
-
-                        if (!preg_match('/^tmp+.*/', $file)) {
-
-                            if (!preg_match('/^backup+.*/', $file)) {
-
-                                if (!in_array($file, array_keys($allClasses))) {
-
-                                    if (!in_array($file, $_sound)) {
-
-                                        $newfile = array('arquivo' => $file,
+            // Read each directory and your files
+            foreach ($sections as $key => $directory) {
+                $scanned_directory = array_diff(scandir($directory), array('..', '.', 'backup', 'tmp'));
+                foreach ($scanned_directory as $dir_key => $file) {
+                    $file_found = $directory . '/' . $file;
+                    if (is_file($file_found)) {
+                        $flag_found = false ;
+                        foreach ($_sound as $sound_key => $sound_value) {
+                            if (isset($sound_value[$key]) && $sound_value[$key] === $file) {
+                                $flag_found = true ;
+                            }
+                        }
+                        // Add file in database
+                        if (!$flag_found) {
+                            $newfile = array('arquivo' => $file,
                                             'descricao' => $file,
                                             'data' => new Zend_Db_Expr('NOW()'),
                                             'language' => $this->lang,
                                             'tipo' => 'MOH',
-                                            'secao' => $id);
-
-
-                                        Snep_SoundFiles_Manager::addClassFile($newfile);
-                                    }
-                                }
-                            }
+                                            'secao' => $key);
+                            self::addClassFile($newfile) ;
                         }
                     }
+
                 }
             }
-        }
+        } // end type = moh
         return true;
     }
 
@@ -514,6 +522,7 @@ class Snep_SoundFiles_Manager {
     public function addSounds($file) {
 
         $db = Zend_Registry::get('db');
+        $this->lang = Zend_Registry::get('config')->system->language;
 
         $insert_data = array('arquivo' => $file,
             'descricao' => substr($file, 0, -4),
@@ -533,11 +542,13 @@ class Snep_SoundFiles_Manager {
 
     /**
      * Get sound files
+     * @param boolean $flag - true = include a null sound in array, false=not include 
      * @return <array>
      */
-    public function getSounds() {
+    public function getSounds($flag=false) {
 
         $db = Zend_Registry::get('db');
+        $this->lang = Zend_Registry::get('config')->system->language;
 
         $select = $db->select()
                 ->from('sounds')
@@ -546,6 +557,14 @@ class Snep_SoundFiles_Manager {
 
         $stmt = $db->query($select);
         $sounds = $stmt->fetchall();
+        if ($flag) {
+            array_unshift($sounds, array ( "arquivo" => "",
+                "descricao" => "" ,
+                "data" => "",
+                "tipo" => "" ,
+                "secao" => "", 
+                "language" => ""));
+        } 
 
         return $sounds;
     }
@@ -564,10 +583,9 @@ class Snep_SoundFiles_Manager {
 
         $sound_path = Zend_Registry::get('config')->system->path->asterisk->sounds;
         $web_path = Zend_Registry::get('config')->system->path->web;
+        $this->lang = Zend_Registry::get('config')->system->language;
         $lang = $this->lang ;
-         if ($this->lang === "en") {
-             $lang = "";
-         }
+
         $result = array();
 
         if (file_exists($sound_path)) {

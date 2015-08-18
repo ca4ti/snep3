@@ -17,7 +17,6 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
  */
 
-require_once '../../../includes/classes.php';
 require_once '../../../includes/functions.php';
 
 
@@ -108,6 +107,24 @@ class ServicesReportService implements SnepService {
 
 		if(isset($_GET['SIGAME'])){
         	array_push($services, 'SIGAME');
+        }        
+		if(isset($_GET['LOCK'])){
+        	array_push($services, 'LOCK');
+        }        
+		if(isset($_GET['SPY'])){
+        	array_push($services, 'SPY');
+        }        
+		if(isset($_GET['REDIAL'])){
+        	array_push($services, 'REDIAL');
+        }        
+		if(isset($_GET['WHOAMI'])){
+        	array_push($services, 'WHOAMI');
+        }        
+		if(isset($_GET['REC'])){
+        	array_push($services, 'REC');
+        }        
+		if(isset($_GET['RECPLAY'])){
+        	array_push($services, 'RECPLAY');
         }        
 
         $srv = '';

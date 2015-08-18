@@ -150,5 +150,22 @@ class Snep_Extensions_Manager {
             $db->rollBack();
         }
     }
+    /**
+     * Method to get all Peers 
+     * @return Array
+     */
+    public function getAll() {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+            ->from('peers', array('name','callerid')) 
+            ->where("peer_type = 'R'");
+
+        $stmt = $db->query($select);
+        $peers = $stmt->fetchall();
+
+        return $peers;
+    }
 
 }

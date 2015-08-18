@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
 --
 -- Table structure for table `groups`
 --
-CREATE TABLE IF NOT EXISTS groups (
+CREATE TABLE IF NOT EXISTS `groups` (
     name varchar(50) PRIMARY KEY,
     inherit varchar(50),
     FOREIGN KEY (inherit) REFERENCES groups(name) ON UPDATE CASCADE
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `language` char(2) default 'br',
   `mailbox` varchar(50) default NULL,
   `md5secret` varchar(80) default '',
-  `nat` varchar(5) NOT NULL default 'no',
+  `nat` varchar(100) NOT NULL default 'no',
   `deny` varchar(95) default NULL,
   `permit` varchar(95) default NULL,
   `mask` varchar(95) default NULL,
@@ -189,12 +189,12 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `rtpholdtimeout` char(3) default NULL,
   `secret` varchar(80) default NULL,
   `type` varchar(6) NOT NULL default 'friend',
-  `username` varchar(80) NOT NULL default '',
+  `defaultuser` varchar(80) NOT NULL default '',
   `disallow` varchar(100) default 'all',
   `allow` varchar(100) default 'ulaw;alaw;gsm',
   `musiconhold` varchar(100) default NULL,
   `regseconds` int(11) NOT NULL default '0',
-  `ipaddr` varchar(15) NOT NULL default '',
+  `ipaddr` varchar(45) NOT NULL default '',
   `regexten` varchar(80) NOT NULL default '',
   `cancallforward` varchar(3) default 'yes',
   `setvar` varchar(100) NOT NULL default '',
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `group` varchar(50) NOT NULL DEFAULT 'users',
   `time_total` int(11) default NULL,
   `time_chargeby` char(1) default NULL,
-  `regserver` int(250) default NULL,
+  `regserver` varchar(20) default NULL,
   `dnd` BOOL NOT NULL DEFAULT '0',
   `sigame` VARCHAR( 20 ) NULL ,
   `directmedia` varchar(10),
@@ -241,18 +241,18 @@ CREATE TABLE IF NOT EXISTS `services_log` (
 --
 -- Table structure for table `queue_log`
 --
-CREATE TABLE IF NOT EXISTS queue_log (
-  id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  time char(26) default NULL,
-  callid varchar(32) NOT NULL default '',
-  queuename varchar(32) NOT NULL default '',
-  agent varchar(32) NOT NULL default '',
-  event varchar(32) NOT NULL default '',
-  data1 varchar(100) NOT NULL default '',
-  data2 varchar(100) NOT NULL default '',
-  data3 varchar(100) NOT NULL default '',
-  data4 varchar(100) NOT NULL default '',
-  data5 varchar(100) NOT NULL default '',
+CREATE TABLE IF NOT EXISTS `queue_log` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `time` char(26) default NULL,
+  `callid` varchar(32) NOT NULL default '',
+  `queuename` varchar(32) NOT NULL default '',
+  `agent` varchar(32) NOT NULL default '',
+  `event` varchar(32) NOT NULL default '',
+  `data1` varchar(100) NOT NULL default '',
+  `data2` varchar(100) NOT NULL default '',
+  `data3` varchar(100) NOT NULL default '',
+  `data4` varchar(100) NOT NULL default '',
+  `data5` varchar(100) NOT NULL default '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `queue_members` (
   `queue_name` varchar(128) default NULL,
   `interface` varchar(128) default NULL,
   `penalty` int(11) default NULL,
-  `paused` tinyint(1) default NULL,
+  `paused` int(2) default NULL,
   PRIMARY KEY  (`uniqueid`),
   UNIQUE KEY `queue_interface` (`queue_name`,`interface`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `sounds` (
   `tipo` char(3) NOT NULL default 'AST',
   `secao` varchar(30) NOT NULL,
   `language` varchar(5) NOT NULL default 'pt_BR',
-  PRIMARY KEY  (`arquivo`,`tipo`,`secao`)
+  PRIMARY KEY  (`arquivo`,`tipo`,`secao`,`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -453,7 +453,7 @@ CREATE TABLE IF NOT EXISTS `voicemail_users` (
   `customer_id` varchar(11) NOT NULL default '0',
   `context` varchar(50) default '',
   `mailbox` varchar(11) NOT NULL default '0',
-  `password` varchar(5) NOT NULL default '0',
+  `password` varchar(10) NOT NULL default '0',
   `fullname` varchar(150) NOT NULL default '',
   `email` varchar(50) NOT NULL default '',
   `pager` varchar(50) default '',
@@ -500,11 +500,13 @@ CREATE TABLE IF NOT EXISTS `lista_abandono` (
 --
 -- Table structure for table `core_cnl_country`
 --
-CREATE TABLE IF NOT EXISTS core_cnl_country (
+CREATE TABLE IF NOT EXISTS `core_cnl_country` (
     `id` integer primary key,
     `name` varchar(30) not null,
     `code_2` varchar(2) not null,
-    `code_3` varchar(3) not null
+    `code_3` varchar(3) not null,
+    `language` varchar(5) not null,
+    `locale` varchar(5) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -604,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `core_city` (
 --
 CREATE TABLE IF NOT EXISTS `contacts_group` (
   `id` integer NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

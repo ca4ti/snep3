@@ -91,9 +91,16 @@ class ContactsController extends Zend_Controller_Action {
                     $this->view->translate("Add")));
 
         $this->view->contact_id = Snep_Contacts_Manager::getLastId();
+
+        foreach ($this->allGroups as $key=>$val) {
+            $this->allGroups[$key]['selected'] = "" ;
+        }
+
+        $this->allGroups['0']['selected']='selected';
         $this->view->contact_groups = $this->allGroups;
         $this->view->states = $this->states;
         $this->view->action = 'add';
+
         $this->renderScript('contacts/addedit.phtml');
 
 
@@ -255,20 +262,7 @@ class ContactsController extends Zend_Controller_Action {
         }
     }
 
-    /**
-     * getForm
-     * @param <object> $form
-     * @return <object>
-     */
-    protected function getForm($form) {
 
-        $phoneField = new Snep_Form_Element_Html("contacts/elements/phone.phtml", "phone", false);
-        $phoneField->setLabel($this->view->translate("Phone"));
-        $phoneField->setOrder(9);
-        $form->addElement($phoneField);
-        $this->form = $form;
-        return $this->form;
-    }
 
     /**
      * multiRemoveAction - Remove various contacts

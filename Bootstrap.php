@@ -1,4 +1,20 @@
 <?php
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 require_once 'Zend/Session.php';
 require_once 'Zend/Application/Bootstrap/Bootstrap.php';
@@ -68,7 +84,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headLink()->setStylesheet($view->baseUrl() . "/css/systemstatus.css");
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/snep-env.js.php", 'text/javascript');
         $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/jquery.min.js", 'text/javascript');
-        $view->headScript()->appendFile($view->baseUrl() . "/includes/geral.js", 'text/javascript');
+        $view->headScript()->appendFile($view->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
 
         //List installed modules to be used on the modules menu
         $systemInfo['modules'] = array();

@@ -83,12 +83,10 @@ class UsersController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
 
             $dados = $this->_request->getParams();
-            $groupId = Snep_Profiles_Manager::getName($dados['group']);
-            $dados['group'] = $groupId['id'];
-
-            $newId = Snep_Users_Manager::getName($dados['name']);
+           
+            $name_exist = Snep_Users_Manager::getName($dados['name']);
             
-            if (count($newId) > 1) {
+            if (count($name_exist) > 1) {
                 
                 $this->view->error_message = $this->view->translate('Name already exists.'); 
                 $this->renderScript('error/sneperror.phtml');
@@ -120,16 +118,6 @@ class UsersController extends Zend_Controller_Action {
             $this->view->disabled = 'disabled';
         }
    
-        // Marks the already registered user profile
-        foreach($this->profiles as $key => $profile){
-            if ( $profile['id'] === $user['profile_id']) {
-                $this->profiles[$key]['selected'] = 'selected' ;
-            } else {
-                $this->profiles[$key]['selected'] = "" ;
-            }
-        }
-        // Id of the current profile
-        $idProfile = $user["profile_id"];
         
         // Mount the view
         $this->view->profiles = $this->profiles;
@@ -143,39 +131,21 @@ class UsersController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
 
             $dados = $this->_request->getParams();
-            
-            $newId = Snep_Users_Manager::getName($dados['name']);
-            
-            if (count($newId) > 1 && $user['name'] != $dados['name']) {
-                
-                $this->view->error_message = $this->view->translate('Name already exists.'); 
-                $this->renderScript('error/sneperror.phtml');
 
-            } else {
-               
-                $dados['created'] = $user['created'];
+            $dados['created'] = $user['created'];
 
-                if (strlen($dados['password']) != 32) {
-                    $dados['password'] = md5($dados['password']);
-                }
-
-                // User admin equals profile default
-                if ($id == 1) {
-                    $dados['group'] = 1;
-                }else{
-                    $groupID = Snep_Profiles_Manager::getName($dados['group']);
-                    $dados['group'] = $groupID['id'];
-                }
-
-                // In the Group edition, the user loses the individual permissions
-                if ($idProfile != $dados['group']) {
-                    Snep_Users_Manager::removePermission($id);
-                }
-
-                Snep_Users_Manager::edit($dados);
-                $this->_redirect($this->getRequest()->getControllerName());
-
+            if (strlen($dados['password']) != 32) {
+                $dados['password'] = md5($dados['password']);
             }
+
+            // if change profile, remove permissions
+            if ($user['profile_id'] != $dados['profile_id']) {
+                Snep_Users_Manager::removePermission($id);
+            }
+
+            Snep_Users_Manager::edit($dados);
+            $this->_redirect($this->getRequest()->getControllerName());
+
         }
         
     }

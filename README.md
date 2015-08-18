@@ -1,6 +1,7 @@
---TODO-- 
-- Tradução e revisão das traduções Pt-BR, EN, ES
-- Correção no comportamento do menu principal
+**A FAZER : PRINCIPAL**
+
+* Tradução e revisão das traduções Pt-BR, EN, ES
+* Correção no comportamento do menu principal
 - Refatorar rotina de Rotas / Regras Negócio
 - Separar por ABAS: Entradas, Saidas, Outras
 - Sistema de Ajuda on-line
@@ -10,7 +11,8 @@
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rotina das Notificações on-line (fonte/origem)
 
--Pequenos ajustes a fazer-
+**A Fazer : Próxima versão**
+
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
@@ -30,7 +32,8 @@
 - Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
 ---------------------------------
-Release 1.0-Betha-rc1
+**Release 1.0-Betha-rc1**
+
 - Ajustes diversos no SQL inicial e dados iniciais
 - Ajustes para leitura do arquivo de áudio de acordo com language selecionada
 - Adicionado controle para exibição ou não de regras desabilitadas (Parâmetros)
@@ -55,7 +58,8 @@ Release 1.0-Betha-rc1
 - Cadeado - Corrigido : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
 - Filas - Corrigido: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 ---------------------------------
---Release 1.0-alpha--
+**Release 1.0-alpha**
+
 - Nova interface
 - Conectado com a ITC  (www.intercomunexao.com.br)
 - Novo sistema de controle de usuarios e permissões de acesso

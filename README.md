@@ -11,7 +11,7 @@
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rotina das Notificações on-line (fonte/origem)
 
-**A Fazer : Pequenos ajustes**
+**A Fazer : Próxima versão**
 
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina

@@ -1,4 +1,4 @@
-**A FAZER**
+**A FAZER : PRINCIPAL**
 
 * Tradução e revisão das traduções Pt-BR, EN, ES
 * Correção no comportamento do menu principal
@@ -11,7 +11,7 @@
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rotina das Notificações on-line (fonte/origem)
 
-**Pequenos ajustes a fazer**
+**A Fazer : Pequenos ajustes**
 
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina

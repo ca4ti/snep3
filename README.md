@@ -31,6 +31,9 @@
 - Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
 - Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
+- Ramais cadastrados como IAX são exibidos como SIP ao alterar
+FEITO - Salas de conferencias x Menu problemas na visualização
+FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
 ---------------------------------
 **Release 1.0-Betha-rc1**
 

@@ -541,13 +541,14 @@
         
             jQuery('#methods').prop('checked', true);
 
-            }).on('hide.bs.password', function(e) {
+        }).on('hide.bs.password', function(e) {
                 jQuery('#methods').prop('checked', false);
-            });
-            jQuery('#methods').click(function() {
-                jQuery('#passwordpadlock').password('toggle');
-            });
         });
+    
+        jQuery('#methods').click(function() {
+            jQuery('#passwordpadlock').password('toggle');
+        });
+    });
 
 
     

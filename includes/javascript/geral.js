@@ -80,8 +80,8 @@ jQuery(window).resize(servicesReposition);
 /*end of services footer*/
 
 
-// var imgtrue = pathName+"images/true.png";
-// var imgfalse = pathName+"images/false.png";
+//var imgtrue = pathName+"images/true.png";
+//var imgfalse = pathName+"images/false.png";
 
 jQuery(document).ready(function(e) {
     /* tolabel*/
@@ -103,15 +103,19 @@ jQuery(document).ready(function(e) {
         var div = jQuery('#check_img_'+name, jQuery(this).parent());
         var a = jQuery('#check_a_'+name, jQuery(this).parent());
         
-        if(jQuery(this).attr('checked')) div.attr('src', imgtrue);
-        else div.attr('src', imgfalse);
+        if(jQuery(this).attr('checked')) {
+            //div.attr('src', imgtrue);
+
+        }else {
+            //div.attr('src', imgfalse);
+        }
         var check = jQuery(this);
         var change = function(){
             if(check.attr('checked')){
-                div.attr('src', imgfalse);
+                //div.attr('src', imgfalse);
                 check.attr('checked', false);
             }else{
-                div.attr('src', imgtrue);
+                //div.attr('src', imgtrue);
                 check.attr('checked', true);
             }
         };

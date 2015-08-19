@@ -11,7 +11,8 @@
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rotina das Notificações on-line (fonte/origem)
 
-**A Fazer : Próxima versão**
+**A Fazer : Próxima versão - betha-rc2**
+
 - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
@@ -31,8 +32,8 @@
 - Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
 - Ramais cadastrados como IAX são exibidos como SIP ao alterar
-- Slas de conferencias x Menu problemas na visualização
-- Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
+FEITO - Salas de conferencias x Menu problemas na visualização
+FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
 ---------------------------------
 **Release 1.0-Betha-rc1**
 

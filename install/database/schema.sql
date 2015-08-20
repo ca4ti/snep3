@@ -617,16 +617,14 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
 CREATE TABLE IF NOT EXISTS `contacts_names` (
   `id` integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(80) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `id_state` int(11),
+  `address` varchar(100),
+  `id_state` char(2),
   `id_city` int(11),
-  `cep` varchar(8) NOT NULL,
+  `cep` varchar(8),
   `group` integer NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  FOREIGN KEY (`id_state`) REFERENCES core_state(`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  FOREIGN KEY (`id_city`) REFERENCES core_city(`id`) ON UPDATE CASCADE ON DELETE RESTRICT
   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 

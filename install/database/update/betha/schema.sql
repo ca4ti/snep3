@@ -8,3 +8,11 @@ ALTER TABLE  `queue_members` CHANGE  `paused`  `paused` INT(2);
 ALTER TABLE  `peers` CHANGE  `nat`  `nat` VARCHAR(16);
 ALTER TABLE  `contacts_group` CHANGE `name` `name` VARCHAR(50) NOT NULL;
 ALTER TABLE  `sounds` DROP PRIMARY KEY, ADD PRIMARY KEY (`arquivo`,`tipo`,`secao`,`language`);
+
+-- Update SNEP Betha-rc1 -> Betha-rc2
+ALTER TABLE `contacts_names` DROP FOREIGN KEY contacts_names_ibfk_1;
+ALTER TABLE `contacts_names` DROP FOREIGN KEY contacts_names_ibfk_2;
+ALTER TABLE `contacts_names` CHANGE `id_state` `id_state` CHAR(2);
+ALTER TABLE `contacts_names` CHANGE `cep` `cep` VARCHAR(8);
+ALTER TABLE `contacts_names` CHANGE `address` `address` VARCHAR(100);
+

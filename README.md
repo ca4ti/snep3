@@ -13,7 +13,10 @@
 
 **A Fazer : Próxima versão - betha-rc2**
 
-- Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
+FEITO - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
+FEITO - Ramais cadastrados como IAX são exibidos como SIP ao alterar
+FEITO - Salas de conferencias x Menu problemas na visualização
+FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
@@ -31,9 +34,7 @@
 - Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
 - Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- Ramais cadastrados como IAX são exibidos como SIP ao alterar
-FEITO - Salas de conferencias x Menu problemas na visualização
-FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
+
 ---------------------------------
 **Release 1.0-Betha-rc1**
 

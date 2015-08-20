@@ -17,10 +17,13 @@ FEITO - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever d
 FEITO - Ramais cadastrados como IAX são exibidos como SIP ao alterar
 FEITO - Salas de conferencias x Menu problemas na visualização
 FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
+FEITO - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
+FEITO - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
+  +-----> Exige mudanças no extensions.conf e snep-features.conf
+
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
-- Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
+
 - Arrumar os ícones para enable/disable das permissões do usuário
 - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem

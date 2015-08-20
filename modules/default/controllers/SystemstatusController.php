@@ -194,7 +194,7 @@ class SystemstatusController extends Zend_Controller_Action {
      * @param <int> $precision
      * @return string
      */
-    function byte_convert($size, $precision = 2) {
+    private function byte_convert($size, $precision = 2) {
 
 
         // Sanity check

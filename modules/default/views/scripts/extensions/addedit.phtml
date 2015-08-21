@@ -347,10 +347,10 @@
                         <div class="col-sm-6">
                             <div class="checkbox">
                                 <label>
-                                    <?php if($this->extension['password'] != ''){?>
-                                        <input type="checkbox" name="padlock" id="padlock" value="padlock" checked/> <?php echo $this->translate("Enabled");?>
+                                    <?php if($this->extension['authenticate']){?>
+                                        <input type="checkbox" name="authenticate" id="authenticate" value="authenticate" checked/> <?php echo $this->translate("Enabled");?>
                                     <?php }else{?>
-                                        <input type="checkbox" name="padlock" id="padlock" value="padlock" /> <?php echo $this->translate("Enabled");?>
+                                        <input type="checkbox" name="authenticate" id="authenticate" value="authenticate" /> <?php echo $this->translate("Enabled");?>
                                     <?php }?>
                                 </label>
                             </div>
@@ -456,7 +456,7 @@
                 },
                 passwordpadlock: {
                     required: function() {
-                        return jQuery("#padlock").is(":checked");
+                        return jQuery("#authenticate").is(":checked");
                     },
                     minlength: 4,
                     maxlength: 32,

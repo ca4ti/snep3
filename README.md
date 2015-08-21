@@ -20,10 +20,13 @@ FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Gr
 FEITO - Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 FEITO - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
   +-----> Exige mudanças no extensions.conf e snep-features.conf
+FEITO - Ajustes no sistema de cadeado do ramal e na Action Cadeeado das Regras de Negocio
+FEITO - Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
+
+
 
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-
 - Arrumar os ícones para enable/disable das permissões do usuário
 - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
@@ -32,11 +35,11 @@ FEITO - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Cadastros diversos com senha - opcao para mostrar senha
 - Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
-- Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
 - Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
+- % de uso da CPU nao esta sendo exibido
 
 ---------------------------------
 **Release 1.0-Betha-rc1**

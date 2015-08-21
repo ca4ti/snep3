@@ -31,6 +31,7 @@ class SystemstatusController extends Zend_Controller_Action {
     
 
     private $systemInfo = array();
+    private $sysInfo = array() ;
 
     /**
      * indexAction - List information of services
@@ -52,7 +53,7 @@ class SystemstatusController extends Zend_Controller_Action {
         try {
             $linfoData->request();
             $sysInfo = $linfoData->getLastResponse()->getBody();
-            $sysInfo = simplexml_load_string($sysInfo);
+            $this->sysInfo = simplexml_load_string($sysInfo);
         } catch (HttpException $ex) {
             echo $ex;
         }
@@ -60,9 +61,7 @@ class SystemstatusController extends Zend_Controller_Action {
         if (trim($config->ambiente->db->host) == "") {
             $this->_redirect("/installer/");
         } else {
-
-
-           
+          
             // Server uptime
             $execUptimeRaw = explode(",", exec("uptime"));
             $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
@@ -145,14 +144,11 @@ class SystemstatusController extends Zend_Controller_Action {
         $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
         $this->systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
 
-        $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
-        $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
-        $this->systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
+        $cpuNumber = count(explode('<br />', $this->sysInfo->core->CPU));
 
-        $cpuNumber = count(explode('<br />', $sysInfo->core->CPU));
-
-        $cpuUsageRaw = explode(' ', $sysInfo->core->load);
+        $cpuUsageRaw = explode(' ', $this->sysInfo->core->load);
         $sum_cpu = ($cpuUsageRaw[0] + $cpuUsageRaw[1] + $cpuUsageRaw[2]) ;
+
         if ($sum_cpu = 0 ) {
             $loadAvarege = 0 ;
         } else {
@@ -160,15 +156,14 @@ class SystemstatusController extends Zend_Controller_Action {
         }
         $this->systemInfo['usage'] = round(($loadAvarege * 100) / ($cpuNumber - 1));
         
-
         // RAM Memory
         $this->systemInfo['memory'] = self::sys_meminfo();
 
         $this->systemInfo['memory']['swap'] = array(
-            'total' => $this->byte_convert(floatval($sysInfo->memory->swap->core->free)),
-            'free' => $this->byte_convert(floatval($sysInfo->memory->swap->core->total)),
-            'used' => $this->byte_convert(floatval($sysInfo->memory->swap->core->used)),
-            'percent' => floatval($sysInfo->memory->swap->core->total) > 0 ? round(floatval($sysInfo->memory->swap->core->used) / floatval($sysInfo->memory->swap->core->total) * 100) : 0
+            'total' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->free)),
+            'free' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->total)),
+            'used' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->used)),
+            'percent' => floatval($this->sysInfo->memory->swap->core->total) > 0 ? round(floatval($this->sysInfo->memory->swap->core->used) / floatval($this->sysInfo->memory->swap->core->total) * 100) : 0
         );
 
         // Hard Disk
@@ -177,7 +172,7 @@ class SystemstatusController extends Zend_Controller_Action {
         foreach($this->sys_fsinfo() as $key => $partition){
             
             // verifica valores duplicados de disco
-            $repeat[$partition['mount_point']] += 1; 
+            isset($repeat[$partition['mount_point']]) ? $repeat[$partition['mount_point']] += 1 : $repeat[$partition['mount_point']] = 1; 
             
             foreach($repeat as $x => $value){
                 if($partition['mount_point'] == $x && $value == 1){

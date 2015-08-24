@@ -9,6 +9,9 @@
 - Ajustes CSS
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
+- Rever/redefinir conceitos/funcionalidades para Audios
+- Rever/redefinir conceitos/funcionalidades para Language
+- Rever/redefinir conceitos/funcionalidades para Segurança
 - Rotina das Notificações on-line (fonte/origem)
 
 **A Fazer : Próxima versão - betha-rc2**
@@ -22,7 +25,9 @@ FEITO - Revisar o comportamento do asterisk (AGI's) quando usa / altera Language
   +-----> Exige mudanças no extensions.conf e snep-features.conf
 FEITO - Ajustes no sistema de cadeado do ramal e na Action Cadeeado das Regras de Negocio
 FEITO - Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
-
+FEITO - Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados - Sincronizado - descriceos zeradas
+FEITO - Cadastros diversos com senha - opcao para mostrar senha
+FEITO - Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
 
 
 - Arquivos de Som do Asterisk - rever a rotina
@@ -33,11 +38,7 @@ FEITO - Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
-- Cadastros diversos com senha - opcao para mostrar senha
-- Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
-- Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
-- Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
 - % de uso da CPU nao esta sendo exibido
 

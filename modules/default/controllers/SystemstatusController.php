@@ -53,6 +53,7 @@ class SystemstatusController extends Zend_Controller_Action {
         try {
             $linfoData->request();
             $sysInfo = $linfoData->getLastResponse()->getBody();
+	    Zend_Debug::Dump($sysInfo);
             $this->sysInfo = simplexml_load_string($sysInfo);
         } catch (HttpException $ex) {
             echo $ex;

@@ -29,7 +29,7 @@ FEITO - Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados - S
 FEITO - Cadastros diversos com senha - opcao para mostrar senha
 FEITO - Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
 FEITO - % de uso da CPU nao esta sendo exibido
-- Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
+FEITO - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT = NO.
 
 
 - Arquivos de Som do Asterisk - rever a rotina

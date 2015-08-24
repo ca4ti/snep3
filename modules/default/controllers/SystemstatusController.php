@@ -45,7 +45,6 @@ class SystemstatusController extends Zend_Controller_Action {
         $username = $auth->getIdentity();
         $this->view->breadcrumb = $this->view->translate("Welcome to Snep, ") . $username ;
 
-        // Direcionando para o "snep antigo"
         $config = Zend_Registry::get('config');
         $db = Zend_Registry::get('db');
 
@@ -53,7 +52,6 @@ class SystemstatusController extends Zend_Controller_Action {
         try {
             $linfoData->request();
             $sysInfo = $linfoData->getLastResponse()->getBody();
-	    Zend_Debug::Dump($sysInfo);
             $this->sysInfo = simplexml_load_string($sysInfo);
         } catch (HttpException $ex) {
             echo $ex;
@@ -140,23 +138,39 @@ class SystemstatusController extends Zend_Controller_Action {
             $this->systemInfo['asterisk'] = "Asterisk - ";
         }
 
-        // CPU Info
+        //CPU Info
         $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
         $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
         $this->systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
 
-        $cpuNumber = count(explode('<br />', $this->sysInfo->core->CPU));
+        // $cpuNumber = count(explode('<br />', $this->sysInfo->core->CPU));
 
-        $cpuUsageRaw = explode(' ', $this->sysInfo->core->load);
-        $sum_cpu = ($cpuUsageRaw[0] + $cpuUsageRaw[1] + $cpuUsageRaw[2]) ;
+        // $cpuUsageRaw = explode(' ', $this->sysInfo->core->load);
+        // $sum_cpu = ($cpuUsageRaw[0] + $cpuUsageRaw[1] + $cpuUsageRaw[2]) ;
+        // if ($sum_cpu === 0 ) {
+        //     $loadAvarege = 0 ;
+        // } else {
+        //     $loadAvarege = $sum_cpu / 3;
+        // }
 
-        if ($sum_cpu = 0 ) {
-            $loadAvarege = 0 ;
-        } else {
-            $loadAvarege = $sum_cpu / 3;
-        }
-        $this->systemInfo['usage'] = round(($loadAvarege * 100) / ($cpuNumber - 1));
-        
+        // $this->systemInfo['usage'] = round(($loadAvarege * 100) / ($cpuNumber));
+
+
+        $prevVal = shell_exec("cat /proc/stat");
+        $prevArr = explode(' ',trim($prevVal));
+        $prevTotal = $prevArr[2] + $prevArr[3] + $prevArr[4] + $prevArr[5];
+        $prevIdle = $prevArr[5];
+        usleep(0.15 * 1000000);
+        $val = shell_exec("cat /proc/stat");
+        $arr = explode(' ', trim($val));
+        $total = $arr[2] + $arr[3] + $arr[4] + $arr[5];
+        $idle = $arr[5];
+        $intervalTotal = intval($total - $prevTotal);
+        $stat =  intval(100 * (($intervalTotal - ($idle - $prevIdle)) / $intervalTotal));
+
+        $this->systemInfo['usage'] = $stat;
+
+
         // RAM Memory
         $this->systemInfo['memory'] = self::sys_meminfo();
 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Linfo (c) 2010 Joseph Gillotti.
+ * This file is part of Linfo (c) 2010, 2012 Joseph Gillotti.
  * 
  * Linfo is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -10,16 +10,16 @@
  * 
  * Linfo is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with Linfo.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Linfo. If not, see <http://www.gnu.org/licenses/>.
  * 
 */
 
 
-defined('IN_INFO') or exit;
+defined('IN_LINFO') or exit;
 
 /*
  * OpenBSD info class.
@@ -41,47 +41,54 @@ class OS_OpenBSD extends OS_BSD_Common {
 		// Initiate parent
 		parent::__construct($settings);
 
+
 		// We search these folders for our commands
 		$this->exec->setSearchPaths(array('/sbin', '/bin', '/usr/bin', '/usr/local/bin', '/usr/sbin'));
-	}
-	
-	// Return it all
-	public function getAll() {
 
-		// Return everything, whilst obeying display permissions
+		// sysctl values we'll access below
+		$this->GetSysCTL(array(
+
+			// Has unix timestamp of boot time
+			'kern.boottime',
+
+			// Ram stuff
+			'hw.physmem',
+
+			// CPU related
+			'hw.model',
+			'hw.ncpu',
+			'hw.cpuspeed',
+
+			'vm.loadavg'
+		), false);
+	}
+
+	// What we should leave out
+	public function getContains() {
 		return array(
-			'OS' => empty($this->settings['show']) ? '' : $this->getOS(), 			# done
-			'Kernel' => empty($this->settings['show']) ? '' : $this->getKernel(), 		# done
-			'HostName' => empty($this->settings['show']) ? '' : $this->getHostName(), 	# done
-			'Mounts' => empty($this->settings['show']) ? array() : $this->getMounts(), 	# done
-			'RAM' => empty($this->settings['show']) ? array() : $this->getRam(), 		# done
-			'Load' => empty($this->settings['show']) ? array() : $this->getLoad(), 		# done
-			'Devices' => empty($this->settings['show']) ? array() : $this->getDevs(), 	# done
-			'HD' => empty($this->settings['show']) ? '' : $this->getHD(), 			# done
-			'UpTime' => empty($this->settings['show']) ? '' : $this->getUpTime(), 		# done
-			'Network Devices' => empty($this->settings['show']) ? array() : $this->getNet(),# done
-			'CPU' => empty($this->settings['show']) ? array() : $this->getCPU(), 		# done
-			'processStats' => empty($this->settings['show']['process_stats']) ? array() : $this->getProcessStats(), # lacks thread stats
-		);
+				'drives_rw_stats' => false,
+				'hw_vendor' => false,
+				'drives_vendor' => false
+			);
 	}
 
 	// OS
-	private function getOS() {
+	public function getOS() {
 		return 'OpenBSD';
 	}
 
 	// Kernel
-	private function getKernel() {
+	public function getKernel() {
 		return php_uname('r');
 	}
 
 	// Hostname
-	private function getHostName() {
+	public function getHostName() {
 		return php_uname('n');
 	}
 
 	// Get mounted file systems and their disk usage stats
-	private function getMounts() {
+	public function getMounts() {
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('Mounted file systems');
@@ -132,16 +139,15 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// Get memory usage statistics
-	private function getRam() {
+	public function getRam() {
 		
-		// Store our shit here
 		$return = array();
 		$return['swapTotal'] = 0;
 		$return['swapFree'] = 0;
 		$return['swapInfo'] = array();
 
 		// Get amount of real hard ram, in bytes
-		$return['total'] = (int) $this->getSysCTL('hw.physmem');
+		$return['total'] =  $this->sysctl['hw.physmem'];
 
 		// Get real
 		try {
@@ -181,13 +187,13 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// System load averages
-	private function getLoad() {
+	public function getLoad() {
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('Load Averages');
 
 		// Use sysctl
-		$loads = $this->getSysCTL('vm.loadavg');
+		$loads = $this->sysctl['vm.loadavg'];
 
 		// hmm?
 		if ($loads == false)
@@ -205,7 +211,7 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// Get hardware devices
-	private function getDevs() {
+	public function getDevs() {
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('Hardware Devices');
@@ -235,13 +241,12 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// Get hard disk drives and the like
-	private function getHD() {
+	public function getHD() {
 		
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('CPU');
 
-		// Temp shit
 		$drives = array();
 		$curr_hd = false;
 
@@ -273,25 +278,28 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// Get uptime
-	private function getUpTime() {
+	public function getUpTime() {
 		
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('Uptime');
 		
 		// Short and sweet
-		$booted = $this->getSysCTL('kern.boottime');
+		$booted = $this->sysctl['kern.boottime'];
 
-		// Well fuck?
 		if ($booted == false)
 			return 'Unknown';
 
+		// Is it not a timestamp?
+		if (!is_numeric($booted))
+			$booted = strtotime($booted);
+
 		// Give it
-		return seconds_convert(time() - $booted) . '; booted ' . date('m/d/y h:i A', $booted);
+		return LinfoCommon::secondsConvert(time() - $booted) . '; booted ' . date($this->settings['dates'], $booted);
 	}
 
 	// Get network devices, their stats, status, and type
-	private function getNet() {
+	public function getNet() {
 		
 		// Time?
 		if (!empty($this->settings['timer']))
@@ -395,34 +403,31 @@ class OS_OpenBSD extends OS_BSD_Common {
 	}
 
 	// processors...
-	private function getCPU() {
+	public function getCPU() {
 
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('CPUs');
 
-		// Use dmesg to get them
-		if (preg_match_all('/^cpu\d+: (.+) \("(.+)".+\) ([\d\.]+) (\w+)/m', $this->dmesg, $cpu_matches, PREG_SET_ORDER) == 0)
-			return array();
-
+		
 		// Store them here
 		$cpus = array();
-
-		// Save them
-		foreach ($cpu_matches as $cpu) 
+		
+		// Stuff it with identical cpus
+		for ($i = 0; $i < $this->sysctl['hw.ncpu']; $i++)
+			
+			// Save each
 			$cpus[] = array(
-				'Vendor' => $cpu[2],
-				'Model' => $cpu[1],
-				'MHz' => ($cpu[4] == 'GHz' ? $cpu[3] * 1000 : $cpu[3])
+				'Model' => $this->sysctl['hw.model'],
+				'MHz' => $this->sysctl['hw.cpuspeed']
 			);
 		
-
-		// Give
+		// Return
 		return $cpus;
 	}
 	
 	// Get process stats
-	private function getProcessStats() {
+	public function getProcessStats() {
 		// Time?
 		if (!empty($this->settings['timer']))
 			$t = new LinfoTimerStart('Process Stats');

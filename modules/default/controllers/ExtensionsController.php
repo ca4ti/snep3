@@ -53,6 +53,10 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
+
+
+
+        
     }
 
 
@@ -163,7 +167,7 @@ class ExtensionsController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
-        $this->view->directmediayes = "checked";
+        $this->view->directmedianonat = "checked";
         $this->view->typeFriend = "checked";
         $this->view->dtmfrf = "checked";
         $this->view->nat_no = 'checked' ;
@@ -260,15 +264,15 @@ class ExtensionsController extends Zend_Controller_Action {
             case "sip":
             
                 $this->view->directmediayes = "";
-                $this->view->directmediayes = "";
+                $this->view->directmedianonat = "";
                 $this->view->directmediaupdate = "";
                 $this->view->directmediaoutgoing = "";
                 switch ($exten['directmedia']) {
                     case "yes":
                         $this->view->directmediayes = "checked";
                         break;
-                    case "yes":
-                        $this->view->directmediayes = "checked";
+                    case "nonat":
+                        $this->view->directmedianonat = "checked";
                         break;
                     case "outgoing":
                         $this->view->directmediaoutgoing = "checked";

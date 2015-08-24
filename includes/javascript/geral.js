@@ -33,8 +33,7 @@ function servicesSlider(){
     var right = jQuery('#statusbar');
     var opened = jQuery(window).width() - jQuery(right).width() + 20;
     var closed = jQuery(window).width() - 50;
-    console.log(opened);
-    console.log(closed);
+    
     if (servicesState == 1){
         servicesRefresh();
         right.stop().animate({'left': opened}, 400);
@@ -76,6 +75,7 @@ jQuery(document).ready(function(){
 jQuery(document).ready(servicesRefresh);
 jQuery(document).ready(servicesReposition);
 jQuery(window).resize(servicesReposition);
+system_status_interval = setInterval(servicesRefresh, 10000); // That's 60 seconds
 
 /*end of services footer*/
 

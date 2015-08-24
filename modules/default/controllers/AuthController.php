@@ -278,7 +278,11 @@ class AuthController extends Zend_Controller_Action {
     public function logoutAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             Zend_Auth::getInstance()->clearIdentity();
-        }
+        }?>
+        <script>
+        clearInterval(system_status_interval); // That's 60 seconds
+        </script>
+        <?php
         $this->_redirect("auth/login");
     }
 

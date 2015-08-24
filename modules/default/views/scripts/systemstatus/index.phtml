@@ -19,16 +19,15 @@
                     <li>
                         <!-- CPU-->
                         <?php
-			$load = sys_getloadavg();
-                        if ($load["0"] <= 50){
+                        if ($this->indexData["usage"] <= 50){
                             echo "<div class='sn-status-cpu statusbar-indicator' style='color:#96d190;' ></div>";
-                        }else if ($load["0"] > 50 && $load["0"] <= 80){
+                        }else if ($this->indexData["usage"] > 50 && $this->indexData["usage"] <= 80){
                             echo "<div class='sn-status-cpu statusbar-indicator' style='color:#eccd61;' ></div>";
                         }else{
                             echo "<div class='sn-status-cpu statusbar-indicator' style='color:#f0625f;' ></div>";
                         }
                         ?> 
-                        <span><?php echo $load["0"] . '%'; ?></span>
+                        <span><?php echo $this->indexData["usage"] . '%'; ?></span>
                     </li>
                     <li>
                         <!-- Memory RAM -->

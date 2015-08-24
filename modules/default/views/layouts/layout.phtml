@@ -5,6 +5,7 @@
     $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
 
     if($controller != 'auth'){
+        $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
         $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');

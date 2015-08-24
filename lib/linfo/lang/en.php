@@ -10,16 +10,16 @@
  * 
  * Linfo is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with Linfo.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Linfo. If not, see <http://www.gnu.org/licenses/>.
  * 
 */
 
 
-defined('IN_INFO') or exit;
+defined('IN_LINFO') or exit;
 
 /*
  * English translation
@@ -56,17 +56,13 @@ $lang = array(
 	'value' => 'Value',
 	'hardware' => 'Hardware',
 	'vendor' => 'Vendor',
-	'type' => 'Type',
 	'drives' => 'Drives',
 	'name' => 'Name',
 	'reads' => 'Reads',
 	'writes' => 'Writes',
-	'size' => 'Size',
 	'filesystem_mounts' => 'Filesystem Mounts',
 	'mount_point' => 'Mount Point',
 	'filesystem' => 'Filesystem',
-	'used' => 'Used',
-	'free' => 'Free',
 	'percent_used' => 'Percent Used',
 	'raid_arrays' => 'RAID Arrays',
 	'level' => 'Level',
@@ -90,9 +86,10 @@ $lang = array(
 	'area' => 'Area',
 	'time_taken' => 'Time taken to fetch',
 	'days' => 'days',
+	'years' => 'years',
+	'hours' => 'hours',
 	'minutes' => 'minutes',
 	'seconds' => 'seconds',
-	'hours' => 'hours',
 	'pid' => 'PID',
 	'service' => 'Service',
 	'services' => 'Services',
@@ -100,4 +97,10 @@ $lang = array(
 	'distro' => 'Distribution',
 	'cpu_arch' => 'Architecture',
 	'model' => 'Model',
+	'numLoggedIn' => 'Active Users',
+	'virtualization' => 'Virtualization',
+	'guest' => 'Guest',
+	'host' => 'Host',
+	'cpu_usage' => 'Overall CPU Usage',
+	'port_speed' => 'Port Speed'
 );

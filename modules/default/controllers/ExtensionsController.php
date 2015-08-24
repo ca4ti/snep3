@@ -53,10 +53,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
-
-
-
-        
     }
 
 

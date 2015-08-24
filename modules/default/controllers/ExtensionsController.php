@@ -226,7 +226,6 @@ class ExtensionsController extends Zend_Controller_Action {
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
         $this->view->extension = $exten;
-        Zend_Debug::dump($exten);
             
         // Groups       
         $this->view->pickupGroups = $this->pickupGroups;

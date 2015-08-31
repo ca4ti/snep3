@@ -56,57 +56,52 @@ class SystemstatusController extends Zend_Controller_Action {
         } catch (HttpException $ex) {
             echo $ex;
         }
-
-        if (trim($config->ambiente->db->host) == "") {
-            $this->_redirect("/installer/");
-        } else {
           
-            // Server uptime
-            $execUptimeRaw = explode(",", exec("uptime"));
-            $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
+        // Server uptime
 
-            if (strpos($uptimeRaw, "min") > 0) {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "min") + 3);
-            } elseif (strpos($uptimeRaw, ":") > 0) {
-                $uptimeTmp = explode(":", $uptimeRaw);
-                $systemInfo['uptime'] = $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            } else {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "day")) . $this->view->translate(' dias, ');
-                $uptimeTmp = explode(":", $execUptimeRaw[1]);
-                $this->systemInfo['uptime'].= $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            }
-            $this->systemInfo['uptime'] = trim($systemInfo['uptime']);
-
-            // Mysql
-            $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
-
-            if (file_exists("/etc/slackware-version")) {
-                exec("cat /etc/slackware-version", $linuxVer);
-                $this->systemInfo['linux_ver'] = $linuxVer[0];
-            } else {
-                exec("cat /etc/issue", $linuxVer);
-                $this->systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
-            }
-
-            // Kernel
-            $this->systemInfo['linux_kernel'] = exec("uname -sr");
-            
-            // Installed Modules
-            $this->systemInfo['modules'] = array();
-            $modules = Snep_Modules::getInstance()->getRegisteredModules();
-            foreach ($modules as $module) {
-                $this->systemInfo['modules'][] = array(
-                    "name" => $module->getName(),
-                    "version" => $module->getVersion(),
-                    "description" => $module->getDescription()
-                );
-            }
-
-            $this->statusbar_info();
-
-            $this->view->indexData = $this->systemInfo ;
-
+        $uptimeRaw = (array)$this->sysInfo->core->uptime;
+        
+        //$uptimeRaw = explode(",", $uptimeRaw[0]);
+        $uptimeRaw = explode(";", $uptimeRaw[0]);
+        $uptimeRaw = $uptimeRaw[0];
+        $search =  array('day', 'days', 'hour', 'hours', 'minute', 'minutes', 'second', 'seconds');
+        $replace = array();
+        foreach ($search as $key => $value) {
+            array_push($replace,$this->view->translate($value));
         }
+        
+        $uptimeRaw = str_replace($search,$replace,$uptimeRaw);
+       
+        $this->systemInfo['uptime'] = $uptimeRaw;
+
+        // Mysql
+        $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
+
+        if (file_exists("/etc/slackware-version")) {
+            exec("cat /etc/slackware-version", $linuxVer);
+            $this->systemInfo['linux_ver'] = $linuxVer[0];
+        } else {
+            exec("cat /etc/issue", $linuxVer);
+            $this->systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
+        }
+
+        // Kernel
+        $this->systemInfo['linux_kernel'] = exec("uname -sr");
+        
+        // Installed Modules
+        $this->systemInfo['modules'] = array();
+        $modules = Snep_Modules::getInstance()->getRegisteredModules();
+        foreach ($modules as $module) {
+            $this->systemInfo['modules'][] = array(
+                "name" => $module->getName(),
+                "version" => $module->getVersion(),
+                "description" => $module->getDescription()
+            );
+        }
+
+        $this->statusbar_info();
+
+        $this->view->indexData = $this->systemInfo ;
     }
 
     /**

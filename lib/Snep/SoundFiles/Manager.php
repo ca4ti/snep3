@@ -477,10 +477,10 @@ class Snep_SoundFiles_Manager {
         // Mount directory list
         if ($type === 'moh') {
             $scanned_directory = array_diff(scandir($this->base_dir), array('..', '.', 'backup', 'tmp'));
-            $sections = array("default" => $dir) ;
+            $sections = array("default" => $this->base_dir) ;
             foreach ($scanned_directory as $key => $value) {
-                if (is_dir($dir . '/' . $value)) {
-                    $sections[$value] = $dir.'/'.$value ;
+                if (is_dir($this->base_dir . '/' . $value)) {
+                    $sections[$value] = $this->base_dir.'/'.$value ;
                     continue ;
                 } 
             }

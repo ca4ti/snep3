@@ -45,7 +45,6 @@ class SystemstatusController extends Zend_Controller_Action {
         $username = $auth->getIdentity();
         $this->view->breadcrumb = $this->view->translate("Welcome to Snep, ") . $username ;
 
-        $config = Zend_Registry::get('config');
         $db = Zend_Registry::get('db');
 
         $linfoData = new Zend_Http_Client('http://localhost/' . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
@@ -132,6 +131,10 @@ class SystemstatusController extends Zend_Controller_Action {
         } else {
             $this->systemInfo['asterisk'] = "Asterisk - ";
         }
+
+		// Snep version
+        $config = Zend_Registry::get('config');
+		$this->systemInfo['snep'] = exec('cat '.$config->system->path->base.'/configs/snep_version'); 
 
         //CPU Info
         $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");

@@ -479,23 +479,6 @@ CREATE TABLE IF NOT EXISTS `voicemail_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
---
--- Table structure for table `lista_abandono`
---
-CREATE TABLE IF NOT EXISTS `lista_abandono` (
-  `time` int(20) NOT NULL,
-  `data` varchar(150) NOT NULL,
-  `fila` varchar(150) NOT NULL,
-  `canal` varchar(150) NOT NULL,
-  `evento` varchar(150) NOT NULL,
-  `par1` varchar(30) NOT NULL,
-  `par2` varchar(30) NOT NULL,
-  `par3` varchar(30) NOT NULL,
-  `date` datetime NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --
 -- Table structure for table `core_cnl_country`
@@ -617,16 +600,14 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
 CREATE TABLE IF NOT EXISTS `contacts_names` (
   `id` integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(80) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `id_state` int(11),
+  `address` varchar(100),
+  `id_state` char(2),
   `id_city` int(11),
-  `cep` varchar(8) NOT NULL,
+  `cep` varchar(8),
   `group` integer NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
-  CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  FOREIGN KEY (`id_state`) REFERENCES core_state(`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  FOREIGN KEY (`id_city`) REFERENCES core_city(`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+  CONSTRAINT contacts_group_fk FOREIGN KEY (`group`) REFERENCES contacts_group(`id`) ON DELETE RESTRICT ON UPDATE CASCADE
   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
@@ -802,11 +783,6 @@ CREATE INDEX cdr_disposition ON cdr (disposition(30));
 CREATE INDEX cdr_accountcode ON cdr (accountcode(20));
 CREATE INDEX cdr_uniqueid ON cdr (uniqueid(32));
 CREATE INDEX cdr_userfield ON cdr (userfield(120));
-
---
--- Indexing table 'lista_abandono'
---
-CREATE INDEX lista_abandono_time ON lista_abandono (time);
 
 --
 -- Indexing table 'queue_log'

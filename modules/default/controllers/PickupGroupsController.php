@@ -70,15 +70,16 @@ class PickupGroupsController extends Zend_Controller_Action {
                     $this->view->translate("Pickup Groups"),
                     $this->view->translate("Add")));
 
-        $groupAllExtensions = array() ;
-
-        foreach ($this->extensionsAll as $key => $value) {
-            array_push($groupAllExtensions,array(
-                'name' => $value['name'], 
-                'pickupgroup' => "",
-                'group_name' => ""));
-         
+        //All extensions 
+        $groupAllExtensions = array();
+        foreach ($this->extensionsAll as $data) {
+            
+            array_push($groupAllExtensions,array('name' => $data['name'], 
+                'pickupgroup' => $data['pickupgroup'],
+                'group_name' => $data['nome']));
+                
         }
+
 
         $this->view->extensionsAll = $groupAllExtensions;
         

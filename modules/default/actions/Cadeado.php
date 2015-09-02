@@ -133,7 +133,7 @@ XML;
                 $ramal = PBX_Usuarios::get($ramal['data']);
             }
             catch( PBX_Exception_NotFound $ex ) {
-                throw new PBX_Exception_AuthFail("Ivalid Extension");
+                throw new PBX_Exception_AuthFail("Invalid Extension");
             }
 
             $request->setSrcObj($ramal);
@@ -144,8 +144,14 @@ XML;
         }
 
         $senha = "";
-        if((!isset($this->config['senha']) || isset($this->config['senha']) && $this->config['senha'] == "") && $request->getSrcObj() instanceof Snep_Usuario) {
+
+        if(isset($this->config['senha']) && $this->config['senha'] === "" && $request->getSrcObj() instanceof Snep_Usuario) {
             $senha = $request->getSrcObj()->getPassword();
+            if ($senha === "") {
+                $log->warn("Impossivel determinar qual senha usar para a regra");
+                $asterisk->exec('PLAYBACK',"vm-youhaveno&vm-password&to-call-this-number") ;
+                throw new PBX_Exception_AuthFail();
+            }
         }
         else if(isset($this->config['senha']) && $this->config['senha'] != ""){
             $senha = $this->config['senha'];
@@ -154,6 +160,7 @@ XML;
             $log->warn("Impossivel determinar qual senha usar para a regra");
             return;
         }
+
 
         $auth = $asterisk->exec('AUTHENTICATE', array($senha,'',strlen((string)$senha)));
         if($auth['result'] == -1) {

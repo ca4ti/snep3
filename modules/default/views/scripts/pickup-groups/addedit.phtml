@@ -17,7 +17,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
    
       	    <?php foreach($this->extensionsAll as $extension){ ?>      
       	    	<option value="<?php echo $extension['name'];?>">
-                    <?php echo $extension['name'].' ( '.$extension['group_name'].' )';?>
+                    <?php echo $extension['name'].' ( '. $this->translate('Actual group') . ': '.$extension['group_name'].' )';?>
                 </option>
       	    <?php }?>
       	    

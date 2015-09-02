@@ -38,7 +38,7 @@ class ContactsController extends Zend_Controller_Action {
         $this->allGroups = Snep_ContactGroups_Manager::getAll();
 
         // States
-        $this->states = Snep_Register_Manager::getState();
+        $this->states = Snep_Contacts_Manager::getStates();
 
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
@@ -63,8 +63,8 @@ class ContactsController extends Zend_Controller_Action {
                 ->from(array("n" => "contacts_names"), array("id as ide", "name as nome", "id_city", "id_state", "cep"))
                 ->join(array("g" => "contacts_group"), 'n.group = g.id')
                 ->join(array("p" => "contacts_phone"), 'n.id = p.contact_id')
-                ->joinLeft(array("s" => "core_state"), 'n.id_state = s.id', "name as state")
-                ->joinLeft(array("c" => "core_city"), 'n.id_city = c.id', "name as city")
+                ->joinLeft(array("s" => "core_cnl_state"), 'n.id_state = s.id', "name as state")
+                ->joinLeft(array("c" => "core_cnl_city"), 'n.id_city = c.id', "name as city")
                 ->group("n.id");
         
         $stmt = $db->query($select);
@@ -189,7 +189,7 @@ class ContactsController extends Zend_Controller_Action {
                 $allstates .= ($contact["id_state"] == $state['id']) ? "<option value='".$state['id'] . "' selected >".$state['name']." </option>\n": "<option value='".$state['id'] . "'>".$state['name']." </option>\n";
             }
 
-            $citys = Snep_Register_Manager::getCity($contact['id_state']);
+            $citys = Snep_Contacts_Manager::getCity($contact['id_state']);
             foreach($citys as $key => $city){
                 $allcitys .= ($contact["id_city"] == $city['id']) ? "<option value='".$citys[$key]['id'] . "' selected >".$citys[$key]['name']." </option>\n": "<option value='".$citys[$key]['id'] . "'>".$citys[$key]['name']." </option>\n";
             }
@@ -198,8 +198,8 @@ class ContactsController extends Zend_Controller_Action {
             $this->view->citys = $allcitys;
             
         } else {
-            $states = Snep_Register_Manager::getState();
-            $this->view->states = $states;
+
+            $this->view->states = $this->states;
             $this->view->null = true;
         }
         

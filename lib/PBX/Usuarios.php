@@ -84,14 +84,15 @@ class PBX_Usuarios {
         }
 
         $user = new Snep_Exten($usuario->name, $usuario->password, $usuario->callerid, $interface);
+	
 
         $user->setGroup($usuario->group);
 
-        if ($usuario->authenticate) {
+        if ($usuario->authenticate === 1) {
             $user->lock();
         }
 
-        if ($usuario->dnd) {
+        if ($usuario->dnd === 1) {
             $user->DNDEnable();
         }
 

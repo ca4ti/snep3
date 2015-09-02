@@ -178,7 +178,8 @@ class ExtensionsController extends Zend_Controller_Action {
             "email" => "",
             "password" => "",
             "usa_vc" => "",
-            "cancallforward" => "");
+            "cancallforward" => "",
+            "authenticate" => 0);
         $extension['qualify'] = 'yes';
         $this->view->extension = $extension;
 
@@ -551,11 +552,10 @@ class ExtensionsController extends Zend_Controller_Action {
             $advVoiceMail = 'no';
         }
 
-        $advPadLock = '0';
-        if (key_exists("padlock", $formData)) {
-            $advPadLock = '1';
+        if (key_exists("authenticate", $formData)) {
+            $advPadLock = 1;
         } else {
-            $advPadLock = '0';
+            $advPadLock = 0;
         }
 
         $advCancallforward = 'no';

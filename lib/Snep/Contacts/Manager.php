@@ -118,12 +118,33 @@ class Snep_Contacts_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('ars_estado');
+                ->from('core_cnl_state');
 
         $stmt = $db->query($select);
         $states = $stmt->fetchall();
 
         return $states;
+    }
+
+    /**
+     * getCity - Get City in Database
+     * @param <string> $state
+     * @return <array>
+     */
+    public function getCity($state) {
+        
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('core_cnl_city',array('id','name'))
+                ->where('core_cnl_city.state = ? ',$state)
+                ->order('name');
+
+        $stmt = $db->query($select);
+        $states = $stmt->fetchAll();
+
+        return $states;
+
     }
 
     /**

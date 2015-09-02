@@ -108,7 +108,6 @@ class CnlController extends Zend_Controller_Action {
                                 }
                             } elseif ($c_type === "M") {
                                 $prefix = trim(substr($line,0,7));
-                                Zend_debug::dump($prefix);
                                 if (!array_key_exists($prefix, $prefixos)) {
                                     $prefixos[$prefix] = array(
                                         "state"     => NULL,

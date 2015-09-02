@@ -213,6 +213,28 @@ class Snep_Locale {
         return $this->availableLanguages;
     }
 
+    /**
+     *  Adjuste Asterisk GLOBAL variable for Language
+     * @param <string> $lang - Language
+     */
+    public function setExtensionsLanguage($lang) {
+        $config = "/etc/asterisk/extensions.conf";
+        $config_tmp = $config . '.dpkg-new' ;
+        $option='SNEP_LANGUAGE' ;
+        $value=$lang;
+        
+        $shell_cmd='sed "s,^'.$option.' *=.*,'.$option.'='.$value.'," < "'.$config.'" > "'.$config_tmp.'";
+        chown --reference '.$config.' '.$config_tmp.' ;
+        chmod --reference '.$config .' '.$config_tmp.' ;
+        mv "'.$config_tmp.'" "'.$config.'"';
+        exec($shell_cmd);
+
+        // Forcing asterisk to reload the configs
+        $asteriskAmi = PBX_Asterisk_AMI::getInstance();
+        $asteriskAmi->Command("dialplan reload");
+        
+    }
+
      /**
      * Returns the locale in datepicker format
      *

@@ -179,86 +179,61 @@ class ParametersController extends Zend_Controller_Action {
         // Verify if the request is a post
         if ($this->_request->getPost()) {
 
-            $formIsValid = true;
             $formData = $this->getRequest()->getParams();
 
             // Get country code 
             $db = Snep_Db::getInstance();
             $country_code = $db->query("select id from core_cnl_country where locale='".$formData['language']."'")->fetch();
 
-            
-            // Specific verification for propertie path_voice
-            if (!file_exists($formData['path_voz'])) {
-                $this->view->error = $this->view->translate("Recorded Files Path: Invalid path");
-                $formIsValid = false;
+            $configFile = APPLICATION_PATH . "/includes/setup.conf";
+            $config = new Zend_Config_Ini($configFile, null, true);
+
+            $config->ambiente->emp_nome = $formData['emp_nome'];
+
+            if($formData['debug'] == 'on'){
+                $config->system->debug = 1;    
+            }else{
+                $config->system->debug = 0;
             }
-
-            //Validates form, then sets propertie values and records it on the configuration file
-            if ($formIsValid) {
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-
-                    $old_param["tipo"] = "OLD";
-                    Snep_Parameters_Manager::insertParameter($old_param);
-                    // Inserção de log de todas edições efetuadas em parametros
-                    $acao = "Editou parametros";
-                    Snep_Parameters_Manager::salvalog($acao);
-                }
-
-                $configFile = APPLICATION_PATH . "/includes/setup.conf";
-                $config = new Zend_Config_Ini($configFile, null, true);
-
-                $config->ambiente->emp_nome = $formData['emp_nome'];
-
-                if($formData['debug'] == 'on'){
-                    $config->system->debug = 1;    
-                }else{
-                    $config->system->debug = 0;
-                }
-                if($formData['hide_routes'] == 'on'){
-                    $config->system->hide_routes = 1;    
-                }else{
-                    $config->system->hide_routes = 0;
-                }
-                $config->system->language = $formData['language'];
-                $config->system->locale = $formData['locale'];
-                $config->system->timezone = $formData['timezone'];
-                $config->system->country_code = $country_code['id'];
-
-                $config->ambiente->ip_sock = $formData['ip_sock'];
-                $config->ambiente->user_sock = $formData['user_sock'];
-                $config->ambiente->pass_sock = $formData['pass_sock'];
-                $config->system->mail = $formData['mail'];
-                $config->ambiente->linelimit = $formData['linelimit'];
-                $config->ambiente->conference_app = $formData['conference_app'];
-
-                $config->ambiente->db->dbname = $formData['db_dbname'];
-                $config->ambiente->db->host = $formData['db_host'];
-                $config->ambiente->db->username = $formData['db_username'];
-                $config->ambiente->db->password = $formData['db_password'];
-
-                $config->general->record->application = $formData['application'];
-                $config->general->record->flag = $formData['flag'];
-                $config->general->record_mp3 = $formData['record_mp3'];
-
-                $config->ambiente->path_voz = $formData['path_voz'];
-                $config->ambiente->path_voz_bkp = $formData['path_voz_bkp'];
-
-                $config->ambiente->valor_controle_qualidade = $formData['valor_controle_qualidade'];
-
-                $writer = new Zend_Config_Writer_Ini(array('config' => $config,
-                    'filename' => $configFile));
-
-                $writer->write();
-
-                if (class_exists("Loguser_Manager")) {
-                    $formData["tipo"] = "NEW";
-                    Snep_Parameters_Manager::insertParameter($formData);
-                }
-
-                $this->_redirect('parameters');
+            if($formData['hide_routes'] == 'on'){
+                $config->system->hide_routes = 1;    
+            }else{
+                $config->system->hide_routes = 0;
             }
+            $config->system->language = $formData['language'];
+            $config->system->locale = $formData['locale'];
+            $config->system->timezone = $formData['timezone'];
+            $config->system->country_code = $country_code['id'];
+
+            $config->ambiente->ip_sock = $formData['ip_sock'];
+            $config->ambiente->user_sock = $formData['user_sock'];
+            $config->ambiente->pass_sock = $formData['pass_sock'];
+            $config->system->mail = $formData['mail'];
+            $config->ambiente->linelimit = $formData['linelimit'];
+            $config->ambiente->conference_app = $formData['conference_app'];
+
+            $config->ambiente->db->dbname = $formData['db_dbname'];
+            $config->ambiente->db->host = $formData['db_host'];
+            $config->ambiente->db->username = $formData['db_username'];
+            $config->ambiente->db->password = $formData['db_password'];
+
+            $config->general->record->application = $formData['application'];
+            $config->general->record->flag = $formData['flag'];
+            $config->general->record_mp3 = $formData['record_mp3'];
+
+            $config->ambiente->path_voz = $formData['path_voz'];
+            $config->ambiente->path_voz_bkp = $formData['path_voz_bkp'];
+
+            $config->ambiente->valor_controle_qualidade = $formData['valor_controle_qualidade'];
+
+            $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+                'filename' => $configFile));
+
+            $writer->write();
+
+            Snep_Locale::setExtensionsLanguage($formData['language']) ;
+
+            $this->_redirect('parameters');
         }
         
     }
@@ -275,9 +250,12 @@ class ParametersController extends Zend_Controller_Action {
             'filename' => $configFile));
         $writer->write();
 
+        Snep_Locale::setExtensionsLanguage($_GET["language"]) ;
+
         $module = $_GET["module"];
         $this->_redirect($module);
-
     }
+
+    
 
 }

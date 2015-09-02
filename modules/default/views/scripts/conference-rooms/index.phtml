@@ -27,7 +27,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
     }
 </style>
 <script type="text/javascript" src="/snep/includes/javascript/bootstrap-toggle.min.js"></script>
-
+<script src="/snep/includes/javascript/password.js"></script> 
 <div class="row">
     <div class="tab-content">
         <div class="tab-pane active" id="demo">
@@ -48,7 +48,10 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                         <tr>
                             <th class="text-center"> <?php echo $this->translate('Code') ?> </th>
                             <th class="text-center"> <?php echo $this->translate('Record') ?> </th>
-                            <th class="text-center"> <?php echo $this->translate('Restricted Access') ?> </th>
+                            <th class="text-center"> 
+                                <?php echo $this->translate('Password for Restricted Access') ?><br />
+                                (<small><?php echo $this->translate('Only numbers');?></small>)
+                            </th>
                             <th class="text-center"> <?php echo $this->translate('Cost Center') ?>
                             <th class="text-center"> <?php echo $this->translate('Active') ?> </th> </th>
                         </tr>
@@ -69,10 +72,11 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
 
                                         <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
                                     </td>
-                                    <td class="password text-center" ">                   
+                                    <td class="password text-center" >                   
                                         <div>                        
-                                            <input type="password" name="password[<?php echo $conferenceRooms['id'] ?>]"  onkeypress="return onlyDigit(event)"  value="<?php echo $conferenceRooms['authenticate'] ?>">
-                                            <small> <?php echo $this->translate('(Only numbers)') ?></small>
+                                            <input type="password" id="password<?php echo $conferenceRooms['id'] ?>" name="password[<?php echo $conferenceRooms['id'] ?>]"  onkeypress="return onlyDigit(event)" placeholder="<?php echo ($conferenceRooms['authenticate'] != '') ? $this->translate('Reset') : '' ;?> " size="30">
+
+                                            
                                         </div>
                                     </td>
 
@@ -101,7 +105,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                     </tbody>
                 </table>
                 <div class="snep-body-footer-buttons">
-                    <input type="submit" class="btn btn-add btn-primary" name="conference" value='<?php echo $this->translate('Save') ?>'/>
+                    <input type="submit" class="btn btn-add btn-primary" name="conference" value="<?php echo $this->translate('Save') ?>"/>
                 </div>        
             </div> <!-- demo -->
         </div> <!-- tab-content -->
@@ -111,6 +115,34 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
 
 <script type="text/javascript">
 
+    jQuery.noConflict();
+    jQuery(function() {
+        field_view = [] ;
+        for (var i=901; i <= 915 ; i++) {
+            var field_name='#password'+i;
+            
+ 
+
+
+
+                jQuery(field_name).password().on('show.bs.password', function(e) {
+                    jQuery('#methods').prop('checked', true);
+
+                }).on('hide.bs.password', function(e) {
+                    jQuery('#methods').prop('checked', false);
+                
+                });
+                
+                jQuery('#methods').click(function() {
+                    jQuery(field_name).password('toggle');
+                });
+
+
+        }
+        
+    });
+
+    
 
     function pass(id) {
         if (document.getElementById('box_' + id).style.display == '') {

@@ -351,12 +351,12 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $list_db = array();
         foreach ($soundDb as $sound) {
-            $list_db[] = strtolower($sound['arquivo']);
+            $list_db[] = $sound['arquivo'];
         }
 
         // Lista de arquivos de som da pasta sounds
-        $language =  ($this->lang === "en" ? $language = "" : $language = $this->lang) ;
-        $pasteSounds = "/var/lib/asterisk/sounds/".$language."/";
+        $language =  $this->lang ;
+        $pasteSounds = $this->path_sound .'/'.$language.'/';
         $listSounds = new DirectoryIterator($pasteSounds);
         
         $list_sounds = array();
@@ -366,16 +366,6 @@ class SoundFilesController extends Zend_Controller_Action {
             $list_sounds[] = ($fileInfo->getFilename());
         }
 
-
-        // Lista de arquivos de som da pasta moh
-        //$pasteMoh = "/var/lib/asterisk/moh/";
-        //$listMoh = new RecursiveDirectoryIterator($pasteMoh);
-        //$recursiveMoh = new RecursiveIteratorIterator($listMoh);
-
-        //foreach ($recursiveMoh as $obj) {
-        //    $list_sounds[] = strtolower($obj->getFilename());
-        //}
-
         // Arquivos contidos no banco alem dos existentes no diretorio
         $fileNotExist = array_diff($list_db, $list_sounds);
         // Arquivos contidos no diretorio além dos cadastrados no banco
@@ -384,7 +374,7 @@ class SoundFilesController extends Zend_Controller_Action {
         $array_directory = array();
         foreach ($fileDirectory as $number => $file) {
 
-            if (substr(strtolower($file), -3) == 'gsm' || substr(strtolower($file), -3) == 'wav' || substr(strtolower($file), -3) == 'mp3') {
+            if (substr(strtolower($file), -3) === 'gsm' || substr(strtolower($file), -3) === 'wav' || substr(strtolower($file), -3) === 'mp3') {
                 $array_directory[] = $file;
             }
         }
@@ -427,10 +417,14 @@ class SoundFilesController extends Zend_Controller_Action {
             $this->view->msgclass = 'sucess';
         }
 
+        // After Post
         if ($this->_request->isPost()) {
+
+            
 
             foreach ($fileNotExist as $key => $file) {
                 Snep_SoundFiles_Manager::remove($file);
+                
             }
             foreach ($array_directory as $cont => $archive) {
                 Snep_SoundFiles_Manager::addSounds($archive);

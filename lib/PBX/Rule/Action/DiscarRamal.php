@@ -120,7 +120,7 @@ class PBX_Rule_Action_DiscarRamal extends PBX_Rule_Action {
      * @return Nome da Ação
      */
     public function getName() {
-        return $this->i18n->translate("Discar para Ramal");
+        return $this->i18n->translate("Dial extension");
     }
 
     /**
@@ -136,7 +136,7 @@ class PBX_Rule_Action_DiscarRamal extends PBX_Rule_Action {
      * @return Descrição de funcionamento ou objetivo
      */
     public function getDesc() {
-        return $this->i18n->translate("Disca para um ramal cadastrado no banco de dados do SNEP");
+        return $this->i18n->translate("Dial a registered extension in SNEP database");
     }
 
     /**
@@ -188,7 +188,7 @@ class PBX_Rule_Action_DiscarRamal extends PBX_Rule_Action {
 <boolean>
     <id>resolv_agent</id>
     <default>false</default>
-    <label>{$i18n->translate("Resolver Agentes")}</label>
+    <label>{$i18n->translate("Resolv agents")}</label>
     $resolv_agent
 </boolean>
 AGENT_CONFIG;
@@ -209,7 +209,7 @@ AGENT_CONFIG;
         <id>dial_timeout</id>
         <default>$default_dial_timeout</default>
         <label>{$i18n->translate("Dial Timeout")}</label>
-        <unit>{$i18n->translate("segundos")}</unit>
+        <unit>{$i18n->translate("seconds")}</unit>
         <size>2</size>
         $dial_timeout
     </int>
@@ -223,19 +223,20 @@ AGENT_CONFIG;
     <boolean>
         <id>diff_ring</id>
         <default>false</default>
-        <label>{$i18n->translate("Diferenciar toque")}</label>
+        <label>{$i18n->translate("Distinguish ring")}</label>
         $diff_ring
     </boolean>
     <boolean>
         <id>allow_voicemail</id>
         <default>false</default>
-        <label>{$i18n->translate("Permitir Voicemail")}</label>
+        <label>{$i18n->translate("Allow Voicemail")}</label>
         $allow_voicemail
     </boolean>
     <boolean>
         <id>dont_overflow</id>
         <default>false</default>
-        <label>{$i18n->translate("Não Transbordar (ocupado e não atende)")}</label>
+        <label>{$i18n->translate("Not overflow (busy and no answer)")}</label>
+
         $dont_overflow
     </boolean>
     $agent_config
@@ -264,7 +265,7 @@ XML;
         <id>dial_timeout</id>
         <default>$dial_timeout</default>
         <label>{$i18n->translate("Dial Timeout")}</label>
-        <unit>{$i18n->translate("segundos")}</unit>
+        <unit>{$i18n->translate("seconds")}</unit>
         <size>2</size>
     </int>
 </params>

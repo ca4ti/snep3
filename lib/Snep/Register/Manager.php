@@ -72,7 +72,8 @@ class Snep_Register_Manager {
     }
 
     /**
-     * getState - Get State in Database
+     * getCity - Get City in Database
+     * @param int $state
      * @return <array>
      */
     public function getCity($id_state) {

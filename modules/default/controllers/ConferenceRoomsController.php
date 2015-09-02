@@ -170,6 +170,9 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                 $contentConfe .= "exten => " . $idActivate . ",1,Set(CHANNEL(language)=$language)\n";
                 
                 // Passwords
+                if ($salas[$idActivate]['authenticate'] <>  "" && $password[$idActivate] === "") {
+                    $password[$idActivate] = $salas[$idActivate]['authenticate'] ;
+                }
                 if ($password[$idActivate] <> "" ) {
                     $valuePassword = $password[$idActivate] ;
                     if (strlen($valuePassword) != 32) {

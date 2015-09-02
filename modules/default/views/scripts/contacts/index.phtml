@@ -41,12 +41,12 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                     <tr>
                         <th class="text-center" data-type="numeric" data-sort-initial="true"><?php echo $this->translate('Code');?></th>
                         <th><?php echo $this->translate('Name');?></th>
-                        <th><?php echo $this->translate('Group');?></th>
+                        <th class="text-center"><?php echo $this->translate('Group');?></th>
                         <th><?php echo $this->translate('City');?></th>
-                        <th><?php echo $this->translate('State');?></th>
-                        <th><?php echo $this->translate('Zip Code');?></th>
-                        <th><?php echo $this->translate('Phone');?></th>
-                        <th  class="text-center" colspan="2" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                        <th class="text-center"><?php echo $this->translate('State');?></th>
+                        <th class="text-center"><?php echo $this->translate('Zip Code');?></th>
+                        <th class="text-center"><?php echo $this->translate('Phone');?></th>
+                        <th class="text-center" colspan="2" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,11 +57,11 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                             <tr>
                                 <td class="text-center"> <b> <?php echo $contact['ide'] ?> </b> </td>
                                 <td> <?php echo $contact['nome'] ?> </td>
-                                <td> <?php echo $contact['name'] ?> </td>
+                                <td class="text-center"> <?php echo $contact['name'] ?> </td>
                                 <td> <?php echo $contact['city'] ?> </td>
-                                <td> <?php echo $contact['state'] ?> </td>
-                                <td> <?php echo ($contact['cep'] != "")? $this->formatter->fmt_cep($contact['cep']) : " "; ?> </td>
-                                <td><?php echo ($contact['phone'] != "")? $this->formatter->fmt_telefone(array("a" =>$contact['phone'])) : " "; ?></td>
+                                <td class="text-center"> <?php echo $contact['state'] ?> </td>
+                                <td class="text-center"> <?php echo ($contact['cep'] != "")? $this->formatter->fmt_cep($contact['cep']) : " "; ?> </td>
+                                <td class="text-center"><?php echo ($contact['phone'] != "")? $this->formatter->fmt_telefone(array("a" =>$contact['phone'])) : " "; ?></td>
                                 <td class="text-center">
                                     <a class="btn btn-edit btn-xs"  href="<?php echo $this->url ?>/edit/id/<?php echo $contact['ide'] ?>" role="button"><?php echo $this->translate('Edit')?>
                                             

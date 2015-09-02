@@ -66,7 +66,7 @@ class Snep_InterfaceConf {
             $header .= ";-----------------------------------------------------------------------------------\n";
 
             /* query that gets information of the peers on the DB */
-            $sql = "SELECT * FROM peers WHERE name != 'admin' AND canal like '" . strtoupper($tech) . "%'";
+            $sql = "SELECT * FROM peers WHERE name != 'admin' AND peer_type = 'T' AND canal like '" . strtoupper($tech) . "%'";
             $peer_data = $db->query($sql)->fetchAll();
 
             $peers = "\n";

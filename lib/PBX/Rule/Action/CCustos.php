@@ -50,7 +50,7 @@ class PBX_Rule_Action_CCustos extends PBX_Rule_Action {
      * @return Nome da Ação
      */
     public function getName() {
-        return $this->i18n->translate("Definir Centro de Custos");
+        return $this->i18n->translate("Set a cost center");
     }
 
     /**
@@ -76,7 +76,7 @@ class PBX_Rule_Action_CCustos extends PBX_Rule_Action {
      * @return Descrição de funcionamento ou objetivo
      */
     public function getDesc() {
-        return $this->i18n->translate("Define um centro de custos para classificação da ligação");
+        return $this->i18n->translate("Set a cost center to link classification");
     }
 
     /**

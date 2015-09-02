@@ -7,33 +7,52 @@
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
-- Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
-- Rever/redefinir conceitos/funcionalidades para Centros de Custos
+- Calendario de feriados
 - Rotina das Notificações on-line (fonte/origem)
 
-**A Fazer : Próxima versão**
+- Rever/redefinir conceitos/funcionalidades para Centros de Custos
+- Rever/redefinir conceitos/funcionalidades para Audios
+- Rever/redefinir conceitos/funcionalidades para Language
+- Rever/redefinir conceitos/funcionalidades para Segurança
+- Rever/Redefinir conceitos/funcionalidades agents
+  - Grupos de agentes
+- Rever/Redefinir conceitos/funcionalidades Grupos de Captura
 
-- Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
+**A Fazer : Próxima versão - betha-rc3**
+
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Revisar o comportamento do asterisk (AGI's) quando usa / altera Language - tem locais que o CHANNEL(language) é fixado em pt-BR. Ver rotina lib/PBX/Rule.php
-- Contatos : usando tabela core-state ao invés de core-cnl-state. Rever duplicidade de informações
 - Arrumar os ícones para enable/disable das permissões do usuário
 - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
-- Cadastros diversos com senha - opcao para mostrar senha
-- Arquivos de som e Musicas de espera: Rever/Criar rotina para sincronizar disco com Banco de dados e vice-versa
-- Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
-- Arquivo de som: Rever/Criar descricao dos arquivos no banco de dados
-- Player de audio (relatorio chamadas, arquivos de som,etc) so toca wav. não toca gsm - REVER
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- Ramais cadastrados como IAX são exibidos como SIP ao alterar
-FEITO - Salas de conferencias x Menu problemas na visualização
-FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
+- % de uso da CPU nao esta sendo exibido
+- os perfis de acesso devem permitir vinculos
+- Status dos Sistemas Ramais : Rever comportamento
+- Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
+  - + de 1 grupo por ramal
+  - discar para um grupo de ramais
+  - Uso em espionar e sussurrar
+  - Grupos para destino (ringall)
+
+---------------------------------
+**Release 1.0-Betha-rc2**
+
+- Contatos: Alterada base de leitura de cidades e estados, retirada a obrigatoriedade de cidade e estado do cadastro.
+- Corrigido: Ramais cadastrados como IAX sendo exibidos como SIP ao alterar
+- Corrigido: Salas de conferencias x Menu - problemas na visualização
+- Corrigido: Lista de ramais disponíveis no Grupo de Captura exibe referencias do Grupo de Ramal
+- Revisado/corrigido: comportamento do asterisk (AGI's) quando usa/altera Language (exige ajustes em extensions.conf e snep-features.conf)
+- Corrigido: Erro quando usa/habilita cadeado no ramal
+- Arquivos de som: Limpar a lista (fisica) de arquivos - muitos duplicados. (wav e gsm)
+- Corrigido: Arquivo de som - descricao dos arquivos no banco de dados - Sincronizado - descricões zeradas
+- Nova funcionalidade: Cadastros diversos com senha - opcao para mostrar senha
+- Ajustes na exibição do status do sistema / controle do temporizador para atualização do status
+
 ---------------------------------
 **Release 1.0-Betha-rc1**
 
@@ -60,6 +79,7 @@ FEITO - Lista de ramais disponíveis no Grupo de Captura exibe referencias do Gr
 - Tronco SNEPSip - Corrigido:  não funciona
 - Cadeado - Corrigido : Ao incluir senha e marcar checkbox não funciona (ERRO de AGI). Ao alterar desmarcando o checkbox e deixando somente a senha, funciona normalmente
 - Filas - Corrigido: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
+
 ---------------------------------
 **Release 1.0-alpha**
 

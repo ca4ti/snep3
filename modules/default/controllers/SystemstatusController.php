@@ -31,6 +31,7 @@ class SystemstatusController extends Zend_Controller_Action {
     
 
     private $systemInfo = array();
+    private $sysInfo = array() ;
 
     /**
      * indexAction - List information of services
@@ -44,71 +45,62 @@ class SystemstatusController extends Zend_Controller_Action {
         $username = $auth->getIdentity();
         $this->view->breadcrumb = $this->view->translate("Welcome to Snep, ") . $username ;
 
-        // Direcionando para o "snep antigo"
-        $config = Zend_Registry::get('config');
         $db = Zend_Registry::get('db');
 
         $linfoData = new Zend_Http_Client('http://localhost/' . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
         try {
             $linfoData->request();
             $sysInfo = $linfoData->getLastResponse()->getBody();
-            $sysInfo = simplexml_load_string($sysInfo);
+            $this->sysInfo = simplexml_load_string($sysInfo);
         } catch (HttpException $ex) {
             echo $ex;
         }
+          
+        // Server uptime
 
-        if (trim($config->ambiente->db->host) == "") {
-            $this->_redirect("/installer/");
-        } else {
-
-
-           
-            // Server uptime
-            $execUptimeRaw = explode(",", exec("uptime"));
-            $uptimeRaw = substr($execUptimeRaw[0], strpos($execUptimeRaw[0], "up") + 2);
-
-            if (strpos($uptimeRaw, "min") > 0) {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "min") + 3);
-            } elseif (strpos($uptimeRaw, ":") > 0) {
-                $uptimeTmp = explode(":", $uptimeRaw);
-                $systemInfo['uptime'] = $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            } else {
-                $systemInfo['uptime'] = substr($uptimeRaw, 0, strpos($uptimeRaw, "day")) . $this->view->translate(' dias, ');
-                $uptimeTmp = explode(":", $execUptimeRaw[1]);
-                $this->systemInfo['uptime'].= $uptimeTmp[0] . $this->view->translate(' hour(s), ') . $uptimeTmp[1] . $this->view->translate(' minutes');
-            }
-            $this->systemInfo['uptime'] = trim($systemInfo['uptime']);
-
-            // Mysql
-            $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
-
-            if (file_exists("/etc/slackware-version")) {
-                exec("cat /etc/slackware-version", $linuxVer);
-                $this->systemInfo['linux_ver'] = $linuxVer[0];
-            } else {
-                exec("cat /etc/issue", $linuxVer);
-                $this->systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
-            }
-
-            // Kernel
-            $this->systemInfo['linux_kernel'] = exec("uname -sr");
-            
-            // Installed Modules
-            $this->systemInfo['modules'] = array();
-            $modules = Snep_Modules::getInstance()->getRegisteredModules();
-            foreach ($modules as $module) {
-                $this->systemInfo['modules'][] = array(
-                    "name" => $module->getName(),
-                    "version" => $module->getVersion(),
-                    "description" => $module->getDescription()
-                );
-            }
-
-            $this->statusbar_info();
-
-            $this->view->indexData = $this->systemInfo ;
-
+        $uptimeRaw = (array)$this->sysInfo->core->uptime;
+        
+        //$uptimeRaw = explode(",", $uptimeRaw[0]);
+        $uptimeRaw = explode(";", $uptimeRaw[0]);
+        $uptimeRaw = $uptimeRaw[0];
+        $search =  array('day', 'days', 'hour', 'hours', 'minute', 'minutes', 'second', 'seconds');
+        $replace = array();
+        foreach ($search as $key => $value) {
+            array_push($replace,$this->view->translate($value));
         }
+        
+        $uptimeRaw = str_replace($search,$replace,$uptimeRaw);
+       
+        $this->systemInfo['uptime'] = $uptimeRaw;
+
+        // Mysql
+        $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
+
+        if (file_exists("/etc/slackware-version")) {
+            exec("cat /etc/slackware-version", $linuxVer);
+            $this->systemInfo['linux_ver'] = $linuxVer[0];
+        } else {
+            exec("cat /etc/issue", $linuxVer);
+            $this->systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
+        }
+
+        // Kernel
+        $this->systemInfo['linux_kernel'] = exec("uname -sr");
+        
+        // Installed Modules
+        $this->systemInfo['modules'] = array();
+        $modules = Snep_Modules::getInstance()->getRegisteredModules();
+        foreach ($modules as $module) {
+            $this->systemInfo['modules'][] = array(
+                "name" => $module->getName(),
+                "version" => $module->getVersion(),
+                "description" => $module->getDescription()
+            );
+        }
+
+        $this->statusbar_info();
+
+        $this->view->indexData = $this->systemInfo ;
     }
 
     /**
@@ -140,35 +132,51 @@ class SystemstatusController extends Zend_Controller_Action {
             $this->systemInfo['asterisk'] = "Asterisk - ";
         }
 
-        // CPU Info
+		// Snep version
+        $config = Zend_Registry::get('config');
+		$this->systemInfo['snep'] = exec('cat '.$config->system->path->base.'/configs/snep_version'); 
+
+        //CPU Info
         $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
         $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
         $this->systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
 
-        $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
-        $hard2 = exec("cat /proc/cpuinfo | grep MHz |  awk -F: '{print $2}'");
-        $this->systemInfo['hardware'] = trim($hard1 . " , " . $hard2 . " Mhz");
+        // $cpuNumber = count(explode('<br />', $this->sysInfo->core->CPU));
 
-        $cpuNumber = count(explode('<br />', $sysInfo->core->CPU));
+        // $cpuUsageRaw = explode(' ', $this->sysInfo->core->load);
+        // $sum_cpu = ($cpuUsageRaw[0] + $cpuUsageRaw[1] + $cpuUsageRaw[2]) ;
+        // if ($sum_cpu === 0 ) {
+        //     $loadAvarege = 0 ;
+        // } else {
+        //     $loadAvarege = $sum_cpu / 3;
+        // }
 
-        $cpuUsageRaw = explode(' ', $sysInfo->core->load);
-        $sum_cpu = ($cpuUsageRaw[0] + $cpuUsageRaw[1] + $cpuUsageRaw[2]) ;
-        if ($sum_cpu = 0 ) {
-            $loadAvarege = 0 ;
-        } else {
-            $loadAvarege = $sum_cpu / 3;
-        }
-        $this->systemInfo['usage'] = round(($loadAvarege * 100) / ($cpuNumber - 1));
-        
+        // $this->systemInfo['usage'] = round(($loadAvarege * 100) / ($cpuNumber));
+
+
+        $prevVal = shell_exec("cat /proc/stat");
+        $prevArr = explode(' ',trim($prevVal));
+        $prevTotal = $prevArr[2] + $prevArr[3] + $prevArr[4] + $prevArr[5];
+        $prevIdle = $prevArr[5];
+        usleep(0.15 * 1000000);
+        $val = shell_exec("cat /proc/stat");
+        $arr = explode(' ', trim($val));
+        $total = $arr[2] + $arr[3] + $arr[4] + $arr[5];
+        $idle = $arr[5];
+        $intervalTotal = intval($total - $prevTotal);
+        $stat =  intval(100 * (($intervalTotal - ($idle - $prevIdle)) / $intervalTotal));
+
+        $this->systemInfo['usage'] = $stat;
+
 
         // RAM Memory
         $this->systemInfo['memory'] = self::sys_meminfo();
 
         $this->systemInfo['memory']['swap'] = array(
-            'total' => $this->byte_convert(floatval($sysInfo->memory->swap->core->free)),
-            'free' => $this->byte_convert(floatval($sysInfo->memory->swap->core->total)),
-            'used' => $this->byte_convert(floatval($sysInfo->memory->swap->core->used)),
-            'percent' => floatval($sysInfo->memory->swap->core->total) > 0 ? round(floatval($sysInfo->memory->swap->core->used) / floatval($sysInfo->memory->swap->core->total) * 100) : 0
+            'total' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->free)),
+            'free' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->total)),
+            'used' => $this->byte_convert(floatval($this->sysInfo->memory->swap->core->used)),
+            'percent' => floatval($this->sysInfo->memory->swap->core->total) > 0 ? round(floatval($this->sysInfo->memory->swap->core->used) / floatval($this->sysInfo->memory->swap->core->total) * 100) : 0
         );
 
         // Hard Disk
@@ -177,7 +185,7 @@ class SystemstatusController extends Zend_Controller_Action {
         foreach($this->sys_fsinfo() as $key => $partition){
             
             // verifica valores duplicados de disco
-            $repeat[$partition['mount_point']] += 1; 
+            isset($repeat[$partition['mount_point']]) ? $repeat[$partition['mount_point']] += 1 : $repeat[$partition['mount_point']] = 1; 
             
             foreach($repeat as $x => $value){
                 if($partition['mount_point'] == $x && $value == 1){
@@ -194,7 +202,7 @@ class SystemstatusController extends Zend_Controller_Action {
      * @param <int> $precision
      * @return string
      */
-    function byte_convert($size, $precision = 2) {
+    private function byte_convert($size, $precision = 2) {
 
 
         // Sanity check

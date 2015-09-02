@@ -9,7 +9,6 @@
 - Ajustes CSS
 - Calendario de feriados
 - Rotina das Notificações on-line (fonte/origem)
-
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
@@ -18,7 +17,7 @@
   - Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
 
-**A Fazer : Próxima versão - betha-rc3**
+**A Fazer : Próxima release - betha-rc3 (30/09/2015)**
 
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
@@ -30,9 +29,9 @@
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- % de uso da CPU nao esta sendo exibido
+FEITO - % de uso da CPU nao esta sendo exibido
 - os perfis de acesso devem permitir vinculos
-- Status dos Sistemas Ramais : Rever comportamento
+- Status do Sistema -  Ramais : Rever comportamento
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
   - + de 1 grupo por ramal
   - discar para um grupo de ramais
@@ -40,7 +39,7 @@
   - Grupos para destino (ringall)
 
 ---------------------------------
-**Release 1.0-Betha-rc2**
+**Release Betha-rc2**
 
 - Contatos: Alterada base de leitura de cidades e estados, retirada a obrigatoriedade de cidade e estado do cadastro.
 - Corrigido: Ramais cadastrados como IAX sendo exibidos como SIP ao alterar
@@ -54,7 +53,7 @@
 - Ajustes na exibição do status do sistema / controle do temporizador para atualização do status
 
 ---------------------------------
-**Release 1.0-Betha-rc1**
+**Release Betha-rc1**
 
 - Ajustes diversos no SQL inicial e dados iniciais
 - Ajustes para leitura do arquivo de áudio de acordo com language selecionada
@@ -81,7 +80,7 @@
 - Filas - Corrigido: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 
 ---------------------------------
-**Release 1.0-alpha**
+**Release Alpha**
 
 - Nova interface
 - Conectado com a ITC  (www.intercomunexao.com.br)

@@ -259,6 +259,9 @@ label.error {
     right: 0;
     left: auto;
 }
+ul.dropdown-user.in {
+    z-index: 30000;
+}
 
 /*
  * Breadcrumb

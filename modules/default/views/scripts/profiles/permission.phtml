@@ -14,16 +14,20 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
         </div>
         <fieldset>
             <legend><?php echo $this->translate("Routines")?></legend>
-          <select multiple="multiple" size="10" name="duallistbox_permission[]" id="select">
+            <select multiple="multiple" size="10" name="duallistbox_permission[]" id="select">
         	   
         	    <?php foreach($this->resources as $y => $resource){ ?>      
-        	    	<option value="<?php echo $y;?>"><?php echo $resource;?></option>
+        	    	<option value="<?php echo $y;?>">
+                        <?php echo $resource;?>
+                    </option>
         	    <?php }?>
         	    
         	    <?php foreach($this->selected as $x => $select){?>
-        		    <option value="<?php echo $x;?>" selected="selected"><?php echo $select;?></option>
+        		    <option value="<?php echo $x;?>" selected="selected">
+                        <?php echo $select;?>
+                    </option>
         	    <?php } ?>
-          </select>
+            </select>
         </fieldset>
         <div class="snep-body-footer-buttons">
             <button type="submit" class="btn btn-add" name="save" value="save"><?php echo $this->translate("Save");?></button>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 10:00-0300\n"
+"POT-Creation-Date: 2015-09-16 14:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,24 @@ msgstr ""
 msgid ""
 "\tThis warning is being delivered to you because Snep detected the usage of "
 "a trunk marked with your email.\n"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:26
+msgid ""
+"\n"
+"            SNEP is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version. \n"
+"            <br /><br />\n"
+"            SNEP is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+"            <br /><br />\n"
+"            You should have received a copy of the GNU General Public "
+"License along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
+"            "
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:355
@@ -110,6 +128,10 @@ msgstr ""
 msgid "60"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:65
+msgid "88137-300 - Palhoça - SC - Brasil"
+msgstr ""
+
 #: ../modules/default/controllers/AuthController.php:247
 msgid "</b> on PABX <b>"
 msgstr ""
@@ -132,6 +154,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/register/index.phtml:40
 msgid "API Key"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:24
+msgid "About"
 msgstr ""
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:11
@@ -410,11 +436,10 @@ msgstr ""
 msgid "All Groups"
 msgstr ""
 
-#: ../modules/default/views/scripts/users/permission.phtml:44
-#: ../modules/default/views/scripts/users/permission.phtml:50
-#: ../modules/default/views/scripts/users/permission.phtml:60
-#: ../modules/default/views/scripts/users/permission.phtml:66
-#: ../modules/default/views/scripts/users/permission.phtml:72
+#: ../modules/default/views/scripts/users/permission.phtml:84
+#: ../modules/default/views/scripts/users/permission.phtml:92
+#: ../modules/default/views/scripts/users/permission.phtml:98
+#: ../modules/default/views/scripts/users/permission.phtml:104
 msgid "Allow"
 msgstr ""
 
@@ -525,7 +550,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:76
 #: ../modules/default/views/scripts/profiles/addedit.phtml:44
-#: ../modules/default/views/scripts/profiles/permission.phtml:41
+#: ../modules/default/views/scripts/profiles/permission.phtml:45
 #: ../modules/default/views/scripts/queues/members.phtml:41
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:72
 #: ../modules/default/views/scripts/users/bond.phtml:60
@@ -760,7 +785,7 @@ msgstr ""
 #: ../modules/default/views/scripts/parameters/index.phtml:238
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:35
 #: ../modules/default/views/scripts/profiles/addedit.phtml:35
-#: ../modules/default/views/scripts/profiles/permission.phtml:31
+#: ../modules/default/views/scripts/profiles/permission.phtml:35
 #: ../modules/default/views/scripts/queues/addedit.phtml:241
 #: ../modules/default/views/scripts/queues/members.phtml:26
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:33
@@ -772,7 +797,7 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:426
 #: ../modules/default/views/scripts/users/addedit.phtml:63
 #: ../modules/default/views/scripts/users/bond.phtml:50
-#: ../modules/default/views/scripts/users/permission.phtml:96
+#: ../modules/default/views/scripts/users/permission.phtml:120
 msgid "Cancel"
 msgstr ""
 
@@ -842,6 +867,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/services-report/index.phtml:87
 msgid "Choose the services"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:64
+msgid "Cidade Universitária Pedra Branca"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:59
@@ -1032,6 +1061,10 @@ msgstr ""
 msgid "Copy of %s"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:60
+msgid "Copyright"
+msgstr ""
+
 #: ../lib/PBX/Rule/ActionConfig.php:248
 #: ../modules/default/controllers/CallsReportController.php:441
 #: ../modules/default/controllers/CostCenterController.php:50
@@ -1105,6 +1138,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:381
 msgid "DTML dial mode number"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:48
+msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:421
@@ -1338,6 +1375,10 @@ msgstr ""
 msgid "Delete music on hold file: "
 msgstr ""
 
+#: ../modules/default/views/scripts/users/permission.phtml:78
+msgid "Deny"
+msgstr ""
+
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
@@ -1443,6 +1484,10 @@ msgstr ""
 msgid "Differ ring"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:54
+msgid "Dina Jumann [ dina.jumann@opens.com.br ] - Web designer "
+msgstr ""
+
 #: ../modules/default/views/scripts/extensions/addedit.phtml:150
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:91
 msgid "Direct Media"
@@ -1511,6 +1556,10 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:41
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:61
 msgid "Donut Hole"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:51
+msgid "Douglas Conrad [ douglas.conrad@opens.com.br ] - Opens CEO"
 msgstr ""
 
 #: ../lib/Snep/CsvIE.php:169 ../lib/Snep/CsvIE.php:294
@@ -1966,6 +2015,10 @@ msgstr ""
 msgid "Fix"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:41
+msgid "Flavio H. Somensi [ flavio@opens.com.br ]- Developer"
+msgstr ""
+
 #: ../modules/default/views/scripts/simulator/index.phtml:83
 msgid "For"
 msgstr ""
@@ -2058,7 +2111,6 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/import.phtml:46
 #: ../modules/default/views/scripts/contacts/index.phtml:44
 #: ../modules/default/views/scripts/services-report/index.phtml:61
-#: ../modules/default/views/scripts/users/permission.phtml:11
 msgid "Group"
 msgstr ""
 
@@ -2068,6 +2120,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/migration.phtml:14
 msgid "Group contacts "
+msgstr ""
+
+#: ../modules/default/views/scripts/users/permission.phtml:47
+msgid "Group permission"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:221
@@ -2855,6 +2911,10 @@ msgstr ""
 msgid "Opens Technology"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:62
+msgid "Opens Tecnologia "
+msgstr ""
+
 #: ../modules/default/views/scripts/calls-report/index.phtml:79
 #: ../modules/default/views/scripts/calls-report/index.phtml:116
 msgid "Option"
@@ -3004,7 +3064,6 @@ msgstr ""
 #: ../modules/default/controllers/UsersController.php:186
 #: ../modules/default/views/scripts/profiles/index.phtml:62
 #: ../modules/default/views/scripts/users/index.phtml:62
-#: ../modules/default/views/scripts/users/permission.phtml:13
 msgid "Permission"
 msgstr ""
 
@@ -3582,7 +3641,7 @@ msgstr ""
 msgid "Routes"
 msgstr ""
 
-#: ../modules/default/views/scripts/users/permission.phtml:10
+#: ../modules/default/views/scripts/users/permission.phtml:46
 msgid "Routine"
 msgstr ""
 
@@ -3592,6 +3651,10 @@ msgstr ""
 
 #: /var/www/html/snep/modules/default/resources.xml
 msgid "Routing"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:63
+msgid "Rua dos Cisnes, 541 "
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:331
@@ -3681,7 +3744,7 @@ msgstr ""
 #: ../modules/default/views/scripts/parameters/index.phtml:236
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:33
 #: ../modules/default/views/scripts/profiles/addedit.phtml:33
-#: ../modules/default/views/scripts/profiles/permission.phtml:29
+#: ../modules/default/views/scripts/profiles/permission.phtml:33
 #: ../modules/default/views/scripts/queues/addedit.phtml:239
 #: ../modules/default/views/scripts/queues/members.phtml:24
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:31
@@ -3690,7 +3753,7 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:424
 #: ../modules/default/views/scripts/users/addedit.phtml:61
 #: ../modules/default/views/scripts/users/bond.phtml:48
-#: ../modules/default/views/scripts/users/permission.phtml:94
+#: ../modules/default/views/scripts/users/permission.phtml:118
 msgid "Save"
 msgstr ""
 
@@ -3802,7 +3865,7 @@ msgid "Select the columns you wish to export."
 msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:75
-#: ../modules/default/views/scripts/profiles/permission.phtml:40
+#: ../modules/default/views/scripts/profiles/permission.phtml:44
 #: ../modules/default/views/scripts/queues/members.phtml:40
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:71
 #: ../modules/default/views/scripts/users/bond.phtml:59
@@ -3922,7 +3985,7 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:93
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/profiles/addedit.phtml:45
-#: ../modules/default/views/scripts/profiles/permission.phtml:42
+#: ../modules/default/views/scripts/profiles/permission.phtml:46
 #: ../modules/default/views/scripts/queues/members.phtml:42
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:73
 #: ../modules/default/views/scripts/users/bond.phtml:61
@@ -4190,6 +4253,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/export-data/index.phtml:21
 msgid "Table"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:37
+msgid "Team"
 msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:84
@@ -4512,6 +4579,12 @@ msgstr ""
 msgid "Thursday"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:44
+msgid ""
+"Tiago Zimmemann [ tiago.zimmermann@opens.com.br ] - Developer\n"
+"                        "
+msgstr ""
+
 #: ../modules/default/views/scripts/ranking-report/index.phtml:72
 #: ../modules/default/views/scripts/simulator/index.phtml:112
 msgid "Time"
@@ -4717,7 +4790,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:26
 #: ../modules/default/views/scripts/ip-status/index.phtml:169
 #: ../modules/default/views/scripts/ip-status/index.phtml:214
-#: ../modules/default/views/scripts/users/permission.phtml:12
 msgid "User"
 msgstr ""
 
@@ -4738,6 +4810,11 @@ msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:84
 msgid "User or password invalid"
+msgstr ""
+
+#: ../modules/default/views/scripts/users/permission.phtml:48
+#: ../modules/default/views/scripts/users/permission.phtml:49
+msgid "User permission"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:442
@@ -4861,6 +4938,7 @@ msgstr ""
 msgid "Welcome to Intercomunexão."
 msgstr ""
 
+#: ../modules/default/controllers/InformationController.php:39
 #: ../modules/default/controllers/SystemstatusController.php:46
 msgid "Welcome to Snep, "
 msgstr ""
@@ -4921,6 +4999,10 @@ msgstr ""
 
 #: ../modules/default/controllers/NotificationsController.php:50
 msgid "You do not have any notifications"
+msgstr ""
+
+#: ../modules/default/controllers/PermissionController.php:39
+msgid "You do not have permission to access this routine."
 msgstr ""
 
 #: ../modules/default/controllers/ContactsController.php:74
@@ -5085,6 +5167,10 @@ msgstr ""
 msgid "contacts/index"
 msgstr ""
 
+#: ../modules/default/views/scripts/information/index.phtml:68
+msgid "copyright(c) All rights reserved"
+msgstr ""
+
 #: /var/www/html/snep/configs/dashboard.xml
 msgid "cost-center/add"
 msgstr ""
@@ -5149,6 +5235,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:70
 msgid "here"
+msgstr ""
+
+#: ../modules/default/views/scripts/information/index.phtml:66
+msgid "http://www.opens.com.br"
 msgstr ""
 
 #: /var/www/html/snep/configs/titleOptions.xml

@@ -47,211 +47,143 @@ class Snep_ExtensionsGroups_Manager {
 
     /**
      * Return a group from the database based on their ID.
-     * Retorna um grupo do banco de dados com base na sua identificação.
      *
      * @param int $id
+     * @return array (id <int>, name (string))
      */
-    public static function getGroup($id) {
+    public static function get($id) {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from('groups')
-                ->where("name = '$id'");
+                ->from('core_groups')
+                ->where("id = $id");
 
         $stmt = $db->query($select);
-        $registros = $stmt->fetch();
-
-        return $registros;
+        return $stmt->fetch();
     }
 
     /**
      * Return all the group's database.
-     * Retorna todos os grupo do banco de dados.
+     *
+     * @return aray (id <int>, name <string>)
      */
-    public static function getAllGroup() {
+    public static function getAll() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('groups', array('name', 'inherit'))
-                ->where("name not in ('NULL', 'all') ");
+                ->from('core_groups');
 
         $stmt = $db->query($select);
-        $extensionsGroup = $stmt->fetchAll();
-
-        return $extensionsGroup;
+        return $stmt->fetchAll();
     }
 
     /**
-     * Returns all groups and extensions of the database based on their ID.
-     * Retorna todos os grupo e suas extensões do banco de dados  com base na sua identificação.
+     * Returns all extensions of the group based on their ID.
      *
      * @param int $id
+     * @return array (peer_id <int>, group_id <int>, name <string> )
      */
     public function getExtensionsGroup($id) {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('peers', array('id', 'name', 'group'))
-                ->from('groups', array('name', 'inherit'))
-                ->where('peers.group = groups.name')
-                ->where('groups.name = ?', $id);
+               ->from('core_peer_groups')
+               ->from('peers',array('name'))
+               ->where('core_peer_groups.group_id = ?', $id)
+               ->where('peers.id = core_peer_groups.peer_id');
 
         $stmt = $db->query($select);
-        $extensionsGroup = $stmt->fetchAll();
-
-        return $extensionsGroup;
-    }
-
-    public function getExtensionsOnlyGroup($id) {
-
-        $db = Zend_Registry::get('db');
-
-        $select = $db->select()
-                ->from('peers', array('id', 'name', 'group'))
-                ->where('peers.group = ?', $id);
-
-        $stmt = $db->query($select);
-        $extensionsGroup = $stmt->fetchAll();
-
-        return $extensionsGroup;
+        return $stmt->fetchAll();
     }
 
     /**
-     * Returns all groups and extensions of the database.
-     * Retorna todos os grupo e suas extensões do banco de dados.
+     * Returns all extensions that are not group based on their ID.
+     *
+     * @param int $id
+     * @return array (peer_id <int>, group_id <int>, name <string>, group_name <string> )
      */
-    public function getExtensionsAllGroup() {
+    public function getExtensionsNoGroup($id) {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('peers', array('id', 'name', 'group'))
-                ->from('groups', array('name', 'inherit'))
-                ->where('peers.group = groups.name');
+            ->from('core_peer_groups')
+            ->joinInner('peers','peers.id = core_peer_groups.peer_id',array('name'))
+            ->joinInner('core_groups','core_groups.id = core_peer_groups.group_id',array('group_name'=>'name'))
+            ->where('core_peer_groups.group_id != ?', $id)
+            ->order('peer_id');
 
         $stmt = $db->query($select);
-        $extensionsGroup = $stmt->fetchAll();
-
-        return $extensionsGroup;
+        return $stmt->fetchAll();
     }
-
+    /**
+     * Returns all extensions in all grroups
+     *
+     * @return array (peer_id <int>, group_id <int>, name <string>, group_name <string> )
+     */
     public function getExtensionsAll() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('peers', array('id', 'name', 'group'))
-                ->where('peers.peer_type = ?', 'R');
+            ->from('core_peer_groups')
+            ->joinInner('peers','peers.id = core_peer_groups.peer_id',array('name'))
+            ->joinInner('core_groups','core_groups.id = core_peer_groups.group_id',array('group_name'=>'name'))
+            ->order('peer_id');
 
         $stmt = $db->query($select);
-        $extensionsGroup = $stmt->fetchAll();
-
-        return $extensionsGroup;
+        return $stmt->fetchAll();
     }
 
     /**
-     * Adds the group to the database based on the value reported.
-     * Adiciona o grupo no banco de dados com base no valor informado.
+     * Returns all extensions that exist only in group ID
      *
-     * @param int $group
+     * @return <int> $group
      */
-    public static function addGroup($group) {
+    public function getExtensionsOnlyGroup($group) {
 
-        $db = Zend_Registry::get('db');
-        $db->beginTransaction();
-
-        try {
-            $db->insert('groups', $group);
-            $db->commit();
-            return true;
-        } catch (Exception $e) {
-            $db->rollBack();
-            return $e;
+        $exten_in  = self::getExtensionsGroup($group) ;
+        $exten_out = self::getExtensionsNoGroup($group) ;
+        $extensions = array() ;
+        foreach ($exten_in as $key_in => $val_in) {
+            $flag = true ;
+            foreach($exten_out as $key_out => $val_out) {
+                if ($val_out['peer_id'] === $val_in['peer_id']) {
+                    $flag = false ;
+                }
+            }
+            if ($flag) {
+                array_push($extensions,$val_in['peer_id']) ;
+            }
         }
+        return $extensions ;      
+
     }
 
     /**
-     * Change the group in the database based on the value reported.
-     * Altera o grupo no banco de dados com base no valor informado.
+     * Method to get extension group by name
      *
-     * @param int $group
+     * @param <string> $id
+     * @return Array
      */
-    public static function editGroup($group) {
-
-        $db = Zend_Registry::get('db');
-        $db->beginTransaction();
-
-        try {
-
-            $value = array('name' => $group['name'], 'inherit' => $group['type']);
-
-            $db->update("groups", $value, "name ='" . $group['id'] . "'");
-            $db->commit();
-
-            return true;
-        } catch (Exception $e) {
-
-            $db->rollBack();
-            return $e;
-        }
-    }
-
-    /**
-     * Adds the group their extensions in the database based on the value reported.
-     * Adiciona ao grupo as suas extensões no banco de dados com base no valor informado.
-     *
-     * @param string $extensionsGroup
-     */
-    public function addExtensionsGroup($extensionsGroup) {
-
-
-        $db = Zend_Registry::get('db');
-        $db->beginTransaction();
-
-        try {
-
-            $value = array("peers.group" => $extensionsGroup['group']);
-
-            $db->update("peers", $value, "name = " . $extensionsGroup['extensions']);
-            $db->commit();
-
-            return true;
-        } catch (Exception $e) {
-
-            $db->rollBack();
-            return $e;
-        }
-    }
-
-    /**
-     * Remove a group from the database based on his  ID.
-     * Remover um grupo do banco de dados com base na sua identificação.
-     *
-     * @param int $id
-     */
-    public static function delete($id) {
+    public function getName($name) {
 
         $db = Zend_Registry::get('db');
 
-        $db->beginTransaction();
+        $select = $db->select()
+                ->from("core_groups")
+                ->where("core_groups.name = ?", $name);
 
-        try {
-
-            $db->delete("groups", "name='{$id}'");
-            $db->commit();
-
-            return true;
-        } catch (Exception $e) {
-
-            $db->rollBack();
-            return $e;
-        }
+        $stmt = $db->query($select);
+        return $stmt->fetch();
     }
 
+    
+
     /**
-     * getValidation - checks if the group is used in the rule 
+     * getValidation - checks if the group is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -270,78 +202,187 @@ class Snep_ExtensionsGroups_Manager {
         return $regras;
     }
 
-    /**
-     * getGroup - Monta array com todos dados do grupo de ramal
-     * @param <int> $id - codigo da expressao
-     * @return <array> $archive - Dados da expressao
-     */
-    function getGroupLog($id) {
-
-        $db = Zend_Registry::get("db");
-
-        $select = $db->select()
-                ->from("groups")
-                ->where("groups.name = ?", $id);
-        $stmt = $db->query($select);
-        $archive = $stmt->fetch();
-
-        $select = $db->select()
-                ->from("peers", array("name as member"))
-                ->where("peers.group = ?", $id);
-        $stmt = $db->query($select);
-        $expressions = $stmt->fetchall();
-        $archive["member"] = "";
-
-        foreach ($expressions as $expr) {
-            $archive["member"] .= $expr["member"] . " ";
-        }
-
-        return $archive;
-    }
 
     /**
-     * insertLogGroup - insere na tabela logs_users os dados do grupo de ramal
-     * @global <int> $id_user
-     * @param <array> $add
+     * Returns all groups and extensions of the database.
      */
-    function insertLogGroup($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'cod' => $add["name"],
-            'param1' => $add["inherit"],
-            'param2' => $add["member"],
-            'value' => "GRP",
-            'tipo' => $acao);
-
-        $db->insert('logs_users', $insert_data);
-    }
-
-    /**
-     * Method to get extension group by name
-     * @param <string> $id
-     * @return Array
-     */
-    public function getName($name) {
+    public function getExtensionsAllGroup() {
 
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from("groups", array("name","inherit"))
-                ->where("groups.name = ?", $name);
+                ->from('peers', array('id', 'name', 'group'))
+                ->from('groups', array('name', 'inherit'))
+                ->where('peers.group = groups.name');
 
         $stmt = $db->query($select);
-        $pgroup = $stmt->fetch();
+        $extensionsGroup = $stmt->fetchAll();
 
-        return $pgroup;
+        return $extensionsGroup;
     }
+
+    /**
+     * Returns all groups of the extension based on their ID.
+     * 
+     * @param <int> $exten
+     */
+
+    public function getGroupsExtensions($exten) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('core_peer_groups')
+                ->where('core_peer_groups.peer_id = ?', $exten);
+
+        $stmt = $db->query($select);
+        return $stmt->fetchAll();
+
+    }
+
+
+/**
+     * Adds the group to the database based on the value reported.
+     *
+     * @param <string> $group
+     */
+    public static function addGroup($group) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+            $db->insert('core_groups', $group);
+            $id=$db->lastInsertId();
+            $db->commit();
+            return $id;
+        } catch (Exception $e) {
+            $db->rollBack();
+            return $e;
+        }
+
+    }
+
+    /**
+     * Add peer and your group.
+     *
+     * @param <array> $extensionsGroup
+     */
+    public function addExtensionsGroup($extensionsGroup) {
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+            $db->insert('core_peer_groups', $extensionsGroup);
+            $db->commit();
+            return true;
+        } catch (Exception $e) {
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * Change the group in the database based on the value reported.
+     * 
+     * @param <array> $group
+     */
+    public static function editGroup($group) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+
+            $value = array('name' => $group['name']);
+
+            $db->update("groups", $value, "id = " . $group['id'] );
+            $db->commit();
+
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * Update group and extensions in core_peer_groups
+     *
+     * @param <array> $extensionsGroup
+     */
+    public function updateExtensionsGroup($group, $old_members, $new_members) {
+
+        // Delete all group extensions  based in old_members
+        // Insert into Default group if necessary, because any extension must belong one group
+        foreach ($old_members as $key => $val) {
+            self::deleteGroupExtensions($val) ;
+            $result = self::getGroupsExtensions($val['peer_id']) ;
+            if ( count($result) === 0  && ! array_key_exists($val['peer_id'], $new_members)) {
+                self::addExtensionsGroup(array('peer_id' => $val['peer_id'], 'group_id' => 1));
+            }
+        }
+
+        // Add new group members based in new_members
+        foreach ($new_members as $key => $val) {
+            self::addExtensionsGroup(array('peer_id' => $key, 'group_id' => $group));
+        }
+
+
+    }
+
+    /**
+     * Remove a group from the database based on his  ID.
+     *
+     * @param int $id
+     */
+    public static function delete($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+
+        try {
+
+            $db->delete("core_groups", "id= ".$id);
+            $db->commit();
+
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * Remove group members from the database .
+     *
+     * @param <array> $member
+     */
+    public static function deleteGroupExtensions($member) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+
+        try {
+
+            $db->delete("core_peer_groups", 
+                array('peer_id = '.$member['peer_id'],
+                      'group_id = '.$member['group_id']));
+            $db->commit();
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
+    }
+
+
+
 
 }
 

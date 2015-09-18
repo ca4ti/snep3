@@ -19,6 +19,7 @@
 
 **A Fazer : Próxima release - betha-rc3 (30/09/2015)**
 
+- Erro na apresentacao do espaço usado em disco
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Arrumar os ícones para enable/disable das permissões do usuário

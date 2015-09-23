@@ -308,9 +308,12 @@ class Snep_ExtensionsGroups_Manager {
     }
 
     /**
-     * Update group and extensions in core_peer_groups
+     * Update all extensions of a group based on your ID.
      *
-     * @param <array> $extensionsGroup
+     * @param <int> $group - Group id
+     * @param <array> $old_members
+     * @param <array> $new_members
+     * 
      */
     public function updateExtensionsGroup($group, $old_members, $new_members) {
 
@@ -329,13 +332,33 @@ class Snep_ExtensionsGroups_Manager {
             self::addExtensionsGroup(array('peer_id' => $key, 'group_id' => $group));
         }
 
+    }
 
+    /**
+     * Update all groups of a extension based in your ID
+     *
+     * @param <int> $extension - Extension ID
+     * @param <array> $old_members
+     * @param <array> $new_members
+     * 
+     */
+    public function updateGroupsExtension($extension, $old_members, $new_members) {
+
+        if (count($old_members) > 0) {
+            foreach ($old_members as $key => $val) {
+               self::deleteGroupExtensions($val) ;
+            }
+        }
+        foreach ($new_members as $key => $value) {
+            self::addExtensionsGroup(array('peer_id' => $extension,'group_id' => $value));
+        }
     }
 
     /**
      * Remove a group from the database based on his  ID.
      *
      * @param int $id
+     * 
      */
     public static function delete($id) {
 
@@ -381,7 +404,29 @@ class Snep_ExtensionsGroups_Manager {
         }
     }
 
+/**
+     * Remove group from DB based in extension ID
+     *
+     * @param <int> $extension
+     */
+    public static function deleteExtensionGroups($extension) {
 
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+
+        try {
+
+            $db->delete("core_peer_groups", 
+                array('peer_id = '.$extension));
+            $db->commit();
+            return true;
+        } catch (Exception $e) {
+
+            $db->rollBack();
+            return $e;
+        }
+    }
 
 
 }

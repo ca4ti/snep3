@@ -249,22 +249,19 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
             } else {
                 $this->view->message = $this->view->translate("The extension group will be deleted. Are you sure?.");
             }
+            $this->view->id = $id;
             $this->view->remove_title = $this->view->translate('Delete Extension Group.');
             $this->view->remove_message = $this->view->translate('The extension group will be deleted. After that, you have no way get it back.');
-            $this->view->remove_form = 'extensions-groups';
+            $this->view->remove_form = 'extensions-groups'; 
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
-
-                Snep_ExtensionsGroups_Manager::delete($_POST['id']);
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-
-                    Snep_LogUser::salvaLog("Excluiu Grupo de ramal", $_POST['id'], 11);
-                    $add = Snep_ExtensionsGroups_Manager::getGroupLog($_POST['id']);
-                    Snep_ExtensionsGroups_Manager::insertLogGroup("DEL", $add);
+                $id = $_POST['id'];
+                $extensions_all  = Snep_ExtensionsGroups_Manager::getExtensionsGroup($id);
+                foreach($extensions_all as $key => $value){
+                    Snep_ExtensionsGroups_Manager::deleteGroupExtensions(array('peer_id' => $value,  'group_id' => $id));
                 }
+                Snep_ExtensionsGroups_Manager::delete($id);
 
                 $this->_redirect($this->getRequest()->getControllerName());
             }
@@ -283,8 +280,12 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         $allGroups = Snep_ExtensionsGroups_Manager::getAll();
+        foreach ($allGroups as $key => $value) {
+            if ($value['id'] === $id) {
+                unset($allGroups[$key]);
+            }
+        }
 
-        
         if (isset($allGroups)) {
 
             $this->view->groups = $allGroups;
@@ -299,13 +300,25 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
 
         if ($this->_request->getPost()) {
 
-            $extensions = Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($_POST['customerid']);
+            $dados = $this->_request->getParams();
 
-            foreach($extensions as $key => $value){
-                Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('extensions' => $value['name'], 'group' => $_POST['group']));
+            $extensions_all  = Snep_ExtensionsGroups_Manager::getExtensionsGroup($dados['group_id']);
+
+            $extensions_uniq = Snep_ExtensionsGroups_Manager::getExtensionsOnlyGroup($dados['group_id']);
+
+
+
+
+            foreach($extensions_uniq as $key => $value){
+                Snep_ExtensionsGroups_Manager::addExtensionsGroup(array('peer_id' => $value, 'group_id' => $dados['new_group']));
             }
+            foreach($extensions_all as $key => $value){
+                Snep_ExtensionsGroups_Manager::deleteGroupExtensions(array('peer_id' => $value,  'group_id' => $dados['group_id']));
+            }
+            Snep_ExtensionsGroups_Manager::delete($dados['group_id']);
 
-            Snep_ExtensionsGroups_Manager::delete($_POST['customerid']);
+
+           
 
             $this->_redirect($this->getRequest()->getControllerName());
         }

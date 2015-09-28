@@ -1,31 +1,4 @@
-<?php if(!$this->id){?> 
-    
-    <div class="row">
-
-        <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => "multiremove"), null, true); ?>" METHOD="post">
-                    
-            <fieldset>
-                <legend><?php echo $this->translate('Extension');?></legend>    
-                    
-                <div class="form-group">
-                    <label class="col-sm-2 control-label"><?php echo $this->translate("Extensions Range");?></label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Ex: 1000-1050;1060;1063;1070-1100")?>' />
-                    </div>
-                </div>
-
-            </fieldset>
-
-            <br>
-             <div class="snep-body-footer-buttons">
-                <button type="submit" class="btn btn-add" name="remove" value="remove"><?php echo $this->translate("Remove");?></button>
-                &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>               
-            </div>
-        </form>
-    </div>
-
-<?php }else{?>
+<?php  if($this->id){?> 
     
     <div class="row">
     
@@ -50,6 +23,31 @@
             </div>   
            
             <br>
+        </form>
+    </div>
+<?php } else { ?>
+    <div class="row">
+
+        <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 20px;" action="<?php echo $this->url(array("controller" => "extensions", "action" => "multiremove"), null, true); ?>" METHOD="post">
+                    
+            <fieldset>
+                <legend><?php echo $this->translate('Extension');?></legend>    
+                    
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><?php echo $this->translate("Extensions Range");?></label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Ex: 1000-1050;1060;1063;1070-1100")?>' />
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <br>
+             <div class="snep-body-footer-buttons">
+                <button type="submit" class="btn btn-add" name="remove" value="remove"><?php echo $this->translate("Remove");?></button>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>               
+            </div>
         </form>
     </div>
 

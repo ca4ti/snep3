@@ -404,7 +404,7 @@ class Snep_ExtensionsGroups_Manager {
         }
     }
 
-/**
+    /**
      * Remove group from DB based in extension ID
      *
      * @param <int> $extension

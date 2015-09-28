@@ -712,49 +712,85 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Delete Multiples")));
 
         if ($this->getRequest()->isPost()) {
-           
 
-            $postData = $this->_request->getParams();
-
-            $this->view->id = $postData["exten"];
-            $this->view->remove_title = $this->view->translate('Delete Extension Multiples.'); 
-            $this->view->remove_message = $this->view->translate('The extensions will be deleted. After that, you have no way get it back.'); 
-            $this->view->remove_form = 'extensions'; 
-            $this->renderScript('extensions/multiremove.phtml');
+            $data = $this->_request->getParams();
+            $range = array() ;
+            // Mount extensions list 
+            if (isset($data['exten'])) {
+                $range = explode(";", $data["exten"]);
+                $data = $data["exten"];
+            }
             
-            if($_POST['id']){
-                
-                $range = explode(";", $_POST["id"]);
-                foreach ($range as $exten) {
+            foreach ($range as $exten) {
+                if (is_numeric($exten)) {
+                    $extensions[$exten]="" ;
+                }else{
+                    $exten = explode(";", $exten);
+                    foreach ($exten as $extension) {
+                        $rangeToAdd = explode('-', $extension);
 
-                    if ($this->view->error)
-                        break;
-                    
-                    if (is_numeric($exten)) {
-
-                        Snep_Extensions_Manager::remove($exten);
-                        Snep_Extensions_Manager::removeVoicemail($exten);
-                        
-                    } else {
-
-                        $exten = explode(";", $exten);
-
-                        foreach ($exten as $extension) {
-                            $rangeToAdd = explode('-', $extension);
-
-                            if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
-                                $i = $rangeToAdd[0];
-                                while ($i <= $rangeToAdd[1]) {
-
-                                    Snep_Extensions_Manager::remove($i);
-                                    Snep_Extensions_Manager::removeVoicemail($i);
-                                    $i++;
-                                }
+                        if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
+                            $start = (int) $rangeToAdd[0];
+                            $end = (int) $rangeToAdd[1];
+                            while ($start <= $end) {
+                                $extensions[$start] = "";
+                                $start++;
                             }
                         }
                     }
                 }
+            }
+            // checks if the exten is used in the rule
+            $rules = array();
+            foreach ($extensions as $key => $value) {
+                
+                $_rules = Snep_Extensions_Manager::getValidation($key);
+                $rulesQuery = Snep_Extensions_Manager::getValidationRules($key);
+                if (count($_rules) > 0 || count($rulesQuery) > 0 ) {
+                    $rules[$key] = array_merge($_rules, $rulesQuery);
+                }
+            }
+            
+            if (count($rules) > 0) {
+                $errMsg = $this->view->translate('The following extensions are in use in routes, modify them prior to remove this extension') . ":<br />\n";
+                foreach ($rules as $ext => $regra) {
+                    foreach ($regra as $k => $v) {
+                        $errMsg .= $this->view->translate('Extension')." : ".$key." - ";
+                        $errMsg .= $this->view->translate('Rule')." : ". $v['id'] . " - " . $v['desc'] . "<br />\n";
+                    }
+                }
+                $this->view->error_message = $errMsg;
+                $this->view->back = $this->view->translate("Back");
+                $this->renderScript('error/sneperror.phtml');
+            } else {
+                
+                foreach ($extensions as $key => $value) {
+                    $exten = $key;
+                    $db = Zend_Registry::get('db');
+                    $sql = "SELECT id from peers where name = '$exten'";
+                    $stmt = $db->query($sql);
+                    $result = $stmt->fetch();       
+                    $idExten = $result['id'];
 
+                    try {
+                        
+                        Snep_Extensions_Manager::remove($exten);
+                        Snep_Extensions_Manager::removeVoicemail($exten);
+                        Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);             
+                        
+                    } catch (PDOException $e) {
+                        $db->rollBack();
+                        $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
+                        $this->view->back = $this->view->translate("Back");
+                        $this->renderScript('error/sneperror.phtml');;
+                    }
+                    $return = Snep_InterfaceConf::loadConfFromDb();
+
+                    if ($return != true) {
+                        $this->view->error_message = $return;
+                        $this->renderScript('error/sneperror.phtml');;
+                    }
+                }
                 $this->_redirect("default/extensions");
             }
             
@@ -772,24 +808,17 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add Multiples Extensions")));
-
-        try {
-            $astinfo = new AsteriskInfo();
-        } catch (Exception $e) {
-            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
-            $this->renderScript('error/sneperror.phtml');
-            return;
-        }
         
         $this->view->pickupGroups = $this->pickupGroups;
+        $this->view->extenGroups = $this->extenGroups;
+        // Set ExtensionGroup  "Default" 
+        $this->view->extenInGroup = array('1' => "");
 
         $this->view->boardData = $this->boardData;
 
         // Monta SELECT de codecs e define o default para cada opcao
         $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
-        $codec1 = "";
-        $codec2 = "";
-        $codec3 = "";
+        $codec1 = $codec2 = $codec3 = "";
         foreach($codecsDefault as $key => $value){
             $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
             $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
@@ -801,15 +830,13 @@ class ExtensionsController extends Zend_Controller_Action {
  
         $this->view->trunks = Snep_Trunks_Manager::getData(); 
 
-
         if ($this->getRequest()->isPost()) {
 
-            $postData = $this->_request->getParams();
+            $data = $this->_request->getParams();
 
-            $range = explode(";", $postData["exten"]);
+            $range = explode(";", $data["exten"]);
             $this->view->error = "";
             
-
             foreach ($range as $exten) {
 
                 if ($this->view->error)
@@ -817,14 +844,14 @@ class ExtensionsController extends Zend_Controller_Action {
 
                 if (is_numeric($exten)) {
 
-                    $postData["exten"] = $exten;
-                    $postData["password"] = $exten . $exten;
-                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . ' <' . $exten . '>';
-                    $postData["sip"]["password"] = $exten;
-                    $postData["iax"]["password"] = $exten;
-                    $postData['type'] = 'friend' ;
+                    $data["exten"] = $exten;
+                    $data["password"] = $exten . $exten;
+                    $data["name"] = $this->view->translate("Extension ") . " " . $exten ;
+                    $data["sip"]["password"] = $exten;
+                    $data["iax"]["password"] = $exten;
+                    $data['type'] = 'friend' ;
 
-                    $ret = $this->execAdd($postData);
+                    $ret = $this->execAdd($data);
 
                     if (is_string($ret)) {
                         $this->view->error .= $exten . " - " . $ret;
@@ -841,15 +868,15 @@ class ExtensionsController extends Zend_Controller_Action {
                             $i = $rangeToAdd[0];
                             while ($i <= $rangeToAdd[1]) {
 
-                                $postData["id"] = $i;
-                                $postData["exten"] = $i;
-                                $postData["password"] = $i . $i;
-                                $postData["name"] = $this->view->translate("Extension ") . " " . $i . '<' . $i . '>';
-                                $postData["sip"]["password"] = $i . $i;
-                                $postData["iax2"]["password"] = $i . $i;
-                                $postData['type'] = 'friend' ;
+                                $data["id"] = $i;
+                                $data["exten"] = $i;
+                                $data["password"] = $i . $i;
+                                $data["name"] = $this->view->translate("Extension ") . " " . $i ;
+                                $data["sip"]["password"] = $i . $i;
+                                $data["iax2"]["password"] = $i . $i;
+                                $data['type'] = 'friend' ;
 
-                                $ret = $this->execAdd($postData);
+                                $ret = $this->execAdd($data);
 
                                 if (is_string($ret)) {
                                     $this->view->error .= $i . " - " . $ret;

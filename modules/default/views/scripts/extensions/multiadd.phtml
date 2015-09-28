@@ -15,12 +15,13 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Extensions Group");?></label>
                 <div class="col-sm-6">
-
-                    <select class="form-control" name="exten_group" id="exten_group">
-                        <?php foreach($this->extenGroups as $key => $val){ ?>
-                            <option  value="<?php echo $key;?>">
-                                <?php echo $val ;?>
-                            </option>
+                    <select multiple size=3 class="form-control" name="exten_group[]" id="exten_group">
+                        <?php foreach($this->extenGroups as $key => $val){ 
+                            if(array_key_exists($val['id'], $this->extenInGroup)){?>
+                                <option value="<?php echo $val['id'];?>" selected><?php echo $val['name'];?></option>
+                            <?php }else{ ?>
+                                <option  value="<?php echo $val['id']; ?>"><?php echo $val['name'];?></option>
+                            <?php } ?>
                         <?php } ?>
                     </select>
                 </div>
@@ -210,6 +211,9 @@
     jQuery(document).ready(function(){ 
         jQuery('#defaultForm').validate({
             rules: {
+                "exten_group[]" : {
+                    required: true,
+                },
                 exten: {
                     required: true,
                     minlength: 8,
@@ -220,6 +224,9 @@
                 }
             },
             messages: {
+                "exten_group[]" : {
+                    required: "<?php echo $this->translate('The extension group is required'); ?>",
+                },
                 exten: {
                     required: "<?php echo $this->translate('The extension is required'); ?>",
                     minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 

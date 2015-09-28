@@ -17,24 +17,27 @@
   - Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
 
-**A Fazer : Próxima release - betha-rc3 (30/09/2015)**
+**A Fazer : Próxima release - betha-rc3 **
+
+FEITO - % de uso da CPU nao esta sendo exibido
+FEITO - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
+FEITO - Criada view para o menu de Informações
+FEITO - Arrumar os ícones para enable/disable das permissões do usuário
+FEITO - Corrigido problema que exibia mensagem de erro abaixo da view em execução
+FEITO - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais : + de 1 grupo por ramal
 
 - Erro na apresentacao do espaço usado em disco
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Arrumar os ícones para enable/disable das permissões do usuário
-- Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-FEITO - % de uso da CPU nao esta sendo exibido
 - os perfis de acesso devem permitir vinculos
 - Status do Sistema -  Ramais : Rever comportamento
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
-  - + de 1 grupo por ramal
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)

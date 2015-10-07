@@ -20,7 +20,7 @@
 		<div class="form-group">
             <label class="col-sm-3 control-label"><?php echo $this->translate("Default path");?></label>
             <div class="col-sm-6">
-                <input type="text" class="form-control"  value='<?php echo "/var/lib/asterisk/moh/" ?>' disabled/>
+                <input type="text" class="form-control" value='<?php echo $this->path_base ?>' disabled/>
             </div>
         </div>
 
@@ -30,8 +30,9 @@
                 <input type="text" class="form-control" name="directory" id="directory" value='<?php echo $this->directoryName;?>' <?php echo $this->disabled;?>/>
             </div>
         </div>
-        <input type="hidden" name="directory" value='<?php echo $this->file['directory']; ?>' />
-        <input type="hidden" name="name" value="<?php echo $this->file['name'];?>" />
+        <<input type="hidden" name="folder" value='<?php echo $this->directoryName;; ?>' /> -->
+        <!-- <input type="hidden" name="name" value="<?php echo $this->file['name'];?>" /> -->
+        <input type="hidden" name=" base" value='<?php echo $this->path_base;?>'  />
         <div class="snep-body-footer-buttons">
             <button type="submit" class="btn btn-add" name="signup" value="Sign up"><?php echo $this->translate("Save");?></button>
             &nbsp;&nbsp;&nbsp;

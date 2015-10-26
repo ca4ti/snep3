@@ -139,7 +139,6 @@ class IpStatusController extends Zend_Controller_Action {
             $sis_chan = $val['channel'];
             $sis_clid = $val['callerid'];
             $sis_host = $val['host'];
-            $sis_user = $val['username'];
             $sis_type = $val['type'];
             $CV = $CSS = False;
 
@@ -175,7 +174,6 @@ class IpStatusController extends Zend_Controller_Action {
                             $CV = True;
                             $troncos[$key]['status'] = $tr_val_ind[5];
                             $troncos[$key]['host'] = $tr_host;
-                            $troncos[$key]['username'] = $tr_user;
                             $troncos[$key]['latencia'] = $peer_lat[1];
                         }
                     } elseif ($sis_type == "SNEPIAX2") {
@@ -194,7 +192,6 @@ class IpStatusController extends Zend_Controller_Action {
                 $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
                 $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
                 $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
-                $troncos[$key]['username'] = $virt_name;
             }
             if ($sis_type == "VIRTUAL" && !$CV) {
 
@@ -206,7 +203,6 @@ class IpStatusController extends Zend_Controller_Action {
                 $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
                 $peer_host = substr($peer_host, strpos($peer_host, ":") + 1);
                 $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
-                $troncos[$key]['username'] = $virt_name;
             }
         }
         foreach ($troncos as $val => $key) {
@@ -239,8 +235,8 @@ class IpStatusController extends Zend_Controller_Action {
             $sis_chan = $val['channel'];
             $sis_clid = $val['callerid'];
             $sis_host = $val['host'];
-            $sis_user = $val['username'];
             $sis_type = $val['type'];
+            $sis_user = $val['username'];
 
             // Varre troncos com autenticacao para pegar status e latencia
             $CV = $CSS = False;
@@ -249,8 +245,9 @@ class IpStatusController extends Zend_Controller_Action {
                     continue;
                 }
                 // Array individual para cada tronco
-                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
 
+                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
+Zend_Debug::dump($troncos);
                 $tr_user = $tr_val_ind[2];
                 $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
 
@@ -268,7 +265,7 @@ class IpStatusController extends Zend_Controller_Action {
                     if ($tr_val_ind[4] === "Registered")
                         $troncos[$key]['status'] = $tr_val_ind[4];
                     else
-                        $troncos[$key]['status'] = $tr_val_ind[4] . ' ' . $tr_val_ind[4];
+                        $troncos[$key]['status'] = $tr_val_ind[4].' '.$tr_val_ind[5] ;
                     	$troncos[$key]['latencia'] = $peer_lat;
                 } else {
                     // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
@@ -283,7 +280,6 @@ class IpStatusController extends Zend_Controller_Action {
                             else
                                 $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
                             $troncos[$key]['host'] = $tr_host;
-                            $troncos[$key]['username'] = $tr_user;
                             $troncos[$key]['latencia'] = $peer_lat;
                         }
                     } elseif ($sis_type == "SNEPSIP") {
@@ -303,7 +299,7 @@ class IpStatusController extends Zend_Controller_Action {
                 $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
                 $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
                 $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":"));
-                $troncos[$key]['username'] = $virt_name;
+                $troncos[$key]['status'] = $peer_lat;
             }
 
             if ($sis_type == "VIRTUAL" && !$CV) {
@@ -315,12 +311,12 @@ class IpStatusController extends Zend_Controller_Action {
                 $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
                 $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
                 $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":") + 2);
-                $troncos[$key]['username'] = $virt_name;
             }
         }
 
         foreach ($troncos as $val => $key) {
             unset($troncos[$val]['channel']);
+            unset($troncos[$val]['username']);
             if (trim($troncos[$val]['latencia']) === "") {
                 $troncos[$val]['latencia'] = "UNREACHABLE";
             }
@@ -328,6 +324,7 @@ class IpStatusController extends Zend_Controller_Action {
                 $troncos[$val]['status'] = "N.D.";
             }
         }
+
 
         $this->view->troncoSip = $troncos;
 
@@ -354,6 +351,7 @@ class IpStatusController extends Zend_Controller_Action {
         $this->view->filas = $filas;
         $this->view->ramais = $ramais;
         $this->view->codecs = $codec;
+        $this->view->headMeta()->appendHttpEquiv('refresh','10');
     }
 
     /**

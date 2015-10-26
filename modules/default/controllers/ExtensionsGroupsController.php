@@ -51,8 +51,10 @@ class ExtensionsGroupsController extends Zend_Controller_Action {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('core_groups',array('id','name','count(group_id) as qt_peers'))
-                ->joinLeft("core_peer_groups",'core_groups.id = core_peer_groups.group_id')
+                ->from(array('groups' => 'core_groups'),
+                       array('groups.id','groups.name','count(peer_groups.group_id) as qt_peers'))
+                ->joinLeft(array('peer_groups'=>'core_peer_groups'),
+                           'groups.id = peer_groups.group_id',array())
                 ->group(array('id'));
 
         $stmt = $db->query($select);

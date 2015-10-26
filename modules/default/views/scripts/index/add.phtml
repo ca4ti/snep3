@@ -30,7 +30,7 @@
                     <div class="panel-footer">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" data-toggle="toggle" <?php echo $value['used']?> name="<?php echo 'dash['.$key.']';?>" id="<?php echo 'dash['.$key.']';?>">
+                                <input type="checkbox" data-toggle="toggle" <?php echo isset($value['used']) ? $value['used'] : "" ;?> name="<?php echo 'dash['.$key.']';?>" id="<?php echo 'dash['.$key.']';?>">
                             </label>
                         </div>
                     </div>

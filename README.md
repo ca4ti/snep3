@@ -35,7 +35,7 @@ FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com m
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- os perfis de acesso devem permitir vinculos
+- Os perfis de acesso devem permitir vinculos
 - Status do Sistema -  Ramais : Rever comportamento
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
   - discar para um grupo de ramais

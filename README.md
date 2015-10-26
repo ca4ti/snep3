@@ -25,8 +25,8 @@ FEITO - Criada view para o menu de Informações
 FEITO - Arrumar os ícones para enable/disable das permissões do usuário
 FEITO - Corrigido problema que exibia mensagem de erro abaixo da view em execução
 FEITO - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais : + de 1 grupo por ramal
+FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
 
-- Erro na apresentacao do espaço usado em disco
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem

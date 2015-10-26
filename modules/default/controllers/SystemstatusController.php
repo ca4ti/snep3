@@ -246,7 +246,8 @@ class SystemstatusController extends Zend_Controller_Action {
             $results[$i - 1]['size'] = $ar_buf[1];
             $results[$i - 1]['used'] = $ar_buf[2];
             $results[$i - 1]['free'] = $ar_buf[3];
-            $results[$i - 1]['percent'] = round(($results[$i - 1]['used'] * 100) / $results[$i - 1]['size']) . '%';
+            $results[$i - 1]['percent'] = $ar_buf[4];
+            //$results[$i - 1]['percent'] = round(($results[$i - 1]['used'] * 100) / $results[$i - 1]['size']) . '%';
             $results[$i - 1]['mount_point'] = $ar_buf[5];
             ($fstype[$ar_buf[5]]) ? $results[$i - 1]['fstype'] = $fstype[$ar_buf[5]] : $results[$i - 1]['fstype'] = $fsdev[$ar_buf[0]];
         }

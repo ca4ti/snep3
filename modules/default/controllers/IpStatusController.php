@@ -18,6 +18,7 @@
  */
 require_once "includes/AsteriskInfo.php";
 require_once "includes/functions.php";
+require_once "includes/AMI.php";
 
 /**
  * IP Status Controller
@@ -45,6 +46,7 @@ class IpStatusController extends Zend_Controller_Action {
      * @return type
      */
     public function indexAction() {
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Ip Status")));
 
@@ -120,199 +122,70 @@ class IpStatusController extends Zend_Controller_Action {
         $like = 'IAX%';
         $troncos = Snep_IpStatus_Manager::getTrunk($like);
 
-        foreach ($troncos as $val => $key) {
-            $troncos[$val]['status'] = "N.D.";
-            $troncos[$val]['latencia'] = "N.D.";
-        }
-        if (!$iax_trunk = ast_status("iax2 show peers", "", True)) {
-            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
-            $this->renderScript('error/sneperror.phtml');
-            exit;
-        }
+        // Popula troncos com itens faltantes do array
+        $ami = new AMI () ;
+        $peer_list = $ami->get_IAXpeerlist() ;
+        $reg_list = $ami->get_IAXregistry();
 
-        // Define array das linhas retornadas pelo Asterisk
-        $trunksReg = explode("\n", ast_status("iax2 show registry", "", True));
 
-        // Varre troncos cadastrados no sistema 
         foreach ($troncos as $key => $val) {
-
-            $sis_chan = $val['channel'];
-            $sis_clid = $val['callerid'];
-            $sis_host = $val['host'];
-            $sis_type = $val['type'];
-            $CV = $CSS = False;
-
-            // Varre troncos com autenticacao para pegar status e latencia
-            foreach ($trunksReg as $tr_key => $tr_val) {
-                if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
-                    continue;
-                }
-                // Array individual apra cada tronco
-                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
-
-                $tr_user = $tr_val_ind[2];
-                $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
-
-                // Verifica latencia do tronco
-                $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
-
-                $peer_lat = ast_status("iax2 show peer $peer_user", "Status", True);
-                $peer_lat = explode(":", $peer_lat);
-
-                // SE    o username do BD = Username do Asterisk e
-                // E SE  o host do BD = Hostname do Asterisk  
-                // ENTÃO Define o status como sendo o State do Asterisk
-                if ($tr_user === $sis_user && $tr_host === $sis_host) {
-                    $troncos[$key]['status'] = $tr_val_ind[5];
-                    $troncos[$key]['latencia'] = $peer_lat[1];
-                } else {
-                    // Se o tipo do tronco for VIRTUAL, BD nao tem Host e nem Username
-                    if ($sis_type == "VIRTUAL") {
-                        // Define como Username a 2a. parte do Channel
-                        $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-                        if ($virt_name === $tr_user) {
-                            $CV = True;
-                            $troncos[$key]['status'] = $tr_val_ind[5];
-                            $troncos[$key]['host'] = $tr_host;
-                            $troncos[$key]['latencia'] = $peer_lat[1];
-                        }
-                    } elseif ($sis_type == "SNEPIAX2") {
-                        $CSS = True;
-                        $troncos[$key]['latencia'] = $peer_lat[1];
-                    }
+            $ami = new AMI ();
+            $troncos[$key]['status'] = "N.D.";
+            $troncos[$key]['latencia'] = "N.D.";
+            // Get information about peer
+            $iax_username = $val['type'] === "VIRTUAL" ? substr($val['channel'], 5): $val['username'];
+            foreach ($peer_list as $pl_key => $pl_val) {
+                if ($pl_val['objectname'] === $iax_username) {
+                    $troncos[$key]['latencia'] = $pl_val['status'];
                 }
             }
-            if ($sis_type == "SNEPIAX2" && !$CSS) {
 
-                // Define como Username a 2a. parte do Channel
-                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-                $iax_peer = explode("\n", ast_status("iax2 show peer $virt_name", "", True));
-                $peer_lat = implode(":", preg_grep('/Status/', $iax_peer));
-                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
-                $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
-                $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
-                $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
+            //Get information about registry
+            
+            if ($val['type'] === "VIRTUAL") {
+               $troncos[$key]['host'] = $res_peer['ipaddress'] ;
             }
-            if ($sis_type == "VIRTUAL" && !$CV) {
-
-                // Define como Username a 2a. parte do Channel
-                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-                $iax_peer = explode("\n", ast_status("iax2 show peer $virt_name", "", True));
-                $peer_lat = implode(":", preg_grep('/Status/', $iax_peer));
-                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
-                $peer_host = implode(":", preg_grep('/Addr->IP/', $iax_peer));
-                $peer_host = substr($peer_host, strpos($peer_host, ":") + 1);
-                $troncos[$key]['host'] = substr($peer_host, 0, strpos($peer_host, "Port"));
+            $res_reg = $ami->get_IAXregistry($troncos[$key]['host'],$iax_username);
+            if ($res_reg) {
+                $troncos[$key]['status'] = $res_reg['state'];
             }
+           
         }
+
         foreach ($troncos as $val => $key) {
             unset($troncos[$val]['channel']);
+            unset($troncos[$val]['username']);
         }
+
 
         $this->view->trunkIax = $troncos;
 
-        // Trunk Sip
+        // Get Trunks Sip from database - table: trunks
         $like = 'SIP%';
         $troncos = Snep_IpStatus_Manager::getTrunk($like);
 
         // Popula troncos com itens faltantes do array
-        foreach ($troncos as $val => $key) {
-            $troncos[$val]['status'] = "N.D.";
-            $troncos[$val]['latencia'] = "N.D.";
-        }
-        if (!$sip_trunk = ast_status("sip show peers", "", True)) {
-            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
-            $this->renderScript('error/sneperror.phtml');
-            exit;
-        }
-
-        // Define array das linhas retornadas pelo Asterisk
-        $trunksReg = explode("\n", ast_status("sip show registry", "", True));
-
         foreach ($troncos as $key => $val) {
-            $troncos[$key]['status'] = "";
-            $troncos[$key]['latencia'] = "";
-            $sis_chan = $val['channel'];
-            $sis_clid = $val['callerid'];
-            $sis_host = $val['host'];
-            $sis_type = $val['type'];
-            $sis_user = $val['username'];
-
-            // Varre troncos com autenticacao para pegar status e latencia
-            $CV = $CSS = False;
-            foreach ($trunksReg as $tr_key => $tr_val) {
-                if (preg_match('/^(Privilege|Host|$).*$/', $tr_val)) {
-                    continue;
-                }
-                // Array individual para cada tronco
-
-                $tr_val_ind = explode(' ', ltrim(preg_replace('/ +/', ' ', $tr_val)));
-Zend_Debug::dump($troncos);
-                $tr_user = $tr_val_ind[2];
-                $tr_host = substr($tr_val_ind[0], 0, strpos($tr_val_ind[0], ":"));
-
-                // Verifica latencia do tronco
-                $peer_user = ($sis_user != "") ? $sis_user : $tr_user;
-
-                $sip_peer = explode("\n", ast_status("sip show peer $peer_user", "", True));
-                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
-                $peer_lat = substr($peer_lat, strpos($peer_lat, ":") + 2);
-
-                // SE    o username do BD = Username do Asterisk e
-                // E SE  o host do BD = Hostname do Asterisk  
-                // ENTÃO Define o status como sendo o State do Asterisk
-                if ($tr_user === $sis_user && $tr_host === $sis_host) {
-                    if ($tr_val_ind[4] === "Registered")
-                        $troncos[$key]['status'] = $tr_val_ind[4];
-                    else
-                        $troncos[$key]['status'] = $tr_val_ind[4].' '.$tr_val_ind[5] ;
-                    	$troncos[$key]['latencia'] = $peer_lat;
-                } else {
-                    // Se o tipo do tronco for VIRTUAL, BD naotem Host e nem Username
-                    if ($sis_type == "VIRTUAL") {
-                        // Define como Username a 2a. parte do Channel
-                        $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-
-                        if ($virt_name === $tr_user) {
-                            $CV = True;
-                            if ($tr_val_ind[3] === "Registered")
-                                $troncos[$key]['status'] = $tr_val_ind[3];
-                            else
-                                $troncos[$key]['status'] = $tr_val_ind[3] . ' ' . $tr_val_ind[4];
-                            $troncos[$key]['host'] = $tr_host;
-                            $troncos[$key]['latencia'] = $peer_lat;
-                        }
-                    } elseif ($sis_type == "SNEPSIP") {
-                        $CSS = True;
-                        $troncos[$key]['latencia'] = $peer_lat;
-                    }
-                }
+            $ami = new AMI ();
+            $troncos[$key]['status'] = "N.D.";
+            $troncos[$key]['latencia'] = "N.D.";
+            // Get information about peer
+            $sip_username = $val['type'] === "VIRTUAL" ? substr($val['channel'], 4): $val['username'];
+            $res_peer = $ami->get_sippeer($sip_username);
+            if ($res_peer) {
+                $troncos[$key]['latencia'] = $res_peer['status'];
             }
-
-            if ($sis_type == "SNEPSIP" && !$CSS) {
-
-                // Define como Username a 2a. parte do Channel
-                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-                $sip_peer = explode("\n", ast_status("sip show peer $virt_name", "", True));
-                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
-                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
-                $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
-                $peer_host = substr($peer_host, strpos($peer_host, ":") + 2);
-                $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":"));
-                $troncos[$key]['status'] = $peer_lat;
+            // Get information about registry
+            if ($val['type'] === "VIRTUAL") {
+                $troncos[$key]['host'] = $res_peer['tohost'] ;
             }
-
-            if ($sis_type == "VIRTUAL" && !$CV) {
-
-                // Define como Username a 2a. parte do Channel
-                $virt_name = substr($sis_chan, strpos($sis_chan, "/") + 1);
-                $sip_peer = explode("\n", ast_status("sip show peer $virt_name", "", True));
-                $peer_lat = implode(":", preg_grep('/Status/', $sip_peer));
-                $troncos[$key]['latencia'] = substr($peer_lat, strpos($peer_lat, ":") + 2);
-                $peer_host = implode(":", preg_grep('/ToHost/', $sip_peer));
-                $troncos[$key]['host'] = substr($peer_host, strpos($peer_host, ":") + 2);
+            $res_reg = $ami->get_SIPshowregistry($troncos[$key]['host'],$sip_username);
+            if ($res_reg) {
+                $troncos[$key]['status'] = $res_reg['state'];
             }
+           
         }
+
 
         foreach ($troncos as $val => $key) {
             unset($troncos[$val]['channel']);

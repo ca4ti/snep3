@@ -363,7 +363,7 @@ class QueuesController extends Zend_Controller_Action {
             foreach ($cd as $canal) {
                 if (strlen($canal) > 0) {
                     if (!array_key_exists($canal, $mem)) {
-                        $notMem[$canal] = $row['callerid'] . " ($canal)({$row['group']})";
+                        $notMem[$canal] = $row['callerid'] . " ($canal)";
                     }
                 }
             }

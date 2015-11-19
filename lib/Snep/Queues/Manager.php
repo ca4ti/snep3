@@ -201,11 +201,9 @@ class Snep_Queues_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-                ->from('peers', array('name', 'canal', 'callerid', 'group'))
-                ->where("peers.name != 'admin'")
+                ->from('peers', array('name', 'canal', 'callerid'))
                 ->where("peers.peer_type = 'R'")
-                ->where("peers.canal != ''")
-                ->order("group");
+                ->where("peers.canal != ''");
 
         $stmt = $db->query($select);
         $allMembers = $stmt->fetchAll();

@@ -301,6 +301,8 @@ require_once "Asterisk/Exception/Auth.php";
         $this->log("Failed to login.");
         fclose($this->socket);
         throw new Asterisk_Exception_Auth("Failed to login.");
+      } else {
+        sleep(1);
       }
     }
 

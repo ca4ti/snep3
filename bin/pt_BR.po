@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 15:32-0200\n"
-"PO-Revision-Date: 2015-10-26 15:46-0200\n"
+"POT-Creation-Date: 2015-11-19 10:49-0200\n"
+"PO-Revision-Date: 2015-11-19 11:01-0200\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -45,6 +45,20 @@ msgid ""
 "License along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
 "            "
 msgstr ""
+"\n"
+"            SNEP é um software livre: você pode redistribuirei e/ou "
+"modificar ele de acordo com os termos da  GNU General Public License "
+"publicada pela Free Software Foundation, de acordo com a versão 3 da "
+"licença, ou (a seu critério) qualquer versão posterior. \n"
+"<br /><br />\n"
+"            SNEP é distribuído na esperança que possa ser útil, mas SEM "
+"NENHUMA GARANTIA; inclusive sem a garantia implícita de COMERCIALIZAÇÃO ou "
+"ADEQUAÇÃO A UM DETERMINADO FIM. Veja a Licença Pública Geral GNU para obter "
+"mais detalhes. \n"
+"            <br /><br />\n"
+"           Você deve ter recebido uma cópia da Licença Pública Geral GNU "
+"junto com SNEP.  Se não, veja http://www.gnu.org/licenses.\n"
+"            "
 
 #: ..//modules/default/actions/DiscarTronco.php:355
 msgid ""
@@ -353,7 +367,8 @@ msgstr "Adicionar página ao Dashboard"
 #: ..//modules/default/views/scripts/extensions/index.phtml:30
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:20
 #: ..//modules/default/views/scripts/inspector/index.phtml:9
-#: ..//modules/default/views/scripts/ip-status/index.phtml:28
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:28
+#: ..//modules/default/views/scripts/ip-status/index.phtml:43
 #: ..//modules/default/views/scripts/khomp-links/index.phtml:9
 #: ..//modules/default/views/scripts/logs/index.phtml:16
 #: ..//modules/default/views/scripts/music-on-hold/index.phtml:24
@@ -560,6 +575,10 @@ msgstr "Áudio: Você é o próximo da fila"
 msgid "Audios"
 msgstr "Áudios"
 
+#: ..//modules/default/controllers/IpStatusController.php:45
+msgid "Auth. Sent"
+msgstr "Autent. enviada"
+
 #: ..//modules/default/controllers/AuthController.php:115
 msgid "Authentication failure"
 msgstr "Falha na Autenticação"
@@ -595,6 +614,7 @@ msgstr "Ramais Disponíveis"
 #: ..//modules/default/views/scripts/music-on-hold/file.phtml:70
 #: ..//modules/default/views/scripts/queues/error.phtml:16
 #: ..//modules/default/views/scripts/register/index.phtml:48
+#: ..//modules/default/views/scripts/simulator/index.phtml:156
 #: ..//modules/default/views/scripts/sound-files/synchronize.phtml:37
 #: ..//modules/default/views/scripts/trunks/asterisk-error.phtml:17
 #: ..//modules/default/views/scripts/trunks/error.phtml:16
@@ -763,6 +783,10 @@ msgstr "Localização da Chamada"
 msgid "Caller record"
 msgstr "Gravação da chamada"
 
+#: ..//modules/default/views/scripts/ip-status/index.phtml:66
+msgid "Callerid"
+msgstr "Nome"
+
 #: ..//modules/default/controllers/CallsReportController.php:55
 #: ..//modules/default/controllers/CallsReportController.php:286
 #: ..//modules/default/controllers/CallsReportController.php:343
@@ -773,7 +797,15 @@ msgstr "Gravação da chamada"
 msgid "Calls"
 msgstr "Chamadas do Período"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:127
+#: ..//modules/default/views/scripts/ip-status/index.phtml:160
+msgid "Calls Abandoned"
+msgstr "Chamadas abandonadas"
+
+#: ..//modules/default/views/scripts/ip-status/index.phtml:159
+msgid "Calls completed"
+msgstr "Chamadas completadas"
+
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:127
 msgid "Calls in the queue awaiting"
 msgstr "Chamadas na fila aguardando"
 
@@ -813,7 +845,6 @@ msgstr "Chamadas na fila aguardando"
 #: ..//modules/default/views/scripts/queues-groups/addedit.phtml:33
 #: ..//modules/default/views/scripts/ranking-report/export.phtml:24
 #: ..//modules/default/views/scripts/remove/remove.phtml:26
-#: ..//modules/default/views/scripts/simulator/index.phtml:156
 #: ..//modules/default/views/scripts/sound-files/addedit.phtml:48
 #: ..//modules/default/views/scripts/sound-files/synchronize.phtml:79
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:426
@@ -861,6 +892,7 @@ msgstr "Tipo de central"
 #: ..//modules/default/controllers/TrunksController.php:83
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:263
 #: ..//modules/default/views/scripts/extensions/index.phtml:49
+#: ..//modules/default/views/scripts/ip-status/index.phtml:67
 #: ..//modules/default/views/scripts/khomp-links/view.phtml:53
 msgid "Channel"
 msgstr "Canal"
@@ -937,7 +969,7 @@ msgstr "Atualizar CNL"
 #: ..//modules/default/views/scripts/cost-center/index.phtml:37
 #: ..//modules/default/views/scripts/expression-alias/index.phtml:37
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:30
-#: ..//modules/default/views/scripts/ip-status/index.phtml:90
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:90
 #: ..//modules/default/views/scripts/pickup-groups/index.phtml:37
 #: ..//modules/default/views/scripts/profiles/index.phtml:34
 #: ..//modules/default/views/scripts/queues-groups/index.phtml:35
@@ -1238,7 +1270,7 @@ msgstr "Dia"
 msgid "Deactivated"
 msgstr "Desativado"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:91
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:91
 msgid "Decode"
 msgstr "Decodificar"
 
@@ -1785,13 +1817,7 @@ msgstr "Erro. Falhou ao conectar com Asterisk."
 #: ..//modules/default/controllers/ErrorsKhompController.php:57
 #: ..//modules/default/controllers/ErrorsKhompController.php:136
 #: ..//modules/default/controllers/ExtensionsController.php:53
-#: ..//modules/default/controllers/IpStatusController.php:54
-#: ..//modules/default/controllers/IpStatusController.php:60
-#: ..//modules/default/controllers/IpStatusController.php:68
-#: ..//modules/default/controllers/IpStatusController.php:128
-#: ..//modules/default/controllers/IpStatusController.php:224
-#: ..//modules/default/controllers/IpStatusController.php:334
-#: ..//modules/default/controllers/IpStatusController.php:365
+#: ..//modules/default/controllers/IpStatusController.php:69
 #: ..//modules/default/controllers/KhompLinksController.php:57
 #: ..//modules/default/controllers/KhompLinksController.php:245
 #: ..//modules/default/controllers/TrunksController.php:52
@@ -1907,7 +1933,7 @@ msgstr "Aliasse de Expressão Regular"
 #: ..//modules/default/views/scripts/extensions/index.phtml:47
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:6
 #: ..//modules/default/views/scripts/extensions/multiremove.phtml:34
-#: ..//modules/default/views/scripts/ip-status/index.phtml:47
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:47
 #: ..//modules/default/views/scripts/route/add_edit.phtml:33
 #: ..//modules/default/views/scripts/services-report/view.phtml:35
 #: ..//modules/default/views/scripts/simulator/index.phtml:49
@@ -1955,6 +1981,7 @@ msgstr "Ramal:"
 #: ..//modules/default/controllers/ExtensionsController.php:711
 #: ..//modules/default/controllers/ExtensionsController.php:809
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:9
+#: ..//modules/default/views/scripts/ip-status/index.phtml:56
 #: ..//modules/default/views/scripts/services-report/index.phtml:58
 #: ..//modules/default/views/scripts/services-report/index.phtml:73
 #: /Users/fsomensi/Google
@@ -2203,7 +2230,7 @@ msgstr "Já sou cadastrado"
 msgid "I want to register"
 msgstr "Quero me registrar"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:201
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:201
 msgid "IAX Trunks"
 msgstr "Troncos IAX"
 
@@ -2222,17 +2249,19 @@ msgstr "IAX2 Trunking"
 msgid "ID Regular Expression"
 msgstr "Expressão de Identificação"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:166
-#: ..//modules/default/views/scripts/ip-status/index.phtml:210
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:166
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:210
+#: ..//modules/default/views/scripts/ip-status/index.phtml:68
+#: ..//modules/default/views/scripts/ip-status/index.phtml:111
 #: ..//modules/default/views/scripts/trunks/index.phtml:58
 msgid "IP"
 msgstr "IP"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:49
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:49
 msgid "IP Address"
 msgstr "Endereço IP"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:39
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:39
 msgid "IP Extensions"
 msgstr "Ramais IP"
 
@@ -2375,7 +2404,7 @@ msgstr "Formato Inválido"
 msgid "Invalid table name."
 msgstr "Nome da tabela inválida"
 
-#: ..//modules/default/controllers/IpStatusController.php:49
+#: ..//modules/default/controllers/IpStatusController.php:64
 msgid "Ip Status"
 msgstr "Status IP"
 
@@ -2436,9 +2465,11 @@ msgstr "Ultima ligação para"
 msgid "Last update"
 msgstr "Última atualização"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:50
-#: ..//modules/default/views/scripts/ip-status/index.phtml:169
-#: ..//modules/default/views/scripts/ip-status/index.phtml:214
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:50
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:169
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:213
+#: ..//modules/default/views/scripts/ip-status/index.phtml:69
+#: ..//modules/default/views/scripts/ip-status/index.phtml:114
 msgid "Latency"
 msgstr "Latência"
 
@@ -2451,8 +2482,8 @@ msgid "Leave blank to use the number from the destination."
 msgstr "Deixe em branco para usar o número do destino."
 
 #: ..//modules/default/views/layouts/loginregister.phtml:91
-#: ..//modules/default/views/layouts/register.phtml:383
-#: ..//modules/default/views/layouts/register.phtml:436
+#: ..//modules/default/views/layouts/register.phtml:382
+#: ..//modules/default/views/layouts/register.phtml:435
 msgid "Letters and Numbers only please"
 msgstr "É permitido somente letras e números "
 
@@ -2461,19 +2492,19 @@ msgstr "É permitido somente letras e números "
 msgid "Letters and numbers only please"
 msgstr "É permitido somente letras e números "
 
-#: ..//modules/default/views/layouts/register.phtml:388
-#: ..//modules/default/views/layouts/register.phtml:394
+#: ..//modules/default/views/layouts/register.phtml:387
+#: ..//modules/default/views/layouts/register.phtml:393
 #: ..//modules/default/views/scripts/profiles/addedit.phtml:69
 #: ..//modules/default/views/scripts/register/index.phtml:80
 #: ..//modules/default/views/scripts/users/addedit.phtml:94
 msgid "Letters only please"
 msgstr "É permitido somente letras "
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:81
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:81
 msgid "Licenses"
 msgstr "Licenças"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:89
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:89
 msgid "Licenses (g729)"
 msgstr "Licenças (g729)"
 
@@ -2574,7 +2605,8 @@ msgstr "Miembro"
 
 #: ..//modules/default/controllers/QueuesController.php:351
 #: ..//modules/default/controllers/QueuesGroupsController.php:222
-#: ..//modules/default/views/scripts/ip-status/index.phtml:126
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:126
+#: ..//modules/default/views/scripts/ip-status/index.phtml:158
 #: ..//modules/default/views/scripts/profiles/addedit.phtml:18
 #: ..//modules/default/views/scripts/queues/index.phtml:59
 msgid "Members"
@@ -2732,8 +2764,11 @@ msgstr "NAT"
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:40
 #: ..//modules/default/views/scripts/extensions-groups/addedit.phtml:27
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:31
-#: ..//modules/default/views/scripts/ip-status/index.phtml:165
-#: ..//modules/default/views/scripts/ip-status/index.phtml:209
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:165
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:209
+#: ..//modules/default/views/scripts/ip-status/index.phtml:65
+#: ..//modules/default/views/scripts/ip-status/index.phtml:110
+#: ..//modules/default/views/scripts/ip-status/index.phtml:156
 #: ..//modules/default/views/scripts/music-on-hold/addedit.phtml:5
 #: ..//modules/default/views/scripts/music-on-hold/addedit.phtml:7
 #: ..//modules/default/views/scripts/music-on-hold/file.phtml:34
@@ -2875,6 +2910,10 @@ msgstr "Não há links nesta placa"
 msgid "No modules instaled."
 msgstr "Nenhum módulo instalado."
 
+#: ..//modules/default/views/scripts/ip-status/index.phtml:177
+msgid "No queues available"
+msgstr "Nenhuma fila cadastrada"
+
 #: ..//lib/Snep/CsvIE.php:150
 #: ..//modules/default/controllers/CallsReportController.php:478
 #: ..//modules/default/controllers/ExportDataController.php:165
@@ -2940,7 +2979,7 @@ msgstr "Números separados por ( . ). EX: 5.04"
 
 #: ..//modules/default/actions/DiscarTronco.php:142
 msgid "Ommit origin (only for Khomp KGSM)"
-msgstr "Números separados por ( . ). EX: 5.04"
+msgstr "Omitir origem (somente para Khomp KGSM)"
 
 #: ..//modules/default/controllers/KhompLinksController.php:213
 #: ..//modules/default/controllers/KhompLinksController.php:224
@@ -3169,16 +3208,16 @@ msgstr "Tocar um arquivo de áudio."
 msgid "Please enter a username"
 msgstr "Por favor, insira um nome de usuário"
 
-#: ..//modules/default/views/layouts/register.phtml:377
+#: ..//modules/default/views/layouts/register.phtml:376
 msgid "Please enter a valide e-mail."
 msgstr "Por favor, insira um e-mail."
 
 #: ..//modules/default/views/layouts/loginregister.phtml:85
 #: ..//modules/default/views/layouts/loginregister.phtml:89
-#: ..//modules/default/views/layouts/register.phtml:381
-#: ..//modules/default/views/layouts/register.phtml:430
-#: ..//modules/default/views/layouts/register.phtml:434
-#: ..//modules/default/views/layouts/register.phtml:461
+#: ..//modules/default/views/layouts/register.phtml:380
+#: ..//modules/default/views/layouts/register.phtml:429
+#: ..//modules/default/views/layouts/register.phtml:433
+#: ..//modules/default/views/layouts/register.phtml:460
 #: ..//modules/default/views/scripts/contact-groups/addedit.phtml:58
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:223
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:229
@@ -3239,11 +3278,11 @@ msgid "Please enter letters only."
 msgstr "Por favor, ingrese sólo letras."
 
 #: ..//modules/default/views/layouts/loginregister.phtml:90
-#: ..//modules/default/views/layouts/register.phtml:382
-#: ..//modules/default/views/layouts/register.phtml:387
-#: ..//modules/default/views/layouts/register.phtml:393
-#: ..//modules/default/views/layouts/register.phtml:435
-#: ..//modules/default/views/layouts/register.phtml:462
+#: ..//modules/default/views/layouts/register.phtml:381
+#: ..//modules/default/views/layouts/register.phtml:386
+#: ..//modules/default/views/layouts/register.phtml:392
+#: ..//modules/default/views/layouts/register.phtml:434
+#: ..//modules/default/views/layouts/register.phtml:461
 #: ..//modules/default/views/scripts/contact-groups/addedit.phtml:59
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:224
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:230
@@ -3372,7 +3411,7 @@ msgstr "Quantidade"
 
 #: ..//lib/PBX/Rule/ActionConfig.php:268
 #: ..//modules/default/controllers/QueuesController.php:267
-#: ..//modules/default/views/scripts/ip-status/index.phtml:125
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:125
 #: ..//modules/default/views/scripts/queues-groups/members.phtml:11
 msgid "Queue"
 msgstr "Fila"
@@ -3401,7 +3440,8 @@ msgstr "Áudio de anúncio da fila"
 #: ..//modules/default/controllers/QueuesController.php:93
 #: ..//modules/default/controllers/QueuesController.php:182
 #: ..//modules/default/controllers/QueuesController.php:350
-#: ..//modules/default/views/scripts/ip-status/index.phtml:117
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:117
+#: ..//modules/default/views/scripts/ip-status/index.phtml:147
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
@@ -3521,9 +3561,23 @@ msgstr "Registrar"
 msgid "Register Snep"
 msgstr "Registrar Snep"
 
+#: ..//modules/default/controllers/IpStatusController.php:46
+msgid "Registered"
+msgstr "Registrado"
+
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:168
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:212
+#: ..//modules/default/views/scripts/ip-status/index.phtml:113
+msgid "Registry"
+msgstr "Registro"
+
 #: ..//modules/default/views/scripts/route/add_edit.phtml:29
 msgid "Regular Expression"
 msgstr "Expressão Regular"
+
+#: ..//modules/default/controllers/IpStatusController.php:44
+msgid "Rejected"
+msgstr "Rejeitado"
 
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:66
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:68
@@ -3602,6 +3656,10 @@ msgstr "Relatórios"
 #: ..//modules/default/actions/Cadeado.php:69
 msgid "Request Password"
 msgstr "Pedir Senha"
+
+#: ..//modules/default/controllers/IpStatusController.php:47
+msgid "Request Sent"
+msgstr "Requisição enviada"
 
 #: ..//modules/default/controllers/SimulatorController.php:155
 msgid "Request password"
@@ -3773,7 +3831,7 @@ msgstr "Sígame"
 msgid "SIP"
 msgstr "SIP"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:157
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:157
 msgid "SIP Trunks"
 msgstr "Tronco SIP"
 
@@ -3865,11 +3923,6 @@ msgstr "Tela"
 msgid "Search"
 msgstr "Buscar"
 
-#: /Users/fsomensi/Google
-#: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
-msgid "Search Records"
-msgstr "Busca de Gravações"
-
 #: ..//modules/default/controllers/QueuesController.php:50
 msgid "Search for a available agent (roundrobin)"
 msgstr "Buscar um agente disponível (roundrobin)"
@@ -3893,7 +3946,7 @@ msgid "Select a Khomp channel from the list"
 msgstr "Selecione um canal da lista"
 
 #: ..//modules/default/views/layouts/register.phtml:213
-#: ..//modules/default/views/layouts/register.phtml:401
+#: ..//modules/default/views/layouts/register.phtml:400
 msgid "Select a city"
 msgstr "Selecione uma cidade"
 
@@ -3914,7 +3967,7 @@ msgid "Select a country"
 msgstr "Selecione um país"
 
 #: ..//modules/default/views/layouts/register.phtml:197
-#: ..//modules/default/views/layouts/register.phtml:398
+#: ..//modules/default/views/layouts/register.phtml:397
 msgid "Select a state"
 msgstr "Selecione um estado"
 
@@ -4232,8 +4285,6 @@ msgstr "Senha Estática:"
 #: ..//modules/default/controllers/ServicesReportController.php:225
 #: ..//modules/default/views/scripts/calls-report/index.phtml:137
 #: ..//modules/default/views/scripts/calls-report/view.phtml:53
-#: ..//modules/default/views/scripts/ip-status/index.phtml:168
-#: ..//modules/default/views/scripts/ip-status/index.phtml:213
 #: ..//modules/default/views/scripts/notifications/index.phtml:34
 #: ..//modules/default/views/scripts/services-report/view.phtml:38
 #: /Users/fsomensi/Google
@@ -4253,6 +4304,7 @@ msgstr "Dados Por Período"
 msgid "Status of last call"
 msgstr "Status da ultima chamada"
 
+#: ..//modules/default/views/scripts/ip-status/index.phtml:157
 #: ..//modules/default/views/scripts/queues/index.phtml:41
 msgid "Strategy"
 msgstr "Estratégia de distribuição"
@@ -4429,8 +4481,8 @@ msgid "The e-mail is required"
 msgstr "O e-mail é obrigatório."
 
 #: ..//modules/default/views/layouts/loginregister.phtml:84
-#: ..//modules/default/views/layouts/register.phtml:376
-#: ..//modules/default/views/layouts/register.phtml:429
+#: ..//modules/default/views/layouts/register.phtml:375
+#: ..//modules/default/views/layouts/register.phtml:428
 msgid "The email is required"
 msgstr "O e-mail é obrigatório."
 
@@ -4496,7 +4548,7 @@ msgstr ""
 msgid "The filename is required"
 msgstr "O nome do arquivo é obrigatório"
 
-#: ..//modules/default/views/layouts/register.phtml:386
+#: ..//modules/default/views/layouts/register.phtml:385
 msgid "The first name is required"
 msgstr "O nome é obrigatório"
 
@@ -4538,7 +4590,7 @@ msgstr "As seguintes rotas usam este ramal, modifique elas antes de apaga-lo."
 msgid "The group will be removed. After that you can't go back."
 msgstr "O grupo será apagado. Depois disso, você não tem como recupera-lo."
 
-#: ..//modules/default/views/layouts/register.phtml:460
+#: ..//modules/default/views/layouts/register.phtml:459
 msgid "The hash is required"
 msgstr "O código é obrigatório"
 
@@ -4546,7 +4598,7 @@ msgstr "O código é obrigatório"
 msgid "The hostname is required."
 msgstr "O hostname é obrigatório"
 
-#: ..//modules/default/views/layouts/register.phtml:392
+#: ..//modules/default/views/layouts/register.phtml:391
 msgid "The last name is required"
 msgstr "O sobrenome é obrigatório"
 
@@ -4591,8 +4643,8 @@ msgid "The page you are looking for was not found or does not exists."
 msgstr "A página que você está procurando não foi encontrada ou não existe."
 
 #: ..//modules/default/views/layouts/loginregister.phtml:88
-#: ..//modules/default/views/layouts/register.phtml:380
-#: ..//modules/default/views/layouts/register.phtml:433
+#: ..//modules/default/views/layouts/register.phtml:379
+#: ..//modules/default/views/layouts/register.phtml:432
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:499
 #: ..//modules/default/views/scripts/register/index.phtml:83
 #: ..//modules/default/views/scripts/users/addedit.phtml:97
@@ -4801,6 +4853,7 @@ msgstr "Tronco"
 #: ..//modules/default/controllers/TrunksController.php:189
 #: ..//modules/default/controllers/TrunksController.php:279
 #: ..//modules/default/controllers/TrunksController.php:424
+#: ..//modules/default/views/scripts/ip-status/index.phtml:101
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
@@ -4823,9 +4876,10 @@ msgstr "Terça-feira"
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:84
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:194
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:47
-#: ..//modules/default/views/scripts/ip-status/index.phtml:48
-#: ..//modules/default/views/scripts/ip-status/index.phtml:167
-#: ..//modules/default/views/scripts/ip-status/index.phtml:212
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:48
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:167
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:211
+#: ..//modules/default/views/scripts/ip-status/index.phtml:112
 #: ..//modules/default/views/scripts/logs/index.phtml:26
 #: ..//modules/default/views/scripts/music-on-hold/index.phtml:39
 #: ..//modules/default/views/scripts/systemstatus/index.phtml:158
@@ -4850,6 +4904,18 @@ msgstr "Tipo de Centro de Custos"
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:404
 msgid "Type of control"
 msgstr "Tipo de controle"
+
+#: ..//modules/default/controllers/IpStatusController.php:52
+msgid "UNKNOWN"
+msgstr "Desconhecido"
+
+#: ..//modules/default/controllers/IpStatusController.php:50
+msgid "UNMONITORED"
+msgstr "Não monitorado"
+
+#: ..//modules/default/controllers/IpStatusController.php:51
+msgid "UNREACHABLE"
+msgstr "Inacessível"
 
 #: ..//modules/default/controllers/SoundFilesController.php:303
 msgid "Unable to remove file"
@@ -4887,6 +4953,11 @@ msgstr "Desconhecido"
 msgid "Unknown error. Please contact the administrator."
 msgstr "Erro desconhecido. Entre em contato com o administrador."
 
+#: ..//modules/default/controllers/IpStatusController.php:48
+msgid "Unmonitored"
+msgstr "Não monitorado"
+
+#: ..//modules/default/controllers/IpStatusController.php:43
 #: ..//modules/default/controllers/KhompLinksController.php:207
 msgid "Unreachable"
 msgstr "Inacessível"
@@ -4921,7 +4992,6 @@ msgid "Used"
 msgstr "Usado"
 
 #: ..//modules/default/views/scripts/auth/login.phtml:15
-#: ..//modules/default/views/scripts/ip-status/index.phtml:211
 msgid "User"
 msgstr "Usuário"
 
@@ -5477,20 +5547,25 @@ msgstr ""
 msgid "music-on-hold/index"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:104
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:104
 msgid "no data available"
 msgstr "sem dados disponíveis"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:66
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:66
 msgid "no extension available"
 msgstr "sem ramais disponíveis"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:143
+#: ..//modules/default/views/scripts/ip-status/index.phtml:86
+msgid "no extensions available"
+msgstr "nenhum ramal disponivel"
+
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:143
 msgid "no queue available"
 msgstr "sem filas disponíveis"
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:187
-#: ..//modules/default/views/scripts/ip-status/index.phtml:230
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:187
+#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:229
+#: ..//modules/default/views/scripts/ip-status/index.phtml:131
 msgid "no trunk available"
 msgstr "sem troncos disponíveis"
 
@@ -5568,11 +5643,6 @@ msgid "read"
 msgstr "Leitura"
 
 #: /Users/fsomensi/Google
-#: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
-msgid "record-report/index"
-msgstr ""
-
-#: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/titleOptions.xml
 msgid "report_view_icon.png"
 msgstr ""
@@ -5624,11 +5694,6 @@ msgstr ""
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 msgid "sn-arquivo-som"
-msgstr ""
-
-#: /Users/fsomensi/Google
-#: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
-msgid "sn-busca"
 msgstr ""
 
 #: /Users/fsomensi/Google
@@ -5814,6 +5879,9 @@ msgstr "Escrita"
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/info.xml
 msgid "www.sneplivre.com.br"
 msgstr "www.sneplivre.com.br"
+
+#~ msgid "Search Records"
+#~ msgstr "Busca de Gravações"
 
 #~ msgid "Delete Extension Multiples."
 #~ msgstr "Remover Múltiplos Ramais."
@@ -6109,9 +6177,6 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "Call Type"
 #~ msgstr "Tipo de Ligação"
-
-#~ msgid "Callerid"
-#~ msgstr "Nome"
 
 #~ msgid "Cellphone"
 #~ msgstr "Celular"

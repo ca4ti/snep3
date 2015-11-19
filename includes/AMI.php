@@ -59,12 +59,12 @@
         public function __construct( $host = false, $port = 5038, $username = false, $password = false )
         {
 
-            $config = Zend_Registry::get('config');
+            $config = parse_ini_file("setup.conf");
             
-            $this->_host = $config->ambiente->ip_sock;
+            $this->_host = $config['ip_sock'];
             $this->_port = $port;
-            $this->_username = $config->ambiente->user_sock;
-            $this->_password = $config->ambiente->pass_sock;
+            $this->_username = $config['user_sock'];
+            $this->_password = $config['pass_sock'];
             
             if ( !$this->login() )
             {
@@ -87,7 +87,75 @@
         /* Public functions
          */
 
-         public function get_SIPshowregistry($host = false, $user=false)
+         public function get_CoreShowChannels()
+        {
+            /* List currently defined channels and some information about them.
+             *
+             *  @return values:
+             *
+             *      - Array of data on success 
+             *      - False on failure.
+             *
+             */
+            
+            $cmd = array(
+                 "Action" => "CoreShowChannels" 
+            );
+            
+            $cmd_return = $this->sendrecv( $cmd, "Event: CoreShowChannelsComplete\r\n","CoreShowChannel");           
+
+            return $cmd_return ;
+        }
+
+
+
+
+        public function get_BridgeList()
+        {
+            /* Get a list of Bridges in the system (show channels)
+             *
+             *  @return values:
+             *
+             *      - Array of data on success 
+             *      - False on failure.
+             *
+             */
+            
+            $cmd = array(
+                 "Action" => "BridgeList" 
+            );
+            
+            $cmd_return = $this->sendrecv( $cmd, "Event: BridgeListComplete\r\n","BridgeListItem");           
+
+            return $cmd_return ;
+        }
+        
+        public function get_BridgeInfo($bridgeid)
+        {
+            /* Get information about a bridge
+             *
+             *  @return values:
+             *
+             *      - Array of data on success 
+             *      - False on failure.
+             *      
+             *  @params:
+             *      - (string) bridgeid: The unique ID of the bridge about which to retrieve information.
+             *
+             */
+            
+            $cmd = array(
+                 "Action" => "BridgeInfo",
+                 "BridgeUniqueid" => $bridgeid
+            );
+            
+            $cmd_return = $this->sendrecv( $cmd, "Event: BridgeInfoComplete\r\n", "BridgeInfoChannel");
+
+            return $cmd_return ;
+        }
+        
+
+        public function get_SIPshowregistry($host = false, $user=false)
         {
             /* Get a list of all registered SIP peers
              *
@@ -444,7 +512,7 @@
             if ( isset( $cmd_return["message"] ) && preg_match( "/authentication accepted/i", $cmd_return["message"] ) )
             {
                 // logged in - success!
-                
+                //sleep(1);
                 return true;
             } else
             {

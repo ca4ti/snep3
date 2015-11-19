@@ -16,17 +16,8 @@
 - Rever/Redefinir conceitos/funcionalidades agents
   - Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
-
-**A Fazer : Próxima release - betha-rc3 **
-
-FEITO - % de uso da CPU nao esta sendo exibido
-FEITO - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
-FEITO - Criada view para o menu de Informações
-FEITO - Arrumar os ícones para enable/disable das permissões do usuário
-FEITO - Corrigido problema que exibia mensagem de erro abaixo da view em execução
-FEITO - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais : + de 1 grupo por ramal
-FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
-
+- Sigame : aceitar chamadas vindas do proprio siga-me (1000 ativa siga-me para 1005 - aceitar somente chamadas do 1005)
+- Cadastro troncos :  verificar peer_type x type ao salvar tronco SIP
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
@@ -36,11 +27,26 @@ FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com m
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
 - Os perfis de acesso devem permitir vinculos
-- Status do Sistema -  Ramais : Rever comportamento
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
-  - Grupos para destino (ringall)
+  - Grupos para destino (ringall)   
+
+---------------------------------
+**Release - betha-rc3 **
+
+FEITO - % de uso da CPU nao esta sendo exibido
+FEITO - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
+FEITO - Criada view para o menu de Informações
+FEITO - Arrumar os ícones para enable/disable das permissões do usuário
+FEITO - Corrigido problema que exibia mensagem de erro abaixo da view em execução
+FEITO - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais : + de 1 grupo por ramal
+FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
+FEITO - Corrigido erros na exibicao de status e latencia de troncos em Status >> Status IP
+FEITO - Cadastro usuário portal ITC agora permite qualquer caracter para a senha - comaptibilizar com portal ITC
+FEITO - Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
+FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report) 
+FEITO - Ajustes em strings de tradução
 
 ---------------------------------
 **Release Betha-rc2**

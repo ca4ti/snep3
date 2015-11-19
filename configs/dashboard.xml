@@ -235,12 +235,12 @@
         <link>services-report/index</link>
 	</atalho>
 
-    <atalho>
+<!--     <atalho>
         <nome>Search Records</nome>
         <descricao>View</descricao>
         <icone>sn-busca</icone>
         <link>record-report/index</link>
-    </atalho>
+    </atalho> -->
 
     <atalho>
         <nome>Export Data</nome>

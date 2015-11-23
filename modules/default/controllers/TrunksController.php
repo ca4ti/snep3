@@ -222,7 +222,6 @@ class TrunksController extends Zend_Controller_Action {
         }
         $this->view->boards = $boards;
 
-
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = "snepsip";

@@ -21,12 +21,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <style type="text/css">
     
-    .ip-status > a {
-        color: #868488;
+    .ip-status > h4 > a {
+        color: #f26c45;
         text-decoration: none !important;
+        background-color: transparent;
     }
-    .ip-status > a:hover,
-    .ip-status > a:focus, {
+    .ip-status > h4 > a:hover,
+    .ip-status > h4 > a:focus, {
         color: #333 !important;
         text-decoration: none !important;
     }
@@ -52,9 +53,13 @@
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading ip-status">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        <h4><?php echo $this->translate("Extensions") ?></h4>
-                    </a>
+                    <h4>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <button type="button" class="boxremove del_field" id="exten" style="background-color:transparent !important;">
+                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Extensions") ?>
+                            </button>
+                        </a>
+                    </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in ip-status"  style="background-color: #fff !important">
                     <div class="panel-body">
@@ -97,9 +102,13 @@
             <!-- Trunks -->
             <div class="panel panel-default">
                 <div class="panel-heading ip-status">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        <h4><?php echo $this->translate("Trunks") ?></h4>
-                    </a>
+                    <h4>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <button type="button" class="boxadd add_field" id="trunk" style="background-color:transparent !important;">
+                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Trunks") ?>
+                            </button>
+                        </a>
+                    </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse ip-status"  style="background-color: #fff !important">
                     <div class="panel-body">
@@ -143,9 +152,13 @@
             <!-- Queues -->
             <div class="panel panel-default">
                 <div class="panel-heading ip-status">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        <h4><?php echo $this->translate("Queues") ?></h4>
-                    </a>
+                    <h4>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <button type="button" class="boxadd add_field" id="queue" style="background-color:transparent !important;">
+                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Queues") ?>
+                            </button>
+                        </a>
+                    </h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse ip-status"  style="background-color: #fff !important">
                     <div class="panel-body">
@@ -235,7 +248,34 @@
         //setInterval(populate_tables,5000);
         populate_tables();
 
-        
+
+        // Changle the icon of panel titles when clicked
+        jQuery("#exten,#trunk,#queue").click(function() {
+            // Toggle clicked element
+            if(jQuery(this).hasClass('add_field')) {
+                jQuery(this).removeClass('boxadd add_field').addClass('boxremove del_field') ;
+            } else { 
+                jQuery(this).removeClass('boxremove del_field').addClass('boxadd add_field') ;
+            }
+            // Togle other elements
+            var sel=jQuery(this).attr('id') ;
+            var arr = [ 'exten','trunk','queue'] ;
+            var list = arr.splice(arr.indexOf(sel),1);
+            jQuery.each(arr,function(index,value){
+                var pid = jQuery('#'+value).parent().attr('href') ;
+                var flag = false ;
+                if (jQuery(pid).hasClass('in')) {
+                    flag = true ;
+                }
+                if(flag) {
+                    if (jQuery('#'+value).hasClass('del_field')) {
+                        jQuery('#'+value).removeClass('boxremove del_field').addClass('boxadd add_field') ;
+                    } else {
+                        jQuery('#'+value).removeClass('boxadd add_field').addClass('boxremove del_field') ;
+                    }
+                } 
+            });
+        });
     });
 
 </script>

@@ -52,17 +52,19 @@ foreach ($peers as $key => $val) {
     $res_peer = $ami->get_sippeer($val['name']);
 
     if ($res_peer) {
-           $peers[$key]['latencia'] = $res_peer['status'];
-           $ip = substr($res_peer['contact'],strpos($res_peer['contact'],'@')+1);
-           $ip = substr($ip,0,strpos($ip,':'));
-           $peers[$key]['ip'] = $ip;
+        $peers[$key]['latencia'] = isset($res_peer['status']) ? $res_peer['status'] : "N.D.";
+        if (isset($res_peer['contact'])) {
+            $ip = substr($res_peer['contact'],strpos($res_peer['contact'],'@')+1);
+            $ip = substr($ip,0,strpos($ip,':'));
+            $peers[$key]['ip'] = $ip;
+        }
     }
 }
 
 foreach ($peers as $key => $val) {
-    if (trim($peers[$key]['latencia']) === "") {
-        unset($peers[$key]);
-    }
+    // if (trim($peers[$key]['latencia']) === "N.D.") {
+    //     unset($peers[$key]['latencia']);
+    // }
     if (trim($peers[$key]['ip']) === "") {
         $peers[$key]['ip'] = "N.D.";
     }

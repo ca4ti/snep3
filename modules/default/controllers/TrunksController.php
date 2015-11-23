@@ -206,6 +206,12 @@ class TrunksController extends Zend_Controller_Action {
         $this->view->codec2 = $codec2;
         $this->view->codec3 = $codec3;
 
+        $this->view->dtmf_rfc2833 = 'checked' ;
+
+        $this->view->nat_no = 'checked';
+
+        $this->view->type_friend = 'checked';
+
         // Informações de placas khomp
         $boards = "";
         if (isset($this->khompBoards)) {

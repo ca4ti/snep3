@@ -47,6 +47,8 @@ FEITO - Cadastro usuário portal ITC agora permite qualquer caracter para a senh
 FEITO - Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
 FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report) 
 FEITO - Ajustes em strings de tradução
+FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,frient)
+
 
 ---------------------------------
 **Release Betha-rc2**

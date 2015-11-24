@@ -31,6 +31,8 @@
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)   
+  - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais)
+  - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 
 ---------------------------------
 **Release - betha-rc3 **
@@ -47,8 +49,8 @@ FEITO - Cadastro usuário portal ITC agora permite qualquer caracter para a senh
 FEITO - Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
 FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report) 
 FEITO - Ajustes em strings de tradução
-FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,frient)
-
+FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,friend)
+FEITO - Ajustes para remover diversos Warning e Notices do console do apache
 
 ---------------------------------
 **Release Betha-rc2**

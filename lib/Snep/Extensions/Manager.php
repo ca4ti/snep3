@@ -160,7 +160,7 @@ class Snep_Extensions_Manager {
 
         $select = $db->select()
             ->from('peers', array('id' => 'id','name' => 'callerid' ,'exten' => 'name', 'channel' => 'canal'))
-            ->joinInner('core_peer_groups','core_peer_groups.peer_id = peers.id')
+            ->joinInner('core_peer_groups','core_peer_groups.peer_id = peers.id',array('group_id'=>'group_id','peer_id','peer_id') )
             ->joinInner('core_groups','core_groups.id = core_peer_groups.group_id',array('group_name' => 'name'))
             ->where("peer_type = 'R'");
 

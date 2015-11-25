@@ -93,8 +93,7 @@ class CallsReportService implements SnepService {
         if (isset($_GET['groupsrc'])) {
 
             $groupsrc = $_GET['groupsrc'];
-            $select = "SELECT name FROM peers WHERE `group` = '$groupsrc' ";
-            $origens = $db->query($select)->fetchAll();
+            $origens = Snep_ExtensionsGroups_Manager::getExtensionsGroup($groupsrc);
             
             if (count($origens) == 0) {
                 return array("status" => "fail", "message" => "errorgroup");
@@ -114,11 +113,10 @@ class CallsReportService implements SnepService {
         if (isset($_GET['groupdst'])) {
             
             $groupdst = $_GET['groupdst'];
-            $select = "SELECT name FROM peers WHERE `group` = '$groupdst' ";
-            $destino = $db->query($select)->fetchAll();
+            $destino = Snep_ExtensionsGroups_Manager::getExtensionsGroup($groupdst);
             
             if (count($destino) == 0) {
-                return array("status" => "fail", "message" => "errorgroup");
+                return array("status" => "fail", "message" => "There are no extensions in the selected group");
             } else {
                 $ramaldst = "";
 

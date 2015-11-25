@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 10:49-0200\n"
+"POT-Creation-Date: 2015-11-25 17:35-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,12 +87,12 @@ msgstr ""
 msgid " in "
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:401
+#: ..//modules/default/controllers/CallsReportController.php:385
 #: ..//modules/default/controllers/ExportDataController.php:68
 #: ..//modules/default/controllers/ExportDataController.php:91
 #: ..//modules/default/controllers/ExportDataController.php:131
 #: ..//modules/default/controllers/RankingReportController.php:159
-#: ..//modules/default/controllers/ServicesReportController.php:192
+#: ..//modules/default/controllers/ServicesReportController.php:175
 msgid ". Please contact your system administrator"
 msgstr ""
 
@@ -157,6 +157,10 @@ msgstr ""
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
+msgstr ""
+
+#: ..//modules/default/views/scripts/calls-report/view.phtml:16
+msgid "ANSWERED"
 msgstr ""
 
 #: ..//modules/default/views/scripts/register/index.phtml:40
@@ -342,8 +346,7 @@ msgstr ""
 #: ..//modules/default/views/scripts/extensions/index.phtml:30
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:20
 #: ..//modules/default/views/scripts/inspector/index.phtml:9
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:28
-#: ..//modules/default/views/scripts/ip-status/index.phtml:43
+#: ..//modules/default/views/scripts/ip-status/index.phtml:44
 #: ..//modules/default/views/scripts/khomp-links/index.phtml:9
 #: ..//modules/default/views/scripts/logs/index.phtml:16
 #: ..//modules/default/views/scripts/music-on-hold/index.phtml:24
@@ -379,11 +382,6 @@ msgstr ""
 
 #: ..//modules/default/controllers/RouteController.php:81
 msgid "Administrator"
-msgstr ""
-
-#: ..//modules/default/controllers/CallsReportController.php:72
-#: ..//modules/default/controllers/ServicesReportController.php:66
-msgid "Administrators"
 msgstr ""
 
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:318
@@ -432,9 +430,7 @@ msgstr ""
 msgid "Alias RegEx"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:78
 #: ..//modules/default/controllers/RouteController.php:80
-#: ..//modules/default/controllers/ServicesReportController.php:72
 msgid "All"
 msgstr ""
 
@@ -457,11 +453,11 @@ msgstr ""
 msgid "Allow voicemail"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:444
+#: ..//modules/default/controllers/CallsReportController.php:428
 msgid "Amaflags"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:287
+#: ..//modules/default/controllers/CallsReportController.php:271
 #: ..//modules/default/views/scripts/calls-report/index.phtml:219
 #: ..//modules/default/views/scripts/khomp-links/index.phtml:38
 msgid "Analytic"
@@ -478,9 +474,9 @@ msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:80
 #: ..//modules/default/views/scripts/calls-report/index.phtml:141
-#: ..//modules/default/views/scripts/calls-report/view.phtml:134
-#: ..//modules/default/views/scripts/calls-report/view.phtml:179
-#: ..//modules/default/views/scripts/calls-report/view.phtml:203
+#: ..//modules/default/views/scripts/calls-report/view.phtml:138
+#: ..//modules/default/views/scripts/calls-report/view.phtml:183
+#: ..//modules/default/views/scripts/calls-report/view.phtml:207
 msgid "Answered"
 msgstr ""
 
@@ -572,6 +568,10 @@ msgstr ""
 msgid "Available extensions"
 msgstr ""
 
+#: ..//modules/default/views/scripts/calls-report/view.phtml:15
+msgid "BUSY"
+msgstr ""
+
 #: ..//modules/default/controllers/ExtensionsController.php:660
 #: ..//modules/default/controllers/ExtensionsController.php:689
 #: ..//modules/default/controllers/ExtensionsController.php:763
@@ -653,9 +653,9 @@ msgstr ""
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:90
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:331
 #: ..//modules/default/views/scripts/calls-report/index.phtml:147
-#: ..//modules/default/views/scripts/calls-report/view.phtml:140
-#: ..//modules/default/views/scripts/calls-report/view.phtml:181
-#: ..//modules/default/views/scripts/calls-report/view.phtml:205
+#: ..//modules/default/views/scripts/calls-report/view.phtml:144
+#: ..//modules/default/views/scripts/calls-report/view.phtml:185
+#: ..//modules/default/views/scripts/calls-report/view.phtml:209
 msgid "Busy"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:35
+#: ..//modules/default/views/scripts/calls-report/view.phtml:39
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:109
 #: ..//modules/default/views/scripts/services-report/view.phtml:21
 msgid "CSV"
@@ -718,7 +718,7 @@ msgstr ""
 msgid "Call Recording Configuration"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:438
+#: ..//modules/default/controllers/CallsReportController.php:422
 #: ..//modules/default/views/scripts/khomp-links/view.phtml:55
 msgid "Call Status"
 msgstr ""
@@ -727,7 +727,7 @@ msgstr ""
 msgid "Call Time"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:50
+#: ..//modules/default/views/scripts/calls-report/view.phtml:54
 msgid "Call date"
 msgstr ""
 
@@ -739,7 +739,7 @@ msgstr ""
 msgid "Call status"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:446
+#: ..//modules/default/controllers/CallsReportController.php:430
 msgid "Calldate"
 msgstr ""
 
@@ -755,30 +755,26 @@ msgstr ""
 msgid "Caller record"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:66
+#: ..//modules/default/views/scripts/ip-status/index.phtml:71
 msgid "Callerid"
 msgstr ""
 
 #: ..//modules/default/controllers/CallsReportController.php:55
-#: ..//modules/default/controllers/CallsReportController.php:286
-#: ..//modules/default/controllers/CallsReportController.php:343
-#: ..//modules/default/controllers/CallsReportController.php:421
+#: ..//modules/default/controllers/CallsReportController.php:270
+#: ..//modules/default/controllers/CallsReportController.php:327
+#: ..//modules/default/controllers/CallsReportController.php:405
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
 msgid "Calls"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:160
+#: ..//modules/default/views/scripts/ip-status/index.phtml:173
 msgid "Calls Abandoned"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:159
+#: ..//modules/default/views/scripts/ip-status/index.phtml:172
 msgid "Calls completed"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:127
-msgid "Calls in the queue awaiting"
 msgstr ""
 
 #: ..//lib/Snep/CsvIE.php:170 ..//lib/Snep/CsvIE.php:295
@@ -842,7 +838,7 @@ msgstr ""
 msgid "Cannot remove. The following routes are using this queues: "
 msgstr ""
 
-#: ..//modules/default/controllers/TrunksController.php:453
+#: ..//modules/default/controllers/TrunksController.php:458
 msgid "Cannot remove. The following routes are using this trunk: "
 msgstr ""
 
@@ -855,11 +851,11 @@ msgstr ""
 msgid "Central type "
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:447
+#: ..//modules/default/controllers/CallsReportController.php:431
 #: ..//modules/default/controllers/TrunksController.php:83
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:263
 #: ..//modules/default/views/scripts/extensions/index.phtml:49
-#: ..//modules/default/views/scripts/ip-status/index.phtml:67
+#: ..//modules/default/views/scripts/ip-status/index.phtml:72
 #: ..//modules/default/views/scripts/khomp-links/view.phtml:53
 msgid "Channel"
 msgstr ""
@@ -900,7 +896,7 @@ msgstr ""
 msgid "Cidade Universitária Pedra Branca"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:59
+#: ..//modules/default/views/scripts/calls-report/view.phtml:63
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:61
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:81
 #: ..//modules/default/views/scripts/contacts/index.phtml:45
@@ -936,7 +932,6 @@ msgstr ""
 #: ..//modules/default/views/scripts/cost-center/index.phtml:37
 #: ..//modules/default/views/scripts/expression-alias/index.phtml:37
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:30
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:90
 #: ..//modules/default/views/scripts/pickup-groups/index.phtml:37
 #: ..//modules/default/views/scripts/profiles/index.phtml:34
 #: ..//modules/default/views/scripts/queues-groups/index.phtml:35
@@ -945,7 +940,7 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:431
+#: ..//modules/default/controllers/CallsReportController.php:415
 msgid "Code Cost Center"
 msgstr ""
 
@@ -965,7 +960,7 @@ msgstr ""
 msgid "Code sent to your email"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:445
+#: ..//modules/default/controllers/CallsReportController.php:429
 msgid "Code unique"
 msgstr ""
 
@@ -1063,7 +1058,7 @@ msgid "Contains"
 msgstr ""
 
 #: ..//modules/default/actions/GoContext.php:92
-#: ..//modules/default/controllers/CallsReportController.php:443
+#: ..//modules/default/controllers/CallsReportController.php:427
 msgid "Context"
 msgstr ""
 
@@ -1075,11 +1070,11 @@ msgstr ""
 msgid "Control Type"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:55
+#: ..//modules/default/views/scripts/calls-report/view.phtml:59
 msgid "Conversation"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:440
+#: ..//modules/default/controllers/CallsReportController.php:424
 msgid "Conversation (seconds)"
 msgstr ""
 
@@ -1099,14 +1094,14 @@ msgid "Copyright"
 msgstr ""
 
 #: ..//lib/PBX/Rule/ActionConfig.php:248
-#: ..//modules/default/controllers/CallsReportController.php:441
+#: ..//modules/default/controllers/CallsReportController.php:425
 #: ..//modules/default/controllers/CostCenterController.php:50
 #: ..//modules/default/controllers/CostCenterController.php:82
 #: ..//modules/default/controllers/CostCenterController.php:125
 #: ..//modules/default/controllers/CostCenterController.php:176
 #: ..//modules/default/views/scripts/calls-report/index.phtml:157
-#: ..//modules/default/views/scripts/calls-report/view.phtml:56
-#: ..//modules/default/views/scripts/calls-report/view.phtml:230
+#: ..//modules/default/views/scripts/calls-report/view.phtml:60
+#: ..//modules/default/views/scripts/calls-report/view.phtml:234
 #: ..//modules/default/views/scripts/conference-rooms/index.phtml:55
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
@@ -1114,7 +1109,7 @@ msgstr ""
 msgid "Cost Center"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:226
+#: ..//modules/default/views/scripts/calls-report/view.phtml:230
 msgid "Costs Center Call"
 msgstr ""
 
@@ -1220,25 +1215,21 @@ msgstr ""
 msgid "Database username"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:435
-#: ..//modules/default/controllers/ServicesReportController.php:221
-#: ..//modules/default/views/scripts/calls-report/view.phtml:202
+#: ..//modules/default/controllers/CallsReportController.php:419
+#: ..//modules/default/controllers/ServicesReportController.php:204
+#: ..//modules/default/views/scripts/calls-report/view.phtml:206
 #: ..//modules/default/views/scripts/notifications/index.phtml:35
 #: ..//modules/default/views/scripts/services-report/view.phtml:36
 msgid "Date"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:434
+#: ..//modules/default/controllers/CallsReportController.php:418
 msgid "Day"
 msgstr ""
 
 #: ..//modules/default/controllers/KhompLinksController.php:67
 #: ..//modules/default/controllers/KhompLinksController.php:174
 msgid "Deactivated"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:91
-msgid "Decode"
 msgstr ""
 
 #: /Users/fsomensi/Google
@@ -1315,7 +1306,7 @@ msgstr ""
 #: ..//modules/default/controllers/QueuesGroupsController.php:266
 #: ..//modules/default/controllers/RouteController.php:605
 #: ..//modules/default/controllers/SoundFilesController.php:275
-#: ..//modules/default/controllers/TrunksController.php:425
+#: ..//modules/default/controllers/TrunksController.php:430
 #: ..//modules/default/controllers/UsersController.php:160
 #: ..//modules/default/views/scripts/contact-groups/index.phtml:56
 #: ..//modules/default/views/scripts/contacts/index.phtml:73
@@ -1399,7 +1390,7 @@ msgstr ""
 msgid "Delete Sound Files?"
 msgstr ""
 
-#: ..//modules/default/controllers/TrunksController.php:462
+#: ..//modules/default/controllers/TrunksController.php:467
 msgid "Delete Trunk."
 msgstr ""
 
@@ -1435,7 +1426,7 @@ msgstr ""
 
 #: ..//modules/default/actions/DiscarTronco.php:337
 #: ..//modules/default/views/scripts/calls-report/index.phtml:95
-#: ..//modules/default/views/scripts/calls-report/view.phtml:52
+#: ..//modules/default/views/scripts/calls-report/view.phtml:56
 #: ..//modules/default/views/scripts/ranking-report/view.phtml:45
 msgid "Destination"
 msgstr ""
@@ -1448,7 +1439,7 @@ msgstr ""
 msgid "Destination Group"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:437
+#: ..//modules/default/controllers/CallsReportController.php:421
 #: ..//modules/default/controllers/RankingReportController.php:190
 #: ..//modules/default/views/scripts/route/elements/dst.phtml:2
 #: ..//modules/default/views/scripts/route/index.phtml:69
@@ -1608,11 +1599,11 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:54
+#: ..//modules/default/views/scripts/calls-report/view.phtml:58
 msgid "Duration"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:439
+#: ..//modules/default/controllers/CallsReportController.php:423
 msgid "Duration (seconds)"
 msgstr ""
 
@@ -1666,7 +1657,7 @@ msgstr ""
 msgid "Edit File"
 msgstr ""
 
-#: ..//modules/default/controllers/TrunksController.php:280
+#: ..//modules/default/controllers/TrunksController.php:285
 msgid "Edit trunk"
 msgstr ""
 
@@ -1751,12 +1742,12 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:400
+#: ..//modules/default/controllers/CallsReportController.php:384
 #: ..//modules/default/controllers/ExportDataController.php:67
 #: ..//modules/default/controllers/ExportDataController.php:90
 #: ..//modules/default/controllers/ExportDataController.php:130
 #: ..//modules/default/controllers/RankingReportController.php:158
-#: ..//modules/default/controllers/ServicesReportController.php:191
+#: ..//modules/default/controllers/ServicesReportController.php:174
 msgid "Error "
 msgstr ""
 
@@ -1824,9 +1815,9 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:422
+#: ..//modules/default/controllers/CallsReportController.php:406
 #: ..//modules/default/controllers/RankingReportController.php:175
-#: ..//modules/default/controllers/ServicesReportController.php:213
+#: ..//modules/default/controllers/ServicesReportController.php:196
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/titleOptions.xml
 msgid "Export CSV"
@@ -1898,7 +1889,6 @@ msgstr ""
 #: ..//modules/default/views/scripts/extensions/index.phtml:47
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:6
 #: ..//modules/default/views/scripts/extensions/multiremove.phtml:34
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:47
 #: ..//modules/default/views/scripts/route/add_edit.phtml:33
 #: ..//modules/default/views/scripts/services-report/view.phtml:35
 #: ..//modules/default/views/scripts/simulator/index.phtml:49
@@ -1946,7 +1936,7 @@ msgstr ""
 #: ..//modules/default/controllers/ExtensionsController.php:711
 #: ..//modules/default/controllers/ExtensionsController.php:809
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:9
-#: ..//modules/default/views/scripts/ip-status/index.phtml:56
+#: ..//modules/default/views/scripts/ip-status/index.phtml:59
 #: ..//modules/default/views/scripts/services-report/index.phtml:58
 #: ..//modules/default/views/scripts/services-report/index.phtml:73
 #: /Users/fsomensi/Google
@@ -1972,6 +1962,10 @@ msgstr ""
 msgid "Extensions Range"
 msgstr ""
 
+#: ..//modules/default/views/scripts/calls-report/view.phtml:18
+msgid "FAILED"
+msgstr ""
+
 #: ..//modules/default/controllers/KhompLinksController.php:83
 #: ..//modules/default/controllers/KhompLinksController.php:95
 #: ..//modules/default/controllers/KhompLinksController.php:190
@@ -1982,9 +1976,9 @@ msgstr ""
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:95
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:335
 #: ..//modules/default/views/scripts/calls-report/index.phtml:150
-#: ..//modules/default/views/scripts/calls-report/view.phtml:143
-#: ..//modules/default/views/scripts/calls-report/view.phtml:182
-#: ..//modules/default/views/scripts/calls-report/view.phtml:206
+#: ..//modules/default/views/scripts/calls-report/view.phtml:147
+#: ..//modules/default/views/scripts/calls-report/view.phtml:186
+#: ..//modules/default/views/scripts/calls-report/view.phtml:210
 msgid "Failed"
 msgstr ""
 
@@ -2195,10 +2189,6 @@ msgstr ""
 msgid "I want to register"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:201
-msgid "IAX Trunks"
-msgstr ""
-
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:93
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:51
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:52
@@ -2214,20 +2204,10 @@ msgstr ""
 msgid "ID Regular Expression"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:166
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:210
-#: ..//modules/default/views/scripts/ip-status/index.phtml:68
-#: ..//modules/default/views/scripts/ip-status/index.phtml:111
+#: ..//modules/default/views/scripts/ip-status/index.phtml:73
+#: ..//modules/default/views/scripts/ip-status/index.phtml:120
 #: ..//modules/default/views/scripts/trunks/index.phtml:58
 msgid "IP"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:49
-msgid "IP Address"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:39
-msgid "IP Extensions"
 msgstr ""
 
 #: /Users/fsomensi/Google
@@ -2294,7 +2274,7 @@ msgstr ""
 #: ..//modules/default/controllers/KhompLinksController.php:80
 #: ..//modules/default/controllers/KhompLinksController.php:187
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:197
-#: ..//modules/default/views/scripts/calls-report/view.phtml:161
+#: ..//modules/default/views/scripts/calls-report/view.phtml:165
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:34
 msgid "Incoming"
 msgstr ""
@@ -2430,11 +2410,8 @@ msgstr ""
 msgid "Last update"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:50
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:169
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:213
-#: ..//modules/default/views/scripts/ip-status/index.phtml:69
-#: ..//modules/default/views/scripts/ip-status/index.phtml:114
+#: ..//modules/default/views/scripts/ip-status/index.phtml:74
+#: ..//modules/default/views/scripts/ip-status/index.phtml:123
 msgid "Latency"
 msgstr ""
 
@@ -2465,14 +2442,6 @@ msgstr ""
 msgid "Letters only please"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:81
-msgid "Licenses"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:89
-msgid "Licenses (g729)"
-msgstr ""
-
 #: ..//modules/default/controllers/TrunksController.php:80
 #: ..//modules/default/views/scripts/errors-khomp/index.phtml:40
 #: ..//modules/default/views/scripts/khomp-links/view.phtml:32
@@ -2483,7 +2452,7 @@ msgstr ""
 msgid "Link Status"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:94
+#: ..//modules/default/views/scripts/calls-report/view.phtml:98
 #: ..//modules/default/views/scripts/sound-files/index.phtml:66
 #: ..//modules/default/views/scripts/sound-files/index.phtml:78
 msgid "Listen"
@@ -2570,8 +2539,7 @@ msgstr ""
 
 #: ..//modules/default/controllers/QueuesController.php:351
 #: ..//modules/default/controllers/QueuesGroupsController.php:222
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:126
-#: ..//modules/default/views/scripts/ip-status/index.phtml:158
+#: ..//modules/default/views/scripts/ip-status/index.phtml:171
 #: ..//modules/default/views/scripts/profiles/addedit.phtml:18
 #: ..//modules/default/views/scripts/queues/index.phtml:59
 msgid "Members"
@@ -2712,6 +2680,10 @@ msgstr ""
 msgid "NAT Optimization"
 msgstr ""
 
+#: ..//modules/default/views/scripts/calls-report/view.phtml:17
+msgid "NOANSWER"
+msgstr ""
+
 #: ..//modules/default/controllers/ContactsController.php:344
 #: ..//modules/default/views/scripts/action-configs/index.phtml:35
 #: ..//modules/default/views/scripts/contact-groups/addedit.phtml:11
@@ -2729,11 +2701,9 @@ msgstr ""
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:40
 #: ..//modules/default/views/scripts/extensions-groups/addedit.phtml:27
 #: ..//modules/default/views/scripts/extensions-groups/index.phtml:31
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:165
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:209
-#: ..//modules/default/views/scripts/ip-status/index.phtml:65
-#: ..//modules/default/views/scripts/ip-status/index.phtml:110
-#: ..//modules/default/views/scripts/ip-status/index.phtml:156
+#: ..//modules/default/views/scripts/ip-status/index.phtml:70
+#: ..//modules/default/views/scripts/ip-status/index.phtml:119
+#: ..//modules/default/views/scripts/ip-status/index.phtml:169
 #: ..//modules/default/views/scripts/music-on-hold/addedit.phtml:5
 #: ..//modules/default/views/scripts/music-on-hold/addedit.phtml:7
 #: ..//modules/default/views/scripts/music-on-hold/file.phtml:34
@@ -2757,7 +2727,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:433
+#: ..//modules/default/controllers/CallsReportController.php:417
 msgid "Name Cost Center"
 msgstr ""
 
@@ -2772,8 +2742,8 @@ msgstr ""
 #: ..//modules/default/controllers/QueuesController.php:150
 #: ..//modules/default/controllers/QueuesGroupsController.php:105
 #: ..//modules/default/controllers/QueuesGroupsController.php:186
-#: ..//modules/default/controllers/TrunksController.php:236
-#: ..//modules/default/controllers/TrunksController.php:391
+#: ..//modules/default/controllers/TrunksController.php:241
+#: ..//modules/default/controllers/TrunksController.php:396
 #: ..//modules/default/controllers/UsersController.php:91
 msgid "Name already exists."
 msgstr ""
@@ -2840,14 +2810,16 @@ msgstr ""
 msgid "No data found in the file"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:393
 #: ..//modules/default/controllers/RankingReportController.php:140
-#: ..//modules/default/controllers/ServicesReportController.php:178
 msgid "No entries found"
 msgstr ""
 
 #: ..//modules/default/controllers/LogsController.php:116
 msgid "No entries found!"
+msgstr ""
+
+#: ..//modules/default/controllers/CallsReportController.php:377
+msgid "No entries found."
 msgstr ""
 
 #: ..//modules/default/api/actions/CSV_ExportDataService.php:49
@@ -2875,15 +2847,15 @@ msgstr ""
 msgid "No modules instaled."
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:177
+#: ..//modules/default/views/scripts/ip-status/index.phtml:190
 msgid "No queues available"
 msgstr ""
 
 #: ..//lib/Snep/CsvIE.php:150
-#: ..//modules/default/controllers/CallsReportController.php:478
+#: ..//modules/default/controllers/CallsReportController.php:462
 #: ..//modules/default/controllers/ExportDataController.php:165
 #: ..//modules/default/controllers/RankingReportController.php:226
-#: ..//modules/default/controllers/ServicesReportController.php:256
+#: ..//modules/default/controllers/ServicesReportController.php:239
 msgid "No records found."
 msgstr ""
 
@@ -2901,9 +2873,9 @@ msgid "Normal"
 msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/index.phtml:144
-#: ..//modules/default/views/scripts/calls-report/view.phtml:137
-#: ..//modules/default/views/scripts/calls-report/view.phtml:180
-#: ..//modules/default/views/scripts/calls-report/view.phtml:204
+#: ..//modules/default/views/scripts/calls-report/view.phtml:141
+#: ..//modules/default/views/scripts/calls-report/view.phtml:184
+#: ..//modules/default/views/scripts/calls-report/view.phtml:208
 msgid "Not Answered"
 msgstr ""
 
@@ -3013,21 +2985,18 @@ msgstr ""
 
 #: ..//modules/default/controllers/CostCenterController.php:70
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:207
-#: ..//modules/default/views/scripts/calls-report/view.phtml:163
+#: ..//modules/default/views/scripts/calls-report/view.phtml:167
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:42
 msgid "Other"
 msgstr ""
 
+#: ..//modules/default/controllers/CostCenterController.php:69
 #: ..//modules/default/controllers/KhompLinksController.php:79
 #: ..//modules/default/controllers/KhompLinksController.php:186
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:202
-#: ..//modules/default/views/scripts/calls-report/view.phtml:162
+#: ..//modules/default/views/scripts/calls-report/view.phtml:166
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:38
 msgid "Outgoing"
-msgstr ""
-
-#: ..//modules/default/controllers/CostCenterController.php:69
-msgid "Outgoing "
 msgstr ""
 
 #: ..//modules/default/controllers/KhompLinksController.php:76
@@ -3104,7 +3073,7 @@ msgstr ""
 msgid "Path where to store the backup audio files"
 msgstr ""
 
-#: ..//modules/default/controllers/ServicesReportController.php:222
+#: ..//modules/default/controllers/ServicesReportController.php:205
 msgid "Peer"
 msgstr ""
 
@@ -3368,14 +3337,13 @@ msgstr ""
 msgid "Qualify"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:231
+#: ..//modules/default/views/scripts/calls-report/view.phtml:235
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:68
 msgid "Quantity"
 msgstr ""
 
 #: ..//lib/PBX/Rule/ActionConfig.php:268
 #: ..//modules/default/controllers/QueuesController.php:267
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:125
 #: ..//modules/default/views/scripts/queues-groups/members.phtml:11
 msgid "Queue"
 msgstr ""
@@ -3404,8 +3372,7 @@ msgstr ""
 #: ..//modules/default/controllers/QueuesController.php:93
 #: ..//modules/default/controllers/QueuesController.php:182
 #: ..//modules/default/controllers/QueuesController.php:350
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:117
-#: ..//modules/default/views/scripts/ip-status/index.phtml:147
+#: ..//modules/default/views/scripts/ip-status/index.phtml:158
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
@@ -3488,7 +3455,7 @@ msgstr ""
 msgid "Recording Parameters"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:63
+#: ..//modules/default/views/scripts/calls-report/view.phtml:67
 msgid "Records"
 msgstr ""
 
@@ -3529,9 +3496,7 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:168
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:212
-#: ..//modules/default/views/scripts/ip-status/index.phtml:113
+#: ..//modules/default/views/scripts/ip-status/index.phtml:122
 msgid "Registry"
 msgstr ""
 
@@ -3602,16 +3567,16 @@ msgid "Report Type"
 msgstr ""
 
 #: ..//modules/default/controllers/CallsReportController.php:54
-#: ..//modules/default/controllers/CallsReportController.php:285
-#: ..//modules/default/controllers/CallsReportController.php:342
-#: ..//modules/default/controllers/CallsReportController.php:420
+#: ..//modules/default/controllers/CallsReportController.php:269
+#: ..//modules/default/controllers/CallsReportController.php:326
+#: ..//modules/default/controllers/CallsReportController.php:404
 #: ..//modules/default/controllers/ExportDataController.php:49
 #: ..//modules/default/controllers/ExportDataController.php:111
 #: ..//modules/default/controllers/RankingReportController.php:79
 #: ..//modules/default/controllers/RankingReportController.php:173
 #: ..//modules/default/controllers/ServicesReportController.php:49
-#: ..//modules/default/controllers/ServicesReportController.php:105
-#: ..//modules/default/controllers/ServicesReportController.php:211
+#: ..//modules/default/controllers/ServicesReportController.php:87
+#: ..//modules/default/controllers/ServicesReportController.php:194
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
 msgid "Reports"
@@ -3781,7 +3746,7 @@ msgstr ""
 msgid "Rule: %s %s"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:49
+#: ..//modules/default/views/scripts/calls-report/view.phtml:53
 msgid "SEQ"
 msgstr ""
 
@@ -3793,10 +3758,6 @@ msgstr ""
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:50
 #: ..//modules/default/views/scripts/trunks/addedit.phtml:51
 msgid "SIP"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:157
-msgid "SIP Trunks"
 msgstr ""
 
 #: ..//modules/default/views/scripts/queues/index.phtml:42
@@ -3866,7 +3827,7 @@ msgstr ""
 msgid "Screen"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:40
+#: ..//modules/default/views/scripts/calls-report/view.phtml:44
 #: ..//modules/default/views/scripts/contact-groups/index.phtml:25
 #: ..//modules/default/views/scripts/contacts/index.phtml:29
 #: ..//modules/default/views/scripts/cost-center/index.phtml:22
@@ -3935,7 +3896,7 @@ msgstr ""
 msgid "Select a state"
 msgstr ""
 
-#: ..//modules/default/controllers/ServicesReportController.php:134
+#: ..//modules/default/controllers/ServicesReportController.php:116
 msgid "Select at least one service"
 msgstr ""
 
@@ -4008,7 +3969,7 @@ msgstr ""
 msgid "Server Status"
 msgstr ""
 
-#: ..//modules/default/controllers/ServicesReportController.php:223
+#: ..//modules/default/controllers/ServicesReportController.php:206
 #: ..//modules/default/views/scripts/services-report/view.phtml:37
 msgid "Service"
 msgstr ""
@@ -4018,8 +3979,8 @@ msgid "Services"
 msgstr ""
 
 #: ..//modules/default/controllers/ServicesReportController.php:50
-#: ..//modules/default/controllers/ServicesReportController.php:106
-#: ..//modules/default/controllers/ServicesReportController.php:212
+#: ..//modules/default/controllers/ServicesReportController.php:88
+#: ..//modules/default/controllers/ServicesReportController.php:195
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
 msgid "Services Use"
@@ -4064,7 +4025,7 @@ msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/index.phtml:244
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:114
-#: ..//modules/default/views/scripts/services-report/index.phtml:128
+#: ..//modules/default/views/scripts/services-report/index.phtml:127
 msgid "Show Report"
 msgstr ""
 
@@ -4154,8 +4115,8 @@ msgstr ""
 #: ..//modules/default/controllers/KhompLinksController.php:241
 #: ..//modules/default/controllers/KhompLinksController.php:270
 #: ..//modules/default/controllers/TrunksController.php:48
-#: ..//modules/default/controllers/TrunksController.php:433
 #: ..//modules/default/controllers/TrunksController.php:438
+#: ..//modules/default/controllers/TrunksController.php:443
 msgid "Socket connection to the server is not available at the moment."
 msgstr ""
 
@@ -4189,10 +4150,10 @@ msgid "Sound file updated"
 msgstr ""
 
 #: ..//modules/default/actions/DiscarTronco.php:336
-#: ..//modules/default/controllers/CallsReportController.php:436
+#: ..//modules/default/controllers/CallsReportController.php:420
 #: ..//modules/default/controllers/RankingReportController.php:189
 #: ..//modules/default/views/scripts/calls-report/index.phtml:58
-#: ..//modules/default/views/scripts/calls-report/view.phtml:51
+#: ..//modules/default/views/scripts/calls-report/view.phtml:55
 #: ..//modules/default/views/scripts/route/elements/src.phtml:2
 #: ..//modules/default/views/scripts/route/index.phtml:68
 #: ..//modules/default/views/scripts/simulator/index.phtml:47
@@ -4227,8 +4188,8 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: ..//modules/default/controllers/ServicesReportController.php:224
-#: ..//modules/default/views/scripts/calls-report/view.phtml:59
+#: ..//modules/default/controllers/ServicesReportController.php:207
+#: ..//modules/default/views/scripts/calls-report/view.phtml:63
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:49
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:72
 #: ..//modules/default/views/scripts/contacts/index.phtml:46
@@ -4246,9 +4207,9 @@ msgstr ""
 #: ..//modules/default/controllers/ErrorsKhompController.php:50
 #: ..//modules/default/controllers/KhompLinksController.php:50
 #: ..//modules/default/controllers/KhompLinksController.php:370
-#: ..//modules/default/controllers/ServicesReportController.php:225
+#: ..//modules/default/controllers/ServicesReportController.php:208
 #: ..//modules/default/views/scripts/calls-report/index.phtml:137
-#: ..//modules/default/views/scripts/calls-report/view.phtml:53
+#: ..//modules/default/views/scripts/calls-report/view.phtml:57
 #: ..//modules/default/views/scripts/notifications/index.phtml:34
 #: ..//modules/default/views/scripts/services-report/view.phtml:38
 #: /Users/fsomensi/Google
@@ -4256,11 +4217,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:175
+#: ..//modules/default/views/scripts/calls-report/view.phtml:179
 msgid "Status Call"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:197
+#: ..//modules/default/views/scripts/calls-report/view.phtml:201
 msgid "Status by Period"
 msgstr ""
 
@@ -4268,7 +4229,7 @@ msgstr ""
 msgid "Status of last call"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index.phtml:157
+#: ..//modules/default/views/scripts/ip-status/index.phtml:170
 #: ..//modules/default/views/scripts/queues/index.phtml:41
 msgid "Strategy"
 msgstr ""
@@ -4277,7 +4238,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:130
+#: ..//modules/default/views/scripts/calls-report/view.phtml:134
 msgid "Subtotal"
 msgstr ""
 
@@ -4308,7 +4269,7 @@ msgstr ""
 msgid "Synchronize archives"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:344
+#: ..//modules/default/controllers/CallsReportController.php:328
 #: ..//modules/default/views/scripts/calls-report/index.phtml:223
 #: ..//modules/default/views/scripts/khomp-links/index.phtml:42
 msgid "Synthetic"
@@ -4642,7 +4603,7 @@ msgstr ""
 msgid "The trunk is required"
 msgstr ""
 
-#: ..//modules/default/controllers/TrunksController.php:463
+#: ..//modules/default/controllers/TrunksController.php:468
 msgid "The trunk will be deleted. After that, you have no way get it back."
 msgstr ""
 
@@ -4670,7 +4631,7 @@ msgid ""
 "between the keys, blanks and special characters except( # % | . - _ )"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:271
+#: ..//modules/default/controllers/CallsReportController.php:255
 msgid "There are no extensions in the selected group"
 msgstr ""
 
@@ -4767,8 +4728,8 @@ msgid "Total entries to be exported: "
 msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:32
-#: ..//modules/default/views/scripts/calls-report/view.phtml:183
-#: ..//modules/default/views/scripts/calls-report/view.phtml:207
+#: ..//modules/default/views/scripts/calls-report/view.phtml:187
+#: ..//modules/default/views/scripts/calls-report/view.phtml:211
 msgid "Totals"
 msgstr ""
 
@@ -4784,9 +4745,9 @@ msgstr ""
 
 #: ..//modules/default/controllers/TrunksController.php:101
 #: ..//modules/default/controllers/TrunksController.php:189
-#: ..//modules/default/controllers/TrunksController.php:279
-#: ..//modules/default/controllers/TrunksController.php:424
-#: ..//modules/default/views/scripts/ip-status/index.phtml:101
+#: ..//modules/default/controllers/TrunksController.php:284
+#: ..//modules/default/controllers/TrunksController.php:429
+#: ..//modules/default/views/scripts/ip-status/index.phtml:108
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/modules/default/resources.xml
@@ -4809,10 +4770,7 @@ msgstr ""
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:84
 #: ..//modules/default/views/scripts/extensions/addedit.phtml:194
 #: ..//modules/default/views/scripts/extensions/multiadd.phtml:47
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:48
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:167
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:211
-#: ..//modules/default/views/scripts/ip-status/index.phtml:112
+#: ..//modules/default/views/scripts/ip-status/index.phtml:121
 #: ..//modules/default/views/scripts/logs/index.phtml:26
 #: ..//modules/default/views/scripts/music-on-hold/index.phtml:39
 #: ..//modules/default/views/scripts/systemstatus/index.phtml:158
@@ -4826,11 +4784,11 @@ msgstr ""
 msgid "Type "
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:157
+#: ..//modules/default/views/scripts/calls-report/view.phtml:161
 msgid "Type Call"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:432
+#: ..//modules/default/controllers/CallsReportController.php:416
 msgid "Type Cost Center"
 msgstr ""
 
@@ -4952,7 +4910,7 @@ msgstr ""
 msgid "User permission"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:442
+#: ..//modules/default/controllers/CallsReportController.php:426
 msgid "Userfield"
 msgstr ""
 
@@ -4966,9 +4924,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:75
 #: ..//modules/default/controllers/RouteController.php:82
-#: ..//modules/default/controllers/ServicesReportController.php:69
 #: ..//modules/default/controllers/UsersController.php:53
 #: ..//modules/default/controllers/UsersController.php:73
 #: ..//modules/default/controllers/UsersController.php:111
@@ -5223,7 +5179,7 @@ msgstr ""
 msgid "You'Re Welcome"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:95
+#: ..//modules/default/views/scripts/calls-report/view.phtml:99
 #: ..//modules/default/views/scripts/sound-files/index.phtml:67
 #: ..//modules/default/views/scripts/sound-files/index.phtml:79
 msgid "Your browser does not support the audio element."
@@ -5272,7 +5228,7 @@ msgstr ""
 msgid "action-configs/index"
 msgstr ""
 
-#: ..//modules/default/controllers/CallsReportController.php:471
+#: ..//modules/default/controllers/CallsReportController.php:455
 msgid "calls"
 msgstr ""
 
@@ -5452,25 +5408,11 @@ msgstr ""
 msgid "music-on-hold/index"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:104
-msgid "no data available"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:66
-msgid "no extension available"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index.phtml:86
+#: ..//modules/default/views/scripts/ip-status/index.phtml:91
 msgid "no extensions available"
 msgstr ""
 
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:143
-msgid "no queue available"
-msgstr ""
-
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:187
-#: ..//modules/default/views/scripts/ip-status/index-orig.phtml:229
-#: ..//modules/default/views/scripts/ip-status/index.phtml:131
+#: ..//modules/default/views/scripts/ip-status/index.phtml:140
 msgid "no trunk available"
 msgstr ""
 
@@ -5577,7 +5519,7 @@ msgstr ""
 msgid "services-report/index"
 msgstr ""
 
-#: ..//modules/default/controllers/ServicesReportController.php:249
+#: ..//modules/default/controllers/ServicesReportController.php:232
 msgid "services_use"
 msgstr ""
 

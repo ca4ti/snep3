@@ -28,6 +28,9 @@ while($row = $stmt->fetch()) {
        $sci->execute() ;
     }
 }
+$sql = "update peers drop column `groups` ; drop table `groups`;";
+$sci = $conn->prepare($sql) ;
+$sci->execute() ;
 
 
 function check_group($name) {

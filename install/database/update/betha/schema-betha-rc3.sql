@@ -1,6 +1,6 @@
 alter table peers drop foreign key `peers_ibfk_1`;
 alter table peers drop foreign key `peers_ibfk_2`;
-
+ 
 CREATE TABLE `core_groups` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL,

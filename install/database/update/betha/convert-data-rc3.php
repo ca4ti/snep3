@@ -28,7 +28,7 @@ while($row = $stmt->fetch()) {
        $sci->execute() ;
     }
 }
-$sql = "update peers drop column `groups` ; drop table `groups`;";
+$sql = "alter table peers drop column `group` ; drop table `groups`;";
 $sci = $conn->prepare($sql) ;
 $sci->execute() ;
 

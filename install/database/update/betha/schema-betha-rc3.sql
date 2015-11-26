@@ -1,6 +1,6 @@
 alter table peers drop foreign key `peers_ibfk_1`;
 alter table peers drop foreign key `peers_ibfk_2`;
-alter table peers drop column `group`;
+
 CREATE TABLE `core_groups` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL,
@@ -20,4 +20,3 @@ CREATE TABLE `core_peer_groups` (
     CONSTRAINT `core_peer_groups_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  ;
 
-drop table `groups`;

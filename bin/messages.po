@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-25 17:35-0200\n"
+"POT-Creation-Date: 2015-11-26 10:18-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -474,9 +474,9 @@ msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:80
 #: ..//modules/default/views/scripts/calls-report/index.phtml:141
-#: ..//modules/default/views/scripts/calls-report/view.phtml:138
-#: ..//modules/default/views/scripts/calls-report/view.phtml:183
-#: ..//modules/default/views/scripts/calls-report/view.phtml:207
+#: ..//modules/default/views/scripts/calls-report/view.phtml:139
+#: ..//modules/default/views/scripts/calls-report/view.phtml:184
+#: ..//modules/default/views/scripts/calls-report/view.phtml:208
 msgid "Answered"
 msgstr ""
 
@@ -653,9 +653,9 @@ msgstr ""
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:90
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:331
 #: ..//modules/default/views/scripts/calls-report/index.phtml:147
-#: ..//modules/default/views/scripts/calls-report/view.phtml:144
-#: ..//modules/default/views/scripts/calls-report/view.phtml:185
-#: ..//modules/default/views/scripts/calls-report/view.phtml:209
+#: ..//modules/default/views/scripts/calls-report/view.phtml:145
+#: ..//modules/default/views/scripts/calls-report/view.phtml:186
+#: ..//modules/default/views/scripts/calls-report/view.phtml:210
 msgid "Busy"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:39
+#: ..//modules/default/views/scripts/calls-report/view.phtml:40
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:109
 #: ..//modules/default/views/scripts/services-report/view.phtml:21
 msgid "CSV"
@@ -727,7 +727,7 @@ msgstr ""
 msgid "Call Time"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:54
+#: ..//modules/default/views/scripts/calls-report/view.phtml:55
 msgid "Call date"
 msgstr ""
 
@@ -896,7 +896,7 @@ msgstr ""
 msgid "Cidade Universitária Pedra Branca"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:63
+#: ..//modules/default/views/scripts/calls-report/view.phtml:64
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:61
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:81
 #: ..//modules/default/views/scripts/contacts/index.phtml:45
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "Control Type"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:59
+#: ..//modules/default/views/scripts/calls-report/view.phtml:60
 msgid "Conversation"
 msgstr ""
 
@@ -1100,8 +1100,8 @@ msgstr ""
 #: ..//modules/default/controllers/CostCenterController.php:125
 #: ..//modules/default/controllers/CostCenterController.php:176
 #: ..//modules/default/views/scripts/calls-report/index.phtml:157
-#: ..//modules/default/views/scripts/calls-report/view.phtml:60
-#: ..//modules/default/views/scripts/calls-report/view.phtml:234
+#: ..//modules/default/views/scripts/calls-report/view.phtml:61
+#: ..//modules/default/views/scripts/calls-report/view.phtml:235
 #: ..//modules/default/views/scripts/conference-rooms/index.phtml:55
 #: /Users/fsomensi/Google
 #: Drive/Projects/snep/snep-3/snep-betha-rc3/configs/dashboard.xml
@@ -1109,7 +1109,7 @@ msgstr ""
 msgid "Cost Center"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:230
+#: ..//modules/default/views/scripts/calls-report/view.phtml:231
 msgid "Costs Center Call"
 msgstr ""
 
@@ -1217,7 +1217,7 @@ msgstr ""
 
 #: ..//modules/default/controllers/CallsReportController.php:419
 #: ..//modules/default/controllers/ServicesReportController.php:204
-#: ..//modules/default/views/scripts/calls-report/view.phtml:206
+#: ..//modules/default/views/scripts/calls-report/view.phtml:207
 #: ..//modules/default/views/scripts/notifications/index.phtml:35
 #: ..//modules/default/views/scripts/services-report/view.phtml:36
 msgid "Date"
@@ -1426,7 +1426,7 @@ msgstr ""
 
 #: ..//modules/default/actions/DiscarTronco.php:337
 #: ..//modules/default/views/scripts/calls-report/index.phtml:95
-#: ..//modules/default/views/scripts/calls-report/view.phtml:56
+#: ..//modules/default/views/scripts/calls-report/view.phtml:57
 #: ..//modules/default/views/scripts/ranking-report/view.phtml:45
 msgid "Destination"
 msgstr ""
@@ -1599,7 +1599,7 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:58
+#: ..//modules/default/views/scripts/calls-report/view.phtml:59
 msgid "Duration"
 msgstr ""
 
@@ -1976,9 +1976,9 @@ msgstr ""
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:95
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:335
 #: ..//modules/default/views/scripts/calls-report/index.phtml:150
-#: ..//modules/default/views/scripts/calls-report/view.phtml:147
-#: ..//modules/default/views/scripts/calls-report/view.phtml:186
-#: ..//modules/default/views/scripts/calls-report/view.phtml:210
+#: ..//modules/default/views/scripts/calls-report/view.phtml:148
+#: ..//modules/default/views/scripts/calls-report/view.phtml:187
+#: ..//modules/default/views/scripts/calls-report/view.phtml:211
 msgid "Failed"
 msgstr ""
 
@@ -2274,7 +2274,7 @@ msgstr ""
 #: ..//modules/default/controllers/KhompLinksController.php:80
 #: ..//modules/default/controllers/KhompLinksController.php:187
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:197
-#: ..//modules/default/views/scripts/calls-report/view.phtml:165
+#: ..//modules/default/views/scripts/calls-report/view.phtml:166
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:34
 msgid "Incoming"
 msgstr ""
@@ -2452,7 +2452,7 @@ msgstr ""
 msgid "Link Status"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:98
+#: ..//modules/default/views/scripts/calls-report/view.phtml:99
 #: ..//modules/default/views/scripts/sound-files/index.phtml:66
 #: ..//modules/default/views/scripts/sound-files/index.phtml:78
 msgid "Listen"
@@ -2681,7 +2681,7 @@ msgid "NAT Optimization"
 msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/view.phtml:17
-msgid "NOANSWER"
+msgid "NO ANSWER"
 msgstr ""
 
 #: ..//modules/default/controllers/ContactsController.php:344
@@ -2873,9 +2873,9 @@ msgid "Normal"
 msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/index.phtml:144
-#: ..//modules/default/views/scripts/calls-report/view.phtml:141
-#: ..//modules/default/views/scripts/calls-report/view.phtml:184
-#: ..//modules/default/views/scripts/calls-report/view.phtml:208
+#: ..//modules/default/views/scripts/calls-report/view.phtml:142
+#: ..//modules/default/views/scripts/calls-report/view.phtml:185
+#: ..//modules/default/views/scripts/calls-report/view.phtml:209
 msgid "Not Answered"
 msgstr ""
 
@@ -2985,7 +2985,7 @@ msgstr ""
 
 #: ..//modules/default/controllers/CostCenterController.php:70
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:207
-#: ..//modules/default/views/scripts/calls-report/view.phtml:167
+#: ..//modules/default/views/scripts/calls-report/view.phtml:168
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:42
 msgid "Other"
 msgstr ""
@@ -2994,7 +2994,7 @@ msgstr ""
 #: ..//modules/default/controllers/KhompLinksController.php:79
 #: ..//modules/default/controllers/KhompLinksController.php:186
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:202
-#: ..//modules/default/views/scripts/calls-report/view.phtml:166
+#: ..//modules/default/views/scripts/calls-report/view.phtml:167
 #: ..//modules/default/views/scripts/cost-center/addedit.phtml:38
 msgid "Outgoing"
 msgstr ""
@@ -3337,7 +3337,7 @@ msgstr ""
 msgid "Qualify"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:235
+#: ..//modules/default/views/scripts/calls-report/view.phtml:236
 #: ..//modules/default/views/scripts/ranking-report/index.phtml:68
 msgid "Quantity"
 msgstr ""
@@ -3455,7 +3455,7 @@ msgstr ""
 msgid "Recording Parameters"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:67
+#: ..//modules/default/views/scripts/calls-report/view.phtml:68
 msgid "Records"
 msgstr ""
 
@@ -3746,7 +3746,7 @@ msgstr ""
 msgid "Rule: %s %s"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:53
+#: ..//modules/default/views/scripts/calls-report/view.phtml:54
 msgid "SEQ"
 msgstr ""
 
@@ -3827,7 +3827,7 @@ msgstr ""
 msgid "Screen"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:44
+#: ..//modules/default/views/scripts/calls-report/view.phtml:45
 #: ..//modules/default/views/scripts/contact-groups/index.phtml:25
 #: ..//modules/default/views/scripts/contacts/index.phtml:29
 #: ..//modules/default/views/scripts/cost-center/index.phtml:22
@@ -4153,7 +4153,7 @@ msgstr ""
 #: ..//modules/default/controllers/CallsReportController.php:420
 #: ..//modules/default/controllers/RankingReportController.php:189
 #: ..//modules/default/views/scripts/calls-report/index.phtml:58
-#: ..//modules/default/views/scripts/calls-report/view.phtml:55
+#: ..//modules/default/views/scripts/calls-report/view.phtml:56
 #: ..//modules/default/views/scripts/route/elements/src.phtml:2
 #: ..//modules/default/views/scripts/route/index.phtml:68
 #: ..//modules/default/views/scripts/simulator/index.phtml:47
@@ -4189,7 +4189,7 @@ msgid "Start"
 msgstr ""
 
 #: ..//modules/default/controllers/ServicesReportController.php:207
-#: ..//modules/default/views/scripts/calls-report/view.phtml:63
+#: ..//modules/default/views/scripts/calls-report/view.phtml:64
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:49
 #: ..//modules/default/views/scripts/contacts/addedit.phtml:72
 #: ..//modules/default/views/scripts/contacts/index.phtml:46
@@ -4209,7 +4209,7 @@ msgstr ""
 #: ..//modules/default/controllers/KhompLinksController.php:370
 #: ..//modules/default/controllers/ServicesReportController.php:208
 #: ..//modules/default/views/scripts/calls-report/index.phtml:137
-#: ..//modules/default/views/scripts/calls-report/view.phtml:57
+#: ..//modules/default/views/scripts/calls-report/view.phtml:58
 #: ..//modules/default/views/scripts/notifications/index.phtml:34
 #: ..//modules/default/views/scripts/services-report/view.phtml:38
 #: /Users/fsomensi/Google
@@ -4217,11 +4217,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:179
+#: ..//modules/default/views/scripts/calls-report/view.phtml:180
 msgid "Status Call"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:201
+#: ..//modules/default/views/scripts/calls-report/view.phtml:202
 msgid "Status by Period"
 msgstr ""
 
@@ -4238,7 +4238,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:134
+#: ..//modules/default/views/scripts/calls-report/view.phtml:135
 msgid "Subtotal"
 msgstr ""
 
@@ -4728,8 +4728,8 @@ msgid "Total entries to be exported: "
 msgstr ""
 
 #: ..//modules/default/views/scripts/calls-report/graphic.phtml:32
-#: ..//modules/default/views/scripts/calls-report/view.phtml:187
-#: ..//modules/default/views/scripts/calls-report/view.phtml:211
+#: ..//modules/default/views/scripts/calls-report/view.phtml:188
+#: ..//modules/default/views/scripts/calls-report/view.phtml:212
 msgid "Totals"
 msgstr ""
 
@@ -4784,7 +4784,7 @@ msgstr ""
 msgid "Type "
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:161
+#: ..//modules/default/views/scripts/calls-report/view.phtml:162
 msgid "Type Call"
 msgstr ""
 
@@ -4805,6 +4805,7 @@ msgid "UNMONITORED"
 msgstr ""
 
 #: ..//modules/default/controllers/IpStatusController.php:51
+#: ..//modules/default/views/scripts/calls-report/view.phtml:19
 msgid "UNREACHABLE"
 msgstr ""
 
@@ -5179,7 +5180,7 @@ msgstr ""
 msgid "You'Re Welcome"
 msgstr ""
 
-#: ..//modules/default/views/scripts/calls-report/view.phtml:99
+#: ..//modules/default/views/scripts/calls-report/view.phtml:100
 #: ..//modules/default/views/scripts/sound-files/index.phtml:67
 #: ..//modules/default/views/scripts/sound-files/index.phtml:79
 msgid "Your browser does not support the audio element."

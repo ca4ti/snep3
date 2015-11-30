@@ -14,6 +14,12 @@ try {
     exit ;
 }
 
+// Remove index
+$sql = "alter table peers drop foreign key `peers_ibfk_1` ; ";
+$sql .= "alter table peers drop foreign key `peers_ibfk_2` ; ";
+$stmd = $conn->prepare($sql) ;
+$stmd->execute() ;
+
 // GEt groups list
 $sql = "select id,name,`group` from peers where peer_type = 'R'";
 $stmt = $conn->query($sql) ;
@@ -50,9 +56,9 @@ while($row = $stmt->fetch()) {
         }
     }
 } 
-//$sql = "alter table peers drop column `group` ; drop table `groups`;";
-//$sci = $conn->prepare($sql) ;
-//$sci->execute() ;
+$sql = "alter table peers drop column `group` ; drop table `groups`;";
+$sci = $conn->prepare($sql) ;
+$sci->execute() ;
 
 function altera_regra_negocio($tipo,$id,$name,$grupo,$valor) {
    global $conn ;

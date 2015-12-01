@@ -77,8 +77,12 @@ class RouteController extends Zend_Controller_Action {
                     $entry = "CG:" . $entry['name'];
                     break;
                 case "G" :
-					$entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
-					$entry = "G:" . $entry['name'];
+					if ($entry != "G:all") {
+						$entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
+						$entry = "G:" . $entry['name'];
+					} else {
+		                $entry = "G:" . $this->view->translate('All');
+					}
                     break;
                 case "AL" :
                     $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));

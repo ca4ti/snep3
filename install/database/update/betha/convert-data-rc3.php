@@ -9,6 +9,7 @@ $pwd  = $settings['db.password'];
 $db   = $settings['db.dbname'];
 try {       
    $conn = new PDO('mysql:host='.$host.';dbname='.$db, $user, $pwd) ;
+   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo $e->getMessage();
     exit ;
@@ -19,11 +20,15 @@ $sql = "alter table peers drop foreign key `peers_ibfk_1` ; ";
 $sql .= "alter table peers drop foreign key `peers_ibfk_2` ; ";
 $stmd = $conn->prepare($sql) ;
 $stmd->execute() ;
+$stmd->closeCursor();
 
 // GEt groups list
 $sql = "select id,name,`group` from peers where peer_type = 'R'";
-$stmt = $conn->query($sql) ;
-while($row = $stmt->fetch()) {
+$stmt = $conn->prepare($sql) ;
+$stmt->execute();
+$data = $stmt->fetchAll() ;
+$stmt->closeCursor();
+foreach ($data as $row) {
     $grupo = check_group($row['group']) ;
     // Ajusta grupos de ramais x rtamais
     $sql = 'select * from core_peer_groups where peer_id='.$row['id'].' AND group_id='.$grupo ;
@@ -32,7 +37,8 @@ while($row = $stmt->fetch()) {
     if (  count($res) === 0 ) {
        $sql = 'insert into core_peer_groups (`peer_id`,`group_id`) values ('.$row['id'].','.$grupo.')' ;
         $sci = $conn->prepare($sql) ;
-       $sci->execute() ;
+        $sci->execute() ;
+        $sci->closeCursor();
     } 
     // Ajusta regras de negocio
     $sql = "select id,origem,destino from regras_negocio where origem like '%G:%' or destino like '%G:%'" ;
@@ -66,6 +72,7 @@ function altera_regra_negocio($tipo,$id,$name,$grupo,$valor) {
    $sql='Update regras_negocio set '.$tipo.'="'.$result.'"where id='.$id ;
    $scrn = $conn->prepare($sql) ;
    $scrn->execute() ;
+   $scrn->closeCursor();
 }
 
 
@@ -80,6 +87,7 @@ function check_group($name) {
    } else {
       $stmt = $conn->prepare('insert into  core_groups (`name`) values ("'.$name.'")') ;
       $stmt->execute() ;
+      $stmt->closeCursor();
       $gid = $conn->lastInsertId();
    } 
    return $gid ;

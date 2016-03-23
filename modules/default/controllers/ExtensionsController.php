@@ -163,7 +163,6 @@ class ExtensionsController extends Zend_Controller_Action {
         }
         $this->view->boardData = $boardList;
 
-
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
@@ -190,6 +189,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             
             $postData = $this->_request->getParams();
+            $postData['name'] .= " <".$postData['exten'].">";
 
             if (key_exists('virtual_error', $postData)) {
                 $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
@@ -225,6 +225,13 @@ class ExtensionsController extends Zend_Controller_Action {
         // Load data about exten
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
+        
+        $nameValue = explode("<", $exten['callerid']);
+
+        if(count($nameValue) > 1){
+            $exten['callerid'] = $nameValue[0]; 
+        };
+       
         $this->view->extension = $exten;
             
         // Groups       
@@ -440,9 +447,17 @@ class ExtensionsController extends Zend_Controller_Action {
             $postData = $this->_request->getParams();
 
             $postData["exten"] = $this->_request->getParam("id");
+            
+            // increment in callerid "Name <exten>"
+            $nameValue = explode("<", $postData['name']);
+            if(count($nameValue) <= 1){
+                $postData['name'] .= " <".$postData['exten'].">";
+            }else{
+                $postData['name'] = $nameValue[0]." <".$postData['exten'].">"; 
+            };
 
             $ret = $this->execAdd($postData, true);
-
+            
             if (!is_string($ret)) {
                 $this->_redirect('/extensions/');
             } else {

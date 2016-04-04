@@ -1,43 +1,52 @@
 **A FAZER : PRINCIPAL**
 
-* Tradução e revisão das traduções Pt-BR, EN, ES
-* Correção no comportamento do menu principal
+- Tradução e revisão das traduções Pt-BR, EN, ES
+- Correção no comportamento do menu principal
 - Refatorar rotina de Rotas / Regras Negócio
-- Separar por ABAS: Entradas, Saidas, Outras
+- Regras de NEgócio: Separar por ABAS: Entradas, Saidas, Outras
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
 - Calendario de feriados
 - Rotina das Notificações on-line (fonte/origem)
-
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
 - Rever/redefinir conceitos/funcionalidades para Segurança
-- Rever/Redefinir conceitos/funcionalidades agents
-  - Grupos de agentes
+- Rever/Redefinir conceitos/funcionalidades agents / Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
-
-**A Fazer : Próxima versão - betha-rc3**
-
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Arrumar os ícones para enable/disable das permissões do usuário
-- Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
-- Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- % de uso da CPU nao esta sendo exibido
 - os perfis de acesso devem permitir vinculos
 - Status dos Sistemas Ramais : Rever comportamento
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
-  - + de 1 grupo por ramal
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)
+
+---------------------------------
+**Release 1.0-Betha-rc3**
+
+- Corrigido: - % de uso da CPU nao esta sendo exibido
+- Corrigido: Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
+- Criada view para o menu de Informações
+- Corrigido os ícones para enable/disable das permissões do usuário
+- Corrigido problema que exibia mensagem de erro abaixo da view em execução
+- Redefinido Grupos de Ramais para permitir + de 1 grupo por ramal
+- Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
+- Corrigido erros na exibicao de status e latencia de troncos em Status >> Status IP
+- Cadastro usuário portal ITC agora permite qualquer caracter para a senha - compatibilizar com portal ITC
+- Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
+- Removido do Dashboard : Atalho para "buscar gravacoes" (record-report)
+- Ajustes em strings de tradução    
+- Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,friend)
+- Ajustes para remover diversos Warning e Notices do console do apache
+
 
 ---------------------------------
 **Release 1.0-Betha-rc2**

@@ -40,10 +40,7 @@ INSERT INTO `expr_alias_expression` VALUES (1,'[2-5]XXXXXXX'),(2,'[6-9]XXXXXXX')
 --
 -- Default group extension
 --
-INSERT INTO groups VALUES ('all',null);
-INSERT INTO groups VALUES ('admin','all');
-INSERT INTO groups VALUES ('users','all');
-INSERT INTO groups VALUES ('NULL',null);
+INSERT INTO `core_groups` (`name`) VALUES ('Default');
 
 --
 -- Default contacts group
@@ -77,8 +74,7 @@ INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('a
 --
 -- Default pickup group
 --
-INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES
-(1, 'GERAL');
+INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES (1, 'GERAL');
 
 --
 -- Default queue group

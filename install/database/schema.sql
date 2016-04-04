@@ -145,16 +145,6 @@ CREATE TABLE IF NOT EXISTS `grupos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `groups`
---
-CREATE TABLE IF NOT EXISTS `groups` (
-    name varchar(50) PRIMARY KEY,
-    inherit varchar(50),
-    FOREIGN KEY (inherit) REFERENCES groups(name) ON UPDATE CASCADE
-)ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-
---
 -- Table structure for table `peers`
 --
 CREATE TABLE IF NOT EXISTS `peers` (
@@ -209,7 +199,6 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `authenticate` boolean not null default false,
   `subscribecontext` varchar(40) default NULL,
   `trunk` varchar(3) NOT NULL,
-  `group` varchar(50) NOT NULL DEFAULT 'users',
   `time_total` int(11) default NULL,
   `time_chargeby` char(1) default NULL,
   `regserver` varchar(20) default NULL,
@@ -221,7 +210,6 @@ CREATE TABLE IF NOT EXISTS `peers` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),
-  FOREIGN KEY (`group`) REFERENCES groups(`name`) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (`pickupgroup`) REFERENCES grupos(`cod_grupo`) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -715,6 +703,28 @@ CREATE TABLE IF NOT EXISTS `core_binds` (
   CONSTRAINT `binds_peer_refs_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Table structure for table `core_groups`
+--
+CREATE TABLE `core_groups` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(50) NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `core_peer_groups`
+--
+CREATE TABLE `core_peer_groups` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `peer_id` int(11) NOT NULL,
+    `group_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `group_id` (`group_id`),
+    KEY `peer_id` (`peer_id`),
+    CONSTRAINT `core_peer_groups_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `core_groups` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `core_peer_groups_ibfk_2` FOREIGN KEY (`peer_id`) REFERENCES `peers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  ;
 
 --
 -- Table structure for table `password_recovery`

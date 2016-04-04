@@ -60,7 +60,7 @@ class RouteController extends Zend_Controller_Action {
             $this->view->translate("No Destiny"),
             $this->view->translate("Any"),
             $this->view->translate("Trunk") . ": ",
-            "",
+            $this->view->translate("Regex") . ": ",
             $this->view->translate("Extension") . ": ",
             $this->view->translate("Alias RegEx") . ": ",
             $this->view->translate("Contact Group") . ": ",
@@ -77,9 +77,12 @@ class RouteController extends Zend_Controller_Action {
                     $entry = "CG:" . $entry['name'];
                     break;
                 case "G" :
-                    $entry = strtolower(substr($entry,2)) === "all" ? "G:".$this->view->translate('All') : $entry;
-                    $entry = strtolower(substr($entry,2)) === "admin" ? "G:".$this->view->translate('Administrator') : $entry;
-                    $entry = strtolower(substr($entry,2)) === "users" ? "G:".$this->view->translate('Users') : $entry;
+					if ($entry != "G:all") {
+						$entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
+						$entry = "G:" . $entry['name'];
+					} else {
+		                $entry = "G:" . $this->view->translate('All');
+					}
                     break;
                 case "AL" :
                     $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));
@@ -177,18 +180,11 @@ class RouteController extends Zend_Controller_Action {
             $this->form = $form;
 
            
-            $groups = Snep_ExtensionsGroups_Manager::getAllGroup();
+            $groups = Snep_ExtensionsGroups_Manager::getAll();
             $group_list = "";
             $group_list .= "[\"all\", \"{$this->view->translate('All')}\"],";
             foreach ($groups as $group) {
-                if (strtolower($group['name']) === 'admin' ) {
-                    $name = $this->view->translate('Administrator') ;
-                } elseif (strtolower($group['name']) === 'users') {
-                    $name = $this->view->translate('Users') ;
-                } else {
-                    $name = $group['name'] ;
-                }
-                $group_list .= "[\"{$group['name']}\", \"{$name}\"],";
+                $group_list .= "[\"{$group['id']}\", \"{$group['name']}\"],";
             }
             
             $group_list = "[" . trim($group_list, ",") . "]";

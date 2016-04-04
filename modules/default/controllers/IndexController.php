@@ -322,7 +322,7 @@ class IndexController extends Zend_Controller_Action {
             
             $dados = $this->_request->getParams();
             
-            foreach($dados['dash'] as $key => $enabled){
+            foreach($dados['dash'] as $key => $value){
                 $dashboard[] = $key;
             }
 

@@ -80,6 +80,7 @@ class ErrorController extends Zend_Controller_Action {
             $this->renderScript('error/sneperror.phtml');
      */
     public function sneperrorAction() {
+
         $error_type = $this->_request->getParam('error_type') ;
         $error_title = $this->_request->getParam('error_title') ;
         $error_message = $this->_request->getParam('error_message') ;
@@ -93,7 +94,7 @@ class ErrorController extends Zend_Controller_Action {
         }
         if (isset($error_message)) {
             $this->view->error_message = $error_message;
-        }
+        } 
         if (isset($error_buttons)) {
             $this->view->error_buttons = $error_buttons;
         }

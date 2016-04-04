@@ -329,7 +329,8 @@ class PBX_Rule {
                 break;
             case 'G':
                 if ($this->request->getSrcObj() instanceof Snep_Usuario) {
-                    return PBX_Usuarios::hasGroupInheritance($expr, $this->request->getSrcObj()->getGroup());
+                    //return PBX_Usuarios::hasGroupInheritance($expr, $this->request->getSrcObj()->getGroup())
+                    return PBX_Usuarios::hasExtenGroup($expr,$value);
                 } else {
                     return false;
                 }
@@ -732,7 +733,7 @@ class PBX_Rule {
                     $peer = false;
                 }
 
-                if ($peer instanceof Snep_Usuario && PBX_Usuarios::hasGroupInheritance($dst['value'], $peer->getGroup())) {
+                if ($peer instanceof Snep_Usuario && PBX_Usuarios::hasExtenGroup($dst['value'], $extension)) {
                     return true;
                 }
             } else if ($this->checkExpr($dst['type'], $dst['value'], $extension)) {

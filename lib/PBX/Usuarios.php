@@ -86,7 +86,7 @@ class PBX_Usuarios {
         $user = new Snep_Exten($usuario->name, $usuario->password, $usuario->callerid, $interface);
 	
 
-        $user->setGroup($usuario->group);
+        //$user->setGroup($usuario->group);
 
         if ($usuario->authenticate === 1) {
             $user->lock();
@@ -186,6 +186,23 @@ class PBX_Usuarios {
         $acl->deny();
         $acl->allow($parent);
         return $acl->isAllowed($node);
+    }
+
+    public static function hasExtenGroup($group,$exten) {
+        if ($group === 'all') {
+            return true ;
+        }
+        $db = Snep_Db::getInstance();
+
+        $select = $db->select()
+            ->from('core_peer_groups')
+            ->joinInner('peers','peers.id = core_peer_groups.peer_id')
+            ->where('peers.name = '.$exten)
+            ->where('core_peer_groups.group_id = '.$group);
+
+        $stmt = $db->query($select);
+        return  $stmt->fetchAll();
+        
     }
 
 }

@@ -66,7 +66,7 @@ class CostCenterController extends Zend_Controller_Action {
 
         $this->view->types = array(
             'E' => $this->view->translate('Incoming'),
-            'S' => $this->view->translate('Outgoing '),
+            'S' => $this->view->translate('Outgoing'),
             'O' => $this->view->translate('Other'));
         
         $this->view->costcenter = $data;

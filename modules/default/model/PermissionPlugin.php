@@ -28,7 +28,7 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Iago Uilian Berndt <iagouilian@gmail.com>
- * $edited    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ * @edited    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
  * 
  */
 class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
@@ -38,7 +38,7 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
     }
 
     /**
-     * preDispatch - Verifica se o usuaria tem permissão para acesso a view,
+     * preDispatch - Verifica se o usuario tem permissão para acesso a view,
      * Se não tiver permissão é redirecionado e força o zend a finaliziar imediatamente
      * @param Zend_Controller_Request_Abstract $request
      * @return type
@@ -76,10 +76,11 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
 
                 if (!$result) {
                     $redirect = new Zend_Controller_Action_Helper_Redirector();
-                    $redirect->gotoSimpleAndExit("error-unset", "permission", "default");
+                    $redirect->gotoSimpleAndExit("error", "permission","default") ;
                 } elseif (!$result['allow']) {
                     $redirect = new Zend_Controller_Action_Helper_Redirector();
                     $redirect->gotoSimpleAndExit("error", "permission", "default");
+                     
                 }
             }
         }

@@ -100,8 +100,8 @@ class ContactGroupsController extends Zend_Controller_Action {
             if (count($newId) > 1) {
                 $form_isValid = false;
 
-                $this->view->error = $this->view->translate("Name already exists.");
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }
             
             if ($form_isValid) {
@@ -159,8 +159,8 @@ class ContactGroupsController extends Zend_Controller_Action {
 
             if (count($newId) > 1 && $dados['group'] != $group['name']) {
                 $form_isValid = false;
-                $this->view->error = $this->view->translate("Name already exists.");
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }
 
             if ($form_isValid) {

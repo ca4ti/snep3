@@ -9,7 +9,6 @@
 - Ajustes CSS
 - Calendario de feriados
 - Rotina das Notificações on-line (fonte/origem)
-
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
@@ -17,30 +16,44 @@
 - Rever/Redefinir conceitos/funcionalidades agents
   - Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
-
-**A Fazer : Próxima versão - betha-rc3**
-
+- Sigame : aceitar chamadas vindas do proprio siga-me (1000 ativa siga-me para 1005 - aceitar somente chamadas do 1005)
+- Cadastro troncos :  verificar peer_type x type ao salvar tronco SIP
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Arrumar os ícones para enable/disable das permissões do usuário
-- Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
 - Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- % de uso da CPU nao esta sendo exibido
-- os perfis de acesso devem permitir vinculos
-- Status dos Sistemas Ramais : Rever comportamento
+- Os perfis de acesso devem permitir vinculos
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
-  - + de 1 grupo por ramal
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
-  - Grupos para destino (ringall)
+  - Grupos para destino (ringall)   
+  - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais)
+  - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 
 ---------------------------------
-**Release 1.0-Betha-rc2**
+**Release - betha-rc3 **
+
+FEITO - % de uso da CPU nao esta sendo exibido
+FEITO - Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
+FEITO - Criada view para o menu de Informações
+FEITO - Arrumar os ícones para enable/disable das permissões do usuário
+FEITO - Corrigido problema que exibia mensagem de erro abaixo da view em execução
+FEITO - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais : + de 1 grupo por ramal
+FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
+FEITO - Corrigido erros na exibicao de status e latencia de troncos em Status >> Status IP
+FEITO - Cadastro usuário portal ITC agora permite qualquer caracter para a senha - comaptibilizar com portal ITC
+FEITO - Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
+FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report) 
+FEITO - Ajustes em strings de tradução
+FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,friend)
+FEITO - Ajustes para remover diversos Warning e Notices do console do apache
+
+---------------------------------
+**Release Betha-rc2**
 
 - Contatos: Alterada base de leitura de cidades e estados, retirada a obrigatoriedade de cidade e estado do cadastro.
 - Corrigido: Ramais cadastrados como IAX sendo exibidos como SIP ao alterar
@@ -54,7 +67,7 @@
 - Ajustes na exibição do status do sistema / controle do temporizador para atualização do status
 
 ---------------------------------
-**Release 1.0-Betha-rc1**
+**Release Betha-rc1**
 
 - Ajustes diversos no SQL inicial e dados iniciais
 - Ajustes para leitura do arquivo de áudio de acordo com language selecionada
@@ -81,7 +94,7 @@
 - Filas - Corrigido: Não funciona os anuncios ao chamador (tipo: Você é o proximo a ser atendido....")
 
 ---------------------------------
-**Release 1.0-alpha**
+**Release Alpha**
 
 - Nova interface
 - Conectado com a ITC  (www.intercomunexao.com.br)

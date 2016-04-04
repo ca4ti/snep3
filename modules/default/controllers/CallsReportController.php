@@ -60,39 +60,19 @@ class CallsReportController extends Zend_Controller_Action {
         $test = new Permissions();
         $response = $test->getTests();
 
-        // Populate groups
-        $groupLib = new Snep_GruposRamais();
-        $groupsTmp = $groupLib->getAll();
+        // Peer groups
+        $peer_groups = Snep_ExtensionsGroups_Manager::getAll() ;
+        array_unshift($peer_groups, array('id' => '0', 'name' => ""));
+        $this->view->groups = $peer_groups;
 
-        $groupsData = array();
-
-        foreach ($groupsTmp as $key => $group) {
-            switch ($group['name']) {
-                case 'administrator':
-                    $groupsData[$this->view->translate('Administrators')] = $group['name'];
-                    break;
-                case 'users':
-                    $groupsData[$this->view->translate('Users')] = $group['name'];
-                    break;
-                case 'all':
-                    $groupsData[$this->view->translate('All')] = $group['name'];
-                    break;
-                default:
-                    $groupsData[$group['name']] = $group['name'];
-            }
-        }
-        array_unshift($groupsData, " ");
-        $this->view->groups = $groupsData;
-
+        // Cost Centers
         $this->view->costs = Snep_CostCenter_Manager::getAll(); 
         
         $locale = Snep_Locale::getInstance()->getLocale();
         $this->view->datepicker_locale =  Snep_Locale::getDatePickerLocale($locale) ;
 
         if ($this->_request->getPost()) {
-            
             $this->viewAction();
-           
         }
 
     }
@@ -152,6 +132,7 @@ class CallsReportController extends Zend_Controller_Action {
             if($formData['duration_end'] != "")
                 $param['time_call_end'] = $formData['duration_end'];
 
+            // Peer groups of src and dst
             if($formData['selectSrc'] != "0"){
                 $param['groupsrc'] = $formData['selectSrc'];
             }
@@ -160,6 +141,7 @@ class CallsReportController extends Zend_Controller_Action {
                 $param['groupdst'] = $formData['selectDst'];
             }
 
+            // Peer list od src or dst
             if($formData['groupSrc'] != ""){
                 $param['src'] = $formData['groupSrc'];
                 $param['order_src'] = $formData['order_src'];
@@ -177,6 +159,7 @@ class CallsReportController extends Zend_Controller_Action {
 
             }
 
+            $record = false;
             if(isset($formData['record'])){
                 $param['record'] = true;
                 $record = true;
@@ -205,6 +188,7 @@ class CallsReportController extends Zend_Controller_Action {
             foreach($param as $key => $value){
                 $link .= '&'.$key.'='.$value;
             }
+
 
             // Limit on select
             $limit = '0,' .$line_limit;
@@ -390,7 +374,7 @@ class CallsReportController extends Zend_Controller_Action {
                 
                 }else{
                         
-                    $this->view->error_message = $this->view->translate("No entries found");
+                    $this->view->error_message = $this->view->translate("No entries found.");
                     $this->renderScript('error/sneperror.phtml');
 
                 }                    

@@ -1,12 +1,28 @@
 <?php
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallistbox.css" );
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallistbox.css" );
 ?>
 <script type="text/javascript" src="/snep/includes/javascript/jquery.bootstrap-duallistbox.js"></script>
 
 <div class="row">
-                
+
     <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "extensions-groups", "action" => $this->action), null, false); ?>" METHOD="post">
-        
+
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Name");?></label>
             <div class="col-sm-6">
@@ -14,35 +30,19 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
             </div>
         </div>
 
-        <div class="form-group">
-            
-            <label class="col-sm-2 control-label"><?php echo $this->translate("Group Type: ");?></label>
-            <div class="col-sm-6">    
-    			<label class="radio-inline">
-    				<input type="radio" name="type"  value="all" <?php echo ($this->type === 'all' ? 'checked' : '');?> ><?php echo $this->translate("Administrator");?>
-    			</label>
-
-    			<label class="radio-inline">
-    				<input type="radio" name="type"  value="users" <?php echo ($this->type === 'users' ? 'checked' : '');?> > <?php echo $this->translate("User");?>
-    			</label>
-
-    			<label class="radio-inline">
-    				<input type="radio" name="type"  value="NULL" <?php echo ($this->type === 'NULL' ? 'checked' : '');?>><?php echo $this->translate("None");?>
-    			</label>
-            </div>
-
-        </div>
-
         <select multiple="multiple" size="10" name="duallistbox_group[]" id="select">
-   
-      	    <?php foreach($this->extensionsAll as $extension){ ?>      
-      	    	<option value="<?php echo $extension['name'];?>"><?php echo $extension['name'] . ' ( ' . $this->translate('Actual group') . ': ' . $extension['group'] . ' )';?></option>
+      	    <?php foreach($this->noGroupExtensions as $extension){ ?>
+      	    	<option value="<?php echo $extension['peer_id'];?>">
+                    <?php echo $extension['name'] . ' ( ' . $extension['group_name'] . ' )';?>
+                </option>
       	    <?php }?>
-      	    
+
       	    <?php foreach($this->groupExtensions as $extension){?>
-      		    <option value="<?php echo $extension['name'];?>" selected="selected"><?php echo $extension['name'] ;?></option>
+      		    <option value="<?php echo $extension['peer_id'];?>" selected="selected">
+                    <?php echo $extension['name'] . $extension['group_name']  ;?>
+                </option>
       	    <?php } ?>
-        </select>	
+        </select>
 
         <br>
         <div class="snep-body-footer-buttons">
@@ -58,7 +58,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
 <script type="text/javascript">
 
 jQuery.noConflict();
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
     jQuery('#defaultForm').validate({
         rules: {
             name: {
@@ -71,9 +71,9 @@ jQuery(document).ready(function(){
         messages: {
             name: {
                 required: "<?php echo $this->translate('The name is required'); ?>",
-                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
                 maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only.'); ?>" 
+                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only.'); ?>"
             }
         },
         highlight: function(element) {
@@ -85,7 +85,7 @@ jQuery(document).ready(function(){
             .closest('.control-group').removeClass('error').addClass('success');
         }
     });
-}); 
+});
 
 var profile = jQuery('select[name="duallistbox_group[]"]').bootstrapDualListbox({
     selectedListLabel: "<?php echo $this->translate('In group extensions'); ?>" ,

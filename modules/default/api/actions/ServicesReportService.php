@@ -67,12 +67,11 @@ class ServicesReportService implements SnepService {
     	if(isset($_GET['group_select'])){
 
 	        $groupsrc = $_GET['group_select'];
-	            
-	        $select = "SELECT name FROM peers WHERE `group` = '$groupsrc' ";
-	        $origens = $db->query($select)->fetchAll();
+	   
+	        $origens = Snep_ExtensionsGroups_Manager::getExtensionsGroup($groupsrc);
 	            
 	        if (count($origens) == 0) {
-	            return array("status" => "fail", "message" => "errorgroup");
+	            return array("status" => "fail", "message" => "No have extensions in group.");
 	        } else {
 	            $ramalsrc = "";
  

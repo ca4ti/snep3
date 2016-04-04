@@ -84,13 +84,13 @@ class Snep_InterfaceConf {
                     }
                     $allow = substr($allow, 0, strlen($allow) - 1);
 
-                    if ($peer['peer_type'] == 'T') {
+                    if ($peer['peer_type'] === 'T') {
 
                         $select = $db->select()->from('trunks')->where("name = {$peer['name']}")->limit(1);
                         $trunk = $db->query($select)->fetchObject();
 
 
-                        if ($trunk->type == "SNEPSIP") {
+                        if ($trunk->type === "SNEPSIP") {
 
                             /* Assemble trunk entries */
                             $peers .= '[' . $peer['defaultuser'] . "]\n";
@@ -103,7 +103,7 @@ class Snep_InterfaceConf {
                             $peers .= 'disallow=' . $peer['disallow'] . "\n";
                             $peers .= 'allow=' . $allow . "\n";
                             $peers .= "\n";
-                        } else if ($trunk->type == "SNEPIAX2") {
+                        } else if ($trunk->type === "SNEPIAX2") {
                             /* Assemble Extension entries */
                             $peers .= '[' . $peer['defaultuser'] . "]\n";
                             $peers .= 'type=' . $peer['type'] . "\n";
@@ -149,7 +149,8 @@ class Snep_InterfaceConf {
                                 $peers .= 'trunk=' . $peer['trunk'] . "\n";
                             }
                             if ($trunk->reverse_auth) {
-                                $peers .= 'defaultuser=' . $peer['defaultuser'] . "\n";
+                                $name_of_user = $trunk->type == "IAX2" ? 'username=' : 'defaultuser=';
+                                $peers .=  $name_of_user . $peer['defaultuser'] . "\n";
                                 $peers .= 'secret=' . $peer['secret'] . "\n";
                             }
                             $peers .= "\n";

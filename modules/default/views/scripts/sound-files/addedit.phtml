@@ -12,21 +12,21 @@
     <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "sound-files", "action" => $this->action), null, true); ?>" method="post" enctype="multipart/form-data">
         
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="inputFile"><?php echo $this->translate("Select the File");?></label>
+            <label class="col-sm-3 control-label" for="inputFile"><?php echo $this->translate("Select the File");?></label>
                 <div class="col-sm-6">
                     <input type="file" id="inputFile" name="inputFile" value='<?php echo $this->sound['arquivo'];?>'  >
                  </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $this->translate("Description");?></label>
+            <label class="col-sm-3 control-label"><?php echo $this->translate("Description");?></label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="description" id="description" placeholder='<?php echo $this->translate("Description")?>' value='<?php echo $this->sound['descricao'];?>'/>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $this->translate("Converte to GSM")?></label>
+            <label class="col-sm-3 control-label"><?php echo $this->translate("Converte to GSM")?></label>
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label>
@@ -64,7 +64,7 @@ jQuery(document).ready(function(){
             <?php endif ?>
             description: {
                 required: true,
-                minlength: 3,
+                minlength: 1,
                 maxlength: 80
             }
         },

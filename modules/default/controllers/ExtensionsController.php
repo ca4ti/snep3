@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -15,6 +15,12 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ *  controller for extensions
+ * 
+ *  @author : Opens developers team
+ *  @package : snep
+ * 
  */
 require_once "includes/AsteriskInfo.php";
 
@@ -143,7 +149,6 @@ class ExtensionsController extends Zend_Controller_Action {
         }
         $this->view->boardData = $boardList;
 
-
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
@@ -169,7 +174,8 @@ class ExtensionsController extends Zend_Controller_Action {
         // After POST
         if ($this->getRequest()->isPost()) {
             
-            $data = $this->_request->getParams();
+            $postData = $this->_request->getParams();
+            $postData['name'] .= " <".$postData['exten'].">";
 
             if (key_exists('virtual_error', $data)) {
                 $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
@@ -201,8 +207,21 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Edit")));
 
         // Load data about exten
+<<<<<<< HEAD
         $exten = Snep_Extensions_Manager::getPeer($id);
         $this->view->extension = $exten ;
+=======
+        $extenUtil = new Snep_Extensions();
+        $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
+        
+        $nameValue = explode("<", $exten['callerid']);
+
+        if(count($nameValue) > 1){
+            $exten['callerid'] = $nameValue[0]; 
+        };
+       
+        $this->view->extension = $exten;
+>>>>>>> 4cf2c75cf71d7b613a3ea80a1425a4d8d7bde5bc
             
         // Groups       
         $this->view->pickupGroups = $this->pickupGroups;
@@ -424,9 +443,17 @@ class ExtensionsController extends Zend_Controller_Action {
             $postData = $this->_request->getParams();
 
             $postData["exten"] = $this->_request->getParam("id");
+            
+            // increment in callerid "Name <exten>"
+            $nameValue = explode("<", $postData['name']);
+            if(count($nameValue) <= 1){
+                $postData['name'] .= " <".$postData['exten'].">";
+            }else{
+                $postData['name'] = $nameValue[0]." <".$postData['exten'].">"; 
+            };
 
             $ret = $this->execAdd($postData, true);
-
+            
             if (!is_string($ret)) {
                 $this->_redirect('/extensions/');
             } else {

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -15,6 +15,12 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  Add and Update view for extensions
+ * 
+ *  @author : Opens developers team
+ *  @package : snep
+ * 
  */
 ?>
 <script src="/snep/includes/javascript/password.js"></script> 
@@ -30,7 +36,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Extension");?></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['name']?>" <?php echo $this->disabled;?>>
+                            <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['name']?>" onChange="showDiv(this.value);" <?php echo $this->disabled;?>>
                         </div>
                     </div>
 

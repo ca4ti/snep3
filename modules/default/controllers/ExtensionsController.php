@@ -887,7 +887,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $data["id"] = $i;
                                 $data["exten"] = $i;
                                 $data["password"] = $i . $i;
-                                $data["name"] = $this->view->translate("Extension ") . " " . $i ;
+                                $data["name"] = $this->view->translate("Extension ") . " <" . $i.">" ;
                                 $data["sip"]["password"] = $i . $i;
                                 $data["iax2"]["password"] = $i . $i;
                                 $data['type'] = 'friend' ;

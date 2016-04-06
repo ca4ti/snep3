@@ -59,6 +59,9 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
+
+
+
         
     }
 
@@ -71,7 +74,14 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
 
-        $this->extenGroups = Snep_ExtensionsGroups_Manager::getAll();
+        $this->extenGroups = Snep_ExtensionsGroups_Manager::getAllGroup();
+        $this->view->extenGroups = array() ;
+        foreach ($this->extenGroups as $key => $value) {
+            $k = $v = $value['name'] ;
+            $v = strtolower($v) === 'admin' ? $this->view->translate('Administrator') : $v ;
+            $v = strtolower($v) === 'users' ? $this->view->translate('Users') : $v ;
+            $this->view->extenGroups[$k] = $v ;
+        }
 
         $this->pickupGroups = Snep_PickupGroups_Manager::getAll();
 
@@ -86,19 +96,29 @@ class ExtensionsController extends Zend_Controller_Action {
     /**
      * indexAction - List extensions
      */
-    
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions")));
 
-        $extensions = Snep_Extensions_Manager::getAll();
         
-        if(empty($extensions)){
+        $db = Zend_Registry::get('db');
+        $select = $db->select()->from("peers", array(
+            "id" => "id",
+            "exten" => "name",
+            "name" => "callerid",
+            "channel" => "canal",
+            "group"));
+        $select->where("peer_type='R'");
+
+        $stmt = $db->query($select);
+        $data = $stmt->fetchAll(); 
+
+        if(empty($data)){
             $this->view->error_message = $this->view->translate("You do not have registered extensions. <br><br> Click 'Add Extensions' ou 'Multi Add Extensions' to make the first registration");
         }
 
-        $this->view->extensions = $extensions;
+        $this->view->extensions = $data;
 
     }
 
@@ -114,13 +134,13 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Add"))); 
 
         $this->view->pickupGroups = $this->pickupGroups;
-        $this->view->extenGroups = $this->extenGroups;
-        // Set ExtensionGroup  "Default" 
-        $this->view->extenInGroup = array('1' => "");
+
 
         // Mont codec's list and sets the default codec for each option
         $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
-        $codec1 = $codec2 = $codec3 = "";
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
         foreach($codecsDefault as $key => $value){
             $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
             $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
@@ -177,18 +197,20 @@ class ExtensionsController extends Zend_Controller_Action {
             $postData = $this->_request->getParams();
             $postData['name'] .= " <".$postData['exten'].">";
 
-            if (key_exists('virtual_error', $data)) {
+            if (key_exists('virtual_error', $postData)) {
                 $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
                 $this->renderScript('error/sneperror.phtml');
             }
 
-            $ret = $this->execAdd($data);
+            $ret = $this->execAdd($postData);
 
             if (!is_string($ret)) {
+
                 $this->_redirect('/extensions/');
             } else {
-                $message = $ret;
-                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
+                $this->view->error_message = $ret;
+                $this->renderScript('error/sneperror.phtml');
+
             }
             
         }
@@ -207,10 +229,6 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Edit")));
 
         // Load data about exten
-<<<<<<< HEAD
-        $exten = Snep_Extensions_Manager::getPeer($id);
-        $this->view->extension = $exten ;
-=======
         $extenUtil = new Snep_Extensions();
         $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
         
@@ -221,18 +239,10 @@ class ExtensionsController extends Zend_Controller_Action {
         };
        
         $this->view->extension = $exten;
->>>>>>> 4cf2c75cf71d7b613a3ea80a1425a4d8d7bde5bc
             
         // Groups       
         $this->view->pickupGroups = $this->pickupGroups;
-        $this->view->extenGroups = $this->extenGroups;
-
-        $extenInGroup = array();
-        foreach(Snep_ExtensionsGroups_Manager::getGroupsExtensions($exten['id']) as $key => $value){
-            $extenInGroup[$value['group_id']] = "";
-        }
-        $this->view->extenInGroup = $extenInGroup;
-
+        
         // Tech Type
         if (!$exten["canal"] || $exten["canal"] == 'INVALID' || substr($exten["canal"], 0, strpos($exten["canal"], '/')) == '') {
             $techType = 'manual';
@@ -474,6 +484,7 @@ class ExtensionsController extends Zend_Controller_Action {
     protected function execAdd($formData, $update = false) {
 
         $db = Zend_Registry::get('db');
+
         $exten = $formData["exten"];
         $sqlValidName = "SELECT * from peers where name = '$exten'";
         $selectValidName = $db->query($sqlValidName);
@@ -482,7 +493,7 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($resultGetId && !$update) {
             return $this->view->translate('Extension already taken. Please, choose another denomination.');
         } else if ($update) {
-            $idExten = $resultGetId['id'];
+            $idExt = $resultGetId['id'];
         }
 
         $context = 'default';
@@ -558,6 +569,8 @@ class ExtensionsController extends Zend_Controller_Action {
         $advVoiceMail = 'no';
         if (key_exists("voicemail", $formData)) {
             $advVoiceMail = 'yes';
+        } else {
+            $advVoiceMail = 'no';
         }
 
         if (key_exists("authenticate", $formData)) {
@@ -611,31 +624,28 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql.= "outgoinglimit='1', incominglimit='1',";
             $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
             $sql.= "nat='$nat',canal='$channel', authenticate=$advPadLock, ";
-            $sql.= "`directmedia`='$directmedia',";
-            $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType', cancallforward='$advCancallforward'";
-            $sql.= "  WHERE id=$idExten";
+            $sql.= "`group`='$extenGroup', `directmedia`='$directmedia',";
+            $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType', cancallforward='$advCancallforward'  WHERE id=$idExt";
         } else {
             $sql = "INSERT INTO peers (";
             $sql.= "name, password,callerid,context,mailbox,qualify,";
             $sql.= "secret,type,allow,fromuser,defaultuser,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
-            $sql.= "trunk, callgroup, time_total, cancallforward, directmedia, ";
+            $sql.= "trunk, `group`, callgroup, time_total, cancallforward, directmedia, ";
             $sql.= "time_chargeby " . $sqlFieldsExten;
             $sql.= ") values (";
             $sql.= "'$exten','$extenPass','$extenName','$context','$exten','$qualify',";
             $sql.= "'$secret','$type','$allow','$exten','$exten','$fullcontact',";
             $sql.= "'$dtmfmode','$advEmail','$callLimit','1',";
-            $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',$advPadLock,";
-            $sql.= "'no','$extenPickGrp', $advTimeTotal, '$advCancallforward', '$directmedia', ";
-            $sql.= "'$advCtrlType' " . $sqlDefaultValues;
+            $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',";
+            $sql.= "$advPadLock,'no','$extenGroup',";
+            $sql.= "'$extenPickGrp', $advTimeTotal, '$advCancallforward', '$directmedia', '$advCtrlType' " . $sqlDefaultValues;
             $sql.= ")";
         }
 
         $stmt = $db->query($sql);
-        if (! $update) {
-           $idExten = $db->lastInsertId();
-        }
+        $idExten = $db->lastInsertId();
 
         if ($advVoiceMail == 'yes') {
             if ($update) {
@@ -647,14 +657,6 @@ class ExtensionsController extends Zend_Controller_Action {
             $stmt = $db->prepare($sql);
             $stmt->execute();
         }
-        if (isset($extenGroup)) {
-            $extensions_group = Snep_ExtensionsGroups_Manager::getGroupsExtensions($idExten);
-        } else {
-            $extensions_group = array();
-        }
-
-        // Update table core_peer_groups
-        Snep_ExtensionsGroups_Manager::updateGroupsExtension($idExten,$extensions_group,$extenGroup) ;
 
         Snep_InterfaceConf::loadConfFromDb();
 
@@ -671,11 +673,25 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Extensions"),
                     $this->view->translate("Delete")));
 
-        $exten = $this->_request->getParam("id");
+        $db = Zend_Registry::get('db');
+        $id = $this->_request->getParam("id");
+
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');;
+            return;
+        }
+        if (!$data = $astinfo->status_asterisk("khomp links show concise", "", True)) {
+
+            $this->view->error_message = $this->view->translate("Socket connection to the server is not available at the moment.");
+            $this->renderScript('error/sneperror.phtml');;
+        }
 
         //checks if the exten is used in the rule 
-        $rules = Snep_Extensions_Manager::getValidation($exten);
-        $rulesQuery = Snep_Extensions_Manager::getValidationRules($exten);
+        $rules = Snep_Extensions_Manager::getValidation($id);
+        $rulesQuery = Snep_Extensions_Manager::getValidationRules($id);
         $rules = array_merge($rules, $rulesQuery);
 
         if (count($rules) > 0) {
@@ -686,29 +702,27 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->error_message = $errMsg;
             $this->view->back = $this->view->translate("Back");
             $this->renderScript('error/sneperror.phtml');
-
         } else {
 
-            $this->view->id = $exten;
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+                Snep_LogUser::salvaLog("Excluiu Ramal", $id, 5);
+                $add = Snep_Extensions_Manager::getPeer($id);
+                Snep_Extensions_Manager::insertLogRamal("DEL", $add);
+            }
+
+            $this->view->id = $id;
             $this->view->remove_title = $this->view->translate('Delete Extension.'); 
             $this->view->remove_message = $this->view->translate('The extension will be deleted. After that, you have no way get it back.'); 
             $this->view->remove_form = 'extensions'; 
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
-
-                $exten = $_POST['id'];
-                $db = Zend_Registry::get('db');
-                $sql = "SELECT id from peers where name = '$exten'";
-                $stmt = $db->query($sql);
-                $result = $stmt->fetch();       
-                $idExten = $result['id'];
+                
+                Snep_Extensions_Manager::remove($_POST['id']);
+                Snep_Extensions_Manager::removeVoicemail($_POST['id']);
 
                 try {
-                    
-                    Snep_Extensions_Manager::remove($exten);
-                    Snep_Extensions_Manager::removeVoicemail($exten);
-                    Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);             
                     
                 } catch (PDOException $e) {
                     $db->rollBack();
@@ -739,85 +753,49 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Delete Multiples")));
 
         if ($this->getRequest()->isPost()) {
+           
 
-            $data = $this->_request->getParams();
-            $range = array() ;
-            // Mount extensions list 
-            if (isset($data['exten'])) {
-                $range = explode(";", $data["exten"]);
-                $data = $data["exten"];
-            }
+            $postData = $this->_request->getParams();
+
+            $this->view->id = $postData["exten"];
+            $this->view->remove_title = $this->view->translate('Delete Extension Multiples.'); 
+            $this->view->remove_message = $this->view->translate('The extensions will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'extensions'; 
+            $this->renderScript('extensions/multiremove.phtml');
             
-            foreach ($range as $exten) {
-                if (is_numeric($exten)) {
-                    $extensions[$exten]="" ;
-                }else{
-                    $exten = explode(";", $exten);
-                    foreach ($exten as $extension) {
-                        $rangeToAdd = explode('-', $extension);
+            if($_POST['id']){
+                
+                $range = explode(";", $_POST["id"]);
+                foreach ($range as $exten) {
 
-                        if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
-                            $start = (int) $rangeToAdd[0];
-                            $end = (int) $rangeToAdd[1];
-                            while ($start <= $end) {
-                                $extensions[$start] = "";
-                                $start++;
+                    if ($this->view->error)
+                        break;
+                    
+                    if (is_numeric($exten)) {
+
+                        Snep_Extensions_Manager::remove($exten);
+                        Snep_Extensions_Manager::removeVoicemail($exten);
+                        
+                    } else {
+
+                        $exten = explode(";", $exten);
+
+                        foreach ($exten as $extension) {
+                            $rangeToAdd = explode('-', $extension);
+
+                            if (is_numeric($rangeToAdd[0]) && is_numeric($rangeToAdd[1])) {
+                                $i = $rangeToAdd[0];
+                                while ($i <= $rangeToAdd[1]) {
+
+                                    Snep_Extensions_Manager::remove($i);
+                                    Snep_Extensions_Manager::removeVoicemail($i);
+                                    $i++;
+                                }
                             }
                         }
                     }
                 }
-            }
-            // checks if the exten is used in the rule
-            $rules = array();
-            foreach ($extensions as $key => $value) {
-                
-                $_rules = Snep_Extensions_Manager::getValidation($key);
-                $rulesQuery = Snep_Extensions_Manager::getValidationRules($key);
-                if (count($_rules) > 0 || count($rulesQuery) > 0 ) {
-                    $rules[$key] = array_merge($_rules, $rulesQuery);
-                }
-            }
-            
-            if (count($rules) > 0) {
-                $errMsg = $this->view->translate('The following extensions are in use in routes, modify them prior to remove this extension') . ":<br />\n";
-                foreach ($rules as $ext => $regra) {
-                    foreach ($regra as $k => $v) {
-                        $errMsg .= $this->view->translate('Extension')." : ".$key." - ";
-                        $errMsg .= $this->view->translate('Rule')." : ". $v['id'] . " - " . $v['desc'] . "<br />\n";
-                    }
-                }
-                $this->view->error_message = $errMsg;
-                $this->view->back = $this->view->translate("Back");
-                $this->renderScript('error/sneperror.phtml');
-            } else {
-                
-                foreach ($extensions as $key => $value) {
-                    $exten = $key;
-                    $db = Zend_Registry::get('db');
-                    $sql = "SELECT id from peers where name = '$exten'";
-                    $stmt = $db->query($sql);
-                    $result = $stmt->fetch();       
-                    $idExten = $result['id'];
 
-                    try {
-                        
-                        Snep_Extensions_Manager::remove($exten);
-                        Snep_Extensions_Manager::removeVoicemail($exten);
-                        Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);             
-                        
-                    } catch (PDOException $e) {
-                        $db->rollBack();
-                        $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
-                        $this->view->back = $this->view->translate("Back");
-                        $this->renderScript('error/sneperror.phtml');;
-                    }
-                    $return = Snep_InterfaceConf::loadConfFromDb();
-
-                    if ($return != true) {
-                        $this->view->error_message = $return;
-                        $this->renderScript('error/sneperror.phtml');;
-                    }
-                }
                 $this->_redirect("default/extensions");
             }
             
@@ -835,17 +813,24 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add Multiples Extensions")));
+
+        try {
+            $astinfo = new AsteriskInfo();
+        } catch (Exception $e) {
+            $this->view->error_message = $this->translate("Error! Failed to connect to server Asterisk.");
+            $this->renderScript('error/sneperror.phtml');
+            return;
+        }
         
         $this->view->pickupGroups = $this->pickupGroups;
-        $this->view->extenGroups = $this->extenGroups;
-        // Set ExtensionGroup  "Default" 
-        $this->view->extenInGroup = array('1' => "");
 
         $this->view->boardData = $this->boardData;
 
         // Monta SELECT de codecs e define o default para cada opcao
         $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
-        $codec1 = $codec2 = $codec3 = "";
+        $codec1 = "";
+        $codec2 = "";
+        $codec3 = "";
         foreach($codecsDefault as $key => $value){
             $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
             $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
@@ -857,13 +842,15 @@ class ExtensionsController extends Zend_Controller_Action {
  
         $this->view->trunks = Snep_Trunks_Manager::getData(); 
 
+
         if ($this->getRequest()->isPost()) {
 
-            $data = $this->_request->getParams();
+            $postData = $this->_request->getParams();
 
-            $range = explode(";", $data["exten"]);
+            $range = explode(";", $postData["exten"]);
             $this->view->error = "";
             
+
             foreach ($range as $exten) {
 
                 if ($this->view->error)
@@ -871,14 +858,14 @@ class ExtensionsController extends Zend_Controller_Action {
 
                 if (is_numeric($exten)) {
 
-                    $data["exten"] = $exten;
-                    $data["password"] = $exten . $exten;
-                    $data["name"] = $this->view->translate("Extension ") . " " . $exten ;
-                    $data["sip"]["password"] = $exten;
-                    $data["iax"]["password"] = $exten;
-                    $data['type'] = 'friend' ;
+                    $postData["exten"] = $exten;
+                    $postData["password"] = $exten . $exten;
+                    $postData["name"] = $this->view->translate("Extension ") . " " . $exten . ' <' . $exten . '>';
+                    $postData["sip"]["password"] = $exten;
+                    $postData["iax"]["password"] = $exten;
+                    $postData['type'] = 'friend' ;
 
-                    $ret = $this->execAdd($data);
+                    $ret = $this->execAdd($postData);
 
                     if (is_string($ret)) {
                         $this->view->error .= $exten . " - " . $ret;
@@ -895,15 +882,15 @@ class ExtensionsController extends Zend_Controller_Action {
                             $i = $rangeToAdd[0];
                             while ($i <= $rangeToAdd[1]) {
 
-                                $data["id"] = $i;
-                                $data["exten"] = $i;
-                                $data["password"] = $i . $i;
-                                $data["name"] = $this->view->translate("Extension ") . " " . $i ;
-                                $data["sip"]["password"] = $i . $i;
-                                $data["iax2"]["password"] = $i . $i;
-                                $data['type'] = 'friend' ;
+                                $postData["id"] = $i;
+                                $postData["exten"] = $i;
+                                $postData["password"] = $i . $i;
+                                $postData["name"] = $this->view->translate("Extension ") . " " . $i . '<' . $i . '>';
+                                $postData["sip"]["password"] = $i . $i;
+                                $postData["iax2"]["password"] = $i . $i;
+                                $postData['type'] = 'friend' ;
 
-                                $ret = $this->execAdd($data);
+                                $ret = $this->execAdd($postData);
 
                                 if (is_string($ret)) {
                                     $this->view->error .= $i . " - " . $ret;

@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Extension");?></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['name']?>" onChange="showDiv(this.value);" <?php echo $this->disabled;?>>
+                            <input type="text" class="form-control" name="exten" placeholder='<?php echo $this->translate("Only numbers")?>' value="<?php echo $this->extension['name']?>" <?php echo $this->disabled;?>>
                         </div>
                     </div>
 
@@ -50,14 +50,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Extensions Group");?></label>
                         <div class="col-sm-6">
-                            
-                            <select multiple size=3 class="form-control" name="exten_group[]" id="exten_group">
+
+                            <select class="form-control" name="exten_group" id="exten_group">
 
                                 <?php foreach($this->extenGroups as $key => $val){ 
-                                    if(array_key_exists($val['id'], $this->extenInGroup)){?>
-                                        <option value="<?php echo $val['id'];?>" selected><?php echo $val['name'];?></option>
+                                    if($key == $this->extension['group']){?>
+                                        <option value="<?php echo $key;?>" selected><?php echo $val;?></option>
                                     <?php }else{ ?>
-                                        <option  value="<?php echo $val['id']; ?>"><?php echo $val['name'];?></option>
+                                        <option  value="<?php echo $key; ?>"><?php echo $val;?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select>
@@ -327,7 +327,7 @@
                         <label class="col-sm-3 control-label"><?php echo $this->translate("Voicemail");?></label>
                         <div class="col-sm-6">
                             <div class="checkbox">
-                                <?php if($this->extension['usa_vc'] === 'yes'){?>
+                                <?php if($this->extension['usa_vc']){?>
                                     <label>
                                         <input type="checkbox" name="voicemail" id="voicemail" value="voicemail" checked/> <?php echo $this->translate("Enabled");?>
                                     </label>
@@ -449,9 +449,6 @@
     jQuery(document).ready(function(){ 
         jQuery('#defaultForm').validate({
             rules: {
-                "exten_group[]" : {
-                    required: true,
-                },
                 exten: {
                     required: true,
                     minlength: 4,
@@ -463,7 +460,6 @@
                     minlength: 5,
                     maxlength: 30
                 },
-                
                 passwordpadlock: {
                     required: function() {
                         return jQuery("#authenticate").is(":checked");
@@ -492,9 +488,6 @@
                 }
             },
             messages: {
-                "exten_group[]" : {
-                    required: "<?php echo $this->translate('The extension group is required'); ?>",
-                },
                 exten: {
                     required: "<?php echo $this->translate('The extension is required'); ?>",
                     minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 

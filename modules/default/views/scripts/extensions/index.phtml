@@ -83,7 +83,7 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
                                 $callerid = $nameValue[0];
                                 echo $callerid ?> </td>
                             <td> <?php echo $val['channel'] ?> </td>
-                            <td> <?php echo $val['groups'] ?> </td>
+                            <td> <?php echo strtolower($val['group']) === 'all' ? $this->translate('All') : $val['group'] ?> </td>
                             <td  class="text-center">
                                 <a class="btn btn-edit btn-xs" href='<?php echo $this->url ?>/edit/id/<?php echo $val['exten'] ?>' role="button"><?php echo $this->translate('Edit')?></a>
                             </td>

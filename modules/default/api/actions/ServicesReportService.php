@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -14,15 +15,10 @@
  *
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/lgpl.txt>.
- * 
- *  Service to implement API for Service Reports
- * 
- *  @author : Opens developers team
- *  @package : snep
- * 
  */
 
 require_once '../../../includes/functions.php';
+
 
 /**
  * Services Report Service 

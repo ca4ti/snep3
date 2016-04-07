@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="tab-content">
+        <div class="tab-pane active" id="demo">
+            <?php if($this->key){ ?>
+                <div class="snep-body-top-buttons">
+                    <div class="snep-body-search">
+                        <?php if($this->key){ 
+                            echo ""; 
+                            ?>
+                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+    <?php 
+    if ($this->error_message) {
+        echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert', 
+            'error_title' => $this->translate('Alert'), 'error_message' => $this->error_message, 'error_buttons' => False) );
+    } else { ?>
+
+    <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "module-settings", "action" => "index"), null, true); ?>" METHOD="post">
+        
+        <?php foreach($this->data as $module => $data){?>
+            
+            <fieldset>
+                <legend><?php echo $data["name"] . $this->translate(" Configuration");?></legend>
+            
+                <?php 
+                foreach($data["view"] as $x => $form){ 
+                
+                    //form in input text        
+                    if($form['type'] == "text"){ ?> 
+                        
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                            <div class="col-sm-6">
+                                <?php if(isset($form["value"])){ ?>
+                                    <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" />
+                                <?php }else{ ?>
+                                    <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
+                                <?php }?>
+                            </div>
+                        </div>
+                    
+                    <?php }
+
+                    //form in input text        
+                    if($form['type'] == "password"){ ?> 
+                        
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                            <div class="col-sm-6">
+                                <?php if(isset($form["value"])){ ?>
+                                    <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value=<?php echo $form['value']; ?> />
+                                <?php }else{ ?>
+                                    <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
+                                <?php }?>
+                            </div>
+                        </div>
+                    
+                    <?php }
+
+                    if($form["type"] == "checkbox"){ ?>
+    
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label"><?php echo $this->translate($form['label'])?></label>
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <?php if(isset($form["checked"])){?>
+                                            <input type="checkbox"  checked name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
+                                        <?php }else{?>
+                                            <input type="checkbox" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
+                                        <?php } ?>
+                                        <?php echo $this->translate($form['placeholder'])?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } 
+
+                    if($form["type"] == "select"){ ?>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?>>
+                                    <?php foreach($form["select"] as $key => $value){ 
+                                        if($value["key"] == $form["selected"]){?>
+                                            <option value='<?php echo $value["key"];?>' selected><?php echo $value["label"];?></option>
+                                        <?php }else{?>
+                                            <option value='<?php echo $value["key"];?>'><?php echo $value["label"];?></option>
+                                        <?php } ?>
+                                    <?php } ?> 
+                                </select>
+                            </div>
+                        </div>
+
+                    <?php }
+
+                    if($form["type"] == "separator"){ ?>
+                        <legend></legend>
+                    <?php } 
+                } ?>
+
+            </fieldset>
+        
+        <?php } ?>
+
+        <br>
+        <div class="snep-body-footer-buttons">
+            <button type="submit" class="btn btn-add" name="signup" value="Sign up"><?php echo $this->translate("Save");?></button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-outline btn-add" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Cancel")?></a>
+        </div>
+        
+    </form>
+
+    <?php } ?>
+</div>    

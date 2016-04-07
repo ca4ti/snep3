@@ -43,10 +43,26 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
         <div class="tab-pane active" id="demo">
             
          <div class="snep-body-top-buttons">
-            <a class="btn btn-outline btn-add" href="<?php echo $this->baseUrl ?>/simulator " role="button"><?php echo $this->translate("Simulator")?></a>
+            
+            <a class="btn btn-outline btn-add" style="margin-right: 5px;" href="<?php echo $this->baseUrl ?>/simulator " role="button"><?php echo $this->translate("Simulator")?></a>
             <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Rule")?></a>
+        
+            <?php if ($this->hide_routes === "1") {?>
+                
+                    <span class=" btn hide_rules_enable">
+                        <span class="sn-visivel fa-fw" style="font-size: 14px;"></span>
+                        <?php echo $this->translate("Hide routes is enable")?>
+                    </span>
 
-            <div class="snep-body-search">
+            <?php } else {?>
+                    
+                    <span class=" btn hide_rules_disable">
+                        <span class="sn-oculto fa-fw"></span>
+                        <?php echo $this->translate("Hide routes is disable")?>
+                    </span>
+            <?php } ?>
+    
+            <div class="snep-body-search" >
                 <?php if($this->key){ ?>
                     <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>">
                         </a> 
@@ -63,8 +79,8 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
             <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
                 <thead>
                     <tr>
-                        <th style="width: 5%;" class="text-center" data-type="numeric" ><?php echo $this->translate('Id');?></th>
-                        <th style="width: 6%;" class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
+                        <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
+                        <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
                         <th><?php echo $this->translate('Source');?></th>
                         <th><?php echo $this->translate('Destiny');?></th>
                         <th><?php echo $this->translate('Description');?></th>
@@ -74,29 +90,29 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                 <tbody>
                     <?php foreach($this->routes as $route ): ?>
                         <tr>
-                            <th class="text-center" style="vertical-align: middle !important;"> <?php echo $route['id'] ?>  </th>
-                            <td class="text-center"> <?php echo $route['prio'] ?> </td>
-                            <td> <?php echo $route['origem'] ?> </td>
-                            <td> <?php echo $route['destino'] ?> </td>
-                            <td> <?php echo $route['desc'] ?> </td>
-                            <td> 
+                            <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
+                            <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
+                            <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
+                            <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
+                            <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
+                            <td style="padding: 0px 8px 0px 8px;"> 
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" >
                                     </label>
                                 </div>
                             </td>
-                             <td align="center">
+                             <td style="padding: 0px 8px 0px 8px;" align="center">
                                 <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
                                     <?php echo $this->translate('Duplicate')?>
                                 </a>
                             </td>
-                            <td align="center">
+                            <td style="padding: 0px 8px 0px 8px;" align="center">
                                 <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
                                     <?php echo $this->translate('Edit')?>
                                 </a>
                             </td>
-                            <td align="center">
+                            <td style="padding: 0px 8px 0px 8px;" align="center">
                                 <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?>
                                 </a>
                             </td>

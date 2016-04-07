@@ -307,9 +307,11 @@ class TrunksController extends Zend_Controller_Action {
                 $this->view->qualify_specify = "checked";
             }
 
-            $nat = $ip_info["nat"];
-            $label = "nat_".$nat;
-            $this->view->$label = "checked";            
+            $array_nat = explode(",",$ip_info['nat']);
+            foreach($array_nat as $key => $val) {
+                $label = "nat_".$val;
+                $this->view->$label = "checked";
+            }
             
         }
 
@@ -600,7 +602,9 @@ class TrunksController extends Zend_Controller_Action {
 
             $trunk_data['id_regex'] = $trunktype . "/" . $trunk_data['username'];
             $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
- 
+
+            
+
         } else if ($trunktype === "SNEPSIP" || $trunktype === "SNEPIAX2") {
 
             $trunk_data['peer_type'] = $trunktype == "SNEPSIP" ? "peer" : "friend";
@@ -655,8 +659,21 @@ class TrunksController extends Zend_Controller_Action {
             }
         }
         $ip_data["peer_type"] = "T";
-
-
+        $nat_types = array('no','comedia','force_rport','auto_comedia','auto_force_rport');
+        $nat = "" ; 
+        foreach ($nat_types as $key => $val) {
+            if (isset($post['nat_'.$val])) {
+                if ($nat === "") {
+                    $nat = $val ;
+                } else {
+                    $nat .= ','.$val ;
+                }
+            }
+        }
+        if ($nat === "") {
+            $nat = 'no';
+        }
+        $ip_data['nat'] = $nat ;
 
         return array("trunk" => $trunk_data, "ip" => $ip_data);
     }

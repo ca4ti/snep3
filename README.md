@@ -2,8 +2,7 @@
 
 * Tradução e revisão das traduções Pt-BR, EN, ES
 * Correção no comportamento do menu principal
-- Refatorar rotina de Rotas / Regras Negócio
-- Separar por ABAS: Entradas, Saidas, Outras
+- Refatorar rotina de Rotas / Regras Negócio - Separar por ABAS: Entradas, Saidas, Outras
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
@@ -33,6 +32,16 @@
   - Grupos para destino (ringall)   
   - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais)
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
+
+---------------------------------
+**3.0 Estável **
+- CORRIGIDO - Perda de autenticacao dos ramais SIP
+- CORRIGIDO - Permitir multipla selecaoo de NAT para Troncos 
+- ALTERADO - Dados gravados no camp 'name' da tabela peers - preparado para o módulo Billing
+- ALTERADO - Ordem de exibição das  filas de atendimento (por nome)
+- NOVO - Webservice snep/arquivos/load.php - Busca por um arquivo de gravação a partir do ID
+- NOVO - Adicionadas funcionalidades para Pausar/Tirar de Pausa os Ramais de Filas de Atendimento
+- NOVO - Identificação visual para Esconder/Mostrar Regras desabilitadas em Regras de Negocio >> Rotas
 
 ---------------------------------
 **Release - betha-rc3 **

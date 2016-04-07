@@ -115,3 +115,19 @@ ul#dst > li, ul#orig > li, ul#time > li{
 [for=record-enable] {
     margin-left: 0px !important;
 }
+
+.hide_rules_enable {
+    background-color: #ebecee !important;
+    border-color: #ebecee !important;
+    font-family:sans-serif !important;
+    cursor: default !important;
+    color: #000000 !important;
+    font-weight: bolder !important;
+}
+.hide_rules_disable {
+    background-color: #ebecee !important;
+    border-color: #ebecee !important;
+    color:  #999999 !important;
+    font-family:sans-serif !important;
+    cursor: default !important;
+}

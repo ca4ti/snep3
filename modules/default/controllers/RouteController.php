@@ -137,6 +137,7 @@ class RouteController extends Zend_Controller_Action {
 
         $this->view->routes = $routes;
         $this->view->lineNumber = $lineNumber;
+        $this->view->hide_routes = $hide_routes;
         $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
         
         

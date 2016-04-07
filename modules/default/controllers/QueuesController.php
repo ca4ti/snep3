@@ -70,7 +70,8 @@ class QueuesController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from("queues");
+                ->from("queues")
+                ->order("name");
 
         $stmt = $db->query($select);
         $queues = $stmt->fetchAll();  

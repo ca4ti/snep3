@@ -859,14 +859,14 @@ class ExtensionsController extends Zend_Controller_Action {
                     break;
 
                 if (is_numeric($exten)) {
-
+                    
                     $data["exten"] = $exten;
                     $data["password"] = $exten . $exten;
-                    $data["name"] = $this->view->translate("Extension ") . " " . $exten ;
+                    $data["name"] = $this->view->translate("Extension ") ." ".$exten . " <" . $exten.">" ;
                     $data["sip"]["password"] = $exten;
                     $data["iax"]["password"] = $exten;
                     $data['type'] = 'friend' ;
-
+                    
                     $ret = $this->execAdd($data);
 
                     if (is_string($ret)) {
@@ -887,7 +887,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $data["id"] = $i;
                                 $data["exten"] = $i;
                                 $data["password"] = $i . $i;
-                                $data["name"] = $this->view->translate("Extension ") . " <" . $i.">" ;
+                                $data["name"] = $this->view->translate("Extension ") ." ".$i . " <" . $i.">" ;
                                 $data["sip"]["password"] = $i . $i;
                                 $data["iax2"]["password"] = $i . $i;
                                 $data['type'] = 'friend' ;

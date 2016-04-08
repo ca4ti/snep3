@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-08 10:43-0300\n"
-"PO-Revision-Date: 2016-04-08 11:11-0300\n"
+"PO-Revision-Date: 2016-04-08 11:53-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -2170,11 +2170,11 @@ msgstr "Esconder rotas"
 
 #: ../modules/default/views/scripts/route/index.phtml:61
 msgid "Hide routes is disable"
-msgstr "Esconder regra está desabilitado"
+msgstr "Exibindo todas as regras"
 
 #: ../modules/default/views/scripts/route/index.phtml:54
 msgid "Hide routes is enable"
-msgstr "Esconder regras está habilitado"
+msgstr "Exibindo somente regras habilitadas"
 
 #: ../modules/default/views/layouts/register.phtml:103
 msgid "High quality support"

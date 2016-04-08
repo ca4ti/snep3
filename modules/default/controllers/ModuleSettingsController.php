@@ -56,6 +56,7 @@ class ModuleSettingsController extends Zend_Controller_Action {
         $directory = scandir($path);
         $data = array();
         $cont_modules = count($directory);
+        $all_modules = "";
 
         // receives the form parameter through json file of modules
         foreach($directory as $dir => $folder){
@@ -81,47 +82,49 @@ class ModuleSettingsController extends Zend_Controller_Action {
         }else{
 
             // mounts array with form data
+            $cont = 0;
             foreach ($data as $module => $json) {
-            
+                
                 $values = json_decode($json);
-                $view[$module]["name"] = $values->nome;
+                $view[$cont]["name"] = $values->nome;
                 $module_name = $values->nome;
+                $all_modules .= "#".$values->nome.",";
                 unset($values->nome);
             
                 foreach($values as $key => $value){
 
                     if($value->type == "select"){
 
-                        $view[$module]["view"][$key]["type"] = $value->type;
-                        $view[$module]["view"][$key]["key"] = $module_name."=".$value->key;
-                        $view[$module]["view"][$key]["label"] = $value->label;
+                        $view[$cont]["view"][$key]["type"] = $value->type;
+                        $view[$cont]["view"][$key]["key"] = $module_name."=".$value->key;
+                        $view[$cont]["view"][$key]["label"] = $value->label;
 
                         foreach($value->option as $x => $option){
                         
-                            $view[$module]["view"][$key]["select"][$x]["label"] = $option->label;
-                            $view[$module]["view"][$key]["select"][$x]["key"] = $option->key;
+                            $view[$cont]["view"][$key]["select"][$x]["label"] = $option->label;
+                            $view[$cont]["view"][$key]["select"][$x]["key"] = $option->key;
                             
                             if(isset($option->selected)){
-                                $view[$module]["view"][$key]["select"][$x]["selected"] = true;    
+                                $view[$cont]["view"][$key]["select"][$x]["selected"] = true;    
                             
                             }else{
-                                $view[$module]["view"][$key]["select"][$x]["selected"] = "";
+                                $view[$cont]["view"][$key]["select"][$x]["selected"] = "";
                             }
                         }
 
                     }elseif($value->type == "separator"){
-                        $view[$module]["view"][$key]["type"] = $value->type;    
+                        $view[$cont]["view"][$key]["type"] = $value->type;    
                     
                     }else{
                     
-                        $view[$module]["view"][$key]["type"] = $value->type;
-                        $view[$module]["view"][$key]["key"] = $module_name."=".$value->key;
-                        $view[$module]["view"][$key]["label"] = $value->label;
-                        (isset($value->placeholder))? $view[$module]["view"][$key]["placeholder"] = $value->placeholder : $view[$module]["view"][$key]["placeholder"] = "";
+                        $view[$cont]["view"][$key]["type"] = $value->type;
+                        $view[$cont]["view"][$key]["key"] = $module_name."=".$value->key;
+                        $view[$cont]["view"][$key]["label"] = $value->label;
+                        (isset($value->placeholder))? $view[$cont]["view"][$key]["placeholder"] = $value->placeholder : $view[$cont]["view"][$key]["placeholder"] = "";
                         
                     } 
                 }
-     
+                $cont++;
             }
             
             //get data in database
@@ -165,6 +168,8 @@ class ModuleSettingsController extends Zend_Controller_Action {
             }         
             
             $this->view->data = $view;
+            
+            $this->view->allModules = substr($all_modules,0,-1);
 
         }
         

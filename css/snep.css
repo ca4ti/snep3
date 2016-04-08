@@ -38,6 +38,18 @@ body {
     font-size: 14px;
 }
 
+.ip-status > h4 > a {
+    color: #f26c45;
+    text-decoration: none !important;
+    background-color: transparent;
+}
+
+.ip-status > h4 > a:hover,
+.ip-status > h4 > a:focus, {
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
 audio {
     width: 100px;
     height: 5px;

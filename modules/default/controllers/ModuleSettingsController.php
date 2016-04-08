@@ -168,7 +168,6 @@ class ModuleSettingsController extends Zend_Controller_Action {
             }         
             
             $this->view->data = $view;
-            
             $this->view->allModules = substr($all_modules,0,-1);
 
         }

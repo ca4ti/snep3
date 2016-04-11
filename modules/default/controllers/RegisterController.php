@@ -59,6 +59,7 @@ class RegisterController extends Zend_Controller_Action {
                     $this->view->data = $response;   
                     $this->view->client_key = $data['client_key'];
                     $this->view->api_key = $data['api_key'];
+                    $this->view->uuid = $data['uuid'];
                     $distributions = $response->details->distributions;
 
                     // Update distributions in database

@@ -33,7 +33,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
         <select multiple="multiple" size="10" name="duallistbox_bond[]" id="select">
                
                 <?php foreach($this->peers as $y => $peer){ ?>      
-                    <option value="<?php echo $peer['name'];?>"><?php echo $peer['name'];?></option>
+                    <option value="<?php echo $peer['exten'];?>"><?php echo $peer['exten'];?></option>
                 <?php }?>
                 
                 <?php foreach($this->selected as $x => $select){?>

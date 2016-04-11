@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-08 10:43-0300\n"
-"PO-Revision-Date: 2016-04-11 15:20-0300\n"
+"PO-Revision-Date: 2016-04-08 11:53-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,48 +16,48 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-Bookmarks: -1,493,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
 msgid ""
-"\tThis warning is being delivered to you because Snep detected the usage of a "
-"trunk marked with your email.\n"
+"\tThis warning is being delivered to you because Snep detected the usage of "
+"a trunk marked with your email.\n"
 msgstr ""
-"\tEste aviso esta sendo enviado para vocÃª porquÃª o Snep detectou o uso de "
-"um tronco marcado com seu e-mail.\n"
+"\tEste aviso esta sendo enviado para você porquê o Snep detectou o uso de um "
+"tronco marcado com seu e-mail.\n"
 
 #: ../modules/default/views/scripts/information/index.phtml:26
 msgid ""
 "\n"
 "            SNEP is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
-"Software Foundation, either version 3 of the License, or (at your option) any "
-"later version. \n"
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version. \n"
 "            <br /><br />\n"
 "            SNEP is distributed in the hope that it will be useful, but "
-"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
 "            <br /><br />\n"
-"            You should have received a copy of the GNU General Public License "
-"along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
+"            You should have received a copy of the GNU General Public "
+"License along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
 "            "
 msgstr ""
 "\n"
-"            SNEP Ã© um software livre: vocÃª pode redistribuirei e/ou "
+"            SNEP é um software livre: você pode redistribuirei e/ou "
 "modificar ele de acordo com os termos da  GNU General Public License "
-"publicada pela Free Software Foundation, de acordo com a versÃ£o 3 da "
-"licenÃ§a, ou (a seu critÃ©rio) qualquer versÃ£o posterior. \n"
+"publicada pela Free Software Foundation, de acordo com a versão 3 da "
+"licença, ou (a seu critério) qualquer versão posterior. \n"
 "<br /><br />\n"
-"            SNEP Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM "
-"NENHUMA GARANTIA; inclusive sem a garantia implÃ­cita de COMERCIALIZAÃ‡ÃƒO ou "
-"ADEQUAÃ‡ÃƒO A UM DETERMINADO FIM. Veja a LicenÃ§a PÃºblica Geral GNU para "
-"obter mais detalhes. \n"
+"            SNEP é distribuído na esperança que possa ser útil, mas SEM "
+"NENHUMA GARANTIA; inclusive sem a garantia implícita de COMERCIALIZAÇÃO ou "
+"ADEQUAÇÃO A UM DETERMINADO FIM. Veja a Licença Pública Geral GNU para obter "
+"mais detalhes. \n"
 "            <br /><br />\n"
-"           VocÃª deve ter recebido uma cÃ³pia da LicenÃ§a PÃºblica Geral GNU "
-"junto com SNEP.  Se nÃ£o, veja http://www.gnu.org/licenses.\n"
+"           Você deve ter recebido uma cópia da Licença Pública Geral GNU "
+"junto com SNEP.  Se não, veja http://www.gnu.org/licenses.\n"
 "            "
 
 #: ../modules/default/actions/DiscarTronco.php:355
@@ -66,7 +66,7 @@ msgid ""
 "There were a previous call attempt"
 msgstr ""
 "\n"
-"ouve uma tentativa de ligaÃ§Ã£o anterior"
+"ouve uma tentativa de ligação anterior"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:190
 msgid " -Kernel + Aplic."
@@ -74,7 +74,7 @@ msgstr " -Kernel + Aplic."
 
 #: ../inspectors/Sounds.php:82
 msgid " Subfolders not found "
-msgstr "Subpastas nÃ£o encontradas"
+msgstr "Subpastas não encontradas"
 
 #: ../modules/default/controllers/ContactsController.php:450
 msgid " The contact "
@@ -86,19 +86,19 @@ msgstr " dd-MM-yyyy_hh'h'mm'm' "
 
 #: ../inspectors/Permissions.php:79
 msgid " does not exists."
-msgstr " nÃ£o existe."
+msgstr " não existe."
 
 #: ../inspectors/Permissions.php:90
 msgid " does not have permition to be modified."
-msgstr " nÃ£o possui permissÃ£o de escrita."
+msgstr " não possui permissão de escrita."
 
 #: ../inspectors/Permissions.php:101
 msgid " does not have permition to be viewed."
-msgstr " nÃ£o possui permissÃ£o de leitura."
+msgstr " não possui permissão de leitura."
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:72
 msgid " for more information"
-msgstr "para mais informaÃ§Ãµes"
+msgstr "para mais informações"
 
 #: ../modules/default/controllers/ContactsController.php:450
 msgid " has the following error "
@@ -150,8 +150,8 @@ msgid "60"
 msgstr "60"
 
 #: ../modules/default/views/scripts/information/index.phtml:65
-msgid "88137-300 - PalhoÃ§a - SC - Brasil"
-msgstr "88137-300 - PalhoÃ§a - SC - Brasil"
+msgid "88137-300 - Palhoça - SC - Brasil"
+msgstr "88137-300 - Palhoça - SC - Brasil"
 
 #: ../modules/default/controllers/AuthController.php:247
 msgid "</b> on PABX <b>"
@@ -162,19 +162,19 @@ msgid ""
 "</b>.<br><br>Need to enter the code below for the redefinition.<br>Access "
 "code : <font color= red><b>"
 msgstr ""
-"</b>.<br><br>Ã‰ preciso informar o cÃ³digo abaixo para a redefiniÃ§Ã£o."
-"<br>CÃ³digo de acesso : <font color= red><b>"
+"</b>.<br><br>É preciso informar o código abaixo para a redefinição."
+"<br>Código de acesso : <font color= red><b>"
 
 #: ../modules/default/controllers/AuthController.php:249
 msgid "</b></font><br>Your code will expire on: "
-msgstr "</b></font><br>Seu cÃ³digo expirarÃ¡ em:"
+msgstr "</b></font><br>Seu código expirará em:"
 
 #: ../modules/default/controllers/AuthController.php:250
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
 msgstr ""
-"<br><br>Se vocÃª nÃ£o solicitou uma senha redefiniÃ§Ã£o, por favor "
+"<br><br>Se você não solicitou uma senha redefinição, por favor "
 "desconsidere<br><br><i>Equipe Snep</i>."
 
 #: ../modules/default/views/scripts/register/index.phtml:40
@@ -187,11 +187,11 @@ msgstr "Sobre"
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:11
 msgid "Action"
-msgstr "AÃ§Ã£o"
+msgstr "Ação"
 
 #: ../modules/default/actions/ActionLoop.php:91
 msgid "Action index"
-msgstr "AÃ§Ã£o"
+msgstr "Ação"
 
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:39
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:33
@@ -213,11 +213,11 @@ msgstr "AÃ§Ã£o"
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:41
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:38
 msgid "Actions"
-msgstr "AÃ§Ãµes"
+msgstr "Ações"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:123
 msgid "Actions to execute"
-msgstr "AÃ§Ãµes para executar"
+msgstr "Ações para executar"
 
 #: ../modules/default/controllers/KhompLinksController.php:62
 #: ../modules/default/controllers/KhompLinksController.php:63
@@ -256,7 +256,7 @@ msgstr "Adicionar"
 
 #: ../modules/default/views/scripts/route/elements/actions.phtml:22
 msgid "Add Action"
-msgstr "Adicionar aÃ§Ã£o"
+msgstr "Adicionar ação"
 
 #: ../modules/default/views/scripts/contacts/index.phtml:16
 msgid "Add Contact"
@@ -272,7 +272,7 @@ msgstr "Adicionar Centro de Custos"
 
 #: ../modules/default/views/scripts/expression-alias/index.phtml:19
 msgid "Add Expression Alias"
-msgstr "Adicionar ExpressÃ£o Regular"
+msgstr "Adicionar Expressão Regular"
 
 #: ../modules/default/views/scripts/extensions/index.phtml:22
 msgid "Add Extension"
@@ -290,11 +290,11 @@ msgstr "Adicionar Arquivo"
 #: ../modules/default/views/scripts/extensions/index.phtml:24
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Add Multiple"
-msgstr "Adicionar MÃºltiplos"
+msgstr "Adicionar Múltiplos"
 
 #: ../modules/default/controllers/ExtensionsController.php:826
 msgid "Add Multiples Extensions"
-msgstr "Adicionar MÃºltiplos Ramais"
+msgstr "Adicionar Múltiplos Ramais"
 
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:21
 msgid "Add Pickup Group"
@@ -322,7 +322,7 @@ msgstr "Adicionar Rotas"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:20
 msgid "Add Session"
-msgstr "Adicionar SessÃ£o"
+msgstr "Adicionar Sessão"
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:27
 msgid "Add Sound File"
@@ -334,15 +334,15 @@ msgstr "Adicionar Tronco"
 
 #: ../modules/default/views/scripts/users/index.phtml:17
 msgid "Add User"
-msgstr "Adicionar UsuÃ¡rio"
+msgstr "Adicionar Usuário"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Add multiple"
-msgstr "Adicionar MÃºltiplos"
+msgstr "Adicionar Múltiplos"
 
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Add page to Dashboard"
-msgstr "Adicionar pÃ¡gina ao Dashboard"
+msgstr "Adicionar página ao Dashboard"
 
 #: ../modules/default/views/scripts/logs/index.phtml:16
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:25
@@ -385,20 +385,20 @@ msgstr "Filtros adicionais"
 #: ../modules/default/views/scripts/contacts/addedit.phtml:42
 #: ../modules/default/views/layouts/register.phtml:173
 msgid "Address"
-msgstr "EndereÃ§o"
+msgstr "Endereço"
 
 #: ../modules/default/actions/EmailAction.php:66
 msgid "Addressee"
-msgstr "EndereÃ§o"
+msgstr "Endereço"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:358
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
 msgid "Advanced"
-msgstr "AvanÃ§ado"
+msgstr "Avançado"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:79
 msgid "Advanced Configurations"
-msgstr "ConfiguraÃ§Ãµes avanÃ§adas"
+msgstr "Configurações avançadas"
 
 #: ../modules/default/controllers/QueuesController.php:293
 msgid "Agent:"
@@ -407,7 +407,7 @@ msgstr "Agente:"
 #: ../modules/snep-agile/actions/AgileAction.php:34
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Agile"
-msgstr "Agile"
+msgstr ""
 
 #: ../modules/snep-agile/actions/AgileAction.php:51
 msgid "Agile for Incoming Calls"
@@ -415,7 +415,7 @@ msgstr "Agile para chamadas de entrada"
 
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Agile module to Snep PBX."
-msgstr "Módulo Agile para Snep PBX"
+msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:7
 #: ../modules/default/views/scripts/module-settings/index.phtml:24
@@ -440,7 +440,7 @@ msgstr "Email de alerta"
 #: ../modules/default/views/scripts/action-configs/edit.phtml:24
 #: ../modules/default/actions/DiscarTronco.php:221
 msgid "Alert repetition rate"
-msgstr "Taxa de repetiÃ§Ã£o de Alerta"
+msgstr "Taxa de repetição de Alerta"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:31
 #: ../modules/default/actions/DiscarTronco.php:222
@@ -449,7 +449,7 @@ msgstr "Som de alerta"
 
 #: ../modules/default/controllers/RouteController.php:65
 msgid "Alias RegEx"
-msgstr "Alias de ExpressÃ£o Regular"
+msgstr "Alias de Expressão Regular"
 
 #: ../modules/default/controllers/RouteController.php:84
 msgid "All"
@@ -468,7 +468,7 @@ msgstr "Permitir"
 
 #: ../modules/default/views/scripts/users/bond.phtml:27
 msgid "Allow Viewing"
-msgstr "Permitir visualizaÃ§Ã£o"
+msgstr "Permitir visualização"
 
 #: ../modules/default/actions/DiscarRamal.php:181
 msgid "Allow voicemail"
@@ -482,7 +482,7 @@ msgstr "Amaflags"
 #: ../modules/default/views/scripts/khomp-links/index.phtml:38
 #: ../modules/default/views/scripts/calls-report/index.phtml:219
 msgid "Analytic"
-msgstr "AnalÃ­tico"
+msgstr "Analítico"
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:323
 msgid "Answer"
@@ -513,7 +513,7 @@ msgstr "Qualquer"
 
 #: ../modules/default/actions/ExecuteApp.php:73
 msgid "Application"
-msgstr "AplicaÃ§Ã£o"
+msgstr "Aplicação"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:103
 msgid "Asterisk"
@@ -521,7 +521,7 @@ msgstr "Asterisk"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:88
 msgid "Asterisk Manager connect"
-msgstr "ConexÃ£o com Asterisk Manager"
+msgstr "Conexão com Asterisk Manager"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:93
 msgid "Asterisk Socket IP"
@@ -533,7 +533,7 @@ msgstr "Senha do Socket IP Asterisk"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:100
 msgid "Asterisk Socket IP username"
-msgstr "UsuÃ¡rio do Socket IP Asterisk"
+msgstr "Usuário do Socket IP Asterisk"
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:54
 msgid "Asterisk Status"
@@ -545,27 +545,27 @@ msgstr "Audio"
 
 #: ../modules/default/views/scripts/queues/index.phtml:40
 msgid "Audio Class"
-msgstr "Classe de Ã¡udio"
+msgstr "Classe de áudio"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:145
 msgid "Audio: Number of calls waiting"
-msgstr "Ãudio: NÃºmero de ligaÃ§Ãµes em espera"
+msgstr "Áudio: Número de ligações em espera"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:163
 msgid "Audio: Thanks for waiting"
-msgstr "Ãudio: Obrigado por espera"
+msgstr "Áudio: Obrigado por espera"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:127
 msgid "Audio: You're Here"
-msgstr "Ãudio: VocÃª estÃ¡ aqui"
+msgstr "Áudio: Você está aqui"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:109
 msgid "Audio: You're next"
-msgstr "Ãudio: VocÃª Ã© o prÃ³ximo da fila"
+msgstr "Áudio: Você é o próximo da fila"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:60
 msgid "Audios"
-msgstr "Ãudios"
+msgstr "Áudios"
 
 #: ../modules/default/controllers/IpStatusController.php:45
 msgid "Auth. Sent"
@@ -573,7 +573,7 @@ msgstr "Autent. enviada"
 
 #: ../modules/default/controllers/AuthController.php:115
 msgid "Authentication failure"
-msgstr "Falha na AutenticaÃ§Ã£o"
+msgstr "Falha na Autenticação"
 
 #: ../modules/default/views/scripts/queues/members.phtml:41
 #: ../modules/default/views/scripts/users/bond.phtml:60
@@ -582,12 +582,12 @@ msgstr "Falha na AutenticaÃ§Ã£o"
 #: ../modules/default/views/scripts/profiles/addedit.phtml:44
 #: ../modules/default/views/scripts/profiles/permission.phtml:45
 msgid "Available"
-msgstr "DisponÃ­vel"
+msgstr "Disponível"
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:74
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:92
 msgid "Available extensions"
-msgstr "Ramais DisponÃ­veis"
+msgstr "Ramais Disponíveis"
 
 #: ../modules/default/controllers/ExtensionsController.php:676
 #: ../modules/default/controllers/ExtensionsController.php:705
@@ -615,7 +615,7 @@ msgstr "Voltar"
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:82
 msgid "Backp not available"
-msgstr "Backup nÃ£o disponÃ­vel"
+msgstr "Backup não disponível"
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:50
 msgid "Backup"
@@ -627,7 +627,7 @@ msgstr "Caminho dos Arquivos de Backup"
 
 #: ../modules/default/actions/Cadeado.php:85
 msgid "Block the execution of the action until password is given."
-msgstr "Bloquear a execuÃ§Ã£o de aÃ§Ãµes atÃ© a senha ser informada"
+msgstr "Bloquear a execução de ações até a senha ser informada"
 
 #: ../modules/default/controllers/TrunksController.php:76
 #: ../modules/default/views/scripts/trunks/addedit.phtml:295
@@ -647,11 +647,11 @@ msgstr "Placas"
 #: ../modules/default/views/scripts/users/bond.phtml:16
 #: ../modules/default/views/scripts/users/index.phtml:66
 msgid "Bond"
-msgstr "VÃ­nculo"
+msgstr "Vínculo"
 
 #: ../modules/default/views/scripts/users/bond.phtml:19
 msgid "Bond Option"
-msgstr "OpÃ§Ãµes de vÃ­nculo"
+msgstr "Opções de vínculo"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:216
 msgid "Buffers"
@@ -686,21 +686,21 @@ msgstr "Ocupado Entrada"
 #: ../modules/default/controllers/KhompLinksController.php:191
 #: ../modules/default/controllers/KhompLinksController.php:192
 msgid "Busy Outgoing"
-msgstr "Ocupado SaÃ­da"
+msgstr "Ocupado Saída"
 
 #: ../modules/default/controllers/IndexController.php:202
 msgid ""
-"By registering your SNEP, you connect to the portal of IntercomunexÃ£o. "
+"By registering your SNEP, you connect to the portal of Intercomunexão. "
 "Portal where you will have access to exclusive solutions, high-quality "
 "support and a constantly evolving technology. <br>Access: itc.opens.com.br"
 msgstr ""
-"Ao registrar seu SNEP, vocÃª se conecta ao portal de IntercomunexÃ£o. Portal "
-"onde vocÃª terÃ¡ acesso a soluÃ§Ãµes exclusivas, suporte de alta qualidade e "
-"uma tecnologia em constante evoluÃ§Ã£o. <br> Acesse: itc.opens.com.br"
+"Ao registrar seu SNEP, você se conecta ao portal de Intercomunexão. Portal "
+"onde você terá acesso a soluções exclusivas, suporte de alta qualidade e uma "
+"tecnologia em constante evolução. <br> Acesse: itc.opens.com.br"
 
 #: ../modules/default/controllers/CnlController.php:40
 msgid "CNL Update"
-msgstr "AtualizaÃ§Ã£o da CNL"
+msgstr "Atualização da CNL"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:95
 msgid "CPU"
@@ -718,33 +718,33 @@ msgstr "Em cache"
 
 #: ../modules/default/actions/DiscarTronco.php:333
 msgid "Call Date"
-msgstr "Data da LigaÃ§Ã£o"
+msgstr "Data da Ligação"
 
 #: ../modules/default/actions/DiscarTronco.php:139
 msgid "Call Duration Limit"
-msgstr "Limite de DuraÃ§Ã£o da Chamada"
+msgstr "Limite de Duração da Chamada"
 
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Call Ranking"
-msgstr "Ranking de LigaÃ§Ãµes"
+msgstr "Ranking de Ligações"
 
 #: ../modules/default/controllers/RankingReportController.php:54
 msgid "Call Rankings"
-msgstr "Ranking de LigaÃ§Ãµes"
+msgstr "Ranking de Ligações"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:185
 msgid "Call Recording Configuration"
-msgstr "ConfiguraÃ§Ã£o de GravaÃ§Ã£o "
+msgstr "Configuração de Gravação "
 
 #: ../modules/default/controllers/CallsReportController.php:422
 #: ../modules/default/views/scripts/khomp-links/view.phtml:55
 msgid "Call Status"
-msgstr "Status da LigaÃ§Ã£o"
+msgstr "Status da Ligação"
 
 #: ../modules/default/actions/DiscarTronco.php:332
 msgid "Call Time"
-msgstr "Tempo de LigaÃ§Ã£o"
+msgstr "Tempo de Ligação"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:48
 msgid "Call date"
@@ -752,15 +752,15 @@ msgstr "Data da chamada"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:68
 msgid "Call distribution strategy"
-msgstr "EstratÃ©gia de distribuiÃ§Ã£o das chamadas"
+msgstr "Estratégia de distribuição das chamadas"
 
 #: ../modules/default/actions/DiscarTronco.php:338
 msgid "Call status"
-msgstr "Status da LigaÃ§Ã£o"
+msgstr "Status da Ligação"
 
 #: ../modules/default/controllers/CallsReportController.php:430
 msgid "Calldate"
-msgstr "Data das ligaÃ§Ãµes"
+msgstr "Data das ligações"
 
 #: ../modules/default/views/scripts/extensions/index.phtml:48
 msgid "Caller ID"
@@ -768,11 +768,11 @@ msgstr "Nome"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:184
 msgid "Caller location"
-msgstr "LocalizaÃ§Ã£o da Chamada"
+msgstr "Localização da Chamada"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:200
 msgid "Caller record"
-msgstr "GravaÃ§Ã£o da chamada"
+msgstr "Gravação da chamada"
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:60
 msgid "Callerid"
@@ -785,7 +785,7 @@ msgstr "Nome"
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Calls"
-msgstr "Chamadas do PerÃ­odo"
+msgstr "Chamadas do Período"
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:162
 msgid "Calls Abandoned"
@@ -844,29 +844,27 @@ msgstr "Cancelar"
 #: ../modules/default/controllers/ContactGroupsController.php:210
 msgid "Cannot remove. The following routes are using this contact group: "
 msgstr ""
-"NÃ£o Ã© possÃ­vel remover. As seguintes rotas estÃ£o usando este grupo de "
+"Não é possível remover. As seguintes rotas estão usando este grupo de "
 "contatos:"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:198
 msgid "Cannot remove. The following routes are using this expression alias: "
 msgstr ""
-"NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando esta alias de "
-"expressÃ£o:"
+"Não é possível apagar. As seguinte rotas estão utilizando esta alias de "
+"expressão:"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:240
 msgid "Cannot remove. The following routes are using this extensions group: "
 msgstr ""
-"NÃ£o Ã© possivel apagar. As seguinte rotas estÃ£o utilizando o grupo de ramal:"
+"Não é possivel apagar. As seguinte rotas estão utilizando o grupo de ramal:"
 
 #: ../modules/default/controllers/QueuesController.php:304
 msgid "Cannot remove. The following routes are using this queues: "
-msgstr ""
-"NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando esta fila: "
+msgstr "Não é possível apagar. As seguinte rotas estão utilizando esta fila: "
 
 #: ../modules/default/controllers/TrunksController.php:460
 msgid "Cannot remove. The following routes are using this trunk: "
-msgstr ""
-"NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando este tronco:"
+msgstr "Não é possível apagar. As seguinte rotas estão utilizando este tronco:"
 
 #: ../lib/Snep/Cnl.php:191 ../modules/default/views/layouts/register.phtml:217
 msgid "Cell"
@@ -915,11 +913,11 @@ msgstr "Tecnologia do Canal"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:87
 msgid "Choose the services"
-msgstr "Escolha os ServiÃ§os"
+msgstr "Escolha os Serviços"
 
 #: ../modules/default/views/scripts/information/index.phtml:64
-msgid "Cidade UniversitÃ¡ria Pedra Branca"
-msgstr "Cidade UniversitÃ¡ria Pedra Branca"
+msgid "Cidade Universitária Pedra Branca"
+msgstr "Cidade Universitária Pedra Branca"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:61
 #: ../modules/default/views/scripts/contacts/addedit.phtml:81
@@ -930,7 +928,7 @@ msgstr "Cidade"
 
 #: ../modules/default/controllers/CnlController.php:152
 msgid "City code not foun or invalid."
-msgstr "CÃ³digo da cidade nÃ£o foi encontrado ou invÃ¡lido."
+msgstr "Código da cidade não foi encontrado ou inválido."
 
 #: ../modules/default/controllers/CnlController.php:148
 msgid "City/State : "
@@ -962,31 +960,31 @@ msgstr "Atualizar CNL"
 #: ../modules/default/views/scripts/expression-alias/index.phtml:37
 #: ../modules/default/views/scripts/profiles/index.phtml:34
 msgid "Code"
-msgstr "CÃ³digo"
+msgstr "Código"
 
 #: ../modules/default/controllers/CallsReportController.php:415
 msgid "Code Cost Center"
-msgstr "CÃ³digo do Centro de Custos"
+msgstr "Código do Centro de Custos"
 
 #: ../modules/default/controllers/ContactsController.php:122
 msgid "Code already exists"
-msgstr "CÃ³digo jÃ¡ existe"
+msgstr "Código já existe"
 
 #: ../modules/default/controllers/CostCenterController.php:99
 msgid "Code already exists."
-msgstr "CÃ³digo jÃ¡ existe"
+msgstr "Código já existe"
 
 #: ../modules/default/controllers/AuthController.php:194
 msgid "Code invalid"
-msgstr "CÃ³digo invÃ¡lido"
+msgstr "Código inválido"
 
 #: ../modules/default/views/scripts/auth/recuperation.phtml:29
 msgid "Code sent to your email"
-msgstr "CÃ³digo enviado para o seu e-mail"
+msgstr "Código enviado para o seu e-mail"
 
 #: ../modules/default/controllers/CallsReportController.php:429
 msgid "Code unique"
-msgstr "CÃ³digo Ãºnico"
+msgstr "Código único"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:195
 #: ../modules/default/views/scripts/extensions/addedit.phtml:230
@@ -1009,7 +1007,7 @@ msgstr "Codec 3"
 #: ../modules/default/controllers/KhompLinksController.php:90
 #: ../modules/default/controllers/KhompLinksController.php:197
 msgid "Communication Error"
-msgstr "Erro de ComunicaÃ§Ã£o"
+msgstr "Erro de Comunicação"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:23
 msgid "Company Name"
@@ -1017,23 +1015,23 @@ msgstr "Nome da Empresa"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:76
 msgid "Conference Application"
-msgstr "AplicaÃ§Ã£o de ConferÃªncia"
+msgstr "Aplicação de Conferência"
 
 #: ../modules/default/controllers/ConferenceRoomsController.php:39
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Conference Rooms"
-msgstr "Salas de ConferÃªncia"
+msgstr "Salas de Conferência"
 
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Configuration"
-msgstr "ConfiguraÃ§Ã£o"
+msgstr "Configuração"
 
 #: ../modules/default/controllers/CnlController.php:39
 #: ../modules/default/controllers/CnlController.php:68
 #: ../modules/default/views/scripts/action-configs/index.phtml:47
 msgid "Configure"
-msgstr "ConfiguraÃ§Ã£o"
+msgstr "Configuração"
 
 #: ../modules/default/views/layouts/register.phtml:47
 msgid "Confirm"
@@ -1041,11 +1039,11 @@ msgstr "Confirmar"
 
 #: ../modules/default/views/layouts/register.phtml:60
 msgid "Congratulations"
-msgstr "ParabÃ©ns"
+msgstr "Parabéns"
 
 #: ../modules/default/views/layouts/register.phtml:99
 msgid "Constant technological innovation"
-msgstr "Constante inovaÃ§Ã£o tecnolÃ³gica"
+msgstr "Constante inovação tecnológica"
 
 #: ../modules/default/controllers/RouteController.php:66
 #: ../modules/default/controllers/ContactGroupsController.php:51
@@ -1092,11 +1090,11 @@ msgstr "Tipo de Controle"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:53
 msgid "Conversation"
-msgstr "ConversaÃ§Ã£o"
+msgstr "Conversação"
 
 #: ../modules/default/controllers/CallsReportController.php:424
 msgid "Conversation (seconds)"
-msgstr "ConversaÃ§Ã£o (segundos)"
+msgstr "Conversação (segundos)"
 
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:29
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:28
@@ -1134,7 +1132,7 @@ msgstr "Centro de Custos"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:17
 msgid "Country"
-msgstr "PaÃ­s"
+msgstr "País"
 
 #: ../modules/default/views/scripts/users/index.phtml:37
 #: ../modules/default/views/scripts/profiles/index.phtml:36
@@ -1161,11 +1159,11 @@ msgstr "Erro ao apagar do DB: "
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:108
 msgid "DDD + Number"
-msgstr "DDD + NÃºmero"
+msgstr "DDD + Número"
 
 #: ../modules/default/views/scripts/contacts/elements/phone.phtml:1
 msgid "DDD + Number. Example: 4899999999"
-msgstr "DDD + NÃºmero. Exemplo: 4899999999"
+msgstr "DDD + Número. Exemplo: 4899999999"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:95
 msgid "DND"
@@ -1183,11 +1181,11 @@ msgstr "Modo de discagem DTMF"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:385
 msgid "DTMF dial mode number"
-msgstr "NÃºmero do modo de discagem DTMF"
+msgstr "Número do modo de discagem DTMF"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:387
 msgid "DTML dial mode number"
-msgstr "NÃºmero do modo de discagem DTMF"
+msgstr "Número do modo de discagem DTMF"
 
 #: ../modules/default/views/scripts/information/index.phtml:48
 msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
@@ -1207,7 +1205,7 @@ msgstr "Dashboard"
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:14
 msgid "Data by Period"
-msgstr "Dados Por PerÃ­odo"
+msgstr "Dados Por Período"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:118
 msgid "Database"
@@ -1215,7 +1213,7 @@ msgstr "Banco de Dados"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:115
 msgid "Database connect"
-msgstr "ConexÃ£o com banco de dados"
+msgstr "Conexão com banco de dados"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:127
 msgid "Database hostname"
@@ -1231,7 +1229,7 @@ msgstr "Senha da base de dados"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:134
 msgid "Database username"
-msgstr "UsuÃ¡rio da base de dados"
+msgstr "Usuário da base de dados"
 
 #: ../modules/default/controllers/CallsReportController.php:419
 #: ../modules/default/controllers/ServicesReportController.php:204
@@ -1252,45 +1250,45 @@ msgstr "Desativado"
 
 #: /var/www/html/snep-3/modules/default/info.xml
 msgid "Default"
-msgstr "PadrÃ£o"
+msgstr "Padrão"
 
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Default Config"
-msgstr "ConfiguraÃ§Ã£o PadrÃ£o"
+msgstr "Configuração Padrão"
 
 #: ../modules/default/controllers/ActionConfigsController.php:46
 #: ../modules/default/controllers/ActionConfigsController.php:106
 msgid "Default Configs"
-msgstr "ConfiguraÃ§Ã£o PadrÃ£o"
+msgstr "Configuração Padrão"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:61
 msgid "Default E-mail"
-msgstr "E-mail PadrÃ£o"
+msgstr "E-mail Padrão"
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:39
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:59
 msgid "Default Options"
-msgstr "OpÃ§Ã£o PadrÃ£o"
+msgstr "Opção Padrão"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Default Settings"
-msgstr "ConfiguraÃ§Ã£o PadrÃ£o"
+msgstr "Configuração Padrão"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:64
 msgid "Default e-mail where the alerts will be sent to"
-msgstr "Email padrÃ£o para onde os alertas devem ser enviados"
+msgstr "Email padrão para onde os alertas devem ser enviados"
 
 #: /var/www/html/snep-3/modules/default/info.xml
 msgid "Default module that provides basic features to Snep PBX."
-msgstr "MÃ³dulo padrÃ£o que provem as funcionalidades bÃ¡sicas ao Snep PBX."
+msgstr "Módulo padrão que provem as funcionalidades básicas ao Snep PBX."
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:21
 msgid "Default path"
-msgstr "Caminho PadrÃ£o"
+msgstr "Caminho Padrão"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:229
 msgid "Default value for Qualify"
-msgstr "Valor padrÃ£o para o Controle de Qualidade"
+msgstr "Valor padrão para o Controle de Qualidade"
 
 #: ../modules/default/actions/Ccustos.php:45
 msgid "Define Cost Center"
@@ -1302,7 +1300,7 @@ msgstr "Definir Centro de Custos para "
 
 #: ../modules/default/views/scripts/parameters/index.phtml:71
 msgid "Defines how many lines you want per page of report"
-msgstr "Defina quantas linhas vocÃª quer por pÃ¡gina de relatÃ³rio"
+msgstr "Defina quantas linhas você quer por página de relatório"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:142
 msgid "Delay Qualification"
@@ -1358,7 +1356,7 @@ msgstr "Deletar Centro de Custos"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:207
 msgid "Delete Expression Alias."
-msgstr "Deletar Alias de ExpressÃ£o Regular"
+msgstr "Deletar Alias de Expressão Regular"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:255
 msgid "Delete Extension Group."
@@ -1374,7 +1372,7 @@ msgstr "Deletar Arquivo"
 
 #: ../modules/default/controllers/ExtensionsController.php:728
 msgid "Delete Multiples"
-msgstr "Deletar MÃºltiplos"
+msgstr "Deletar Múltiplos"
 
 #: ../modules/default/controllers/PickupGroupsController.php:226
 msgid "Delete Pickup Group."
@@ -1410,11 +1408,11 @@ msgstr "Deletar Tronco."
 
 #: ../modules/default/controllers/UsersController.php:165
 msgid "Delete User."
-msgstr "Deletar UsuÃ¡rio."
+msgstr "Deletar Usuário."
 
 #: ../modules/default/controllers/MusicOnHoldController.php:362
 msgid "Delete music on hold file: "
-msgstr "Remover arquivo de mÃºsica em espera:"
+msgstr "Remover arquivo de música em espera:"
 
 #: ../modules/default/views/scripts/users/permission.phtml:78
 msgid "Deny"
@@ -1435,7 +1433,7 @@ msgstr "Negar"
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:36
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Description"
-msgstr "DescriÃ§Ã£o"
+msgstr "Descrição"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:45
 #: ../modules/default/views/scripts/calls-report/view.phtml:50
@@ -1477,7 +1475,7 @@ msgstr "Flags de discagem"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:101
 msgid "Dial Method"
-msgstr "MÃ©todo de Discagem"
+msgstr "Método de Discagem"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:7
 #: ../modules/default/actions/DiscarRamal.php:182
@@ -1499,11 +1497,11 @@ msgstr "Discar para Ramal"
 
 #: ../modules/default/controllers/SimulatorController.php:138
 msgid "Dial through Trunk "
-msgstr "Discar atravÃ©s do Tronco"
+msgstr "Discar através do Tronco"
 
 #: ../modules/default/actions/DiscarTronco.php:119
 msgid "Dial to a Trunk"
-msgstr "Discar atravÃ©s do Tronco"
+msgstr "Discar através do Tronco"
 
 #: ../modules/default/actions/DiscarRamal.php:137
 msgid "Dial to a snep extension."
@@ -1546,7 +1544,7 @@ msgstr "Pasta"
 #: ../modules/default/controllers/MusicOnHoldController.php:118
 #: ../modules/default/controllers/MusicOnHoldController.php:134
 msgid "Directory already exists"
-msgstr "Pasta jÃ¡ existe"
+msgstr "Pasta já existe"
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:28
 msgid "Directory name"
@@ -1571,23 +1569,23 @@ msgstr "Exibir"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:87
 msgid "Distribution"
-msgstr "DistribuiÃ§Ã£o"
+msgstr "Distribuição"
 
 #: ../modules/default/actions/Rewrite.php:92
 msgid "Do not cut"
-msgstr "NÃ£o cortar"
+msgstr "Não cortar"
 
 #: ../modules/default/actions/DiscarRamal.php:186
 msgid "Do not overflow (busy and no answer)"
-msgstr "NÃ£o Transbordar (ocupado e nÃ£o atende)"
+msgstr "Não Transbordar (ocupado e não atende)"
 
 #: ../modules/default/views/scripts/contacts/index.phtml:72
 msgid "Do you really wish to remove this item?"
-msgstr "VocÃª tem certeza que deseja apagar este item?"
+msgstr "Você tem certeza que deseja apagar este item?"
 
 #: ../modules/default/actions/ActionLoop.php:79
 msgid "Does a loop in actions."
-msgstr "Faz um laÃ§o nas aÃ§Ãµes."
+msgstr "Faz um laço nas ações."
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:222
 #: ../modules/default/views/scripts/trunks/addedit.phtml:224
@@ -1614,15 +1612,15 @@ msgstr "Duplicar"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:52
 msgid "Duration"
-msgstr "DuraÃ§Ã£o"
+msgstr "Duração"
 
 #: ../modules/default/controllers/CallsReportController.php:423
 msgid "Duration (seconds)"
-msgstr "DuraÃ§Ã£o (segundos)"
+msgstr "Duração (segundos)"
 
 #: ../modules/default/actions/EmailAction.php:67
 msgid "E-mail of addressee"
-msgstr "EndereÃ§o de E-mail"
+msgstr "Endereço de E-mail"
 
 #: ../modules/default/controllers/CostCenterController.php:126
 #: ../modules/default/controllers/SoundFilesController.php:187
@@ -1685,7 +1683,7 @@ msgstr "E-mail"
 
 #: ../modules/default/views/scripts/users/addedit.phtml:39
 msgid "Email address"
-msgstr "EndereÃ§o de E-mail"
+msgstr "Endereço de E-mail"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:179
 #: ../modules/default/views/scripts/extensions/addedit.phtml:183
@@ -1699,7 +1697,7 @@ msgstr "Habilitar o Siga-me"
 
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Enable recording"
-msgstr "Ativar GravaÃ§Ã£o"
+msgstr "Ativar Gravação"
 
 #: ../modules/default/controllers/KhompLinksController.php:97
 #: ../modules/default/controllers/KhompLinksController.php:204
@@ -1727,15 +1725,15 @@ msgstr "Fim"
 
 #: ../modules/default/views/layouts/register.phtml:39
 msgid "Enter confirmation key"
-msgstr "Entre com a chave de confirmaÃ§Ã£o"
+msgstr "Entre com a chave de confirmação"
 
 #: ../modules/default/views/scripts/auth/redefine.phtml:15
 msgid ""
 "Enter your user to send a redefinition of the password to your registered "
 "email "
 msgstr ""
-"Digite seu usuÃ¡rio para enviarmos uma redefiniÃ§Ã£o da senha para o seu e-"
-"mail cadastrado"
+"Digite seu usuário para enviarmos uma redefinição da senha para o seu e-mail "
+"cadastrado"
 
 #: ../inspectors/AGI.php:110
 msgid "Environment for AGI SNEP"
@@ -1791,7 +1789,7 @@ msgstr "Erro. Falhou ao conectar com Asterisk."
 #: ../modules/default/controllers/KhompLinksController.php:245
 #: ../modules/default/controllers/IpStatusController.php:69
 msgid "Error! Failed to connect to server Asterisk."
-msgstr "Erro! Falha na conexÃ£o com o servidor Asterisk"
+msgstr "Erro! Falha na conexão com o servidor Asterisk"
 
 #: ../modules/default/views/scripts/khomp-links/khomp-error.phtml:9
 msgid "Error! No Khomp board installed"
@@ -1799,7 +1797,7 @@ msgstr "Erro: Nenhuma placa Khomp instalada."
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:68
 msgid "Errors were detected in the configuration of SNEP, click "
-msgstr "Erros foram detectados na configuraÃ§Ã£o do SNEP, clique "
+msgstr "Erros foram detectados na configuração do SNEP, clique "
 
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:39
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:11
@@ -1808,19 +1806,19 @@ msgstr "Ex: 1000-1050;1060;1063;1070-1100"
 
 #: ../modules/default/views/layouts/register.phtml:98
 msgid "Exclusive modules"
-msgstr "MÃ³dulos Exclusivos"
+msgstr "Módulos Exclusivos"
 
 #: ../modules/default/actions/ExecuteApp.php:39
 msgid "Execute Application"
-msgstr "Executar AplicaÃ§Ã£o"
+msgstr "Executar Aplicação"
 
 #: ../modules/default/actions/ExecuteApp.php:55
 msgid "Execute an Asterisk Application."
-msgstr "Executar uma aplicaÃ§Ã£o Asterisk."
+msgstr "Executar uma aplicação Asterisk."
 
 #: ../modules/default/controllers/LogsController.php:82
 msgid "Exibition mode:"
-msgstr "Modo de exibiÃ§Ã£o:"
+msgstr "Modo de exibição:"
 
 #: ../modules/default/views/scripts/export-data/index.phtml:236
 #: /var/www/html/snep-3/configs/titleOptions.xml
@@ -1856,11 +1854,11 @@ msgstr "Exportar para PDF"
 
 #: ../modules/default/controllers/ExportDataController.php:50
 msgid "Export Report"
-msgstr "Exportar RelatÃ³rio"
+msgstr "Exportar Relatório"
 
 #: ../modules/default/views/scripts/export-data/export.phtml:5
 msgid "Export Users"
-msgstr "Exportar usuÃ¡rios"
+msgstr "Exportar usuários"
 
 #: ../lib/Snep/CsvIE.php:167 ../lib/Snep/CsvIE.php:292
 #: ../modules/default/views/scripts/ranking-report/export.phtml:13
@@ -1872,7 +1870,7 @@ msgstr "Exportar para CSV"
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:43
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:132
 msgid "Expression"
-msgstr "ExpressÃ£o"
+msgstr "Expressão"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:51
 #: ../modules/default/controllers/ExpressionAliasController.php:73
@@ -1881,11 +1879,11 @@ msgstr "ExpressÃ£o"
 #: ../modules/default/views/scripts/route/add_edit.phtml:36
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Expression Alias"
-msgstr "Alias de ExpressÃ£o Regular"
+msgstr "Alias de Expressão Regular"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Expression Aliases"
-msgstr "Aliasse de ExpressÃ£o Regular"
+msgstr "Aliasse de Expressão Regular"
 
 #: ../lib/PBX/Rule/ActionConfig.php:158
 #: ../modules/default/controllers/RouteController.php:64
@@ -1928,7 +1926,7 @@ msgstr "Ramal"
 
 #: ../modules/default/controllers/ExtensionsController.php:472
 msgid "Extension already taken. Please, choose another denomination."
-msgstr "Ramal jÃ¡ cadastrado. Por favor, escolha outra denominaÃ§Ã£o de ramal."
+msgstr "Ramal já cadastrado. Por favor, escolha outra denominação de ramal."
 
 #: ../modules/default/controllers/QueuesController.php:286
 msgid "Extension:"
@@ -1985,11 +1983,11 @@ msgstr "Falhada"
 #: ../lib/Snep/InterfaceConf.php:47 ../lib/Snep/InterfaceConf.php:50
 #, php-format
 msgid "Failed to open file %s with write permission."
-msgstr "Falha ao abrir arquivo %s com permissÃ£o de escrita."
+msgstr "Falha ao abrir arquivo %s com permissão de escrita."
 
 #: ../modules/default/controllers/SimulatorController.php:150
 msgid "Failure on trial to dial extension %: non existent extension"
-msgstr "Falha na tentativa de discar para ramal %: ramal nÃ£o existente"
+msgstr "Falha na tentativa de discar para ramal %: ramal não existente"
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:49
 msgid "File"
@@ -1997,28 +1995,28 @@ msgstr "Arquivo"
 
 #: ../inspectors/Permissions.php:118
 msgid "File Permissions"
-msgstr "PermissÃµes de Arquivo"
+msgstr "Permissões de Arquivo"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:283
 msgid "File already exists"
-msgstr "Arquivo jÃ¡ existe"
+msgstr "Arquivo já existe"
 
 #: ../modules/default/controllers/SoundFilesController.php:116
 msgid "File already exists in database for this language."
-msgstr "O arquivo jÃ¡ existe no banco de dados para este idioma."
+msgstr "O arquivo já existe no banco de dados para este idioma."
 
 #: ../modules/default/controllers/ConferenceRoomsController.php:103
 msgid "File does not have editing permission"
-msgstr "Arquivo nÃ£o possui permissÃ£o de escrita"
+msgstr "Arquivo não possui permissão de escrita"
 
 #: ../modules/default/controllers/SoundFilesController.php:121
 #: ../modules/default/controllers/SoundFilesController.php:222
 msgid "File extesion is invalid."
-msgstr "ExtensÃ£o do arquivo invÃ¡lido"
+msgstr "Extensão do arquivo inválido"
 
 #: ../modules/default/controllers/SoundFilesController.php:308
 msgid "File not found."
-msgstr "Arquivo nÃ£o encontrado"
+msgstr "Arquivo não encontrado"
 
 #: ../modules/default/views/scripts/contacts/import.phtml:15
 #: ../modules/default/views/scripts/sound-files/index.phtml:47
@@ -2045,7 +2043,7 @@ msgstr "Primeiro Nome"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:164
 msgid "Fisical Memory"
-msgstr "MemÃ³ria FÃ­sica"
+msgstr "Memória Física"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:31
 msgid "Fix"
@@ -2061,7 +2059,7 @@ msgstr "Para"
 
 #: ../modules/default/controllers/QueuesController.php:49
 msgid "For all agents available (ringall)"
-msgstr "Para todos os agente disponÃ­veis (ringall)"
+msgstr "Para todos os agente disponíveis (ringall)"
 
 #: ../modules/default/controllers/QueuesController.php:51
 msgid "For the agent idle for the most time (leastrecent)"
@@ -2073,7 +2071,7 @@ msgstr "Para o agente que atendeu menos chamadas (fewestcalls)"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:184
 msgid "Force reverse authentication"
-msgstr "ForÃ§ar AutenticaÃ§Ã£o Reversa"
+msgstr "Forçar Autenticação Reversa"
 
 #: ../modules/default/views/scripts/auth/login.phtml:27
 msgid "Forgot Password?"
@@ -2106,17 +2104,17 @@ msgstr "De"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:135
 #: ../modules/default/views/scripts/trunks/addedit.phtml:137
 msgid "From Domain"
-msgstr "DomÃ­nio de Origem"
+msgstr "Domínio de Origem"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:128
 #: ../modules/default/views/scripts/trunks/addedit.phtml:130
 msgid "From User"
-msgstr "Especificar UsuÃ¡rio de Origem"
+msgstr "Especificar Usuário de Origem"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:20
 #: ../modules/default/views/scripts/queues/addedit.phtml:6
 msgid "General Configuration"
-msgstr "ConfiguraÃ§Ãµes Gerais"
+msgstr "Configurações Gerais"
 
 #: ../modules/default/views/scripts/error/error.phtml:12
 msgid "Get me out of here"
@@ -2124,7 +2122,7 @@ msgstr "Me Tire Daqui"
 
 #: ../modules/default/views/scripts/error/error.phtml:14
 msgid "Go back to the last page"
-msgstr "Voltar para a ultima pÃ¡gina"
+msgstr "Voltar para a ultima página"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:102
 msgid "Go to Context"
@@ -2141,7 +2139,7 @@ msgstr "Desviar para Contexto"
 #: ../modules/default/views/scripts/calls-report/index.phtml:236
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Graphic"
-msgstr "GrÃ¡fico"
+msgstr "Gráfico"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:61
 #: ../modules/default/views/scripts/contacts/addedit.phtml:24
@@ -2156,7 +2154,7 @@ msgstr "Grupo de Contatos"
 
 #: ../modules/default/views/scripts/users/permission.phtml:47
 msgid "Group permission"
-msgstr "PermissÃµes do grupo"
+msgstr "Permissões do grupo"
 
 #: ../modules/default/controllers/KhompLinksController.php:221
 msgid "Hanging Up"
@@ -2189,7 +2187,7 @@ msgstr "Hostname"
 
 #: ../modules/default/views/layouts/register.phtml:110
 msgid "I am already registered"
-msgstr "JÃ¡ sou cadastrado"
+msgstr "Já sou cadastrado"
 
 #: ../modules/default/views/layouts/register.phtml:112
 msgid "I want to register"
@@ -2208,7 +2206,7 @@ msgstr "IAX2 Trunking"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:282
 #: ../modules/default/views/scripts/trunks/addedit.phtml:284
 msgid "ID Regular Expression"
-msgstr "ExpressÃ£o de IdentificaÃ§Ã£o"
+msgstr "Expressão de Identificação"
 
 #: ../modules/default/views/scripts/trunks/index.phtml:58
 #: ../modules/default/views/scripts/ip-status/index.phtml:62
@@ -2232,7 +2230,7 @@ msgstr "Identificador"
 #: ../modules/default/views/scripts/calls-report/index.phtml:192
 #: ../modules/default/views/scripts/calls-report/index.phtml:208
 msgid "If enabled the query will be slower"
-msgstr "Se habilitada, a consulta serÃ¡ mais lenta"
+msgstr "Se habilitada, a consulta será mais lenta"
 
 #: ../modules/default/views/scripts/contacts/import.phtml:26
 #: /var/www/html/snep-3/configs/titleOptions.xml
@@ -2296,7 +2294,7 @@ msgstr "Info"
 
 #: ../modules/default/views/layouts/layout.phtml:154
 msgid "Information"
-msgstr "InformaÃ§Ãµes"
+msgstr "Informações"
 
 #: ../modules/default/controllers/KhompLinksController.php:209
 msgid "Initializing"
@@ -2312,8 +2310,8 @@ msgid "Insecure"
 msgstr "Insecure"
 
 #: ../modules/default/views/layouts/layout.phtml:162
-msgid "IntercomunexÃ£o"
-msgstr "IntercomunexÃ£o"
+msgid "Intercomunexão"
+msgstr "Intercomunexão"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:39
 #: ../modules/default/views/scripts/extensions/addedit.phtml:81
@@ -2343,15 +2341,15 @@ msgstr "Erro Do Servidor Interno. Por favor, tente mais tarde"
 
 #: ../modules/default/views/scripts/contacts/csv.phtml:48
 msgid "Invalid File"
-msgstr "Arquivo InvÃ¡lido"
+msgstr "Arquivo Inválido"
 
 #: ../modules/default/controllers/SoundFilesController.php:168
 msgid "Invalid format"
-msgstr "Formato InvÃ¡lido"
+msgstr "Formato Inválido"
 
 #: ../modules/default/api/actions/CSV_ExportDataService.php:46
 msgid "Invalid table name."
-msgstr "Nome da tabela invÃ¡lida"
+msgstr "Nome da tabela inválida"
 
 #: ../modules/default/controllers/IpStatusController.php:64
 msgid "Ip Status"
@@ -2359,11 +2357,11 @@ msgstr "Status IP"
 
 #: ../modules/default/controllers/ModuleSettingsController.php:76
 msgid "Its modules do not require extra settings"
-msgstr "Seus mÃ³dulos nÃ£o exigem configuraÃ§Ãµes extras"
+msgstr "Seus módulos não exigem configurações extras"
 
 #: ../modules/default/views/layouts/register.phtml:86
 msgid "Join the network of intercomunexao"
-msgstr "FaÃ§a parte da rede de IntercomunexÃ£o"
+msgstr "Faça parte da rede de Intercomunexão"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:91
 msgid "Kernel"
@@ -2404,20 +2402,20 @@ msgstr "Sobrenome"
 
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:19
 msgid "Last Update"
-msgstr "Ãšltima AtualizaÃ§Ã£o"
+msgstr "Última Atualização"
 
 #: ../modules/default/actions/DiscarTronco.php:356
 msgid "Last call to"
-msgstr "Ultima ligaÃ§Ã£o para"
+msgstr "Ultima ligação para"
 
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:35
 msgid "Last update"
-msgstr "Ãšltima atualizaÃ§Ã£o"
+msgstr "Última atualização"
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:63
 #: ../modules/default/views/scripts/ip-status/index.phtml:112
 msgid "Latency"
-msgstr "LatÃªncia"
+msgstr "Latência"
 
 #: ../modules/default/actions/Cadeado.php:99
 msgid "Leave blank to use extensions password."
@@ -2425,18 +2423,18 @@ msgstr "Deixe vazio para usar a senha dos ramais."
 
 #: ../modules/default/actions/DiscarRamal.php:187
 msgid "Leave blank to use the number from the destination."
-msgstr "Deixe em branco para usar o nÃºmero do destino."
+msgstr "Deixe em branco para usar o número do destino."
 
 #: ../modules/default/views/layouts/register.phtml:382
 #: ../modules/default/views/layouts/register.phtml:435
 #: ../modules/default/views/layouts/loginregister.phtml:91
 msgid "Letters and Numbers only please"
-msgstr "Ã‰ permitido somente letras e nÃºmeros "
+msgstr "É permitido somente letras e números "
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:225
 #: ../modules/default/views/scripts/trunks/addedit.phtml:522
 msgid "Letters and numbers only please"
-msgstr "Ã‰ permitido somente letras e nÃºmeros "
+msgstr "É permitido somente letras e números "
 
 #: ../modules/default/views/scripts/register/index.phtml:87
 #: ../modules/default/views/scripts/users/addedit.phtml:94
@@ -2444,7 +2442,7 @@ msgstr "Ã‰ permitido somente letras e nÃºmeros "
 #: ../modules/default/views/layouts/register.phtml:387
 #: ../modules/default/views/layouts/register.phtml:393
 msgid "Letters only please"
-msgstr "Ã‰ permitido somente letras "
+msgstr "É permitido somente letras "
 
 #: ../modules/default/controllers/TrunksController.php:80
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:40
@@ -2472,7 +2470,7 @@ msgstr "Local"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:147
 msgid "Locale Configuration"
-msgstr "ConfiguraÃ§Ã£o de LocalizaÃ§Ã£o"
+msgstr "Configuração de Localização"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:99
 msgid "Lock"
@@ -2523,15 +2521,15 @@ msgstr "Marca a chamada com um centro de custos."
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:11
 msgid "Maximum 12 characters"
-msgstr "MÃ¡ximo 12 caracteres"
+msgstr "Máximo 12 caracteres"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:177
 msgid "Maximum Call Time"
-msgstr "Tempo MÃ¡ximo da LigaÃ§Ã£o"
+msgstr "Tempo Máximo da Ligação"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:54
 msgid "Maximum number of calls waiting in the queue"
-msgstr "NÃºmero mÃ¡ximo de ligaÃ§Ãµes esperando na fila"
+msgstr "Número máximo de ligações esperando na fila"
 
 #: ../modules/default/views/scripts/queues-groups/members.phtml:12
 #: ../modules/default/views/scripts/queues-groups/members.phtml:35
@@ -2549,7 +2547,7 @@ msgstr "Membros"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:152
 msgid "Memory Usage"
-msgstr "Uso da MemÃ³ria"
+msgstr "Uso da Memória"
 
 #: ../modules/default/views/scripts/notifications/index.phtml:37
 #: ../modules/default/actions/EmailAction.php:68
@@ -2572,11 +2570,11 @@ msgstr "Migrar contatos para o grupo"
 
 #: ../modules/default/views/scripts/users/addedit.phtml:34
 msgid "Minimum 5 characters"
-msgstr "MÃ­nimo de 5 caracteres"
+msgstr "Mínimo de 5 caracteres"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:170
 msgid "Minimum Call Time"
-msgstr "Tempo MÃ­nimo da LigaÃ§Ã£o"
+msgstr "Tempo Mínimo da Ligação"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:392
 #: ../modules/default/views/scripts/extensions/addedit.phtml:388
@@ -2594,7 +2592,7 @@ msgstr "MixMonitor"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:35
 msgid "Mobile"
-msgstr "MÃ³vel"
+msgstr "Móvel"
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:12
 msgid "Mode"
@@ -2608,12 +2606,12 @@ msgstr "Erro de modem"
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Module Settings"
-msgstr "ConfiguraÃ§Ã£o de MÃ³dulos"
+msgstr "Configuração de Módulos"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 #: ../modules/default/views/layouts/layout.phtml:197
 msgid "Modules"
-msgstr "MÃ³dulos"
+msgstr "Módulos"
 
 #: ../modules/default/controllers/SimulatorController.php:185
 #: ../modules/default/views/scripts/simulator/index.phtml:90
@@ -2636,15 +2634,15 @@ msgstr "MultiCheckbox"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Music On Hold"
-msgstr "MÃºsica em Espera"
+msgstr "Música em Espera"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:16
 msgid "Music On Hold Class"
-msgstr "Classe da MÃºsica em Espera"
+msgstr "Classe da Música em Espera"
 
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Music on Hold"
-msgstr "MÃºsica em Espera"
+msgstr "Música em Espera"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:59
 #: ../modules/default/controllers/MusicOnHoldController.php:98
@@ -2656,19 +2654,19 @@ msgstr "MÃºsica em Espera"
 #: ../modules/default/controllers/MusicOnHoldController.php:355
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Music on Hold Sessions"
-msgstr "SeÃ§Ãµes de MÃºsica em Espera"
+msgstr "Seções de Música em Espera"
 
 #: ../inspectors/Sounds.php:114
 msgid "Music on Hold class"
-msgstr "Classe da MÃºsica em Espera"
+msgstr "Classe da Música em Espera"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:126
 msgid "Music on hold class already exists"
-msgstr "Classe de mÃºsica em espera jÃ¡ existe"
+msgstr "Classe de música em espera já existe"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:32
 msgid "Music on hold loop timer"
-msgstr "Intervalo de repetiÃ§Ã£o das mensagens ao chamador"
+msgstr "Intervalo de repetição das mensagens ao chamador"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:107
 msgid "MySQL"
@@ -2745,11 +2743,11 @@ msgstr "Nome do Centro de Custos"
 #: ../modules/default/controllers/ContactGroupsController.php:103
 #: ../modules/default/controllers/ContactGroupsController.php:162
 msgid "Name already exists."
-msgstr "Nome jÃ¡ existe."
+msgstr "Nome já existe."
 
 #: ../modules/default/controllers/ContactsController.php:397
 msgid "Name and phone number are required"
-msgstr "O nome e telefone sÃ£o obrigatÃ³rios"
+msgstr "O nome e telefone são obrigatórios"
 
 #: ../modules/default/views/scripts/auth/recuperation.phtml:19
 msgid "New Password"
@@ -2767,16 +2765,16 @@ msgstr "Novo Arquivos de Som adicionado"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:149
 #: ../modules/default/views/scripts/trunks/addedit.phtml:261
 msgid "No"
-msgstr "NÃ£o"
+msgstr "Não"
 
 #: ../modules/default/views/scripts/users/bond.phtml:23
 msgid "No Allow Viewing"
-msgstr "NÃ£o Permitir visualizaÃ§Ã£o"
+msgstr "Não Permitir visualização"
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:85
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:327
 msgid "No Answer"
-msgstr "NÃ£o antedida"
+msgstr "Não antedida"
 
 #: ../modules/default/controllers/RouteController.php:60
 #: ../modules/default/views/scripts/route/add_edit.phtml:35
@@ -2790,11 +2788,11 @@ msgstr "Nenhuma placa Khomp instalada"
 #: ../modules/default/controllers/KhompLinksController.php:68
 #: ../modules/default/controllers/KhompLinksController.php:175
 msgid "No Link Available"
-msgstr "Nenhum link disponÃ­vel."
+msgstr "Nenhum link disponível."
 
 #: ../modules/default/views/scripts/notifications/index.phtml:54
 msgid "No Visualized"
-msgstr "NÃ£o Visualizado"
+msgstr "Não Visualizado"
 
 #: ../modules/default/controllers/KhompLinksController.php:138
 msgid "No boards selected."
@@ -2803,11 +2801,11 @@ msgstr "Nenhuma placa selecionada"
 #: ../modules/default/controllers/ErrorsKhompController.php:93
 #: ../modules/default/controllers/ErrorsKhompController.php:124
 msgid "No boards whith links was detected."
-msgstr "NÃ£o hÃ¡ placas com ligaÃ§Ãµes detectadas."
+msgstr "Não há placas com ligações detectadas."
 
 #: ../modules/default/controllers/CnlController.php:176
 msgid "No data found in the file"
-msgstr "NÃ£o foram encontrados dados no arquivo"
+msgstr "Não foram encontrados dados no arquivo"
 
 #: ../modules/default/controllers/RankingReportController.php:140
 msgid "No entries found"
@@ -2827,7 +2825,7 @@ msgstr "Nenhum campo foi informado."
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:93
 msgid "No files to restore"
-msgstr "NÃ£o hÃ¡ arquivos para restaurar"
+msgstr "Não há arquivos para restaurar"
 
 #: ../modules/default/controllers/ContactsController.php:116
 msgid "No group selected"
@@ -2840,11 +2838,11 @@ msgstr "Nenhuma placa Khomp instalada"
 
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:71
 msgid "No links in this board"
-msgstr "NÃ£o hÃ¡ links nesta placa"
+msgstr "Não há links nesta placa"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:140
 msgid "No modules instaled."
-msgstr "Nenhum mÃ³dulo instalado."
+msgstr "Nenhum módulo instalado."
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:179
 msgid "No queues available"
@@ -2876,42 +2874,42 @@ msgstr "Normal"
 #: ../modules/default/views/scripts/calls-report/view.phtml:202
 #: ../modules/default/views/scripts/calls-report/index.phtml:144
 msgid "Not Answered"
-msgstr "NÃ£o antedida"
+msgstr "Não antedida"
 
 #: ../modules/default/controllers/ErrorController.php:44
 msgid "Not Found"
-msgstr "NÃ£o Encontrado"
+msgstr "Não Encontrado"
 
 #: ../modules/default/views/scripts/trunks/index.phtml:67
 msgid "Not configured"
-msgstr "NÃ£o configurado"
+msgstr "Não configurado"
 
 #: ../modules/default/controllers/NotificationsController.php:36
 msgid "Notifications"
-msgstr "NotificaÃ§Ãµes"
+msgstr "Notificações"
 
 #: ../modules/default/views/layouts/register.phtml:102
 msgid "Notifications in real time"
-msgstr "NotificaÃ§Ãµes em tempo real"
+msgstr "Notificações em tempo real"
 
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:35
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:46
 msgid "Number"
-msgstr "NÃºmero"
+msgstr "Número"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:69
 msgid "Number of Lines"
-msgstr "NÃºmero de Linhas"
+msgstr "Número de Linhas"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:231
 #: ../modules/default/views/scripts/extensions/addedit.phtml:496
 #: ../modules/default/views/scripts/extensions/addedit.phtml:502
 msgid "Numbers only please"
-msgstr "Apenas NÃºmeros"
+msgstr "Apenas Números"
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:12
 msgid "Numbers separated by ( . ). EX: 5.04"
-msgstr "NÃºmeros separados por ( . ). EX: 5.04"
+msgstr "Números separados por ( . ). EX: 5.04"
 
 #: ../modules/default/actions/DiscarTronco.php:142
 msgid "Ommit origin (only for Khomp KGSM)"
@@ -2920,7 +2918,7 @@ msgstr "Omitir origem (somente para Khomp KGSM)"
 #: ../modules/default/controllers/KhompLinksController.php:213
 #: ../modules/default/controllers/KhompLinksController.php:224
 msgid "On Going"
-msgstr "Em LigaÃ§Ã£o"
+msgstr "Em Ligação"
 
 #: ../modules/default/controllers/ErrorsKhompController.php:86
 msgid "On board"
@@ -2929,7 +2927,7 @@ msgstr "Na Placa"
 #: ../modules/default/controllers/KhompLinksController.php:70
 #: ../modules/default/controllers/KhompLinksController.php:177
 msgid "On going"
-msgstr "Em LigaÃ§Ã£o"
+msgstr "Em Ligação"
 
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:53
 #: ../modules/default/views/scripts/extensions/addedit.phtml:33
@@ -2937,7 +2935,7 @@ msgstr "Em LigaÃ§Ã£o"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:364
 #: ../modules/default/views/scripts/extensions/addedit.phtml:366
 msgid "Only numbers"
-msgstr "Somente nÃºmeros "
+msgstr "Somente números "
 
 #: /var/www/html/snep-3/modules/default/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
@@ -2951,7 +2949,7 @@ msgstr "Opens Tecnologia "
 #: ../modules/default/views/scripts/calls-report/index.phtml:79
 #: ../modules/default/views/scripts/calls-report/index.phtml:116
 msgid "Option"
-msgstr "OpÃ§Ã£o"
+msgstr "Opção"
 
 #: ../modules/default/views/layouts/register.phtml:162
 msgid "Optional"
@@ -2959,7 +2957,7 @@ msgstr "Opcional"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:202
 msgid "Options to the recording application"
-msgstr "OpÃ§Ãµes para a aplicaÃ§Ã£o de gravaÃ§Ã£o"
+msgstr "Opções para a aplicação de gravação"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:44
 msgid "Order"
@@ -3001,7 +2999,7 @@ msgstr "Saida"
 #: ../modules/default/controllers/KhompLinksController.php:76
 #: ../modules/default/controllers/KhompLinksController.php:183
 msgid "Outgoing Call"
-msgstr "LigaÃ§Ãµes de SaÃ­da"
+msgstr "Ligações de Saída"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:346
 msgid "Padlock"
@@ -3013,11 +3011,11 @@ msgstr "Cadeado"
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Parameters"
-msgstr "ParÃ¢metros"
+msgstr "Parâmetros"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:306
 msgid "Partition"
-msgstr "PartiÃ§Ã£o"
+msgstr "Partição"
 
 #: ../modules/default/views/scripts/register/index.phtml:5
 msgid "Partner"
@@ -3057,7 +3055,7 @@ msgstr "Senha recuperada com sucesso"
 
 #: ../modules/default/controllers/AuthController.php:188
 msgid "Passwords do not match"
-msgstr "As senhas nÃ£o coincidem"
+msgstr "As senhas não coincidem"
 
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:38
 msgid "Path"
@@ -3065,11 +3063,11 @@ msgstr "Caminho"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:209
 msgid "Path where to store the audio files"
-msgstr "Caminho onde armazenar os arquivos de Ã¡udio"
+msgstr "Caminho onde armazenar os arquivos de áudio"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:216
 msgid "Path where to store the backup audio files"
-msgstr "Caminho onde armazenar os backups dos arquivos de Ã¡udio"
+msgstr "Caminho onde armazenar os backups dos arquivos de áudio"
 
 #: ../modules/default/controllers/ServicesReportController.php:205
 msgid "Peer"
@@ -3088,18 +3086,18 @@ msgstr "Ramais no grupo"
 #: ../modules/default/views/scripts/services-report/index.phtml:28
 #: ../modules/default/views/scripts/calls-report/index.phtml:26
 msgid "Period"
-msgstr "PerÃ­odo"
+msgstr "Período"
 
 #: ../modules/default/controllers/LogsController.php:109
 msgid "Period: "
-msgstr "PerÃ­odo:"
+msgstr "Período:"
 
 #: ../modules/default/controllers/UsersController.php:186
 #: ../modules/default/controllers/ProfilesController.php:243
 #: ../modules/default/views/scripts/users/index.phtml:62
 #: ../modules/default/views/scripts/profiles/index.phtml:62
 msgid "Permission"
-msgstr "PermissÃµes"
+msgstr "Permissões"
 
 #: ../modules/default/controllers/ContactsController.php:347
 #: ../modules/default/views/scripts/contacts/addedit.phtml:104
@@ -3112,7 +3110,7 @@ msgstr "Telefone"
 
 #: ../modules/default/controllers/ContactsController.php:426
 msgid "Phone invalid"
-msgstr "Telefone invÃ¡lido"
+msgstr "Telefone inválido"
 
 #: ../modules/default/controllers/PickupGroupsController.php:220
 #: ../modules/default/views/scripts/extensions/addedit.phtml:62
@@ -3130,15 +3128,15 @@ msgstr "Grupos de Captura"
 
 #: ../modules/default/actions/Playback.php:52
 msgid "Play Audio"
-msgstr "Tocar Ãudio"
+msgstr "Tocar Áudio"
 
 #: ../modules/default/actions/Playback.php:78
 msgid "Play an audio file."
-msgstr "Tocar um arquivo de Ã¡udio."
+msgstr "Tocar um arquivo de áudio."
 
 #: ../modules/default/controllers/AuthController.php:65
 msgid "Please enter a username"
-msgstr "Por favor, insira um nome de usuÃ¡rio"
+msgstr "Por favor, insira um nome de usuário"
 
 #: ../modules/default/views/layouts/register.phtml:376
 msgid "Please enter a valide e-mail."
@@ -3189,7 +3187,7 @@ msgstr "Por favor, insira pelo menos {0} caracteres."
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:78
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:71
 msgid "Please enter letters and numbers only"
-msgstr "Por favor, insira somente letras e nÃºmeros"
+msgstr "Por favor, insira somente letras e números"
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:58
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:76
@@ -3197,7 +3195,7 @@ msgstr "Por favor, insira somente letras e nÃºmeros"
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:56
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:60
 msgid "Please enter letters and numbers only."
-msgstr "Por favor, insira somente letras e nÃºmeros"
+msgstr "Por favor, insira somente letras e números"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:79
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:51
@@ -3207,7 +3205,7 @@ msgstr "Por favor, insira somente letras"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:267
 msgid "Please enter letters only."
-msgstr "Por favor, ingrese sÃ³lo letras."
+msgstr "Por favor, ingrese sólo letras."
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:57
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:75
@@ -3243,17 +3241,17 @@ msgstr "Por favor, ingrese sÃ³lo letras."
 #: ../modules/default/views/layouts/register.phtml:461
 #: ../modules/default/views/layouts/loginregister.phtml:90
 msgid "Please enter no more than {0} characters."
-msgstr "Digite nÃ£o mais do que {0} caracteres."
+msgstr "Digite não mais do que {0} caracteres."
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:70
 #: ../modules/default/views/scripts/action-configs/edit.phtml:73
 #: ../modules/default/views/scripts/action-configs/edit.phtml:76
 msgid "Please enter numbers only"
-msgstr "Por favor, insira somente nÃºmeros"
+msgstr "Por favor, insira somente números"
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:82
 msgid "Please enter with code valid"
-msgstr "Por favor, insira um cÃ³digo vÃ¡lido"
+msgstr "Por favor, insira um código válido"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:305
 msgid "Please enter with numbers only."
@@ -3262,11 +3260,11 @@ msgstr "Por favor, insira somente letras"
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:72
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:233
 msgid "Please enter with range valid"
-msgstr "Por favor, insira um range vÃ¡lido"
+msgstr "Por favor, insira um range válido"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:291
 msgid "Please enter with value valid."
-msgstr "Por favor, insira um valor vÃ¡lido"
+msgstr "Por favor, insira um valor válido"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:236
 #: ../modules/default/views/scripts/trunks/addedit.phtml:238
@@ -3275,7 +3273,7 @@ msgstr "Porta"
 
 #: ../modules/default/views/layouts/login.phtml:32
 msgid "Powered by"
-msgstr "DistribuÃ­do por"
+msgstr "Distribuído por"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:229
 msgid "Preview"
@@ -3308,8 +3306,8 @@ msgstr "Perfis"
 msgid ""
 "Program 'unzip' not installed or there was a problem with the file transfer"
 msgstr ""
-"Programa 'unzip' NÃ£o estÃ¡ instalado ou que havia um problema com a "
-"transferÃªncia de arquivos"
+"Programa 'unzip' Não está instalado ou que havia um problema com a "
+"transferência de arquivos"
 
 #: ../modules/default/controllers/RankingReportController.php:191
 msgid "Q. Answered"
@@ -3317,7 +3315,7 @@ msgstr "Q. Atendidas"
 
 #: ../modules/default/controllers/RankingReportController.php:192
 msgid "Q. No Answer"
-msgstr "Q. NÃ£o atendidas"
+msgstr "Q. Não atendidas"
 
 #: ../modules/default/controllers/RankingReportController.php:193
 msgid "Q. Total"
@@ -3359,11 +3357,11 @@ msgstr "Prioridade da Fila"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:61
 msgid "Queue Service Level Agreement (Used for statistics and monitoring)"
-msgstr "NÃ­vel de ServiÃ§o da Fila (Utilizado para EstatÃ­sticas e Monitoramento)"
+msgstr "Nível de Serviço da Fila (Utilizado para Estatísticas e Monitoramento)"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:84
 msgid "Queue notice audio"
-msgstr "Ãudio de anÃºncio da fila"
+msgstr "Áudio de anúncio da fila"
 
 #: ../modules/default/controllers/QueuesController.php:69
 #: ../modules/default/controllers/QueuesController.php:94
@@ -3396,16 +3394,16 @@ msgstr "RFC-2833"
 
 #: ../modules/default/controllers/QueuesController.php:52
 msgid "Randomly (random)"
-msgstr "AleatÃ³riamente (random)"
+msgstr "Aleatóriamente (random)"
 
 #: ../modules/default/controllers/RankingReportController.php:80
 #: ../modules/default/controllers/RankingReportController.php:174
 msgid "Ranking"
-msgstr "ClassificaÃ§Ã£o"
+msgstr "Classificação"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:62
 msgid "Ranking Options"
-msgstr "OpÃ§Ãµes de Ranking"
+msgstr "Opções de Ranking"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:65
 msgid "Ranking Type"
@@ -3413,7 +3411,7 @@ msgstr "Tipo do Ranking"
 
 #: ../lib/Snep/Notifications.php:60
 msgid "Read All Messages"
-msgstr "Ver Todas NotificaÃ§Ãµes"
+msgstr "Ver Todas Notificações"
 
 #: ../modules/default/views/scripts/logs/index.phtml:28
 msgid "Real Time"
@@ -3421,7 +3419,7 @@ msgstr "Tempo Real"
 
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Recharge the page"
-msgstr "Recarregar a pÃ¡gina"
+msgstr "Recarregar a página"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:115
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:50
@@ -3430,23 +3428,23 @@ msgstr "Gravar"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:119
 msgid "Record Play"
-msgstr "Ouvir gravaÃ§Ã£o"
+msgstr "Ouvir gravação"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:207
 msgid "Recorded Files Path"
-msgstr "Caminho dos arquivos de gravaÃ§Ã£o"
+msgstr "Caminho dos arquivos de gravação"
 
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Recording"
-msgstr "GravaÃ§Ã£o"
+msgstr "Gravação"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:188
 msgid "Recording Application"
-msgstr "AplicaÃ§Ã£o de GravaÃ§Ã£o"
+msgstr "Aplicação de Gravação"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:199
 msgid "Recording Parameters"
-msgstr "ParÃ¢metros de GravaÃ§Ã£o"
+msgstr "Parâmetros de Gravação"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:61
 msgid "Records"
@@ -3455,11 +3453,11 @@ msgstr "Registros"
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:40
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:60
 msgid "Rectangular Pie"
-msgstr "GrÃ¡fico de pizza"
+msgstr "Gráfico de pizza"
 
 #: ../modules/default/controllers/AuthController.php:252
 msgid "Redefinition password - SNEP"
-msgstr "RedifiniÃ§Ã£o de Senha - SNEP"
+msgstr "Redifinição de Senha - SNEP"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:107
 msgid "Redial"
@@ -3495,7 +3493,7 @@ msgstr "Registro"
 
 #: ../modules/default/views/scripts/route/add_edit.phtml:29
 msgid "Regular Expression"
-msgstr "ExpressÃ£o Regular"
+msgstr "Expressão Regular"
 
 #: ../modules/default/controllers/IpStatusController.php:44
 msgid "Rejected"
@@ -3521,15 +3519,15 @@ msgstr "Apagar Todos"
 #: ../modules/default/views/scripts/extensions/index.phtml:26
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Remove Multiple"
-msgstr "Apagar MÃºltiplos"
+msgstr "Apagar Múltiplos"
 
 #: ../modules/default/views/scripts/contacts/index.phtml:19
 msgid "Remove multiple"
-msgstr "Apagar MÃºltiplos"
+msgstr "Apagar Múltiplos"
 
 #: ../modules/default/views/scripts/contacts/select-multi-remove.phtml:31
 msgid "Remove multiples Contacts"
-msgstr "Deletar mÃºltiplos contatos"
+msgstr "Deletar múltiplos contatos"
 
 #: ../modules/default/actions/ActionLoop.php:90
 msgid "Repeat"
@@ -3549,13 +3547,13 @@ msgstr "Substituir origem"
 
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Report"
-msgstr "RelatÃ³rios"
+msgstr "Relatórios"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:102
 #: ../modules/default/views/scripts/khomp-links/index.phtml:35
 #: ../modules/default/views/scripts/calls-report/index.phtml:216
 msgid "Report Type"
-msgstr "Tipo de RelatÃ³rio"
+msgstr "Tipo de Relatório"
 
 #: ../modules/default/controllers/CallsReportController.php:54
 #: ../modules/default/controllers/CallsReportController.php:269
@@ -3570,7 +3568,7 @@ msgstr "Tipo de RelatÃ³rio"
 #: ../modules/default/controllers/ExportDataController.php:111
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Reports"
-msgstr "RelatÃ³rios"
+msgstr "Relatórios"
 
 #: ../modules/default/actions/Cadeado.php:69
 msgid "Request Password"
@@ -3578,7 +3576,7 @@ msgstr "Pedir Senha"
 
 #: ../modules/default/controllers/IpStatusController.php:47
 msgid "Request Sent"
-msgstr "RequisiÃ§Ã£o enviada"
+msgstr "Requisição enviada"
 
 #: ../modules/default/controllers/SimulatorController.php:155
 msgid "Request password"
@@ -3587,7 +3585,7 @@ msgstr "Pedir Senha"
 #: ../modules/default/controllers/ExpressionAliasController.php:103
 #: ../modules/default/controllers/ExpressionAliasController.php:163
 msgid "Required value"
-msgstr "Valor obrigatÃ³rio"
+msgstr "Valor obrigatório"
 
 #: ../modules/default/controllers/KhompLinksController.php:98
 #: ../modules/default/controllers/KhompLinksController.php:205
@@ -3630,7 +3628,7 @@ msgstr "Restaurar arquivo de som de backup"
 
 #: ../modules/default/actions/Restore.php:76
 msgid "Restore the original source or destination of a call."
-msgstr "Restaurar a origem ou destino original de uma ligaÃ§Ã£o."
+msgstr "Restaurar a origem ou destino original de uma ligação."
 
 #: ../modules/default/actions/Restore.php:121
 #, php-format
@@ -3652,7 +3650,7 @@ msgstr "Tentar novamente"
 
 #: ../modules/default/actions/Rewrite.php:60
 msgid "Rewrite Request"
-msgstr "Reescrever RequisiÃ§Ã£o"
+msgstr "Reescrever Requisição"
 
 #: ../modules/default/actions/Rewrite.php:76
 msgid "Rewrite requests source or destination."
@@ -3706,7 +3704,7 @@ msgstr "Rotinas"
 
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Routing"
-msgstr "Regras de NegÃ³cio"
+msgstr "Regras de Negócio"
 
 #: ../modules/default/views/scripts/information/index.phtml:63
 msgid "Rua dos Cisnes, 541 "
@@ -3723,11 +3721,11 @@ msgstr "Regra ignorada por prioridade"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:146
 msgid "Rule invalid because of time"
-msgstr "Regra invÃ¡lida por causa do horÃ¡rio"
+msgstr "Regra inválida por causa do horário"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:145
 msgid "Rule that will be executed"
-msgstr "Regra que serÃ¡ executada"
+msgstr "Regra que será executada"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:131
 #, php-format
@@ -3740,7 +3738,7 @@ msgstr "SEQ"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:91
 msgid "SIGAME"
-msgstr "SÃ­game"
+msgstr "Sígame"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:51
 #: ../modules/default/views/scripts/extensions/addedit.phtml:92
@@ -3838,7 +3836,7 @@ msgstr "Buscar"
 
 #: ../modules/default/controllers/QueuesController.php:50
 msgid "Search for a available agent (roundrobin)"
-msgstr "Buscar um agente disponÃ­vel (roundrobin)"
+msgstr "Buscar um agente disponível (roundrobin)"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:17
 #: ../modules/default/actions/DiscarTronco.php:219
@@ -3876,7 +3874,7 @@ msgstr "Selecione um Grupo de Contato para remover seus contatos"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:20
 msgid "Select a country"
-msgstr "Selecione um paÃ­s"
+msgstr "Selecione um país"
 
 #: ../modules/default/views/layouts/register.phtml:197
 #: ../modules/default/views/layouts/register.phtml:397
@@ -3885,7 +3883,7 @@ msgstr "Selecione um estado"
 
 #: ../modules/default/controllers/ServicesReportController.php:116
 msgid "Select at least one service"
-msgstr "Selecione pelo menos um serviÃ§o"
+msgstr "Selecione pelo menos um serviço"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:64
 msgid "Select city"
@@ -3954,31 +3952,31 @@ msgstr "Separado por virgula"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:81
 msgid "Server Status"
-msgstr "Status do ServiÃ§o"
+msgstr "Status do Serviço"
 
 #: ../modules/default/controllers/ServicesReportController.php:206
 #: ../modules/default/views/scripts/services-report/view.phtml:37
 msgid "Service"
-msgstr "ServiÃ§o"
+msgstr "Serviço"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:84
 msgid "Services"
-msgstr "ServiÃ§os"
+msgstr "Serviços"
 
 #: ../modules/default/controllers/ServicesReportController.php:50
 #: ../modules/default/controllers/ServicesReportController.php:88
 #: ../modules/default/controllers/ServicesReportController.php:195
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Services Use"
-msgstr "ServiÃ§os Utilizados"
+msgstr "Serviços Utilizados"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Services Used"
-msgstr "ServiÃ§os Utilizados"
+msgstr "Serviços Utilizados"
 
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:12
 msgid "Session"
-msgstr "SessÃ£o"
+msgstr "Sessão"
 
 #: ../lib/PBX/Rule/Action/CCustos.php:53
 msgid "Set a cost center"
@@ -3990,15 +3988,15 @@ msgstr "Define um centro de custos para classificar a chamada"
 
 #: ../modules/default/views/scripts/contacts/import.phtml:63
 msgid "Set the relationship column x data"
-msgstr "Defina a relaÃ§Ã£o ente da coluna e o dado"
+msgstr "Defina a relação ente da coluna e o dado"
 
 #: ../modules/default/views/layouts/layout.phtml:138
 msgid "Settings"
-msgstr "ConfiguraÃ§Ãµes"
+msgstr "Configurações"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:198
 msgid "Should calls be ejected from queue if all agents logout?"
-msgstr "Chamadas devem sair da fila quando os Agentes saÃ­rem?"
+msgstr "Chamadas devem sair da fila quando os Agentes saírem?"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:39
 msgid "Show / Hide deactivated routes"
@@ -4012,7 +4010,7 @@ msgstr "Mostrar Logs"
 #: ../modules/default/views/scripts/services-report/index.phtml:127
 #: ../modules/default/views/scripts/calls-report/index.phtml:244
 msgid "Show Report"
-msgstr "Mostrar RelatÃ³rio"
+msgstr "Mostrar Relatório"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:54
 msgid "Show error message events if activated"
@@ -4024,11 +4022,11 @@ msgstr "Exibir links / canais"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:90
 msgid "Show top by destiny"
-msgstr "Exibir â€™nâ€™ melhores classificados por destino"
+msgstr "Exibir ’n’ melhores classificados por destino"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:78
 msgid "Show top by source ranking"
-msgstr "Exibir â€™nâ€™ melhores classificados por origem"
+msgstr "Exibir ’n’ melhores classificados por origem"
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:93
@@ -4061,7 +4059,7 @@ msgstr "Sinal Perdido"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:224
 msgid "Silent time before connecting the agent to a caller"
-msgstr "Tempo de descanso para o Agente antes de conectÃ¡-lo ao chamador"
+msgstr "Tempo de descanso para o Agente antes de conectá-lo ao chamador"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:154
 msgid "Simulate"
@@ -4076,7 +4074,7 @@ msgstr "Simulador"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:112
 msgid "Simultaneous Call Limit"
-msgstr "Limite de Chamadas SimultÃ¢neas"
+msgstr "Limite de Chamadas Simultâneas"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:307
 msgid "Size"
@@ -4102,7 +4100,7 @@ msgstr "Snep/PHP Debug"
 #: ../modules/default/controllers/KhompLinksController.php:241
 #: ../modules/default/controllers/KhompLinksController.php:270
 msgid "Socket connection to the server is not available at the moment."
-msgstr "Socket de conexÃ£o para o servidor nÃ£o esta disponÃ­vel no momento."
+msgstr "Socket de conexão para o servidor não esta disponível no momento."
 
 #: ../modules/default/views/layouts/register.phtml:92
 msgid "Some Advantages"
@@ -4110,8 +4108,8 @@ msgstr "Algumas Vantagens"
 
 #: ../modules/default/controllers/ErrorController.php:52
 msgid ""
-"Some internal error occured while processing your request. Please contact the "
-"system administrator and report this incident."
+"Some internal error occured while processing your request. Please contact "
+"the system administrator and report this incident."
 msgstr "Algum erro interno ocorreu enquanto seu pedido era processado."
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:6
@@ -4185,7 +4183,7 @@ msgstr "Estado :"
 
 #: ../modules/default/actions/Cadeado.php:98
 msgid "Static Password"
-msgstr "Senha EstÃ¡tica:"
+msgstr "Senha Estática:"
 
 #: ../modules/default/controllers/ErrorsKhompController.php:50
 #: ../modules/default/controllers/ServicesReportController.php:208
@@ -4205,7 +4203,7 @@ msgstr "Status da Chamada"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:195
 msgid "Status by Period"
-msgstr "Dados Por PerÃ­odo"
+msgstr "Dados Por Período"
 
 #: ../modules/default/actions/DiscarTronco.php:357
 msgid "Status of last call"
@@ -4214,7 +4212,7 @@ msgstr "Status da ultima chamada"
 #: ../modules/default/views/scripts/queues/index.phtml:41
 #: ../modules/default/views/scripts/ip-status/index.phtml:159
 msgid "Strategy"
-msgstr "EstratÃ©gia de distribuiÃ§Ã£o"
+msgstr "Estratégia de distribuição"
 
 #: ../modules/default/actions/EmailAction.php:65
 msgid "Subject"
@@ -4236,7 +4234,7 @@ msgstr "Domingo"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:268
 msgid "Swap Memory"
-msgstr "MemÃ³ria Swap"
+msgstr "Memória Swap"
 
 #: ../modules/default/controllers/SoundFilesController.php:347
 msgid "Synchronization of sound files "
@@ -4254,11 +4252,11 @@ msgstr "Sincronizar arquivos"
 #: ../modules/default/views/scripts/khomp-links/index.phtml:42
 #: ../modules/default/views/scripts/calls-report/index.phtml:223
 msgid "Synthetic"
-msgstr "SintÃ©tico"
+msgstr "Sintético"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "System Diagnosis"
-msgstr "DiagnÃ³stico do Sistema"
+msgstr "Diagnóstico do Sistema"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:172
 msgid "System Language"
@@ -4288,7 +4286,7 @@ msgstr "Total atendidas"
 
 #: ../modules/default/controllers/RankingReportController.php:195
 msgid "T. No Answer"
-msgstr "Total nÃ£o atendidas"
+msgstr "Total não atendidas"
 
 #: ../modules/default/controllers/RankingReportController.php:196
 msgid "T. Total"
@@ -4324,73 +4322,72 @@ msgstr "Texto"
 
 #: ../modules/default/controllers/ParametersController.php:60
 msgid "The File includes/setup.conf does not have permission to be modified."
-msgstr "O arquivo includes/setup.conf nÃ£o tem permissÃ£o de escrita."
+msgstr "O arquivo includes/setup.conf não tem permissão de escrita."
 
 #: ../modules/default/views/scripts/parameters/index.phtml:308
 msgid "The Recorded Files Path is required."
-msgstr "O diretÃ³rio de arquivos de gravaÃ§Ã£o e obrigatÃ³rio."
+msgstr "O diretório de arquivos de gravação e obrigatório."
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:525
 msgid "The board is required"
-msgstr "A placa Ã© obrigatÃ³ria"
+msgstr "A placa é obrigatória"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:508
 msgid "The channel is required"
-msgstr "O canal Ã© obrigatÃ³rio"
+msgstr "O canal é obrigatório"
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:79
 msgid "The code is required"
-msgstr "O cÃ³digo Ã© obrigatÃ³rio"
+msgstr "O código é obrigatório"
 
 #: ../modules/default/controllers/ContactsController.php:253
 msgid "The contact will be deleted. After that, you have no way get it back."
-msgstr ""
-"O contato serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr "O contato será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/controllers/ContactGroupsController.php:229
 msgid ""
 "The contacts group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de contatos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
-"recuperÃ¡-lo."
+"O grupo de contatos será excluído. Depois disso, você não tem como recuperá-"
+"lo."
 
 #: ../modules/default/controllers/CostCenterController.php:192
 msgid ""
 "The cost center will be deleted. After that, you have no way get it back."
 msgstr ""
-"O centro de custos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
-"recuperÃ¡-lo."
+"O centro de custos será excluído. Depois disso, você não tem como recuperá-"
+"lo."
 
 #: ../modules/default/views/scripts/logs/index.phtml:143
 #: ../modules/default/views/scripts/logs/index.phtml:147
 msgid "The date is required"
-msgstr "A data Ã© obrigatÃ³ria"
+msgstr "A data é obrigatória"
 
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:76
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:75
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:68
 msgid "The description is required"
-msgstr "A descriÃ§Ã£o Ã© obrigatÃ³ria"
+msgstr "A descrição é obrigatória"
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:76
 msgid "The directory name is required"
-msgstr "O nome do diretÃ³rio Ã© obrigatÃ³rio"
+msgstr "O nome do diretório é obrigatório"
 
 #: ../modules/default/views/scripts/register/index.phtml:95
 #: ../modules/default/views/scripts/users/addedit.phtml:102
 #: ../modules/default/views/scripts/extensions/addedit.phtml:516
 msgid "The e-mail is required"
-msgstr "O e-mail Ã© obrigatÃ³rio."
+msgstr "O e-mail é obrigatório."
 
 #: ../modules/default/views/layouts/register.phtml:375
 #: ../modules/default/views/layouts/register.phtml:428
 #: ../modules/default/views/layouts/loginregister.phtml:84
 msgid "The email is required"
-msgstr "O e-mail Ã© obrigatÃ³rio."
+msgstr "O e-mail é obrigatório."
 
 #: ../modules/default/views/scripts/parameters/index.phtml:300
 msgid "The email is required."
-msgstr "O e-mail Ã© obrigatÃ³rio."
+msgstr "O e-mail é obrigatório."
 
 #: ../modules/default/controllers/ContactGroupsController.php:272
 msgid "The excluded group has associated contacts."
@@ -4398,84 +4395,84 @@ msgstr "O grupo apagado tem contatos associados."
 
 #: ../modules/default/controllers/ExpressionAliasController.php:208
 msgid ""
-"The expression alias will be deleted. After that, you have no way get it back."
+"The expression alias will be deleted. After that, you have no way get it "
+"back."
 msgstr ""
-"A aliÃ¡s de expressÃ£o serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como "
-"recuperÃ¡-la."
+"A aliás de expressão será excluída. Depois disso, você não tem como recuperá-"
+"la."
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:490
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:228
 msgid "The extension group is required"
-msgstr "O grupo de ramal Ã© requerido"
+msgstr "O grupo de ramal é requerido"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:256
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:10
 msgid ""
 "The extension group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de ramais serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O grupo de ramais será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:252
 msgid "The extension group will be deleted. Are you sure?."
-msgstr "O grupo de ramais serÃ¡ apagado. Deseja continuar?"
+msgstr "O grupo de ramais será apagado. Deseja continuar?"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:493
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:231
 msgid "The extension is required"
-msgstr "O ramal Ã© obrigatÃ³rio"
+msgstr "O ramal é obrigatório"
 
 #: ../modules/default/controllers/ExtensionsController.php:683
 msgid "The extension will be deleted. After that, you have no way get it back."
-msgstr "O ramal serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr "O ramal será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/controllers/SoundFilesController.php:126
 #, php-format
 msgid "The file %s already exists in directory."
-msgstr "O arquivo %s jÃ¡ existe no diretÃ³rio."
+msgstr "O arquivo %s já existe no diretório."
 
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:73
 msgid "The file is required"
-msgstr "O arquivo Ã© obrigatÃ³rio"
+msgstr "O arquivo é obrigatório"
 
 #: ../modules/default/controllers/ContactsController.php:314
 msgid ""
 "The file must be separated by commas. The columns can be associated in the "
 "next screen."
 msgstr ""
-"O arquivo deve ser separados por vÃ­rgulas. As colunas podem ser associados na "
-"prÃ³xima tela."
+"O arquivo deve ser separados por vírgulas. As colunas podem ser associados "
+"na próxima tela."
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:69
 msgid "The filename is required"
-msgstr "O nome do arquivo Ã© obrigatÃ³rio"
+msgstr "O nome do arquivo é obrigatório"
 
 #: ../modules/default/views/layouts/register.phtml:385
 msgid "The first name is required"
-msgstr "O nome Ã© obrigatÃ³rio"
+msgstr "O nome é obrigatório"
 
 #: ../modules/default/controllers/ExtensionsController.php:771
 msgid ""
 "The following extensions are in use in routes, modify them prior to remove "
 "this extension"
 msgstr ""
-"As seguintes extensÃµes EstÃ£o em uso nesta rota, ajuste primeiro ou entÃ£o "
-"remova a extensÃ£o"
+"As seguintes extensões Estão em uso nesta rota, ajuste primeiro ou então "
+"remova a extensão"
 
 #: ../modules/default/controllers/SoundFilesController.php:405
 msgid ""
 "The following files do not exist in the directory and will be excluded from "
 "the database."
 msgstr ""
-"Os seguintes arquivos nÃ£o existem no diretÃ³rio e serÃ£o excluÃ­dos do banco "
-"de dados."
+"Os seguintes arquivos não existem no diretório e serão excluídos do banco de "
+"dados."
 
 #: ../modules/default/controllers/SoundFilesController.php:412
 msgid ""
-"The following files were found in the directory and will be registered in the "
-"database."
+"The following files were found in the directory and will be registered in "
+"the database."
 msgstr ""
-"Os seguintes arquivos foram encontrados no diretÃ³rio e serÃ£o registrados no "
+"Os seguintes arquivos foram encontrados no diretório e serão registrados no "
 "banco de dados."
 
 #: ../modules/default/controllers/QueuesController.php:279
@@ -4490,35 +4487,35 @@ msgstr "As seguintes rotas usam este ramal, modifique elas antes de apaga-lo."
 
 #: ../modules/default/controllers/ContactGroupsController.php:224
 msgid "The group will be removed. After that you can't go back."
-msgstr "O grupo serÃ¡ apagado. Depois disso, vocÃª nÃ£o tem como recupera-lo."
+msgstr "O grupo será apagado. Depois disso, você não tem como recupera-lo."
 
 #: ../modules/default/views/layouts/register.phtml:459
 msgid "The hash is required"
-msgstr "O cÃ³digo Ã© obrigatÃ³rio"
+msgstr "O código é obrigatório"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:288
 msgid "The hostname is required."
-msgstr "O hostname Ã© obrigatÃ³rio"
+msgstr "O hostname é obrigatório"
 
 #: ../modules/default/views/layouts/register.phtml:391
 msgid "The last name is required"
-msgstr "O sobrenome Ã© obrigatÃ³rio"
+msgstr "O sobrenome é obrigatório"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:304
 msgid "The linelimit is required."
-msgstr "O limite de linha Ã© obrigatÃ³rio"
+msgstr "O limite de linha é obrigatório"
 
 #: ../modules/default/controllers/LogsController.php:122
 msgid "The log file cannot be open!"
-msgstr "O arquivo de log nÃ£o pode ser aberto!"
+msgstr "O arquivo de log não pode ser aberto!"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:363
 msgid ""
 "The music on hold files will be deleted. After that, you have no way get it "
 "back."
 msgstr ""
-"A mÃºsica de espera serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como "
-"recuperÃ¡-la."
+"A música de espera será excluída. Depois disso, você não tem como recuperá-"
+"la."
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:55
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
@@ -4534,16 +4531,15 @@ msgstr ""
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:70
 msgid "The name is required"
-msgstr "O nome Ã© obrigatÃ³rio"
+msgstr "O nome é obrigatório"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:282
 msgid "The name is required."
-msgstr "O nome Ã© obrigatÃ³rio."
+msgstr "O nome é obrigatório."
 
 #: ../modules/default/controllers/ErrorController.php:43
 msgid "The page you are looking for was not found or does not exists."
-msgstr ""
-"A pÃ¡gina que vocÃª estÃ¡ procurando nÃ£o foi encontrada ou nÃ£o existe."
+msgstr "A página que você está procurando não foi encontrada ou não existe."
 
 #: ../modules/default/views/scripts/register/index.phtml:90
 #: ../modules/default/views/scripts/users/addedit.phtml:97
@@ -4552,81 +4548,76 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:432
 #: ../modules/default/views/layouts/loginregister.phtml:88
 msgid "The password is required"
-msgstr "A senha Ã© obrigatÃ³ria"
+msgstr "A senha é obrigatória"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:297
 msgid "The password is required."
-msgstr "A senha Ã© obrigatÃ³ria."
+msgstr "A senha é obrigatória."
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:228
 msgid "The phone is required"
-msgstr "O telefone Ã© obrigatÃ³rio"
+msgstr "O telefone é obrigatório"
 
 #: ../modules/default/controllers/PickupGroupsController.php:227
 msgid ""
 "The pickup group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de captura serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
-"recuperÃ¡-lo."
+"O grupo de captura será excluído. Depois disso, você não tem como recuperá-"
+"lo."
 
 #: ../modules/default/controllers/ProfilesController.php:218
 msgid "The profile will be deleted. After that, you have no way get it back."
-msgstr ""
-"O perfil serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr "O perfil será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/controllers/QueuesController.php:316
 msgid "The queue will be deleted. After that, you have no way get it back."
-msgstr "A fila serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-la."
+msgstr "A fila será excluída. Depois disso, você não tem como recuperá-la."
 
 #: ../modules/default/controllers/QueuesGroupsController.php:272
 msgid ""
 "The queues group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de filas serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O grupo de filas será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:70
 msgid "The range extension is required"
-msgstr "O range de ramais Ã© obrigatÃ³rio"
+msgstr "O range de ramais é obrigatório"
 
 #: ../modules/default/controllers/RouteController.php:615
 msgid "The route will be deleted. After that, you have no way get it back."
-msgstr "A rota serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-la."
+msgstr "A rota será excluída. Depois disso, você não tem como recuperá-la."
 
 #: ../modules/default/controllers/SoundFilesController.php:281
 msgid ""
 "The sound files will be deleted. After that, you have no way get it back."
 msgstr ""
-"O arquivo de som serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O arquivo de som será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:505
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:236
 msgid "The trunk is required"
-msgstr "O tronco Ã© obrigatÃ³rio"
+msgstr "O tronco é obrigatório"
 
 #: ../modules/default/controllers/TrunksController.php:470
 msgid "The trunk will be deleted. After that, you have no way get it back."
-msgstr ""
-"O tronco serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr "O tronco será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:90
 msgid "The type is required"
-msgstr "O tipo Ã© obrigatÃ³rio"
+msgstr "O tipo é obrigatório"
 
 #: ../modules/default/controllers/UsersController.php:166
 msgid "The user will be deleted. After that, you have no way get it back."
-msgstr ""
-"O usuÃ¡rio serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr "O usuário será excluído. Depois disso, você não tem como recuperá-lo."
 
 #: ../modules/default/views/scripts/register/index.phtml:84
 #: ../modules/default/views/scripts/users/addedit.phtml:91
 msgid "The username is required"
-msgstr "O usuÃ¡rio Ã© obrigatÃ³rio"
+msgstr "O usuário é obrigatório"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:294
 msgid "The username is required."
-msgstr "O usuÃ¡rio Ã© obrigatÃ³rio."
+msgstr "O usuário é obrigatório."
 
 #: ../modules/default/controllers/ExpressionAliasController.php:98
 #: ../modules/default/controllers/ExpressionAliasController.php:158
@@ -4634,16 +4625,16 @@ msgid ""
 "Their alias has invalid character. Accents are not allowed, empty value "
 "between the keys, blanks and special characters except( # % | . - _ )"
 msgstr ""
-"Seu apelido possui caracteres invÃ¡lidos. NÃ£o sÃ£o permitidos, valor vazio, "
-"espaÃ§os em branco e caracteres especiais, exceto ( # % | . - _ )"
+"Seu apelido possui caracteres inválidos. Não são permitidos, valor vazio, "
+"espaços em branco e caracteres especiais, exceto ( # % | . - _ )"
 
 #: ../modules/default/controllers/CallsReportController.php:255
 msgid "There are no extensions in the selected group"
-msgstr "NÃ£o existem ramais no grupo selecionado"
+msgstr "Não existem ramais no grupo selecionado"
 
 #: ../modules/default/controllers/ContactsController.php:360
 msgid "There is no contacts group registered."
-msgstr "NÃ£o existem grupos de contatos registrados."
+msgstr "Não existem grupos de contatos registrados."
 
 #: ../modules/default/controllers/MusicOnHoldController.php:313
 msgid ""
@@ -4655,8 +4646,8 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:26
 msgid ""
-"This group has some extensions exclusively associated with it. Select another "
-"group for these extensions."
+"This group has some extensions exclusively associated with it. Select "
+"another group for these extensions."
 msgstr ""
 "Este grupo tem ramais associados exclusivamente a ele. Selecione outro grupo "
 "para estes ramais."
@@ -4684,7 +4675,7 @@ msgstr "Saldo de Tempo (h:m:s)"
 
 #: ../modules/default/controllers/AuthController.php:200
 msgid "Time of validity of the code was expired"
-msgstr "Tempo de validade do cÃ³digo foi expirado"
+msgstr "Tempo de validade do código foi expirado"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:403
 #: ../modules/default/views/scripts/extensions/addedit.phtml:404
@@ -4697,37 +4688,37 @@ msgstr "Tempo limite"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:150
 msgid "Timezone"
-msgstr "Fuso HorÃ¡rio"
+msgstr "Fuso Horário"
 
 #: ../modules/default/views/scripts/notifications/index.phtml:36
 msgid "Title"
-msgstr "TÃ­tulo"
+msgstr "Título"
 
 #: ../modules/default/views/scripts/logs/index.phtml:55
 #: ../modules/default/views/scripts/ranking-report/index.phtml:46
 #: ../modules/default/views/scripts/services-report/index.phtml:43
 #: ../modules/default/views/scripts/calls-report/index.phtml:42
 msgid "To"
-msgstr "AtÃ©"
+msgstr "Até"
 
 #: ../modules/default/views/layouts/register.phtml:30
 msgid ""
 "To confirm your registration, an email was sent with the confirmation key."
 msgstr ""
-"Para confirma o seu registro, um e-mail foi enviado com a chave de confirmaÃ§Ã"
-"£o"
+"Para confirma o seu registro, um e-mail foi enviado com a chave de "
+"confirmação"
 
 #: ../modules/default/views/layouts/loginregister.phtml:31
 msgid "To proceed you need to log in to your account again."
-msgstr "Para continuar Ã© preciso logar novamente em sua conta."
+msgstr "Para continuar é preciso logar novamente em sua conta."
 
 #: ../modules/default/controllers/IndexController.php:73
 msgid ""
 "To register your Snep you must be connected to an internet network. Check "
 "your connection and try again."
 msgstr ""
-"Para registrar seu Snep vocÃª deve estar conectado a uma rede de internet. "
-"Verifique sua conexÃ£o e tente novamente."
+"Para registrar seu Snep você deve estar conectado a uma rede de internet. "
+"Verifique sua conexão e tente novamente."
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:49
 #: ../modules/default/views/scripts/ranking-report/view.phtml:52
@@ -4768,13 +4759,13 @@ msgstr "Troncos"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:223
 msgid "Trunks Configuration"
-msgstr "ConfiguraÃ§Ã£o dos Troncos"
+msgstr "Configuração dos Troncos"
 
 #: ../modules/default/controllers/SimulatorController.php:186
 #: ../modules/default/views/scripts/simulator/index.phtml:91
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Tuesday"
-msgstr "TerÃ§a-feira"
+msgstr "Terça-feira"
 
 #: ../modules/default/views/scripts/logs/index.phtml:26
 #: ../modules/default/views/scripts/systemstatus/index.phtml:158
@@ -4813,11 +4804,11 @@ msgstr "Desconhecido"
 
 #: ../modules/default/controllers/IpStatusController.php:50
 msgid "UNMONITORED"
-msgstr "NÃ£o monitorado"
+msgstr "Não monitorado"
 
 #: ../modules/default/controllers/IpStatusController.php:51
 msgid "UNREACHABLE"
-msgstr "InacessÃ­vel"
+msgstr "Inacessível"
 
 #: ../modules/default/views/scripts/register/index.phtml:47
 msgid "UUID do Snep"
@@ -4825,7 +4816,7 @@ msgstr "UUID do SNEP"
 
 #: ../modules/default/controllers/SoundFilesController.php:303
 msgid "Unable to remove file"
-msgstr "NÃ£o foi possÃ­vel remover arquivo"
+msgstr "Não foi possível remover arquivo"
 
 #: ../modules/default/controllers/SoundFilesController.php:331
 msgid "Unable to restore file"
@@ -4834,12 +4825,12 @@ msgstr "Incapaz de restaurar o arquivo"
 #: ../modules/default/controllers/SoundFilesController.php:132
 #: ../modules/default/controllers/SoundFilesController.php:228
 msgid "Unable to upload file."
-msgstr "NÃ£o Ã© possÃ­vel fazer o upload do arquivo."
+msgstr "Não é possível fazer o upload do arquivo."
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:48
 #: ../modules/default/views/scripts/ranking-report/view.phtml:51
 msgid "Unanswerd"
-msgstr "NÃ£o Atendida"
+msgstr "Não Atendida"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:51
 msgid "Undefined"
@@ -4861,19 +4852,19 @@ msgstr "Erro desconhecido. Entre em contato com o administrador."
 
 #: ../modules/default/controllers/IpStatusController.php:48
 msgid "Unmonitored"
-msgstr "NÃ£o monitorado"
+msgstr "Não monitorado"
 
 #: ../modules/default/controllers/KhompLinksController.php:207
 #: ../modules/default/controllers/IpStatusController.php:43
 msgid "Unreachable"
-msgstr "InacessÃ­vel"
+msgstr "Inacessível"
 
 #: ../modules/default/controllers/KhompLinksController.php:71
 #: ../modules/default/controllers/KhompLinksController.php:178
 #: ../modules/default/controllers/KhompLinksController.php:212
 #: ../modules/default/controllers/KhompLinksController.php:223
 msgid "Unused"
-msgstr "NÃ£o Utilizado"
+msgstr "Não Utilizado"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:42
 msgid "Update"
@@ -4899,31 +4890,31 @@ msgstr "Usado"
 
 #: ../modules/default/views/scripts/auth/login.phtml:15
 msgid "User"
-msgstr "UsuÃ¡rio"
+msgstr "Usuário"
 
 #: ../modules/default/controllers/IndexController.php:136
 #: ../modules/default/controllers/IndexController.php:186
 msgid "User already exists."
-msgstr "UsuÃ¡rio jÃ¡ existe."
+msgstr "Usuário já existe."
 
 #: ../modules/default/controllers/AuthController.php:183
 #: ../modules/default/controllers/AuthController.php:234
 msgid "User not registered"
-msgstr "UsuÃ¡rio NÃ£o Registrado"
+msgstr "Usuário Não Registrado"
 
 #: ../modules/default/controllers/RegisterController.php:137
 #: ../modules/default/controllers/IndexController.php:254
 msgid "User or password incorrect."
-msgstr "UsuÃ¡rio ou senha invÃ¡lido"
+msgstr "Usuário ou senha inválido"
 
 #: ../modules/default/controllers/AuthController.php:84
 msgid "User or password invalid"
-msgstr "UsuÃ¡rio ou senha invÃ¡lido"
+msgstr "Usuário ou senha inválido"
 
 #: ../modules/default/views/scripts/users/permission.phtml:48
 #: ../modules/default/views/scripts/users/permission.phtml:49
 msgid "User permission"
-msgstr "PermissÃ£o do usuÃ¡rio"
+msgstr "Permissão do usuário"
 
 #: ../modules/default/controllers/CallsReportController.php:426
 msgid "Userfield"
@@ -4937,7 +4928,7 @@ msgstr "Userfield"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:114
 #: ../modules/default/views/scripts/trunks/addedit.phtml:116
 msgid "Username"
-msgstr "UsuÃ¡rio"
+msgstr "Usuário"
 
 #: ../modules/default/controllers/UsersController.php:53
 #: ../modules/default/controllers/UsersController.php:73
@@ -4948,15 +4939,15 @@ msgstr "UsuÃ¡rio"
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Users"
-msgstr "UsuÃ¡rios"
+msgstr "Usuários"
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:181
 msgid "Users can enter the queue without Agents Present?"
-msgstr "UsuÃ¡rios podem entrar na Fila mesmo sem Agentes presentes?"
+msgstr "Usuários podem entrar na Fila mesmo sem Agentes presentes?"
 
 #: ../modules/default/views/scripts/route/elements/time.phtml:2
 msgid "Valid Times"
-msgstr "Tempos vÃ¡lidos"
+msgstr "Tempos válidos"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:134
 #, php-format
@@ -4969,7 +4960,7 @@ msgstr "Detalhado"
 
 #: ../modules/default/views/scripts/logs/index.phtml:84
 msgid "Verbose (only numbers)"
-msgstr "Somente nÃºmeros"
+msgstr "Somente números"
 
 #: ../modules/default/views/scripts/notifications/index.phtml:38
 #: /var/www/html/snep-3/configs/dashboard.xml
@@ -5008,7 +4999,7 @@ msgstr "Notificar agente o tempo que a chamada esperou na fila"
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:9
 msgid "Warning: Maximum upload file size"
-msgstr "AtenÃ§Ã£o: Tamanho mÃ¡ximo do arquivo"
+msgstr "Atenção: Tamanho máximo do arquivo"
 
 #: ../modules/default/views/layouts/loginregister.phtml:29
 msgid "We found recently that his key API has been updated"
@@ -5020,7 +5011,7 @@ msgstr "Estamos quase terminando"
 
 #: ../modules/default/controllers/AuthController.php:169
 msgid "We've sent an access code to the email:"
-msgstr "Enviamos um cÃ³digo de acesso ao e-mail:"
+msgstr "Enviamos um código de acesso ao e-mail:"
 
 #: ../modules/default/controllers/SimulatorController.php:187
 #: ../modules/default/views/scripts/simulator/index.phtml:92
@@ -5037,8 +5028,8 @@ msgid "Week Days"
 msgstr "Dias da Semana"
 
 #: ../modules/default/controllers/IndexController.php:201
-msgid "Welcome to IntercomunexÃ£o."
-msgstr "Bem-vindo a IntercomunexÃ£o."
+msgid "Welcome to Intercomunexão."
+msgstr "Bem-vindo a Intercomunexão."
 
 #: ../modules/default/controllers/InformationController.php:39
 #: ../modules/default/controllers/SystemstatusController.php:46
@@ -5051,15 +5042,15 @@ msgstr "Quem sou eu"
 
 #: ../modules/default/views/layouts/register.phtml:88
 msgid ""
-"Within seconds you register your Snep and participates in the IntercomunexÃ"
-"£o, a freer communication network, intelligent and humane."
+"Within seconds you register your Snep and participates in the "
+"Intercomunexão, a freer communication network, intelligent and humane."
 msgstr ""
-"Em poucos segundos vocÃª registrar seu Snep e participa da IntercomunexÃ£o, "
-"uma rede de comunicaÃ§Ã£o mais livre, inteligente e humana."
+"Em poucos segundos você registrar seu Snep e participa da Intercomunexão, "
+"uma rede de comunicação mais livre, inteligente e humana."
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:108
 msgid "Without Authentication"
-msgstr "Sem AutenticaÃ§Ã£o"
+msgstr "Sem Autenticação"
 
 #: ../modules/default/controllers/RegisterController.php:84
 #: ../modules/default/controllers/RegisterController.php:140
@@ -5067,12 +5058,12 @@ msgstr "Sem AutenticaÃ§Ã£o"
 #: ../modules/default/controllers/IndexController.php:189
 #: ../modules/default/controllers/IndexController.php:257
 msgid "Without internet connection."
-msgstr "Sem conexÃ£o Ã  internet."
+msgstr "Sem conexão à internet."
 
 #: ../modules/default/views/layouts/register.phtml:119
 #: ../modules/default/views/layouts/register.phtml:303
 msgid "Would not Like Me registering at this time"
-msgstr "NÃ£o gostaria de me registrar neste momento"
+msgstr "Não gostaria de me registrar neste momento"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:246
 msgid "XX.XXX-XXX"
@@ -5096,27 +5087,27 @@ msgid ""
 "You are removing a music on hold class, it has some audio files attached to "
 "it."
 msgstr ""
-"VocÃª esta removendo uma classe de Musicas em Espera, esta classe tem alguns "
-"arquivos de Ã¡udio associados a ela."
+"Você esta removendo uma classe de Musicas em Espera, esta classe tem alguns "
+"arquivos de áudio associados a ela."
 
 #: ../modules/default/controllers/AuthController.php:246
 msgid "You asked for resetting your password the user <b>"
-msgstr "VocÃª pediu para redefinir sua senha do usuÃ¡rio <b>"
+msgstr "Você pediu para redefinir sua senha do usuário <b>"
 
 #: ../modules/default/controllers/NotificationsController.php:50
 msgid "You do not have any notifications"
-msgstr "VocÃª nÃ£o possui notificaÃ§Ãµes"
+msgstr "Você não possui notificações"
 
 #: ../modules/default/controllers/PermissionController.php:39
 msgid "You do not have permission to access this routine."
-msgstr "VocÃª nÃ£o tem permissÃ£o para acessar esta rotina"
+msgstr "Você não tem permissão para acessar esta rotina"
 
 #: ../modules/default/controllers/ContactsController.php:74
 msgid ""
-"You do not have registered contacts. <br><br> Click 'Add Contact' to make the "
-"first registration\n"
+"You do not have registered contacts. <br><br> Click 'Add Contact' to make "
+"the first registration\n"
 msgstr ""
-"VocÃª nÃ£o possui contatos registrados. <br> Clique em \"Adicionar contato\" "
+"Você não possui contatos registrados. <br> Clique em \"Adicionar contato\" "
 "para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/CostCenterController.php:62
@@ -5124,7 +5115,7 @@ msgid ""
 "You do not have registered cost centers. <br><br> Click 'Add cost center' to "
 "make the first registration\n"
 msgstr ""
-"VocÃª nÃ£o possui centro de custos registrados. <br> Clique em \"Adicionar "
+"Você não possui centro de custos registrados. <br> Clique em \"Adicionar "
 "Centro de Custo\" para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:57
@@ -5132,31 +5123,31 @@ msgid ""
 "You do not have registered expression alias. <br><br> Click 'Add Expression "
 "Alias' to make the first registration"
 msgstr ""
-"VocÃª nÃ£o possui alias de expressÃ£o registrados. <br><br> Clique em "
-"\"Adicionar Alias de ExpressÃ£o\" para fazer seu primeiro registro"
+"Você não possui alias de expressão registrados. <br><br> Clique em "
+"\"Adicionar Alias de Expressão\" para fazer seu primeiro registro"
 
 #: ../modules/default/controllers/ExtensionsController.php:92
 msgid ""
 "You do not have registered extensions. <br><br> Click 'Add Extensions' ou "
 "'Multi Add Extensions' to make the first registration"
 msgstr ""
-"VocÃª nÃ£o possui ramais registrados. <br><br> Clique em \"Adicionar Ramal\" "
-"ou â€œAdicionar MÃºltiplosâ€ para cadastrar seu primeiro ramal"
+"Você não possui ramais registrados. <br><br> Clique em \"Adicionar Ramal\" "
+"ou “Adicionar Múltiplos” para cadastrar seu primeiro ramal"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:247
 msgid ""
 "You do not have registered file. <br><br> Click 'Add File' to make the first "
 "registration"
 msgstr ""
-"VocÃª nÃ£o tem nenhum arquivo cadastrado. <br><br> Clique em â€˜Adicionar "
-"arquivoâ€™ para incluir o primeiro arquivo."
+"Você não tem nenhum arquivo cadastrado. <br><br> Clique em ‘Adicionar "
+"arquivo’ para incluir o primeiro arquivo."
 
 #: ../modules/default/controllers/QueuesController.php:80
 msgid ""
 "You do not have registered queues. <br><br> Click 'Add Queue' to make the "
 "first registration\n"
 msgstr ""
-"VocÃª nÃ£o possui filas registradas. <br> Clique em \"Adicionar Fila\" para "
+"Você não possui filas registradas. <br> Clique em \"Adicionar Fila\" para "
 "fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/RouteController.php:128
@@ -5164,23 +5155,23 @@ msgid ""
 "You do not have registered rule. <br><br> Click 'Add Rule' to make the first "
 "registration\n"
 msgstr ""
-"VocÃª nÃ£o possui regras registradas. <br> Clique em \"Adicionar Regras\" "
-"para fazer seu primeiro registro \n"
+"Você não possui regras registradas. <br> Clique em \"Adicionar Regras\" para "
+"fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:85
 msgid ""
 "You do not have registered session. <br><br> Click 'Add Session' to make the "
 "first registration"
 msgstr ""
-"VocÃª nÃ£o tem nenhuma sessÃ£o cadastrada.<br><br> Clique em  'Adicionar sessÃ"
-"£o' para criar a primeira sessÃ£o."
+"Você não tem nenhuma sessão cadastrada.<br><br> Clique em  'Adicionar "
+"sessão' para criar a primeira sessão."
 
 #: ../modules/default/controllers/SoundFilesController.php:64
 msgid ""
 "You do not have registered sound files. <br><br> Click 'Add Sound File' to "
 "make the first registration\n"
 msgstr ""
-"VocÃª nÃ£o possui arquivos de som registrados. <br> Clique em \"Adicionar "
+"Você não possui arquivos de som registrados. <br> Clique em \"Adicionar "
 "Arquivo de Som\" para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/TrunksController.php:125
@@ -5188,7 +5179,7 @@ msgid ""
 "You do not have registered trunks. <br><br> Click 'Add Trunk' to make the "
 "first registration\n"
 msgstr ""
-"VocÃª nÃ£o possui troncos registrados. <br> Clique em \"Adicionar Tronco\" "
+"Você não possui troncos registrados. <br> Clique em \"Adicionar Tronco\" "
 "para fazer seu primeiro registro \n"
 
 #: ../modules/default/views/scripts/extensions/khomp_error.phtml:1
@@ -5204,12 +5195,12 @@ msgid ""
 "You have data connections with this cost center, so this exclusion is not "
 "permitted."
 msgstr ""
-"VocÃª tem chamadas vinculadas com este centro de custo, por isso esta exclusÃ"
-"£o nÃ£o Ã© permitida."
+"Você tem chamadas vinculadas com este centro de custo, por isso esta "
+"exclusão não é permitida."
 
 #: ../lib/Snep/Notifications.php:67
 msgid "You have no notifications"
-msgstr "VocÃª nÃ£o possui notificaÃ§Ãµes"
+msgstr "Você não possui notificações"
 
 #: ../modules/default/views/layouts/register.phtml:285
 msgid "You'Re Welcome"
@@ -5217,28 +5208,28 @@ msgstr "Seja Bem-Vindo"
 
 #: ../modules/default/controllers/ModuleSettingsController.php:79
 msgid "Your Snep not have additional modules"
-msgstr "Seu Snep nÃ£o possui mÃ³dulos adicionais"
+msgstr "Seu Snep não possui módulos adicionais"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:93
 #: ../modules/default/views/scripts/sound-files/index.phtml:67
 #: ../modules/default/views/scripts/sound-files/index.phtml:79
 msgid "Your browser does not support the audio element."
-msgstr "Seu navegador nÃ£o suporta o elemento de Ã¡udio."
+msgstr "Seu navegador não suporta o elemento de áudio."
 
 #: ../modules/default/views/scripts/register/index.phtml:96
 #: ../modules/default/views/scripts/parameters/index.phtml:301
 #: ../modules/default/views/scripts/users/addedit.phtml:103
 #: ../modules/default/views/scripts/extensions/addedit.phtml:517
 msgid "Your email address must be in the format of name@domain.com"
-msgstr "O seu endereÃ§o de e-mail deve estar no formato de nome@dominio.com"
+msgstr "O seu endereço de e-mail deve estar no formato de nome@dominio.com"
 
 #: ../modules/default/controllers/SoundFilesController.php:416
 msgid "Your files are synchronized"
-msgstr "Seus arquivos sÃ£o sincronizados"
+msgstr "Seus arquivos são sincronizados"
 
 #: ../modules/default/views/layouts/register.phtml:62
 msgid "Your registration is complete, welcome to Snep."
-msgstr "O seu registo estÃ¡ completo, bem-vindo ao Snep."
+msgstr "O seu registo está completo, bem-vindo ao Snep."
 
 #: ../modules/default/controllers/ContactsController.php:346
 #: ../modules/default/views/scripts/contacts/addedit.phtml:92
@@ -5253,7 +5244,7 @@ msgstr "Cep"
 
 #: ../modules/default/controllers/ContactsController.php:433
 msgid "Zipcode invalid"
-msgstr "CEP invÃ¡lido"
+msgstr "CEP inválido"
 
 #: ../modules/default/actions/DiscarTronco.php:82
 msgid "[snep] Warning of trunk usage"
@@ -5316,7 +5307,7 @@ msgid ""
 "display information of source and destination of the call in the body of the "
 "email?"
 msgstr ""
-"Deseja exibir informaÃ§Ãµes de origem e de destino da chamada no corpo do e-"
+"Deseja exibir informações de origem e de destino da chamada no corpo do e-"
 "mail?"
 
 #: /var/www/html/snep-3/configs/titleOptions.xml
@@ -5430,7 +5421,7 @@ msgstr "nenhum ramal disponivel"
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:129
 msgid "no trunk available"
-msgstr "sem troncos disponÃ­veis"
+msgstr "sem troncos disponíveis"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:15
 msgid "off"
@@ -5482,7 +5473,7 @@ msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:219
 msgid "ranking"
-msgstr "ClassificaÃ§Ã£o"
+msgstr "Classificação"
 
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "ranking-report/index"
@@ -5652,7 +5643,7 @@ msgstr "Tempos"
 
 #: ../modules/default/controllers/LogsController.php:109
 msgid "to"
-msgstr "atÃ©"
+msgstr "até"
 
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "true"
@@ -5705,10 +5696,10 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Falhou"
 
 #~ msgid "NO ANSWER"
-#~ msgstr "NÃ£o atendida"
+#~ msgstr "Não atendida"
 
 #~ msgid "NOANSWER"
-#~ msgstr "NÃ£o atendida"
+#~ msgstr "Não atendida"
 
 #~ msgid "Administrators"
 #~ msgstr "Administradores"
@@ -5723,16 +5714,16 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Troncos IAX"
 
 #~ msgid "IP Address"
-#~ msgstr "EndereÃ§o IP"
+#~ msgstr "Endereço IP"
 
 #~ msgid "IP Extensions"
 #~ msgstr "Ramais IP"
 
 #~ msgid "Licenses"
-#~ msgstr "LicenÃ§as"
+#~ msgstr "Licenças"
 
 #~ msgid "Licenses (g729)"
-#~ msgstr "LicenÃ§as (g729)"
+#~ msgstr "Licenças (g729)"
 
 #~ msgid "Outgoing "
 #~ msgstr "Saida"
@@ -5741,31 +5732,30 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Tronco SIP"
 
 #~ msgid "no data available"
-#~ msgstr "sem dados disponÃ­veis"
+#~ msgstr "sem dados disponíveis"
 
 #~ msgid "no extension available"
-#~ msgstr "sem ramais disponÃ­veis"
+#~ msgstr "sem ramais disponíveis"
 
 #~ msgid "no queue available"
-#~ msgstr "sem filas disponÃ­veis"
+#~ msgstr "sem filas disponíveis"
 
 #~ msgid "Search Records"
-#~ msgstr "Busca de GravaÃ§Ãµes"
+#~ msgstr "Busca de Gravações"
 
 #~ msgid "Delete Extension Multiples."
-#~ msgstr "Remover MÃºltiplos Ramais."
+#~ msgstr "Remover Múltiplos Ramais."
 
 #~ msgid "Group Type: "
 #~ msgstr "Tipo de Grupo"
 
 #~ msgid "Invalid Path"
-#~ msgstr "DiretÃ³rio invÃ¡lido"
+#~ msgstr "Diretório inválido"
 
 #~ msgid ""
 #~ "The extensions will be deleted. After that, you have no way get it back."
 #~ msgstr ""
-#~ "Os ramais serÃ£o excluÃ­dos. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-#~ "los."
+#~ "Os ramais serão excluídos. Depois disso, você não tem como recuperá-los."
 
 #~ msgid ""
 #~ "This groups has extensions associated. Select another group for these "
@@ -5783,25 +5773,25 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr " minutos"
 
 #~ msgid "( Only numbers)"
-#~ msgstr "(Somente nÃºmeros)"
+#~ msgstr "(Somente números)"
 
 #~ msgid "Advanced Configuration"
-#~ msgstr "ConfiguraÃ§Ã£o avanÃ§ada"
+#~ msgstr "Configuração avançada"
 
 #~ msgid "Call's date"
-#~ msgstr "Data das ligaÃ§Ãµes"
+#~ msgstr "Data das ligações"
 
 #~ msgid "Custom application"
-#~ msgstr "AplicaÃ§Ã£o Personalizada"
+#~ msgstr "Aplicação Personalizada"
 
 #~ msgid "Delete Sound Files"
 #~ msgstr "Deletar Arquivos de Som"
 
 #~ msgid "Delete music on hold files."
-#~ msgstr "Deletar Arquivo de MÃºsica em Espera"
+#~ msgstr "Deletar Arquivo de Música em Espera"
 
 #~ msgid "Invalid archive"
-#~ msgstr "Arquivo InvÃ¡lido"
+#~ msgstr "Arquivo Inválido"
 
 #~ msgid "MP3"
 #~ msgstr "MP3"
@@ -5810,10 +5800,10 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Outros Filtros"
 
 #~ msgid "Password Authentication"
-#~ msgstr "AutenticaÃ§Ã£o por Senha"
+#~ msgstr "Autenticação por Senha"
 
 #~ msgid "Recorded Files Path: Invalid path"
-#~ msgstr "DiretÃ³rio de arquivos de gravaÃ§Ã£o: DiretÃ³rio invÃ¡lido"
+#~ msgstr "Diretório de arquivos de gravação: Diretório inválido"
 
 #~ msgid "Restricted Access"
 #~ msgstr "Acesso restrito"
@@ -5822,22 +5812,22 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Selecione um grupo de contatos para exportar"
 
 #~ msgid "The extensions can only consist of numbers"
-#~ msgstr "Os ramais aceitam somente nÃºmeros"
+#~ msgstr "Os ramais aceitam somente números"
 
 #~ msgid "The extensions is not valid"
-#~ msgstr "Os ramais nÃ£o sÃ£o vÃ¡lidos"
+#~ msgstr "Os ramais não são válidos"
 
 #~ msgid "The extensions is required"
-#~ msgstr "O ramal Ã© obrigatÃ³rio"
+#~ msgstr "O ramal é obrigatório"
 
 #~ msgid "The file already exists"
-#~ msgstr "O arquivo jÃ¡ existe"
+#~ msgstr "O arquivo já existe"
 
 #~ msgid "The time can only consist of number."
-#~ msgstr "O tempo sÃ³ pode conter nÃºmeros"
+#~ msgstr "O tempo só pode conter números"
 
 #~ msgid "This group does not have any contacts"
-#~ msgstr "Este grupo nÃ£o tem nenhum contato"
+#~ msgstr "Este grupo não tem nenhum contato"
 
 #~ msgid "Without buffer"
 #~ msgstr "Sem buffer"
@@ -5849,21 +5839,21 @@ msgstr "www.sneplivre.com.br"
 #~ "You do not have registered file. <br><br> Click 'Add File' to make the "
 #~ "first registration\n"
 #~ msgstr ""
-#~ "VocÃª nÃ£o possui arquivos registrados. <br> Clique em \"Adicionar Arquivo"
+#~ "Você não possui arquivos registrados. <br> Clique em \"Adicionar Arquivo"
 #~ "\" para fazer seu primeiro registro \n"
 
 #~ msgid ""
 #~ "You do not have registered session. <br><br> Click 'Add Session' to make "
 #~ "the first registration\n"
 #~ msgstr ""
-#~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o"
-#~ "\" para fazer seu primeiro registro \n"
+#~ "Você não possui sessões registradas. <br> Clique em \"Adicionar Sessão\" "
+#~ "para fazer seu primeiro registro \n"
 
 #~ msgid "All Files"
 #~ msgstr "Todos arquivos"
 
 #~ msgid "Discard header"
-#~ msgstr "Descartar cabeÃ§alho"
+#~ msgstr "Descartar cabeçalho"
 
 #~ msgid "Enable/Disable"
 #~ msgstr "Ativar/Desativar"
@@ -5873,10 +5863,10 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "Error: The following files are not writable by the system:"
 #~ msgstr ""
-#~ "Erro: Os arquivos a seguir nÃ£o tem permissÃ£o de escrita pelo sistema:"
+#~ "Erro: Os arquivos a seguir não tem permissão de escrita pelo sistema:"
 
 #~ msgid "Expressions"
-#~ msgstr "ExpressÃµes"
+#~ msgstr "Expressões"
 
 #~ msgid "Friend"
 #~ msgstr "Friend"
@@ -5889,7 +5879,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Portador"
 
 #~ msgid "Asterisk configuration"
-#~ msgstr "ConfiguraÃ§Ã£o do Asterisk "
+#~ msgstr "Configuração do Asterisk "
 
 #~ msgid "Carrier"
 #~ msgstr "Operadoras"
@@ -5898,31 +5888,31 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Comprimir os arquivos selecionados"
 
 #~ msgid "Database configuration"
-#~ msgstr "ConfiguraÃ§Ã£o de Banco de Dados"
+#~ msgstr "Configuração de Banco de Dados"
 
-#~ msgid "DiagnÃ³stico do Sistema"
-#~ msgstr "DiagnÃ³stico do Sistema"
+#~ msgid "Diagnóstico do Sistema"
+#~ msgstr "Diagnóstico do Sistema"
 
 #~ msgid "Do you wish to remove this record?"
-#~ msgstr "Â¿Realmente desea eliminar este artÃ­culo?"
+#~ msgstr "¿Realmente desea eliminar este artículo?"
 
 #~ msgid "Extension %s does not exists."
-#~ msgstr "Ramal %s nÃ£o existe."
+#~ msgstr "Ramal %s não existe."
 
 #~ msgid "Fragmentation Time"
-#~ msgstr "Tiempo de activaciÃ³n"
+#~ msgstr "Tiempo de activación"
 
 #~ msgid "Installation completed"
-#~ msgstr "InstalaÃ§Ã£o concluÃ­da"
+#~ msgstr "Instalação concluída"
 
 #~ msgid "Installer Snep"
 #~ msgstr "Instalar Snep"
 
-#~ msgid "Installer Â» Configuration"
-#~ msgstr "Instalador Â» ConfiguraÃ§Ã£o"
+#~ msgid "Installer » Configuration"
+#~ msgstr "Instalador » Configuração"
 
-#~ msgid "Installer Â» Diagnostic"
-#~ msgstr "Instalador Â» DiagnÃ³stico"
+#~ msgid "Installer » Diagnostic"
+#~ msgstr "Instalador » Diagnóstico"
 
 #~ msgid "No entries found!."
 #~ msgstr "Nenhum registo encontrado!"
@@ -5932,10 +5922,10 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "The files were compressed successfully! Wait for the download start."
 #~ msgstr ""
-#~ "Os arquivos foram comprimidos com sucesso! Espere o download comeÃ§ar."
+#~ "Os arquivos foram comprimidos com sucesso! Espere o download começar."
 
 #~ msgid "You do not have permission to perform this action"
-#~ msgstr "VocÃª nÃ£o possui permissÃ£o para esta aÃ§Ã£o"
+#~ msgstr "Você não possui permissão para esta ação"
 
 #~ msgid " - Activated"
 #~ msgstr "- Ativado"
@@ -5947,10 +5937,10 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Ativado/Desativado"
 
 #~ msgid "Audio Files Format"
-#~ msgstr "Formato dos arquivos de Ã¡udio"
+#~ msgstr "Formato dos arquivos de áudio"
 
 #~ msgid "Available in key https://itc.opens.com.br."
-#~ msgstr "Chave disponÃ­vel em https://itc.opens.com.br."
+#~ msgstr "Chave disponível em https://itc.opens.com.br."
 
 #~ msgid "DESTINATION"
 #~ msgstr "DESTINO"
@@ -5959,22 +5949,22 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Data e Hora"
 
 #~ msgid "Defines what destinations will be excluded from reports"
-#~ msgstr "Define quais destinos devem ser desprezados por relatÃ³rios"
+#~ msgstr "Define quais destinos devem ser desprezados por relatórios"
 
 #~ msgid "Destination Exceptions"
-#~ msgstr "ExceÃ§Ãµes de Destino"
+#~ msgstr "Exceções de Destino"
 
 #~ msgid "End with"
 #~ msgstr "Termina com"
 
 #~ msgid "Init with"
-#~ msgstr "ComeÃ§a com"
+#~ msgstr "Começa com"
 
 #~ msgid "Invalid Date"
 #~ msgstr "Data invalida"
 
 #~ msgid "Just Numbers"
-#~ msgstr "Apenas NÃºmeros"
+#~ msgstr "Apenas Números"
 
 #~ msgid "Licensed to"
 #~ msgstr "Licenciado para"
@@ -5983,28 +5973,28 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "NUM. ATENDIDAS"
 
 #~ msgid "N. UNANSWERD"
-#~ msgstr "NUM. Ã‘ ATENDIDAS"
+#~ msgstr "NUM. Ñ ATENDIDAS"
 
 #~ msgid "Options"
-#~ msgstr "OpÃ§Ãµes"
+#~ msgstr "Opções"
 
 #~ msgid "SOURCE"
 #~ msgstr "ORIGEM"
 
 #~ msgid "Search records"
-#~ msgstr "Busca de GravaÃ§Ãµes"
+#~ msgstr "Busca de Gravações"
 
 #~ msgid "Separate with ;"
 #~ msgstr "Separado com ;"
 
 #~ msgid "Service - Activated/Deactivated"
-#~ msgstr "ServiÃ§o - Ativado/Desativado"
+#~ msgstr "Serviço - Ativado/Desativado"
 
 #~ msgid "Service State"
-#~ msgstr "Status do ServiÃ§o"
+#~ msgstr "Status do Serviço"
 
 #~ msgid "Service Status"
-#~ msgstr "Status do ServiÃ§o"
+#~ msgstr "Status do Serviço"
 
 #~ msgid "Show 'n' source ranking"
 #~ msgstr "Exibir ranking de 'n' origens"
@@ -6016,16 +6006,16 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "TEMPO TOTAL ATENDIDAS"
 
 #~ msgid "TIME TOTAL UNANSWERD"
-#~ msgstr "TEMPO TOTAL Ã‘ ATENDIDAS"
+#~ msgstr "TEMPO TOTAL Ñ ATENDIDAS"
 
 #~ msgid "The Destination Exceptions is required."
-#~ msgstr "As exceÃ§Ãµes de Destino sÃ£o obrigatÃ³rias"
+#~ msgstr "As exceções de Destino são obrigatórias"
 
 #~ msgid "Total Time"
 #~ msgstr "Tempo Total"
 
 #~ msgid "'%value%' is not a valid date, the format is dd/mm/aaaa hh:mm."
-#~ msgstr "'%value%' nÃ£o Ã© uma data vÃ¡lida, o formato Ã© dd/mm/aaaa hh:mm."
+#~ msgstr "'%value%' não é uma data válida, o formato é dd/mm/aaaa hh:mm."
 
 #~ msgid ", Link : "
 #~ msgstr ", Link : "
@@ -6034,19 +6024,19 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Adicionar no Dashboard"
 
 #~ msgid "Add another expression"
-#~ msgstr "Adicionar outra expressÃ£o"
+#~ msgstr "Adicionar outra expressão"
 
 #~ msgid "Application responsable of call recording"
-#~ msgstr "AplicaÃ§Ã£o responsÃ¡vel pela gravaÃ§Ã£o da chamada"
+#~ msgstr "Aplicação responsável pela gravação da chamada"
 
 #~ msgid "Application responsable of the conference rooms on Snep."
-#~ msgstr "AplicaÃ§Ã£o responsÃ¡vel pela sala de conferÃªncia do Snep."
+#~ msgstr "Aplicação responsável pela sala de conferência do Snep."
 
 #~ msgid "CNL File"
 #~ msgstr "Arquivo CNL"
 
 #~ msgid "Call Type"
-#~ msgstr "Tipo de LigaÃ§Ã£o"
+#~ msgstr "Tipo de Ligação"
 
 #~ msgid "Cellphone"
 #~ msgstr "Celular"
@@ -6058,10 +6048,10 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Codecs"
 
 #~ msgid "Conference"
-#~ msgstr "ConferÃªncia"
+#~ msgstr "Conferência"
 
 #~ msgid "Configuration of access to the database, Asterisk"
-#~ msgstr "ConfiguraÃ§Ã£o do acesso ao banco de dados, asterisk"
+#~ msgstr "Configuração do acesso ao banco de dados, asterisk"
 
 #~ msgid "Continue"
 #~ msgstr "Continuar"
@@ -6070,15 +6060,15 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Converter para GSM"
 
 #~ msgid "Critical"
-#~ msgstr "CrÃ­tico"
+#~ msgstr "Crítico"
 
 #~ msgid ""
 #~ "Defines what destinations will be excluded from reports (Sintax: nono ; "
 #~ "nonono ; nono)"
-#~ msgstr "Define quais destinos devem ser desprezados por relatÃ³rios"
+#~ msgstr "Define quais destinos devem ser desprezados por relatórios"
 
 #~ msgid "Diagnosis System"
-#~ msgstr "DiagnÃ³stico do Sistema"
+#~ msgstr "Diagnóstico do Sistema"
 
 #~ msgid ""
 #~ "Drag the fields as chosen order. Click the columns you wish to export."
@@ -6087,7 +6077,7 @@ msgstr "www.sneplivre.com.br"
 #~ "exportar."
 
 #~ msgid "EmailAddress"
-#~ msgstr "EndereÃ§o de E-mail"
+#~ msgstr "Endereço de E-mail"
 
 #~ msgid "Enable"
 #~ msgstr "Ativar"
@@ -6108,22 +6098,22 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Falha ao conectar: %s"
 
 #~ msgid "File format is not valid"
-#~ msgstr "Arquivo invÃ¡lido"
+#~ msgstr "Arquivo inválido"
 
 #~ msgid "File is not valid"
-#~ msgstr "Arquivo invÃ¡lido"
+#~ msgstr "Arquivo inválido"
 
 #~ msgid "Filter by"
 #~ msgstr "Filtrar Por"
 
 #~ msgid "Format witch the recorded files will be stored"
-#~ msgstr "Formato no qual os arquivos gravados serÃ£o gravados"
+#~ msgstr "Formato no qual os arquivos gravados serão gravados"
 
 #~ msgid "From domain"
-#~ msgstr "DomÃ­nio de Origem"
+#~ msgstr "Domínio de Origem"
 
 #~ msgid "From user"
-#~ msgstr "Especificar UsuÃ¡rio de Origem"
+#~ msgstr "Especificar Usuário de Origem"
 
 #~ msgid "From:"
 #~ msgstr "De:"
@@ -6135,34 +6125,34 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Grupo de Contatos"
 
 #~ msgid "Invalid column count on line %d"
-#~ msgstr "Contagem invÃ¡lida de colunas na linha %d"
+#~ msgstr "Contagem inválida de colunas na linha %d"
 
-#~ msgid "InvÃ¡lid Path"
-#~ msgstr "Caminho InvÃ¡lido"
+#~ msgid "Inválid Path"
+#~ msgstr "Caminho Inválido"
 
 #~ msgid "Just numbers"
-#~ msgstr "Apenas NÃºmeros"
+#~ msgstr "Apenas Números"
 
 #~ msgid "Khomp Boards Errors"
 #~ msgstr "Erros Placas Khomp"
 
 #~ msgid "Language selection and location"
-#~ msgstr "SeleÃ§Ã£o de LÃ­ngua e LocalizaÃ§Ã£o"
+#~ msgstr "Seleção de Língua e Localização"
 
 #~ msgid "Month"
-#~ msgstr "MÃªs"
+#~ msgstr "Mês"
 
 #~ msgid "Musiconhold"
-#~ msgstr "MÃºsica em Espera"
+#~ msgstr "Música em Espera"
 
 #~ msgid "Next"
-#~ msgstr "PrÃ³ximo"
+#~ msgstr "Próximo"
 
 #~ msgid "Numbers Only"
-#~ msgstr "Apenas NÃºmeros"
+#~ msgstr "Apenas Números"
 
 #~ msgid "Numbers only"
-#~ msgstr "Apenas NÃºmeros"
+#~ msgstr "Apenas Números"
 
 #~ msgid "Operator"
 #~ msgstr "Operador"
@@ -6174,7 +6164,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Confirmar Senha"
 
 #~ msgid "Period from:"
-#~ msgstr "PerÃ­odo de:"
+#~ msgstr "Período de:"
 
 #~ msgid "PickupGroup"
 #~ msgstr "Grupos de Captura"
@@ -6183,7 +6173,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Por Favor, Aguarde..."
 
 #~ msgid "Prioritary"
-#~ msgstr "PrioritÃ¡rio"
+#~ msgstr "Prioritário"
 
 #~ msgid "Range of Agents"
 #~ msgstr "Intervalo de agentes"
@@ -6195,7 +6185,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Recebida"
 
 #~ msgid "Remove expression"
-#~ msgstr "Deletar ExpressÃ£o Regular"
+#~ msgstr "Deletar Expressão Regular"
 
 #~ msgid "Set Password Administrator"
 #~ msgstr "Entre com a senha do Administrador"
@@ -6204,7 +6194,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Exibir os TOP 'n' por origem"
 
 #~ msgid "Signal Strength"
-#~ msgstr "ForÃ§a do Sinal"
+#~ msgstr "Força do Sinal"
 
 #~ msgid "Sort Results"
 #~ msgstr "Ordenar Resultados"
@@ -6219,24 +6209,24 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Tabela de Troncos"
 
 #~ msgid "Table Users"
-#~ msgstr "Tabela de UsuÃ¡rios"
+#~ msgstr "Tabela de Usuários"
 
 #~ msgid ""
-#~ "The SNEP was successfully installed on your system, click the button below "
-#~ "to go to the login screen."
+#~ "The SNEP was successfully installed on your system, click the button "
+#~ "below to go to the login screen."
 #~ msgstr ""
-#~ "O SNEP foi instalado em seu sistema com sucesso, clique no botÃ£o abaixo "
-#~ "para ir para a pÃ¡gina de login."
+#~ "O SNEP foi instalado em seu sistema com sucesso, clique no botão abaixo "
+#~ "para ir para a página de login."
 
 #~ msgid "The SNEP was successfully installed."
 #~ msgstr "O SNEP foi instalado com sucesso."
 
 #~ msgid "The confirmation password does not match the requested password"
 #~ msgstr ""
-#~ "A senha de confirmaÃ§Ã£o nÃ£o coincide com a senha solicitada solicitada"
+#~ "A senha de confirmação não coincide com a senha solicitada solicitada"
 
 #~ msgid "The default path is required"
-#~ msgstr "O diretÃ³rio padrÃ£o Ã© obrigatÃ³rio"
+#~ msgstr "O diretório padrão é obrigatório"
 
 #~ msgid ""
 #~ "The extension list must follow the format from this example. EX: 8000;8001"
@@ -6250,23 +6240,23 @@ msgstr "www.sneplivre.com.br"
 #~ "The password for the Admin user has been reset in the installation, store "
 #~ "it safely."
 #~ msgstr ""
-#~ "A senha do admin foi redefinida na instalaÃ§Ã£o, mantenha esta informaÃ§Ã"
-#~ "£o segura."
+#~ "A senha do admin foi redefinida na instalação, mantenha esta informação "
+#~ "segura."
 
 #~ msgid ""
 #~ "The user must have permission to create tables in the informed database"
 #~ msgstr ""
-#~ "O usuÃ¡rio deve ter permissÃ£o para criar tabelas no banco de dados "
+#~ "O usuário deve ter permissão para criar tabelas no banco de dados "
 #~ "informado"
 
 #~ msgid "This email is not valid"
-#~ msgstr "Este e-mail nÃ£o Ã© vÃ¡lido"
+#~ msgstr "Este e-mail não é válido"
 
 #~ msgid "This field shoud contain only numbers"
-#~ msgstr "Este campo deve conter apenas nÃºmeros"
+#~ msgstr "Este campo deve conter apenas números"
 
 #~ msgid "This field should contain numbers only"
-#~ msgstr "Este campo deve conter apenas nÃºmeros"
+#~ msgstr "Este campo deve conter apenas números"
 
 #~ msgid "Time Total"
 #~ msgstr "Tempo Total"
@@ -6278,11 +6268,11 @@ msgstr "www.sneplivre.com.br"
 #~ "To witch context the call must go when the caller dial any number while "
 #~ "waiting"
 #~ msgstr ""
-#~ "Para qual contexto a ligaÃ§Ã£o deve ir quando uma tecla de qualquer "
-#~ "nÃºmero for digitada enquanto espera"
+#~ "Para qual contexto a ligação deve ir quando uma tecla de qualquer número "
+#~ "for digitada enquanto espera"
 
 #~ msgid "To:"
-#~ msgstr "AtÃ©:"
+#~ msgstr "Até:"
 
 #~ msgid "True"
 #~ msgstr "Verdadeiro"
@@ -6291,7 +6281,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Tipo de tronco"
 
 #~ msgid "User password or refused by the Asterisk server"
-#~ msgstr "UsuÃ¡rio e/ou senha rejeitados pelo servidor Asterisk"
+#~ msgstr "Usuário e/ou senha rejeitados pelo servidor Asterisk"
 
 #~ msgid "Waiting"
 #~ msgstr "Esperando"
@@ -6312,21 +6302,21 @@ msgstr "www.sneplivre.com.br"
 #~ "you wish, this diagnosis can be accessed from within the system menu "
 #~ "choice <strong>Settings</strong> > <strong>Diagnostics </strong>."
 #~ msgstr ""
-#~ "VocÃª deve corrigir possÃ­veis erros destacados em vermelho neste passo da "
-#~ "instalaÃ§Ã£o. Ã‰ importante que todos os erros sejam corrigidos para que o "
-#~ "SNEP funcione corretamente. UsuÃ¡rios avanÃ§ados podem pular essa parte da "
-#~ "instalaÃ§Ã£o se desejarem e este diagnÃ³stico pode ser acessado pelo "
-#~ "sistema atravÃ©s do menu <strong>ConfiguraÃ§Ãµes</strong> > "
-#~ "<strong>DiagnÃ³stico </strong>."
+#~ "Você deve corrigir possíveis erros destacados em vermelho neste passo da "
+#~ "instalação. É importante que todos os erros sejam corrigidos para que o "
+#~ "SNEP funcione corretamente. Usuários avançados podem pular essa parte da "
+#~ "instalação se desejarem e este diagnóstico pode ser acessado pelo sistema "
+#~ "através do menu <strong>Configurações</strong> > <strong>Diagnóstico </"
+#~ "strong>."
 
 #~ msgid "You must select at least one column."
-#~ msgstr "VocÃª deve selecionar pelo menos uma coluna."
+#~ msgstr "Você deve selecionar pelo menos uma coluna."
 
 #~ msgid "You will be taken in the installation of SNEP"
-#~ msgstr "VocÃª serÃ¡ envaido para a instalaÃ§Ã£o de SNEP"
+#~ msgstr "Você será envaido para a instalação de SNEP"
 
 #~ msgid "analitic"
-#~ msgstr "analÃ­tico"
+#~ msgstr "analítico"
 
 #~ msgid "by data"
 #~ msgstr "por data"
@@ -6351,44 +6341,45 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "sound file played for the agent to indicate him about a new call"
 #~ msgstr ""
-#~ "Arquivo de som tocado para o agente para notifica-lo sobre uma nova chamada"
+#~ "Arquivo de som tocado para o agente para notifica-lo sobre uma nova "
+#~ "chamada"
 
 #~ msgid "text"
 #~ msgstr "texto"
 
 #~ msgid "users"
-#~ msgstr "usuÃ¡rios"
+#~ msgstr "usuários"
 
 #~ msgid "yes"
 #~ msgstr "sim"
 
 #~ msgid "Add Multiple Extensions"
-#~ msgstr "Adicionar MÃºltiplos Ramais"
+#~ msgstr "Adicionar Múltiplos Ramais"
 
 #~ msgid "Ranking Type: "
 #~ msgstr "Tipo do Ranking"
 
 #~ msgid "The date not valid"
-#~ msgstr "A data nÃ£o Ã© vÃ¡lida"
+#~ msgstr "A data não é válida"
 
 #~ msgid ""
 #~ "The username can only consist of alphabetical, number, dot and underscore"
-#~ msgstr "O usuÃ¡rio Ã© permitido somente letras, nÃºmeros, ponto e underline"
+#~ msgstr "O usuário é permitido somente letras, números, ponto e underline"
 
 #~ msgid "The value date not valid"
-#~ msgstr "Data invÃ¡lida"
+#~ msgstr "Data inválida"
 
 #~ msgid "This value is not valid"
-#~ msgstr "Valor invÃ¡lido"
+#~ msgstr "Valor inválido"
 
 #~ msgid "Other Options"
-#~ msgstr "Outras OpÃ§Ãµes"
+#~ msgstr "Outras Opções"
 
 #~ msgid "Please enter with date valid"
-#~ msgstr "Por favor, insira uma data vÃ¡lida"
+#~ msgstr "Por favor, insira uma data válida"
 
 #~ msgid "ATTENTION"
-#~ msgstr "AtenciÃ³n"
+#~ msgstr "Atención"
 
 #~ msgid "Add Extension Groups"
 #~ msgstr "Agregar Grupo de extensiones"
@@ -6403,37 +6394,37 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Alias de expresiones regulares"
 
 #~ msgid "Are you sure you want to delete this extension?"
-#~ msgstr "Â¿Seguro que quieres eliminar esta extensiÃ³n?"
+#~ msgstr "¿Seguro que quieres eliminar esta extensión?"
 
 #~ msgid "Are you sure you want to remove this record?"
-#~ msgstr "Â¿Seguro que quieres eliminar este registro?"
+#~ msgstr "¿Seguro que quieres eliminar este registro?"
 
 #~ msgid "Billing"
-#~ msgstr "FacturaciÃ³n"
+#~ msgstr "Facturación"
 
-#~ msgid "Business Rules Â» Standard Settings Â» "
-#~ msgstr "Reglas de Negocio Â» Ajustes generales Â»"
+#~ msgid "Business Rules » Standard Settings » "
+#~ msgstr "Reglas de Negocio » Ajustes generales »"
 
 #~ msgid "City Code"
-#~ msgstr "CÃ³digo postal"
+#~ msgstr "Código postal"
 
 #~ msgid "Do you want to remove this item?"
-#~ msgstr "Â¿Quieres eliminar este elemento?"
+#~ msgstr "¿Quieres eliminar este elemento?"
 
 #~ msgid "Edit %s"
 #~ msgstr "Editar %s"
 
 #~ msgid "Edit Expression Alias %s"
-#~ msgstr "Editar expresiÃ³n Alias %s"
+#~ msgstr "Editar expresión Alias %s"
 
 #~ msgid "Edit Extension Groups"
-#~ msgstr "Editar ExtensiÃ³n Grupos"
+#~ msgstr "Editar Extensión Grupos"
 
 #~ msgid "Edit Route %s"
 #~ msgstr "Editar ruta %s"
 
 #~ msgid "Edit permission user"
-#~ msgstr "Usuario permiso de ediciÃ³n"
+#~ msgstr "Usuario permiso de edición"
 
 #~ msgid "Enter"
 #~ msgstr "Entrar"
@@ -6442,7 +6433,7 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "No se pudo conectar al servidor Asterisk"
 
 #~ msgid "Line numbers"
-#~ msgstr "Los nÃºmeros de lÃ­nea"
+#~ msgstr "Los números de línea"
 
 #, fuzzy
 #~ msgid "Minute Fee for Mobile"
@@ -6452,16 +6443,16 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Nuevo Grupo"
 
 #~ msgid "OpenS Tecnologia"
-#~ msgstr "Opens TecnologÃ­a"
+#~ msgstr "Opens Tecnología"
 
 #~ msgid "PBX Statistics"
-#~ msgstr "PBX EstadÃ­stica"
+#~ msgstr "PBX Estadística"
 
 #~ msgid "Permissions"
 #~ msgstr "Permisos"
 
 #~ msgid "Phones"
-#~ msgstr "TelÃ©fonos"
+#~ msgstr "Teléfonos"
 
 #~ msgid "Really want to remove this alias?"
 #~ msgstr "Realmente quiere eliminar este alias?"
@@ -6476,8 +6467,8 @@ msgstr "www.sneplivre.com.br"
 #~ msgid "Starts from"
 #~ msgstr "Comienzo"
 
-#~ msgid "Status Â» System Logs "
-#~ msgstr "Estado Â» Logs del sistema"
+#~ msgid "Status » System Logs "
+#~ msgstr "Estado » Logs del sistema"
 
 #~ msgid "This bill is already set"
 #~ msgstr "El archivo ya existe"
@@ -6486,46 +6477,46 @@ msgstr "www.sneplivre.com.br"
 #~ "This is the only group and it has extensions associated. You can migrate "
 #~ "these extensions to a new group."
 #~ msgstr ""
-#~ "Este es el Ãºnico grupo y se ha asociado extensiones. Puede migrar estas "
+#~ "Este es el único grupo y se ha asociado extensiones. Puede migrar estas "
 #~ "extensiones a un nuevo grupo."
 
 #~ msgid ""
 #~ "This software is in Alpha stage. Its unstable and may contain defects."
 #~ msgstr ""
-#~ "Este software se encuentra en fase alfa. Ã‰l es inestable y puede contener "
+#~ "Este software se encuentra en fase alfa. Él es inestable y puede contener "
 #~ "errores."
 
 #~ msgid "To mantain this data accurate, this page is automatically refreshed"
 #~ msgstr ""
-#~ "Para mentener estos datos precisos, esta pÃ¡gina se actualiza "
-#~ "automÃ¡ticamente"
+#~ "Para mentener estos datos precisos, esta página se actualiza "
+#~ "automáticamente"
 
 #~ msgid "Turn-on Time"
-#~ msgstr "Tiempo de activaciÃ³n"
+#~ msgstr "Tiempo de activación"
 
 #~ msgid "Updated successfully"
-#~ msgstr "Actualizado con Ã©xito"
+#~ msgstr "Actualizado con éxito"
 
 #~ msgid ""
 #~ "Users who do not have individual permissions are listed. To change the "
 #~ "group of users with these permissions is necessary to make editing user."
 #~ msgstr ""
-#~ "Los usuarios que no tienen permisos individuales se enumeran. Para cambiar "
-#~ "el grupo de usuarios con estos permisos es necesario para que la ediciÃ³n "
-#~ "del usuario."
+#~ "Los usuarios que no tienen permisos individuales se enumeran. Para "
+#~ "cambiar el grupo de usuarios con estos permisos es necesario para que la "
+#~ "edición del usuario."
 
 #~ msgid ""
 #~ "We sent an email to you containing the code for the redefinition of your "
 #~ "password"
 #~ msgstr ""
-#~ "Hemos enviado un correo electrÃ³nico a usted que contiene el cÃ³digo para "
-#~ "la redefiniciÃ³n de la contraseÃ±a"
+#~ "Hemos enviado un correo electrónico a usted que contiene el código para "
+#~ "la redefinición de la contraseña"
 
 #~ msgid "ZIP Code"
-#~ msgstr "CÃ³digo postal"
+#~ msgstr "Código postal"
 
 #~ msgid "ZipCode"
-#~ msgstr "CÃ³digo postal"
+#~ msgstr "Código postal"
 
 #~ msgid "Close All Widgets"
 #~ msgstr "Cerrar Todo Widgets"

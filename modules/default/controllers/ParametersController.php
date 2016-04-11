@@ -233,7 +233,8 @@ class ParametersController extends Zend_Controller_Action {
 
             Snep_Locale::setExtensionsLanguage($formData['language']) ;
 
-            $this->_redirect('parameters');
+            // redirect
+            $this->_redirect('/');
         }
         
     }

@@ -63,7 +63,8 @@ class ExtensionsController extends Zend_Controller_Action {
      public function init() {
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+        $this->view->peers_digits =  Zend_Registry::get('config')->canais->peers_digits;
 
         $this->extenGroups = Snep_ExtensionsGroups_Manager::getAll();
 
@@ -162,7 +163,6 @@ class ExtensionsController extends Zend_Controller_Action {
             "authenticate" => 0);
         $extension['qualify'] = 'yes';
         $this->view->extension = $extension;
-
 
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 

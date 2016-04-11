@@ -36,12 +36,14 @@
 ---------------------------------
 **3.0 Estável **
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
-- CORRIGIDO - Permitir multipla selecaoo de NAT para Troncos 
-- ALTERADO - Dados gravados no camp 'name' da tabela peers - preparado para o módulo Billing
-- ALTERADO - Ordem de exibição das  filas de atendimento (por nome)
+- CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
+- ALTERADO - Dados gravados no campo 'name' da tabela peers - preparado para o módulo Billing
+- ALTERADO - Ordem de exibição na lista de filas de atendimento : alfabetica do nome da fila
 - NOVO - Webservice snep/arquivos/load.php - Busca por um arquivo de gravação a partir do ID
 - NOVO - Adicionadas funcionalidades para Pausar/Tirar de Pausa os Ramais de Filas de Atendimento
 - NOVO - Identificação visual para Esconder/Mostrar Regras desabilitadas em Regras de Negocio >> Rotas
+- NOVO - Parametrizado (Configuracoes >> Parametros) o número de dígitos no Cadastro do Ramal
+- ATUALIZADO - Strings de tradução pt_BR 
 
 ---------------------------------
 **Release - betha-rc3 **

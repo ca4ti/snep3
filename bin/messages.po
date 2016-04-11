@@ -130,7 +130,7 @@ msgid "60"
 msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:65
-msgid "88137-300 - Palhoça - SC - Brasil"
+msgid "88137-300 - PalhoÃ§a - SC - Brasil"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:247
@@ -666,7 +666,7 @@ msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:202
 msgid ""
-"By registering your SNEP, you connect to the portal of Intercomunexão. "
+"By registering your SNEP, you connect to the portal of IntercomunexÃ£o. "
 "Portal where you will have access to exclusive solutions, high-quality "
 "support and a constantly evolving technology. <br>Access: itc.opens.com.br"
 msgstr ""
@@ -884,7 +884,7 @@ msgid "Choose the services"
 msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:64
-msgid "Cidade Universitária Pedra Branca"
+msgid "Cidade UniversitÃ¡ria Pedra Branca"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:61
@@ -2276,7 +2276,7 @@ msgid "Insecure"
 msgstr ""
 
 #: ../modules/default/views/layouts/layout.phtml:162
-msgid "Intercomunexão"
+msgid "IntercomunexÃ£o"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:39
@@ -4961,7 +4961,7 @@ msgid "Week Days"
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:201
-msgid "Welcome to Intercomunexão."
+msgid "Welcome to IntercomunexÃ£o."
 msgstr ""
 
 #: ../modules/default/controllers/InformationController.php:39
@@ -4976,7 +4976,7 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:88
 msgid ""
 "Within seconds you register your Snep and participates in the "
-"Intercomunexão, a freer communication network, intelligent and humane."
+"IntercomunexÃ£o, a freer communication network, intelligent and humane."
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:108

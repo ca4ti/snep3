@@ -437,8 +437,9 @@
     </section>
 </div>
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+    var peers_digits = "<?php echo $this->peers_digits; ?>"
     jQuery.noConflict();
     jQuery(document).ready(function(){ 
         jQuery('#defaultForm').validate({
@@ -448,8 +449,8 @@
                 },
                 exten: {
                     required: true,
-                    minlength: 4,
-                    maxlength: 4,
+                    minlength: peers_digits,
+                    maxlength: peers_digits,
                     numbersOnly: true
                 },
                 name: {

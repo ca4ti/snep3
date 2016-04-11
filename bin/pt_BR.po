@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-08 10:43-0300\n"
-"PO-Revision-Date: 2016-04-08 11:53-0300\n"
+"PO-Revision-Date: 2016-04-11 15:20-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -16,33 +16,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Bookmarks: -1,493,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
 msgid ""
-"\tThis warning is being delivered to you because Snep detected the usage of "
-"a trunk marked with your email.\n"
+"\tThis warning is being delivered to you because Snep detected the usage of a "
+"trunk marked with your email.\n"
 msgstr ""
-"\tEste aviso esta sendo enviado para vocÃª porquÃª o Snep detectou o uso de um "
-"tronco marcado com seu e-mail.\n"
+"\tEste aviso esta sendo enviado para vocÃª porquÃª o Snep detectou o uso de "
+"um tronco marcado com seu e-mail.\n"
 
 #: ../modules/default/views/scripts/information/index.phtml:26
 msgid ""
 "\n"
 "            SNEP is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
-"Software Foundation, either version 3 of the License, or (at your option) "
-"any later version. \n"
+"Software Foundation, either version 3 of the License, or (at your option) any "
+"later version. \n"
 "            <br /><br />\n"
 "            SNEP is distributed in the hope that it will be useful, but "
-"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
-"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
 "            <br /><br />\n"
-"            You should have received a copy of the GNU General Public "
-"License along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
+"            You should have received a copy of the GNU General Public License "
+"along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
 "            "
 msgstr ""
 "\n"
@@ -53,8 +53,8 @@ msgstr ""
 "<br /><br />\n"
 "            SNEP Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM "
 "NENHUMA GARANTIA; inclusive sem a garantia implÃ­cita de COMERCIALIZAÃ‡ÃƒO ou "
-"ADEQUAÃ‡ÃƒO A UM DETERMINADO FIM. Veja a LicenÃ§a PÃºblica Geral GNU para obter "
-"mais detalhes. \n"
+"ADEQUAÃ‡ÃƒO A UM DETERMINADO FIM. Veja a LicenÃ§a PÃºblica Geral GNU para "
+"obter mais detalhes. \n"
 "            <br /><br />\n"
 "           VocÃª deve ter recebido uma cÃ³pia da LicenÃ§a PÃºblica Geral GNU "
 "junto com SNEP.  Se nÃ£o, veja http://www.gnu.org/licenses.\n"
@@ -407,7 +407,7 @@ msgstr "Agente:"
 #: ../modules/snep-agile/actions/AgileAction.php:34
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Agile"
-msgstr ""
+msgstr "Agile"
 
 #: ../modules/snep-agile/actions/AgileAction.php:51
 msgid "Agile for Incoming Calls"
@@ -415,7 +415,7 @@ msgstr "Agile para chamadas de entrada"
 
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Agile module to Snep PBX."
-msgstr ""
+msgstr "Módulo Agile para Snep PBX"
 
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:7
 #: ../modules/default/views/scripts/module-settings/index.phtml:24
@@ -695,8 +695,8 @@ msgid ""
 "support and a constantly evolving technology. <br>Access: itc.opens.com.br"
 msgstr ""
 "Ao registrar seu SNEP, vocÃª se conecta ao portal de IntercomunexÃ£o. Portal "
-"onde vocÃª terÃ¡ acesso a soluÃ§Ãµes exclusivas, suporte de alta qualidade e uma "
-"tecnologia em constante evoluÃ§Ã£o. <br> Acesse: itc.opens.com.br"
+"onde vocÃª terÃ¡ acesso a soluÃ§Ãµes exclusivas, suporte de alta qualidade e "
+"uma tecnologia em constante evoluÃ§Ã£o. <br> Acesse: itc.opens.com.br"
 
 #: ../modules/default/controllers/CnlController.php:40
 msgid "CNL Update"
@@ -860,11 +860,13 @@ msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:304
 msgid "Cannot remove. The following routes are using this queues: "
-msgstr "NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando esta fila: "
+msgstr ""
+"NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando esta fila: "
 
 #: ../modules/default/controllers/TrunksController.php:460
 msgid "Cannot remove. The following routes are using this trunk: "
-msgstr "NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando este tronco:"
+msgstr ""
+"NÃ£o Ã© possÃ­vel apagar. As seguinte rotas estÃ£o utilizando este tronco:"
 
 #: ../lib/Snep/Cnl.php:191 ../modules/default/views/layouts/register.phtml:217
 msgid "Cell"
@@ -1732,8 +1734,8 @@ msgid ""
 "Enter your user to send a redefinition of the password to your registered "
 "email "
 msgstr ""
-"Digite seu usuÃ¡rio para enviarmos uma redefiniÃ§Ã£o da senha para o seu e-mail "
-"cadastrado"
+"Digite seu usuÃ¡rio para enviarmos uma redefiniÃ§Ã£o da senha para o seu e-"
+"mail cadastrado"
 
 #: ../inspectors/AGI.php:110
 msgid "Environment for AGI SNEP"
@@ -4108,8 +4110,8 @@ msgstr "Algumas Vantagens"
 
 #: ../modules/default/controllers/ErrorController.php:52
 msgid ""
-"Some internal error occured while processing your request. Please contact "
-"the system administrator and report this incident."
+"Some internal error occured while processing your request. Please contact the "
+"system administrator and report this incident."
 msgstr "Algum erro interno ocorreu enquanto seu pedido era processado."
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:6
@@ -4342,21 +4344,22 @@ msgstr "O cÃ³digo Ã© obrigatÃ³rio"
 
 #: ../modules/default/controllers/ContactsController.php:253
 msgid "The contact will be deleted. After that, you have no way get it back."
-msgstr "O contato serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr ""
+"O contato serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
 
 #: ../modules/default/controllers/ContactGroupsController.php:229
 msgid ""
 "The contacts group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de contatos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O grupo de contatos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
+"recuperÃ¡-lo."
 
 #: ../modules/default/controllers/CostCenterController.php:192
 msgid ""
 "The cost center will be deleted. After that, you have no way get it back."
 msgstr ""
-"O centro de custos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O centro de custos serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
+"recuperÃ¡-lo."
 
 #: ../modules/default/views/scripts/logs/index.phtml:143
 #: ../modules/default/views/scripts/logs/index.phtml:147
@@ -4395,11 +4398,10 @@ msgstr "O grupo apagado tem contatos associados."
 
 #: ../modules/default/controllers/ExpressionAliasController.php:208
 msgid ""
-"The expression alias will be deleted. After that, you have no way get it "
-"back."
+"The expression alias will be deleted. After that, you have no way get it back."
 msgstr ""
-"A aliÃ¡s de expressÃ£o serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"la."
+"A aliÃ¡s de expressÃ£o serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como "
+"recuperÃ¡-la."
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:490
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:228
@@ -4411,7 +4413,8 @@ msgstr "O grupo de ramal Ã© requerido"
 msgid ""
 "The extension group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de ramais serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+"O grupo de ramais serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
+"lo."
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:252
 msgid "The extension group will be deleted. Are you sure?."
@@ -4440,8 +4443,8 @@ msgid ""
 "The file must be separated by commas. The columns can be associated in the "
 "next screen."
 msgstr ""
-"O arquivo deve ser separados por vÃ­rgulas. As colunas podem ser associados "
-"na prÃ³xima tela."
+"O arquivo deve ser separados por vÃ­rgulas. As colunas podem ser associados na "
+"prÃ³xima tela."
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:69
 msgid "The filename is required"
@@ -4464,13 +4467,13 @@ msgid ""
 "The following files do not exist in the directory and will be excluded from "
 "the database."
 msgstr ""
-"Os seguintes arquivos nÃ£o existem no diretÃ³rio e serÃ£o excluÃ­dos do banco de "
-"dados."
+"Os seguintes arquivos nÃ£o existem no diretÃ³rio e serÃ£o excluÃ­dos do banco "
+"de dados."
 
 #: ../modules/default/controllers/SoundFilesController.php:412
 msgid ""
-"The following files were found in the directory and will be registered in "
-"the database."
+"The following files were found in the directory and will be registered in the "
+"database."
 msgstr ""
 "Os seguintes arquivos foram encontrados no diretÃ³rio e serÃ£o registrados no "
 "banco de dados."
@@ -4514,8 +4517,8 @@ msgid ""
 "The music on hold files will be deleted. After that, you have no way get it "
 "back."
 msgstr ""
-"A mÃºsica de espera serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"la."
+"A mÃºsica de espera serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como "
+"recuperÃ¡-la."
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:55
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
@@ -4539,7 +4542,8 @@ msgstr "O nome Ã© obrigatÃ³rio."
 
 #: ../modules/default/controllers/ErrorController.php:43
 msgid "The page you are looking for was not found or does not exists."
-msgstr "A pÃ¡gina que vocÃª estÃ¡ procurando nÃ£o foi encontrada ou nÃ£o existe."
+msgstr ""
+"A pÃ¡gina que vocÃª estÃ¡ procurando nÃ£o foi encontrada ou nÃ£o existe."
 
 #: ../modules/default/views/scripts/register/index.phtml:90
 #: ../modules/default/views/scripts/users/addedit.phtml:97
@@ -4562,12 +4566,13 @@ msgstr "O telefone Ã© obrigatÃ³rio"
 msgid ""
 "The pickup group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de captura serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
-"lo."
+"O grupo de captura serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como "
+"recuperÃ¡-lo."
 
 #: ../modules/default/controllers/ProfilesController.php:218
 msgid "The profile will be deleted. After that, you have no way get it back."
-msgstr "O perfil serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr ""
+"O perfil serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
 
 #: ../modules/default/controllers/QueuesController.php:316
 msgid "The queue will be deleted. After that, you have no way get it back."
@@ -4577,7 +4582,8 @@ msgstr "A fila serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recupe
 msgid ""
 "The queues group will be deleted. After that, you have no way get it back."
 msgstr ""
-"O grupo de filas serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+"O grupo de filas serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
+"lo."
 
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:70
 msgid "The range extension is required"
@@ -4591,7 +4597,8 @@ msgstr "A rota serÃ¡ excluÃ­da. Depois disso, vocÃª nÃ£o tem como recupe
 msgid ""
 "The sound files will be deleted. After that, you have no way get it back."
 msgstr ""
-"O arquivo de som serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+"O arquivo de som serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
+"lo."
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:505
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:236
@@ -4600,7 +4607,8 @@ msgstr "O tronco Ã© obrigatÃ³rio"
 
 #: ../modules/default/controllers/TrunksController.php:470
 msgid "The trunk will be deleted. After that, you have no way get it back."
-msgstr "O tronco serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr ""
+"O tronco serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
 
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:90
 msgid "The type is required"
@@ -4608,7 +4616,8 @@ msgstr "O tipo Ã© obrigatÃ³rio"
 
 #: ../modules/default/controllers/UsersController.php:166
 msgid "The user will be deleted. After that, you have no way get it back."
-msgstr "O usuÃ¡rio serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
+msgstr ""
+"O usuÃ¡rio serÃ¡ excluÃ­do. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-lo."
 
 #: ../modules/default/views/scripts/register/index.phtml:84
 #: ../modules/default/views/scripts/users/addedit.phtml:91
@@ -4646,8 +4655,8 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:26
 msgid ""
-"This group has some extensions exclusively associated with it. Select "
-"another group for these extensions."
+"This group has some extensions exclusively associated with it. Select another "
+"group for these extensions."
 msgstr ""
 "Este grupo tem ramais associados exclusivamente a ele. Selecione outro grupo "
 "para estes ramais."
@@ -4705,8 +4714,8 @@ msgstr "AtÃ©"
 msgid ""
 "To confirm your registration, an email was sent with the confirmation key."
 msgstr ""
-"Para confirma o seu registro, um e-mail foi enviado com a chave de "
-"confirmaÃ§Ã£o"
+"Para confirma o seu registro, um e-mail foi enviado com a chave de confirmaÃ§Ã"
+"£o"
 
 #: ../modules/default/views/layouts/loginregister.phtml:31
 msgid "To proceed you need to log in to your account again."
@@ -5042,8 +5051,8 @@ msgstr "Quem sou eu"
 
 #: ../modules/default/views/layouts/register.phtml:88
 msgid ""
-"Within seconds you register your Snep and participates in the "
-"IntercomunexÃ£o, a freer communication network, intelligent and humane."
+"Within seconds you register your Snep and participates in the IntercomunexÃ"
+"£o, a freer communication network, intelligent and humane."
 msgstr ""
 "Em poucos segundos vocÃª registrar seu Snep e participa da IntercomunexÃ£o, "
 "uma rede de comunicaÃ§Ã£o mais livre, inteligente e humana."
@@ -5104,8 +5113,8 @@ msgstr "VocÃª nÃ£o tem permissÃ£o para acessar esta rotina"
 
 #: ../modules/default/controllers/ContactsController.php:74
 msgid ""
-"You do not have registered contacts. <br><br> Click 'Add Contact' to make "
-"the first registration\n"
+"You do not have registered contacts. <br><br> Click 'Add Contact' to make the "
+"first registration\n"
 msgstr ""
 "VocÃª nÃ£o possui contatos registrados. <br> Clique em \"Adicionar contato\" "
 "para fazer seu primeiro registro \n"
@@ -5155,16 +5164,16 @@ msgid ""
 "You do not have registered rule. <br><br> Click 'Add Rule' to make the first "
 "registration\n"
 msgstr ""
-"VocÃª nÃ£o possui regras registradas. <br> Clique em \"Adicionar Regras\" para "
-"fazer seu primeiro registro \n"
+"VocÃª nÃ£o possui regras registradas. <br> Clique em \"Adicionar Regras\" "
+"para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:85
 msgid ""
 "You do not have registered session. <br><br> Click 'Add Session' to make the "
 "first registration"
 msgstr ""
-"VocÃª nÃ£o tem nenhuma sessÃ£o cadastrada.<br><br> Clique em  'Adicionar "
-"sessÃ£o' para criar a primeira sessÃ£o."
+"VocÃª nÃ£o tem nenhuma sessÃ£o cadastrada.<br><br> Clique em  'Adicionar sessÃ"
+"£o' para criar a primeira sessÃ£o."
 
 #: ../modules/default/controllers/SoundFilesController.php:64
 msgid ""
@@ -5195,8 +5204,8 @@ msgid ""
 "You have data connections with this cost center, so this exclusion is not "
 "permitted."
 msgstr ""
-"VocÃª tem chamadas vinculadas com este centro de custo, por isso esta "
-"exclusÃ£o nÃ£o Ã© permitida."
+"VocÃª tem chamadas vinculadas com este centro de custo, por isso esta exclusÃ"
+"£o nÃ£o Ã© permitida."
 
 #: ../lib/Snep/Notifications.php:67
 msgid "You have no notifications"
@@ -5755,7 +5764,8 @@ msgstr "www.sneplivre.com.br"
 #~ msgid ""
 #~ "The extensions will be deleted. After that, you have no way get it back."
 #~ msgstr ""
-#~ "Os ramais serÃ£o excluÃ­dos. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-los."
+#~ "Os ramais serÃ£o excluÃ­dos. Depois disso, vocÃª nÃ£o tem como recuperÃ¡-"
+#~ "los."
 
 #~ msgid ""
 #~ "This groups has extensions associated. Select another group for these "
@@ -5846,8 +5856,8 @@ msgstr "www.sneplivre.com.br"
 #~ "You do not have registered session. <br><br> Click 'Add Session' to make "
 #~ "the first registration\n"
 #~ msgstr ""
-#~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o\" "
-#~ "para fazer seu primeiro registro \n"
+#~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o"
+#~ "\" para fazer seu primeiro registro \n"
 
 #~ msgid "All Files"
 #~ msgstr "Todos arquivos"
@@ -6212,8 +6222,8 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr "Tabela de UsuÃ¡rios"
 
 #~ msgid ""
-#~ "The SNEP was successfully installed on your system, click the button "
-#~ "below to go to the login screen."
+#~ "The SNEP was successfully installed on your system, click the button below "
+#~ "to go to the login screen."
 #~ msgstr ""
 #~ "O SNEP foi instalado em seu sistema com sucesso, clique no botÃ£o abaixo "
 #~ "para ir para a pÃ¡gina de login."
@@ -6240,8 +6250,8 @@ msgstr "www.sneplivre.com.br"
 #~ "The password for the Admin user has been reset in the installation, store "
 #~ "it safely."
 #~ msgstr ""
-#~ "A senha do admin foi redefinida na instalaÃ§Ã£o, mantenha esta informaÃ§Ã£o "
-#~ "segura."
+#~ "A senha do admin foi redefinida na instalaÃ§Ã£o, mantenha esta informaÃ§Ã"
+#~ "£o segura."
 
 #~ msgid ""
 #~ "The user must have permission to create tables in the informed database"
@@ -6268,8 +6278,8 @@ msgstr "www.sneplivre.com.br"
 #~ "To witch context the call must go when the caller dial any number while "
 #~ "waiting"
 #~ msgstr ""
-#~ "Para qual contexto a ligaÃ§Ã£o deve ir quando uma tecla de qualquer nÃºmero "
-#~ "for digitada enquanto espera"
+#~ "Para qual contexto a ligaÃ§Ã£o deve ir quando uma tecla de qualquer "
+#~ "nÃºmero for digitada enquanto espera"
 
 #~ msgid "To:"
 #~ msgstr "AtÃ©:"
@@ -6305,9 +6315,9 @@ msgstr "www.sneplivre.com.br"
 #~ "VocÃª deve corrigir possÃ­veis erros destacados em vermelho neste passo da "
 #~ "instalaÃ§Ã£o. Ã‰ importante que todos os erros sejam corrigidos para que o "
 #~ "SNEP funcione corretamente. UsuÃ¡rios avanÃ§ados podem pular essa parte da "
-#~ "instalaÃ§Ã£o se desejarem e este diagnÃ³stico pode ser acessado pelo sistema "
-#~ "atravÃ©s do menu <strong>ConfiguraÃ§Ãµes</strong> > <strong>DiagnÃ³stico </"
-#~ "strong>."
+#~ "instalaÃ§Ã£o se desejarem e este diagnÃ³stico pode ser acessado pelo "
+#~ "sistema atravÃ©s do menu <strong>ConfiguraÃ§Ãµes</strong> > "
+#~ "<strong>DiagnÃ³stico </strong>."
 
 #~ msgid "You must select at least one column."
 #~ msgstr "VocÃª deve selecionar pelo menos uma coluna."
@@ -6341,8 +6351,7 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "sound file played for the agent to indicate him about a new call"
 #~ msgstr ""
-#~ "Arquivo de som tocado para o agente para notifica-lo sobre uma nova "
-#~ "chamada"
+#~ "Arquivo de som tocado para o agente para notifica-lo sobre uma nova chamada"
 
 #~ msgid "text"
 #~ msgstr "texto"
@@ -6501,9 +6510,9 @@ msgstr "www.sneplivre.com.br"
 #~ "Users who do not have individual permissions are listed. To change the "
 #~ "group of users with these permissions is necessary to make editing user."
 #~ msgstr ""
-#~ "Los usuarios que no tienen permisos individuales se enumeran. Para "
-#~ "cambiar el grupo de usuarios con estos permisos es necesario para que la "
-#~ "ediciÃ³n del usuario."
+#~ "Los usuarios que no tienen permisos individuales se enumeran. Para cambiar "
+#~ "el grupo de usuarios con estos permisos es necesario para que la ediciÃ³n "
+#~ "del usuario."
 
 #~ msgid ""
 #~ "We sent an email to you containing the code for the redefinition of your "

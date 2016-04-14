@@ -513,6 +513,15 @@ ul.snep-menu-list{
     text-align: left;
     height: 40px;
 }
+
+.btn-add-route {
+    margin-left: 15px;
+}
+
+.header-dropdown {
+    text-align: right;
+}
+
 .snep-body-footer-buttons {
     clear: both;
     margin-left: 0px !important;

@@ -8,4 +8,7 @@ CREATE TABLE IF NOT EXISTS `core_config` (
     `config_value` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `regras_negocio` ADD COLUMN `type` ENUM('incoming','outgoing','others') NOT NULL DEFAULT 'others' ;
+
+
 

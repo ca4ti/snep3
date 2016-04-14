@@ -110,7 +110,7 @@ class RouteController extends Zend_Controller_Action {
         $hide_routes = $config->system->hide_routes;
 
         $db = Zend_Registry::get('db');
-        $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio")
+        $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio","type")
         );
         if ($hide_routes === "1") {
             $select->where("ativa = '1'");
@@ -125,17 +125,30 @@ class RouteController extends Zend_Controller_Action {
         }
 
         if(empty($routes)){
-            $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration
-");
+            $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration");
+        }
+
+        foreach($routes as $x => $route){
+            
+            if($route['type'] == 'incoming'){
+                $incoming[$x] = $route;
+            }elseif($route['type'] == 'outgoing'){
+                $outgoing[$x] = $route;
+            }else{
+                $others[$x] = $route;
+            }    
         }
 
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
-            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
-            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
-            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
-
-        $this->view->routes = $routes;
+        Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+        Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+        Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+        
+        (isset($incoming)) ? $this->view->incoming = $incoming : $this->view->incoming = null;
+        (isset($outgoing)) ? $this->view->outgoing = $outgoing : $this->view->outgoing = null;
+        (isset($others)) ? $this->view->others = $others : $this->view->others = null;
+        
         $this->view->lineNumber = $lineNumber;
         $this->view->hide_routes = $hide_routes;
         $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
@@ -231,14 +244,12 @@ class RouteController extends Zend_Controller_Action {
         $form->getElement('week')->setValue(true);
         $this->view->form = $form;
 
-
-
         if ($this->getRequest()->isPost()) {
             
             if ($this->isValidPost()) {
 
                 $rule = $this->parseRuleFromPost();
-
+                
                 PBX_Rules::register($rule);
                 
                 //log-user
@@ -499,6 +510,7 @@ class RouteController extends Zend_Controller_Action {
         $form->getElement('desc')->setValue($rule->getDesc());
         $form->getElement('record')->setValue($rule->isRecording());
         $form->getElement('prio')->setValue("p" . $rule->getPriority());
+        $form->getElement('typeRule')->setValue($rule->getTypeRule());
         $form->getElement('week')->setValue($rule->getValidWeekDays());
     }
 
@@ -577,6 +589,9 @@ class RouteController extends Zend_Controller_Action {
         // Adding Description
         $rule->setDesc($post['desc']);
 
+        // Adding type rule
+        $rule->setTypeRule($post['typeRule']);
+
         // Defining recording order
         if (isset($post['record']) && $post['record']) {
             $rule->record();
@@ -584,6 +599,7 @@ class RouteController extends Zend_Controller_Action {
 
         // Defining priority
         $rule->setPriority(substr($post['prio'], 1));
+        
 
         if (isset($post['actions_order'])) {
             parse_str($post['actions_order'], $actions_order);

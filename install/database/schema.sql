@@ -57,7 +57,8 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   record boolean NOT NULL default false,
   ativa boolean NOT NULL default true,
   mailing boolean NOT NULL default false,
-  from_dialer boolean NOT NULL default false
+  from_dialer boolean NOT NULL default false,
+  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

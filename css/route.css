@@ -48,7 +48,8 @@
 .snep-route input[type="text"] {
     margin-left: 5px;
 }
-.snep-route select#prio, 
+.snep-route select#prio,
+.snep-route select#typeRule, 
 .campos,
 .snep-route input[type="text"]  {
     margin-left: 5px;
@@ -71,11 +72,16 @@
 }
 #week-label, 
 #record-label,
+#typeRule-label,
 #prio-label{
     margin-top: 15px;
 }
 
 .snep-route select#prio option {
+    vertical-align: middle;
+}
+
+.snep-route select#typeRule option {
     vertical-align: middle;
 }
 

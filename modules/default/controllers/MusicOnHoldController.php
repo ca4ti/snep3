@@ -207,17 +207,18 @@ class MusicOnHoldController extends Zend_Controller_Action {
                     $this->view->translate("Music on Hold Sessions"),
                     $this->view->translate("Remove")));
 
-        $file = $this->_request->getParam('file');
+        $file = $this->_request->getParam('section');
 
         $this->view->class = Snep_SoundFiles_Manager::getClasse($file);
         $this->view->message = $this->view->translate("You are removing a music on hold class, it has some audio files attached to it.");
         $this->view->confirmation = $this->view->translate("Delete Sound Files?");
         $this->view->id = $file;
+
         
         if ($this->_request->getPost()) {
             
             if ($_POST['delete']) {
-                $class = Snep_SoundFiles_Manager::getClasse($_POST['customerid']);
+                $class = Snep_SoundFiles_Manager::getClasse($_POST['id']);
                 Snep_SoundFiles_Manager::removeClass($class);
             }
             $this->_redirect($this->getRequest()->getControllerName());

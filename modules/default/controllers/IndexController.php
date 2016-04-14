@@ -56,11 +56,10 @@ class IndexController extends Zend_Controller_Action {
             curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
             $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-            $http_response = curl_exec($http);
+            $http_response = curl_exec($http);          
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_close($http);
 
-            
             switch ($httpcode) {
                 case 200:
                     $this->view->country = Snep_Register_Manager::getCountry();                
@@ -73,7 +72,7 @@ class IndexController extends Zend_Controller_Action {
                     $this->view->error = $this->view->translate("To register your Snep you must be connected to an internet network. Check your connection and try again.");
                     break;
                 default:
-                    $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                    $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                     break;
             }
 
@@ -139,7 +138,7 @@ class IndexController extends Zend_Controller_Action {
                             $this->view->error = $this->view->translate("Without internet connection.");
                             break;
                         default:
-                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                             break;
                     }
                      
@@ -189,7 +188,7 @@ class IndexController extends Zend_Controller_Action {
                             $this->view->error = $this->view->translate("Without internet connection.");
                             break;
                         default:
-                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                             break;
                     }
 
@@ -257,7 +256,7 @@ class IndexController extends Zend_Controller_Action {
                             $this->view->error = $this->view->translate("Without internet connection.");
                             break;
                         default:
-                            $this->view->error = $this->view->translate("Unknown error. Please contact the administrator.");
+                            $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                             break;
                     }
                      

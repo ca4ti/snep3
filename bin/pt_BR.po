@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 17:51-0300\n"
-"PO-Revision-Date: 2016-04-14 17:54-0300\n"
+"POT-Creation-Date: 2016-04-15 11:00-0300\n"
+"PO-Revision-Date: 2016-04-15 11:02-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -214,9 +214,9 @@ msgstr "Ação"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:37
 #: ../modules/default/views/scripts/contact-groups/index.phtml:35
 #: ../modules/default/views/scripts/trunks/index.phtml:44
-#: ../modules/default/views/scripts/route/index.phtml:103
-#: ../modules/default/views/scripts/route/index.phtml:172
-#: ../modules/default/views/scripts/route/index.phtml:239
+#: ../modules/default/views/scripts/route/index.phtml:112
+#: ../modules/default/views/scripts/route/index.phtml:198
+#: ../modules/default/views/scripts/route/index.phtml:284
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
 #: ../modules/default/views/scripts/cost-center/index.phtml:41
 #: ../modules/default/views/scripts/expression-alias/index.phtml:39
@@ -1342,9 +1342,9 @@ msgstr "Controle de Qualidade"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:64
 #: ../modules/default/views/scripts/contact-groups/index.phtml:56
 #: ../modules/default/views/scripts/trunks/index.phtml:76
-#: ../modules/default/views/scripts/route/index.phtml:135
-#: ../modules/default/views/scripts/route/index.phtml:204
-#: ../modules/default/views/scripts/route/index.phtml:271
+#: ../modules/default/views/scripts/route/index.phtml:146
+#: ../modules/default/views/scripts/route/index.phtml:232
+#: ../modules/default/views/scripts/route/index.phtml:318
 #: ../modules/default/views/scripts/cost-center/index.phtml:59
 #: ../modules/default/views/scripts/expression-alias/index.phtml:54
 #: ../modules/default/views/scripts/sound-files/index.phtml:105
@@ -1439,9 +1439,9 @@ msgid "Deny"
 msgstr "Negar"
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
-#: ../modules/default/views/scripts/route/index.phtml:102
-#: ../modules/default/views/scripts/route/index.phtml:171
-#: ../modules/default/views/scripts/route/index.phtml:238
+#: ../modules/default/views/scripts/route/index.phtml:111
+#: ../modules/default/views/scripts/route/index.phtml:197
+#: ../modules/default/views/scripts/route/index.phtml:283
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/cost-center/index.phtml:40
@@ -1476,9 +1476,9 @@ msgstr "Grupo Destino"
 #: ../modules/default/controllers/RankingReportController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
-#: ../modules/default/views/scripts/route/index.phtml:101
-#: ../modules/default/views/scripts/route/index.phtml:170
-#: ../modules/default/views/scripts/route/index.phtml:237
+#: ../modules/default/views/scripts/route/index.phtml:110
+#: ../modules/default/views/scripts/route/index.phtml:196
+#: ../modules/default/views/scripts/route/index.phtml:282
 #: ../modules/default/views/scripts/route/elements/dst.phtml:2
 msgid "Destiny"
 msgstr "Destino"
@@ -1630,9 +1630,9 @@ msgid "Download"
 msgstr "Download"
 
 #: ../modules/default/controllers/RouteController.php:361
-#: ../modules/default/views/scripts/route/index.phtml:124
-#: ../modules/default/views/scripts/route/index.phtml:193
-#: ../modules/default/views/scripts/route/index.phtml:260
+#: ../modules/default/views/scripts/route/index.phtml:135
+#: ../modules/default/views/scripts/route/index.phtml:221
+#: ../modules/default/views/scripts/route/index.phtml:307
 msgid "Duplicate"
 msgstr "Duplicar"
 
@@ -1672,9 +1672,9 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:60
 #: ../modules/default/views/scripts/contact-groups/index.phtml:51
 #: ../modules/default/views/scripts/trunks/index.phtml:71
-#: ../modules/default/views/scripts/route/index.phtml:130
-#: ../modules/default/views/scripts/route/index.phtml:199
-#: ../modules/default/views/scripts/route/index.phtml:266
+#: ../modules/default/views/scripts/route/index.phtml:141
+#: ../modules/default/views/scripts/route/index.phtml:227
+#: ../modules/default/views/scripts/route/index.phtml:313
 #: ../modules/default/views/scripts/cost-center/index.phtml:56
 #: ../modules/default/views/scripts/expression-alias/index.phtml:50
 #: ../modules/default/views/scripts/sound-files/index.phtml:99
@@ -2263,9 +2263,9 @@ msgstr "IP"
 msgid "IP Status"
 msgstr "Status IP"
 
-#: ../modules/default/views/scripts/route/index.phtml:98
-#: ../modules/default/views/scripts/route/index.phtml:167
-#: ../modules/default/views/scripts/route/index.phtml:234
+#: ../modules/default/views/scripts/route/index.phtml:107
+#: ../modules/default/views/scripts/route/index.phtml:193
+#: ../modules/default/views/scripts/route/index.phtml:279
 msgid "Id"
 msgstr "ID"
 
@@ -2892,7 +2892,6 @@ msgid "No modules instaled."
 msgstr "Nenhum módulo instalado."
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:179
-#: ../modules/default/views/scripts/route/index.phtml:277
 msgid "No queues available"
 msgstr "Nenhuma fila cadastrada"
 
@@ -3337,9 +3336,9 @@ msgstr "Distribuído por"
 msgid "Preview"
 msgstr "Visualizar"
 
-#: ../modules/default/views/scripts/route/index.phtml:99
-#: ../modules/default/views/scripts/route/index.phtml:168
-#: ../modules/default/views/scripts/route/index.phtml:235
+#: ../modules/default/views/scripts/route/index.phtml:108
+#: ../modules/default/views/scripts/route/index.phtml:194
+#: ../modules/default/views/scripts/route/index.phtml:280
 msgid "Prio"
 msgstr "Prio"
 
@@ -3792,15 +3791,18 @@ msgstr "Regra que será executada"
 msgid "Rule: %s %s"
 msgstr "Regra: %s %s"
 
-#: ../modules/default/views/scripts/route/index.phtml:86
+#: ../modules/default/views/scripts/route/index.phtml:87
+#: ../modules/default/views/scripts/route/index.phtml:89
 msgid "Rules&nbsp;of&nbsp;Incoming"
 msgstr "Regras&nbsp;de&nbsp;Entrada"
 
-#: ../modules/default/views/scripts/route/index.phtml:223
+#: ../modules/default/views/scripts/route/index.phtml:260
+#: ../modules/default/views/scripts/route/index.phtml:262
 msgid "Rules&nbsp;of&nbsp;Others"
 msgstr "Outras&nbsp;Regras"
 
-#: ../modules/default/views/scripts/route/index.phtml:156
+#: ../modules/default/views/scripts/route/index.phtml:174
+#: ../modules/default/views/scripts/route/index.phtml:176
 msgid "Rules&nbsp;of&nbsp;Outgoing"
 msgstr "Regras&nbsp;de&nbsp;Saída"
 
@@ -4206,9 +4208,9 @@ msgstr "Arquivo de Som atualizado"
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
 #: ../modules/default/views/scripts/simulator/index.phtml:110
-#: ../modules/default/views/scripts/route/index.phtml:100
-#: ../modules/default/views/scripts/route/index.phtml:169
-#: ../modules/default/views/scripts/route/index.phtml:236
+#: ../modules/default/views/scripts/route/index.phtml:109
+#: ../modules/default/views/scripts/route/index.phtml:195
+#: ../modules/default/views/scripts/route/index.phtml:281
 #: ../modules/default/views/scripts/route/elements/src.phtml:2
 #: ../modules/default/views/scripts/calls-report/view.phtml:49
 #: ../modules/default/views/scripts/calls-report/index.phtml:58
@@ -5210,6 +5212,30 @@ msgid ""
 msgstr ""
 "Você não tem nenhum arquivo cadastrado. <br><br> Clique em ‘Adicionar "
 "arquivo’ para incluir o primeiro arquivo."
+
+#: ../modules/default/controllers/RouteController.php:148
+msgid ""
+"You do not have registered incoming rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Você não possui regras de entrada registradas. <br> Clique em 'Adicionar "
+"Regras' para fazer seu primeiro registro \n"
+
+#: ../modules/default/controllers/RouteController.php:150
+msgid ""
+"You do not have registered others rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Você não possui regras do tipo outras registradas. <br> Clique em 'Adicionar "
+"Regras' para fazer seu primeiro registro \n"
+
+#: ../modules/default/controllers/RouteController.php:149
+msgid ""
+"You do not have registered outgoing rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Você não possui regras de saída registradas. <br> Clique em 'Adicionar "
+"Regras' para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/QueuesController.php:80
 msgid ""

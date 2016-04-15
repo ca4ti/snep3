@@ -145,9 +145,9 @@ class RouteController extends Zend_Controller_Action {
         Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
         Zend_Controller_Front::getInstance()->getRequest()->getActionName());
         
-        (isset($incoming)) ? $this->view->incoming = $incoming : $this->view->incoming = null;
-        (isset($outgoing)) ? $this->view->outgoing = $outgoing : $this->view->outgoing = null;
-        (isset($others)) ? $this->view->others = $others : $this->view->others = null;
+        (isset($incoming)) ? $this->view->incoming = $incoming : $this->view->incoming = $this->view->translate("You do not have registered incoming rules. <br> Click 'Add Rule' to make the first registration");
+        (isset($outgoing)) ? $this->view->outgoing = $outgoing : $this->view->outgoing = $this->view->translate("You do not have registered outgoing rules. <br> Click 'Add Rule' to make the first registration");
+        (isset($others)) ? $this->view->others = $others : $this->view->others = $this->view->translate("You do not have registered others rules. <br> Click 'Add Rule' to make the first registration");
         
         $this->view->lineNumber = $lineNumber;
         $this->view->hide_routes = $hide_routes;

@@ -83,67 +83,84 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                     <h4>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             <button type="button" class="boxadd add_field" id="exten" style="background-color:transparent !important;">
-                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Incoming"). "(". count($this->incoming) . ")"; ?>
+                                <?php if(is_array($this->incoming)){
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Incoming"). "(". count($this->incoming) . ")";
+                                }else{
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Incoming"). "(0)";
+                                }?>
                             </button>
 
                         </a>
                     </h4>
                 </div>
+
                 <div id="collapseOne" class="panel-collapse collapse ip-status" style="background-color: #fff !important">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
-                                        <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
-                                        <th><?php echo $this->translate('Source');?></th>
-                                        <th><?php echo $this->translate('Destiny');?></th>
-                                        <th><?php echo $this->translate('Description');?></th>
-                                        <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($this->incoming) {
-                                        foreach ($this->incoming as $key => $route) { ?>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
-                                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> 
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
-                                                </div>
-                                                </td>
-                                                
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
-                                                    <?php echo $this->translate('Duplicate')?>
-                                                    </a>
-                                                </td>
+                <div class="panel-body">
+                <div class="table-responsive">
+
+                <?php
+                if(is_array($this->incoming)){ ?>
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
+                            <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
+                            <th><?php echo $this->translate('Source');?></th>
+                            <th><?php echo $this->translate('Destiny');?></th>
+                            <th><?php echo $this->translate('Description');?></th>
+                            <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                        </tr>
+                        </thead>
+                     
+                        <tbody>
+                        <?php
+                        foreach ($this->incoming as $key => $route) { ?>
+                                
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
+                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> 
+                                    
+                                    <div class="checkbox">
+                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
+                                    </div>
+                                </td>
+                                              
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
+                                    <?php echo $this->translate('Duplicate')?>
+                                    </a>
+                                </td>
                             
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
-                                                    <?php echo $this->translate('Edit')?>
-                                                    </a>
-                                                </td>
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
+                                    <?php echo $this->translate('Edit')?>
+                                    </a>
+                                </td>
 
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                    }else{
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                                                                 
+                        </tbody>
+                    </table>
+                    
+                <?php }else{ 
 
-                                    } ?>  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    echo $this->incoming;
+
+                } ?>
+
                 </div>
+                </div>
+                </div>
+
             </div>
             <!-- /Incoming -->
 
@@ -153,64 +170,83 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                     <h4>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             <button type="button" class="boxadd add_field" id="trunk" style="background-color:transparent !important;">
-                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Outgoing"). "(". count($this->outgoing) . ")"; ?>
+                                <?php if(is_array($this->outgoing)){
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Outgoing"). "(". count($this->outgoing) . ")";
+                                }else{
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Outgoing"). "(0)";
+                                }?>
                             </button>
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse ip-status"  style="background-color: #fff !important">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
-                                        <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
-                                        <th><?php echo $this->translate('Source');?></th>
-                                        <th><?php echo $this->translate('Destiny');?></th>
-                                        <th><?php echo $this->translate('Description');?></th>
-                                        <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($this->outgoing) {
-                                        foreach ($this->outgoing as $key => $route) { ?>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
-                                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> 
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
-                                                </div>
-                                                </td>
-                                                
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
-                                                    <?php echo $this->translate('Duplicate')?>
-                                                    </a>
-                                                </td>
-                            
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
-                                                    <?php echo $this->translate('Edit')?>
-                                                    </a>
-                                                </td>
 
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                     } ?>  
-                                </tbody>
-                            </table>                            
-                        </div>
-                    </div>
+                <div id="collapseTwo" class="panel-collapse collapse ip-status" style="background-color: #fff !important">
+                <div class="panel-body">
+                <div class="table-responsive">
+
+                <?php
+                if(is_array($this->outgoing)){ ?>
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
+                            <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
+                            <th><?php echo $this->translate('Source');?></th>
+                            <th><?php echo $this->translate('Destiny');?></th>
+                            <th><?php echo $this->translate('Description');?></th>
+                            <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                        </tr>
+                        </thead>
+                     
+                        <tbody>
+                        <?php
+                        foreach ($this->outgoing as $key => $route) { ?>
+                                
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
+                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> 
+                                    
+                                    <div class="checkbox">
+                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
+                                    </div>
+                                </td>
+                                              
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
+                                    <?php echo $this->translate('Duplicate')?>
+                                    </a>
+                                </td>
+                            
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
+                                    <?php echo $this->translate('Edit')?>
+                                    </a>
+                                </td>
+
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                                                                 
+                        </tbody>
+                    </table>
+                    
+                <?php }else{ 
+
+                    echo $this->outgoing;
+
+                } ?>
+
                 </div>
+                </div>
+                </div>
+
             </div>
             <!-- /Outgoing -->
 
@@ -220,68 +256,83 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                     <h4>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             <button type="button" class="boxadd add_field" id="others" style="background-color:transparent !important;">
-                                <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Others"). "(". count($this->others) . ")"; ?>
+                                <?php if(is_array($this->others)){
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Others"). "(". count($this->others) . ")";
+                                }else{
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$this->translate("Rules&nbsp;of&nbsp;Others"). "(0)";
+                                }?>
                             </button>
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse ip-status"  style="background-color: #fff !important">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 3%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
-                                        <th style="width: 3%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
-                                        <th><?php echo $this->translate('Source');?></th>
-                                        <th><?php echo $this->translate('Destiny');?></th>
-                                        <th><?php echo $this->translate('Description');?></th>
-                                        <th colspan="4" class="text-center" style="width: 25%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($this->others) {
-                                        foreach ($this->others as $key => $route) { ?>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
-                                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
-                                                <td style="padding: 0px 8px 0px 8px;"> 
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
-                                                </div>
-                                                </td>
-                                                
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
-                                                    <?php echo $this->translate('Duplicate')?>
-                                                    </a>
-                                                </td>
-                            
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
-                                                    <?php echo $this->translate('Edit')?>
-                                                    </a>
-                                                </td>
 
-                                                <td style="padding: 0px 8px 0px 8px;" align="center">
-                                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                    } else { ?>
-                                        <tr>
-                                            <td colspan="6"><?php echo $this->translate("No queues available") ?></td>
-                                        </tr>
-                                    <?php } ?>  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div id="collapseThree" class="panel-collapse collapse ip-status" style="background-color: #fff !important">
+                <div class="panel-body">
+                <div class="table-responsive">
+
+                <?php
+                if(is_array($this->others)){ ?>
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%;" class="text-center" data-type="numeric"  ><?php echo $this->translate('Id');?></th>
+                            <th style="width: 6%; " class="text-center" data-type="numeric" data-sort-initial="false"><?php echo $this->translate('Prio');?></th>                        
+                            <th><?php echo $this->translate('Source');?></th>
+                            <th><?php echo $this->translate('Destiny');?></th>
+                            <th><?php echo $this->translate('Description');?></th>
+                            <th colspan="4" class="text-center" style="width: 20%;" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
+                        </tr>
+                        </thead>
+                     
+                        <tbody>
+                        <?php
+                        foreach ($this->others as $key => $route) { ?>
+                                
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle !important; padding: 0px 8px 0px 8px;"> <?php echo $route['id'] ?>  </th>
+                                <td style="padding: 0px 8px 0px 8px;" class="text-center"> <?php echo $route['prio'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['origem'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['destino'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> <?php echo $route['desc'] ?> </td>
+                                <td style="padding: 0px 8px 0px 8px;"> 
+                                    
+                                    <div class="checkbox">
+                                    <label><input type="checkbox" data-toggle="toggle" data-size="mini" <?php echo $route['ativa'] === '1' ? 'checked' : ''; ?> id="rule_state" value="<?php echo $route['id'];?>" onchange="change_status(this.value)" ></label>
+                                    </div>
+                                </td>
+                                              
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/duplicate/<?php echo $route['id']?>' >
+                                    <?php echo $this->translate('Duplicate')?>
+                                    </a>
+                                </td>
+                            
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-edit btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/route/edit/<?php echo $route['id'] ?>'>
+                                    <?php echo $this->translate('Edit')?>
+                                    </a>
+                                </td>
+
+                                <td style="padding: 0px 8px 0px 8px;" align="center">
+                                    <a class="btn btn-danger btn-xs"  href="<?php echo $this->baseUrl ?>/route/remove/id/<?php echo $route['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                                                                 
+                        </tbody>
+                    </table>
+                    
+                <?php }else{ 
+
+                    echo $this->others;
+
+                } ?>
+
                 </div>
+                </div>
+                </div>
+
             </div>
             <!-- /Others -->
         </div>  

@@ -277,6 +277,63 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));
 
+            $idLastNotification = Snep_Notifications::getDateLastNotification();
+            $configs = Snep_Config::getConfiguration('CORE','HOST_NOTIFICATION');
+            
+            // Ping in ITC
+            $url = $configs["config_value"].$idLastNotification;
+                        
+            $http = curl_init($url);
+
+            curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
+            $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+            $http_response = curl_exec($http);          
+            $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            curl_close($http);
+            
+            switch ($httpcode) {
+                case 200:
+                    
+                    $notifications = json_decode($http_response);
+                    foreach($notifications as $item => $notification){
+                        Snep_Notifications::addNotification(utf8_decode($notification->title),utf8_decode($notification->message),$notification->id);    
+                    }
+                    break;
+                case 500:
+                    
+                    $notificationWarning = Snep_Notifications::getNotificationWarning();
+                    if($notificationWarning == false){
+                        
+                        $title = $this->view->translate('Warning');
+                        $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
+                        Snep_Notifications::addNotification($title,$message);
+                    }    
+                    
+                    break;
+                case false:
+
+                    $notificationWarning = Snep_Notifications::getNotificationWarning();
+                    if($notificationWarning == false){
+
+                        $title = $this->view->translate('Warning');
+                        $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
+                        Snep_Notifications::addNotification($title,$message);
+                    }
+                    
+                    break;
+                default:
+
+                    $notificationWarning = Snep_Notifications::getNotificationWarning();
+                    if($notificationWarning == false){
+
+                        $title = $this->view->translate('Warning');
+                        $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
+                        Snep_Notifications::addNotification($title,$message);
+                    }
+                    break;
+            }            
+
             $modelos = Snep_Dashboard_Manager::getModelos();
 
             if (isset($_GET['dashboard_add'])) {

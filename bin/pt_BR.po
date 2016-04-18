@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 11:00-0300\n"
-"PO-Revision-Date: 2016-04-15 11:02-0300\n"
+"POT-Creation-Date: 2016-04-18 16:43-0300\n"
+"PO-Revision-Date: 2016-04-18 16:46-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -111,6 +111,12 @@ msgstr "em"
 #: /var/www/html/snep-3/modules/fop2/resources.xml
 msgid "-->"
 msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:331
+msgid ". Please contact the administrator for receiver notifications."
+msgstr ""
+". Entre em contato com o administrador do sistema para receber suas "
+"notificações."
 
 #: ../modules/default/controllers/IndexController.php:75
 #: ../modules/default/controllers/IndexController.php:141
@@ -1210,7 +1216,7 @@ msgid "Daily"
 msgstr "Diariamente"
 
 #: ../modules/default/controllers/IndexController.php:278
-#: ../modules/default/controllers/IndexController.php:297
+#: ../modules/default/controllers/IndexController.php:354
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Dashboard"
@@ -1653,7 +1659,7 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/controllers/ContactsController.php:158
 #: ../modules/default/controllers/ExpressionAliasController.php:128
 #: ../modules/default/controllers/RouteController.php:301
-#: ../modules/default/controllers/IndexController.php:298
+#: ../modules/default/controllers/IndexController.php:355
 #: ../modules/default/controllers/PickupGroupsController.php:141
 #: ../modules/default/controllers/ExtensionsController.php:202
 #: ../modules/default/controllers/ActionConfigsController.php:107
@@ -1790,6 +1796,16 @@ msgstr "Erro"
 msgid "Error "
 msgstr "Erro"
 
+#: ../modules/default/controllers/IndexController.php:320
+msgid ""
+"Error notifications.<br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
+msgstr ""
+"Erro ao receber notificações.<br> Para receber novas notificações sobre "
+"funcionalidades, módulos e notícias relacionadas ao Snep você deve estar "
+"conectado a uma rede de internet. Verifique sua conexão e tente novamente. "
+
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:33
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:45
 msgid "Error type"
@@ -1827,6 +1843,7 @@ msgstr "Erro: Nenhuma placa Khomp instalada."
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
+#: ../modules/default/controllers/IndexController.php:331
 msgid "Error: Code "
 msgstr "Erro: Código"
 
@@ -2373,6 +2390,16 @@ msgstr "Tipo da Interface"
 #: ../modules/default/controllers/ErrorController.php:50
 msgid "Internal Error"
 msgstr "Erro Interno"
+
+#: ../modules/default/controllers/IndexController.php:309
+msgid ""
+"Internal Server Error. <br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
+msgstr ""
+"Erro do Servidor Interno. <br> Para receber novas notificações sobre "
+"funcionalidades, módulos e notícias relacionadas ao Snep você deve estar "
+"conectado a uma rede de internet. Verifique sua conexão e tente novamente. "
 
 #: ../modules/default/controllers/RegisterController.php:134
 #: ../modules/default/controllers/IndexController.php:69
@@ -5069,6 +5096,12 @@ msgstr "Tempo de espera para tocar todos os agentes novamente"
 msgid "Warn agent the time that call waited in queue"
 msgstr "Notificar agente o tempo que a chamada esperou na fila"
 
+#: ../modules/default/controllers/IndexController.php:308
+#: ../modules/default/controllers/IndexController.php:319
+#: ../modules/default/controllers/IndexController.php:330
+msgid "Warning"
+msgstr "Aviso"
+
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:27
 msgid "Warning: Maximum upload file size"
 msgstr "Atenção: Tamanho máximo do arquivo"
@@ -6378,9 +6411,6 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "Waiting"
 #~ msgstr "Esperando"
-
-#~ msgid "Warning"
-#~ msgstr "Aviso"
 
 #~ msgid "Welcome to SNEP!"
 #~ msgstr "Bem-vindo ao SNEP!"

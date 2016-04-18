@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 11:00-0300\n"
-"PO-Revision-Date: 2016-04-15 11:03-0300\n"
+"POT-Creation-Date: 2016-04-18 16:43-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: bin\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
 msgid ""
@@ -89,6 +89,10 @@ msgstr ""
 
 #: /var/www/html/snep-3/modules/fop2/resources.xml
 msgid "-->"
+msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:331
+msgid ". Please contact the administrator for receiver notifications."
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:75
@@ -1177,7 +1181,7 @@ msgid "Daily"
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:278
-#: ../modules/default/controllers/IndexController.php:297
+#: ../modules/default/controllers/IndexController.php:354
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Dashboard"
@@ -1620,7 +1624,7 @@ msgstr ""
 #: ../modules/default/controllers/ContactsController.php:158
 #: ../modules/default/controllers/ExpressionAliasController.php:128
 #: ../modules/default/controllers/RouteController.php:301
-#: ../modules/default/controllers/IndexController.php:298
+#: ../modules/default/controllers/IndexController.php:355
 #: ../modules/default/controllers/PickupGroupsController.php:141
 #: ../modules/default/controllers/ExtensionsController.php:202
 #: ../modules/default/controllers/ActionConfigsController.php:107
@@ -1755,6 +1759,13 @@ msgstr ""
 msgid "Error "
 msgstr ""
 
+#: ../modules/default/controllers/IndexController.php:320
+msgid ""
+"Error notifications.<br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
+msgstr ""
+
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:33
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:45
 msgid "Error type"
@@ -1792,6 +1803,7 @@ msgstr ""
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
+#: ../modules/default/controllers/IndexController.php:331
 msgid "Error: Code "
 msgstr ""
 
@@ -2337,6 +2349,13 @@ msgstr ""
 
 #: ../modules/default/controllers/ErrorController.php:50
 msgid "Internal Error"
+msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:309
+msgid ""
+"Internal Server Error. <br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
 msgstr ""
 
 #: ../modules/default/controllers/RegisterController.php:134
@@ -4999,6 +5018,12 @@ msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:211
 msgid "Warn agent the time that call waited in queue"
+msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:308
+#: ../modules/default/controllers/IndexController.php:319
+#: ../modules/default/controllers/IndexController.php:330
+msgid "Warning"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:27

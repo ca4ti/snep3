@@ -39,7 +39,7 @@ class NotificationsController extends Zend_Controller_Action {
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
 
         $options = $this->_request->getParams();
-
+        
         if($options['id'] == 'all'){
 
         	$notifications = Snep_Notifications::getAll();

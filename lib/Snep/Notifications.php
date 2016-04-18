@@ -90,6 +90,25 @@ class Snep_Notifications {
         return $notifications;
     }
 
+    /**
+     * Method to get date last notification
+     * @return <array> $notification
+     */
+    public function getDateLastNotification() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_notifications", array("id_itc"))
+                ->order("id_itc DESC");
+
+        $stmt = $db->query($select);
+        $notification = $stmt->fetch();
+        $last_notification = $notification["id_itc"];
+
+        return $last_notification;
+    }
+
 
     /**
      * Get notification where not read
@@ -108,6 +127,33 @@ class Snep_Notifications {
 
         return $notification;
     }
+
+
+    /**
+     * Get notification warning where not read
+     * @return <boolean> 
+     */
+    public function getNotificationWarning() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_notifications")
+                ->where("core_notifications.read = ?",false)
+                ->where("core_notifications.title = ?","Warning")
+                ->order("creation_date DESC");
+
+        $stmt = $db->query($select);
+        $notification = $stmt->fetch();
+
+        
+        if(is_array($notification)){
+            $notification = true;
+        }
+        
+        return $notification;
+    }
+    
 
     /**
      * setRead - Update core_notifications while user notification read
@@ -128,12 +174,13 @@ class Snep_Notifications {
      * @param <string> $title
      * @param <string> $notification
      */
-    public function addNotification($title,$message) {
+    public function addNotification($title,$message,$id_itc) {
 
         $db = Zend_Registry::get('db');
 
         $insert_data = array('title' => $title,
             'message' => $message,
+            'id_itc' => $id_itc,
             'creation_date' => date('Y-m-d H:i:s'));
 
         $db->insert('core_notifications', $insert_data);

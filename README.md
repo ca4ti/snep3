@@ -35,6 +35,7 @@
 
 ---------------------------------
 **3.0 Estável **
+
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
 - CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
 - CORRIGIDO - Erros ao adiconar arquivos de Musicas de espera e removes seçoes de musica de espera

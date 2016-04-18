@@ -81,6 +81,7 @@ class ParametersController extends Zend_Controller_Action {
         $old_param["user_sock"] = $config->ambiente->user_sock;
         $old_param["email"] = $config->system->mail;
         $old_param["linelimit"] = $config->ambiente->linelimit;
+        $old_param['peers_digits'] =  $config->canais->peers_digits;
 
         $old_param["db.dbname"] = $config->ambiente->db->dbname;
         $old_param["db.host"] = $config->ambiente->db->host;
@@ -204,6 +205,8 @@ class ParametersController extends Zend_Controller_Action {
             $config->system->locale = $formData['locale'];
             $config->system->timezone = $formData['timezone'];
             $config->system->country_code = $country_code['id'];
+
+            $config->canais->peers_digits = $formData['peers_digits'];
 
             $config->ambiente->ip_sock = $formData['ip_sock'];
             $config->ambiente->user_sock = $formData['user_sock'];

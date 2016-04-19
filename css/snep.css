@@ -684,6 +684,10 @@ ul.snep-menu-list{
     cursor: pointer;
 }
 
+.toggle-on.btn {
+    padding-left: 0px !important;
+}
+
 /*
  * Chat
  */

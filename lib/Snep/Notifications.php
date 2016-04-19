@@ -187,5 +187,56 @@ class Snep_Notifications {
     
     }
 
+    /**
+     * Method to add a last notification in core_config.
+     * @param <int> $id
+     */
+    public function addLastNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('config_module' => "CORE",
+            'config_name' => "LAST_ID_NOTIFICATION",
+            'config_value' => $id);
+
+        $db->insert('core_config', $insert_data);
+    }
+
+    /**
+     * Method to remove a lastNotification in core_config.
+     * @param <int> $id
+     */
+    public function removeLastNotification() {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_config', "config_name = 'LAST_ID_NOTIFICATION'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * Method to remove a lastNotification
+     * @param <int> $id
+     */
+    public function removeNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_notifications', "id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
 }
 ?>

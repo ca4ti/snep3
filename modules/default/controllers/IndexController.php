@@ -277,12 +277,19 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));
 
-            $idLastNotification = Snep_Notifications::getDateLastNotification();
+            // get last_id_notification if exists
+            $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
+            if($idLastNotification){
+                $idLastNotification = $idLastNotification["config_value"];        
+            }else{
+                $idLastNotification = Snep_Notifications::getDateLastNotification();
+            }
+            
             $configs = Snep_Config::getConfiguration('CORE','HOST_NOTIFICATION');
             
-            // Ping in ITC
-            $url = $configs["config_value"].$idLastNotification;
-                        
+            // get notification in itc
+            $url = $configs["config_value"].$idLastNotification."/UUID/".$_SESSION["uuid"];
+             
             $http = curl_init($url);
 
             curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);

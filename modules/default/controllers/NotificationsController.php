@@ -114,4 +114,36 @@ class NotificationsController extends Zend_Controller_Action {
         
     }
 
+    /**
+     * Remove a user
+     */
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Notification"),
+                    $this->view->translate("Delete")));
+
+        $id = $this->_request->getParam('id');
+
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete Notification.'); 
+        $this->view->remove_message = $this->view->translate('The notification will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'notifications'; 
+        $this->renderScript('remove/remove.phtml');
+
+        if ($this->_request->getPost()) {
+            
+            $idLastNotification = Snep_Notifications::getDateLastNotification();
+            
+            // update last notification in config_core
+            Snep_Notifications::removeLastNotification();
+            Snep_Notifications::addLastNotification($idLastNotification);
+            
+            // remove notification
+            Snep_Notifications::removeNotification($id);
+
+            $this->_redirect($this->getRequest()->getControllerName()."?id=all");
+        }
+    }
+
 }

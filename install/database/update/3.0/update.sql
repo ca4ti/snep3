@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `core_config` (
 ALTER TABLE `regras_negocio` ADD COLUMN `type` ENUM('incoming','outgoing','others') NOT NULL DEFAULT 'others' ;
 
 ALTER TABLE `core_notifications` ADD COLUMN `id_itc` INT(11) DEFAULT 1;
-INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('CORE', 'HOST_NOTIFICATION', 'http://api.opens.com.br:3003/notifications/id/');
+INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('CORE', 'HOST_NOTIFICATION', 'http://api.opens.com.br:3003/notifications/last_id/');
 
 
 

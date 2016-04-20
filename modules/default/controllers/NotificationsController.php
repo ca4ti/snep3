@@ -85,7 +85,7 @@ class NotificationsController extends Zend_Controller_Action {
             		$html[$cont] .= "<div class='panel panel-default col-sm-12 notification-panel'>";
             		$html[$cont] .= "<div class='panel-body'>";
             		$html[$cont] .= "<h2>".$notification['title']."</h2>";
-            		$html[$cont] .= "<h5>".date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</h5>";
+            		$html[$cont] .= "<h5>".$notification['from'] .' - '.date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</h5>";
             		$html[$cont] .= "<br><p>".$notification['message']."</p>";
             		$html[$cont] .= "<div class='panel-footer clearfix notification-panel'>";
             		$html[$cont] .= "<a href='/snep/index.php/default/notifications?id=all'><span class='notification fa fa-list fa-3x notification-panel'></span></a>&nbsp";

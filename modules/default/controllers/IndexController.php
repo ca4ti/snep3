@@ -199,7 +199,7 @@ class IndexController extends Zend_Controller_Action {
 
                     $title = $this->view->translate('Welcome to Intercomunexão.');
                     $message = $this->view->translate('By registering your SNEP, you connect to the portal of Intercomunexão. Portal where you will have access to exclusive solutions, high-quality support and a constantly evolving technology. <br>Access: itc.opens.com.br');
-                    Snep_Notifications::addNotification($title,$message,1,"OPENS");
+                    Snep_Notifications::addNotification($title,$message,1,"Snep");
 
                     // go to snep
                     $_SESSION['registered'] = true;
@@ -309,7 +309,7 @@ class IndexController extends Zend_Controller_Action {
                     foreach($notifications as $item => $notification){
                         $lastId = $notification->id;
 
-                        Snep_Notifications::addNotification(utf8_decode($notification->title),utf8_decode($notification->message),$notification->id,$notification->id_costumer);
+                        Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
                     }
                     
                     if(isset($lastId)){
@@ -332,7 +332,7 @@ class IndexController extends Zend_Controller_Action {
                         
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message,1,"OPENS");
+                        Snep_Notifications::addNotification($title,$message,1,"Snep");
                     }    
                     
                     break;
@@ -343,7 +343,7 @@ class IndexController extends Zend_Controller_Action {
 
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message,1,"OPENS");
+                        Snep_Notifications::addNotification($title,$message,1,"Snep");
                     }
                     
                     break;
@@ -354,7 +354,7 @@ class IndexController extends Zend_Controller_Action {
 
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
-                        Snep_Notifications::addNotification($title,$message,"OPENS");
+                        Snep_Notifications::addNotification($title,$message,"Snep");
                     }
                     break;
             }            

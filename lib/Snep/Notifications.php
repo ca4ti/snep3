@@ -174,12 +174,15 @@ class Snep_Notifications {
      * @param <string> $title
      * @param <string> $notification
      */
-    public function addNotification($title,$message,$id_itc,$costumer) {
+    public function addNotification($title,$message,$id_itc,$from) {
 
         $db = Zend_Registry::get('db');
-
-        ($costumer == 68) ? $from = "OPENS" : $from = "INTEGRADOR";
+        $i18n = Zend_Registry::get("i18n");
         
+        if(is_int($from)){
+            ($from == 68) ? $from = "Opens" : $from = $i18n->translate('Integrator');        
+        }
+
         $insert_data = array('title' => $title,
             'message' => $message,
             'id_itc' => $id_itc,

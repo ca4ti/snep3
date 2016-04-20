@@ -49,13 +49,13 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css");
                                 <?php if($notification['read'] == '1'){?>
                                     
                                     <td> <?php echo $notification['from'] ?> </td>
-                                    <td> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,60)."..." ?> </td>
+                                    <td> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,10)."..." ?> </td>
                                     <td> <?php echo date("d/m/Y G:i:s", strtotime($notification['creation_date'])) ?> </td>    
                                 
                                 <?php }else{?>
                                     
                                     <td class="bold"> <?php echo $notification['from'] ?> </td>
-                                    <td class="bold"> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,60)."..." ?> </td>
+                                    <td class="bold"> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,10)."..." ?> </td>
                                     <td class="bold"> <?php echo date("d/m/Y G:i:s", strtotime($notification['creation_date'])) ?> </td>
                                 
                                 <?php } ?>

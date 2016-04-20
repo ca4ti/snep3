@@ -749,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `core_notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_itc` int(11),
   `title` varchar(255) NOT NULL,
-  `from` varchar(128) DEFAULT "OPENS",
+  `from` varchar(128) DEFAULT "Opens",
   `message` text NOT NULL,
   `creation_date` datetime NOT NULL,
   `read` boolean DEFAULT false,

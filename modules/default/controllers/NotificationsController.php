@@ -135,10 +135,6 @@ class NotificationsController extends Zend_Controller_Action {
             
             $idLastNotification = Snep_Notifications::getDateLastNotification();
             
-            // update last notification in config_core
-            Snep_Notifications::removeLastNotification();
-            Snep_Notifications::addLastNotification($idLastNotification);
-            
             // remove notification
             Snep_Notifications::removeNotification($id);
 

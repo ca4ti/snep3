@@ -33,6 +33,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css");
                     <thead>
                         <tr>
                             
+                            <th><?php echo $this->translate('Remetente');?></th>
                             <th><?php echo $this->translate('Notification');?></th>
                             <th data-sort-ignore="true"><?php echo $this->translate('Date');?></th>
                             <th colspan="2" class="text-center" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
@@ -46,12 +47,14 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/index.css");
                             
                             <tr>
                                 <?php if($notification['read'] == '1'){?>
-                                
+                                    
+                                    <td> <?php echo $notification['from'] ?> </td>
                                     <td> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,60)."..." ?> </td>
                                     <td> <?php echo date("d/m/Y G:i:s", strtotime($notification['creation_date'])) ?> </td>    
                                 
                                 <?php }else{?>
                                     
+                                    <td class="bold"> <?php echo $notification['from'] ?> </td>
                                     <td class="bold"> <?php echo $notification['title'] ." - ". substr($notification['message'], 0,60)."..." ?> </td>
                                     <td class="bold"> <?php echo date("d/m/Y G:i:s", strtotime($notification['creation_date'])) ?> </td>
                                 

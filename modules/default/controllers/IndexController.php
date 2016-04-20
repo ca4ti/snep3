@@ -199,7 +199,7 @@ class IndexController extends Zend_Controller_Action {
 
                     $title = $this->view->translate('Welcome to Intercomunexão.');
                     $message = $this->view->translate('By registering your SNEP, you connect to the portal of Intercomunexão. Portal where you will have access to exclusive solutions, high-quality support and a constantly evolving technology. <br>Access: itc.opens.com.br');
-                    Snep_Notifications::addNotification($title,$message);
+                    Snep_Notifications::addNotification($title,$message,1,"OPENS");
 
                     // go to snep
                     $_SESSION['registered'] = true;
@@ -277,19 +277,22 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));
 
+            $configs = Snep_Config::getConfiguration('CORE','HOST_NOTIFICATION');
+
             // get last_id_notification if exists
             $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
             if($idLastNotification){
-                $idLastNotification = $idLastNotification["config_value"];        
+
+                $idLastNotification = $idLastNotification["config_value"];
+                $url = $configs["config_value"]."/last_id/".$idLastNotification."/UUID/".$_SESSION["uuid"];        
+            
             }else{
-                $idLastNotification = Snep_Notifications::getDateLastNotification();
+            
+                $dateNotification = date("Y-m-d");
+                $url = $configs["config_value"]."/date/".$dateNotification."/UUID/".$_SESSION["uuid"];            
             }
             
-            $configs = Snep_Config::getConfiguration('CORE','HOST_NOTIFICATION');
-            
             // get notification in itc
-            $url = $configs["config_value"].$idLastNotification."/UUID/".$_SESSION["uuid"];
-             
             $http = curl_init($url);
 
             curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
@@ -304,8 +307,23 @@ class IndexController extends Zend_Controller_Action {
                     
                     $notifications = json_decode($http_response);
                     foreach($notifications as $item => $notification){
-                        Snep_Notifications::addNotification(utf8_decode($notification->title),utf8_decode($notification->message),$notification->id);    
+                        $lastId = $notification->id;
+
+                        Snep_Notifications::addNotification(utf8_decode($notification->title),utf8_decode($notification->message),$notification->id,$notification->id_costumer);
                     }
+                    
+                    if(isset($lastId)){
+
+                        // get last_id_notification if exists
+                        $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
+                        if($idLastNotification){
+                            Snep_Notifications::updateLastNotification($lastId);
+                        }else{
+                            Snep_Notifications::addLastNotification($lastId);
+                        }
+                            
+                    }
+                    
                     break;
                 case 500:
                     
@@ -314,7 +332,7 @@ class IndexController extends Zend_Controller_Action {
                         
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message);
+                        Snep_Notifications::addNotification($title,$message,1,"OPENS");
                     }    
                     
                     break;
@@ -325,7 +343,7 @@ class IndexController extends Zend_Controller_Action {
 
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message);
+                        Snep_Notifications::addNotification($title,$message,1,"OPENS");
                     }
                     
                     break;
@@ -336,7 +354,7 @@ class IndexController extends Zend_Controller_Action {
 
                         $title = $this->view->translate('Warning');
                         $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
-                        Snep_Notifications::addNotification($title,$message);
+                        Snep_Notifications::addNotification($title,$message,"OPENS");
                     }
                     break;
             }            

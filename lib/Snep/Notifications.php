@@ -174,14 +174,17 @@ class Snep_Notifications {
      * @param <string> $title
      * @param <string> $notification
      */
-    public function addNotification($title,$message,$id_itc) {
+    public function addNotification($title,$message,$id_itc,$costumer) {
 
         $db = Zend_Registry::get('db');
 
+        ($costumer == 68) ? $from = "OPENS" : $from = "INTEGRADOR";
+        
         $insert_data = array('title' => $title,
             'message' => $message,
             'id_itc' => $id_itc,
-            'creation_date' => date('Y-m-d H:i:s'));
+            'creation_date' => date('Y-m-d H:i:s'),
+            'from' => $from);
 
         $db->insert('core_notifications', $insert_data);
     
@@ -236,6 +239,20 @@ class Snep_Notifications {
         } catch (Exception $e) {
             $db->rollBack();
         }
+    }
+
+    /**
+     * Method to update a lastNotification
+     * @param <int> $id
+     */
+    public function updateLastNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('config_value' => $id);
+
+        $db->update("core_config", $update_data, "config_name = 'LAST_ID_NOTIFICATION'");
+
     }
 
 }

@@ -36,8 +36,6 @@ class AGI extends Snep_Inspector_Test {
      */
     public $paths = array('/var/lib/asterisk/agi-bin/snep' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/var/lib/asterisk/moh' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          '/etc/asterisk/snep/snep-agentes.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
-                          '/etc/asterisk/snep/snep-agents.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-authconferences.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-conferences.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),
                           '/etc/asterisk/snep/snep-features.conf' => array('exists' => 1, 'writable' => 1, 'readable' => 1),

@@ -306,22 +306,24 @@ class IndexController extends Zend_Controller_Action {
                 case 200:
                     
                     $notifications = json_decode($http_response);
-                    foreach($notifications as $item => $notification){
-                        $lastId = $notification->id;
+                    if(!empty($notifications)){
 
-                        Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
-                    }
-                    
-                    if(isset($lastId)){
+                        foreach($notifications as $item => $notification){
+                            $lastId = $notification->id;
 
-                        // get last_id_notification if exists
-                        $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
-                        if($idLastNotification){
-                            Snep_Notifications::updateLastNotification($lastId);
-                        }else{
-                            Snep_Notifications::addLastNotification($lastId);
+                            Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
                         }
-                            
+                    
+                        if(isset($lastId)){
+
+                            // get last_id_notification if exists
+                            $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
+                            if($idLastNotification){
+                                Snep_Notifications::updateLastNotification($lastId);
+                            }else{
+                                Snep_Notifications::addLastNotification($lastId);
+                            }
+                        }        
                     }
                     
                     break;

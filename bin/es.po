@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-08 10:43-0300\n"
-"PO-Revision-Date: 2016-04-08 11:32-0300\n"
+"POT-Creation-Date: 2016-04-20 16:10-0300\n"
+"PO-Revision-Date: 2016-04-22 10:08-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -92,6 +92,23 @@ msgstr " tiene el siguiente error"
 #: ../inspectors/Sounds.php:82
 msgid " in "
 msgstr "en"
+
+#: /var/www/html/snep-3/modules/fop2/resources.xml
+msgid "-->"
+msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:356
+msgid ". Please contact the administrator for receiver notifications."
+msgstr ""
+". Por favor, póngase en contacto con el administrador de notificaciones "
+"receptor."
+
+#: ../modules/default/controllers/IndexController.php:75
+#: ../modules/default/controllers/IndexController.php:141
+#: ../modules/default/controllers/IndexController.php:191
+#: ../modules/default/controllers/IndexController.php:259
+msgid ". Please contact the administrator."
+msgstr ". Por favor, póngase en contacto con el administrador."
 
 #: ../modules/default/controllers/CallsReportController.php:385
 #: ../modules/default/controllers/RankingReportController.php:159
@@ -189,15 +206,18 @@ msgstr "Índice Acción"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:37
 #: ../modules/default/views/scripts/contact-groups/index.phtml:35
 #: ../modules/default/views/scripts/trunks/index.phtml:44
-#: ../modules/default/views/scripts/route/index.phtml:87
+#: ../modules/default/views/scripts/route/index.phtml:112
+#: ../modules/default/views/scripts/route/index.phtml:198
+#: ../modules/default/views/scripts/route/index.phtml:284
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
 #: ../modules/default/views/scripts/cost-center/index.phtml:41
 #: ../modules/default/views/scripts/expression-alias/index.phtml:39
 #: ../modules/default/views/scripts/sound-files/index.phtml:51
 #: ../modules/default/views/scripts/extensions/index.phtml:51
 #: ../modules/default/views/scripts/profiles/index.phtml:38
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:41
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:58
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:38
+#: ../modules/default/views/scripts/notifications/index.phtml:39
 msgid "Actions"
 msgstr "Acciones"
 
@@ -226,9 +246,9 @@ msgstr "Grupo actual"
 #: ../modules/default/controllers/SoundFilesController.php:87
 #: ../modules/default/controllers/ContactsController.php:91
 #: ../modules/default/controllers/ExpressionAliasController.php:74
-#: ../modules/default/controllers/RouteController.php:227
+#: ../modules/default/controllers/RouteController.php:240
 #: ../modules/default/controllers/PickupGroupsController.php:71
-#: ../modules/default/controllers/ExtensionsController.php:108
+#: ../modules/default/controllers/ExtensionsController.php:109
 #: ../modules/default/controllers/UsersController.php:74
 #: ../modules/default/controllers/QueuesGroupsController.php:82
 #: ../modules/default/controllers/ProfilesController.php:72
@@ -268,7 +288,7 @@ msgstr "Agregar Extensión"
 msgid "Add Extension Group"
 msgstr "Agregar Grupo de extensiones"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:264
+#: ../modules/default/controllers/MusicOnHoldController.php:265
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:20
 msgid "Add File"
 msgstr "Agregar Expediente"
@@ -302,11 +322,11 @@ msgstr "Agregar Colas"
 msgid "Add Queues Group"
 msgstr "Agregar Grupo de Colas"
 
-#: ../modules/default/views/scripts/route/index.phtml:48
+#: ../modules/default/views/scripts/route/index.phtml:47
 msgid "Add Rule"
 msgstr "Agregar Rutas"
 
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:20
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:37
 msgid "Add Session"
 msgstr "Agregar Sesión"
 
@@ -351,14 +371,14 @@ msgstr "Agregar la página de Dashboard"
 #: ../modules/default/views/scripts/contact-groups/index.phtml:21
 #: ../modules/default/views/scripts/trunks/index.phtml:22
 #: ../modules/default/views/scripts/ip-status/index.phtml:33
-#: ../modules/default/views/scripts/route/index.phtml:67
+#: ../modules/default/views/scripts/route/index.phtml:66
 #: ../modules/default/views/scripts/cost-center/index.phtml:19
 #: ../modules/default/views/scripts/expression-alias/index.phtml:23
 #: ../modules/default/views/scripts/calls-report/index.phtml:15
 #: ../modules/default/views/scripts/sound-files/index.phtml:32
 #: ../modules/default/views/scripts/extensions/index.phtml:30
 #: ../modules/default/views/scripts/profiles/index.phtml:21
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:24
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:41
 msgid "Add to dashboard"
 msgstr "Añadir al panel"
 
@@ -396,9 +416,8 @@ msgid "Agile"
 msgstr ""
 
 #: ../modules/snep-agile/actions/AgileAction.php:51
-#, fuzzy
 msgid "Agile for Incoming Calls"
-msgstr "llamada entrante"
+msgstr "Ágil para llamadas entrantes"
 
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Agile module to Snep PBX."
@@ -410,12 +429,12 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:35
 #: ../modules/default/views/scripts/khomp-links/view.phtml:6
 #: ../modules/default/views/scripts/trunks/index.phtml:32
-#: ../modules/default/views/scripts/route/index.phtml:77
+#: ../modules/default/views/scripts/route/index.phtml:74
 #: ../modules/default/views/scripts/cost-center/index.phtml:29
 #: ../modules/default/views/scripts/expression-alias/index.phtml:31
 #: ../modules/default/views/scripts/sound-files/index.phtml:40
 #: ../modules/default/views/scripts/extensions/index.phtml:40
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:31
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:48
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:27
 msgid "Alert"
 msgstr "Alerta"
@@ -435,7 +454,6 @@ msgid "Alert sound"
 msgstr "Sonido de alerta"
 
 #: ../modules/default/controllers/RouteController.php:65
-#, fuzzy
 msgid "Alias RegEx"
 msgstr "Alias de expresiones regulares"
 
@@ -507,19 +525,19 @@ msgstr "Aplicación"
 msgid "Asterisk"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:88
+#: ../modules/default/views/scripts/parameters/index.phtml:102
 msgid "Asterisk Manager connect"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:93
+#: ../modules/default/views/scripts/parameters/index.phtml:107
 msgid "Asterisk Socket IP"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:107
+#: ../modules/default/views/scripts/parameters/index.phtml:121
 msgid "Asterisk Socket IP password"
 msgstr "Asterisk Socket IP seña"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:100
+#: ../modules/default/views/scripts/parameters/index.phtml:114
 msgid "Asterisk Socket IP username"
 msgstr "Asterisk Socket IP nombre de usuario"
 
@@ -551,7 +569,7 @@ msgstr "Audio: Usted está aquí"
 msgid "Audio: You're next"
 msgstr "Audio: Tú eres el siguiente"
 
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:60
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:77
 msgid "Audios"
 msgstr "Audios"
 
@@ -609,7 +627,7 @@ msgstr "Copia de seguridad no está disponible"
 msgid "Backup"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:214
+#: ../modules/default/views/scripts/parameters/index.phtml:228
 msgid "Backup Files Path"
 msgstr "Camino archivos Backup"
 
@@ -676,7 +694,7 @@ msgstr "Ocupado entrante"
 msgid "Busy Outgoing"
 msgstr "Ocupado"
 
-#: ../modules/default/controllers/IndexController.php:202
+#: ../modules/default/controllers/IndexController.php:201
 msgid ""
 "By registering your SNEP, you connect to the portal of Intercomunexão. "
 "Portal where you will have access to exclusive solutions, high-quality "
@@ -721,7 +739,7 @@ msgstr "Llame a la Clasificación"
 msgid "Call Rankings"
 msgstr "Llame a la Clasificación"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:185
+#: ../modules/default/views/scripts/parameters/index.phtml:199
 msgid "Call Recording Configuration"
 msgstr "Llame Configuración de grabación"
 
@@ -791,7 +809,7 @@ msgstr "Llamadas completado"
 #: ../modules/default/views/scripts/action-configs/edit.phtml:42
 #: ../modules/default/views/scripts/index/add.phtml:47
 #: ../modules/default/views/scripts/ranking-report/export.phtml:24
-#: ../modules/default/views/scripts/parameters/index.phtml:239
+#: ../modules/default/views/scripts/parameters/index.phtml:252
 #: ../modules/default/views/scripts/module-settings/index.phtml:137
 #: ../modules/default/views/scripts/queues/addedit.phtml:241
 #: ../modules/default/views/scripts/queues/members.phtml:26
@@ -822,9 +840,10 @@ msgstr "Llamadas completado"
 #: ../modules/default/views/scripts/profiles/addedit.phtml:35
 #: ../modules/default/views/scripts/profiles/permission.phtml:35
 #: ../modules/default/views/scripts/cnl/index.phtml:44
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:39
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:57
+#: ../modules/default/views/scripts/music-on-hold/remove.phtml:42
 #: ../modules/default/views/scripts/music-on-hold/removefile.phtml:15
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:44
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:62
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:49
 msgid "Cancel"
 msgstr "Cancelar"
@@ -928,6 +947,10 @@ msgstr "Ciudad/Estado :"
 msgid "Class"
 msgstr "Clase"
 
+#: ../modules/default/views/scripts/notifications/index.phtml:64
+msgid "Click to visualize"
+msgstr "Clic para visualizar"
+
 #: ../modules/default/views/scripts/register/index.phtml:33
 msgid "Client Key"
 msgstr "Clave de cliente"
@@ -1003,7 +1026,7 @@ msgstr "Error de comunicación"
 msgid "Company Name"
 msgstr "Nombre de empresa"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:76
+#: ../modules/default/views/scripts/parameters/index.phtml:89
 msgid "Conference Application"
 msgstr "Aplicación Conferencia"
 
@@ -1087,12 +1110,11 @@ msgid "Conversation (seconds)"
 msgstr "Conversación (segundos)"
 
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:29
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:28
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:33
 msgid "Converte to GSM"
 msgstr "Convertir a GSM"
 
-#: ../modules/default/controllers/RouteController.php:389
+#: ../modules/default/controllers/RouteController.php:400
 #, php-format
 msgid "Copy of %s"
 msgstr "Copia de %s"
@@ -1186,8 +1208,8 @@ msgstr ""
 msgid "Daily"
 msgstr "Diario"
 
-#: ../modules/default/controllers/IndexController.php:279
-#: ../modules/default/controllers/IndexController.php:298
+#: ../modules/default/controllers/IndexController.php:278
+#: ../modules/default/controllers/IndexController.php:379
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Dashboard"
@@ -1197,27 +1219,27 @@ msgstr ""
 msgid "Data by Period"
 msgstr "Datos por Período"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:118
+#: ../modules/default/views/scripts/parameters/index.phtml:132
 msgid "Database"
 msgstr "Base de datos"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:115
+#: ../modules/default/views/scripts/parameters/index.phtml:129
 msgid "Database connect"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:127
+#: ../modules/default/views/scripts/parameters/index.phtml:141
 msgid "Database hostname"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:120
+#: ../modules/default/views/scripts/parameters/index.phtml:134
 msgid "Database name"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:141
+#: ../modules/default/views/scripts/parameters/index.phtml:155
 msgid "Database password"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:134
+#: ../modules/default/views/scripts/parameters/index.phtml:148
 msgid "Database username"
 msgstr ""
 
@@ -1225,7 +1247,7 @@ msgstr ""
 #: ../modules/default/controllers/ServicesReportController.php:204
 #: ../modules/default/views/scripts/services-report/view.phtml:36
 #: ../modules/default/views/scripts/calls-report/view.phtml:200
-#: ../modules/default/views/scripts/notifications/index.phtml:35
+#: ../modules/default/views/scripts/notifications/index.phtml:38
 msgid "Date"
 msgstr "Fecha"
 
@@ -1273,11 +1295,11 @@ msgstr ""
 msgid "Default module that provides basic features to Snep PBX."
 msgstr "Módulo por defecto que proporciona funciones básicas para Snep PBX"
 
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:21
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:39
 msgid "Default path"
 msgstr "Default camino"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:229
+#: ../modules/default/views/scripts/parameters/index.phtml:242
 msgid "Default value for Qualify"
 msgstr "El valor por defecto para calificar"
 
@@ -1289,9 +1311,13 @@ msgstr "Definir centros de coste"
 msgid "Define Cost Center to "
 msgstr "Definir centros de coste a"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:71
+#: ../modules/default/views/scripts/parameters/index.phtml:74
 msgid "Defines how many lines you want per page of report"
 msgstr "Define el número de líneas que desea por página de informe"
+
+#: ../modules/default/views/scripts/parameters/index.phtml:84
+msgid "Defines the number of digits in the configuration of an extension"
+msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:142
 msgid "Delay Qualification"
@@ -1302,7 +1328,8 @@ msgstr "Retraso Calificación"
 #: ../modules/default/controllers/SoundFilesController.php:275
 #: ../modules/default/controllers/ContactsController.php:247
 #: ../modules/default/controllers/ExpressionAliasController.php:190
-#: ../modules/default/controllers/RouteController.php:609
+#: ../modules/default/controllers/RouteController.php:625
+#: ../modules/default/controllers/NotificationsController.php:124
 #: ../modules/default/controllers/PickupGroupsController.php:221
 #: ../modules/default/controllers/ExtensionsController.php:661
 #: ../modules/default/controllers/UsersController.php:160
@@ -1320,16 +1347,20 @@ msgstr "Retraso Calificación"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:64
 #: ../modules/default/views/scripts/contact-groups/index.phtml:56
 #: ../modules/default/views/scripts/trunks/index.phtml:76
-#: ../modules/default/views/scripts/route/index.phtml:116
+#: ../modules/default/views/scripts/route/index.phtml:146
+#: ../modules/default/views/scripts/route/index.phtml:232
+#: ../modules/default/views/scripts/route/index.phtml:318
 #: ../modules/default/views/scripts/cost-center/index.phtml:59
 #: ../modules/default/views/scripts/expression-alias/index.phtml:54
 #: ../modules/default/views/scripts/sound-files/index.phtml:105
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:20
 #: ../modules/default/views/scripts/extensions/index.phtml:72
 #: ../modules/default/views/scripts/profiles/index.phtml:72
+#: ../modules/default/views/scripts/music-on-hold/remove.phtml:40
 #: ../modules/default/views/scripts/music-on-hold/removefile.phtml:13
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:70
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:87
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:55
+#: ../modules/default/views/scripts/notifications/index.phtml:68
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -1357,13 +1388,17 @@ msgstr "Eliminar grupo de extensiones."
 msgid "Delete Extension."
 msgstr "Eliminar Extensión."
 
-#: ../modules/default/controllers/MusicOnHoldController.php:356
+#: ../modules/default/controllers/MusicOnHoldController.php:357
 msgid "Delete File"
 msgstr "Eliminar archivo"
 
 #: ../modules/default/controllers/ExtensionsController.php:728
 msgid "Delete Multiples"
 msgstr "Eliminar Multiples"
+
+#: ../modules/default/controllers/NotificationsController.php:129
+msgid "Delete Notification."
+msgstr "Eliminar Notificación. "
 
 #: ../modules/default/controllers/PickupGroupsController.php:226
 msgid "Delete Pickup Group."
@@ -1381,9 +1416,13 @@ msgstr "Eliminar cola."
 msgid "Delete Queues Group."
 msgstr "Eliminar colas de grupos."
 
-#: ../modules/default/controllers/RouteController.php:614
+#: ../modules/default/controllers/RouteController.php:630
 msgid "Delete Routes."
 msgstr "Eliminar Rutas."
+
+#: ../modules/default/views/scripts/music-on-hold/remove.phtml:26
+msgid "Delete Sound Files"
+msgstr "Eliminar archivos de sonido"
 
 #: ../modules/default/controllers/SoundFilesController.php:280
 msgid "Delete Sound Files."
@@ -1401,7 +1440,7 @@ msgstr "Eliminar tronco."
 msgid "Delete User."
 msgstr "Eliminar usuario."
 
-#: ../modules/default/controllers/MusicOnHoldController.php:362
+#: ../modules/default/controllers/MusicOnHoldController.php:363
 msgid "Delete music on hold file: "
 msgstr "Eliminar archivos de música de espera:"
 
@@ -1410,15 +1449,17 @@ msgid "Deny"
 msgstr ""
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
-#: ../modules/default/views/scripts/route/index.phtml:86
+#: ../modules/default/views/scripts/route/index.phtml:111
+#: ../modules/default/views/scripts/route/index.phtml:197
+#: ../modules/default/views/scripts/route/index.phtml:283
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/cost-center/index.phtml:40
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:22
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:24
 #: ../modules/default/views/scripts/sound-files/index.phtml:48
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:21
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:23
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:39
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:41
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:26
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:28
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:36
@@ -1445,7 +1486,9 @@ msgstr "Destino Grupo"
 #: ../modules/default/controllers/RankingReportController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
-#: ../modules/default/views/scripts/route/index.phtml:85
+#: ../modules/default/views/scripts/route/index.phtml:110
+#: ../modules/default/views/scripts/route/index.phtml:196
+#: ../modules/default/views/scripts/route/index.phtml:282
 #: ../modules/default/views/scripts/route/elements/dst.phtml:2
 msgid "Destiny"
 msgstr "Destino"
@@ -1537,7 +1580,7 @@ msgstr "Directorio"
 msgid "Directory already exists"
 msgstr "Ya existe Directorio"
 
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:28
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:46
 msgid "Directory name"
 msgstr "Nombre de directorio"
 
@@ -1596,8 +1639,10 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: ../modules/default/controllers/RouteController.php:350
-#: ../modules/default/views/scripts/route/index.phtml:107
+#: ../modules/default/controllers/RouteController.php:361
+#: ../modules/default/views/scripts/route/index.phtml:135
+#: ../modules/default/views/scripts/route/index.phtml:221
+#: ../modules/default/views/scripts/route/index.phtml:307
 msgid "Duplicate"
 msgstr "Duplicar"
 
@@ -1617,8 +1662,8 @@ msgstr "E-mail del destinatario"
 #: ../modules/default/controllers/SoundFilesController.php:187
 #: ../modules/default/controllers/ContactsController.php:158
 #: ../modules/default/controllers/ExpressionAliasController.php:128
-#: ../modules/default/controllers/RouteController.php:290
-#: ../modules/default/controllers/IndexController.php:299
+#: ../modules/default/controllers/RouteController.php:301
+#: ../modules/default/controllers/IndexController.php:380
 #: ../modules/default/controllers/PickupGroupsController.php:141
 #: ../modules/default/controllers/ExtensionsController.php:202
 #: ../modules/default/controllers/ActionConfigsController.php:107
@@ -1637,13 +1682,15 @@ msgstr "E-mail del destinatario"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:60
 #: ../modules/default/views/scripts/contact-groups/index.phtml:51
 #: ../modules/default/views/scripts/trunks/index.phtml:71
-#: ../modules/default/views/scripts/route/index.phtml:112
+#: ../modules/default/views/scripts/route/index.phtml:141
+#: ../modules/default/views/scripts/route/index.phtml:227
+#: ../modules/default/views/scripts/route/index.phtml:313
 #: ../modules/default/views/scripts/cost-center/index.phtml:56
 #: ../modules/default/views/scripts/expression-alias/index.phtml:50
 #: ../modules/default/views/scripts/sound-files/index.phtml:99
 #: ../modules/default/views/scripts/extensions/index.phtml:68
 #: ../modules/default/views/scripts/profiles/index.phtml:66
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:65
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:82
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:51
 #: /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
@@ -1654,7 +1701,7 @@ msgstr "Editar"
 msgid "Edit Dashboard"
 msgstr "Editar Dashboard"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:334
+#: ../modules/default/controllers/MusicOnHoldController.php:335
 msgid "Edit File"
 msgstr "Editar archivo"
 
@@ -1726,7 +1773,7 @@ msgstr ""
 "Ingrese su usuario para enviar una redefinición de la contraseña a su correo "
 "electrónico registrado"
 
-#: ../inspectors/AGI.php:110
+#: ../inspectors/AGI.php:108
 msgid "Environment for AGI SNEP"
 msgstr "Medio Ambiente para AGI SNEP"
 
@@ -1752,6 +1799,17 @@ msgstr ""
 #: ../modules/default/controllers/ExportDataController.php:130
 msgid "Error "
 msgstr "Erro"
+
+#: ../modules/default/controllers/IndexController.php:345
+msgid ""
+"Error notifications.<br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
+msgstr ""
+"Notificaciones de error.<br> Para recibir notificaciones sobre nuevas "
+"características , módulos y noticias relacionadas Snep que debe estar "
+"conectado a una red de Internet . Compruebe su conexión y vuelva a "
+"intentarlo."
 
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:33
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:45
@@ -1785,6 +1843,14 @@ msgstr "Error! Error al conectar con Asterisk servidor."
 #: ../modules/default/views/scripts/khomp-links/khomp-error.phtml:9
 msgid "Error! No Khomp board installed"
 msgstr ""
+
+#: ../modules/default/controllers/IndexController.php:75
+#: ../modules/default/controllers/IndexController.php:141
+#: ../modules/default/controllers/IndexController.php:191
+#: ../modules/default/controllers/IndexController.php:259
+#: ../modules/default/controllers/IndexController.php:356
+msgid "Error: Code "
+msgstr "Código de error"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:68
 msgid "Errors were detected in the configuration of SNEP, click "
@@ -1923,8 +1989,8 @@ msgstr "Extensión ya tomada. Por favor, elija otra denominación."
 msgid "Extension:"
 msgstr "Extensión"
 
-#: ../modules/default/controllers/ExtensionsController.php:87
-#: ../modules/default/controllers/ExtensionsController.php:107
+#: ../modules/default/controllers/ExtensionsController.php:88
+#: ../modules/default/controllers/ExtensionsController.php:108
 #: ../modules/default/controllers/ExtensionsController.php:201
 #: ../modules/default/controllers/ExtensionsController.php:660
 #: ../modules/default/controllers/ExtensionsController.php:727
@@ -1988,7 +2054,7 @@ msgstr "Archivo"
 msgid "File Permissions"
 msgstr "Permisos de archivo"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:283
+#: ../modules/default/controllers/MusicOnHoldController.php:284
 msgid "File already exists"
 msgstr "El archivo ya existe"
 
@@ -2011,15 +2077,15 @@ msgstr "Archivo no encontrado."
 
 #: ../modules/default/views/scripts/contacts/import.phtml:15
 #: ../modules/default/views/scripts/sound-files/index.phtml:47
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:14
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:16
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:32
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:34
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:5
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:7
 msgid "Filename"
 msgstr "Nombre Del Archivo"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:241
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:40
+#: ../modules/default/controllers/MusicOnHoldController.php:242
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:57
 msgid "Files"
 msgstr "Archivo "
 
@@ -2042,6 +2108,15 @@ msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:41
 msgid "Flavio H. Somensi [ flavio@opens.com.br ]- Developer"
+msgstr ""
+
+#: /var/www/html/snep-3/modules/fop2/resources.xml
+#: /var/www/html/snep-3/modules/fop2/info.xml
+msgid "Fop2"
+msgstr ""
+
+#: /var/www/html/snep-3/modules/fop2/info.xml
+msgid "Fop2 module to Snep PBX."
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:83
@@ -2151,7 +2226,7 @@ msgstr "Permiso de Grupo"
 msgid "Hanging Up"
 msgstr "Suspender"
 
-#: ../modules/default/views/layouts/layout.phtml:146
+#: ../modules/default/views/layouts/layout.phtml:140
 msgid "Help"
 msgstr "Ayuda"
 
@@ -2159,11 +2234,11 @@ msgstr "Ayuda"
 msgid "Hidden Routes"
 msgstr "Rutas ocultos"
 
-#: ../modules/default/views/scripts/route/index.phtml:61
+#: ../modules/default/views/scripts/route/index.phtml:60
 msgid "Hide routes is disable"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:54
+#: ../modules/default/views/scripts/route/index.phtml:53
 msgid "Hide routes is enable"
 msgstr ""
 
@@ -2171,8 +2246,8 @@ msgstr ""
 msgid "High quality support"
 msgstr "Soporte de alta calidad"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:91
-#: ../modules/default/views/scripts/parameters/index.phtml:125
+#: ../modules/default/views/scripts/parameters/index.phtml:105
+#: ../modules/default/views/scripts/parameters/index.phtml:139
 msgid "Hostname"
 msgstr "Nombre de host"
 
@@ -2210,7 +2285,9 @@ msgstr ""
 msgid "IP Status"
 msgstr "Estado IP"
 
-#: ../modules/default/views/scripts/route/index.phtml:82
+#: ../modules/default/views/scripts/route/index.phtml:107
+#: ../modules/default/views/scripts/route/index.phtml:193
+#: ../modules/default/views/scripts/route/index.phtml:279
 msgid "Id"
 msgstr ""
 
@@ -2269,6 +2346,7 @@ msgstr ""
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:34
 #: ../modules/default/views/scripts/calls-report/view.phtml:159
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:197
+#: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Incoming"
 msgstr "Entrante"
 
@@ -2283,7 +2361,7 @@ msgstr "llamada entrante"
 msgid "Info"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:154
+#: ../modules/default/views/layouts/layout.phtml:148
 msgid "Information"
 msgstr "Información "
 
@@ -2300,7 +2378,11 @@ msgstr "Archivo de entrada"
 msgid "Insecure"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:162
+#: ../lib/Snep/Notifications.php:183
+msgid "Integrator"
+msgstr "Integrador"
+
+#: ../modules/default/views/layouts/layout.phtml:156
 msgid "Intercomunexão"
 msgstr "Intercomunexão"
 
@@ -2318,11 +2400,22 @@ msgstr "Tipo de interfaz"
 msgid "Internal Error"
 msgstr "Error interno"
 
+#: ../modules/default/controllers/IndexController.php:334
+msgid ""
+"Internal Server Error. <br> To receive notifications about new features, "
+"modules and related news Snep you must be connected to an internet network. "
+"Check your connection and try again."
+msgstr ""
+"Error de servidor interno. <br> Para recibir notificaciones sobre nuevas "
+"características , módulos y noticias relacionadas Snep que debe estar "
+"conectado a una red de Internet . Compruebe su conexión y vuelva a "
+"intentarlo ."
+
 #: ../modules/default/controllers/RegisterController.php:134
-#: ../modules/default/controllers/IndexController.php:70
-#: ../modules/default/controllers/IndexController.php:133
-#: ../modules/default/controllers/IndexController.php:183
-#: ../modules/default/controllers/IndexController.php:251
+#: ../modules/default/controllers/IndexController.php:69
+#: ../modules/default/controllers/IndexController.php:132
+#: ../modules/default/controllers/IndexController.php:182
+#: ../modules/default/controllers/IndexController.php:250
 msgid "Internal Server Error. Please try later"
 msgstr "Error Interno Del Servidor. Por favor, intente más tarde"
 
@@ -2382,7 +2475,7 @@ msgstr "Juntas Khomp"
 msgid "Khomp links errors"
 msgstr "Enlaces erros Khomp"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:193
+#: ../modules/default/views/scripts/parameters/index.phtml:207
 msgid "Krecord"
 msgstr ""
 
@@ -2459,7 +2552,7 @@ msgstr "Cargando"
 msgid "Local"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:147
+#: ../modules/default/views/scripts/parameters/index.phtml:161
 msgid "Locale Configuration"
 msgstr "Configuración Local"
 
@@ -2482,7 +2575,7 @@ msgstr "Archivos de Log"
 msgid "Login"
 msgstr "Iniciar Sesión"
 
-#: ../modules/default/views/layouts/layout.phtml:170
+#: ../modules/default/views/layouts/layout.phtml:164
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr "Salir"
@@ -2540,7 +2633,6 @@ msgstr "Miembros"
 msgid "Memory Usage"
 msgstr "Uso de la memoria"
 
-#: ../modules/default/views/scripts/notifications/index.phtml:37
 #: ../modules/default/actions/EmailAction.php:68
 msgid "Message"
 msgstr "Mensaje"
@@ -2577,7 +2669,7 @@ msgstr "Control Minuto"
 msgid "Minutes"
 msgstr "Acta"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:191
+#: ../modules/default/views/scripts/parameters/index.phtml:205
 msgid "MixMonitor"
 msgstr ""
 
@@ -2585,7 +2677,7 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:12
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:30
 msgid "Mode"
 msgstr "Modo"
 
@@ -2600,7 +2692,7 @@ msgid "Module Settings"
 msgstr "Ajustes del módulo"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
-#: ../modules/default/views/layouts/layout.phtml:197
+#: ../modules/default/views/layouts/layout.phtml:191
 msgid "Modules"
 msgstr "Módulos"
 
@@ -2610,7 +2702,7 @@ msgstr "Módulos"
 msgid "Monday"
 msgstr "Lunes"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:192
+#: ../modules/default/views/scripts/parameters/index.phtml:206
 msgid "Monitor"
 msgstr ""
 
@@ -2639,10 +2731,10 @@ msgstr "Música en espera"
 #: ../modules/default/controllers/MusicOnHoldController.php:98
 #: ../modules/default/controllers/MusicOnHoldController.php:156
 #: ../modules/default/controllers/MusicOnHoldController.php:207
-#: ../modules/default/controllers/MusicOnHoldController.php:240
-#: ../modules/default/controllers/MusicOnHoldController.php:263
-#: ../modules/default/controllers/MusicOnHoldController.php:333
-#: ../modules/default/controllers/MusicOnHoldController.php:355
+#: ../modules/default/controllers/MusicOnHoldController.php:241
+#: ../modules/default/controllers/MusicOnHoldController.php:264
+#: ../modules/default/controllers/MusicOnHoldController.php:334
+#: ../modules/default/controllers/MusicOnHoldController.php:356
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Music on Hold Sessions"
 msgstr "Sesiones Música en espera "
@@ -2708,9 +2800,9 @@ msgstr ""
 #: ../modules/default/views/scripts/profiles/addedit.phtml:13
 #: ../modules/default/views/scripts/profiles/permission.phtml:10
 #: ../modules/default/views/scripts/profiles/index.phtml:35
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:5
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:7
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:37
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:23
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:25
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:54
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:34
 msgid "Name"
 msgstr "Nombre"
@@ -2780,10 +2872,6 @@ msgstr "Ninguna junta Khomp instalada"
 #: ../modules/default/controllers/KhompLinksController.php:175
 msgid "No Link Available"
 msgstr "No hay relación Disponible"
-
-#: ../modules/default/views/scripts/notifications/index.phtml:54
-msgid "No Visualized"
-msgstr "No visualizado"
 
 #: ../modules/default/controllers/KhompLinksController.php:138
 msgid "No boards selected."
@@ -2875,6 +2963,11 @@ msgstr "Extraviado"
 msgid "Not configured"
 msgstr "Sin configurar"
 
+#: ../modules/default/controllers/NotificationsController.php:123
+#: ../modules/default/views/scripts/notifications/index.phtml:37
+msgid "Notification"
+msgstr "Notificaciones "
+
 #: ../modules/default/controllers/NotificationsController.php:36
 msgid "Notifications"
 msgstr "Notificaciones "
@@ -2893,8 +2986,8 @@ msgid "Number of Lines"
 msgstr "Número de líneas"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:231
-#: ../modules/default/views/scripts/extensions/addedit.phtml:496
-#: ../modules/default/views/scripts/extensions/addedit.phtml:502
+#: ../modules/default/views/scripts/extensions/addedit.phtml:497
+#: ../modules/default/views/scripts/extensions/addedit.phtml:503
 msgid "Numbers only please"
 msgstr "Sólo números"
 
@@ -2928,6 +3021,7 @@ msgstr "En curso"
 msgid "Only numbers"
 msgstr "Sólo los números "
 
+#: /var/www/html/snep-3/modules/fop2/info.xml
 #: /var/www/html/snep-3/modules/default/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "Opens Technology"
@@ -2946,7 +3040,7 @@ msgstr "Opción"
 msgid "Optional"
 msgstr "Opcional"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:202
+#: ../modules/default/views/scripts/parameters/index.phtml:216
 msgid "Options to the recording application"
 msgstr "Opciones a la aplicación de grabación"
 
@@ -2978,12 +3072,17 @@ msgstr "Fuente original"
 msgid "Other"
 msgstr "Otro"
 
+#: /var/www/html/snep-3/modules/default/forms/route.xml
+msgid "Others"
+msgstr "Otros"
+
 #: ../modules/default/controllers/CostCenterController.php:69
 #: ../modules/default/controllers/KhompLinksController.php:79
 #: ../modules/default/controllers/KhompLinksController.php:186
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:38
 #: ../modules/default/views/scripts/calls-report/view.phtml:160
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:202
+#: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Outgoing"
 msgstr "Saliente"
 
@@ -2995,6 +3094,10 @@ msgstr "Llamada Saliente"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:346
 msgid "Padlock"
 msgstr "Candado"
+
+#: /var/www/html/snep-3/modules/fop2/resources.xml
+msgid "Painel FOP2"
+msgstr ""
 
 #: ../modules/default/controllers/ParametersController.php:48
 #: ../modules/default/views/scripts/logs/index.phtml:75
@@ -3012,8 +3115,8 @@ msgstr "Tabique"
 msgid "Partner"
 msgstr "Socio"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:105
-#: ../modules/default/views/scripts/parameters/index.phtml:139
+#: ../modules/default/views/scripts/parameters/index.phtml:119
+#: ../modules/default/views/scripts/parameters/index.phtml:153
 #: ../modules/default/views/scripts/users/addedit.phtml:32
 #: ../modules/default/views/scripts/auth/login.phtml:19
 #: ../modules/default/views/scripts/trunks/addedit.phtml:121
@@ -3048,15 +3151,15 @@ msgstr "Contraseña recuperó con éxito"
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:38
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:55
 msgid "Path"
 msgstr "Camino"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:209
+#: ../modules/default/views/scripts/parameters/index.phtml:223
 msgid "Path where to store the audio files"
 msgstr "Ruta a la que guardar los archivos de audio"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:216
+#: ../modules/default/views/scripts/parameters/index.phtml:230
 msgid "Path where to store the backup audio files"
 msgstr "Ruta a la que guardar los archivos de audio de copia de seguridad"
 
@@ -3067,6 +3170,10 @@ msgstr ""
 #: ../modules/default/controllers/RouteController.php:59
 msgid "Peer Group"
 msgstr "Grupo de Extensiones"
+
+#: ../modules/default/views/scripts/parameters/index.phtml:79
+msgid "Peers - number of digits"
+msgstr ""
 
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:32
 msgid "Peers in"
@@ -3133,12 +3240,16 @@ msgstr "Por favor, introduzca un nombre de usuario"
 msgid "Please enter a valide e-mail."
 msgstr "Por favor ingrese un valide e-mail."
 
+#: ../modules/default/views/scripts/parameters/index.phtml:326
+msgid "Please enter a value between 1 and 9."
+msgstr "Por favor, introduzca un valor entre 1 y 9 ."
+
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:56
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:74
 #: ../modules/default/views/scripts/register/index.phtml:85
 #: ../modules/default/views/scripts/register/index.phtml:91
-#: ../modules/default/views/scripts/parameters/index.phtml:283
-#: ../modules/default/views/scripts/parameters/index.phtml:289
+#: ../modules/default/views/scripts/parameters/index.phtml:300
+#: ../modules/default/views/scripts/parameters/index.phtml:306
 #: ../modules/default/views/scripts/queues/addedit.phtml:265
 #: ../modules/default/views/scripts/contacts/addedit.phtml:223
 #: ../modules/default/views/scripts/contacts/addedit.phtml:229
@@ -3151,16 +3262,16 @@ msgstr "Por favor ingrese un valide e-mail."
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:86
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:102
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:77
-#: ../modules/default/views/scripts/extensions/addedit.phtml:494
-#: ../modules/default/views/scripts/extensions/addedit.phtml:500
-#: ../modules/default/views/scripts/extensions/addedit.phtml:512
+#: ../modules/default/views/scripts/extensions/addedit.phtml:495
+#: ../modules/default/views/scripts/extensions/addedit.phtml:501
+#: ../modules/default/views/scripts/extensions/addedit.phtml:513
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:71
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:232
 #: ../modules/default/views/scripts/profiles/addedit.phtml:67
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:71
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:77
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:70
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:76
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:89
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:95
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:88
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:94
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:69
 #: ../modules/default/views/layouts/register.phtml:380
 #: ../modules/default/views/layouts/register.phtml:429
@@ -3173,24 +3284,24 @@ msgstr "Introduzca por lo menos {0} caracteres."
 
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:104
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:79
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:73
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:72
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:78
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:91
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:90
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:96
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:71
 msgid "Please enter letters and numbers only"
 msgstr "Por favor escriba las letras y números"
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:58
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:76
-#: ../modules/default/views/scripts/parameters/index.phtml:285
+#: ../modules/default/views/scripts/parameters/index.phtml:302
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:56
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:60
 msgid "Please enter letters and numbers only."
 msgstr "Por favor escriba las letras y números."
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:79
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:51
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:79
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:69
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:97
 msgid "Please enter letters only"
 msgstr "Por favor escriba las letras sólo"
 
@@ -3202,8 +3313,8 @@ msgstr "Por favor, ingrese sólo letras."
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/register/index.phtml:86
 #: ../modules/default/views/scripts/register/index.phtml:92
-#: ../modules/default/views/scripts/parameters/index.phtml:284
-#: ../modules/default/views/scripts/parameters/index.phtml:290
+#: ../modules/default/views/scripts/parameters/index.phtml:301
+#: ../modules/default/views/scripts/parameters/index.phtml:307
 #: ../modules/default/views/scripts/queues/addedit.phtml:266
 #: ../modules/default/views/scripts/contacts/addedit.phtml:224
 #: ../modules/default/views/scripts/contacts/addedit.phtml:230
@@ -3216,14 +3327,14 @@ msgstr "Por favor, ingrese sólo letras."
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:87
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:103
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:78
-#: ../modules/default/views/scripts/extensions/addedit.phtml:495
-#: ../modules/default/views/scripts/extensions/addedit.phtml:501
-#: ../modules/default/views/scripts/extensions/addedit.phtml:513
+#: ../modules/default/views/scripts/extensions/addedit.phtml:496
+#: ../modules/default/views/scripts/extensions/addedit.phtml:502
+#: ../modules/default/views/scripts/extensions/addedit.phtml:514
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:72
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:78
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:71
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:77
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:90
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:96
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:89
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:95
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:70
 #: ../modules/default/views/layouts/register.phtml:381
 #: ../modules/default/views/layouts/register.phtml:386
@@ -3244,7 +3355,7 @@ msgstr "Por favor, introduzca los números"
 msgid "Please enter with code valid"
 msgstr "Por favor ingrese con código válido"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:305
+#: ../modules/default/views/scripts/parameters/index.phtml:322
 msgid "Please enter with numbers only."
 msgstr "Por favor ingrese con sólo números."
 
@@ -3253,7 +3364,7 @@ msgstr "Por favor ingrese con sólo números."
 msgid "Please enter with range valid"
 msgstr "Por favor ingrese con rango válido"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:291
+#: ../modules/default/views/scripts/parameters/index.phtml:308
 msgid "Please enter with value valid."
 msgstr "Por favor ingrese con valor válido."
 
@@ -3270,7 +3381,9 @@ msgstr "Impulsado por"
 msgid "Preview"
 msgstr "Preestreno"
 
-#: ../modules/default/views/scripts/route/index.phtml:83
+#: ../modules/default/views/scripts/route/index.phtml:108
+#: ../modules/default/views/scripts/route/index.phtml:194
+#: ../modules/default/views/scripts/route/index.phtml:280
 msgid "Prio"
 msgstr "Prioridad "
 
@@ -3317,7 +3430,7 @@ msgstr ""
 msgid "Qualification time"
 msgstr "Tiempo de calificación"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:227
+#: ../modules/default/views/scripts/parameters/index.phtml:240
 #: ../modules/default/views/scripts/extensions/addedit.phtml:174
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:117
 msgid "Qualify"
@@ -3423,7 +3536,7 @@ msgstr "Registro"
 msgid "Record Play"
 msgstr "Grabar Reproducir"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:207
+#: ../modules/default/views/scripts/parameters/index.phtml:221
 msgid "Recorded Files Path"
 msgstr "Grabado Sendero Archivos"
 
@@ -3431,11 +3544,11 @@ msgstr "Grabado Sendero Archivos"
 msgid "Recording"
 msgstr "Grabación"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:188
+#: ../modules/default/views/scripts/parameters/index.phtml:202
 msgid "Recording Application"
 msgstr "Aplicación de grabación"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:199
+#: ../modules/default/views/scripts/parameters/index.phtml:213
 msgid "Recording Parameters"
 msgstr "Parámetros de grabación"
 
@@ -3678,10 +3791,10 @@ msgstr "Zumbido"
 
 #: ../modules/default/controllers/SimulatorController.php:51
 #: ../modules/default/controllers/RouteController.php:106
-#: ../modules/default/controllers/RouteController.php:226
-#: ../modules/default/controllers/RouteController.php:289
-#: ../modules/default/controllers/RouteController.php:349
-#: ../modules/default/controllers/RouteController.php:608
+#: ../modules/default/controllers/RouteController.php:239
+#: ../modules/default/controllers/RouteController.php:300
+#: ../modules/default/controllers/RouteController.php:360
+#: ../modules/default/controllers/RouteController.php:624
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Routes"
@@ -3724,6 +3837,21 @@ msgstr "Regla que se ejecutará"
 #, php-format
 msgid "Rule: %s %s"
 msgstr "Regla: %s %s"
+
+#: ../modules/default/views/scripts/route/index.phtml:87
+#: ../modules/default/views/scripts/route/index.phtml:89
+msgid "Rules&nbsp;of&nbsp;Incoming"
+msgstr ""
+
+#: ../modules/default/views/scripts/route/index.phtml:260
+#: ../modules/default/views/scripts/route/index.phtml:262
+msgid "Rules&nbsp;of&nbsp;Others"
+msgstr ""
+
+#: ../modules/default/views/scripts/route/index.phtml:174
+#: ../modules/default/views/scripts/route/index.phtml:176
+msgid "Rules&nbsp;of&nbsp;Outgoing"
+msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:47
 msgid "SEQ"
@@ -3771,7 +3899,7 @@ msgstr "Sábado"
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:48
 #: ../modules/default/views/scripts/action-configs/edit.phtml:41
 #: ../modules/default/views/scripts/index/add.phtml:45
-#: ../modules/default/views/scripts/parameters/index.phtml:237
+#: ../modules/default/views/scripts/parameters/index.phtml:250
 #: ../modules/default/views/scripts/module-settings/index.phtml:135
 #: ../modules/default/views/scripts/queues/addedit.phtml:239
 #: ../modules/default/views/scripts/queues/members.phtml:24
@@ -3795,8 +3923,8 @@ msgstr "Sábado"
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:201
 #: ../modules/default/views/scripts/profiles/addedit.phtml:33
 #: ../modules/default/views/scripts/profiles/permission.phtml:33
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:37
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:42
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:55
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:60
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:47
 msgid "Save"
 msgstr "Guardar"
@@ -3815,14 +3943,13 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/index.phtml:27
 #: ../modules/default/views/scripts/contact-groups/index.phtml:25
 #: ../modules/default/views/scripts/trunks/index.phtml:26
-#: ../modules/default/views/scripts/route/index.phtml:71
 #: ../modules/default/views/scripts/cost-center/index.phtml:22
 #: ../modules/default/views/scripts/expression-alias/index.phtml:25
 #: ../modules/default/views/scripts/calls-report/view.phtml:38
 #: ../modules/default/views/scripts/sound-files/index.phtml:35
 #: ../modules/default/views/scripts/extensions/index.phtml:34
 #: ../modules/default/views/scripts/profiles/index.phtml:25
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:26
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:43
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:22
 msgid "Search"
 msgstr "Buscar"
@@ -3932,6 +4059,10 @@ msgstr "Enviar llamada a una cola de contestador"
 msgid "Send to Queue"
 msgstr "Enviar a la cola"
 
+#: ../modules/default/views/scripts/notifications/index.phtml:36
+msgid "Sender"
+msgstr "Remitente"
+
 #: ../modules/default/controllers/KhompLinksController.php:89
 #: ../modules/default/controllers/KhompLinksController.php:196
 msgid "Sending SMS"
@@ -3983,7 +4114,7 @@ msgstr ""
 msgid "Set the relationship column x data"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:138
+#: ../modules/default/views/layouts/layout.phtml:132
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -4061,7 +4192,7 @@ msgid "Simulate"
 msgstr "Simular"
 
 #: ../modules/default/controllers/SimulatorController.php:52
-#: ../modules/default/views/scripts/route/index.phtml:47
+#: ../modules/default/views/scripts/route/index.phtml:46
 #: /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Simulator"
@@ -4109,7 +4240,7 @@ msgstr ""
 "Algunos error interno al procesar tu solicitud. Por favor, póngase en "
 "contacto con el administrador del sistema e informar de este incidente."
 
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:6
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:24
 msgid "Sound File"
 msgstr "Archivo de Sonido"
 
@@ -4132,7 +4263,9 @@ msgstr "Archivo de sonido actualizado"
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
 #: ../modules/default/views/scripts/simulator/index.phtml:110
-#: ../modules/default/views/scripts/route/index.phtml:84
+#: ../modules/default/views/scripts/route/index.phtml:109
+#: ../modules/default/views/scripts/route/index.phtml:195
+#: ../modules/default/views/scripts/route/index.phtml:281
 #: ../modules/default/views/scripts/route/elements/src.phtml:2
 #: ../modules/default/views/scripts/calls-report/view.phtml:49
 #: ../modules/default/views/scripts/calls-report/index.phtml:58
@@ -4189,7 +4322,6 @@ msgstr "Contraseña estática"
 #: ../modules/default/views/scripts/services-report/view.phtml:38
 #: ../modules/default/views/scripts/calls-report/view.phtml:51
 #: ../modules/default/views/scripts/calls-report/index.phtml:137
-#: ../modules/default/views/scripts/notifications/index.phtml:34
 #: /var/www/html/snep-3/modules/default/resources.xml
 msgid "Status"
 msgstr "Estado"
@@ -4255,11 +4387,11 @@ msgstr "Sintético"
 msgid "System Diagnosis"
 msgstr "Sistema de Diagnóstico"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:172
+#: ../modules/default/views/scripts/parameters/index.phtml:186
 msgid "System Language"
 msgstr "Idioma del sistema"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:161
+#: ../modules/default/views/scripts/parameters/index.phtml:175
 msgid "System Locale"
 msgstr "Sitio del sistema"
 
@@ -4321,7 +4453,7 @@ msgstr "Texto"
 msgid "The File includes/setup.conf does not have permission to be modified."
 msgstr "El archivo incluye / setup.conf no tiene permiso para ser modificado."
 
-#: ../modules/default/views/scripts/parameters/index.phtml:308
+#: ../modules/default/views/scripts/parameters/index.phtml:329
 msgid "The Recorded Files Path is required."
 msgstr "Se requiere que el destino de los ficheros grabados."
 
@@ -4329,7 +4461,7 @@ msgstr "Se requiere que el destino de los ficheros grabados."
 msgid "The board is required"
 msgstr "Se requiere que el tablero"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:508
+#: ../modules/default/views/scripts/extensions/addedit.phtml:509
 msgid "The channel is required"
 msgstr "Se requiere que el canal de"
 
@@ -4361,18 +4493,18 @@ msgid "The date is required"
 msgstr "Se requiere que la fecha"
 
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:76
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:75
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:93
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:68
 msgid "The description is required"
 msgstr "Se requiere que la descripción"
 
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:76
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:94
 msgid "The directory name is required"
 msgstr "Se requiere que el nombre del directorio"
 
 #: ../modules/default/views/scripts/register/index.phtml:95
 #: ../modules/default/views/scripts/users/addedit.phtml:102
-#: ../modules/default/views/scripts/extensions/addedit.phtml:516
+#: ../modules/default/views/scripts/extensions/addedit.phtml:517
 msgid "The e-mail is required"
 msgstr "Se requiere que el e-mail"
 
@@ -4382,7 +4514,7 @@ msgstr "Se requiere que el e-mail"
 msgid "The email is required"
 msgstr "Se requiere que el e-mail"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:300
+#: ../modules/default/views/scripts/parameters/index.phtml:317
 msgid "The email is required."
 msgstr "Se requiere que el e-mail"
 
@@ -4398,7 +4530,7 @@ msgstr ""
 "Se eliminarán los alias de expresión. Después de eso, no hay manera de "
 "recuperarlo."
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:490
+#: ../modules/default/views/scripts/extensions/addedit.phtml:491
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:228
 msgid "The extension group is required"
 msgstr "Se requiere que el grupo de extensiones"
@@ -4415,7 +4547,7 @@ msgstr ""
 msgid "The extension group will be deleted. Are you sure?."
 msgstr "Se eliminará el grupo de extensiones. Estás seguro?"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:493
+#: ../modules/default/views/scripts/extensions/addedit.phtml:494
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:231
 msgid "The extension is required"
 msgstr "Se requiere que la extensión"
@@ -4442,7 +4574,7 @@ msgstr ""
 "El archivo debe estar separado por comas. Las columnas se pueden asociar en "
 "la siguiente pantalla."
 
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:69
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:87
 msgid "The filename is required"
 msgstr "Se requiere que el nombre del archivo"
 
@@ -4495,7 +4627,7 @@ msgstr "El grupo será eliminado. Después de que no se puede volver atrás."
 msgid "The hash is required"
 msgstr "Se requiere el código"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:288
+#: ../modules/default/views/scripts/parameters/index.phtml:305
 msgid "The hostname is required."
 msgstr "Se requiere que el nombre de host."
 
@@ -4503,7 +4635,7 @@ msgstr "Se requiere que el nombre de host."
 msgid "The last name is required"
 msgstr "Se requiere que el apellido"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:304
+#: ../modules/default/views/scripts/parameters/index.phtml:321
 msgid "The linelimit is required."
 msgstr "Se requiere que el linelimit."
 
@@ -4511,7 +4643,7 @@ msgstr "Se requiere que el linelimit."
 msgid "The log file cannot be open!"
 msgstr "El archivo de registro no se puede abrir!"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:363
+#: ../modules/default/controllers/MusicOnHoldController.php:364
 msgid ""
 "The music on hold files will be deleted. After that, you have no way get it "
 "back."
@@ -4529,15 +4661,22 @@ msgstr ""
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:85
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:101
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
-#: ../modules/default/views/scripts/extensions/addedit.phtml:511
+#: ../modules/default/views/scripts/extensions/addedit.phtml:512
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
-#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:70
+#: ../modules/default/views/scripts/music-on-hold/addedit.phtml:88
 msgid "The name is required"
 msgstr "Se requiere el nombre"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:282
+#: ../modules/default/views/scripts/parameters/index.phtml:299
 msgid "The name is required."
 msgstr "Se requiere que el nombre."
+
+#: ../modules/default/controllers/NotificationsController.php:130
+msgid ""
+"The notification will be deleted. After that, you have no way get it back."
+msgstr ""
+"Se eliminará la notificación. Después de eso , que no hay manera de "
+"recuperarlo ."
 
 #: ../modules/default/controllers/ErrorController.php:43
 msgid "The page you are looking for was not found or does not exists."
@@ -4545,16 +4684,20 @@ msgstr "La página que buscas no se ha encontrado o no existe."
 
 #: ../modules/default/views/scripts/register/index.phtml:90
 #: ../modules/default/views/scripts/users/addedit.phtml:97
-#: ../modules/default/views/scripts/extensions/addedit.phtml:499
+#: ../modules/default/views/scripts/extensions/addedit.phtml:500
 #: ../modules/default/views/layouts/register.phtml:379
 #: ../modules/default/views/layouts/register.phtml:432
 #: ../modules/default/views/layouts/loginregister.phtml:88
 msgid "The password is required"
 msgstr "Se requiere la contraseña"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:297
+#: ../modules/default/views/scripts/parameters/index.phtml:314
 msgid "The password is required."
 msgstr "Se requiere la contraseña."
+
+#: ../modules/default/views/scripts/parameters/index.phtml:325
+msgid "The peers_digits is required."
+msgstr "Se requieren extensiones"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:228
 msgid "The phone is required"
@@ -4585,7 +4728,7 @@ msgstr ""
 msgid "The range extension is required"
 msgstr "Se requiere que la extensión del rango"
 
-#: ../modules/default/controllers/RouteController.php:615
+#: ../modules/default/controllers/RouteController.php:631
 msgid "The route will be deleted. After that, you have no way get it back."
 msgstr "Se eliminará la ruta. Después de eso, no hay manera de recuperarlo."
 
@@ -4596,7 +4739,7 @@ msgstr ""
 "Se eliminarán los archivos de sonido. Después de eso, no hay manera de "
 "recuperarlo."
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:505
+#: ../modules/default/views/scripts/extensions/addedit.phtml:506
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:236
 msgid "The trunk is required"
 msgstr "Se requiere que el tronco"
@@ -4618,7 +4761,7 @@ msgstr "Se eliminará el usuario. Después de eso, no hay manera de recuperarlo.
 msgid "The username is required"
 msgstr "Se requiere que el nombre de usuario"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:294
+#: ../modules/default/views/scripts/parameters/index.phtml:311
 msgid "The username is required."
 msgstr "Se requiere que el nombre de usuario"
 
@@ -4642,7 +4785,7 @@ msgstr ""
 "No hay extensiones en el group.There seleccionado ningún grupo de contactos "
 "registrados."
 
-#: ../modules/default/controllers/MusicOnHoldController.php:313
+#: ../modules/default/controllers/MusicOnHoldController.php:314
 msgid ""
 "There were problems uploading the file. Please, contact your system "
 "administrator."
@@ -4692,13 +4835,9 @@ msgstr "Tiempo total"
 msgid "Timeout"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:150
+#: ../modules/default/views/scripts/parameters/index.phtml:164
 msgid "Timezone"
 msgstr "Zona horaria"
-
-#: ../modules/default/views/scripts/notifications/index.phtml:36
-msgid "Title"
-msgstr ""
 
 #: ../modules/default/views/scripts/logs/index.phtml:55
 #: ../modules/default/views/scripts/ranking-report/index.phtml:46
@@ -4718,7 +4857,7 @@ msgstr ""
 msgid "To proceed you need to log in to your account again."
 msgstr "Para proceder tienes que entrar a tu cuenta de nuevo."
 
-#: ../modules/default/controllers/IndexController.php:73
+#: ../modules/default/controllers/IndexController.php:72
 msgid ""
 "To register your Snep you must be connected to an internet network. Check "
 "your connection and try again."
@@ -4763,7 +4902,7 @@ msgstr "Tronco"
 msgid "Trunks"
 msgstr "Troncos"
 
-#: ../modules/default/views/scripts/parameters/index.phtml:223
+#: ../modules/default/views/scripts/parameters/index.phtml:237
 msgid "Trunks Configuration"
 msgstr "Configuración del tronco"
 
@@ -4784,7 +4923,8 @@ msgstr "Martes"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:84
 #: ../modules/default/views/scripts/extensions/addedit.phtml:194
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:47
-#: ../modules/default/views/scripts/music-on-hold/index.phtml:39
+#: ../modules/default/views/scripts/music-on-hold/index.phtml:56
+#: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Type"
 msgstr "Tipo"
 
@@ -4849,10 +4989,6 @@ msgstr "desconocido"
 
 #: ../modules/default/controllers/RegisterController.php:88
 #: ../modules/default/controllers/RegisterController.php:143
-#: ../modules/default/controllers/IndexController.php:76
-#: ../modules/default/controllers/IndexController.php:142
-#: ../modules/default/controllers/IndexController.php:192
-#: ../modules/default/controllers/IndexController.php:260
 msgid "Unknown error. Please contact the administrator."
 msgstr ""
 "Error desconocido. Por favor, póngase en contacto con el administrador."
@@ -4899,8 +5035,8 @@ msgstr "Usado"
 msgid "User"
 msgstr "Usuario"
 
-#: ../modules/default/controllers/IndexController.php:136
-#: ../modules/default/controllers/IndexController.php:186
+#: ../modules/default/controllers/IndexController.php:135
+#: ../modules/default/controllers/IndexController.php:185
 msgid "User already exists."
 msgstr "El usuario ya existe."
 
@@ -4910,7 +5046,7 @@ msgid "User not registered"
 msgstr "Usuario no registrado"
 
 #: ../modules/default/controllers/RegisterController.php:137
-#: ../modules/default/controllers/IndexController.php:254
+#: ../modules/default/controllers/IndexController.php:253
 msgid "User or password incorrect."
 msgstr "Usuario o contraseña incorrecta."
 
@@ -4927,8 +5063,8 @@ msgstr "Permisos de Usuario"
 msgid "Userfield"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:98
-#: ../modules/default/views/scripts/parameters/index.phtml:132
+#: ../modules/default/views/scripts/parameters/index.phtml:112
+#: ../modules/default/views/scripts/parameters/index.phtml:146
 #: ../modules/default/views/scripts/users/addedit.phtml:25
 #: ../modules/default/views/scripts/auth/recuperation.phtml:14
 #: ../modules/default/views/scripts/auth/redefine.phtml:21
@@ -4969,7 +5105,6 @@ msgstr ""
 msgid "Verbose (only numbers)"
 msgstr "Verbose (only numbers)"
 
-#: ../modules/default/views/scripts/notifications/index.phtml:38
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "View"
 msgstr "Vista"
@@ -4984,14 +5119,6 @@ msgstr "Ver estado del canal?"
 msgid "Virtual"
 msgstr ""
 
-#: ../modules/default/views/scripts/notifications/index.phtml:63
-msgid "Visualize"
-msgstr "Visualizar"
-
-#: ../modules/default/views/scripts/notifications/index.phtml:50
-msgid "Visualized"
-msgstr "Visualizado"
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:321
 msgid "Voicemail"
 msgstr "Correo de voz"
@@ -5004,7 +5131,13 @@ msgstr "El tiempo de espera hasta que todos los agentes de sonar de nuevo"
 msgid "Warn agent the time that call waited in queue"
 msgstr "Agente de advertir al tiempo que esperó en la cola de llamadas"
 
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:9
+#: ../modules/default/controllers/IndexController.php:333
+#: ../modules/default/controllers/IndexController.php:344
+#: ../modules/default/controllers/IndexController.php:355
+msgid "Warning"
+msgstr "Advertencia"
+
+#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:27
 msgid "Warning: Maximum upload file size"
 msgstr ""
 
@@ -5034,7 +5167,7 @@ msgstr "Días de la semana"
 msgid "Week Days"
 msgstr "Días de la semana"
 
-#: ../modules/default/controllers/IndexController.php:201
+#: ../modules/default/controllers/IndexController.php:200
 msgid "Welcome to Intercomunexão."
 msgstr "Bienvenido a la Intercomunexão"
 
@@ -5061,9 +5194,9 @@ msgstr "Sin autenticación"
 
 #: ../modules/default/controllers/RegisterController.php:84
 #: ../modules/default/controllers/RegisterController.php:140
-#: ../modules/default/controllers/IndexController.php:139
-#: ../modules/default/controllers/IndexController.php:189
-#: ../modules/default/controllers/IndexController.php:257
+#: ../modules/default/controllers/IndexController.php:138
+#: ../modules/default/controllers/IndexController.php:188
+#: ../modules/default/controllers/IndexController.php:256
 msgid "Without internet connection."
 msgstr "Sin conexión a Internet."
 
@@ -5084,7 +5217,6 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:145
 #: ../modules/default/views/scripts/trunks/addedit.phtml:260
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:33
-#: ../modules/default/views/scripts/music-on-hold/addfile.phtml:32
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:37
 msgid "Yes"
 msgstr "Si"
@@ -5133,7 +5265,7 @@ msgstr ""
 "Usted no tiene alias expresión registrada. <br> Haga clic en \"Agregar "
 "expresión Alias 'para hacer el primer registro"
 
-#: ../modules/default/controllers/ExtensionsController.php:92
+#: ../modules/default/controllers/ExtensionsController.php:93
 msgid ""
 "You do not have registered extensions. <br><br> Click 'Add Extensions' ou "
 "'Multi Add Extensions' to make the first registration"
@@ -5141,13 +5273,37 @@ msgstr ""
 "Usted no tiene extensión registrada. <br> Haga clic en \"Agregar Extensión "
 "'para hacer el primer registro"
 
-#: ../modules/default/controllers/MusicOnHoldController.php:247
+#: ../modules/default/controllers/MusicOnHoldController.php:248
 msgid ""
 "You do not have registered file. <br><br> Click 'Add File' to make the first "
 "registration"
 msgstr ""
 "Usted no tiene archivo registrado. <br> Haga clic en \"Add File\" para hacer "
 "el primer registro \n"
+
+#: ../modules/default/controllers/RouteController.php:148
+msgid ""
+"You do not have registered incoming rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Usted no tiene regla de entrada registrada. <br> Haga clic en \"Agregar regla"
+"\" para hacer el primer registro \n"
+
+#: ../modules/default/controllers/RouteController.php:150
+msgid ""
+"You do not have registered others rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Usted no tiene otro tipo de regla registrada. <br> Haga clic en \"Agregar "
+"regla\" para hacer el primer registro \n"
+
+#: ../modules/default/controllers/RouteController.php:149
+msgid ""
+"You do not have registered outgoing rules. <br> Click 'Add Rule' to make the "
+"first registration"
+msgstr ""
+"Usted no tiene regla de salida registrada. <br> Haga clic en \"Agregar regla"
+"\" para hacer el primer registro \n"
 
 #: ../modules/default/controllers/QueuesController.php:80
 msgid ""
@@ -5160,7 +5316,7 @@ msgstr ""
 #: ../modules/default/controllers/RouteController.php:128
 msgid ""
 "You do not have registered rule. <br><br> Click 'Add Rule' to make the first "
-"registration\n"
+"registration"
 msgstr ""
 "Usted no tiene regla registrada. <br> Haga clic en \"Agregar regla\" para "
 "hacer el primer registro \n"
@@ -5224,9 +5380,9 @@ msgid "Your browser does not support the audio element."
 msgstr "Su navegador no soporta el elemento de audio."
 
 #: ../modules/default/views/scripts/register/index.phtml:96
-#: ../modules/default/views/scripts/parameters/index.phtml:301
+#: ../modules/default/views/scripts/parameters/index.phtml:318
 #: ../modules/default/views/scripts/users/addedit.phtml:103
-#: ../modules/default/views/scripts/extensions/addedit.phtml:517
+#: ../modules/default/views/scripts/extensions/addedit.phtml:518
 msgid "Your email address must be in the format of name@domain.com"
 msgstr ""
 "Su dirección de correo electrónico debe estar en el formato de "
@@ -5684,6 +5840,7 @@ msgstr "vista"
 msgid "write"
 msgstr "escribe"
 
+#: /var/www/html/snep-3/modules/fop2/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "www.opens.com.br"
 msgstr ""
@@ -5691,6 +5848,12 @@ msgstr ""
 #: /var/www/html/snep-3/modules/default/info.xml
 msgid "www.sneplivre.com.br"
 msgstr ""
+
+#~ msgid "Visualize"
+#~ msgstr "Visualizar"
+
+#~ msgid "Visualized"
+#~ msgstr "Visualizado"
 
 #~ msgid " dias, "
 #~ msgstr "día,"
@@ -5724,9 +5887,6 @@ msgstr ""
 
 #~ msgid "Delete Extension Multiples."
 #~ msgstr "Eliminar Extensión Multiples."
-
-#~ msgid "Delete Sound Files"
-#~ msgstr "Eliminar archivos de sonido"
 
 #~ msgid "Discard header"
 #~ msgstr "Encabezado Deseche"
@@ -5871,9 +6031,6 @@ msgstr ""
 
 #~ msgid "Options"
 #~ msgstr "Opciónes"
-
-#~ msgid "Others"
-#~ msgstr "Otros"
 
 #~ msgid "SOURCE"
 #~ msgstr "FUENTE"
@@ -6073,9 +6230,6 @@ msgstr ""
 #~ msgid "Numbers only"
 #~ msgstr "Sólo números"
 
-#~ msgid "Operator"
-#~ msgstr "Operador"
-
 #~ msgid "Originated"
 #~ msgstr "Originado"
 
@@ -6205,9 +6359,6 @@ msgstr ""
 
 #~ msgid "Waiting"
 #~ msgstr "Espera"
-
-#~ msgid "Warning"
-#~ msgstr "Advertencia"
 
 #~ msgid "Welcome to SNEP!"
 #~ msgstr "Bienvenido a SNEP!"

@@ -42,6 +42,8 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
     <div class="tab-content">
         <div class="tab-pane active" id="demo">
             
+            <a class="btn btn-outline btn-add" style="margin-right: 5px;" href="<?php echo $this->baseUrl ?>/simulator " role="button"><?php echo $this->translate("Simulator")?></a>
+            <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Rule")?></a>
             
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,9 +59,6 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                 </ul>
             </div>
 
-            <a class="btn btn-outline btn-add" style="margin-right: 5px;" href="<?php echo $this->baseUrl ?>/simulator " role="button"><?php echo $this->translate("Simulator")?></a>
-            <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Rule")?></a>
-        
             <?php if ($this->hide_routes === "1") {?>
                 
                     <span class=" btn hide_rules_enable">
@@ -83,7 +82,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
             echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert', 
             'error_title' => $this->translate('Alert'), 'error_message' => $this->error_message, 'error_buttons' => False) );
         } else { ?>
-            
+
             <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
                 <thead>
                     <tr>

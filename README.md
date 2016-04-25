@@ -37,6 +37,7 @@
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
 - CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
 - CORRIGIDO - Erros ao adiconar arquivos de Musicas de espera e removes seçoes de musica de espera
+- CORRIGIDO - Erros de CSS em Rotas >> Configuração padrão
 - ALTERADO - Dados gravados no campo 'name' da tabela peers - preparado para o módulo Billing
 - ALTERADO - Ordem de exibição na lista de filas de atendimento : alfabetica do nome da fila
 - NOVO - Webservice snep/arquivos/load.php - Busca por um arquivo de gravação a partir do ID

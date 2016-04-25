@@ -1,9 +1,7 @@
 **A FAZER : PRINCIPAL**
 
-- Tradução e revisão das traduções Pt-BR, EN, ES
-- Correção no comportamento do menu principal
-- Refatorar rotina de Rotas / Regras Negócio
-- Regras de NEgócio: Separar por ABAS: Entradas, Saidas, Outras
+* Tradução e revisão das traduções Pt-BR, EN, ES
+* Correção no comportamento do menu principal
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
@@ -13,8 +11,11 @@
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
 - Rever/redefinir conceitos/funcionalidades para Segurança
-- Rever/Redefinir conceitos/funcionalidades agents / Grupos de agentes
+- Rever/Redefinir conceitos/funcionalidades agents
+  - Grupos de agentes
 - Rever/Redefinir conceitos/funcionalidades Grupos de Captura
+- Sigame : aceitar chamadas vindas do proprio siga-me (1000 ativa siga-me para 1005 - aceitar somente chamadas do 1005)
+- Cadastro troncos :  verificar peer_type x type ao salvar tronco SIP
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
 - Status do sistema: Avisar que tem problemas de permissões, links etc
@@ -22,14 +23,29 @@
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
 - Arquivos de som: Redefinir conceito  - sobrescreve arquivo ou não ??? mantem backup ou não ???
 - Error reporting nao mostrando corretamente tratamentos (Ex.: path_voz caso nao exista nao gera o erro na tela)
-- os perfis de acesso devem permitir vinculos
-- Status dos Sistemas Ramais : Rever comportamento
+- Os perfis de acesso devem permitir vinculos
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)   
   - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais)
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
+
+---------------------------------
+**3.0 Estável **
+
+- CORRIGIDO - Perda de autenticacao dos ramais SIP
+- CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
+- CORRIGIDO - Erros ao adiconar arquivos de Musicas de espera e removes seçoes de musica de espera
+- CORRIGIDO - Erros de CSS em Rotas >> Configuração padrão
+- ALTERADO - Dados gravados no campo 'name' da tabela peers - preparado para o módulo Billing
+- ALTERADO - Ordem de exibição na lista de filas de atendimento : alfabetica do nome da fila
+- NOVO - Webservice snep/arquivos/load.php - Busca por um arquivo de gravação a partir do ID
+- NOVO - Adicionadas funcionalidades para Pausar/Tirar de Pausa os Ramais de Filas de Atendimento
+- NOVO - Identificação visual para Esconder/Mostrar Regras desabilitadas em Regras de Negocio >> Rotas
+- NOVO - Parametrizado (Configuracoes >> Parametros) o número de dígitos no Cadastro do Ramal
+- NOVO - Filtros para separar Regras de Negócio em Entradas, Saidas, Outras
+- ATUALIZADO - Strings de tradução pt_BR 
 
 ---------------------------------
 **Release - betha-rc3 **
@@ -50,30 +66,7 @@ FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de
 FEITO - Ajustes para remover diversos Warning e Notices do console do apache
 
 ---------------------------------
-<<<<<<< HEAD
 **Release Betha-rc2**
-=======
-**Release 1.0-Betha-rc3**
-
-- Corrigido: - % de uso da CPU nao esta sendo exibido
-- Corrigido: Menu Usuário fica "sob" Status do sistema. Tem que ser "sobre"
-- Criada view para o menu de Informações
-- Corrigido os ícones para enable/disable das permissões do usuário
-- Corrigido problema que exibia mensagem de erro abaixo da view em execução
-- Redefinido Grupos de Ramais para permitir + de 1 grupo por ramal
-- Corrigido Erro na apresentacao do espaço usado em disco para HD's com mais de 1T
-- Corrigido erros na exibicao de status e latencia de troncos em Status >> Status IP
-- Cadastro usuário portal ITC agora permite qualquer caracter para a senha - compatibilizar com portal ITC
-- Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
-- Removido do Dashboard : Atalho para "buscar gravacoes" (record-report)
-- Ajustes em strings de tradução    
-- Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,friend)
-- Ajustes para remover diversos Warning e Notices do console do apache
-
-
----------------------------------
-**Release 1.0-Betha-rc2**
->>>>>>> 4cf2c75cf71d7b613a3ea80a1425a4d8d7bde5bc
 
 - Contatos: Alterada base de leitura de cidades e estados, retirada a obrigatoriedade de cidade e estado do cadastro.
 - Corrigido: Ramais cadastrados como IAX sendo exibidos como SIP ao alterar

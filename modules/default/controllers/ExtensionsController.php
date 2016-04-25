@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  *  This file is part of SNEP.
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -15,12 +15,6 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
- * 
- *  controller for extensions
- * 
- *  @author : Opens developers team
- *  @package : snep
- * 
  */
 require_once "includes/AsteriskInfo.php";
 
@@ -69,7 +63,8 @@ class ExtensionsController extends Zend_Controller_Action {
      public function init() {
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;     
+        $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
+        $this->view->peers_digits =  Zend_Registry::get('config')->canais->peers_digits;
 
         $this->extenGroups = Snep_ExtensionsGroups_Manager::getAll();
 
@@ -149,6 +144,7 @@ class ExtensionsController extends Zend_Controller_Action {
         }
         $this->view->boardData = $boardList;
 
+
         //Define the action and load form
         $this->view->action = "add" ;
         $this->view->techType = 'sip';
@@ -168,14 +164,13 @@ class ExtensionsController extends Zend_Controller_Action {
         $extension['qualify'] = 'yes';
         $this->view->extension = $extension;
 
-
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         // After POST
         if ($this->getRequest()->isPost()) {
             
-            $postData = $this->_request->getParams();
-            $postData['name'] .= " <".$postData['exten'].">";
+            $data = $this->_request->getParams();
+            $data['name'] .= " <".$data['exten'].">";
 
             if (key_exists('virtual_error', $data)) {
                 $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
@@ -207,21 +202,14 @@ class ExtensionsController extends Zend_Controller_Action {
                     $this->view->translate("Edit")));
 
         // Load data about exten
-<<<<<<< HEAD
         $exten = Snep_Extensions_Manager::getPeer($id);
-        $this->view->extension = $exten ;
-=======
-        $extenUtil = new Snep_Extensions();
-        $exten = $extenUtil->ExtenDataAsArray($extenUtil->get($id));
-        
-        $nameValue = explode("<", $exten['callerid']);
 
+        $nameValue = explode("<", $exten['callerid']);
         if(count($nameValue) > 1){
             $exten['callerid'] = $nameValue[0]; 
         };
-       
-        $this->view->extension = $exten;
->>>>>>> 4cf2c75cf71d7b613a3ea80a1425a4d8d7bde5bc
+      
+        $this->view->extension = $exten ;
             
         // Groups       
         $this->view->pickupGroups = $this->pickupGroups;
@@ -443,7 +431,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $postData = $this->_request->getParams();
 
             $postData["exten"] = $this->_request->getParam("id");
-            
+
             // increment in callerid "Name <exten>"
             $nameValue = explode("<", $postData['name']);
             if(count($nameValue) <= 1){
@@ -452,8 +440,9 @@ class ExtensionsController extends Zend_Controller_Action {
                 $postData['name'] = $nameValue[0]." <".$postData['exten'].">"; 
             };
 
+
             $ret = $this->execAdd($postData, true);
-            
+
             if (!is_string($ret)) {
                 $this->_redirect('/extensions/');
             } else {
@@ -870,14 +859,14 @@ class ExtensionsController extends Zend_Controller_Action {
                     break;
 
                 if (is_numeric($exten)) {
-
+                    
                     $data["exten"] = $exten;
                     $data["password"] = $exten . $exten;
-                    $data["name"] = $this->view->translate("Extension ") . " " . $exten ;
+                    $data["name"] = $this->view->translate("Extension ") ." ".$exten . " <" . $exten.">" ;
                     $data["sip"]["password"] = $exten;
                     $data["iax"]["password"] = $exten;
                     $data['type'] = 'friend' ;
-
+                    
                     $ret = $this->execAdd($data);
 
                     if (is_string($ret)) {
@@ -898,7 +887,7 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $data["id"] = $i;
                                 $data["exten"] = $i;
                                 $data["password"] = $i . $i;
-                                $data["name"] = $this->view->translate("Extension ") . " " . $i ;
+                                $data["name"] = $this->view->translate("Extension ") ." ".$i . " <" . $i.">" ;
                                 $data["sip"]["password"] = $i . $i;
                                 $data["iax2"]["password"] = $i . $i;
                                 $data['type'] = 'friend' ;

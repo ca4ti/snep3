@@ -67,8 +67,9 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
 
 
 <script type="text/javascript">
-    $(function () {
-        $('table').footable().on('click', '.row', function(e) {
+    jQuery.noConflict();
+    jQuery(function () {
+        jQuery('table').footable().on('click', '.row', function(e) {
             e.preventDefault(); 
         });
     });

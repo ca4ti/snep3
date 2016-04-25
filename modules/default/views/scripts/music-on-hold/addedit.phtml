@@ -1,3 +1,21 @@
+<?php
+/**
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
 <div class="row">	                
     <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "music-on-hold", "action" => $this->action), null, false); ?>" METHOD="post">
 
@@ -30,7 +48,7 @@
                 <input type="text" class="form-control" name="directory" id="directory" value='<?php echo $this->directoryName;?>' <?php echo $this->disabled;?>/>
             </div>
         </div>
-        <<input type="hidden" name="folder" value='<?php echo $this->directoryName;; ?>' /> -->
+        <!-- input type="hidden" name="folder" value='<?php echo $this->directoryName;; ?>' /> -->
         <!-- <input type="hidden" name="name" value="<?php echo $this->file['name'];?>" /> -->
         <input type="hidden" name=" base" value='<?php echo $this->path_base;?>'  />
         <div class="snep-body-footer-buttons">

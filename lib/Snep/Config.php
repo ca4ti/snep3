@@ -58,4 +58,44 @@ abstract class Snep_Config {
         }
     }
 
+    /**
+     * Get configuration on Snep and modules
+     * @param <string> $module
+     * @return <array> $configuration
+     */
+    public function getAllConfiguration($module) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_config")
+                ->where("core_config.config_module = ?",$module);
+
+        $stmt = $db->query($select);
+        $configs = $stmt->fetchAll();
+
+        return $configs;
+    }
+
+    /**
+     * Get configuration on Snep and modules
+     * @param <string> $module
+     * @param <string> $key
+     * @return <array> $configuration
+     */
+    public function getConfiguration($module, $key) {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_config")
+                ->where("core_config.config_module = ?",$module)
+                ->where("core_config.config_name = ?",$key);
+
+        $stmt = $db->query($select);
+        $configs = $stmt->fetch();
+
+        return $configs;
+    }
+
 }

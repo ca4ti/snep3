@@ -57,7 +57,8 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   record boolean NOT NULL default false,
   ativa boolean NOT NULL default true,
   mailing boolean NOT NULL default false,
-  from_dialer boolean NOT NULL default false
+  from_dialer boolean NOT NULL default false,
+  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -746,13 +747,27 @@ CREATE TABLE IF NOT EXISTS `password_recovery` (
 --
 CREATE TABLE IF NOT EXISTS `core_notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_itc` int(11),
   `title` varchar(255) NOT NULL,
+  `from` varchar(128) DEFAULT "Opens",
   `message` text NOT NULL,
   `creation_date` datetime NOT NULL,
   `read` boolean DEFAULT false,
   `reading_date` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `core_config`
+--
+CREATE TABLE IF NOT EXISTS `core_config` (
+  `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+  `config_module` VARCHAR (255) NOT NULL,
+  `config_name` VARCHAR (255) NOT NULL,
+  `config_value` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 --

@@ -329,5 +329,12 @@
         <icone>sn-som-espera</icone>
         <link>music-on-hold/add</link>
 	</atalho>
+
+    <atalho>
+        <nome>Module Settings</nome>
+        <descricao>Edit</descricao>
+        <icone>sn-parametros</icone>
+        <link>module-settings/index</link>
+    </atalho>
             
 </dashboard>

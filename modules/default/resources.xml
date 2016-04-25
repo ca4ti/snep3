@@ -104,6 +104,7 @@
             <resource id="write"></resource>
         </resource>
         <resource id="cnl" label="Cnl Update"></resource>
+        <resource id="module-settings" label="Module Settings"></resource>
     </group> 
 
     <resource id="auth" order="allow">

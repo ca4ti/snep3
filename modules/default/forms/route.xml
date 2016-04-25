@@ -60,5 +60,16 @@
                 </multiOptions>
             </options>
         </prio>
+        <typeRule>
+            <type>Select</type>
+            <options>
+                <label>Type</label>
+                <multiOptions>
+                    <incoming>Incoming</incoming>
+                    <outgoing>Outgoing</outgoing>
+                    <others>Others</others>
+                </multiOptions>
+            </options>
+        </typeRule>
     </elements>
 </form>

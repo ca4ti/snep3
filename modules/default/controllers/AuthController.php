@@ -39,6 +39,7 @@ class AuthController extends Zend_Controller_Action {
         $this->view->hideMenu = true;
         $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
+
         $config = Zend_Registry::get('config');
         
         if (isset($_GET["recuperation"])) {

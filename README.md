@@ -2,7 +2,6 @@
 
 * Tradução e revisão das traduções Pt-BR, EN, ES
 * Correção no comportamento do menu principal
-- Refatorar rotina de Rotas / Regras Negócio - Separar por ABAS: Entradas, Saidas, Outras
 - Sistema de Ajuda on-line
 - Manual do usuário
 - Ajustes CSS
@@ -19,7 +18,6 @@
 - Cadastro troncos :  verificar peer_type x type ao salvar tronco SIP
 - Arquivos de Som do Asterisk - rever a rotina
 - Opção de NAT - DirectMEdia - Ver conceitos de cada opção, Definir DEFAULT.
-- Regras de Negócio / Ações: Mostra 10 ações e esconde a partir disso - rever rolagem
 - Status do sistema: Avisar que tem problemas de permissões, links etc
 - Sala de Conferências: Criar opção para exibir ou não as mensagens/ nomes dos participantes
 - Music on Hold - ver os tipos de execucao (pasta, mp3, etc) no controlador
@@ -45,6 +43,7 @@
 - NOVO - Adicionadas funcionalidades para Pausar/Tirar de Pausa os Ramais de Filas de Atendimento
 - NOVO - Identificação visual para Esconder/Mostrar Regras desabilitadas em Regras de Negocio >> Rotas
 - NOVO - Parametrizado (Configuracoes >> Parametros) o número de dígitos no Cadastro do Ramal
+- NOVO - Filtros para separar Regras de Negócio em Entradas, Saidas, Outras
 - ATUALIZADO - Strings de tradução pt_BR 
 
 ---------------------------------

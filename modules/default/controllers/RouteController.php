@@ -77,12 +77,12 @@ class RouteController extends Zend_Controller_Action {
                     $entry = "CG:" . $entry['name'];
                     break;
                 case "G" :
-					if ($entry != "G:all") {
-						$entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
-						$entry = "G:" . $entry['name'];
-					} else {
-		                $entry = "G:" . $this->view->translate('All');
-					}
+                    if ($entry != "G:all") {
+                        $entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
+                        $entry = "G:" . $entry['name'];
+                    } else {
+                        $entry = "G:" . $this->view->translate('All');
+                    }
                     break;
                 case "AL" :
                     $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));
@@ -105,13 +105,19 @@ class RouteController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routes")));
 
+        $db = Zend_Registry::get('db');
         $config = Zend_Registry::get('config');
         $lineNumber = $config->ambiente->linelimit;
         $hide_routes = $config->system->hide_routes;
+        $where = "";
 
-        $db = Zend_Registry::get('db');
-        $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio","type")
-        );
+        if(isset($_GET["type"])){
+            $type = $_GET['type'];
+            $select = $db->select()->from("regras_negocio")->where("type = '$type'");
+        }else{
+            $select = $db->select()->from("regras_negocio");
+        }
+        
         if ($hide_routes === "1") {
             $select->where("ativa = '1'");
         }
@@ -125,30 +131,17 @@ class RouteController extends Zend_Controller_Action {
         }
 
         if(empty($routes)){
-            $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration");
-        }
-
-        foreach($routes as $x => $route){
-            
-            if($route['type'] == 'incoming'){
-                $incoming[$x] = $route;
-            }elseif($route['type'] == 'outgoing'){
-                $outgoing[$x] = $route;
-            }else{
-                $others[$x] = $route;
-            }    
+            $this->view->error_message = $this->view->translate("You do not have rules od this kind registered. <br><br> Click 'Add Rule' to make the first registration
+");
         }
 
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
-        Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
-        Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
-        Zend_Controller_Front::getInstance()->getRequest()->getActionName());
-        
-        (isset($incoming)) ? $this->view->incoming = $incoming : $this->view->incoming = $this->view->translate("You do not have registered incoming rules. <br> Click 'Add Rule' to make the first registration");
-        (isset($outgoing)) ? $this->view->outgoing = $outgoing : $this->view->outgoing = $this->view->translate("You do not have registered outgoing rules. <br> Click 'Add Rule' to make the first registration");
-        (isset($others)) ? $this->view->others = $others : $this->view->others = $this->view->translate("You do not have registered others rules. <br> Click 'Add Rule' to make the first registration");
-        
+            Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
+            Zend_Controller_Front::getInstance()->getRequest()->getActionName());
+
+        $this->view->routes = $routes;
         $this->view->lineNumber = $lineNumber;
         $this->view->hide_routes = $hide_routes;
         $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
@@ -244,12 +237,14 @@ class RouteController extends Zend_Controller_Action {
         $form->getElement('week')->setValue(true);
         $this->view->form = $form;
 
+
+
         if ($this->getRequest()->isPost()) {
             
             if ($this->isValidPost()) {
 
                 $rule = $this->parseRuleFromPost();
-                
+
                 PBX_Rules::register($rule);
                 
                 //log-user
@@ -599,7 +594,6 @@ class RouteController extends Zend_Controller_Action {
 
         // Defining priority
         $rule->setPriority(substr($post['prio'], 1));
-        
 
         if (isset($post['actions_order'])) {
             parse_str($post['actions_order'], $actions_order);

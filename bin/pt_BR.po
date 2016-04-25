@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-20 16:10-0300\n"
+"POT-Creation-Date: 2016-04-25 10:52-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -109,7 +109,7 @@ msgstr "em"
 msgid "-->"
 msgstr ""
 
-#: ../modules/default/controllers/IndexController.php:356
+#: ../modules/default/controllers/IndexController.php:358
 msgid ". Please contact the administrator for receiver notifications."
 msgstr ""
 ". Entre em contato com o administrador do sistema para receber suas "
@@ -142,6 +142,10 @@ msgstr "0"
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "1"
 msgstr "1"
+
+#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
+msgid "1.0"
+msgstr ""
 
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "2"
@@ -217,9 +221,7 @@ msgstr "Ação"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:37
 #: ../modules/default/views/scripts/contact-groups/index.phtml:35
 #: ../modules/default/views/scripts/trunks/index.phtml:44
-#: ../modules/default/views/scripts/route/index.phtml:112
-#: ../modules/default/views/scripts/route/index.phtml:198
-#: ../modules/default/views/scripts/route/index.phtml:284
+#: ../modules/default/views/scripts/route/index.phtml:100
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
 #: ../modules/default/views/scripts/cost-center/index.phtml:41
 #: ../modules/default/views/scripts/expression-alias/index.phtml:39
@@ -257,7 +259,7 @@ msgstr "Grupo Atual"
 #: ../modules/default/controllers/SoundFilesController.php:87
 #: ../modules/default/controllers/ContactsController.php:91
 #: ../modules/default/controllers/ExpressionAliasController.php:74
-#: ../modules/default/controllers/RouteController.php:240
+#: ../modules/default/controllers/RouteController.php:233
 #: ../modules/default/controllers/PickupGroupsController.php:71
 #: ../modules/default/controllers/ExtensionsController.php:109
 #: ../modules/default/controllers/UsersController.php:74
@@ -333,7 +335,7 @@ msgstr "Adicionar Fila"
 msgid "Add Queues Group"
 msgstr "Adicionar Grupo de Filas"
 
-#: ../modules/default/views/scripts/route/index.phtml:47
+#: ../modules/default/views/scripts/route/index.phtml:61
 msgid "Add Rule"
 msgstr "Adicionar Rotas"
 
@@ -382,7 +384,7 @@ msgstr "Adicionar página ao Dashboard"
 #: ../modules/default/views/scripts/contact-groups/index.phtml:21
 #: ../modules/default/views/scripts/trunks/index.phtml:22
 #: ../modules/default/views/scripts/ip-status/index.phtml:33
-#: ../modules/default/views/scripts/route/index.phtml:66
+#: ../modules/default/views/scripts/route/index.phtml:80
 #: ../modules/default/views/scripts/cost-center/index.phtml:19
 #: ../modules/default/views/scripts/expression-alias/index.phtml:23
 #: ../modules/default/views/scripts/calls-report/index.phtml:15
@@ -440,7 +442,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:35
 #: ../modules/default/views/scripts/khomp-links/view.phtml:6
 #: ../modules/default/views/scripts/trunks/index.phtml:32
-#: ../modules/default/views/scripts/route/index.phtml:74
+#: ../modules/default/views/scripts/route/index.phtml:90
 #: ../modules/default/views/scripts/cost-center/index.phtml:29
 #: ../modules/default/views/scripts/expression-alias/index.phtml:31
 #: ../modules/default/views/scripts/sound-files/index.phtml:40
@@ -475,6 +477,10 @@ msgstr "Todos"
 #: ../modules/default/controllers/ContactsController.php:295
 msgid "All Groups"
 msgstr "Todos Grupos"
+
+#: ../modules/default/views/scripts/route/index.phtml:56
+msgid "All rules"
+msgstr "Todas as Regras"
 
 #: ../modules/default/views/scripts/users/permission.phtml:84
 #: ../modules/default/views/scripts/users/permission.phtml:92
@@ -1123,7 +1129,7 @@ msgstr "Conversação (segundos)"
 msgid "Converte to GSM"
 msgstr "Converter para GSM"
 
-#: ../modules/default/controllers/RouteController.php:400
+#: ../modules/default/controllers/RouteController.php:395
 #, php-format
 msgid "Copy of %s"
 msgstr "Copia de %s"
@@ -1218,7 +1224,7 @@ msgid "Daily"
 msgstr "Diariamente"
 
 #: ../modules/default/controllers/IndexController.php:278
-#: ../modules/default/controllers/IndexController.php:379
+#: ../modules/default/controllers/IndexController.php:381
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Dashboard"
@@ -1336,7 +1342,7 @@ msgstr "Controle de Qualidade"
 #: ../modules/default/controllers/SoundFilesController.php:275
 #: ../modules/default/controllers/ContactsController.php:247
 #: ../modules/default/controllers/ExpressionAliasController.php:190
-#: ../modules/default/controllers/RouteController.php:625
+#: ../modules/default/controllers/RouteController.php:619
 #: ../modules/default/controllers/NotificationsController.php:124
 #: ../modules/default/controllers/PickupGroupsController.php:221
 #: ../modules/default/controllers/ExtensionsController.php:661
@@ -1355,9 +1361,7 @@ msgstr "Controle de Qualidade"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:64
 #: ../modules/default/views/scripts/contact-groups/index.phtml:56
 #: ../modules/default/views/scripts/trunks/index.phtml:76
-#: ../modules/default/views/scripts/route/index.phtml:146
-#: ../modules/default/views/scripts/route/index.phtml:232
-#: ../modules/default/views/scripts/route/index.phtml:318
+#: ../modules/default/views/scripts/route/index.phtml:129
 #: ../modules/default/views/scripts/cost-center/index.phtml:59
 #: ../modules/default/views/scripts/expression-alias/index.phtml:54
 #: ../modules/default/views/scripts/sound-files/index.phtml:105
@@ -1424,7 +1428,7 @@ msgstr "Deletar Fila."
 msgid "Delete Queues Group."
 msgstr "Deletar Grupo de Filas"
 
-#: ../modules/default/controllers/RouteController.php:630
+#: ../modules/default/controllers/RouteController.php:624
 msgid "Delete Routes."
 msgstr "Deletar Regras."
 
@@ -1457,9 +1461,7 @@ msgid "Deny"
 msgstr "Negar"
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
-#: ../modules/default/views/scripts/route/index.phtml:111
-#: ../modules/default/views/scripts/route/index.phtml:197
-#: ../modules/default/views/scripts/route/index.phtml:283
+#: ../modules/default/views/scripts/route/index.phtml:99
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/cost-center/index.phtml:40
@@ -1494,9 +1496,7 @@ msgstr "Grupo Destino"
 #: ../modules/default/controllers/RankingReportController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
-#: ../modules/default/views/scripts/route/index.phtml:110
-#: ../modules/default/views/scripts/route/index.phtml:196
-#: ../modules/default/views/scripts/route/index.phtml:282
+#: ../modules/default/views/scripts/route/index.phtml:98
 #: ../modules/default/views/scripts/route/elements/dst.phtml:2
 msgid "Destiny"
 msgstr "Destino"
@@ -1647,10 +1647,8 @@ msgstr "Douglas Conrad [ douglas.conrad@opens.com.br ] - CEO da Opens"
 msgid "Download"
 msgstr "Download"
 
-#: ../modules/default/controllers/RouteController.php:361
-#: ../modules/default/views/scripts/route/index.phtml:135
-#: ../modules/default/views/scripts/route/index.phtml:221
-#: ../modules/default/views/scripts/route/index.phtml:307
+#: ../modules/default/controllers/RouteController.php:356
+#: ../modules/default/views/scripts/route/index.phtml:120
 msgid "Duplicate"
 msgstr "Duplicar"
 
@@ -1670,8 +1668,8 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/controllers/SoundFilesController.php:187
 #: ../modules/default/controllers/ContactsController.php:158
 #: ../modules/default/controllers/ExpressionAliasController.php:128
-#: ../modules/default/controllers/RouteController.php:301
-#: ../modules/default/controllers/IndexController.php:380
+#: ../modules/default/controllers/RouteController.php:296
+#: ../modules/default/controllers/IndexController.php:382
 #: ../modules/default/controllers/PickupGroupsController.php:141
 #: ../modules/default/controllers/ExtensionsController.php:202
 #: ../modules/default/controllers/ActionConfigsController.php:107
@@ -1690,9 +1688,7 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:60
 #: ../modules/default/views/scripts/contact-groups/index.phtml:51
 #: ../modules/default/views/scripts/trunks/index.phtml:71
-#: ../modules/default/views/scripts/route/index.phtml:141
-#: ../modules/default/views/scripts/route/index.phtml:227
-#: ../modules/default/views/scripts/route/index.phtml:313
+#: ../modules/default/views/scripts/route/index.phtml:125
 #: ../modules/default/views/scripts/cost-center/index.phtml:56
 #: ../modules/default/views/scripts/expression-alias/index.phtml:50
 #: ../modules/default/views/scripts/sound-files/index.phtml:99
@@ -1781,6 +1777,10 @@ msgstr ""
 "Digite seu usuário para enviarmos uma redefinição da senha para o seu e-mail "
 "cadastrado"
 
+#: ../modules/portability-module/portability/install/actions/PortabilityAction.php:54
+msgid "Envia o número a ser consultado"
+msgstr ""
+
 #: ../inspectors/AGI.php:108
 msgid "Environment for AGI SNEP"
 msgstr "Ambiente para AGI SNEP"
@@ -1808,7 +1808,7 @@ msgstr "Erro"
 msgid "Error "
 msgstr "Erro"
 
-#: ../modules/default/controllers/IndexController.php:345
+#: ../modules/default/controllers/IndexController.php:347
 msgid ""
 "Error notifications.<br> To receive notifications about new features, "
 "modules and related news Snep you must be connected to an internet network. "
@@ -1855,7 +1855,7 @@ msgstr "Erro: Nenhuma placa Khomp instalada."
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
-#: ../modules/default/controllers/IndexController.php:356
+#: ../modules/default/controllers/IndexController.php:358
 msgid "Error: Code "
 msgstr "Erro: Código"
 
@@ -2100,6 +2100,10 @@ msgstr "Arquivos"
 msgid "Filter"
 msgstr "Filtro"
 
+#: ../modules/default/views/scripts/route/index.phtml:48
+msgid "Filter by"
+msgstr "Filtrar por"
+
 #: ../modules/default/views/scripts/register/index.phtml:19
 #: ../modules/default/views/layouts/register.phtml:159
 msgid "First Name"
@@ -2241,11 +2245,11 @@ msgstr "Ajuda"
 msgid "Hidden Routes"
 msgstr "Esconder rotas"
 
-#: ../modules/default/views/scripts/route/index.phtml:60
+#: ../modules/default/views/scripts/route/index.phtml:74
 msgid "Hide routes is disable"
 msgstr "Exibindo todas as regras"
 
-#: ../modules/default/views/scripts/route/index.phtml:53
+#: ../modules/default/views/scripts/route/index.phtml:67
 msgid "Hide routes is enable"
 msgstr "Exibindo somente regras habilitadas"
 
@@ -2292,9 +2296,7 @@ msgstr "IP"
 msgid "IP Status"
 msgstr "Status IP"
 
-#: ../modules/default/views/scripts/route/index.phtml:107
-#: ../modules/default/views/scripts/route/index.phtml:193
-#: ../modules/default/views/scripts/route/index.phtml:279
+#: ../modules/default/views/scripts/route/index.phtml:95
 msgid "Id"
 msgstr "ID"
 
@@ -2362,6 +2364,10 @@ msgstr "Entrada"
 msgid "Incoming Call"
 msgstr "Chamadas de Entrada"
 
+#: ../modules/default/views/scripts/route/index.phtml:52
+msgid "Incoming Rule Only"
+msgstr "Somente Regras de Entrada"
+
 #: ../modules/default/views/scripts/trunks/addedit.phtml:90
 #: ../modules/default/views/scripts/extensions/addedit.phtml:224
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:142
@@ -2407,7 +2413,7 @@ msgstr "Tipo da Interface"
 msgid "Internal Error"
 msgstr "Erro Interno"
 
-#: ../modules/default/controllers/IndexController.php:334
+#: ../modules/default/controllers/IndexController.php:336
 msgid ""
 "Internal Server Error. <br> To receive notifications about new features, "
 "modules and related news Snep you must be connected to an internet network. "
@@ -2761,6 +2767,10 @@ msgstr "Intervalo de repetição das mensagens ao chamador"
 msgid "MySQL"
 msgstr "MySQL"
 
+#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
+msgid "Módulo de Portabilidade"
+msgstr ""
+
 #: ../modules/default/views/scripts/extensions/addedit.phtml:119
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:61
 msgid "NAT"
@@ -3027,6 +3037,10 @@ msgstr "Em Ligação"
 msgid "Only numbers"
 msgstr "Somente números "
 
+#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
+msgid "OpenS Tecnologia"
+msgstr "Opens TecnologÃ­a"
+
 #: /var/www/html/snep-3/modules/fop2/info.xml
 #: /var/www/html/snep-3/modules/default/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
@@ -3082,6 +3096,10 @@ msgstr "Outro"
 msgid "Others"
 msgstr "Outros"
 
+#: ../modules/default/views/scripts/route/index.phtml:54
+msgid "Others Rule Only"
+msgstr "Somente Regras de Tipo Outras"
+
 #: ../modules/default/controllers/CostCenterController.php:69
 #: ../modules/default/controllers/KhompLinksController.php:79
 #: ../modules/default/controllers/KhompLinksController.php:186
@@ -3096,6 +3114,10 @@ msgstr "Saida"
 #: ../modules/default/controllers/KhompLinksController.php:183
 msgid "Outgoing Call"
 msgstr "Ligações de Saí­da"
+
+#: ../modules/default/views/scripts/route/index.phtml:53
+msgid "Outgoing Rule Only"
+msgstr "Somente Regras de Saída"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:346
 msgid "Padlock"
@@ -3379,6 +3401,11 @@ msgstr "Por favor, insira um valor válido"
 msgid "Port"
 msgstr "Porta"
 
+#: ../modules/portability-module/portability/install/actions/PortabilityAction.php:37
+#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
+msgid "Portabilidade"
+msgstr ""
+
 #: ../modules/default/views/layouts/login.phtml:32
 msgid "Powered by"
 msgstr "Distribuido por"
@@ -3387,9 +3414,7 @@ msgstr "Distribuido por"
 msgid "Preview"
 msgstr "Visualizar"
 
-#: ../modules/default/views/scripts/route/index.phtml:108
-#: ../modules/default/views/scripts/route/index.phtml:194
-#: ../modules/default/views/scripts/route/index.phtml:280
+#: ../modules/default/views/scripts/route/index.phtml:96
 msgid "Prio"
 msgstr "Prio"
 
@@ -3795,10 +3820,10 @@ msgstr "Chamando"
 
 #: ../modules/default/controllers/SimulatorController.php:51
 #: ../modules/default/controllers/RouteController.php:106
-#: ../modules/default/controllers/RouteController.php:239
-#: ../modules/default/controllers/RouteController.php:300
-#: ../modules/default/controllers/RouteController.php:360
-#: ../modules/default/controllers/RouteController.php:624
+#: ../modules/default/controllers/RouteController.php:232
+#: ../modules/default/controllers/RouteController.php:295
+#: ../modules/default/controllers/RouteController.php:355
+#: ../modules/default/controllers/RouteController.php:618
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Routes"
@@ -3841,21 +3866,6 @@ msgstr "Regra que será executada"
 #, php-format
 msgid "Rule: %s %s"
 msgstr "Regra: %s %s"
-
-#: ../modules/default/views/scripts/route/index.phtml:87
-#: ../modules/default/views/scripts/route/index.phtml:89
-msgid "Rules&nbsp;of&nbsp;Incoming"
-msgstr "Regras&nbsp;de&nbsp;Entrada"
-
-#: ../modules/default/views/scripts/route/index.phtml:260
-#: ../modules/default/views/scripts/route/index.phtml:262
-msgid "Rules&nbsp;of&nbsp;Others"
-msgstr "Outras&nbsp;Regras"
-
-#: ../modules/default/views/scripts/route/index.phtml:174
-#: ../modules/default/views/scripts/route/index.phtml:176
-msgid "Rules&nbsp;of&nbsp;Outgoing"
-msgstr "Regras&nbsp;de&nbsp;Saí­da"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:47
 msgid "SEQ"
@@ -3947,6 +3957,7 @@ msgstr "Tela"
 #: ../modules/default/views/scripts/queues-groups/index.phtml:27
 #: ../modules/default/views/scripts/contact-groups/index.phtml:25
 #: ../modules/default/views/scripts/trunks/index.phtml:26
+#: ../modules/default/views/scripts/route/index.phtml:84
 #: ../modules/default/views/scripts/cost-center/index.phtml:22
 #: ../modules/default/views/scripts/expression-alias/index.phtml:25
 #: ../modules/default/views/scripts/calls-report/view.phtml:38
@@ -4128,7 +4139,7 @@ msgstr "Chamadas devem sair da fila quando os Agentes saí­rem?"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:39
 msgid "Show / Hide deactivated routes"
-msgstr "Exibir/esconder rotas desabilitadas"
+msgstr "Exibir apenas regras habilitadas"
 
 #: ../modules/default/views/scripts/logs/index.phtml:90
 msgid "Show Logs"
@@ -4194,7 +4205,7 @@ msgid "Simulate"
 msgstr "Simular"
 
 #: ../modules/default/controllers/SimulatorController.php:52
-#: ../modules/default/views/scripts/route/index.phtml:46
+#: ../modules/default/views/scripts/route/index.phtml:60
 #: /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Simulator"
@@ -4263,9 +4274,7 @@ msgstr "Arquivo de Som atualizado"
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
 #: ../modules/default/views/scripts/simulator/index.phtml:110
-#: ../modules/default/views/scripts/route/index.phtml:109
-#: ../modules/default/views/scripts/route/index.phtml:195
-#: ../modules/default/views/scripts/route/index.phtml:281
+#: ../modules/default/views/scripts/route/index.phtml:97
 #: ../modules/default/views/scripts/route/elements/src.phtml:2
 #: ../modules/default/views/scripts/calls-report/view.phtml:49
 #: ../modules/default/views/scripts/calls-report/index.phtml:58
@@ -4722,7 +4731,7 @@ msgstr ""
 msgid "The range extension is required"
 msgstr "O range de ramais é obrigatório"
 
-#: ../modules/default/controllers/RouteController.php:631
+#: ../modules/default/controllers/RouteController.php:625
 msgid "The route will be deleted. After that, you have no way get it back."
 msgstr "A rota será excluí­da. Depois disso, você não tem como recuperá-la."
 
@@ -5120,9 +5129,9 @@ msgstr "Tempo de espera para tocar todos os agentes novamente"
 msgid "Warn agent the time that call waited in queue"
 msgstr "Notificar agente o tempo que a chamada esperou na fila"
 
-#: ../modules/default/controllers/IndexController.php:333
-#: ../modules/default/controllers/IndexController.php:344
-#: ../modules/default/controllers/IndexController.php:355
+#: ../modules/default/controllers/IndexController.php:335
+#: ../modules/default/controllers/IndexController.php:346
+#: ../modules/default/controllers/IndexController.php:357
 msgid "Warning"
 msgstr "Aviso"
 
@@ -5270,30 +5279,6 @@ msgstr ""
 "Você não tem nenhum arquivo cadastrado. <br><br> Clique em \"Adicionar "
 "Arquivo\" para incluir o primeiro arquivo."
 
-#: ../modules/default/controllers/RouteController.php:148
-msgid ""
-"You do not have registered incoming rules. <br> Click 'Add Rule' to make the "
-"first registration"
-msgstr ""
-"Você não possui regras de entrada registradas. <br> Clique em 'Adicionar "
-"Regras' para fazer seu primeiro registro"
-
-#: ../modules/default/controllers/RouteController.php:150
-msgid ""
-"You do not have registered others rules. <br> Click 'Add Rule' to make the "
-"first registration"
-msgstr ""
-"Você não possui regras do tipo outras registradas. <br> Clique em 'Adicionar "
-"Regras' para fazer seu primeiro registro"
-
-#: ../modules/default/controllers/RouteController.php:149
-msgid ""
-"You do not have registered outgoing rules. <br> Click 'Add Rule' to make the "
-"first registration"
-msgstr ""
-"Você não possui regras de saí­da registradas. <br> Clique em 'Adicionar "
-"Regras' para fazer seu primeiro registro"
-
 #: ../modules/default/controllers/QueuesController.php:80
 msgid ""
 "You do not have registered queues. <br><br> Click 'Add Queue' to make the "
@@ -5301,14 +5286,6 @@ msgid ""
 msgstr ""
 "Você não possui filas registradas. <br> Clique em \"Adicionar Fila\" para "
 "fazer seu primeiro registro \n"
-
-#: ../modules/default/controllers/RouteController.php:128
-msgid ""
-"You do not have registered rule. <br><br> Click 'Add Rule' to make the first "
-"registration"
-msgstr ""
-"Você não possui regras registradas. <br> Clique em 'Adicionar Regras' para "
-"fazer seu primeiro registro"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:85
 msgid ""
@@ -5333,6 +5310,14 @@ msgid ""
 msgstr ""
 "Você não possui troncos registrados. <br> Clique em \"Adicionar Tronco\" "
 "para fazer seu primeiro registro \n"
+
+#: ../modules/default/controllers/RouteController.php:134
+msgid ""
+"You do not have rules od this kind registered. <br><br> Click 'Add Rule' to "
+"make the first registration\n"
+msgstr ""
+"Você não possui regras deste tipo registradas. <br> Clique em 'Adicionar "
+"Regras' para fazer seu primeiro registro"
 
 #: ../modules/default/views/scripts/extensions/khomp_error.phtml:1
 msgid "You don't have khomp boards configured in your system."
@@ -5832,9 +5817,44 @@ msgstr "Escrita"
 msgid "www.opens.com.br"
 msgstr "www.opens.com.br"
 
+#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
+#, fuzzy
+msgid "www.snep.com.br"
+msgstr "www.sneplivre.com.br"
+
 #: /var/www/html/snep-3/modules/default/info.xml
 msgid "www.sneplivre.com.br"
 msgstr "www.sneplivre.com.br"
+
+#~ msgid "Rules&nbsp;of&nbsp;Incoming"
+#~ msgstr "Regras&nbsp;de&nbsp;Entrada"
+
+#~ msgid "Rules&nbsp;of&nbsp;Others"
+#~ msgstr "Outras&nbsp;Regras"
+
+#~ msgid "Rules&nbsp;of&nbsp;Outgoing"
+#~ msgstr "Regras&nbsp;de&nbsp;Saí­da"
+
+#~ msgid ""
+#~ "You do not have registered incoming rules. <br> Click 'Add Rule' to make "
+#~ "the first registration"
+#~ msgstr ""
+#~ "Você não possui regras de entrada registradas. <br> Clique em 'Adicionar "
+#~ "Regras' para fazer seu primeiro registro"
+
+#~ msgid ""
+#~ "You do not have registered others rules. <br> Click 'Add Rule' to make "
+#~ "the first registration"
+#~ msgstr ""
+#~ "Você não possui regras do tipo outras registradas. <br> Clique em "
+#~ "'Adicionar Regras' para fazer seu primeiro registro"
+
+#~ msgid ""
+#~ "You do not have registered outgoing rules. <br> Click 'Add Rule' to make "
+#~ "the first registration"
+#~ msgstr ""
+#~ "Você não possui regras de saí­da registradas. <br> Clique em 'Adicionar "
+#~ "Regras' para fazer seu primeiro registro"
 
 #~ msgid "Title"
 #~ msgstr "TÃ­tulo"
@@ -6011,9 +6031,6 @@ msgstr "www.sneplivre.com.br"
 #~ msgstr ""
 #~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o"
 #~ "\" para fazer seu primeiro registro \n"
-
-#~ msgid "All Files"
-#~ msgstr "Todos arquivos"
 
 #~ msgid "Discard header"
 #~ msgstr "Descartar cabeÃ§alho"
@@ -6262,9 +6279,6 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "File is not valid"
 #~ msgstr "Arquivo invÃ¡lido"
-
-#~ msgid "Filter by"
-#~ msgstr "Filtrar Por"
 
 #~ msgid "Format witch the recorded files will be stored"
 #~ msgstr "Formato no qual os arquivos gravados serÃ£o gravados"
@@ -6595,9 +6609,6 @@ msgstr "www.sneplivre.com.br"
 
 #~ msgid "New Group"
 #~ msgstr "Nuevo Grupo"
-
-#~ msgid "OpenS Tecnologia"
-#~ msgstr "Opens TecnologÃ­a"
 
 #~ msgid "PBX Statistics"
 #~ msgstr "PBX EstadÃ­stica"

@@ -102,7 +102,6 @@ class Snep_Extensions {
 
         $exten = new Snep_Exten($data->name, $data->password, $data->callerid, $interface);
         $exten->setChannel($data->canal);
-        $exten->setGroup($data->group);
 
         if ($data->authenticate) {
             $exten->lock();

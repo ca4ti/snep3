@@ -60,7 +60,7 @@ class RouteController extends Zend_Controller_Action {
             $this->view->translate("No Destiny"),
             $this->view->translate("Any"),
             $this->view->translate("Trunk") . ": ",
-            "",
+            $this->view->translate("Regex") . ": ",
             $this->view->translate("Extension") . ": ",
             $this->view->translate("Alias RegEx") . ": ",
             $this->view->translate("Contact Group") . ": ",
@@ -77,9 +77,12 @@ class RouteController extends Zend_Controller_Action {
                     $entry = "CG:" . $entry['name'];
                     break;
                 case "G" :
-                    $entry = strtolower(substr($entry,2)) === "all" ? "G:".$this->view->translate('All') : $entry;
-                    $entry = strtolower(substr($entry,2)) === "admin" ? "G:".$this->view->translate('Administrator') : $entry;
-                    $entry = strtolower(substr($entry,2)) === "users" ? "G:".$this->view->translate('Users') : $entry;
+                    if ($entry != "G:all") {
+                        $entry = Snep_ExtensionsGroups_Manager::get(substr($entry, 2));
+                        $entry = "G:" . $entry['name'];
+                    } else {
+                        $entry = "G:" . $this->view->translate('All');
+                    }
                     break;
                 case "AL" :
                     $entry = Snep_ExpressionAliases_Manager::get(substr($entry, 3));
@@ -102,13 +105,19 @@ class RouteController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routes")));
 
+        $db = Zend_Registry::get('db');
         $config = Zend_Registry::get('config');
         $lineNumber = $config->ambiente->linelimit;
         $hide_routes = $config->system->hide_routes;
+        $where = "";
 
-        $db = Zend_Registry::get('db');
-        $select = $db->select()->from("regras_negocio", array("id", "origem", "destino", "desc", "ativa", "prio")
-        );
+        if(isset($_GET["type"])){
+            $type = $_GET['type'];
+            $select = $db->select()->from("regras_negocio")->where("type = '$type'");
+        }else{
+            $select = $db->select()->from("regras_negocio");
+        }
+        
         if ($hide_routes === "1") {
             $select->where("ativa = '1'");
         }
@@ -122,7 +131,7 @@ class RouteController extends Zend_Controller_Action {
         }
 
         if(empty($routes)){
-            $this->view->error_message = $this->view->translate("You do not have registered rule. <br><br> Click 'Add Rule' to make the first registration
+            $this->view->error_message = $this->view->translate("You do not have rules od this kind registered. <br><br> Click 'Add Rule' to make the first registration
 ");
         }
 
@@ -134,6 +143,7 @@ class RouteController extends Zend_Controller_Action {
 
         $this->view->routes = $routes;
         $this->view->lineNumber = $lineNumber;
+        $this->view->hide_routes = $hide_routes;
         $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
         
         
@@ -177,18 +187,11 @@ class RouteController extends Zend_Controller_Action {
             $this->form = $form;
 
            
-            $groups = Snep_ExtensionsGroups_Manager::getAllGroup();
+            $groups = Snep_ExtensionsGroups_Manager::getAll();
             $group_list = "";
             $group_list .= "[\"all\", \"{$this->view->translate('All')}\"],";
             foreach ($groups as $group) {
-                if (strtolower($group['name']) === 'admin' ) {
-                    $name = $this->view->translate('Administrator') ;
-                } elseif (strtolower($group['name']) === 'users') {
-                    $name = $this->view->translate('Users') ;
-                } else {
-                    $name = $group['name'] ;
-                }
-                $group_list .= "[\"{$group['name']}\", \"{$name}\"],";
+                $group_list .= "[\"{$group['id']}\", \"{$group['name']}\"],";
             }
             
             $group_list = "[" . trim($group_list, ",") . "]";
@@ -502,6 +505,7 @@ class RouteController extends Zend_Controller_Action {
         $form->getElement('desc')->setValue($rule->getDesc());
         $form->getElement('record')->setValue($rule->isRecording());
         $form->getElement('prio')->setValue("p" . $rule->getPriority());
+        $form->getElement('typeRule')->setValue($rule->getTypeRule());
         $form->getElement('week')->setValue($rule->getValidWeekDays());
     }
 
@@ -579,6 +583,9 @@ class RouteController extends Zend_Controller_Action {
 
         // Adding Description
         $rule->setDesc($post['desc']);
+
+        // Adding type rule
+        $rule->setTypeRule($post['typeRule']);
 
         // Defining recording order
         if (isset($post['record']) && $post['record']) {

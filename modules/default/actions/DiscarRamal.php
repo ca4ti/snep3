@@ -369,6 +369,11 @@ XML;
             }
 
             $log->info("Discando para ramal $ramal no canal $canal.");
+	    $calleridname = $asterisk->get_variable("CALLERID(name)");
+	    $calleridnum = $asterisk->get_variable("CALLERID(num)");
+    	    if ($calleridname['data'] === "" || $calleridname['data'] === "unknown"){
+               $asterisk->set_variable("CALLERID(name)",$calleridnum['data']);
+	    }
             $asterisk->exec_dial($canal,$this->dial_timeout,$this->dial_flags);
 
             $dialstatus = $asterisk->get_variable("DIALSTATUS");

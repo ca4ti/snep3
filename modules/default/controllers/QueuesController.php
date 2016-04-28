@@ -70,7 +70,8 @@ class QueuesController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
-                ->from("queues");
+                ->from("queues")
+                ->order("name");
 
         $stmt = $db->query($select);
         $queues = $stmt->fetchAll();  
@@ -147,8 +148,8 @@ class QueuesController extends Zend_Controller_Action {
             
             if (count($newId) > 1) {
                 $form_isValid = false;
-                $this->view->error = $this->view->translate('Name already exists.');
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }
 
             if ($form_isValid) {
@@ -363,7 +364,7 @@ class QueuesController extends Zend_Controller_Action {
             foreach ($cd as $canal) {
                 if (strlen($canal) > 0) {
                     if (!array_key_exists($canal, $mem)) {
-                        $notMem[$canal] = $row['callerid'] . " ($canal)({$row['group']})";
+                        $notMem[$canal] = $row['callerid'] . " ($canal)";
                     }
                 }
             }

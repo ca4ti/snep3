@@ -157,3 +157,7 @@ td, th {
    background-color : #fffa7c ;
    text-align : center;
 }
+
+.bold {
+  font-weight: bold;
+}

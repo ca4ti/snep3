@@ -67,26 +67,20 @@
                     <li class="dropdown">
                         
                         <?php $noView = Snep_Notifications::getNoView();  
+                        
                         if($noView){?>
                             
-                            <a class="dropdown-toggle new-notification" data-toggle="dropdown" href="#"><?php echo count($noView)?>
+                            <a class="dropdown-toggle new-notification"  href="<?php echo $this->baseUrl()."/index.php/notifications?id=all";?>"><?php echo count($noView)?>
                         
                         <?php }else{?>
                             
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle" href="<?php echo $this->baseUrl()."/index.php/notifications?id=all" ?>" >
                         
                         <?php } ?>
 
-                            <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-envelope fa-fw"></i> 
                         </a>
-                        <ul class="dropdown-menu dropdown-messages">
-
-                            <?php 
-                                echo Snep_Notifications::getNotifications($this->baseUrl());     
-                            ?>
-                           
-                            
-                        </ul>
+                        
                         
                     </li>
 
@@ -149,7 +143,7 @@
 
                             <li class="divider"></li>
                             <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters">
+                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/information">
                                     <i class="fa fa-info-circle fa-fw"></i> 
                                     <?php echo $this->translate("Information"); ?>
                                 </a>

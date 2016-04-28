@@ -70,6 +70,7 @@ class PBX_Rules {
         $regra = new PBX_Rule();
         $regra->setPriority($regra_raw->prio);
         $regra->setDesc($regra_raw->desc);
+        $regra->setTypeRule($regra_raw->type);
         $regra->setId($id);
 
         foreach (explode(',', $regra_raw->origem) as $src) {
@@ -178,7 +179,7 @@ class PBX_Rules {
         foreach ($result as $regra) {
             $regras[] = self::get($regra['id']);
         }
-
+        
         return $regras;
     }
 
@@ -226,6 +227,7 @@ class PBX_Rules {
             "destino" => $dsts,
             "record" => $rule->isRecording(),
             "diasDaSemana" => $diasDaSemana,
+            "type" => $rule->getTypeRule(),
             "validade" => $validade
         );
 
@@ -396,9 +398,10 @@ class PBX_Rules {
             "destino" => $dsts,
             "validade" => $validade,
             "diasDaSemana" => $diasDaSemana,
+            "type" => $rule->getTypeRule(),
             "record" => $rule->isRecording()
         );
-        
+
         $db = Snep_Db::getInstance();
 
         $db->beginTransaction();

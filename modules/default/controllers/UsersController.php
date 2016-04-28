@@ -88,8 +88,8 @@ class UsersController extends Zend_Controller_Action {
             
             if (count($name_exist) > 1) {
                 
-                $this->view->error_message = $this->view->translate('Name already exists.'); 
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
                 
             }else{
 

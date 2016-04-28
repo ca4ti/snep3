@@ -74,13 +74,13 @@ class Snep_Extensions_Manager {
      * @param <int> $id - Código do ramal
      * @return <array> $ramal - Dados do ramal
      */
-    function getPeer($id) {
+    function getPeer($name) {
 
         $db = Zend_Registry::get("db");
 
         $select = $db->select()
-                ->from("peers", array("id", "name", "canal", "allow", "dtmfmode"))
-                ->where("peers.name = ?", $id);
+                ->from("peers")
+                ->where("peers.name = ?", $name);
 
 
         $stmt = $db->query($select);
@@ -159,13 +159,33 @@ class Snep_Extensions_Manager {
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
-            ->from('peers', array('name','callerid')) 
+            ->from('peers', array('id' => 'id','name' => 'callerid' ,'exten' => 'name', 'channel' => 'canal'))
+            ->joinInner('core_peer_groups','core_peer_groups.peer_id = peers.id',array('group_id'=>'group_id','peer_id','peer_id') )
+            ->joinInner('core_groups','core_groups.id = core_peer_groups.group_id',array('group_name' => 'name'))
             ->where("peer_type = 'R'");
 
         $stmt = $db->query($select);
-        $peers = $stmt->fetchall();
+        $extensions = $stmt->fetchall();
 
-        return $peers;
+        // Append all groups in a single string
+        $exten_groups = array(); 
+        foreach ($extensions as $key => $value) {
+            if (!isset($exten_groups[$value['id']])) {
+                $exten_groups[$value['id']] =  $value['group_name'] ;
+                unset($extensions[$key]['group_name']) ;
+                unset($extensions[$key]['group_id']);
+
+            } else {
+                $exten_groups[$value['id']] .=  ", ".$value['group_name'] ;
+                unset($extensions[$key]) ;
+            }
+        }
+        foreach ($extensions as $key => $value) {
+            $extensions[$key]['groups'] = $exten_groups[$value['id']] ;
+        }
+
+
+        return $extensions;
     }
 
 }

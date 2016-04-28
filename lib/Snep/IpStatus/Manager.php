@@ -37,7 +37,7 @@ class Snep_IpStatus_Manager {
     /**
      * Get name all Queue
      */
-    public function getQueue() {
+    public function getQueues() {
 
         $db = Zend_registry::get('db');
 
@@ -51,20 +51,37 @@ class Snep_IpStatus_Manager {
     }
 
     /**
-     * Get trunk 
+     * Get trunks
      */
-    public function getTrunk($like) {
+    public function getTrunks($like) {
 
         $db = Zend_registry::get('db');
 
         $select = $db->select()
-                ->from('trunks', array('channel', 'callerid', 'host', 'username', 'type'))
+                ->from('trunks', array('id','channel', 'callerid', 'host', 'username', 'type'))
                 ->where('trunks.channel LIKE ?', $like);
 
         $stmt = $db->query($select);
-        $trunk = $stmt->fetchAll();
+        $trunks = $stmt->fetchAll();
 
-        return $trunk;
+        return $trunks;
+    }
+
+    /**
+     * Get Peers
+     */
+    public function getPeers() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from('peers', array('id','name', 'callerid', 'canal'))
+                ->where('peers.peer_type = "R"');
+
+        $stmt = $db->query($select);
+        $peers = $stmt->fetchAll();
+
+        return $peers;
     }
 
 }

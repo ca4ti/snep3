@@ -11,8 +11,6 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header('Cache-Control: max-age=0' );
-
-
 ?>
 
 <script src="/snep/includes/javascript/footable/footable.js" type="text/javascript"></script>
@@ -78,7 +76,7 @@ header('Cache-Control: max-age=0' );
 										<td><?php echo $callsList->dia; ?></td>
 										<td class="text-center"><?php echo $callsList->src; ?></td>
 										<td class="text-center"><?php echo $callsList->dst; ?></td>
-										<td class="text-center"><?php echo $callsList->disposition; ?></td>
+										<td class="text-center"><?php echo $this->translate($callsList->disposition); ?></td>
 										<td><?php echo $callsList->duration; ?></td>
 										<td><?php echo $callsList->billsec; ?></td>
 										<td><?php echo $callsList->nome; ?></td>

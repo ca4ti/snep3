@@ -33,7 +33,7 @@ if(!isset($file)){
 		header("Location: $file.WAV");
 	}elseif(file_exists("$file.wav")){
 		header("Location: $file.wav");
-	}elseif(file_exists("storage1/$file.WAV")){
+	ca elseif(file_exists("storage1/$file.WAV")){
 		header("Location: storage1/$file.WAV");
 	}elseif(file_exists("storage1/$file.wav")){
 		header("Location: storage1/$file.wav");

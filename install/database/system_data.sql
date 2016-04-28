@@ -84,7 +84,7 @@ INSERT INTO `group_queues` (name) VALUES ('Default');
 --
 -- Default rule 
 --
-INSERT INTO `regras_negocio` VALUES ('',0,'Internas - Ramal para Ramal','G:all','G:all','00:00:00-23:59:59','sun,mon,tue,wed,thu,fri,sat',0,1,0,0);
+INSERT INTO `regras_negocio` VALUES ('',0,'Internas - Ramal para Ramal','G:all','G:all','00:00:00-23:59:59','sun,mon,tue,wed,thu,fri,sat',0,1,0,0,'others');
 INSERT INTO `regras_negocio_actions` VALUES (1,0,'PBX_Rule_Action_CCustos'),(1,1,'PBX_Rule_Action_DiscarRamal');
 INSERT INTO `regras_negocio_actions_config` VALUES (1,0,'ccustos','9'),(1,1,'allow_voicemail','false'),(1,1,'dial_flags','twk'),(1,1,'dial_timeout','60'),(1,1,'diff_ring','false'),(1,1,'dont_overflow','false'),(1,1,'resolv_agent','false');
 

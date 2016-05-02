@@ -61,25 +61,10 @@ class CallsReportController extends Zend_Controller_Action {
         $response = $test->getTests();
 
         // Populate groups
-        $groupLib = new Snep_GruposRamais();
-        $groupsTmp = $groupLib->getAll();
-
+        $extenGroups = Snep_ExtensionsGroups_Manager::getAll();
         $groupsData = array();
-
-        foreach ($groupsTmp as $key => $group) {
-            switch ($group['name']) {
-                case 'administrator':
-                    $groupsData[$this->view->translate('Administrators')] = $group['name'];
-                    break;
-                case 'users':
-                    $groupsData[$this->view->translate('Users')] = $group['name'];
-                    break;
-                case 'all':
-                    $groupsData[$this->view->translate('All')] = $group['name'];
-                    break;
-                default:
-                    $groupsData[$group['name']] = $group['name'];
-            }
+        foreach ($extenGroups as $key => $value) {
+            $groupsData[$value['id']] = $value['name']  ;
         }
         array_unshift($groupsData, " ");
         $this->view->groups = $groupsData;

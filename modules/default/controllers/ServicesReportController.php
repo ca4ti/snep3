@@ -54,27 +54,12 @@ class ServicesReportController extends Zend_Controller_Action {
 
         // Include Inpector class, for permission test
         include_once( $config->system->path->base . "/inspectors/Permissions.php" );
-        
-        $groupLib = new Snep_GruposRamais();
-        $groupsTmp = $groupLib->getAll();
-
+		// Populate groups
+        $extenGroups = Snep_ExtensionsGroups_Manager::getAll();
         $groupsData = array();
-        foreach ($groupsTmp as $key => $group) {
-
-            switch ($group['name']) {
-                case 'administrator':
-                    $groupsData[$this->view->translate('Administrators')] = $group['name'];
-                    break;
-                case 'users':
-                    $groupsData[$this->view->translate('Users')] = $group['name'];
-                    break;
-                case 'all':
-                    $groupsData[$this->view->translate('All')]  = $group['name'];
-                    break;
-                default:
-                    $groupsData[$group['name']] = $group['name'];
-            }
-        }
+        foreach ($extenGroups as $key => $value) {
+            $groupsData[$value['id']] = $value['name']  ;
+        }        
 
         array_unshift($groupsData, "");
         $this->view->group = $groupsData;

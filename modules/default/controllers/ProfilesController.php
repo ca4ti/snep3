@@ -103,8 +103,8 @@ class ProfilesController extends Zend_Controller_Action {
             $newId = Snep_Profiles_Manager::getName($dados['name']);
 
             if (count($newId) > 1) {
-                $this->view->error_message = $this->view->translate('Name already exists.'); 
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }else{
 
                 Snep_Profiles_Manager::add($dados);
@@ -173,8 +173,8 @@ class ProfilesController extends Zend_Controller_Action {
             $newId = Snep_Profiles_Manager::getName($dados['name']);
 
             if (count($newId) > 1 && $profile['name'] != $dados['name']) {
-                $this->view->error_message = $this->view->translate('Name already exists.'); 
-                $this->renderScript('error/sneperror.phtml');
+                $message = $this->view->translate("Name already exists.");
+                $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }else{
 
                 $dados['created'] = $profile['created'];
@@ -286,9 +286,9 @@ class ProfilesController extends Zend_Controller_Action {
 
                         // verifica se modulo possui opcao de escrita para montar label
                         if (substr($resource, -5) == 'write') {
-                            $resources[$resource] = $label . " - " . $this->view->translate('write');
+                            $resources[$resource] = $this->view->translate($label) . " - ". $this->view->translate('write');
                         } else {
-                            $resources[$resource] = $label . " - " . $this->view->translate('read');
+                            $resources[$resource] = $this->view->translate($label) . " - ". $this->view->translate('read');
                         }
 
                         if (array_search($resource, $currentResources) !== FALSE)
@@ -306,9 +306,9 @@ class ProfilesController extends Zend_Controller_Action {
         foreach ($selected as $key => $item) {
 
             if (substr($key, -5) == 'write') {
-                $label = $item . " - " . $this->view->translate('write');
+                $label = $this->view->translate($item) . " - ". $this->view->translate('write') ;
             } else {
-                $label = $item . " - " . $this->view->translate('read');
+                $label = $this->view->translate($item) . " - ". $this->view->translate('read') ;
             }
             $selected[$key] = $label;
         }

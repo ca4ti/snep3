@@ -1,3 +1,39 @@
+<?php
+
+/*
+ *  This file is part of SNEP.
+ *
+ *  SNEP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  SNEP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.min.css" ); 
+$enabled = '<img src="/snep/images/button_ok.png" align="center" width="22" height="22" title="Habilitado";">';
+$disabled = '<img src="/snep/images/button_off.png" width="22" height="22" title="Desabilitado";">';
+// $enabled = '<img src="/snep/images/on.png" align="center" width="22" height="22" title="Habilitado";">';
+// $disabled = '<img src="/snep/images/off.png" width="22" height="22" title="Desabilitado";">';
+
+?>
+<style>
+    .toggle.btn-xs {
+        min-width: 50px;
+    }
+    .checkbox label .toggle {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+</style>
+<script type="text/javascript" src="/snep/includes/javascript/bootstrap-toggle.min.js"></script>
 <div class="row">
     <div class="col-lg-12 text-center">
         <div class="panel panel-default">
@@ -8,15 +44,14 @@
                             <thead>
                                 <tr>
                                     <th><?php echo $this->translate("Routine") ?></th>
-                                    <th class="text-center"><?php echo $this->translate("Group") ?></th>
-                                    <th class="text-center"><?php echo $this->translate("User") ?></th>
-                                    <th class="text-center"><?php echo $this->translate("Permission") ?></th>
+                                    <th class="text-center"><?php echo $this->translate("Group permission") ?></th>
+                                    <th class="text-center"><?php echo $this->translate("User permission") ?></th>
+                                    <th class="text-center"><?php echo $this->translate("User permission") ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                $enabled = '<img src="/snep/images/on.png" align="center" width="22" height="22" title="Habilitado";">';
-                                $disabled = '<img src="/snep/images/off.png" width="22" height="22" title="Desabilitado";">';
+                                
                                 $c = 0;
                                 if ($this->user == true) {
                                     $param = 'user';
@@ -24,67 +59,56 @@
                                     $param = 'group';
                                 }
 
-                                if ($this->modules):
-                                    foreach ($this->modules as $item => $module):?>
+                                if ($this->modules) {
+                                    foreach ($this->modules as $item => $module) { ?>
 
-                                    <tr>
-
-                                    <td> <?php echo $module['name'] ?> </td>
-                                        <?php if (isset($module['group'])) { ?>
-                                            <td class="text-center"> <?php echo $enabled ?> </td>
-                                        <?php } else { ?>
-                                            <td class="text-center"> <?php echo $disabled ?> </td>
-                                        <?php } ?>
-
-                                        <?php if ($this->user == false) { ?>    
+                                        <tr>
+                                            <td> <?php echo $module['name'] ?> </td>
                                             <?php if (isset($module['group'])) { ?>
-                                            <td class="text-center"> <?php echo $enabled ?> </td>
-                                            <td class="text-center"> 
-                                                <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked>
-                                                &nbsp;<?php echo $this->translate('Allow') ?>
-                                            </td>
-                                        <?php } else { ?>
-                                            <td class="text-center"> <?php echo $disabled ?> </td>
-                                            <td class="text-center"> 
-                                                <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" >
-                                                &nbsp;<?php echo $this->translate('Allow') ?>
-                                            </td>
-                                        <?php } ?>
-                                    <?php } else { ?>    
+                                                <td class="text-center"> <?php echo $enabled ?> </td>
+                                            <?php } else { ?>
+                                                <td class="text-center"> <?php echo $disabled ?> </td>
+                                            <?php } ?>
 
-
-                                        <?php if (isset($module['user']) === true && $module['allow'] == true) { ?>
-                                            <td class="text-center"> <?php echo $enabled ?> </td>
-                                            <td class="text-center"> 
-                                                <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked>
-                                                &nbsp;<?php echo $this->translate('Allow') ?>
-                                            </td>
-                                        <?php } else if (isset($module['group']) == true && isset($module['user']) == false) { ?>
-                                            <td class="text-center"> <?php echo $enabled ?> </td>  
-                                            <td class="text-center"> 
-                                                <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked>
-                                                &nbsp;<?php echo $this->translate('Allow') ?>
-                                            </td>
-                                        <?php } else { ?>
-                                            <td class="text-center"> <?php echo $disabled ?> </td>
-                                            <td class="text-center"> 
-                                                <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes">
-                                                &nbsp;<?php echo $this->translate('Allow') ?>
-                                            </td>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-
-
-
-                                    </tr>
-                                <input type="hidden" name="user" value=<?php echo $this->id ?>>
-
-                            <?php endforeach ?>
-                        <?php endif ?>
-                                
-
+                                            <?php if ($this->user == false) { ?>    
+                                                <?php if (isset($module['group'])) { ?>
+                                                    <td class="text-center"> <?php echo $enabled ?> </td>
+                                                    <td class="text-center"> 
+                                                        <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="no" checked>
+                                                        &nbsp;<?php echo $this->translate('Deny') ?>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td class="text-center"> <?php echo $disabled ?> </td>
+                                                    <td class="text-center"> 
+                                                        <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" >
+                                                        &nbsp;<?php echo $this->translate('Allow') ?>
+                                                    </td>
+                                                <?php } ?>  
+                                            <?php } else { ?>    
+                                                <?php if (isset($module['user']) === true && $module['allow'] == true) { ?>
+                                                    <td class="text-center"> <?php echo $enabled ?> </td>
+                                                    <td class="text-center"> 
+                                                        <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked>
+                                                        &nbsp;<?php echo $this->translate('Allow') ?>
+                                                    </td>
+                                                <?php } else if (isset($module['group']) == true && isset($module['user']) == false) { ?>
+                                                    <td class="text-center"> <?php echo $enabled ?> </td>  
+                                                    <td class="text-center"> 
+                                                        <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes" checked>
+                                                        &nbsp;<?php echo $this->translate('Allow') ?>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td class="text-center"> <?php echo $disabled ?> </td>
+                                                    <td class="text-center"> 
+                                                        <input name=<?php echo $module['id_permission'] ?> type="checkbox" value="yes">
+                                                        &nbsp;<?php echo $this->translate('Allow') ?>
+                                                    </td>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </tr>
+                                        <input type="hidden" name="user" value=<?php echo $this->id ?>>
+                                    <?php } // end foreach ?>
+                                <?php } //end if this->modules  ?>
                             </tbody>
                         </table>
                     </div>

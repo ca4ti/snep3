@@ -54,15 +54,12 @@ class ServicesReportController extends Zend_Controller_Action {
 
         // Include Inpector class, for permission test
         include_once( $config->system->path->base . "/inspectors/Permissions.php" );
-		// Populate groups
-        $extenGroups = Snep_ExtensionsGroups_Manager::getAll();
-        $groupsData = array();
-        foreach ($extenGroups as $key => $value) {
-            $groupsData[$value['id']] = $value['name']  ;
-        }        
 
-        array_unshift($groupsData, "");
-        $this->view->group = $groupsData;
+        // Peer groups
+        $peer_groups = Snep_ExtensionsGroups_Manager::getAll() ;
+        array_unshift($peer_groups, array('id' => '0', 'name' => ""));
+        $this->view->group = $peer_groups;
+
         $test = new Permissions();
         $response = $test->getTests();
 
@@ -125,7 +122,7 @@ class ServicesReportController extends Zend_Controller_Action {
             }
         }
 
-        if($formData['group_select'] != ""){
+        if($formData['group_select'] != "0"){
             $param['group_select'] = $formData['group_select'];
         }
 
@@ -158,9 +155,10 @@ class ServicesReportController extends Zend_Controller_Action {
         switch ($httpcode) {
             case 200:
                 $data = json_decode($http_response);
-                
-                if($data->status == 'empty'){
-                    $this->view->error_message = $this->view->translate("No entries found");
+        
+
+                if($data->status === 'empty' || $data->status === 'fail'){
+                    $this->view->error_message = $this->view->translate($data->message);
                     $this->renderScript('error/sneperror.phtml');
                 }else{
 

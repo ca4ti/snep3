@@ -607,10 +607,12 @@ class OS_Linux extends OS_Unix_Common {
 				continue;
 
 			// Should we not show this? (regex)
-			if (is_array($this->settings['hide']['mountpoints_regex'])) {
-				foreach ($this->settings['hide']['mountpoints_regex'] as $regex) {
-					if (@preg_match($regex, $mount[2])) 
-						continue 2;
+			if (isset($this->settings['hide']['mountpoints_regex'])) {
+				if (is_array($this->settings['hide']['mountpoints_regex'])) {
+					foreach ($this->settings['hide']['mountpoints_regex'] as $regex) {
+						if (@preg_match($regex, $mount[2])) 
+							continue 2;
+					}
 				}
 			}
 			

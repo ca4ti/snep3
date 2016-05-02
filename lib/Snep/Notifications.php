@@ -90,6 +90,25 @@ class Snep_Notifications {
         return $notifications;
     }
 
+    /**
+     * Method to get date last notification
+     * @return <array> $notification
+     */
+    public function getDateLastNotification() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_notifications", array("id_itc"))
+                ->order("id_itc DESC");
+
+        $stmt = $db->query($select);
+        $notification = $stmt->fetch();
+        $last_notification = $notification["id_itc"];
+
+        return $last_notification;
+    }
+
 
     /**
      * Get notification where not read
@@ -108,6 +127,33 @@ class Snep_Notifications {
 
         return $notification;
     }
+
+
+    /**
+     * Get notification warning where not read
+     * @return <boolean> 
+     */
+    public function getNotificationWarning() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("core_notifications")
+                ->where("core_notifications.read = ?",false)
+                ->where("core_notifications.title = ?","Warning")
+                ->order("creation_date DESC");
+
+        $stmt = $db->query($select);
+        $notification = $stmt->fetch();
+
+        
+        if(is_array($notification)){
+            $notification = true;
+        }
+        
+        return $notification;
+    }
+    
 
     /**
      * setRead - Update core_notifications while user notification read
@@ -128,16 +174,88 @@ class Snep_Notifications {
      * @param <string> $title
      * @param <string> $notification
      */
-    public function addNotification($title,$message) {
+    public function addNotification($title,$message,$id_itc,$from) {
 
         $db = Zend_Registry::get('db');
+        $i18n = Zend_Registry::get("i18n");
+        
+        if(is_int($from)){
+            ($from == 68) ? $from = "Opens" : $from = $i18n->translate('Integrator');        
+        }
 
         $insert_data = array('title' => $title,
             'message' => $message,
-            'creation_date' => date('Y-m-d H:i:s'));
+            'id_itc' => $id_itc,
+            'creation_date' => date('Y-m-d H:i:s'),
+            'from' => $from);
 
         $db->insert('core_notifications', $insert_data);
     
+    }
+
+    /**
+     * Method to add a last notification in core_config.
+     * @param <int> $id
+     */
+    public function addLastNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('config_module' => "CORE",
+            'config_name' => "LAST_ID_NOTIFICATION",
+            'config_value' => $id);
+
+        $db->insert('core_config', $insert_data);
+    }
+
+    /**
+     * Method to remove a lastNotification in core_config.
+     * @param <int> $id
+     */
+    public function removeLastNotification() {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_config', "config_name = 'LAST_ID_NOTIFICATION'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * Method to remove a lastNotification
+     * @param <int> $id
+     */
+    public function removeNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_notifications', "id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * Method to update a lastNotification
+     * @param <int> $id
+     */
+    public function updateLastNotification($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $update_data = array('config_value' => $id);
+
+        $db->update("core_config", $update_data, "config_name = 'LAST_ID_NOTIFICATION'");
+
     }
 
 }

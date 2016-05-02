@@ -309,26 +309,32 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("NAT Optimization")?></label>
                     <div class="col-sm-7">
-                        <label class="radio-inline">
-                            <input type="radio" name="nat" id="no" value="no" <?php echo $this->nat_no;?>>
-                            no
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="nat" id="force_rport" value="force_rport" <?php echo $this->nat_force_rport;?>>
-                            force_rport
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="nat" id="comedia" value="comedia" <?php echo $this->nat_comedia;?>>
-                            comedia
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="nat" id="auto_force_rport" value="auto_force_rport" <?php echo $this->nat_auto_force_rport;?>>
-                            auto_force_rport
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="nat" id="auto_comedia" value="auto_comedia" <?php echo $this->nat_auto_comedia;?>>
-                            auto_comedia
-                        </label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="nat_no" <?php echo $this->nat_no;?>/>
+                                no
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input type="checkbox" name="nat_force_rport" <?php echo $this->nat_force_rport;?>/>
+                                force-rport
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input type="checkbox" name="nat_comedia" <?php echo $this->nat_comedia;?>/>
+                                comedia
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input type="checkbox" name="nat_auto_force_rport" <?php echo $this->nat_auto_force_rport;?>/>
+                                auto-force-rport
+                            </label>
+                            &nbsp;&nbsp;
+                            <label >
+                                <input type="checkbox" name="nat_auto_comedia" <?php echo $this->nat_auto_comedia;?>/>
+                                auto-comedia
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>    

@@ -30,7 +30,7 @@
             <legend><?php echo $this->translate("Period");?></legend>
             
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("From");?></label>
+                <label class="col-sm-4 control-label"><?php echo $this->translate("From");?></label>
                 <div class="col-sm-3">
                     <div class='input-group'>
                         <input type='text' class="snep-datetimepicker form-control" id='init_day' name="init_day" required/>
@@ -43,7 +43,7 @@
             </div>
             
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("To");?></label>
+                <label class="col-sm-4 control-label"><?php echo $this->translate("To");?></label>
                 <div class="col-sm-3">
                     <div class='input-group'>
                         <input type='text' class="snep-datetimepicker form-control" id='till_day' name="till_day" required/>
@@ -62,7 +62,7 @@
             <legend><?php echo $this->translate("Ranking Options");?></legend>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("Ranking Type")?></label>
+                <label class="col-sm-4 control-label"><?php echo $this->translate("Ranking Type")?></label>
                 <div class="col-sm-4">
                     <label class="radio-inline">
                         <input type="radio" name="type" id="num" value="num" checked><?php echo $this->translate("Quantity");?>
@@ -75,8 +75,8 @@
             </div>
             
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("Show top by source ranking");?></label>
-                <div class="col-sm-4">
+                <label class="col-sm-4 control-label"><?php echo $this->translate("Show top by source ranking");?></label>
+                <div class="col-sm-1">
                     <select class="form-control" name="showsource" id="showsource">
                         <?php 
                         for($cont=5; $cont<=20;$cont += 5){ ?>
@@ -87,8 +87,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo $this->translate("Show top by destiny");?></label>
-                <div class="col-sm-4">
+                <label class="col-sm-4 control-label"><?php echo $this->translate("Show top by destiny");?></label>
+                <div class="col-sm-1">
                     <select class="form-control" name="showdestiny" id="showdestiny">
                         <?php 
                         for($cont=5; $cont<=20;$cont += 5){ ?>
@@ -99,7 +99,7 @@
             </div>
 
             <div class="form-group">
-            <label class="col-sm-3 control-label"><?php echo $this->translate("Report Type")?></label>
+            <label class="col-sm-4 control-label"><?php echo $this->translate("Report Type")?></label>
             <div class="col-sm-4">
                 <label class="radio-inline">
                     <input type="radio" name="out_type" id="lst" value="lst" checked><?php echo $this->translate("Screen");?>
@@ -109,7 +109,7 @@
                     <input type="radio" name="out_type" id="csv" value="csv"><?php echo $this->translate("CSV");?>
                 </label>
             </div>
-            
+            <br /><br />
             <div class="snep-body-footer-buttons">
                     <button type="submit" class="btn btn-add" name="showreport" value="showreport"><?php echo $this->translate("Show Report");?></button>
             </div>

@@ -75,7 +75,7 @@ jQuery(document).ready(function(){
 jQuery(document).ready(servicesRefresh);
 jQuery(document).ready(servicesReposition);
 jQuery(window).resize(servicesReposition);
-system_status_interval = setInterval(servicesRefresh, 10000); // That's 60 seconds
+system_status_interval = setInterval(servicesRefresh, 30000); // That's 30 seconds
 
 /*end of services footer*/
 

@@ -137,7 +137,6 @@ class Snep_SoundFiles_Manager {
 
     public function addClass($class) {
 
-
         $classes = self::getClasses();
         $classes[$class['name']] = $class;
         $todayDate = date("d/m/Y H:m:s");

@@ -62,7 +62,7 @@
                 <div class="col-sm-4">
                     <select class="form-control" name="selectSrc" id="selectSrc" onChange="checksrc(this.value);">
                         <?php foreach($this->groups as $key => $group){ ?>
-                            <option value='<?php echo $key?>'><?php echo $group?></option>
+                            <option value="<?php echo $group['id'];?>"><?php echo $group['name']?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="col-sm-4">
                     <select class="form-control" name="selectDst" id="selectDst" onChange="checkdst(this.value);">
                         <?php foreach($this->groups as $key => $group){ ?>
-                            <option value='<?php echo $key?>'><?php echo $group?></option>
+                            <option value="<?php echo $group['id'];?>"><?php echo $group['name']?></option>
                         <?php } ?>
                     </select>
                 </div>

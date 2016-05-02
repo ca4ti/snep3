@@ -39,7 +39,7 @@ class NotificationsController extends Zend_Controller_Action {
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
 
         $options = $this->_request->getParams();
-
+        
         if($options['id'] == 'all'){
 
         	$notifications = Snep_Notifications::getAll();
@@ -85,7 +85,7 @@ class NotificationsController extends Zend_Controller_Action {
             		$html[$cont] .= "<div class='panel panel-default col-sm-12 notification-panel'>";
             		$html[$cont] .= "<div class='panel-body'>";
             		$html[$cont] .= "<h2>".$notification['title']."</h2>";
-            		$html[$cont] .= "<h5>".date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</h5>";
+            		$html[$cont] .= "<h5>".$notification['from'] .' - '.date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</h5>";
             		$html[$cont] .= "<br><p>".$notification['message']."</p>";
             		$html[$cont] .= "<div class='panel-footer clearfix notification-panel'>";
             		$html[$cont] .= "<a href='/snep/index.php/default/notifications?id=all'><span class='notification fa fa-list fa-3x notification-panel'></span></a>&nbsp";
@@ -112,6 +112,34 @@ class NotificationsController extends Zend_Controller_Action {
 
         }
         
+    }
+
+    /**
+     * Remove a user
+     */
+    public function removeAction() {
+
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+                    $this->view->translate("Notification"),
+                    $this->view->translate("Delete")));
+
+        $id = $this->_request->getParam('id');
+
+        $this->view->id = $id;
+        $this->view->remove_title = $this->view->translate('Delete Notification.'); 
+        $this->view->remove_message = $this->view->translate('The notification will be deleted. After that, you have no way get it back.'); 
+        $this->view->remove_form = 'notifications'; 
+        $this->renderScript('remove/remove.phtml');
+
+        if ($this->_request->getPost()) {
+            
+            $idLastNotification = Snep_Notifications::getDateLastNotification();
+            
+            // remove notification
+            Snep_Notifications::removeNotification($id);
+
+            $this->_redirect($this->getRequest()->getControllerName()."?id=all");
+        }
     }
 
 }

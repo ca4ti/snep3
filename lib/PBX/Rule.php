@@ -88,6 +88,12 @@ class PBX_Rule {
     private $priority = 0;
 
     /**
+     * Tipo de regra
+     * @var <string> Poderá ser incoming, outgoing ou others
+     */
+    private $typeRule = "others";
+
+    /**
      * Define qual será a aplicação que efetuará a gravação da ligação.
      * @var <array> recordApp
      */
@@ -329,7 +335,8 @@ class PBX_Rule {
                 break;
             case 'G':
                 if ($this->request->getSrcObj() instanceof Snep_Usuario) {
-                    return PBX_Usuarios::hasGroupInheritance($expr, $this->request->getSrcObj()->getGroup());
+                    //return PBX_Usuarios::hasGroupInheritance($expr, $this->request->getSrcObj()->getGroup())
+                    return PBX_Usuarios::hasExtenGroup($expr,$value);
                 } else {
                     return false;
                 }
@@ -494,7 +501,7 @@ class PBX_Rule {
                 $requester = $this->request->getSrcObj();
                 if ($requester instanceof Snep_Exten && $requester->isLocked()) {
                     $log->info("User $requester have padlock enabled");
-		    $asterisk->exec_setlanguage($lang);
+		            $asterisk->exec_setlanguage($lang);
                     $asterisk->stream_file('ext-disabled');
                 } else {
                     if ($this->isRecording()) {
@@ -617,6 +624,14 @@ class PBX_Rule {
     }
 
     /**
+     * getTypeRule - Recupera tipo de regra
+     * @return <int> $type
+     */
+    public function getTypeRule() {
+        return $this->typeRule;
+    }
+
+    /**
      * getDstList - Recupera a lista de destinos
      * @return <array> dst
      */
@@ -639,6 +654,8 @@ class PBX_Rule {
     public function getPriority() {
         return $this->priority;
     }
+
+    
 
     /**
      * getRecordApp - Retorna o nome da aplicação que será usada para gravar as ligações.
@@ -732,7 +749,7 @@ class PBX_Rule {
                     $peer = false;
                 }
 
-                if ($peer instanceof Snep_Usuario && PBX_Usuarios::hasGroupInheritance($dst['value'], $peer->getGroup())) {
+                if ($peer instanceof Snep_Usuario && PBX_Usuarios::hasExtenGroup($dst['value'], $extension)) {
                     return true;
                 }
             } else if ($this->checkExpr($dst['type'], $dst['value'], $extension)) {
@@ -861,6 +878,15 @@ class PBX_Rule {
      */
     public function setDesc($desc) {
         $this->desc = $desc;
+    }
+
+    /**
+     * setType - Seta o tipo da regra
+     * Define o tipo para a regra.
+     * @param <string> $type
+     */
+    public function setTypeRule($type) {
+        $this->typeRule = $type;
     }
 
     /**

@@ -6,7 +6,7 @@
 - Manual do usuário
 - Ajustes CSS
 - Calendario de feriados
-- Rotina das Notificações on-line (fonte/origem)
+- Rotina das Notificações on-line (fonte/origem) - Ok
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
@@ -28,7 +28,7 @@
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)   
-  - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais)
+  - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais) - Ok
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 
 ---------------------------------

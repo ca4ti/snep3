@@ -36,6 +36,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                     <tr>
                         <th data-type="numeric"   class="text-center" data-sort-initial="true" style="width: 10%;"><?php echo $this->translate('Code');?></th>
                         <th><?php echo $this->translate('Name');?></th>
+                        <th  class="text-center"><?php echo $this->translate('Peers in');?></th>
                         <th colspan="2" data-sort-ignore="true"  class="text-center"><?php echo $this->translate('Actions');?></th>
                     </tr>
                 </thead>
@@ -46,7 +47,8 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                             <tr>
                                 <td class="text-center"> <?php echo $pickupGroup['cod_grupo'] ?> </td>
                                 <td> <?php echo $pickupGroup['nome'] ?> </td>
-                                
+                                <td class="text-center"> <?php echo $pickupGroup['members'] ?> </td>
+
                                 <?php 
                                     $disabled = "";
                                     if ( $pickupGroup['cod_grupo'] == 1 ) : 

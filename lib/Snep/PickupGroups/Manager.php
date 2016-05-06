@@ -65,6 +65,10 @@ class Snep_PickupGroups_Manager {
         return $registros;
     }
 
+    /**
+     * Return all groups on format group[id] = name
+     * @return <array> $pickuGroups
+     */
     public static function getAll() {
 
         $db = Zend_Registry::get('db');
@@ -78,9 +82,46 @@ class Snep_PickupGroups_Manager {
         foreach ($row as $pickupGroup) {
             $pickupGroups[$pickupGroup['cod_grupo']] = $pickupGroup['nome'];
         }
+
         return $pickupGroups;
     }
 
+    /**
+     * Return all groups and menbers
+     * @return <array> $pickupGroups
+     */
+    public static function getAllMembers() {
+
+        $db = Zend_Registry::get('db');
+        $select = $db->select()
+                ->from('grupos');
+
+        $stmt = $db->query($select);
+        $pickupGroups = $stmt->fetchAll();
+
+        foreach ($pickupGroups as $x => $pickupGroup) {
+            
+            $pickupGroups[$x]["members"] = 0;
+
+            $select = $db->select()
+                ->from('peers')
+                ->where("pickupgroup = ?",$pickupGroup["cod_grupo"]);
+
+                $stmt = $db->query($select);
+                $row = $stmt->fetchAll();
+
+                $pickupGroups[$x]["members"] = count($row);
+        }
+        
+        return $pickupGroups;
+    }
+
+    /**
+     * Get filter in list
+     * @param $field
+     * @param $query
+     * @return <array> $select
+     */
     public static function getFilter($field, $query) {
 
         $db = Zend_Registry::get('db');
@@ -94,6 +135,9 @@ class Snep_PickupGroups_Manager {
         return $select;
     }
 
+    /**
+     * @param <array> $pickupGroup
+     */
     public static function add($pickupGroup) {
 
         $db = Zend_Registry::get('db');
@@ -109,6 +153,10 @@ class Snep_PickupGroups_Manager {
         }
     }
 
+    /**
+     * Edit group
+     * @param <array> $pickupGroup
+     */
     public static function edit($pickupGroup) {
 
         $db = Zend_Registry::get('db');

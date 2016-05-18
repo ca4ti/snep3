@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-25 10:52-0300\n"
+"POT-Creation-Date: 2016-05-18 14:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,10 +123,6 @@ msgstr ""
 msgid "1"
 msgstr ""
 
-#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
-msgid "1.0"
-msgstr ""
-
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "2"
 msgstr ""
@@ -151,21 +147,21 @@ msgstr ""
 msgid "88137-300 - Palhoça - SC - Brasil"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:247
+#: ../modules/default/controllers/AuthController.php:248
 msgid "</b> on PABX <b>"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:248
+#: ../modules/default/controllers/AuthController.php:249
 msgid ""
 "</b>.<br><br>Need to enter the code below for the redefinition.<br>Access "
 "code : <font color= red><b>"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:249
+#: ../modules/default/controllers/AuthController.php:250
 msgid "</b></font><br>Your code will expire on: "
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:250
+#: ../modules/default/controllers/AuthController.php:251
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
@@ -187,7 +183,7 @@ msgstr ""
 msgid "Action index"
 msgstr ""
 
-#: ../modules/default/views/scripts/pickup-groups/index.phtml:39
+#: ../modules/default/views/scripts/pickup-groups/index.phtml:40
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:33
 #: ../modules/default/views/scripts/action-configs/index.phtml:37
 #: ../modules/default/views/scripts/queues/index.phtml:44
@@ -197,7 +193,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/index.phtml:37
 #: ../modules/default/views/scripts/contact-groups/index.phtml:35
 #: ../modules/default/views/scripts/trunks/index.phtml:44
-#: ../modules/default/views/scripts/route/index.phtml:100
+#: ../modules/default/views/scripts/route/index.phtml:94
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
 #: ../modules/default/views/scripts/cost-center/index.phtml:41
 #: ../modules/default/views/scripts/expression-alias/index.phtml:39
@@ -236,7 +232,7 @@ msgstr ""
 #: ../modules/default/controllers/ContactsController.php:91
 #: ../modules/default/controllers/ExpressionAliasController.php:74
 #: ../modules/default/controllers/RouteController.php:233
-#: ../modules/default/controllers/PickupGroupsController.php:71
+#: ../modules/default/controllers/PickupGroupsController.php:67
 #: ../modules/default/controllers/ExtensionsController.php:109
 #: ../modules/default/controllers/UsersController.php:74
 #: ../modules/default/controllers/QueuesGroupsController.php:82
@@ -311,7 +307,7 @@ msgstr ""
 msgid "Add Queues Group"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:61
+#: ../modules/default/views/scripts/route/index.phtml:46
 msgid "Add Rule"
 msgstr ""
 
@@ -360,7 +356,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contact-groups/index.phtml:21
 #: ../modules/default/views/scripts/trunks/index.phtml:22
 #: ../modules/default/views/scripts/ip-status/index.phtml:33
-#: ../modules/default/views/scripts/route/index.phtml:80
+#: ../modules/default/views/scripts/route/index.phtml:73
 #: ../modules/default/views/scripts/cost-center/index.phtml:19
 #: ../modules/default/views/scripts/expression-alias/index.phtml:23
 #: ../modules/default/views/scripts/calls-report/index.phtml:15
@@ -395,7 +391,7 @@ msgstr ""
 msgid "Advanced Configurations"
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:293
+#: ../modules/default/controllers/QueuesController.php:300
 msgid "Agent:"
 msgstr ""
 
@@ -418,7 +414,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:35
 #: ../modules/default/views/scripts/khomp-links/view.phtml:6
 #: ../modules/default/views/scripts/trunks/index.phtml:32
-#: ../modules/default/views/scripts/route/index.phtml:90
+#: ../modules/default/views/scripts/route/index.phtml:83
 #: ../modules/default/views/scripts/cost-center/index.phtml:29
 #: ../modules/default/views/scripts/expression-alias/index.phtml:31
 #: ../modules/default/views/scripts/sound-files/index.phtml:40
@@ -454,7 +450,7 @@ msgstr ""
 msgid "All Groups"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:56
+#: ../modules/default/views/scripts/route/index.phtml:58
 msgid "All rules"
 msgstr ""
 
@@ -570,8 +566,12 @@ msgstr ""
 msgid "Auth. Sent"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:115
+#: ../modules/default/controllers/AuthController.php:116
 msgid "Authentication failure"
+msgstr ""
+
+#: ../modules/webapi-automation/install/Automation.php:65
+msgid "Automation"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/members.phtml:41
@@ -801,7 +801,7 @@ msgstr ""
 #: ../modules/default/views/scripts/ranking-report/export.phtml:24
 #: ../modules/default/views/scripts/parameters/index.phtml:252
 #: ../modules/default/views/scripts/module-settings/index.phtml:137
-#: ../modules/default/views/scripts/queues/addedit.phtml:241
+#: ../modules/default/views/scripts/queues/addedit.phtml:254
 #: ../modules/default/views/scripts/queues/members.phtml:26
 #: ../modules/default/views/scripts/contacts/addedit.phtml:158
 #: ../modules/default/views/scripts/contacts/select-multi-remove.phtml:55
@@ -850,7 +850,7 @@ msgstr ""
 msgid "Cannot remove. The following routes are using this extensions group: "
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:304
+#: ../modules/default/controllers/QueuesController.php:311
 msgid "Cannot remove. The following routes are using this queues: "
 msgstr ""
 
@@ -970,7 +970,7 @@ msgstr ""
 msgid "Code already exists."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:194
+#: ../modules/default/controllers/AuthController.php:195
 msgid "Code invalid"
 msgstr ""
 
@@ -1312,15 +1312,15 @@ msgstr ""
 #: ../modules/default/controllers/ExpressionAliasController.php:190
 #: ../modules/default/controllers/RouteController.php:619
 #: ../modules/default/controllers/NotificationsController.php:124
-#: ../modules/default/controllers/PickupGroupsController.php:221
+#: ../modules/default/controllers/PickupGroupsController.php:217
 #: ../modules/default/controllers/ExtensionsController.php:661
 #: ../modules/default/controllers/UsersController.php:160
 #: ../modules/default/controllers/QueuesGroupsController.php:266
 #: ../modules/default/controllers/ProfilesController.php:213
-#: ../modules/default/controllers/QueuesController.php:269
+#: ../modules/default/controllers/QueuesController.php:276
 #: ../modules/default/controllers/ExtensionsGroupsController.php:231
 #: ../modules/default/controllers/ContactGroupsController.php:200
-#: ../modules/default/views/scripts/pickup-groups/index.phtml:62
+#: ../modules/default/views/scripts/pickup-groups/index.phtml:64
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:52
 #: ../modules/default/views/scripts/queues/index.phtml:69
 #: ../modules/default/views/scripts/contacts/index.phtml:73
@@ -1329,7 +1329,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/index.phtml:64
 #: ../modules/default/views/scripts/contact-groups/index.phtml:56
 #: ../modules/default/views/scripts/trunks/index.phtml:76
-#: ../modules/default/views/scripts/route/index.phtml:129
+#: ../modules/default/views/scripts/route/index.phtml:123
 #: ../modules/default/views/scripts/cost-center/index.phtml:59
 #: ../modules/default/views/scripts/expression-alias/index.phtml:54
 #: ../modules/default/views/scripts/sound-files/index.phtml:105
@@ -1380,7 +1380,7 @@ msgstr ""
 msgid "Delete Notification."
 msgstr ""
 
-#: ../modules/default/controllers/PickupGroupsController.php:226
+#: ../modules/default/controllers/PickupGroupsController.php:222
 msgid "Delete Pickup Group."
 msgstr ""
 
@@ -1388,7 +1388,7 @@ msgstr ""
 msgid "Delete Profile."
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:315
+#: ../modules/default/controllers/QueuesController.php:322
 msgid "Delete Queue."
 msgstr ""
 
@@ -1429,7 +1429,7 @@ msgid "Deny"
 msgstr ""
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
-#: ../modules/default/views/scripts/route/index.phtml:99
+#: ../modules/default/views/scripts/route/index.phtml:93
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/cost-center/index.phtml:40
@@ -1464,7 +1464,7 @@ msgstr ""
 #: ../modules/default/controllers/RankingReportController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
-#: ../modules/default/views/scripts/route/index.phtml:98
+#: ../modules/default/views/scripts/route/index.phtml:92
 #: ../modules/default/views/scripts/route/elements/dst.phtml:2
 msgid "Destiny"
 msgstr ""
@@ -1616,7 +1616,7 @@ msgid "Download"
 msgstr ""
 
 #: ../modules/default/controllers/RouteController.php:356
-#: ../modules/default/views/scripts/route/index.phtml:120
+#: ../modules/default/views/scripts/route/index.phtml:114
 msgid "Duplicate"
 msgstr ""
 
@@ -1638,17 +1638,17 @@ msgstr ""
 #: ../modules/default/controllers/ExpressionAliasController.php:128
 #: ../modules/default/controllers/RouteController.php:296
 #: ../modules/default/controllers/IndexController.php:382
-#: ../modules/default/controllers/PickupGroupsController.php:141
+#: ../modules/default/controllers/PickupGroupsController.php:137
 #: ../modules/default/controllers/ExtensionsController.php:202
 #: ../modules/default/controllers/ActionConfigsController.php:107
 #: ../modules/default/controllers/UsersController.php:112
 #: ../modules/default/controllers/QueuesGroupsController.php:138
 #: ../modules/default/controllers/ProfilesController.php:136
-#: ../modules/default/controllers/QueuesController.php:184
+#: ../modules/default/controllers/QueuesController.php:185
 #: ../modules/default/controllers/ExtensionsGroupsController.php:140
 #: ../modules/default/controllers/MusicOnHoldController.php:157
 #: ../modules/default/controllers/ContactGroupsController.php:127
-#: ../modules/default/views/scripts/pickup-groups/index.phtml:58
+#: ../modules/default/views/scripts/pickup-groups/index.phtml:60
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:47
 #: ../modules/default/views/scripts/queues/index.phtml:64
 #: ../modules/default/views/scripts/contacts/index.phtml:66
@@ -1656,7 +1656,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/index.phtml:60
 #: ../modules/default/views/scripts/contact-groups/index.phtml:51
 #: ../modules/default/views/scripts/trunks/index.phtml:71
-#: ../modules/default/views/scripts/route/index.phtml:125
+#: ../modules/default/views/scripts/route/index.phtml:119
 #: ../modules/default/views/scripts/cost-center/index.phtml:56
 #: ../modules/default/views/scripts/expression-alias/index.phtml:50
 #: ../modules/default/views/scripts/sound-files/index.phtml:99
@@ -1741,10 +1741,6 @@ msgstr ""
 msgid ""
 "Enter your user to send a redefinition of the password to your registered "
 "email "
-msgstr ""
-
-#: ../modules/portability-module/portability/install/actions/PortabilityAction.php:54
-msgid "Envia o número a ser consultado"
 msgstr ""
 
 #: ../inspectors/AGI.php:108
@@ -1955,7 +1951,7 @@ msgstr ""
 msgid "Extension already taken. Please, choose another denomination."
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:286
+#: ../modules/default/controllers/QueuesController.php:293
 msgid "Extension:"
 msgstr ""
 
@@ -2063,7 +2059,7 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:48
+#: ../modules/default/views/scripts/route/index.phtml:50
 msgid "Filter by"
 msgstr ""
 
@@ -2208,11 +2204,7 @@ msgstr ""
 msgid "Hidden Routes"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:74
-msgid "Hide routes is disable"
-msgstr ""
-
-#: ../modules/default/views/scripts/route/index.phtml:67
+#: ../modules/default/views/scripts/route/index.phtml:66
 msgid "Hide routes is enable"
 msgstr ""
 
@@ -2259,7 +2251,7 @@ msgstr ""
 msgid "IP Status"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:95
+#: ../modules/default/views/scripts/route/index.phtml:89
 msgid "Id"
 msgstr ""
 
@@ -2300,7 +2292,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues/addedit.phtml:41
 #: ../modules/default/views/scripts/queues/addedit.phtml:49
 #: ../modules/default/views/scripts/queues/addedit.phtml:63
-#: ../modules/default/views/scripts/queues/addedit.phtml:226
+#: ../modules/default/views/scripts/queues/addedit.phtml:239
 #: ../modules/default/views/scripts/calls-report/index.phtml:172
 #: ../modules/default/views/scripts/calls-report/index.phtml:179
 msgid "In seconds"
@@ -2327,7 +2319,7 @@ msgstr ""
 msgid "Incoming Call"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:52
+#: ../modules/default/views/scripts/route/index.phtml:54
 msgid "Incoming Rule Only"
 msgstr ""
 
@@ -2594,7 +2586,7 @@ msgid "Member"
 msgstr ""
 
 #: ../modules/default/controllers/QueuesGroupsController.php:222
-#: ../modules/default/controllers/QueuesController.php:352
+#: ../modules/default/controllers/QueuesController.php:359
 #: ../modules/default/views/scripts/queues/index.phtml:59
 #: ../modules/default/views/scripts/ip-status/index.phtml:160
 #: ../modules/default/views/scripts/profiles/addedit.phtml:18
@@ -2727,10 +2719,6 @@ msgstr ""
 msgid "MySQL"
 msgstr ""
 
-#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
-msgid "Módulo de Portabilidade"
-msgstr ""
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:119
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:61
 msgid "NAT"
@@ -2789,14 +2777,14 @@ msgstr ""
 
 #: ../modules/default/controllers/TrunksController.php:241
 #: ../modules/default/controllers/TrunksController.php:398
-#: ../modules/default/controllers/PickupGroupsController.php:100
-#: ../modules/default/controllers/PickupGroupsController.php:183
+#: ../modules/default/controllers/PickupGroupsController.php:96
+#: ../modules/default/controllers/PickupGroupsController.php:179
 #: ../modules/default/controllers/UsersController.php:91
 #: ../modules/default/controllers/QueuesGroupsController.php:105
 #: ../modules/default/controllers/QueuesGroupsController.php:186
 #: ../modules/default/controllers/ProfilesController.php:106
 #: ../modules/default/controllers/ProfilesController.php:176
-#: ../modules/default/controllers/QueuesController.php:151
+#: ../modules/default/controllers/QueuesController.php:152
 #: ../modules/default/controllers/ExtensionsGroupsController.php:108
 #: ../modules/default/controllers/ExtensionsGroupsController.php:197
 #: ../modules/default/controllers/ContactGroupsController.php:103
@@ -2818,8 +2806,9 @@ msgstr ""
 
 #: ../modules/default/views/scripts/logs/index.phtml:34
 #: ../modules/default/views/scripts/queues/addedit.phtml:188
-#: ../modules/default/views/scripts/queues/addedit.phtml:205
+#: ../modules/default/views/scripts/queues/addedit.phtml:201
 #: ../modules/default/views/scripts/queues/addedit.phtml:218
+#: ../modules/default/views/scripts/queues/addedit.phtml:231
 #: ../modules/default/views/scripts/khomp-links/index.phtml:56
 #: ../modules/default/views/scripts/trunks/addedit.phtml:149
 #: ../modules/default/views/scripts/trunks/addedit.phtml:261
@@ -2997,10 +2986,6 @@ msgstr ""
 msgid "Only numbers"
 msgstr ""
 
-#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
-msgid "OpenS Tecnologia"
-msgstr ""
-
 #: /var/www/html/snep-3/modules/fop2/info.xml
 #: /var/www/html/snep-3/modules/default/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
@@ -3056,7 +3041,7 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:54
+#: ../modules/default/views/scripts/route/index.phtml:56
 msgid "Others Rule Only"
 msgstr ""
 
@@ -3075,7 +3060,7 @@ msgstr ""
 msgid "Outgoing Call"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:53
+#: ../modules/default/views/scripts/route/index.phtml:55
 msgid "Outgoing Rule Only"
 msgstr ""
 
@@ -3120,10 +3105,10 @@ msgstr ""
 msgid "Password Padlock"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:159
-#: ../modules/default/controllers/AuthController.php:161
-#: ../modules/default/controllers/AuthController.php:217
-#: ../modules/default/controllers/AuthController.php:219
+#: ../modules/default/controllers/AuthController.php:160
+#: ../modules/default/controllers/AuthController.php:162
+#: ../modules/default/controllers/AuthController.php:218
+#: ../modules/default/controllers/AuthController.php:220
 msgid "Password Recovery"
 msgstr ""
 
@@ -3131,11 +3116,11 @@ msgstr ""
 msgid "Password for Restricted Access"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:45
+#: ../modules/default/controllers/AuthController.php:46
 msgid "Password successfully recovered"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:188
+#: ../modules/default/controllers/AuthController.php:189
 msgid "Passwords do not match"
 msgstr ""
 
@@ -3163,6 +3148,7 @@ msgstr ""
 msgid "Peers - number of digits"
 msgstr ""
 
+#: ../modules/default/views/scripts/pickup-groups/index.phtml:39
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:32
 msgid "Peers in"
 msgstr ""
@@ -3198,15 +3184,15 @@ msgstr ""
 msgid "Phone invalid"
 msgstr ""
 
-#: ../modules/default/controllers/PickupGroupsController.php:220
+#: ../modules/default/controllers/PickupGroupsController.php:216
 #: ../modules/default/views/scripts/extensions/addedit.phtml:62
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:31
 msgid "Pickup Group"
 msgstr ""
 
 #: ../modules/default/controllers/PickupGroupsController.php:52
-#: ../modules/default/controllers/PickupGroupsController.php:70
-#: ../modules/default/controllers/PickupGroupsController.php:140
+#: ../modules/default/controllers/PickupGroupsController.php:66
+#: ../modules/default/controllers/PickupGroupsController.php:136
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Pickup Groups"
@@ -3220,7 +3206,7 @@ msgstr ""
 msgid "Play an audio file."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:65
+#: ../modules/default/controllers/AuthController.php:66
 msgid "Please enter a username"
 msgstr ""
 
@@ -3238,7 +3224,7 @@ msgstr ""
 #: ../modules/default/views/scripts/register/index.phtml:91
 #: ../modules/default/views/scripts/parameters/index.phtml:300
 #: ../modules/default/views/scripts/parameters/index.phtml:306
-#: ../modules/default/views/scripts/queues/addedit.phtml:265
+#: ../modules/default/views/scripts/queues/addedit.phtml:278
 #: ../modules/default/views/scripts/contacts/addedit.phtml:223
 #: ../modules/default/views/scripts/contacts/addedit.phtml:229
 #: ../modules/default/views/scripts/users/addedit.phtml:92
@@ -3293,7 +3279,7 @@ msgstr ""
 msgid "Please enter letters only"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:267
+#: ../modules/default/views/scripts/queues/addedit.phtml:280
 msgid "Please enter letters only."
 msgstr ""
 
@@ -3303,7 +3289,7 @@ msgstr ""
 #: ../modules/default/views/scripts/register/index.phtml:92
 #: ../modules/default/views/scripts/parameters/index.phtml:301
 #: ../modules/default/views/scripts/parameters/index.phtml:307
-#: ../modules/default/views/scripts/queues/addedit.phtml:266
+#: ../modules/default/views/scripts/queues/addedit.phtml:279
 #: ../modules/default/views/scripts/contacts/addedit.phtml:224
 #: ../modules/default/views/scripts/contacts/addedit.phtml:230
 #: ../modules/default/views/scripts/users/addedit.phtml:93
@@ -3361,11 +3347,6 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: ../modules/portability-module/portability/install/actions/PortabilityAction.php:37
-#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
-msgid "Portabilidade"
-msgstr ""
-
 #: ../modules/default/views/layouts/login.phtml:32
 msgid "Powered by"
 msgstr ""
@@ -3374,7 +3355,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../modules/default/views/scripts/route/index.phtml:96
+#: ../modules/default/views/scripts/route/index.phtml:90
 msgid "Prio"
 msgstr ""
 
@@ -3431,7 +3412,7 @@ msgid "Quantity"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:268
-#: ../modules/default/controllers/QueuesController.php:268
+#: ../modules/default/controllers/QueuesController.php:275
 #: ../modules/default/views/scripts/queues-groups/members.phtml:11
 msgid "Queue"
 msgstr ""
@@ -3444,7 +3425,7 @@ msgstr ""
 msgid "Queue Name"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:231
+#: ../modules/default/views/scripts/queues/addedit.phtml:244
 msgid "Queue Priority"
 msgstr ""
 
@@ -3458,8 +3439,8 @@ msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:69
 #: ../modules/default/controllers/QueuesController.php:94
-#: ../modules/default/controllers/QueuesController.php:183
-#: ../modules/default/controllers/QueuesController.php:351
+#: ../modules/default/controllers/QueuesController.php:184
+#: ../modules/default/controllers/QueuesController.php:358
 #: ../modules/default/views/scripts/ip-status/index.phtml:147
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
@@ -3548,7 +3529,7 @@ msgstr ""
 msgid "Rectangular Pie"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:252
+#: ../modules/default/controllers/AuthController.php:253
 msgid "Redefinition password - SNEP"
 msgstr ""
 
@@ -3648,6 +3629,10 @@ msgstr ""
 msgid "Report Type"
 msgstr ""
 
+#: ../modules/default/views/scripts/queues/addedit.phtml:181
+msgid "Report member as busy when in connection"
+msgstr ""
+
 #: ../modules/default/controllers/CallsReportController.php:54
 #: ../modules/default/controllers/CallsReportController.php:269
 #: ../modules/default/controllers/CallsReportController.php:326
@@ -3733,7 +3718,7 @@ msgstr ""
 msgid "Restoring source to %s"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:192
+#: ../modules/default/views/scripts/queues/addedit.phtml:205
 msgid "Restrict"
 msgstr ""
 
@@ -3825,6 +3810,10 @@ msgstr ""
 msgid "Rule: %s %s"
 msgstr ""
 
+#: ../modules/webapi-automation/install/Automation.php:81
+msgid "Run an automation process defined by the administrator."
+msgstr ""
+
 #: ../modules/default/views/scripts/calls-report/view.phtml:47
 msgid "SEQ"
 msgstr ""
@@ -3873,7 +3862,7 @@ msgstr ""
 #: ../modules/default/views/scripts/index/add.phtml:45
 #: ../modules/default/views/scripts/parameters/index.phtml:250
 #: ../modules/default/views/scripts/module-settings/index.phtml:135
-#: ../modules/default/views/scripts/queues/addedit.phtml:239
+#: ../modules/default/views/scripts/queues/addedit.phtml:252
 #: ../modules/default/views/scripts/queues/members.phtml:24
 #: ../modules/default/views/scripts/contacts/addedit.phtml:156
 #: ../modules/default/views/scripts/contacts/csv.phtml:84
@@ -3915,7 +3904,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues-groups/index.phtml:27
 #: ../modules/default/views/scripts/contact-groups/index.phtml:25
 #: ../modules/default/views/scripts/trunks/index.phtml:26
-#: ../modules/default/views/scripts/route/index.phtml:84
+#: ../modules/default/views/scripts/route/index.phtml:77
 #: ../modules/default/views/scripts/cost-center/index.phtml:22
 #: ../modules/default/views/scripts/expression-alias/index.phtml:25
 #: ../modules/default/views/scripts/calls-report/view.phtml:38
@@ -4091,7 +4080,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:198
+#: ../modules/default/views/scripts/queues/addedit.phtml:211
 msgid "Should calls be ejected from queue if all agents logout?"
 msgstr ""
 
@@ -4154,7 +4143,7 @@ msgstr ""
 msgid "Signal Lost"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:224
+#: ../modules/default/views/scripts/queues/addedit.phtml:237
 msgid "Silent time before connecting the agent to a caller"
 msgstr ""
 
@@ -4163,7 +4152,7 @@ msgid "Simulate"
 msgstr ""
 
 #: ../modules/default/controllers/SimulatorController.php:52
-#: ../modules/default/views/scripts/route/index.phtml:60
+#: ../modules/default/views/scripts/route/index.phtml:45
 #: /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Simulator"
@@ -4232,7 +4221,7 @@ msgstr ""
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
 #: ../modules/default/views/scripts/simulator/index.phtml:110
-#: ../modules/default/views/scripts/route/index.phtml:97
+#: ../modules/default/views/scripts/route/index.phtml:91
 #: ../modules/default/views/scripts/route/elements/src.phtml:2
 #: ../modules/default/views/scripts/calls-report/view.phtml:49
 #: ../modules/default/views/scripts/calls-report/index.phtml:58
@@ -4556,7 +4545,7 @@ msgid ""
 "the database."
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:279
+#: ../modules/default/controllers/QueuesController.php:286
 msgid "The following members make use of this queue, remove before deleting:"
 msgstr ""
 
@@ -4598,7 +4587,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:55
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
-#: ../modules/default/views/scripts/queues/addedit.phtml:264
+#: ../modules/default/views/scripts/queues/addedit.phtml:277
 #: ../modules/default/views/scripts/contacts/addedit.phtml:222
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:53
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:57
@@ -4646,7 +4635,7 @@ msgstr ""
 msgid "The phone is required"
 msgstr ""
 
-#: ../modules/default/controllers/PickupGroupsController.php:227
+#: ../modules/default/controllers/PickupGroupsController.php:223
 msgid ""
 "The pickup group will be deleted. After that, you have no way get it back."
 msgstr ""
@@ -4655,7 +4644,7 @@ msgstr ""
 msgid "The profile will be deleted. After that, you have no way get it back."
 msgstr ""
 
-#: ../modules/default/controllers/QueuesController.php:316
+#: ../modules/default/controllers/QueuesController.php:323
 msgid "The queue will be deleted. After that, you have no way get it back."
 msgstr ""
 
@@ -4751,7 +4740,7 @@ msgstr ""
 msgid "Time Credit (h:m:s)"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:200
+#: ../modules/default/controllers/AuthController.php:201
 msgid "Time of validity of the code was expired"
 msgstr ""
 
@@ -4964,8 +4953,8 @@ msgstr ""
 msgid "User already exists."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:183
-#: ../modules/default/controllers/AuthController.php:234
+#: ../modules/default/controllers/AuthController.php:184
+#: ../modules/default/controllers/AuthController.php:235
 msgid "User not registered"
 msgstr ""
 
@@ -4974,7 +4963,7 @@ msgstr ""
 msgid "User or password incorrect."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:84
+#: ../modules/default/controllers/AuthController.php:85
 msgid "User or password invalid"
 msgstr ""
 
@@ -5008,7 +4997,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:181
+#: ../modules/default/views/scripts/queues/addedit.phtml:194
 msgid "Users can enter the queue without Agents Present?"
 msgstr ""
 
@@ -5051,7 +5040,7 @@ msgstr ""
 msgid "Wait time until ringing all agents again"
 msgstr ""
 
-#: ../modules/default/views/scripts/queues/addedit.phtml:211
+#: ../modules/default/views/scripts/queues/addedit.phtml:224
 msgid "Warn agent the time that call waited in queue"
 msgstr ""
 
@@ -5073,7 +5062,7 @@ msgstr ""
 msgid "We're almost ending"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:169
+#: ../modules/default/controllers/AuthController.php:170
 msgid "We've sent an access code to the email:"
 msgstr ""
 
@@ -5133,8 +5122,9 @@ msgstr ""
 
 #: ../modules/default/views/scripts/logs/index.phtml:30
 #: ../modules/default/views/scripts/queues/addedit.phtml:184
-#: ../modules/default/views/scripts/queues/addedit.phtml:201
+#: ../modules/default/views/scripts/queues/addedit.phtml:197
 #: ../modules/default/views/scripts/queues/addedit.phtml:214
+#: ../modules/default/views/scripts/queues/addedit.phtml:227
 #: ../modules/default/views/scripts/khomp-links/index.phtml:52
 #: ../modules/default/views/scripts/trunks/addedit.phtml:145
 #: ../modules/default/views/scripts/trunks/addedit.phtml:260
@@ -5149,7 +5139,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:246
+#: ../modules/default/controllers/AuthController.php:247
 msgid "You asked for resetting your password the user <b>"
 msgstr ""
 
@@ -5713,10 +5703,6 @@ msgstr ""
 #: /var/www/html/snep-3/modules/fop2/info.xml
 #: /var/www/html/snep-3/modules/snep-agile/info.xml
 msgid "www.opens.com.br"
-msgstr ""
-
-#: /var/www/html/snep-3/modules/portability-module/portability/info.xml
-msgid "www.snep.com.br"
 msgstr ""
 
 #: /var/www/html/snep-3/modules/default/info.xml

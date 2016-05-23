@@ -6,7 +6,6 @@
 - Manual do usuário
 - Ajustes CSS
 - Calendario de feriados
-- Rotina das Notificações on-line (fonte/origem) - Ok
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
 - Rever/redefinir conceitos/funcionalidades para Language
@@ -28,11 +27,13 @@
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
   - Grupos para destino (ringall)   
-  - Grupos de Captura : Ajustar a view para exibir numero de ramais no grupo (mesmo modelo do Grupo de ramais) - Ok
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
-
 ---------------------------------
-**3.0 Estável **
+**3.1**
+- CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)
+- NOVO - identificacao do modelo do aparelho autenticado (Heros)
+---------------------------------
+**3.0 Estável + 3.01, 3.02 **
 
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
 - CORRIGIDO - Permitir multipla selecao de NAT para Troncos 

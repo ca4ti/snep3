@@ -208,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `directmedia` varchar(10),
   `lastms` int(11) NOT NULL,
   `callbackextension` VARCHAR(250) default NULL,
+  `useragent` VARCHAR(250) default NULL, 
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),

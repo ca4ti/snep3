@@ -111,7 +111,7 @@ class QueuesController extends Zend_Controller_Action {
 
         }
         $this->view->strategy = $strategy;
-        
+        $this->view->ringinuseTrue = "checked";
   
         //Define the action and others and load form
         $this->view->action = "add" ;
@@ -140,6 +140,7 @@ class QueuesController extends Zend_Controller_Action {
                 'reportholdtime' => $_POST['reportholdtime'],
                 'memberdelay' => $_POST['memberdelay'],
                 'weight' => $_POST['weight'],
+                'ringinuse' => $_POST['ringinuse'],
             );
 
             $form_isValid = true;
@@ -213,6 +214,11 @@ class QueuesController extends Zend_Controller_Action {
             $this->view->leavewhenemptyFalse = "checked";
         }
 
+        if($queue['ringinuse'] == "1"){
+            $this->view->ringinuseTrue = "checked";
+        }else{
+            $this->view->ringinuseFalse = "checked";
+        }
         
         if($queue['reportholdtime'] == "1"){
             $this->view->reportholdtimeTrue = "checked";
@@ -228,7 +234,7 @@ class QueuesController extends Zend_Controller_Action {
 
         // After POST
         if ($this->_request->getPost()) {
-
+            
             $dados = array('name' => $queue['name'],
                 'musiconhold' => $_POST['musiconhold'],
                 'announce' => $_POST['announce'],
@@ -249,6 +255,7 @@ class QueuesController extends Zend_Controller_Action {
                 'reportholdtime' => $_POST['reportholdtime'],
                 'memberdelay' => $_POST['memberdelay'],
                 'weight' => $_POST['weight'],
+                'ringinuse' => $_POST['ringinuse'],
             );
 
             

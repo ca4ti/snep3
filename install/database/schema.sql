@@ -309,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `queues` (
   `retry` int(11) default NULL,
   `wrapuptime` int(11) default NULL,
   `maxlen` int(11) default NULL,
+  `ringinuse` BOOL NOT NULL DEFAULT '1',
   `servicelevel` int(11) default NULL,
   `strategy` varchar(128) default NULL,
   `joinempty` varchar(128) default NULL,

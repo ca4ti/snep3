@@ -29,9 +29,11 @@
   - Grupos para destino (ringall)   
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 ---------------------------------
-**3.1**
+**3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)
 - NOVO - identificacao do modelo do aparelho autenticado (Heros)
+- NOVO - controle de ramais ocupados quando fazem parte de uma fila
+- NOVO - Parametrizacao do nome do arquivo de gravacao
 ---------------------------------
 **3.0 Estável + 3.01, 3.02 **
 

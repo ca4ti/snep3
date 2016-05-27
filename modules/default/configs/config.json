@@ -1,0 +1,9 @@
+{"nome":"default",
+"0":{"type":"text","key":"userfield_ud","label":"User defined string"},
+"1":{"type":"multi_checkbox","key":"userfield_compose","label":"Composition of the name of the recording file","fieldset":"usrfld","option":[{"label":"Unix timestamp","key":"TS","checked":"false"},{"label":"Year","key":"AA","checked":"false"},{"label":"Month","key":"MM","checked":"false"},{"label":"Day","key":"DD","checked":"false"},{"label":"Hour","key":"HH","checked":"false"},{"label":"Minute","key":"ii","checked":"false"},{"label":"Source","key":"SR","checked":"false"},{"label":"Destinity","key":"DS","checked":"false"},{"label":"User defined","key":"UD","checked":"false"}]},
+"2":{"type":"button_add_rm","key":"hifem","label":"Hifem"},
+"3":{"type":"button_add_rm","key":"underline","label":"Underline"},
+"4":{"type":"text_ro","key":"userfield","label":"Userfield result"},
+"5":{"type":"text_ro","key":"userfield_example","label":"Example"},
+"6":{"type":"separator"},
+"7":{"type":"text_ro","key":"host_notification","label":"ITC/Snep host notification"} }

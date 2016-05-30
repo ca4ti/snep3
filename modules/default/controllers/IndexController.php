@@ -277,10 +277,10 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));
 
-            $configs = Snep_Config::getConfiguration('CORE','HOST_NOTIFICATION');
+            $configs = Snep_Config::getConfiguration('default','host_notification');
 
             // get last_id_notification if exists
-            $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
+            $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
             if($idLastNotification){
 
                 $idLastNotification = $idLastNotification["config_value"];
@@ -317,7 +317,7 @@ class IndexController extends Zend_Controller_Action {
                         if(isset($lastId)){
 
                             // get last_id_notification if exists
-                            $idLastNotification = Snep_Config::getConfiguration("CORE", "LAST_ID_NOTIFICATION");
+                            $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
                             if($idLastNotification){
                                 Snep_Notifications::updateLastNotification($lastId);
                             }else{

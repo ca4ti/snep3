@@ -47,7 +47,9 @@ class SystemstatusController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
 
-        $linfoData = new Zend_Http_Client('http://localhost/' . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
+		$serverport = $_SERVER['SERVER_PORT'] ;
+		$linfoData = new Zend_Http_Client('http://localhost:'.$serverport . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
+
         try {
             $linfoData->request();
             $sysInfo = $linfoData->getLastResponse()->getBody();

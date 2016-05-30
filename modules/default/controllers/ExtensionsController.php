@@ -594,7 +594,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sql = "UPDATE peers ";
             $sql.=" SET name='$exten',password='$extenPass' , callerid='$extenName', ";
             $sql.= "context='$context',mailbox='$exten',qualify='$qualify',";
-            $sql.= "secret='$secret',type='$type', allow='$allow', fromuser='$exten',";
+            $sql.= "secret='$secret',type='$type', allow='$allow', ";
             $sql.= "defaultuser='$exten',fullcontact='',dtmfmode='$dtmfmode',";
             $sql.= "email='$advEmail', `call-limit`='$callLimit',";
             $sql.= "outgoinglimit='1', incominglimit='1',";
@@ -606,14 +606,14 @@ class ExtensionsController extends Zend_Controller_Action {
         } else {
             $sql = "INSERT INTO peers (";
             $sql.= "name, password,callerid,context,mailbox,qualify,";
-            $sql.= "secret,type,allow,fromuser,defaultuser,fullcontact,";
+            $sql.= "secret,type,allow,defaultuser,fullcontact,";
             $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
             $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
             $sql.= "trunk, callgroup, time_total, cancallforward, directmedia, ";
             $sql.= "time_chargeby " . $sqlFieldsExten;
             $sql.= ") values (";
             $sql.= "'$exten','$extenPass','$extenName','$context','$exten','$qualify',";
-            $sql.= "'$secret','$type','$allow','$exten','$exten','$fullcontact',";
+            $sql.= "'$secret','$type','$allow','$exten','$fullcontact',";
             $sql.= "'$dtmfmode','$advEmail','$callLimit','1',";
             $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',$advPadLock,";
             $sql.= "'no','$extenPickGrp', $advTimeTotal, '$advCancallforward', '$directmedia', ";

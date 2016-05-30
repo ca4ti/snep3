@@ -45,6 +45,7 @@ require_once "Zend/Console/Getopt.php";
 $config = Snep_Config::getConfig();
 $log = Snep_Logger::getInstance();
 $asterisk = PBX_Asterisk_AGI::getInstance();
+$db = Zend_Registry::get("db");
 
 // Line command option configuration
 try {
@@ -121,14 +122,36 @@ $src = $request->getOriginalCallerid();
     }
 
 // Definindo nome do arquivo de gravação.
-// Formato: Timestamp_aaaammdd_hhmm_src_dst.wav
-$filename = implode("_", array(
-    time(),
-    date("Ymd"),
-    date("Hi"),
-    $src,
-    $request->getOriginalExtension()
-        ));
+// Formato: Definido na tabela core_config
+// IMPORTANT - verify:
+// - lib/Snep/ModuleSettings/Manager.php
+// - modules/default/controllers/ModuleSettingsController.php
+// - modules/default/views/scripts/module-settings/index.phtml 
+
+$sql = "select config_name,config_value from core_config where config_module = 'default'";
+$data = $db->query($sql)->fetchAll();
+foreach ($data as $usrfld_key => $usrfld_value) {
+    if ($usrfld_value['config_name'] === 'userfield') {
+        $filename = $usrfld_value['config_value'] ;
+    }
+    if ($usrfld_value['config_name'] === 'userfield_ud') {
+        $user_def = $usrfld_value['config_value'] ;
+    }
+}
+$res = array( 'TS' => time(),
+    'AA' => date('Y'),
+    'MM' => date('m'),
+    'DD' => date('d'),
+    'HH' => date('H'),
+    'ii' => date('i'),
+    'SR' => $src,
+    'DS' => $request->getOriginalExtension(),
+    'UD' => $user_def
+    );
+foreach ($res as $usrfld_key => $usrfld_value) {
+    $filename = str_replace($usrfld_key, $usrfld_value,$filename) ;
+}
+
 
 // Definindo userfield com o nome do arquivo para que se possa encontrar a
 // gravação a partir do registro no CDR.

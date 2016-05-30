@@ -28,27 +28,27 @@
 class Snep_Notifications {
 
 	/**
-     * getNotification - 
+     * getNotification -
      * @return <string> HTML rendered with notifications
      */
     public function getNotifications($url) {
-        
+
         $i18n = Zend_Registry::get("i18n");
         $html = "";
         $notifications = self::getAll();
-        
+
         if($notifications){
-	        
+
 	        foreach ($notifications as $key => $notification) {
-	            
+
                 // number of notifications in the top menu
                 if($key < 3){
     	            $html .= "<li><a href=".$url."/index.php/default/notifications?id=".$notification['id'].">";
     	            $html .= "<div><strong>".$notification['title']."</strong>";
     	            $html .= "<span class='pull-right text-muted'><em>".date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</em>";
-    	            $html .= "</spam></div>"; 
+    	            $html .= "</spam></div>";
     	            $html .= "<div>".substr($notification['message'], 0,30).'...</div></a></li>';
-    	            
+
     	            if($key < 2){
     	            	$html .= "<li class='divider'></li>";
     	            }
@@ -59,7 +59,7 @@ class Snep_Notifications {
 	        $html .= "href='".$url."/index.php/default/notifications?id=all'>";
 	        $html .= "<strong>".$i18n->translate('Read All Messages')."</strong>";
 	        $html .= "</a></li>";
-	        
+
 
 	    }else{
 
@@ -68,7 +68,7 @@ class Snep_Notifications {
 	        $html .= "</a></li>";
 
 	    }
-        
+
         return $html;
     }
 
@@ -131,7 +131,7 @@ class Snep_Notifications {
 
     /**
      * Get notification warning where not read
-     * @return <boolean> 
+     * @return <boolean>
      */
     public function getNotificationWarning() {
 
@@ -146,14 +146,14 @@ class Snep_Notifications {
         $stmt = $db->query($select);
         $notification = $stmt->fetch();
 
-        
+
         if(is_array($notification)){
             $notification = true;
         }
-        
+
         return $notification;
     }
-    
+
 
     /**
      * setRead - Update core_notifications while user notification read
@@ -178,9 +178,9 @@ class Snep_Notifications {
 
         $db = Zend_Registry::get('db');
         $i18n = Zend_Registry::get("i18n");
-        
+
         if(is_int($from)){
-            ($from == 68) ? $from = "Opens" : $from = $i18n->translate('Integrator');        
+            ($from == 68) ? $from = "Opens" : $from = $i18n->translate('Integrator');
         }
 
         $insert_data = array('title' => $title,
@@ -190,7 +190,7 @@ class Snep_Notifications {
             'from' => $from);
 
         $db->insert('core_notifications', $insert_data);
-    
+
     }
 
     /**
@@ -201,8 +201,8 @@ class Snep_Notifications {
 
         $db = Zend_Registry::get('db');
 
-        $insert_data = array('config_module' => "CORE",
-            'config_name' => "LAST_ID_NOTIFICATION",
+        $insert_data = array('config_module' => "default",
+            'config_name' => "last_id_notification",
             'config_value' => $id);
 
         $db->insert('core_config', $insert_data);
@@ -217,7 +217,7 @@ class Snep_Notifications {
         $db = Zend_Registry::get('db');
 
         $db->beginTransaction();
-        $db->delete('core_config', "config_name = 'LAST_ID_NOTIFICATION'");
+        $db->delete('core_config', "config_name = 'last_id_notification'");
 
         try {
             $db->commit();
@@ -254,7 +254,7 @@ class Snep_Notifications {
 
         $update_data = array('config_value' => $id);
 
-        $db->update("core_config", $update_data, "config_name = 'LAST_ID_NOTIFICATION'");
+        $db->update("core_config", $update_data, "config_name = 'last_id_notification'");
 
     }
 

@@ -81,7 +81,8 @@ class Snep_Queues_Manager {
             'leavewhenempty' => $queue['leavewhenempty'],
             'reportholdtime' => $queue['reportholdtime'],
             'memberdelay' => $queue['memberdelay'],
-            'weight' => $queue['weight']
+            'weight' => $queue['weight'],
+            'ringinuse' => $queue['ringinuse']
         );
 
         $db->insert('queues', $insert_data);
@@ -113,7 +114,8 @@ class Snep_Queues_Manager {
             'leavewhenempty' => $queue['leavewhenempty'],
             'reportholdtime' => $queue['reportholdtime'],
             'memberdelay' => $queue['memberdelay'],
-            'weight' => $queue['weight']
+            'weight' => $queue['weight'],
+            'ringinuse' => $queue['ringinuse']
         );
 
         $db->update('queues', $update_data, "name = '{$queue['name']}'");

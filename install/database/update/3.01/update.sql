@@ -12,7 +12,4 @@ ALTER TABLE `regras_negocio` ADD COLUMN `type` ENUM('incoming','outgoing','other
 
 ALTER TABLE `core_notifications` ADD COLUMN `id_itc` INT(11) DEFAULT 1;
 ALTER TABLE `core_notifications` ADD COLUMN `from` VARCHAR(128) DEFAULT "Opens";
-INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('CORE', 'HOST_NOTIFICATION', 'http://api.opens.com.br:3003/notifications');
-
-
-
+INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('default', 'host_notification', 'http://api.opens.com.br:3003/notifications');

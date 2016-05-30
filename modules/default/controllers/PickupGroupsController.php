@@ -51,12 +51,8 @@ class PickupGroupsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Pickup Groups")));
 
-        $db = Zend_Registry::get('db');
-        $select = $db->select()->from("grupos");
-
-        $stmt = $db->query($select);
-        $pickupGroups = $stmt->fetchAll(); 
-
+        $pickupGroups = Snep_PickupGroups_Manager::getAllMembers();
+        
         $this->view->pickupgroups = $pickupGroups;
     
     }

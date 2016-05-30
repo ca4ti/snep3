@@ -19,6 +19,11 @@
 
 /**
  *  Class that  controls  the  persistence  of pickup groups.
+ * 
+ *  IMPORTANT - verify:
+ *  - agi/snep.php
+ *  - modules/default/views/scripts/module-settings/index.phtml 
+ *  - modules/default/controllers/ModuleSettingsController.php
  *
  * @category  Snep
  * @package   Snep
@@ -56,6 +61,28 @@ class Snep_ModuleSettings_Manager {
         }
     }
 
+    /**
+     * Update module configuration in database
+     * 
+     * @param string $module
+     * @param string $name
+     * @param array $value
+     */
+    public static function updateConfig($config_key,$config_value) {
+
+        $db = Zend_Registry::get('db');
+        $db->beginTransaction();
+
+        try {
+            $db->update('core_config', $config_value, $config_key);
+            $db->commit();
+            return true;
+        } catch (Exception $e) {
+            $db->rollBack();
+            return $e;
+        }
+    }
+
 
     /**
     * Return a configuration from the database based on his module.
@@ -71,7 +98,7 @@ class Snep_ModuleSettings_Manager {
                 ->where("config_module = '$module'");
 
         $stmt = $db->query($select);
-        $data = $stmt->fetchAll();
+        $data = $stmt->fetchAll();  
 
         return $data;
     }

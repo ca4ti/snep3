@@ -45,84 +45,138 @@
                                 
                                 <?php 
                                 foreach($data["view"] as $x => $form){ 
-                
-                                    //form in input text        
-                                    if($form['type'] == "text"){ ?> 
-                        
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
-                                            <div class="col-sm-6">
-                                
-                                                <?php if(isset($form["value"])){ ?>
-                                                    <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" />
-                                                <?php }else{ ?>
-                                                    <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
-                                                <?php }?>
-                                            </div>
-                                        </div>
-                    
-                                    <?php }
 
-                                    //form in input pwd        
-                                    if($form['type'] == "password"){ ?> 
-                        
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
-                                            <div class="col-sm-6">
-                                
-                                                <?php if(isset($form["value"])){ ?>
-                                                    <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value=<?php echo $form['value']; ?> />
-                                                <?php }else{ ?>
-                                                    <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
-                                                <?php }?>
-                                            </div>
-                                        </div>
-                                    <?php }
+                                    switch ($form['type']) {
+                                        case 'text':  //form in input text ?>
 
-                                    // form in input checkbox
-                                    if($form["type"] == "checkbox"){ ?>
-    
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"><?php echo $this->translate($form['label'])?></label>
-                                            <div class="col-sm-6">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        
-                                                    <?php if(isset($form["checked"])){?>
-                                                        <input type="checkbox"  checked name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
-                                                    <?php }else{?>
-                                                        <input type="checkbox" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
-                                                    <?php } ?>
-                                                    <?php echo $this->translate($form['placeholder'])?>
-                                                    </label>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                                                <div class="col-sm-6">
+                                    
+                                                    <?php if(isset($form["value"])){ ?>
+                                                        <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" />
+                                                    <?php }else{ ?>
+                                                        <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
+                                                    <?php }?>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php } 
+                                            <?php 
+                                            break ; 
 
-                                    // form in input selectbox
-                                    if($form["type"] == "select"){ ?>
-                        
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
-                                            <div class="col-sm-6">
-                                                <select class="form-control" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?>>
-                                                    
-                                                    <?php foreach($form["select"] as $key => $value){ 
-                                                        if($value["key"] == $form["selected"]){?>
-                                                            <option value='<?php echo $value["key"];?>' selected><?php echo $value["label"];?></option>
-                                                        <?php }else{?>
-                                                            <option value='<?php echo $value["key"];?>'><?php echo $value["label"];?></option>
-                                                        <?php } ?>
-                                                    <?php } ?> 
-                                                </select>
+                                         case 'text_ro':  //form in input text read only ?>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" id=<?php echo $form['key']; ?> readonly />
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php }
+                                            <?php 
+                                            break ; 
 
-                                    // form in iput separator
-                                    if($form["type"] == "separator"){ ?> <br><legend></legend> <?php } 
-                                } ?>
+                                        case 'password' : //form in input password ?>
+                        
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                                                <div class="col-sm-6">
+                                    
+                                                    <?php if(isset($form["value"])){ ?>
+                                                        <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value=<?php echo $form['value']; ?> />
+                                                    <?php }else{ ?>
+                                                        <input type="password" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?>  />
+                                                    <?php }?>
+                                                </div>
+                                            </div>
+                                            <?php 
+                                            break ; 
+                                            
+                                        case 'checkbox' : // form in input checkbox ?>
+\    
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $this->translate($form['label'])?></label>
+                                                <div class="col-sm-6">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            
+                                                        <?php if(isset($form["checked"])){?>
+                                                            <input type="checkbox"  checked name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
+                                                        <?php }else{?>
+                                                            <input type="checkbox" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?> />
+                                                        <?php } ?>
+                                                        <?php echo $this->translate($form['placeholder'])?>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php 
+                                            break ; 
+                                            
+                                        case 'select' :  // form in input selectbox ?>
+                        
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?>>
+                                                        
+                                                        <?php foreach($form["select"] as $key => $value){ 
+                                                            if($value["key"] == $form["selected"]){?>
+                                                                <option value='<?php echo $value["key"];?>' selected><?php echo $value["label"];?></option>
+                                                            <?php }else{?>
+                                                                <option value='<?php echo $value["key"];?>'><?php echo $value["label"];?></option>
+                                                            <?php } ?>
+                                                        <?php } ?> 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <?php 
+                                            break ; 
+                                            
+                                        case 'multi_checkbox' : // form in input multiples selectbox ?>
+                        
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
+                                                <div class="col-sm-6">
+                                                    <div class="checkbox">
+                                                        <fieldset id="<?php echo $form['fieldset'];?>">
+                                                            <?php foreach($form["checkbox"] as $key => $value){ ?>
+                                                            
+                                                                <label>
+                                                                    <?php if($value["checked"] === "true"){?>
+                                                                        <input type="checkbox"  checked name="<?php echo $form['fieldset'].'[]'; ?>" value=<?php echo $value['key'];?>  id=<?php echo $value['key']; ?> />
+                                                                    <?php } else {?>
+                                                                        <input type="checkbox" name="<?php echo $form['fieldset'].'[]'; ?>" value=<?php echo $value['key'];?> id=<?php echo $value['key']; ?> />
+                                                                    <?php } ?>
+                                                                    <?php 
+                                                                        echo $this->translate($value['label']) ;
+                                                                        echo "&nbsp;&nbsp;";
+                                                                    ?>
+
+                                                                </label>
+                                                            <?php } ?>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            break ; 
+                                        
+                                        case 'button_add_rm' : // form in input buttons add/remove ?>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
+                                                <div class="col-sm-6">
+                                                     <button type="button" id="add_<?php echo $form['key'];?>" class="boxadd add_field" ></button>
+                                                     <button type="button" id="del_<?php echo $form['key'];?>" class="boxremove del_field" ></button>
+                                                </div>
+                                            </div>
+                                            <?php 
+                                            break ;
+
+                                        case 'separator' : // form in input separator ?>
+                                            <br><legend></legend> 
+                                            <?php 
+                                            break ;
+                                    } // End switch  
+                                } // End foreach ?>
                             </div>
                         </div>
                     </div>
@@ -146,7 +200,10 @@
 <script type="text/javascript">
 
     jQuery.noConflict();
+
     jQuery( document ).ready(function() {
+
+        formata_userfield_example() ;
         
         // Changle the icon of panel titles when clicked
         var allModules = "<?php echo $this->allModules ?>";
@@ -177,6 +234,62 @@
                 } 
             });
         });
+        // Start - Compose userfield name 
+        // IMPORTANT - verify:
+        // - agi/snep.php
+        // - lib/Snep/ModuleSettings/Manager.php
+        // - modules/default/controllers/ModuleSettingsController.php
+
+        // Constants controller
+        jQuery("input[name='usrfld[]']").change(function(){
+            if (jQuery(this).is(':checked')) {
+                jQuery('input[name="default_x_userfield"]').val(jQuery('input[name="default_x_userfield"]').val()+jQuery(this).val());
+            } else {
+                var replit = jQuery('input[name="default_x_userfield"]').val().replace(jQuery(this).val(),"");
+                jQuery('input[name="default_x_userfield"]').val(replit);
+            }
+            // Example result
+            formata_userfield_example() ;
+        });
+        //Hifem and Underline controllers
+        jQuery("#add_default_x_hifem").click(function(){
+            jQuery('input[name="default_x_userfield"]').val(jQuery('input[name="default_x_userfield"]').val()+"-");
+        });
+        jQuery("#del_default_x_hifem").click(function(){
+            var str=jQuery('input[name="default_x_userfield"]').val();
+            str = str.replace(/-([^-]*)$/,'$1');
+            jQuery('input[name="default_x_userfield"]').val(str);
+        });
+        jQuery("#add_default_x_underline").click(function() {
+            jQuery('input[name="default_x_userfield"]').val(jQuery('input[name="default_x_userfield"]').val()+"_");
+        });
+        jQuery("#del_default_x_underline").click(function(){
+            var str=jQuery('input[name="default_x_userfield"]').val();
+            str = str.replace(/_([^_]*)$/,'$1');
+            jQuery('input[name="default_x_userfield"]').val(str);
+        });
+
+        function formata_userfield_example() {
+            // Example result
+            var d = new Date();
+            var arr = { TS : Date.now(),
+                AA : d.getFullYear(),
+                MM : ("0" + (d.getMonth() + 1)).slice(-2),
+                DD : d.getDate(),
+                HH : d.getHours(),
+                ii : d.getMinutes(),
+                SR : "1001",
+                DS : "4839548000",
+                UD : jQuery('input[name=default_x_userfield_ud]').val(),
+            } ;
+            var result = jQuery('input[name="default_x_userfield"]').val();
+           
+            jQuery.each(arr, function (index, value) {
+                result = result.replace(index,value) ;
+            });
+            jQuery('input[name="default_x_userfield_example"]').val(result);
+        }
+        // End - Compose userfield name 
     });
 
 </script>

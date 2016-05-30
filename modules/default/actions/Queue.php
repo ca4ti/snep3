@@ -122,7 +122,11 @@ XML;
      */
     public function execute($asterisk, $request) {
         $log = Zend_Registry::get('log');
-
+        $calleridname = $asterisk->get_variable("CALLERID(name)");
+        $calleridnum = $asterisk->get_variable("CALLERID(num)");
+        if ($calleridname['data'] === "" || $calleridname['data'] === "unknown"){
+           $asterisk->set_variable("CALLERID(name)",$calleridnum['data']);
+        }
         $asterisk->answer();
         $result = $asterisk->exec('Queue', array($this->config['queue'],$this->config['options'],'','',$this->config['timeout']));
         if($result['result'] == -1) {

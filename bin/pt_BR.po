@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-30 14:31-0300\n"
+"POT-Creation-Date: 2016-05-30 16:36-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
@@ -131,6 +131,34 @@ msgstr ". Entre em contato com o administrador do sistema."
 msgid ". Source: "
 msgstr ". Origem: "
 
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "0"
+msgstr "0"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "1"
+msgstr "1"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "2"
+msgstr "2"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "3"
+msgstr "3"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "4"
+msgstr "4"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "5"
+msgstr "5"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "60"
+msgstr "60"
+
 #: ../modules/default/views/scripts/information/index.phtml:65
 msgid "88137-300 - Palhoça - SC - Brasil"
 msgstr "88137-300 - Palhoça - SC - Brasil"
@@ -232,6 +260,8 @@ msgstr "Grupo Atual"
 #: ../modules/default/controllers/SoundFilesController.php:87
 #: ../modules/default/controllers/TrunksController.php:190
 #: ../modules/default/controllers/UsersController.php:74
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Add"
 msgstr "Adicionar"
 
@@ -269,6 +299,7 @@ msgid "Add File"
 msgstr "Adicionar Arquivo"
 
 #: ../modules/default/views/scripts/extensions/index.phtml:24
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Add Multiple"
 msgstr "Adicionar Múltiplos"
 
@@ -315,6 +346,14 @@ msgstr "Adicionar Tronco"
 #: ../modules/default/views/scripts/users/index.phtml:17
 msgid "Add User"
 msgstr "Adicionar Usuário"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Add multiple"
+msgstr "Adicionar Múltiplos"
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "Add page to Dashboard"
+msgstr "Adicionar página ao Dashboard"
 
 #: ../modules/default/views/scripts/action-configs/index.phtml:25
 #: ../modules/default/views/scripts/calls-report/index.phtml:15
@@ -687,6 +726,11 @@ msgstr "Data da Ligação"
 msgid "Call Duration Limit"
 msgstr "Limite de Duração da Chamada"
 
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Call Ranking"
+msgstr "Ranking de Ligações"
+
 #: ../modules/default/controllers/RankingReportController.php:54
 msgid "Call Rankings"
 msgstr "Ranking de Ligações"
@@ -740,6 +784,8 @@ msgstr "Nome"
 #: ../modules/default/controllers/CallsReportController.php:270
 #: ../modules/default/controllers/CallsReportController.php:327
 #: ../modules/default/controllers/CallsReportController.php:405
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Calls"
 msgstr "Chamadas do Período"
 
@@ -774,7 +820,7 @@ msgstr "Chamadas completadas"
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:50
 #: ../modules/default/views/scripts/index/add.phtml:47
 #: ../modules/default/views/scripts/khomp-links/index.phtml:66
-#: ../modules/default/views/scripts/module-settings/index.phtml:191
+#: ../modules/default/views/scripts/module-settings/index.phtml:190
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:57
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:62
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:49
@@ -902,6 +948,10 @@ msgstr "Clique para visualizar"
 msgid "Client Key"
 msgstr "Chave do Cliente"
 
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Cnl Update"
+msgstr "Atualizar CNL"
+
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:49
 #: ../modules/default/views/scripts/contact-groups/index.phtml:33
 #: ../modules/default/views/scripts/contacts/addedit.phtml:10
@@ -969,7 +1019,7 @@ msgstr "Erro de Comunicação"
 msgid "Company Name"
 msgstr "Nome da Empresa"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Composition of the name of the recording file"
 msgstr "Composição do nome do arquivo de gravação"
 
@@ -978,8 +1028,14 @@ msgid "Conference Application"
 msgstr "Aplicação de Conferência"
 
 #: ../modules/default/controllers/ConferenceRoomsController.php:39
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Conference Rooms"
 msgstr "Salas de Conferência"
+
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Configuration"
+msgstr "Configuração"
 
 #: ../modules/default/controllers/CnlController.php:39
 #: ../modules/default/controllers/CnlController.php:68
@@ -1009,11 +1065,18 @@ msgstr "Constante inovação tecnológica"
 msgid "Contact Group"
 msgstr "Grupos de Contatos"
 
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Contact Groups"
+msgstr "Grupos de Contatos"
+
 #: ../modules/default/controllers/ContactsController.php:56
 #: ../modules/default/controllers/ContactsController.php:90
 #: ../modules/default/controllers/ContactsController.php:157
 #: ../modules/default/controllers/ContactsController.php:246
 #: ../modules/default/controllers/ContactsController.php:311
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Contacts"
 msgstr "Contatos"
 
@@ -1067,6 +1130,8 @@ msgstr "Copyright"
 #: ../modules/default/views/scripts/calls-report/view.phtml:54
 #: ../modules/default/views/scripts/calls-report/view.phtml:228
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:55
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Cost Center"
 msgstr "Centro de Custos"
 
@@ -1142,6 +1207,8 @@ msgstr "Diariamente"
 
 #: ../modules/default/controllers/IndexController.php:278
 #: ../modules/default/controllers/IndexController.php:381
+#: /var/www/html/snep/configs/titleOptions.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1190,6 +1257,14 @@ msgstr "Dia"
 msgid "Deactivated"
 msgstr "Desativado"
 
+#: /var/www/html/snep/modules/default/info.xml
+msgid "Default"
+msgstr "Padrão"
+
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Default Config"
+msgstr "Configuração Padrão"
+
 #: ../modules/default/controllers/ActionConfigsController.php:46
 #: ../modules/default/controllers/ActionConfigsController.php:106
 msgid "Default Configs"
@@ -1204,9 +1279,17 @@ msgstr "E-mail Padrão"
 msgid "Default Options"
 msgstr "Opção Padrão"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Default Settings"
+msgstr "Configuração Padrão"
+
 #: ../modules/default/views/scripts/parameters/index.phtml:64
 msgid "Default e-mail where the alerts will be sent to"
 msgstr "Email padrão para onde os alertas devem ser enviados"
+
+#: /var/www/html/snep/modules/default/info.xml
+msgid "Default module that provides basic features to Snep PBX."
+msgstr "Módulo padrão que provem as funcionalidades básicas ao Snep PBX."
 
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:39
 msgid "Default path"
@@ -1372,6 +1455,7 @@ msgstr "Negar"
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:22
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:24
 #: ../modules/default/views/scripts/sound-files/index.phtml:48
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Description"
 msgstr "Descrição"
 
@@ -1390,7 +1474,7 @@ msgstr "Ramais Destino"
 msgid "Destination Group"
 msgstr "Grupo Destino"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Destinity"
 msgstr "Destino"
 
@@ -1598,6 +1682,8 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/views/scripts/sound-files/index.phtml:99
 #: ../modules/default/views/scripts/trunks/index.phtml:71
 #: ../modules/default/views/scripts/users/index.phtml:70
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Edit"
 msgstr "Editar"
 
@@ -1636,6 +1722,10 @@ msgstr "Ativar Controle de Qualidade"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:373
 msgid "Enable follow-me"
 msgstr "Habilitar o Siga-me"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Enable recording"
+msgstr "Ativar Gravação"
 
 #: ../modules/default/controllers/KhompLinksController.php:97
 #: ../modules/default/controllers/KhompLinksController.php:204
@@ -1760,7 +1850,7 @@ msgstr "Erros foram detectados na configuração do SNEP, clique "
 msgid "Ex: 1000-1050;1060;1063;1070-1100"
 msgstr "Ex: 1000-1050;1060;1063;1070-1100"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Example"
 msgstr "Exemplo"
 
@@ -1781,12 +1871,14 @@ msgid "Exibition mode:"
 msgstr "Modo de exibição:"
 
 #: ../modules/default/views/scripts/export-data/index.phtml:236
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Export"
 msgstr "Exportar"
 
 #: ../modules/default/controllers/CallsReportController.php:406
 #: ../modules/default/controllers/RankingReportController.php:175
 #: ../modules/default/controllers/ServicesReportController.php:196
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Export CSV"
 msgstr "Exportar para CSV"
 
@@ -1797,12 +1889,18 @@ msgstr "Exportar Contatos"
 #: ../modules/default/views/scripts/calls-report/export.phtml:5
 #: ../modules/default/views/scripts/ranking-report/export.phtml:5
 #: ../modules/default/views/scripts/services-report/export.phtml:5
+#: /var/www/html/snep/configs/dashboard.xml
 msgid "Export Data"
 msgstr "Exportar Dados"
 
 #: ../modules/default/controllers/ExportDataController.php:112
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Export Data Table"
 msgstr "Exportar dados"
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "Export PDF"
+msgstr "Exportar para PDF"
 
 #: ../modules/default/controllers/ExportDataController.php:50
 msgid "Export Report"
@@ -1829,8 +1927,13 @@ msgstr "Expressão"
 #: ../modules/default/controllers/ExpressionAliasController.php:127
 #: ../modules/default/controllers/ExpressionAliasController.php:189
 #: ../modules/default/views/scripts/route/add_edit.phtml:36
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Expression Alias"
 msgstr "Alias de Expressão Regular"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Expression Aliases"
+msgstr "Aliasse de Expressão Regular"
 
 #: ../lib/PBX/Rule/ActionConfig.php:158
 #: ../modules/default/controllers/ExtensionsController.php:774
@@ -1858,6 +1961,11 @@ msgstr "Ramal"
 msgid "Extension Group"
 msgstr "Grupo de Ramal"
 
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Extension Groups"
+msgstr "Grupos de Ramais"
+
 #: ../modules/default/views/scripts/trunks/addedit.phtml:361
 msgid "Extension Mapping"
 msgstr "Mapeamento de Ramais"
@@ -1884,6 +1992,8 @@ msgstr "Ramal:"
 #: ../modules/default/views/scripts/ip-status/index.phtml:48
 #: ../modules/default/views/scripts/services-report/index.phtml:58
 #: ../modules/default/views/scripts/services-report/index.phtml:73
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Extensions"
 msgstr "Ramais"
 
@@ -2034,6 +2144,7 @@ msgstr "Livre"
 
 #: ../modules/default/controllers/SimulatorController.php:189
 #: ../modules/default/views/scripts/simulator/index.phtml:94
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Friday"
 msgstr "Sexta-Feira"
 
@@ -2080,6 +2191,7 @@ msgid "Go to a Context"
 msgstr "Desviar para Contexto"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:236
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Graphic"
 msgstr "Gráfico"
 
@@ -2123,7 +2235,7 @@ msgstr "Suporte de alta qualidade"
 msgid "Hostname"
 msgstr "Hostname"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Hour"
 msgstr "Hora"
 
@@ -2156,7 +2268,12 @@ msgstr "Expressão de Identificação"
 msgid "IP"
 msgstr "IP"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "IP Status"
+msgstr "Status IP"
+
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "ITC/Snep host notification"
 msgstr "Servidor de notificações do ITC/Snep"
 
@@ -2174,6 +2291,7 @@ msgid "If enabled the query will be slower"
 msgstr "Se habilitada, a consulta será mais lenta"
 
 #: ../modules/default/views/scripts/contacts/import.phtml:26
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Import"
 msgstr "Importar "
 
@@ -2218,6 +2336,7 @@ msgstr "Inband"
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:197
 #: ../modules/default/views/scripts/calls-report/view.phtml:159
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:34
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Incoming"
 msgstr "Entrada"
 
@@ -2331,14 +2450,21 @@ msgid "Khomp"
 msgstr "Khomp"
 
 #: ../modules/default/controllers/KhompLinksController.php:371
+#: /var/www/html/snep/configs/dashboard.xml
 msgid "Khomp Links"
 msgstr "Links Khomp"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Khomp Links Errors"
+msgstr "Erros Links Khomp"
+
 #: ../modules/default/controllers/KhompLinksController.php:51
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Khomp boards"
 msgstr "Placas Khomp"
 
 #: ../modules/default/controllers/ErrorsKhompController.php:51
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Khomp links errors"
 msgstr "Erros Links Khomp"
 
@@ -2443,14 +2569,20 @@ msgid "Login"
 msgstr "Login"
 
 #: ../modules/default/views/layouts/layout.phtml:164
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Logout"
 msgstr "Sair"
+
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Logs"
+msgstr "Logs"
 
 #: ../modules/default/actions/ActionLoop.php:63
 msgid "Loop"
 msgstr "Loop"
 
 #: ../modules/default/controllers/ContactsController.php:156
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Manage"
 msgstr "Cadastros"
 
@@ -2520,7 +2652,7 @@ msgstr "Mí­nimo de 5 caracteres"
 msgid "Minimum Call Time"
 msgstr "Tempo Mí­nimo da Ligação"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Minute"
 msgstr "Minuto"
 
@@ -2531,7 +2663,7 @@ msgstr "Controle de Minutos"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:406
 #: ../modules/default/views/scripts/trunks/addedit.phtml:405
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Minutes"
 msgstr "Minutos"
 
@@ -2552,6 +2684,8 @@ msgid "Modem Error"
 msgstr "Erro de modem"
 
 #: ../modules/default/controllers/ModuleSettingsController.php:50
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Module Settings"
 msgstr "Configuração de Módulos"
 
@@ -2562,6 +2696,7 @@ msgstr "Módulos"
 
 #: ../modules/default/controllers/SimulatorController.php:185
 #: ../modules/default/views/scripts/simulator/index.phtml:90
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Monday"
 msgstr "Segunda-feira"
 
@@ -2569,7 +2704,7 @@ msgstr "Segunda-feira"
 msgid "Monitor"
 msgstr "Monitor"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Month"
 msgstr "Mês"
 
@@ -2578,9 +2713,21 @@ msgstr "Mês"
 msgid "Monthly"
 msgstr "Mensalmente"
 
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "MultiCheckbox"
+msgstr "MultiCheckbox"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Music On Hold"
+msgstr "Música em Espera"
+
 #: ../modules/default/views/scripts/queues/addedit.phtml:16
 msgid "Music On Hold Class"
 msgstr "Classe da Música em Espera"
+
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Music on Hold"
+msgstr "Música em Espera"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:59
 #: ../modules/default/controllers/MusicOnHoldController.php:98
@@ -2590,6 +2737,7 @@ msgstr "Classe da Música em Espera"
 #: ../modules/default/controllers/MusicOnHoldController.php:264
 #: ../modules/default/controllers/MusicOnHoldController.php:334
 #: ../modules/default/controllers/MusicOnHoldController.php:356
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Music on Hold Sessions"
 msgstr "Sessões de Música em Espera"
 
@@ -2876,6 +3024,10 @@ msgstr "Em Ligação"
 msgid "Only numbers"
 msgstr "Somente números "
 
+#: /var/www/html/snep/modules/default/info.xml
+msgid "Opens Technology"
+msgstr "Opens Tecnologia"
+
 #: ../modules/default/views/scripts/information/index.phtml:62
 msgid "Opens Tecnologia "
 msgstr "Opens Tecnologia "
@@ -2921,6 +3073,10 @@ msgstr "Origem Original"
 msgid "Other"
 msgstr "Outro"
 
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Others"
+msgstr "Outros"
+
 #: ../modules/default/views/scripts/route/index.phtml:56
 msgid "Others Rule Only"
 msgstr "Somente Regras de Tipo Outras"
@@ -2931,6 +3087,7 @@ msgstr "Somente Regras de Tipo Outras"
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:202
 #: ../modules/default/views/scripts/calls-report/view.phtml:160
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:38
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Outgoing"
 msgstr "Saida"
 
@@ -2950,6 +3107,8 @@ msgstr "Cadeado"
 #: ../modules/default/controllers/ParametersController.php:48
 #: ../modules/default/views/scripts/logs/index.phtml:75
 #: ../modules/default/views/scripts/logs/index.phtml:77
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Parameters"
 msgstr "Parâmetros"
 
@@ -3066,6 +3225,8 @@ msgstr "Grupos de Captura"
 #: ../modules/default/controllers/PickupGroupsController.php:52
 #: ../modules/default/controllers/PickupGroupsController.php:66
 #: ../modules/default/controllers/PickupGroupsController.php:136
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Pickup Groups"
 msgstr "Grupos de Captura"
 
@@ -3230,6 +3391,10 @@ msgstr "Visualizar"
 msgid "Prio"
 msgstr "Prio"
 
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Priority"
+msgstr "Prioridade"
+
 #: ../modules/default/controllers/ProfilesController.php:242
 #: ../modules/default/views/scripts/users/addedit.phtml:46
 #: ../modules/default/views/scripts/users/index.phtml:39
@@ -3240,6 +3405,8 @@ msgstr "Perfil"
 #: ../modules/default/controllers/ProfilesController.php:71
 #: ../modules/default/controllers/ProfilesController.php:135
 #: ../modules/default/controllers/ProfilesController.php:212
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Profiles"
 msgstr "Perfis"
 
@@ -3309,6 +3476,8 @@ msgstr "Áudio de anúncio da fila"
 #: ../modules/default/controllers/QueuesController.php:184
 #: ../modules/default/controllers/QueuesController.php:358
 #: ../modules/default/views/scripts/ip-status/index.phtml:147
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Queues"
 msgstr "Filas"
 
@@ -3320,6 +3489,8 @@ msgstr "Grupos de Filas"
 #: ../modules/default/controllers/QueuesGroupsController.php:81
 #: ../modules/default/controllers/QueuesGroupsController.php:137
 #: ../modules/default/controllers/QueuesGroupsController.php:221
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Queues Groups"
 msgstr "Grupos de Filas "
 
@@ -3354,6 +3525,10 @@ msgstr "Ver Todas Notificações"
 msgid "Real Time"
 msgstr "Tempo Real"
 
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "Recharge the page"
+msgstr "Recarregar a página"
+
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:50
 #: ../modules/default/views/scripts/services-report/index.phtml:115
 msgid "Record"
@@ -3366,6 +3541,10 @@ msgstr "Ouvir gravação"
 #: ../modules/default/views/scripts/parameters/index.phtml:221
 msgid "Recorded Files Path"
 msgstr "Caminho dos arquivos de gravação"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Recording"
+msgstr "Gravação"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:202
 msgid "Recording Application"
@@ -3446,6 +3625,7 @@ msgid "Remove All"
 msgstr "Apagar Todos"
 
 #: ../modules/default/views/scripts/extensions/index.phtml:26
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Remove Multiple"
 msgstr "Apagar Múltiplos"
 
@@ -3473,6 +3653,10 @@ msgstr "Substituir por"
 msgid "Replace source extension"
 msgstr "Substituir origem"
 
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "Report"
+msgstr "Relatórios"
+
 #: ../modules/default/views/scripts/calls-report/index.phtml:216
 #: ../modules/default/views/scripts/khomp-links/index.phtml:35
 #: ../modules/default/views/scripts/ranking-report/index.phtml:102
@@ -3494,6 +3678,7 @@ msgstr "Reportar membro como ocupado quando estiver em ligação"
 #: ../modules/default/controllers/ServicesReportController.php:49
 #: ../modules/default/controllers/ServicesReportController.php:87
 #: ../modules/default/controllers/ServicesReportController.php:194
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Reports"
 msgstr "Relatórios"
 
@@ -3616,6 +3801,8 @@ msgstr "Chamando"
 #: ../modules/default/controllers/RouteController.php:355
 #: ../modules/default/controllers/RouteController.php:618
 #: ../modules/default/controllers/SimulatorController.php:51
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Routes"
 msgstr "Rotas"
 
@@ -3626,6 +3813,10 @@ msgstr "Rotina"
 #: ../modules/default/views/scripts/profiles/permission.phtml:16
 msgid "Routines"
 msgstr "Rotinas"
+
+#: /var/www/html/snep/modules/default/resources.xml
+msgid "Routing"
+msgstr "Regras de Negócio"
 
 #: ../modules/default/views/scripts/information/index.phtml:63
 msgid "Rua dos Cisnes, 541 "
@@ -3689,6 +3880,7 @@ msgstr "O mesmo em ambos os servidores"
 
 #: ../modules/default/controllers/SimulatorController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:95
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Saturday"
 msgstr "Sabado"
 
@@ -3708,7 +3900,7 @@ msgstr "Sabado"
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:49
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:48
 #: ../modules/default/views/scripts/index/add.phtml:45
-#: ../modules/default/views/scripts/module-settings/index.phtml:189
+#: ../modules/default/views/scripts/module-settings/index.phtml:188
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:55
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:60
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:47
@@ -3762,6 +3954,10 @@ msgstr "Buscar um agente disponí­vel (roundrobin)"
 #: ../modules/default/views/scripts/action-configs/edit.phtml:17
 msgid "Seconds left to alert"
 msgstr "Tempo restante para alerta"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Select"
+msgstr "Selecionar"
 
 #: ../modules/default/controllers/ExtensionsController.php:532
 msgid "Select a Khomp board from the list"
@@ -3886,7 +4082,12 @@ msgstr "Serviços"
 #: ../modules/default/controllers/ServicesReportController.php:50
 #: ../modules/default/controllers/ServicesReportController.php:88
 #: ../modules/default/controllers/ServicesReportController.php:195
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Services Use"
+msgstr "Serviços Utilizados"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "Services Used"
 msgstr "Serviços Utilizados"
 
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:12
@@ -3982,6 +4183,8 @@ msgstr "Simular"
 
 #: ../modules/default/controllers/SimulatorController.php:52
 #: ../modules/default/views/scripts/route/index.phtml:45
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/configs/titleOptions.xml
 msgid "Simulator"
 msgstr "Simulador"
 
@@ -4034,6 +4237,8 @@ msgstr "Arquivo de Som"
 #: ../modules/default/controllers/SoundFilesController.php:186
 #: ../modules/default/controllers/SoundFilesController.php:274
 #: ../modules/default/controllers/SoundFilesController.php:346
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Sound Files"
 msgstr "Arquivos de Som"
 
@@ -4103,6 +4308,7 @@ msgstr "Senha Estática:"
 #: ../modules/default/views/scripts/calls-report/index.phtml:137
 #: ../modules/default/views/scripts/calls-report/view.phtml:51
 #: ../modules/default/views/scripts/services-report/view.phtml:38
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Status"
 msgstr "Status"
 
@@ -4137,6 +4343,7 @@ msgstr "Sufixo"
 
 #: ../modules/default/controllers/SimulatorController.php:191
 #: ../modules/default/views/scripts/simulator/index.phtml:96
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Sunday"
 msgstr "Domingo"
 
@@ -4162,6 +4369,10 @@ msgstr "Sincronizar arquivos"
 msgid "Synthetic"
 msgstr "Sintético"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "System Diagnosis"
+msgstr "Diagnóstico do Sistema"
+
 #: ../modules/default/views/scripts/parameters/index.phtml:186
 msgid "System Language"
 msgstr "Linguagem do Sistema"
@@ -4170,12 +4381,17 @@ msgstr "Linguagem do Sistema"
 msgid "System Locale"
 msgstr "Localidade do Sistema"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "System Logs"
+msgstr "Logs do Sistema"
+
 #: ../modules/default/controllers/LogsController.php:46
 #: ../modules/default/controllers/LogsController.php:81
 msgid "System Logs "
 msgstr "Logs do Sistema"
 
 #: ../modules/default/controllers/InspectorController.php:46
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "System Status"
 msgstr "Status do Sistema"
 
@@ -4207,9 +4423,17 @@ msgstr "Equipe"
 msgid "Terminal"
 msgstr "Terminal"
 
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "Test Again"
+msgstr "Teste Novamente"
+
 #: ../modules/default/views/scripts/inspector/index.phtml:45
 msgid "Test again"
 msgstr "Teste Novamente"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Text"
+msgstr "Texto"
 
 #: ../modules/default/controllers/ParametersController.php:60
 msgid "The File includes/setup.conf does not have permission to be modified."
@@ -4547,6 +4771,7 @@ msgstr ""
 
 #: ../modules/default/controllers/SimulatorController.php:188
 #: ../modules/default/views/scripts/simulator/index.phtml:93
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Thursday"
 msgstr "Quinta-feira"
 
@@ -4639,6 +4864,8 @@ msgstr "Tronco"
 #: ../modules/default/controllers/TrunksController.php:284
 #: ../modules/default/controllers/TrunksController.php:431
 #: ../modules/default/views/scripts/ip-status/index.phtml:97
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Trunks"
 msgstr "Troncos"
 
@@ -4648,6 +4875,7 @@ msgstr "Configuração dos Troncos"
 
 #: ../modules/default/controllers/SimulatorController.php:186
 #: ../modules/default/views/scripts/simulator/index.phtml:91
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Tuesday"
 msgstr "Terça-feira"
 
@@ -4663,6 +4891,7 @@ msgstr "Terça-feira"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:42
 #: ../modules/default/views/scripts/trunks/addedit.phtml:165
 #: ../modules/default/views/scripts/trunks/index.phtml:41
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Type"
 msgstr "Tipo"
 
@@ -4720,7 +4949,7 @@ msgstr "Não Atendida"
 msgid "Undefined"
 msgstr "Indefinido"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Unix timestamp"
 msgstr "Data Unix"
 
@@ -4781,11 +5010,11 @@ msgstr "Usuário"
 msgid "User already exists."
 msgstr "Usuário já existe."
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "User defined"
 msgstr "Definido pelo usuário"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "User defined string"
 msgstr "Spring definida pelo usuário"
 
@@ -4812,7 +5041,7 @@ msgstr "Permissão do usuário"
 msgid "Userfield"
 msgstr "Userfield"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Userfield result"
 msgstr "Formato resultante"
 
@@ -4832,6 +5061,8 @@ msgstr "Usuário"
 #: ../modules/default/controllers/UsersController.php:159
 #: ../modules/default/controllers/UsersController.php:185
 #: ../modules/default/controllers/UsersController.php:332
+#: /var/www/html/snep/configs/dashboard.xml
+#: /var/www/html/snep/modules/default/resources.xml
 msgid "Users"
 msgstr "Usuários"
 
@@ -4855,6 +5086,10 @@ msgstr "Detalhado"
 #: ../modules/default/views/scripts/logs/index.phtml:84
 msgid "Verbose (only numbers)"
 msgstr "Somente números"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "View"
+msgstr "Ver"
 
 #: ../modules/default/views/scripts/khomp-links/index.phtml:49
 msgid "View status of the channel?"
@@ -4902,11 +5137,16 @@ msgstr "Enviamos um código de acesso ao e-mail:"
 
 #: ../modules/default/controllers/SimulatorController.php:187
 #: ../modules/default/views/scripts/simulator/index.phtml:92
+#: /var/www/html/snep/modules/default/forms/route.xml
 msgid "Wednesday"
 msgstr "Quarta-feira"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:113
 msgid "Week Day"
+msgstr "Dias da Semana"
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "Week Days"
 msgstr "Dias da Semana"
 
 #: ../modules/default/controllers/IndexController.php:200
@@ -4951,7 +5191,7 @@ msgstr "Não gostaria de me registrar neste momento"
 msgid "XX.XXX-XXX"
 msgstr "XX.XXX-XXX"
 
-#: /var/www/html/snep/bin/strings_extras.xml
+#: /var/www/html/snep/modules/default/strings_extras.xml
 msgid "Year"
 msgstr "Ano"
 
@@ -5139,13 +5379,53 @@ msgstr "[snep] Aviso de uso do tronco"
 msgid "_csv_"
 msgstr "_csv_"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "action-configs/index"
+msgstr "action-configs/index"
+
 #: ../modules/default/controllers/CallsReportController.php:455
 msgid "calls"
 msgstr "chamadas"
 
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "calls-report/index"
+msgstr "calls-report/index"
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "chart_view_icon.png"
+msgstr "chart_view_icon.png"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "conference-rooms/index"
+msgstr "conference-rooms/index"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "contact-groups/add"
+msgstr "contact-groups/add"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "contact-groups/index"
+msgstr "contact-groups/index"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "contacts/add"
+msgstr "contacts/add"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "contacts/index"
+msgstr "contacts/index"
+
 #: ../modules/default/views/scripts/information/index.phtml:68
 msgid "copyright(c) All rights reserved"
 msgstr "copyright(c) Todos os direitos reservados"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "cost-center/add"
+msgstr "cost-center/add"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "cost-center/index"
+msgstr "cost-center/index"
 
 #: ../modules/default/actions/EmailAction.php:69
 msgid ""
@@ -5154,6 +5434,54 @@ msgid ""
 msgstr ""
 "Deseja exibir informações de origem e de destino da chamada no corpo do e-mail?"
 
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "edit_icon.png"
+msgstr "edit_icon.png"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "errors-khomp/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "exit_icon.png"
+msgstr ""
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "expor_icon.png"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "export-data/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "expression-alias/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "expression-alias/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "extensions-groups/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "extensions-groups/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "extensions/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "extensions/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "extensions/multiadd"
+msgstr ""
+
 #: ../modules/default/views/scripts/systemstatus/index.phtml:70
 msgid "here"
 msgstr "aqui"
@@ -5161,6 +5489,10 @@ msgstr "aqui"
 #: ../modules/default/views/scripts/information/index.phtml:66
 msgid "http://www.opens.com.br"
 msgstr "http://www.opens.com.br"
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "import_icon.png"
+msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:140
 #: ../modules/default/actions/DiscarTronco.php:220
@@ -5174,6 +5506,38 @@ msgstr "em milisegundos"
 #: ../modules/default/views/scripts/action-configs/edit.phtml:9
 msgid "in seconds"
 msgstr "em segundos"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "inspector/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "ip-status/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "khomp-links/index"
+msgstr ""
+
+#: /var/www/html/snep/lib/linfo/tests/phpunit.xml
+msgid "linfo/"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "logs/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "module-settings/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "music-on-hold/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "music-on-hold/index"
+msgstr ""
 
 #: ../modules/default/views/scripts/ip-status/index.phtml:80
 msgid "no extensions available"
@@ -5191,9 +5555,53 @@ msgstr "off"
 msgid "on"
 msgstr "on"
 
+#: /var/www/html/snep/lib/linfo/tests/phpunit.xml
+msgid "os/"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "parameters/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "pickup-groups/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "pickup-groups/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "profiles/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "profiles/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "queues-groups/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "queues-groups/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "queues/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "queues/index"
+msgstr ""
+
 #: ../modules/default/controllers/RankingReportController.php:219
 msgid "ranking"
 msgstr "Classificação"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "ranking-report/index"
+msgstr ""
 
 #: ../modules/default/controllers/ProfilesController.php:291
 #: ../modules/default/controllers/ProfilesController.php:311
@@ -5201,8 +5609,156 @@ msgstr "Classificação"
 msgid "read"
 msgstr "Leitura"
 
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "report_view_icon.png"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "route/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "route/index"
+msgstr ""
+
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "routeForm"
+msgstr ""
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "send_to_dashboard_icon.png"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "services-report/index"
+msgstr ""
+
 #: ../modules/default/controllers/ServicesReportController.php:232
 msgid "services_use"
+msgstr ""
+
+#: /var/www/html/snep/configs/titleOptions.xml
+msgid "simulador_icon.png"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "simulator/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-alias"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-arquivo-som"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-chamadas"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-conf-padrao"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-conferencia"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-contatos"
+msgstr "sn-contatos"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-erros-links"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-etiqueta"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-filas"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-grupo-captura"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-grupo-contatos"
+msgstr "sn-grupo-contatos"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-grupo-filas"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-grupo-ramais"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-links"
+msgstr "sn-links"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-logs"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-parametros"
+msgstr "sn-parametros"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-perfis"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-ramal"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-ranking"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-regras"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-servicos"
+msgstr "sn-servicos"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-simulador-regra"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-som-espera"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-status-ip"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-status-sistema"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-troncos"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sn-usuarios"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sound-files/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "sound-files/index"
 msgstr ""
 
 #: ../modules/default/actions/ActionLoop.php:93
@@ -5213,38 +5769,39 @@ msgstr "Tempos"
 msgid "to"
 msgstr "até"
 
+#: /var/www/html/snep/modules/default/forms/route.xml
+msgid "true"
+msgstr "verdadeiro"
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "trunks/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "trunks/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "users/add"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "users/index"
+msgstr ""
+
+#: /var/www/html/snep/configs/dashboard.xml
+msgid "view"
+msgstr "ver"
+
 #: ../modules/default/controllers/ProfilesController.php:289
 #: ../modules/default/controllers/ProfilesController.php:309
 #: ../modules/default/controllers/UsersController.php:230
 msgid "write"
 msgstr "Escrita"
 
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "1"
-#~ msgstr "1"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "60"
-#~ msgstr "60"
-
-#~ msgid "Add multiple"
-#~ msgstr "Adicionar Múltiplos"
-
-#~ msgid "Add page to Dashboard"
-#~ msgstr "Adicionar página ao Dashboard"
+#: /var/www/html/snep/modules/default/info.xml
+msgid "www.sneplivre.com.br"
+msgstr "www.sneplivre.com.br"
 
 #~ msgid "Agile for Incoming Calls"
 #~ msgstr "Agile para chamadas de entrada"
@@ -5252,164 +5809,8 @@ msgstr "Escrita"
 #~ msgid "Automation"
 #~ msgstr "Automaticação"
 
-#~ msgid "Call Ranking"
-#~ msgstr "Ranking de Ligações"
-
-#~ msgid "Cnl Update"
-#~ msgstr "Atualizar CNL"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuração"
-
-#~ msgid "Contact Groups"
-#~ msgstr "Grupos de Contatos"
-
-#~ msgid "Default"
-#~ msgstr "Padrão"
-
-#~ msgid "Default Config"
-#~ msgstr "Configuração Padrão"
-
-#~ msgid "Default Settings"
-#~ msgstr "Configuração Padrão"
-
-#~ msgid "Default module that provides basic features to Snep PBX."
-#~ msgstr "Módulo padrão que provem as funcionalidades básicas ao Snep PBX."
-
-#~ msgid "Enable recording"
-#~ msgstr "Ativar Gravação"
-
-#~ msgid "Export PDF"
-#~ msgstr "Exportar para PDF"
-
-#~ msgid "Expression Aliases"
-#~ msgstr "Aliasse de Expressão Regular"
-
-#~ msgid "Extension Groups"
-#~ msgstr "Grupos de Ramais"
-
-#~ msgid "IP Status"
-#~ msgstr "Status IP"
-
-#~ msgid "Khomp Links Errors"
-#~ msgstr "Erros Links Khomp"
-
-#~ msgid "Logs"
-#~ msgstr "Logs"
-
-#~ msgid "MultiCheckbox"
-#~ msgstr "MultiCheckbox"
-
-#~ msgid "Music On Hold"
-#~ msgstr "Música em Espera"
-
-#~ msgid "Music on Hold"
-#~ msgstr "Música em Espera"
-
-#~ msgid "Opens Technology"
-#~ msgstr "Opens Tecnologia"
-
-#~ msgid "Others"
-#~ msgstr "Outros"
-
-#~ msgid "Priority"
-#~ msgstr "Prioridade"
-
-#~ msgid "Recharge the page"
-#~ msgstr "Recarregar a página"
-
-#~ msgid "Recording"
-#~ msgstr "Gravação"
-
-#~ msgid "Report"
-#~ msgstr "Relatórios"
-
-#~ msgid "Routing"
-#~ msgstr "Regras de Negócio"
-
-#~ msgid "Select"
-#~ msgstr "Selecionar"
-
-#~ msgid "Services Used"
-#~ msgstr "Serviços Utilizados"
-
-#~ msgid "System Diagnosis"
-#~ msgstr "Diagnóstico do Sistema"
-
-#~ msgid "System Logs"
-#~ msgstr "Logs do Sistema"
-
-#~ msgid "Test Again"
-#~ msgstr "Teste Novamente"
-
-#~ msgid "Text"
-#~ msgstr "Texto"
-
-#~ msgid "View"
-#~ msgstr "Ver"
-
-#~ msgid "Week Days"
-#~ msgstr "Dias da Semana"
-
-#~ msgid "action-configs/index"
-#~ msgstr "action-configs/index"
-
-#~ msgid "calls-report/index"
-#~ msgstr "calls-report/index"
-
-#~ msgid "chart_view_icon.png"
-#~ msgstr "chart_view_icon.png"
-
-#~ msgid "conference-rooms/index"
-#~ msgstr "conference-rooms/index"
-
-#~ msgid "contact-groups/add"
-#~ msgstr "contact-groups/add"
-
-#~ msgid "contact-groups/index"
-#~ msgstr "contact-groups/index"
-
-#~ msgid "contacts/add"
-#~ msgstr "contacts/add"
-
-#~ msgid "contacts/index"
-#~ msgstr "contacts/index"
-
-#~ msgid "cost-center/add"
-#~ msgstr "cost-center/add"
-
-#~ msgid "cost-center/index"
-#~ msgstr "cost-center/index"
-
-#~ msgid "edit_icon.png"
-#~ msgstr "edit_icon.png"
-
-#~ msgid "sn-contatos"
-#~ msgstr "sn-contatos"
-
-#~ msgid "sn-grupo-contatos"
-#~ msgstr "sn-grupo-contatos"
-
-#~ msgid "sn-links"
-#~ msgstr "sn-links"
-
-#~ msgid "sn-parametros"
-#~ msgstr "sn-parametros"
-
-#~ msgid "sn-servicos"
-#~ msgstr "sn-servicos"
-
-#~ msgid "true"
-#~ msgstr "verdadeiro"
-
-#~ msgid "view"
-#~ msgstr "ver"
-
 #~ msgid "www.opens.com.br"
 #~ msgstr "www.opens.com.br"
-
-#~ msgid "www.sneplivre.com.br"
-#~ msgstr "www.sneplivre.com.br"
 
 #~ msgid "Hide routes is disable"
 #~ msgstr "Exibindo todas as regras"

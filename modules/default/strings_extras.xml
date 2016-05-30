@@ -1,4 +1,5 @@
-<xml>
+<?xml version="1.0" encoding="UTF-8"?>
+<default>
 	<string label="Hour"></string>
    <string label="Minutes"></string>
    <string label="Unix timestamp"></string>
@@ -12,4 +13,4 @@
    <string label="Userfield result"></string>
    <string label="Example"></string>
    <string label="ITC/Snep host notification"></string>
-</xml>
+</default>

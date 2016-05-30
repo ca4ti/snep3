@@ -4,7 +4,6 @@
 * Correção no comportamento do menu principal
 - Sistema de Ajuda on-line
 - Manual do usuário
-- Ajustes CSS
 - Calendario de feriados
 - Rever/redefinir conceitos/funcionalidades para Centros de Custos
 - Rever/redefinir conceitos/funcionalidades para Audios
@@ -31,9 +30,12 @@
 ---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)
-- NOVO - identificacao do modelo do aparelho autenticado (Heros)
+- NOVO - identificacao do modelo do aparelho autenticado (contribuição: Heros do Amaral)
 - NOVO - controle de ramais ocupados quando fazem parte de uma fila
 - NOVO - Parametrizacao do nome do arquivo de gravacao
+- NOVO - Permitir portas diferentes da 80 para configurar servidores web (Apache lighttp, etc)
+- ATUALIZADO - Filas de atendimento - novo campo para identificar status do ramal
+- ATUALIZADO - Tela grupo de Captura - visualizar número de ramais em cada grupo
 ---------------------------------
 **3.0 Estável + 3.01, 3.02 **
 

@@ -313,7 +313,18 @@ class CallsReportController extends Zend_Controller_Action {
                                 // Times
                                 $item->billsec = $format->fmt_segundos(array("a" => $item->billsec, "b" => 'hms'));
                                 $item->duration = $format->fmt_segundos(array("a" => $item->duration, "b" => 'hms'));
-                                
+
+                                if($item->disposition == 'ANSWERED'){
+                                    $class = "label label-success";
+                                }elseif($item->disposition == 'NO ANSWER'){
+                                    $class = "label label-danger";
+                                }elseif($item->disposition == 'BUSY'){
+                                    $class = "label label-warning";
+                                }else{
+                                    $class = "label label-default"; 
+                                }
+                                $item->class = $class;
+                                $item->disposition = $this->view->translate($item->disposition);
                                 $listItems[$cont] = $item;
 
                                 $cont++;

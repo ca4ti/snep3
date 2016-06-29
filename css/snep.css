@@ -38,6 +38,10 @@ body {
     font-size: 14px;
 }
 
+.header_table_info{
+    background-color: #f26c45;
+    color: #fff;
+}
 
 .ip-status > h4 > a {
     color: #f26c45;

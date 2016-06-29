@@ -76,7 +76,8 @@ header('Cache-Control: max-age=0' );
 										<td><?php echo $callsList->dia; ?></td>
 										<td class="text-center"><?php echo $callsList->src; ?></td>
 										<td class="text-center"><?php echo $callsList->dst; ?></td>
-										<td class="text-center"><?php echo $this->translate($callsList->disposition); ?></td>
+										
+										<td class="text-center"><span class="<?php echo $callsList->class;?>"><?php echo $this->translate($callsList->disposition); ?></span></td>
 										<td><?php echo $callsList->duration; ?></td>
 										<td><?php echo $callsList->billsec; ?></td>
 										<td><?php echo $callsList->nome; ?></td>
@@ -122,26 +123,13 @@ header('Cache-Control: max-age=0' );
 	                	</tfoot>
 		            </table>
 
-		            <table class="table table-striped table-bordered table-hover">
-		            	<tr>
-					       <td colspan="12">
-					          <b><?php echo $this->translate("Subtotal"); ?>:</b>
-								&nbsp;&nbsp;
-								<b><?php echo $this->totals->TOTALS;?></b>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						   	    <?php echo $this->translate("Answered");?>:&nbsp;
-								<b><?php echo $this->totals->ANSWERED;?></b>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<?php echo $this->translate("Not Answered"); ?>:&nbsp;
-								<b><?php echo $this->totals->NOANSWER;?></b>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<?php echo $this->translate("Busy");?>:&nbsp;
-								<b><?php echo $this->totals->BUSY;?></b>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<?php echo $this->translate("Failed");?>:&nbsp;
-								<b><?php echo $this->totals->FAILED;?></b>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					       </td>
+		            <table class="table table-bordered">
+		            	<tr class="header_table_info">
+					       <td><?php echo $this->translate("Subtotal"); ?>: <?php echo $this->totals->TOTALS;?></td>
+							<td><?php echo $this->translate("Answered");?>: <?php echo $this->totals->ANSWERED;?></td>
+						   	<td><?php echo $this->translate("Not Answered"); ?>: <?php echo $this->totals->NOANSWER;?></td>    
+							<td><?php echo $this->translate("Busy");?>: <?php echo $this->totals->BUSY;?></td>
+						    <td><?php echo $this->translate("Failed");?>: <?php echo $this->totals->FAILED;?></td>
 					    </tr>
 		            </table><br>
 

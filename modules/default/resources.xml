@@ -87,7 +87,7 @@
         <resource id="route" label="Routes" font="sn-rotas">
             <resource id="write"></resource>
         </resource>
-        <resource id="action-configs" label="Default Config" font="sn-conf-padrao">
+        <resource id="action-configs" label="Default Configs" font="sn-conf-padrao">
             <resource id="write"></resource>
         </resource>
         <resource id="expression-alias" label="Expression Alias" font="sn-alias">

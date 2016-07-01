@@ -359,7 +359,20 @@ class CallsReportController extends Zend_Controller_Action {
                             
                             if($type == 'graphic'){
 
-                                $this->renderScript('calls-report/graphic.phtml');
+                                $http = curl_init("https://www.gstatic.com/charts/loader.js");
+                                $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                                curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+                                $http_response = curl_exec($http);
+                                $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                                curl_close($http);
+
+                                if(!$httpcode){
+                                    $this->view->error_message = $this->view->translate("Error generating chart. Check your connection!");
+                                    $this->renderScript('error/sneperror.phtml');
+                                    
+                                }else{
+                                    $this->renderScript('calls-report/graphic.phtml');
+                                }
 
                             }
                             

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-29 09:05-0300\n"
+"POT-Creation-Date: 2016-07-01 10:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr ""
 msgid ". Please contact the administrator."
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:402
+#: ../modules/default/controllers/CallsReportController.php:409
 #: ../modules/default/controllers/RankingReportController.php:159
 #: ../modules/default/controllers/ServicesReportController.php:175
 #: ../modules/default/controllers/ExportDataController.php:68
@@ -158,10 +158,6 @@ msgstr ""
 #: ../modules/webapi/views/scripts/automation/rdservices.phtml:17
 #: ../modules/webapi/views/scripts/automation/services.phtml:88
 msgid "ADD RD Services"
-msgstr ""
-
-#: ../modules/default/controllers/CallsReportController.php:332
-msgid "ANSWERED"
 msgstr ""
 
 #: ../modules/webapi/controllers/AutomationController.php:451
@@ -526,7 +522,7 @@ msgstr ""
 msgid "Alterar"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:445
+#: ../modules/default/controllers/CallsReportController.php:452
 msgid "Amaflags"
 msgstr ""
 
@@ -540,7 +536,7 @@ msgstr ""
 msgid "Analítico"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:323
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:121
 msgid "Answer"
 msgstr ""
 
@@ -549,10 +545,10 @@ msgstr ""
 msgid "Answerd"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:133
-#: ../modules/default/views/scripts/calls-report/view.phtml:178
-#: ../modules/default/views/scripts/calls-report/view.phtml:202
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:80
+#: ../modules/default/views/scripts/calls-report/view.phtml:129
+#: ../modules/default/views/scripts/calls-report/view.phtml:165
+#: ../modules/default/views/scripts/calls-report/view.phtml:189
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:52
 #: ../modules/default/views/scripts/calls-report/index.phtml:141
 msgid "Answered"
 msgstr ""
@@ -681,10 +677,6 @@ msgstr ""
 msgid "Ações"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:330
-msgid "BUSY"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsController.php:676
 #: ../modules/default/controllers/ExtensionsController.php:705
 #: ../modules/default/controllers/ExtensionsController.php:779
@@ -771,11 +763,11 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:200
 #: ../modules/default/controllers/KhompLinksController.php:217
 #: ../modules/default/controllers/KhompLinksController.php:228
-#: ../modules/default/views/scripts/calls-report/view.phtml:139
-#: ../modules/default/views/scripts/calls-report/view.phtml:180
-#: ../modules/default/views/scripts/calls-report/view.phtml:204
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:90
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:331
+#: ../modules/default/views/scripts/calls-report/view.phtml:131
+#: ../modules/default/views/scripts/calls-report/view.phtml:167
+#: ../modules/default/views/scripts/calls-report/view.phtml:191
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:54
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:123
 #: ../modules/default/views/scripts/calls-report/index.phtml:147
 msgid "Busy"
 msgstr ""
@@ -790,6 +782,14 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:191
 #: ../modules/default/controllers/KhompLinksController.php:192
 msgid "Busy Outgoing"
+msgstr ""
+
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:8
+msgid "By Status Call"
+msgstr ""
+
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:19
+msgid "By Type of Cost Center"
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:201
@@ -834,7 +834,7 @@ msgstr ""
 msgid "Call Recording Configuration"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:439
+#: ../modules/default/controllers/CallsReportController.php:446
 #: ../modules/default/views/scripts/khomp-links/view.phtml:55
 msgid "Call Status"
 msgstr ""
@@ -863,7 +863,7 @@ msgstr ""
 msgid "Call status"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:447
+#: ../modules/default/controllers/CallsReportController.php:454
 msgid "Calldate"
 msgstr ""
 
@@ -885,8 +885,8 @@ msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:55
 #: ../modules/default/controllers/CallsReportController.php:270
-#: ../modules/default/controllers/CallsReportController.php:344
-#: ../modules/default/controllers/CallsReportController.php:422
+#: ../modules/default/controllers/CallsReportController.php:338
+#: ../modules/default/controllers/CallsReportController.php:429
 msgid "Calls"
 msgstr ""
 
@@ -986,7 +986,7 @@ msgstr ""
 
 #: ../modules/cc/views/scripts/dac/index.phtml:95
 #: ../modules/default/controllers/TrunksController.php:83
-#: ../modules/default/controllers/CallsReportController.php:448
+#: ../modules/default/controllers/CallsReportController.php:455
 #: ../modules/default/views/scripts/khomp-links/view.phtml:53
 #: ../modules/default/views/scripts/ip-status/index.phtml:61
 #: ../modules/default/views/scripts/extensions/addedit.phtml:263
@@ -1112,7 +1112,7 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:432
+#: ../modules/default/controllers/CallsReportController.php:439
 msgid "Code Cost Center"
 msgstr ""
 
@@ -1132,7 +1132,7 @@ msgstr ""
 msgid "Code sent to your email"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:446
+#: ../modules/default/controllers/CallsReportController.php:453
 msgid "Code unique"
 msgstr ""
 
@@ -1222,7 +1222,7 @@ msgstr ""
 msgid "Contains"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:444
+#: ../modules/default/controllers/CallsReportController.php:451
 #: ../modules/default/actions/GoContext.php:92
 msgid "Context"
 msgstr ""
@@ -1239,7 +1239,7 @@ msgstr ""
 msgid "Conversation"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:441
+#: ../modules/default/controllers/CallsReportController.php:448
 msgid "Conversation (seconds)"
 msgstr ""
 
@@ -1258,19 +1258,20 @@ msgid "Copyright"
 msgstr ""
 
 #: ../lib/PBX/Rule/ActionConfig.php:248
-#: ../modules/default/controllers/CallsReportController.php:442
+#: ../modules/default/controllers/CallsReportController.php:449
 #: ../modules/default/controllers/CostCenterController.php:50
 #: ../modules/default/controllers/CostCenterController.php:82
 #: ../modules/default/controllers/CostCenterController.php:125
 #: ../modules/default/controllers/CostCenterController.php:176
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:55
 #: ../modules/default/views/scripts/calls-report/view.phtml:54
-#: ../modules/default/views/scripts/calls-report/view.phtml:229
+#: ../modules/default/views/scripts/calls-report/view.phtml:216
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:78
 #: ../modules/default/views/scripts/calls-report/index.phtml:157
 msgid "Cost Center"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:225
+#: ../modules/default/views/scripts/calls-report/view.phtml:212
 msgid "Costs Center Call"
 msgstr ""
 
@@ -1376,10 +1377,6 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:14
-msgid "Data by Period"
-msgstr ""
-
 #: ../modules/default/views/scripts/parameters/index.phtml:132
 msgid "Database"
 msgstr ""
@@ -1404,15 +1401,15 @@ msgstr ""
 msgid "Database username"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:436
+#: ../modules/default/controllers/CallsReportController.php:443
 #: ../modules/default/controllers/ServicesReportController.php:204
 #: ../modules/default/views/scripts/services-report/view.phtml:36
-#: ../modules/default/views/scripts/calls-report/view.phtml:201
+#: ../modules/default/views/scripts/calls-report/view.phtml:188
 #: ../modules/default/views/scripts/notifications/index.phtml:38
 msgid "Date"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:435
+#: ../modules/default/controllers/CallsReportController.php:442
 msgid "Day"
 msgstr ""
 
@@ -1430,11 +1427,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:61
 msgid "Default E-mail"
-msgstr ""
-
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:39
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:59
-msgid "Default Options"
 msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:64
@@ -1639,7 +1631,7 @@ msgstr ""
 msgid "Destinity"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:438
+#: ../modules/default/controllers/CallsReportController.php:445
 #: ../modules/default/controllers/RankingReportController.php:190
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
@@ -1781,11 +1773,6 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:41
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:61
-msgid "Donut Hole"
-msgstr ""
-
 #: ../modules/default/views/scripts/information/index.phtml:51
 msgid "Douglas Conrad [ douglas.conrad@opens.com.br ] - Opens CEO"
 msgstr ""
@@ -1803,7 +1790,7 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:440
+#: ../modules/default/controllers/CallsReportController.php:447
 msgid "Duration (seconds)"
 msgstr ""
 
@@ -1959,13 +1946,17 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:401
+#: ../modules/default/controllers/CallsReportController.php:408
 #: ../modules/default/controllers/RankingReportController.php:158
 #: ../modules/default/controllers/ServicesReportController.php:174
 #: ../modules/default/controllers/ExportDataController.php:67
 #: ../modules/default/controllers/ExportDataController.php:90
 #: ../modules/default/controllers/ExportDataController.php:130
 msgid "Error "
+msgstr ""
+
+#: ../modules/default/controllers/CallsReportController.php:370
+msgid "Error generating chart. Check your connection!"
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:347
@@ -2066,7 +2057,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:423
+#: ../modules/default/controllers/CallsReportController.php:430
 #: ../modules/default/controllers/RankingReportController.php:175
 #: ../modules/default/controllers/ServicesReportController.php:196
 msgid "Export CSV"
@@ -2186,10 +2177,6 @@ msgstr ""
 msgid "Extensions Range"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:331
-msgid "FAILED"
-msgstr ""
-
 #: ../modules/default/controllers/KhompLinksController.php:83
 #: ../modules/default/controllers/KhompLinksController.php:95
 #: ../modules/default/controllers/KhompLinksController.php:190
@@ -2197,11 +2184,11 @@ msgstr ""
 msgid "Fail"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:142
-#: ../modules/default/views/scripts/calls-report/view.phtml:181
-#: ../modules/default/views/scripts/calls-report/view.phtml:205
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:95
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:335
+#: ../modules/default/views/scripts/calls-report/view.phtml:132
+#: ../modules/default/views/scripts/calls-report/view.phtml:168
+#: ../modules/default/views/scripts/calls-report/view.phtml:192
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:55
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:124
 #: ../modules/default/views/scripts/calls-report/index.phtml:150
 msgid "Failed"
 msgstr ""
@@ -2539,8 +2526,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:80
 #: ../modules/default/controllers/KhompLinksController.php:187
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:34
-#: ../modules/default/views/scripts/calls-report/view.phtml:160
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:197
+#: ../modules/default/views/scripts/calls-report/view.phtml:147
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:79
 msgid "Incoming"
 msgstr ""
 
@@ -2953,10 +2940,6 @@ msgstr ""
 msgid "NAT Optimization"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:329
-msgid "NO ANSWER"
-msgstr ""
-
 #: ../modules/webapi/views/scripts/clients/addedit.phtml:27
 #: ../modules/webapi/views/scripts/automation/servicesadd.phtml:26
 #: ../modules/webapi/views/scripts/automation/webhookadd.phtml:24
@@ -3004,7 +2987,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:434
+#: ../modules/default/controllers/CallsReportController.php:441
 msgid "Name Cost Center"
 msgstr ""
 
@@ -3052,8 +3035,7 @@ msgstr ""
 msgid "No Allow Viewing"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:85
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:327
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:53
 msgid "No Answer"
 msgstr ""
 
@@ -3092,7 +3074,7 @@ msgstr ""
 msgid "No entries found!"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:394
+#: ../modules/default/controllers/CallsReportController.php:401
 msgid "No entries found."
 msgstr ""
 
@@ -3126,7 +3108,7 @@ msgid "No queues available"
 msgstr ""
 
 #: ../lib/Snep/CsvIE.php:150
-#: ../modules/default/controllers/CallsReportController.php:479
+#: ../modules/default/controllers/CallsReportController.php:486
 #: ../modules/default/controllers/RankingReportController.php:226
 #: ../modules/default/controllers/ServicesReportController.php:239
 #: ../modules/default/controllers/ExportDataController.php:165
@@ -3135,6 +3117,10 @@ msgstr ""
 
 #: ../modules/default/controllers/SimulatorController.php:113
 msgid "No rule found."
+msgstr ""
+
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:122
+msgid "Noanswer"
 msgstr ""
 
 #: ../modules/webapi/views/scripts/plans/index.phtml:35
@@ -3157,9 +3143,9 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:136
-#: ../modules/default/views/scripts/calls-report/view.phtml:179
-#: ../modules/default/views/scripts/calls-report/view.phtml:203
+#: ../modules/default/views/scripts/calls-report/view.phtml:130
+#: ../modules/default/views/scripts/calls-report/view.phtml:166
+#: ../modules/default/views/scripts/calls-report/view.phtml:190
 #: ../modules/default/views/scripts/calls-report/index.phtml:144
 msgid "Not Answered"
 msgstr ""
@@ -3286,8 +3272,8 @@ msgstr ""
 
 #: ../modules/default/controllers/CostCenterController.php:70
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:42
-#: ../modules/default/views/scripts/calls-report/view.phtml:162
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:207
+#: ../modules/default/views/scripts/calls-report/view.phtml:149
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:81
 msgid "Other"
 msgstr ""
 
@@ -3299,8 +3285,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:79
 #: ../modules/default/controllers/KhompLinksController.php:186
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:38
-#: ../modules/default/views/scripts/calls-report/view.phtml:161
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:202
+#: ../modules/default/views/scripts/calls-report/view.phtml:148
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:80
 msgid "Outgoing"
 msgstr ""
 
@@ -3405,6 +3391,7 @@ msgstr ""
 #: ../modules/default/views/scripts/logs/index.phtml:39
 #: ../modules/default/views/scripts/ranking-report/index.phtml:30
 #: ../modules/default/views/scripts/services-report/index.phtml:28
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:120
 #: ../modules/default/views/scripts/calls-report/index.phtml:26
 msgid "Period"
 msgstr ""
@@ -3675,7 +3662,9 @@ msgid "Quantidade de Sucessos"
 msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:68
-#: ../modules/default/views/scripts/calls-report/view.phtml:230
+#: ../modules/default/views/scripts/calls-report/view.phtml:217
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:51
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:78
 msgid "Quantity"
 msgstr ""
 
@@ -3791,11 +3780,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:61
 msgid "Records"
-msgstr ""
-
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:40
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:60
-msgid "Rectangular Pie"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:253
@@ -3917,8 +3901,8 @@ msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:54
 #: ../modules/default/controllers/CallsReportController.php:269
-#: ../modules/default/controllers/CallsReportController.php:343
-#: ../modules/default/controllers/CallsReportController.php:421
+#: ../modules/default/controllers/CallsReportController.php:337
+#: ../modules/default/controllers/CallsReportController.php:428
 #: ../modules/default/controllers/RankingReportController.php:79
 #: ../modules/default/controllers/RankingReportController.php:173
 #: ../modules/default/controllers/ServicesReportController.php:49
@@ -4599,7 +4583,7 @@ msgstr ""
 msgid "Sound file updated"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:437
+#: ../modules/default/controllers/CallsReportController.php:444
 #: ../modules/default/controllers/RankingReportController.php:189
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
@@ -4668,15 +4652,20 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:370
 #: ../modules/default/views/scripts/services-report/view.phtml:38
 #: ../modules/default/views/scripts/calls-report/view.phtml:51
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:51
 #: ../modules/default/views/scripts/calls-report/index.phtml:137
 msgid "Status"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:174
+#: ../modules/default/views/scripts/calls-report/graphic.phtml:30
+msgid "Status By Period"
+msgstr ""
+
+#: ../modules/default/views/scripts/calls-report/view.phtml:161
 msgid "Status Call"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:196
+#: ../modules/default/views/scripts/calls-report/view.phtml:183
 msgid "Status by Period"
 msgstr ""
 
@@ -4693,7 +4682,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:129
+#: ../modules/default/views/scripts/calls-report/view.phtml:128
 msgid "Subtotal"
 msgstr ""
 
@@ -4722,7 +4711,7 @@ msgstr ""
 msgid "Synchronize archives"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:345
+#: ../modules/default/controllers/CallsReportController.php:339
 #: ../modules/default/views/scripts/khomp-links/index.phtml:42
 #: ../modules/default/views/scripts/calls-report/index.phtml:223
 msgid "Synthetic"
@@ -5224,9 +5213,8 @@ msgstr ""
 msgid "Totalização"
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:182
-#: ../modules/default/views/scripts/calls-report/view.phtml:206
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:32
+#: ../modules/default/views/scripts/calls-report/view.phtml:169
+#: ../modules/default/views/scripts/calls-report/view.phtml:193
 msgid "Totals"
 msgstr ""
 
@@ -5272,7 +5260,6 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/index.phtml:41
 #: ../modules/default/views/scripts/ip-status/index.phtml:110
 #: ../modules/default/views/scripts/cost-center/index.phtml:39
-#: ../modules/default/views/scripts/calls-report/graphic.phtml:52
 #: ../modules/default/views/scripts/extensions/addedit.phtml:84
 #: ../modules/default/views/scripts/extensions/addedit.phtml:194
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:47
@@ -5284,11 +5271,11 @@ msgstr ""
 msgid "Type "
 msgstr ""
 
-#: ../modules/default/views/scripts/calls-report/view.phtml:156
+#: ../modules/default/views/scripts/calls-report/view.phtml:143
 msgid "Type Call"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:433
+#: ../modules/default/controllers/CallsReportController.php:440
 msgid "Type Cost Center"
 msgstr ""
 
@@ -5432,7 +5419,7 @@ msgstr ""
 msgid "User permission"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:443
+#: ../modules/default/controllers/CallsReportController.php:450
 msgid "Userfield"
 msgstr ""
 
@@ -5781,7 +5768,7 @@ msgstr ""
 msgid "_csv_"
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:472
+#: ../modules/default/controllers/CallsReportController.php:479
 msgid "calls"
 msgstr ""
 

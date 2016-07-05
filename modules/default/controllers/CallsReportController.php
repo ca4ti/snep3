@@ -229,6 +229,12 @@ class CallsReportController extends Zend_Controller_Action {
             $this->view->page = $page;
         }
         
+        // events asterisk
+        $this->view->translate("ANSWERED");
+        $this->view->translate("NO ANSWER");
+        $this->view->translate("BUSY");
+        $this->view->translate("FAILED");
+
         $this->view->service_url = $service_url;
         
         $http = curl_init($service_url);

@@ -291,15 +291,15 @@
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
-    noneSelectedText: 'Nothing selected',
-    noneResultsText: 'No results matched {0}',
+    noneSelectedText: 'Nenhum item selecionado',
+    noneResultsText: 'Nenhum resultado encontrado {0}',
     countSelectedText: function (numSelected, numTotal) {
       return (numSelected == 1) ? "{0} item selected" : "{0} items selected";
     },
     maxOptionsText: function (numAll, numGroup) {
       return [
-        (numAll == 1) ? 'Limit reached ({n} item max)' : 'Limit reached ({n} items max)',
-        (numGroup == 1) ? 'Group limit reached ({n} item max)' : 'Group limit reached ({n} items max)'
+        (numAll == 1) ? '({n} item no máximo)' : '({n} itens no máximo)',
+        (numGroup == 1) ? '({n} item no máximo)' : '({n} itens no máximo)'
       ];
     },
     selectAllText: 'Select All',

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 16:18-0300\n"
+"POT-Creation-Date: 2016-07-15 15:08-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: Tiago Zimmermann <tiago.zimmermann@opens.com.br>\n"
@@ -70,13 +70,15 @@ msgstr ""
 msgid " -Kernel + Aplic."
 msgstr " -Kernel + Aplic."
 
-#: ../modules/cc/views/scripts/dac/index.phtml:90
-msgid " Fila(s):"
-msgstr ""
+#: ../modules/cc/views/scripts/operator/index.phtml:87
+#: ../modules/cc/views/scripts/dac/index.phtml:120
+msgid " Data Final"
+msgstr " Data Final"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:94
-msgid " Grupo(s):"
-msgstr ""
+#: ../modules/cc/views/scripts/operator/index.phtml:78
+#: ../modules/cc/views/scripts/dac/index.phtml:111
+msgid " Data Inicial"
+msgstr " Data Inicial"
 
 #: ../modules/agents/lib/Agents/Manager.php:343
 msgid " Não existe. "
@@ -90,7 +92,12 @@ msgstr ""
 msgid " Não possue permissão de leitura. "
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:33
+#: ../modules/cc/views/scripts/operator/index.phtml:53
+msgid " Operador"
+msgstr ""
+
+#: ../modules/cc/views/scripts/operator/index.phtml:40
+#: ../modules/cc/views/scripts/dac/index.phtml:39
 msgid " Período"
 msgstr ""
 
@@ -102,7 +109,7 @@ msgstr "Subpastas não encontradas"
 msgid " The contact "
 msgstr " O Contato"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:48
+#: ../modules/cc/views/scripts/dac/index.phtml:52
 msgid " Tipo"
 msgstr ""
 
@@ -148,7 +155,8 @@ msgstr ""
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
-#: ../modules/cc/controllers/DacController.php:143
+#: ../modules/cc/controllers/DacController.php:133
+#: ../modules/cc/controllers/OperatorController.php:91
 msgid ". Please contact the administrator."
 msgstr ". Entre em contato com o administrador do sistema."
 
@@ -169,7 +177,7 @@ msgstr ". Origem: "
 msgid "88137-300 - Palhoça - SC - Brasil"
 msgstr "88137-300 - Palhoça - SC - Brasil"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:380
+#: ../modules/cc/views/scripts/dac/index.phtml:368
 msgid ":00"
 msgstr ""
 
@@ -197,18 +205,17 @@ msgstr ""
 "<br><br>Se você não solicitou uma senha redefinição, por favor "
 "desconsidere<br><br><i>Equipe Snep</i>."
 
-#: ../modules/cc/views/scripts/queue/index.phtml:175
-#: ../modules/cc/views/scripts/dac/index.phtml:486
+#: ../modules/cc/views/scripts/operator/index.phtml:264
+#: ../modules/cc/views/scripts/dac/index.phtml:474
 msgid "A data é obrigatório final"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/index.phtml:172
-#: ../modules/cc/views/scripts/dac/index.phtml:483
+#: ../modules/cc/views/scripts/operator/index.phtml:261
+#: ../modules/cc/views/scripts/dac/index.phtml:471
 msgid "A data é obrigatório inicial"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/index.phtml:169
-#: ../modules/cc/views/scripts/dac/index.phtml:480
+#: ../modules/cc/views/scripts/dac/index.phtml:468
 msgid "A fila é obrigatória"
 msgstr ""
 
@@ -242,12 +249,10 @@ msgid ""
 "pausados. "
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:21
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:64
-#: ../modules/cc/views/scripts/dac/index.phtml:189
-#: ../modules/cc/views/scripts/dac/index.phtml:245
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:21
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:64
+#: ../modules/cc/views/scripts/operator/index.phtml:126
+#: ../modules/cc/views/scripts/operator/index.phtml:182
+#: ../modules/cc/views/scripts/dac/index.phtml:180
+#: ../modules/cc/views/scripts/dac/index.phtml:236
 msgid "Abandonadas"
 msgstr "Abandonadas"
 
@@ -477,7 +482,7 @@ msgstr ""
 #: ../modules/default/views/scripts/simulator/index.phtml:33
 #: ../modules/agents/views/scripts/pauses/index.phtml:23
 #: ../modules/agents/views/scripts/agents/index.phtml:20
-#: ../modules/cc/views/scripts/queue/index.phtml:20
+#: ../modules/cc/views/scripts/operator/index.phtml:20
 #: ../modules/cc/views/scripts/dac/index.phtml:20
 #: ../modules/webapi/views/scripts/automation/api.phtml:22
 #: ../modules/webapi/views/scripts/automation/index.phtml:22
@@ -638,8 +643,7 @@ msgstr "Amaflags"
 msgid "Analytic"
 msgstr "Analítico"
 
-#: ../modules/cc/views/scripts/queue/index.phtml:84
-#: ../modules/cc/views/scripts/dac/index.phtml:52
+#: ../modules/cc/views/scripts/dac/index.phtml:55
 msgid "Analítico"
 msgstr "Analítico"
 
@@ -698,12 +702,10 @@ msgstr "Usuário do Socket IP Asterisk"
 msgid "Asterisk Status"
 msgstr "Asterisk Status"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:20
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:63
-#: ../modules/cc/views/scripts/dac/index.phtml:188
-#: ../modules/cc/views/scripts/dac/index.phtml:244
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:20
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:63
+#: ../modules/cc/views/scripts/operator/index.phtml:125
+#: ../modules/cc/views/scripts/operator/index.phtml:181
+#: ../modules/cc/views/scripts/dac/index.phtml:179
+#: ../modules/cc/views/scripts/dac/index.phtml:235
 msgid "Atendidas"
 msgstr ""
 
@@ -782,7 +784,6 @@ msgstr "Automation » Adicionar"
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:72
 #: ../modules/default/views/scripts/queues/members.phtml:41
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:76
-#: ../modules/cc/views/scripts/queue/index.phtml:190
 msgid "Available"
 msgstr "Disponí­vel"
 
@@ -942,7 +943,6 @@ msgstr "CPU"
 #: ../modules/default/views/scripts/ranking-report/index.phtml:109
 #: ../modules/default/views/scripts/calls-report/view.phtml:33
 #: ../modules/default/views/scripts/services-report/view.phtml:21
-#: ../modules/cc/views/scripts/queue/index.phtml:121
 msgid "CSV"
 msgstr "CSV"
 
@@ -1050,7 +1050,7 @@ msgstr "Chamadas abandonadas"
 msgid "Calls completed"
 msgstr "Chamadas completadas"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:305
+#: ../modules/cc/views/scripts/dac/index.phtml:296
 msgid "Canal"
 msgstr "Canal"
 
@@ -1157,7 +1157,6 @@ msgstr "Tipo de central"
 #: ../modules/default/views/scripts/ip-status/index.phtml:61
 #: ../modules/default/controllers/CallsReportController.php:461
 #: ../modules/default/controllers/TrunksController.php:83
-#: ../modules/cc/views/scripts/queue/index.phtml:95
 msgid "Channel"
 msgstr "Canal"
 
@@ -1545,9 +1544,8 @@ msgstr "Número do modo de discagem DTMF"
 msgid "DTML dial mode number"
 msgstr "Número do modo de discagem DTMF"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:15
-#: ../modules/cc/views/scripts/dac/index.phtml:183
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:15
+#: ../modules/cc/views/scripts/operator/index.phtml:120
+#: ../modules/cc/views/scripts/dac/index.phtml:174
 msgid "Dados das chamadas atendidas"
 msgstr ""
 
@@ -1565,28 +1563,31 @@ msgstr "Diariamente"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:303
 #: ../modules/webapi/views/scripts/automation/list.phtml:19
 msgid "Data"
 msgstr "Dados"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:134
+#: ../modules/cc/views/scripts/operator/index.phtml:89
+#: ../modules/cc/views/scripts/dac/index.phtml:122
 msgid "Data Final"
 msgstr "Data Final"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:123
+#: ../modules/cc/views/scripts/operator/index.phtml:80
+#: ../modules/cc/views/scripts/dac/index.phtml:113
 msgid "Data Inicial"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:40
+#: ../modules/cc/views/scripts/operator/index.phtml:46
+#: ../modules/cc/views/scripts/dac/index.phtml:45
 msgid "Data específica"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:378
+#: ../modules/cc/views/scripts/dac/index.phtml:366
 msgid "Data/Hora"
 msgstr "Data/Hora"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:239
+#: ../modules/cc/views/scripts/operator/index.phtml:176
+#: ../modules/cc/views/scripts/dac/index.phtml:230
 msgid "Data:"
 msgstr "Data:"
 
@@ -1619,6 +1620,7 @@ msgstr "Usuário da base de dados"
 #: ../modules/default/views/scripts/services-report/view.phtml:36
 #: ../modules/default/controllers/CallsReportController.php:449
 #: ../modules/default/controllers/ServicesReportController.php:204
+#: ../modules/cc/views/scripts/dac/index.phtml:294
 msgid "Date"
 msgstr "Data"
 
@@ -1819,19 +1821,21 @@ msgstr "Negar"
 msgid "Description"
 msgstr "Descrição"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:341
-msgid "Desligada"
+#: ../modules/cc/views/scripts/dac/index.phtml:324
+msgid "Desligada pelo Cliente"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:24
-#: ../modules/cc/views/scripts/dac/index.phtml:192
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:24
+#: ../modules/cc/views/scripts/dac/index.phtml:322
+msgid "Desligada pelo Operador"
+msgstr ""
+
+#: ../modules/cc/views/scripts/operator/index.phtml:129
+#: ../modules/cc/views/scripts/dac/index.phtml:183
 msgid "Desligadas pelo Agente"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:25
-#: ../modules/cc/views/scripts/dac/index.phtml:193
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:25
+#: ../modules/cc/views/scripts/operator/index.phtml:130
+#: ../modules/cc/views/scripts/dac/index.phtml:184
 msgid "Desligadas pelo Cliente"
 msgstr ""
 
@@ -2238,7 +2242,8 @@ msgstr "Erro: Nenhuma placa Khomp instalada."
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
 #: ../modules/default/controllers/IndexController.php:358
-#: ../modules/cc/controllers/DacController.php:143
+#: ../modules/cc/controllers/DacController.php:133
+#: ../modules/cc/controllers/OperatorController.php:91
 msgid "Error: Code "
 msgstr "Erro: Código"
 
@@ -2246,19 +2251,11 @@ msgstr "Erro: Código"
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr "Erros foram detectados na configuração do SNEP, clique "
 
-#: ../modules/cc/views/scripts/queue/index.phtml:63
-msgid "Escolha a(s) fila(s)"
-msgstr ""
-
-#: ../modules/cc/views/scripts/queue/index.phtml:32
-msgid "Escolha o período do relatório"
-msgstr ""
-
 #: ../modules/agents/views/scripts/status/status.phtml:11
 msgid "Esta tela é atualizada a cada 5 segundos."
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:308
+#: ../modules/cc/views/scripts/dac/index.phtml:299
 msgid "Evento"
 msgstr ""
 
@@ -2457,20 +2454,15 @@ msgstr "Falha ao conectar com o servidor Asterisk: "
 msgid "Falha ao conectar com o servidor Asterisk: No AMI "
 msgstr "Falha ao conectar com o servidor Asterisk: No AMI "
 
-#: ../modules/cc/views/scripts/dac/index.phtml:304
+#: ../modules/cc/views/scripts/dac/index.phtml:295
 msgid "Fila"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:9
-#: ../modules/cc/views/scripts/dac/index.phtml:169
-#: ../modules/cc/views/scripts/dac/index.phtml:289
-#: ../modules/cc/views/scripts/dac/index.phtml:364
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:9
+#: ../modules/cc/views/scripts/operator/index.phtml:106
+#: ../modules/cc/views/scripts/dac/index.phtml:160
+#: ../modules/cc/views/scripts/dac/index.phtml:280
+#: ../modules/cc/views/scripts/dac/index.phtml:352
 msgid "Fila: "
-msgstr ""
-
-#: ../modules/cc/views/scripts/queue/index.phtml:65
-msgid "Filas"
 msgstr ""
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:49
@@ -2523,6 +2515,11 @@ msgstr "Filtro"
 #: ../modules/default/views/scripts/route/index.phtml:50
 msgid "Filter by"
 msgstr "Filtrar por"
+
+#: ../modules/cc/views/scripts/operator/index.phtml:32
+#: ../modules/cc/views/scripts/dac/index.phtml:32
+msgid "Filtros"
+msgstr "Filtros"
 
 #: ../modules/default/views/scripts/register/index.phtml:19
 #: ../modules/default/views/layouts/register.phtml:159
@@ -2589,7 +2586,6 @@ msgstr "Sexta-Feira"
 #: ../modules/default/views/scripts/calls-report/index.phtml:29
 #: ../modules/default/views/scripts/logs/index.phtml:42
 #: ../modules/default/views/scripts/services-report/index.phtml:31
-#: ../modules/cc/views/scripts/queue/index.phtml:35
 msgid "From"
 msgstr "De"
 
@@ -2648,15 +2644,11 @@ msgstr "Grant Types"
 msgid "Graphic"
 msgstr "Gráfico"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:348
-msgid "Gravação:"
-msgstr ""
-
 #: ../modules/default/views/scripts/contacts/import.phtml:46
 #: ../modules/default/views/scripts/contacts/addedit.phtml:24
 #: ../modules/default/views/scripts/contacts/index.phtml:44
 #: ../modules/default/views/scripts/services-report/index.phtml:61
-#: ../modules/cc/views/scripts/dac/index.phtml:64
+#: ../modules/cc/views/scripts/dac/index.phtml:66
 msgid "Group"
 msgstr "Grupo"
 
@@ -2692,13 +2684,13 @@ msgstr "Suporte de alta qualidade"
 msgid "History"
 msgstr "History"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:36
+#: ../modules/cc/views/scripts/operator/index.phtml:42
+#: ../modules/cc/views/scripts/dac/index.phtml:41
 msgid "Hoje"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:61
-#: ../modules/cc/views/scripts/dac/index.phtml:242
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:61
+#: ../modules/cc/views/scripts/operator/index.phtml:179
+#: ../modules/cc/views/scripts/dac/index.phtml:233
 msgid "Hora"
 msgstr ""
 
@@ -2747,6 +2739,10 @@ msgstr "Servidor de notificações do ITC/Snep"
 #: ../modules/default/views/scripts/route/index.phtml:89
 msgid "Id"
 msgstr "ID"
+
+#: ../modules/cc/views/scripts/dac/index.phtml:336
+msgid "Id da chamada:"
+msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:347
 msgid "Identifier"
@@ -3213,9 +3209,8 @@ msgstr "Intervalo de repetição das mensagens ao chamador"
 msgid "MySQL"
 msgstr "MySQL"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:16
-#: ../modules/cc/views/scripts/dac/index.phtml:184
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:16
+#: ../modules/cc/views/scripts/operator/index.phtml:121
+#: ../modules/cc/views/scripts/dac/index.phtml:175
 msgid "Médias de atendimento"
 msgstr ""
 
@@ -3515,6 +3510,18 @@ msgstr ""
 msgid "O número de sucessos é obrigatório"
 msgstr ""
 
+#: ../modules/cc/views/scripts/operator/index.phtml:258
+msgid "O operador é obrigatório"
+msgstr ""
+
+#: ../modules/cc/lib/Cc/Format.php:107
+msgid "Off by the client"
+msgstr "Desligada pelo Cliente"
+
+#: ../modules/cc/lib/Cc/Format.php:105
+msgid "Off by the operator"
+msgstr "Desligada pelo Operador"
+
 #: ../modules/default/actions/DiscarTronco.php:142
 msgid "Ommit origin (only for Khomp KGSM)"
 msgstr "Omitir origem (somente para Khomp KGSM)"
@@ -3575,7 +3582,7 @@ msgstr "Ordenar por"
 msgid "Order to Call"
 msgstr "Ordenação da Chamada"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:306
+#: ../modules/cc/views/scripts/dac/index.phtml:297
 msgid "Origem"
 msgstr "Origem"
 
@@ -3628,9 +3635,8 @@ msgstr "Cadeado"
 msgid "Parameters"
 msgstr "Parâmetros"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:54
-#: ../modules/cc/views/scripts/dac/index.phtml:227
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:54
+#: ../modules/cc/views/scripts/operator/index.phtml:164
+#: ../modules/cc/views/scripts/dac/index.phtml:218
 msgid "Parciais"
 msgstr ""
 
@@ -3737,7 +3743,8 @@ msgstr "Período:"
 msgid "Permission"
 msgstr "Permissões"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:110
+#: ../modules/cc/views/scripts/operator/index.phtml:68
+#: ../modules/cc/views/scripts/dac/index.phtml:98
 msgid "Pesquisar Dados"
 msgstr ""
 
@@ -4007,7 +4014,7 @@ msgstr "Quantidade"
 #: ../modules/default/views/scripts/queues-groups/members.phtml:11
 #: ../modules/default/controllers/QueuesController.php:275
 #: ../modules/agents/views/scripts/agents/addedit.phtml:105
-#: ../modules/cc/views/scripts/dac/index.phtml:63
+#: ../modules/cc/views/scripts/dac/index.phtml:65
 #: ../lib/PBX/Rule/ActionConfig.php:268
 msgid "Queue"
 msgstr "Fila"
@@ -4239,7 +4246,6 @@ msgstr "Substituir origem"
 #: ../modules/default/views/scripts/ranking-report/index.phtml:102
 #: ../modules/default/views/scripts/calls-report/index.phtml:216
 #: ../modules/default/views/scripts/khomp-links/index.phtml:35
-#: ../modules/cc/views/scripts/queue/index.phtml:114
 msgid "Report Type"
 msgstr "Tipo de Relatório"
 
@@ -4552,7 +4558,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:105
 #: ../modules/default/views/scripts/calls-report/index.phtml:232
-#: ../modules/cc/views/scripts/queue/index.phtml:117
 msgid "Screen"
 msgstr "Tela"
 
@@ -4666,13 +4671,13 @@ msgstr "Selecione as colunas que deseja exportar."
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:71
 #: ../modules/default/views/scripts/queues/members.phtml:40
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:75
-#: ../modules/cc/views/scripts/queue/index.phtml:189
 msgid "Selected"
 msgstr "Selecionado"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:174
-#: ../modules/cc/views/scripts/dac/index.phtml:295
-#: ../modules/cc/views/scripts/dac/index.phtml:370
+#: ../modules/cc/views/scripts/operator/index.phtml:111
+#: ../modules/cc/views/scripts/dac/index.phtml:165
+#: ../modules/cc/views/scripts/dac/index.phtml:286
+#: ../modules/cc/views/scripts/dac/index.phtml:358
 msgid "Sem dados da fila neste período."
 msgstr ""
 
@@ -4801,7 +4806,6 @@ msgstr "Mostrar Logs"
 #: ../modules/default/views/scripts/ranking-report/index.phtml:114
 #: ../modules/default/views/scripts/calls-report/index.phtml:244
 #: ../modules/default/views/scripts/services-report/index.phtml:127
-#: ../modules/cc/views/scripts/queue/index.phtml:126
 msgid "Show Report"
 msgstr "Mostrar Relatório"
 
@@ -4829,7 +4833,6 @@ msgstr "Exibir top classificados por origem"
 #: ../modules/default/views/scripts/queues/members.phtml:42
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:77
-#: ../modules/cc/views/scripts/queue/index.phtml:191
 msgid "Showing all "
 msgstr "Exibir Todos"
 
@@ -4868,8 +4871,7 @@ msgstr "Simulador"
 msgid "Simultaneous Call Limit"
 msgstr "Limite de Chamadas Simultâneas"
 
-#: ../modules/cc/views/scripts/queue/index.phtml:83
-#: ../modules/cc/views/scripts/dac/index.phtml:51
+#: ../modules/cc/views/scripts/dac/index.phtml:54
 msgid "Sintético"
 msgstr ""
 
@@ -4889,21 +4891,12 @@ msgstr "Snep SIP"
 msgid "Snep/PHP Debug"
 msgstr "Snep/PHP Debug"
 
-#: ../modules/cc/controllers/QueueController.php:34
+#: ../modules/cc/controllers/OperatorController.php:34
+msgid "SnepCC » Estatística do Operador"
+msgstr ""
+
 #: ../modules/cc/controllers/DacController.php:34
-msgid "SnepCC » DAC"
-msgstr ""
-
-#: ../modules/cc/controllers/QueueController.php:117
-msgid "SnepCC » DAC » Analítico"
-msgstr ""
-
-#: ../modules/cc/controllers/QueueController.php:113
-msgid "SnepCC » DAC » Sintético » Período:"
-msgstr ""
-
-#: ../modules/cc/controllers/QueueController.php:121
-msgid "SnepCC » DAC » Totalização"
+msgid "SnepCC » Filas DAC"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:102
@@ -5118,30 +5111,24 @@ msgstr "Totais"
 msgid "TDM"
 msgstr "TDM"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:27
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:67
-#: ../modules/cc/views/scripts/dac/index.phtml:195
-#: ../modules/cc/views/scripts/dac/index.phtml:248
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:27
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:67
+#: ../modules/cc/views/scripts/operator/index.phtml:132
+#: ../modules/cc/views/scripts/operator/index.phtml:185
+#: ../modules/cc/views/scripts/dac/index.phtml:186
+#: ../modules/cc/views/scripts/dac/index.phtml:239
 msgid "TMA"
 msgstr "TDA"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:28
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:68
-#: ../modules/cc/views/scripts/dac/index.phtml:196
-#: ../modules/cc/views/scripts/dac/index.phtml:249
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:28
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:68
+#: ../modules/cc/views/scripts/operator/index.phtml:133
+#: ../modules/cc/views/scripts/operator/index.phtml:186
+#: ../modules/cc/views/scripts/dac/index.phtml:187
+#: ../modules/cc/views/scripts/dac/index.phtml:240
 msgid "TMC"
 msgstr "TMC"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:26
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:66
-#: ../modules/cc/views/scripts/dac/index.phtml:194
-#: ../modules/cc/views/scripts/dac/index.phtml:247
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:26
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:66
+#: ../modules/cc/views/scripts/operator/index.phtml:131
+#: ../modules/cc/views/scripts/operator/index.phtml:184
+#: ../modules/cc/views/scripts/dac/index.phtml:185
+#: ../modules/cc/views/scripts/dac/index.phtml:238
 msgid "TME"
 msgstr "TME"
 
@@ -5153,24 +5140,22 @@ msgstr "Tabela"
 msgid "Team"
 msgstr "Equipe"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:307
+#: ../modules/cc/views/scripts/dac/index.phtml:298
 msgid "Tempo"
 msgstr ""
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:22
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:65
-#: ../modules/cc/views/scripts/dac/index.phtml:190
-#: ../modules/cc/views/scripts/dac/index.phtml:246
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:22
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:65
+#: ../modules/cc/views/scripts/operator/index.phtml:127
+#: ../modules/cc/views/scripts/operator/index.phtml:183
+#: ../modules/cc/views/scripts/dac/index.phtml:181
+#: ../modules/cc/views/scripts/dac/index.phtml:237
 msgid "Tempo Limite"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:345
+#: ../modules/cc/views/scripts/dac/index.phtml:334
 msgid "Tempo da ligação:"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:346
+#: ../modules/cc/views/scripts/dac/index.phtml:335
 msgid "Tempo de espera:"
 msgstr ""
 
@@ -5569,19 +5554,10 @@ msgstr "Tempo limite"
 msgid "Timezone"
 msgstr "Fuso Horário"
 
-#: ../modules/cc/views/scripts/queue/index.phtml:77
-msgid "Tipo de relatório"
-msgstr ""
-
-#: ../modules/cc/views/scripts/queue/index.phtml:79
-msgid "Tipo do relatório"
-msgstr ""
-
 #: ../modules/default/views/scripts/ranking-report/index.phtml:46
 #: ../modules/default/views/scripts/calls-report/index.phtml:42
 #: ../modules/default/views/scripts/logs/index.phtml:55
 #: ../modules/default/views/scripts/services-report/index.phtml:43
-#: ../modules/cc/views/scripts/queue/index.phtml:48
 msgid "To"
 msgstr "Até"
 
@@ -5626,12 +5602,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ranking-report/view.phtml:49
 #: ../modules/default/views/scripts/ranking-report/view.phtml:52
 #: ../modules/default/views/scripts/systemstatus/index.phtml:159
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:19
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:62
-#: ../modules/cc/views/scripts/dac/index.phtml:187
-#: ../modules/cc/views/scripts/dac/index.phtml:243
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:19
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:62
+#: ../modules/cc/views/scripts/operator/index.phtml:124
+#: ../modules/cc/views/scripts/operator/index.phtml:180
+#: ../modules/cc/views/scripts/dac/index.phtml:178
+#: ../modules/cc/views/scripts/dac/index.phtml:234
 msgid "Total"
 msgstr "Total"
 
@@ -5640,14 +5614,12 @@ msgstr "Total"
 msgid "Total entries to be exported: "
 msgstr "Total de dados a serem exportados:"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:14
-#: ../modules/cc/views/scripts/dac/index.phtml:182
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:14
+#: ../modules/cc/views/scripts/operator/index.phtml:119
+#: ../modules/cc/views/scripts/dac/index.phtml:173
 msgid "Totalizadores"
 msgstr "Totais"
 
-#: ../modules/cc/views/scripts/queue/index.phtml:85
-#: ../modules/cc/views/scripts/dac/index.phtml:53
+#: ../modules/cc/views/scripts/dac/index.phtml:56
 msgid "Totalização"
 msgstr ""
 
@@ -5656,9 +5628,8 @@ msgstr ""
 msgid "Totals"
 msgstr "Totais"
 
-#: ../modules/cc/views/scripts/queue/synthetic.phtml:23
-#: ../modules/cc/views/scripts/dac/index.phtml:191
-#: ../modules/cc/views/scripts/dac/synthetic.phtml:23
+#: ../modules/cc/views/scripts/operator/index.phtml:128
+#: ../modules/cc/views/scripts/dac/index.phtml:182
 msgid "Transferidas"
 msgstr ""
 
@@ -6244,9 +6215,13 @@ msgstr "[snep] Aviso de uso do tronco"
 msgid "_csv_"
 msgstr "_csv_"
 
-#: ../modules/cc/controllers/DacController.php:38
+#: ../modules/cc/controllers/DacController.php:53
 msgid "abandon"
 msgstr "Abandonada"
+
+#: ../modules/cc/controllers/DacController.php:55
+msgid "answered"
+msgstr "Atendida"
 
 #: ../modules/default/controllers/CallsReportController.php:485
 msgid "calls"
@@ -6263,6 +6238,11 @@ msgid ""
 msgstr ""
 "Deseja exibir informações de origem e de destino da chamada no corpo do e-"
 "mail?"
+
+#: ../modules/cc/controllers/DacController.php:54
+#: ../modules/cc/lib/Cc/Format.php:89
+msgid "enterqueue"
+msgstr "Entrou na Fila"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:70
 msgid "here"
@@ -6301,6 +6281,10 @@ msgstr "off"
 msgid "on"
 msgstr "on"
 
+#: ../modules/cc/controllers/DacController.php:57
+msgid "queuetimeout"
+msgstr "Tempo limite"
+
 #: ../modules/default/controllers/RankingReportController.php:219
 msgid "ranking"
 msgstr "Classificação"
@@ -6311,7 +6295,7 @@ msgstr "Classificação"
 msgid "read"
 msgstr "Leitura"
 
-#: ../modules/cc/controllers/DacController.php:37
+#: ../modules/cc/controllers/DacController.php:52
 msgid "ringnoanswer"
 msgstr "Não atendida"
 
@@ -6327,33 +6311,33 @@ msgstr "Tempos"
 msgid "to"
 msgstr "até"
 
+#: ../modules/cc/controllers/DacController.php:56
+msgid "transfer"
+msgstr "Transferida"
+
 #: ../modules/default/controllers/UsersController.php:230
 #: ../modules/default/controllers/ProfilesController.php:289
 #: ../modules/default/controllers/ProfilesController.php:309
 msgid "write"
 msgstr "Escrita"
 
-#: ../modules/cc/views/scripts/dac/index.phtml:347
-msgid "Último Status:"
-msgstr "Último Status:"
-
-#: ../modules/cc/views/scripts/dac/index.phtml:38
+#: ../modules/cc/views/scripts/operator/index.phtml:44
+#: ../modules/cc/views/scripts/dac/index.phtml:43
 msgid "Últimos 15 dias"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:39
+#: ../modules/cc/views/scripts/operator/index.phtml:45
+#: ../modules/cc/views/scripts/dac/index.phtml:44
 msgid "Últimos 30 dias"
 msgstr ""
 
-#: ../modules/cc/views/scripts/dac/index.phtml:37
+#: ../modules/cc/views/scripts/operator/index.phtml:43
+#: ../modules/cc/views/scripts/dac/index.phtml:42
 msgid "Últimos 7 dias"
 msgstr ""
 
-#~ msgid "enterqueue"
-#~ msgstr "Entrou na Fila"
-
-#~ msgid "answered"
-#~ msgstr "Atendida"
+#~ msgid "Último Status:"
+#~ msgstr "Último Status:"
 
 #~ msgid "queuehangup"
 #~ msgstr "Entrou na Fila"

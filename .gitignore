@@ -1,5 +1,7 @@
 logs
-sounds
-docs
+arquivos/*
+./sounds
+./docs
+lib/linfo/cache/*
 atualiza-dev
 snep.sublime-workspace

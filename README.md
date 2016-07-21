@@ -28,6 +28,16 @@
   - Grupos para destino (ringall)   
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 ---------------------------------
+**3.04**
+
+- ATUALIZADO - extensions.conf para corrigir Regex descontinuada do asterisk (de _. para _X) (Contribuição: Jean Eduardo - Datasolve Tecnologia)
+- ATUALIZADO - extensions.conf para corrigir ordem de carregamento de .conf's do snep
+- ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
+- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
+- ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
+
+
+---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)
 - NOVO - identificacao do modelo do aparelho autenticado (contribuição: Heros do Amaral)

@@ -191,32 +191,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 1");?></label>
-                    <div class="col-sm-6">
-                        <select class="form-control" name="codec" id="codec">
-                            <?php echo $this->codec1;?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 2");?></label>
-                    <div class="col-sm-6">
-                        <select class="form-control" name="codec1" id="codec1">
-                            <?php echo $this->codec2;?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 3");?></label>
-                    <div class="col-sm-6">
-                        <select class="form-control" name="codec2" id="codec2">
-                            <?php echo $this->codec3;?>
-                        </select>
-                    </div>
-                </div>
+                
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("Domain");?></label>
@@ -340,9 +315,45 @@
             </div>    
             <!-- /NAT -->
 
+            <!-- CODEC -->
+            <div id="codecs">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 1");?></label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="codec" id="codec">
+                            <?php echo $this->codec1;?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 2");?></label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="codec1" id="codec1">
+                            <?php echo $this->codec2;?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo $this->translate("Codec 3");?></label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="codec2" id="codec2">
+                            <?php echo $this->codec3;?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /CODEC -->
+
+            <!-- SnepSIP -->
+            <div id="snepsip" class="invisible">
+                
+            </div>
+            <!-- /SnepSIP -->
+            
             <!-- SnepIAX -->
             <div id="snepiax2" class="invisible">
-
                 <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $this->translate("Identifier");?></label>
                     <div class="col-sm-6">
@@ -353,6 +364,7 @@
             <!-- /SnepIAX -->
 
         </fieldset>
+
 
         <fieldset>
             <legend><?php echo $this->translate('Advanced');?></legend>
@@ -453,12 +465,13 @@
             document.getElementById("iax2").className = "invisible";    
         }
 
-        if(div == 'sip' || div == 'iax2'){
 
+        if(div == 'sip' || div == 'iax2'){
             
             if(div == 'iax2'){
                 document.getElementById("iax2").className = "visible";
             }
+            document.getElementById("codecs").className = "visible";
             div = 'ip';
             
         }else if(div == 'khomp' || div == 'virtual'){
@@ -470,10 +483,13 @@
         if(div == 'snepsip'){
             document.getElementById("dtmfmode").className = "visible";
             document.getElementById("host").className = "visible";
+            document.getElementById("codecs").className = "visible";
+            document.getElementById(div).className = "visible";
         }else if(div == 'snepiax2'){
             document.getElementById("dtmfmode").className = "visible";
             document.getElementById("host").className = "visible";
             document.getElementById("nat").className = "visible";
+            document.getElementById("codecs").className = "visible";
             document.getElementById(div).className = "visible";
         }else{    
             document.getElementById(div).className = "visible";

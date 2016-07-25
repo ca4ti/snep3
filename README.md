@@ -35,8 +35,7 @@
 - ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
 - CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
 - ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
-
-
+- Adiconados arquivos de som pt_BR, en, es removidos por engano na versão 3.03
 ---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)

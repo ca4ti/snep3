@@ -582,7 +582,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $sqlDefaultValues .= ",$value";
         }
 
-        $advEmail = $formData["email"];
+        $advEmail = $formData["email"];      
 
         if ($techType == "sip" || $techType == "iax2") {
             $allow = sprintf("%s;%s;%s", $formData['codec'], $formData['codec1'], $formData['codec2']);
@@ -645,8 +645,6 @@ class ExtensionsController extends Zend_Controller_Action {
         // Update table core_peer_groups
         Snep_ExtensionsGroups_Manager::updateGroupsExtension($idExten,$extensions_group,$extenGroup) ;
 
-        Snep_InterfaceConf::loadConfFromDb();
-
     }
 
     /**
@@ -703,12 +701,6 @@ class ExtensionsController extends Zend_Controller_Action {
                     $db->rollBack();
                     $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
                     $this->view->back = $this->view->translate("Back");
-                    $this->renderScript('error/sneperror.phtml');;
-                }
-                $return = Snep_InterfaceConf::loadConfFromDb();
-
-                if ($return != true) {
-                    $this->view->error_message = $return;
                     $this->renderScript('error/sneperror.phtml');;
                 }
 
@@ -800,12 +792,7 @@ class ExtensionsController extends Zend_Controller_Action {
                         $this->view->back = $this->view->translate("Back");
                         $this->renderScript('error/sneperror.phtml');;
                     }
-                    $return = Snep_InterfaceConf::loadConfFromDb();
 
-                    if ($return != true) {
-                        $this->view->error_message = $return;
-                        $this->renderScript('error/sneperror.phtml');;
-                    }
                 }
                 $this->_redirect("default/extensions");
             }

@@ -31,11 +31,12 @@
 **3.04**
 
 - ATUALIZADO - extensions.conf para corrigir Regex descontinuada do asterisk (de _. para _X) (Contribuição: Jean Eduardo - Datasolve Tecnologia)
-- ATUALIZADO - extensions.conf para corrigir ordem de carregamento de .conf's do snep
+- ATUALIZADO - extensions.conf para corrigir ordem de carregamento de .conf's do snep (Contribuição: Daian Conrad - Opens Tecnologia)
 - ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
 - CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
 - ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
 - Adiconados arquivos de som pt_BR, en, es removidos por engano na versão 3.03
+- NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
 ---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)

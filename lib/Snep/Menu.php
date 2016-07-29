@@ -285,8 +285,15 @@ class Snep_Menu {
      */
     public function renderModule() {
 
-        $html = "<li>";
-        $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
+        $html = "<li id=\"{$this->getId()}\">";
+        $font = $this->getFont();
+
+        if(count(explode("_", $html)) == 2){
+
+            $html .= "<a href=\"{$this->getUri()}\">" . "<i class='$font fa-fw'></i> " . $this->getLabel() . "<span class='fa arrow'></span></a>";
+        }else{
+            $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
+        }
         if (count($this->getChildren()) > 0) {
             $html .= "<ul class='nav nav-third-level'>";
             $html .= $this->renderChildrenModule();

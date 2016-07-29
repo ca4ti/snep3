@@ -16,8 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-select.css" );
 ?>
 <script src="/snep/includes/javascript/password.js"></script> 
+<script src="/snep/includes/javascript/bootstrap-select.js"></script>
 <div class="row">           
     <form id="defaultForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "users", "action" => $this->action), null, false); ?>" autocomplete="off">
         
@@ -46,17 +48,34 @@
         	<label class="col-sm-2 control-label"><?php echo $this->translate("Profile");?></label>
         	<div class="col-sm-6">
         		<select class="form-control" name="profile_id" id="group" value="<?php echo $this->user['groupname']; ?>">
-        			<?php foreach($this->profiles as $key => $value){ 
+        			<?php foreach($this->profiles as $key => $value){
                         $selected = $value['id'] === $this->user['profile_id'] ? "selected" : "" ; ?>
 			    		<option value="<?php echo $value['id'];?>" <?php echo $selected;?>>
                             <?php echo $value['name'];?>
                         </option>
-                
 			    	<?php } ?>
 				</select>
 			</div>
 		</div>
-        
+
+        <?php if ($this->user['id'] != "1") { ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo $this->translate("Queue visualization");?></label>
+                    <div class="col-sm-6">
+                        <select class="form-control selectpicker <?php echo $this->classQueue ?>" multiple name="queues[]" id="queues[]">
+                        <?php foreach($this->queues as $key => $queue){ ?>
+                                <?php if(isset($queue['selected'])){ ?>
+                                    <option value='<?php echo $queue['id']?>' selected><?php echo $queue['name'];?></option>
+                                <?php }else{ ?>
+                                    <option value='<?php echo $queue['id']?>'><?php echo $queue['name'];?></option>
+                                <?php }?>
+                            <?php }?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
         <div class="snep-body-footer-buttons">
                 <button type="submit" class="btn btn-add" name="save" value="save"><?php echo $this->translate("Save");?></button>
                 &nbsp;&nbsp;&nbsp;
@@ -68,7 +87,7 @@
 <script type="text/javascript">
 
 jQuery.noConflict();
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
     jQuery('#defaultForm').validate({
         rules: {
             name: {

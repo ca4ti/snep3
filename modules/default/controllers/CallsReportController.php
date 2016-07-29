@@ -229,6 +229,12 @@ class CallsReportController extends Zend_Controller_Action {
             $this->view->page = $page;
         }
         
+        // events asterisk
+        $this->view->translate("ANSWERED");
+        $this->view->translate("NO ANSWER");
+        $this->view->translate("BUSY");
+        $this->view->translate("FAILED");
+
         $this->view->service_url = $service_url;
         
         $http = curl_init($service_url);
@@ -313,7 +319,18 @@ class CallsReportController extends Zend_Controller_Action {
                                 // Times
                                 $item->billsec = $format->fmt_segundos(array("a" => $item->billsec, "b" => 'hms'));
                                 $item->duration = $format->fmt_segundos(array("a" => $item->duration, "b" => 'hms'));
-                                
+
+                                if($item->disposition == 'ANSWERED'){
+                                    $class = "label label-success";
+                                }elseif($item->disposition == 'NO ANSWER'){
+                                    $class = "label label-danger";
+                                }elseif($item->disposition == 'BUSY'){
+                                    $class = "label label-warning";
+                                }else{
+                                    $class = "label label-default"; 
+                                }
+                                $item->class = $class;
+                                $item->disposition = $this->view->translate($item->disposition);
                                 $listItems[$cont] = $item;
 
                                 $cont++;
@@ -348,7 +365,20 @@ class CallsReportController extends Zend_Controller_Action {
                             
                             if($type == 'graphic'){
 
-                                $this->renderScript('calls-report/graphic.phtml');
+                                $http = curl_init("https://www.gstatic.com/charts/loader.js");
+                                $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                                curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+                                $http_response = curl_exec($http);
+                                $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                                curl_close($http);
+
+                                if(!$httpcode){
+                                    $this->view->error_message = $this->view->translate("Error generating chart. Check your connection!");
+                                    $this->renderScript('error/sneperror.phtml');
+                                    
+                                }else{
+                                    $this->renderScript('calls-report/graphic.phtml');
+                                }
 
                             }
                             

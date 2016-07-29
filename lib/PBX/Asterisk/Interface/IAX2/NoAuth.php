@@ -44,7 +44,8 @@ class PBX_Asterisk_Interface_IAX2_NoAuth extends PBX_Asterisk_Interface_IAX2 {
      * getCanal - Eliminando uso de getCanal para essa interface.
      */
     public function getCanal() {
-        throw new Exception(get_class($this) . ' dont support channel returning, use $obj->getTech()/$your_exten@$obj->getHost() to dial');
+        //throw new Exception(get_class($this) . ' dont support channel returning, use $obj->getTech()/$your_exten@$obj->getHost() to dial');
+		return $this->getTech() . "/" .  $this->getHost();
     }
 
     /**

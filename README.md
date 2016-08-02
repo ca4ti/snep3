@@ -41,6 +41,8 @@
 - NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
 - NOVO - Utilização dos gráficos do google no relatório de chamadas do período
 - NOVO - Nova lib bootstrap para selecionar mais de um item no campo select
+- CORRIGIDO - Adicionado getTech e getHost para chamadas com troncos sem autenticacao ( Contribuição: Renato dos Santos)
+
 ---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)

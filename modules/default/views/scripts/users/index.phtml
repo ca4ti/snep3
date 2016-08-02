@@ -17,13 +17,13 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                 <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add User")?></a>
 
                 <div class="snep-body-search">
-                    
+
                     <?php if($this->key){ ?>
                         <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>">
-                        </a> 
-                        &nbsp;|&nbsp;  
+                        </a>
+                        &nbsp;|&nbsp;
                     <?php } ?>
-                    <?php echo $this->translate("Search")?> 
+                    <?php echo $this->translate("Search")?>
                     <a class="filter"><input id="filter" type="text"/></a>
                 </div>
             </div>
@@ -41,10 +41,10 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     <?php if ($this->users):
                         foreach ($this->users as $user): ?>
-                        
+
                             <tr>
                                 <td  class="text-center"> <b> <?php echo $user['ide'] ?> </b> </td>
                                 <td> <?php echo $user['nome'] ?> </td>
@@ -52,26 +52,17 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                 <td class="text-center"> <?php echo date('d/m/Y H:i:s', strtotime($user['updated'])) ?> </td>
                                 <td class="text-center"> <?php echo $user['name'] ?> </td>
 
-                                <?php if ($user['ide'] == "1") { 
-                                    $disabled= "disabled"; 
+                                <?php if ($user['ide'] == "1") {
+                                    $disabled= "disabled";
                                 }else{
-                                    $disabled = "";    
+                                    $disabled = "";
                                 }?>
 
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/permission/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Permission')?></a>
-                                </td>
-
-                                <td align="center">
-                                    <a class="btn btn-default btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/bond/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Bond')?></a>
-                                </td>
-
-                                <td align="center">
-                                    <a class="btn btn-edit btn-xs" href="<?php echo $this->url ?>/edit/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Edit')?></a>
-                                </td>    
-                                
-                                <td align="center">
-                                    <a class="btn btn-danger btn-xs <?php echo $disabled ?>" href="<?php echo $this->url ?>/remove/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                    <a class="btn btn-default btn-sm <?php echo $disabled ?>"  href="<?php echo $this->url ?>/permission/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Permission')?></a>
+                                    <a class="btn btn-default btn-sm <?php echo $disabled ?>"  href="<?php echo $this->url ?>/bond/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Bond')?></a>
+                                    <a class="btn btn-edit btn-sm" href="<?php echo $this->url ?>/edit/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Edit')?></a>
+                                    <a class="btn btn-danger btn-sm <?php echo $disabled ?>" href="<?php echo $this->url ?>/remove/id/<?php echo $user['ide'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -98,7 +89,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
     jQuery.noConflict();
     jQuery(function () {
         jQuery('table').footable().on('click', '.row', function(e) {
-            e.preventDefault(); 
+            e.preventDefault();
         });
     });
 </script>

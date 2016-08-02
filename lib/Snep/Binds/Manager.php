@@ -26,18 +26,18 @@
  * @package   Snep
  * @copyright Copyright (c) 2015 OpenS Tecnologia
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
- * 
+ *
  */
 class Snep_Binds_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
      * getBond - Method to get user bond
-     * @param <int> $id 
-     * @return <array> $peers 
+     * @param <int> $id
+     * @return <array> $peers
      */
     function getBond($id) {
 
@@ -50,7 +50,7 @@ class Snep_Binds_Manager {
 
         $stmt = $db->query($select);
         $peers = $stmt->fetchAll();
-        
+
         return $peers;
     }
 
@@ -74,7 +74,6 @@ class Snep_Binds_Manager {
         $db->insert('core_binds', $insert_data);
     }
 
-    
     /**
      * removeBond - Method to remove bond a user
      * @param <int> $id
@@ -85,6 +84,24 @@ class Snep_Binds_Manager {
 
         $db->beginTransaction();
         $db->delete('core_binds', "user_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeBondByPeer - Method to remove bond a user
+     * @param <int> $id
+     */
+    public function removeBondByPeer($peer) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_binds', "peer_name = '$peer'");
 
         try {
             $db->commit();
@@ -109,18 +126,18 @@ class Snep_Binds_Manager {
             foreach($bond as $key => $peer){
                 $binds[] = $peer["peer_name"];
             }
-        
+
             foreach($row as $key => $call){
                 foreach($binds as $x => $value){
 
                     // Allow
                     if($typeBond == 'bound'){
-                        
+
                         if (!in_array($call['src'], $binds)) {
                             unset($row[$key]);
                         }
-                        
-                    // No allow    
+
+                    // No allow
                     }else{
 
                         if($value == $call['src'] || $value == $call['dst']){

@@ -370,10 +370,11 @@ class UsersController extends Zend_Controller_Action {
         $this->view->id = $id;
 
         $allPeers = Snep_Extensions_Manager::getAll();
+
         $usersBond = Snep_Binds_Manager::getBond($id);
 
         if($usersBond){
-            
+
             // Type bond
             if($usersBond[0]["type"] == 'bound'){
                 $this->view->typeBond = 'checked';
@@ -385,7 +386,7 @@ class UsersController extends Zend_Controller_Action {
             foreach($usersBond as $key => $user){
                 $selectedUsers[]['name'] = $user["peer_name"];
                 foreach($allPeers as $x => $peer){
-                    if($user['peer_name'] == $peer['name']){
+                    if($user['peer_name'] == $peer['exten']){
                         unset($allPeers[$x]);
                     }
                 }
@@ -393,7 +394,7 @@ class UsersController extends Zend_Controller_Action {
 
             $this->view->selected = $selectedUsers;
             $this->view->peers = $allPeers;
-        
+
         }else{
 
             $this->view->peers = $allPeers;
@@ -402,9 +403,9 @@ class UsersController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
-            
+
             $data = $_POST;
-            
+
             // removes bond extension
             Snep_Binds_Manager::removeBond($data['id']);
 
@@ -416,7 +417,7 @@ class UsersController extends Zend_Controller_Action {
 
                 }
             }
-            
+
             $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
         }
     }

@@ -3128,7 +3128,7 @@ msgstr "NAT"
 
 #: ../modules/default/controllers/CallsReportController.php:234
 msgid "NO ANSWER"
-msgstr "NÃ£o atendida"
+msgstr "Não atendida"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:38
 #: ../modules/default/views/scripts/extensions/addedit.phtml:40

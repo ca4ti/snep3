@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `users_queues_permissions` (
 CREATE TABLE IF NOT EXISTS `core_binds_exceptions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `exception` varchar(255) NOT NULL,
+  `exception` text NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),

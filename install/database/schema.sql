@@ -707,7 +707,7 @@ CREATE TABLE IF NOT EXISTS `core_binds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `peer_name` varchar(80) NOT NULL,
-  `type` enum('bound','nobound') NOT NULL, 
+  `type` enum('bound','nobound') NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -723,7 +723,7 @@ CREATE TABLE IF NOT EXISTS `core_binds` (
 CREATE TABLE IF NOT EXISTS `core_binds_exceptions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `exception` varchar(255) NOT NULL,
+  `exception` text NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),

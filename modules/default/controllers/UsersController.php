@@ -418,7 +418,7 @@ class UsersController extends Zend_Controller_Action {
             Snep_Binds_Manager::removeBond($data['id']);
 
             //add bond extension
-            if($data['duallistbox_bond']){
+            if(isset($data['duallistbox_bond'])){
                 foreach($data['duallistbox_bond'] as $key => $peer){
 
                     Snep_Binds_Manager::addBond($data['id'],$data['bound'],$peer);
@@ -430,8 +430,11 @@ class UsersController extends Zend_Controller_Action {
             // add bond exceptions
             if($data["exceptions"] != ""){
                 $exceptions = explode(",", $data["exceptions"]);
+
                 foreach($exceptions as $x => $exception){
-                    Snep_Binds_Manager::addBondException($data['id'],$exception);
+                    if($exception != ""){
+                        Snep_Binds_Manager::addBondException($data['id'],$exception);
+                    }
                 }
             }
 

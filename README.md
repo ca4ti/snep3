@@ -41,6 +41,8 @@
 - NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
 - NOVO - Utilização dos gráficos do google no relatório de chamadas do período
 - NOVO - Nova lib bootstrap para selecionar mais de um item no campo select
+- NOVO - Acrescimo de exceções especiais no vinculo do usuário
+- CORRIGIDO - Consulta de hierarquia de centro de custos no relatorio de chamadas do período
 - CORRIGIDO - Adicionado getTech e getHost para chamadas com troncos sem autenticacao ( Contribuição: Renato dos Santos)
 
 ---------------------------------

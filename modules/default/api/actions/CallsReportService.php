@@ -204,14 +204,14 @@ class CallsReportService implements SnepService {
             if (count($cost_centers) > 0) {
                 $tmp_cc = "";
                 foreach ($cost_centers as $valor) {
-                    $tmp_cc .= " cdr.accountcode = '" . $valor . "'";
+                    $tmp_cc .= " cdr.accountcode like '" . $valor . "%'";
                     $tmp_cc .= " OR ";
                 }
                 $cost_centers = implode(",", $cost_centers);
                 if($tmp_cc != "")
                     $where_cost_center.= " AND ( " . substr($tmp_cc, 0, strlen($tmp_cc) - 3) . " ) ";
             }else{
-                $where_cost_center = " cdr.accountcode = ".$cost_centers;
+                $where_cost_center = " cdr.accountcode like ".$cost_centers."%";
             }
         }
 

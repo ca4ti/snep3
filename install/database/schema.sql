@@ -718,6 +718,20 @@ CREATE TABLE IF NOT EXISTS `core_binds` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Table structure for table `core_binds_exceptions`
+--
+CREATE TABLE IF NOT EXISTS `core_binds_exceptions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `exception` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `binds_peer_refs_user_id_exception` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Table structure for table `core_groups`
 --
 CREATE TABLE `core_groups` (

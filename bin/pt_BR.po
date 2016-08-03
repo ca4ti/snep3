@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-29 11:56-0300\n"
+"POT-Creation-Date: 2016-08-03 10:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
@@ -138,7 +138,7 @@ msgstr " tem o seguinte erro"
 msgid " in "
 msgstr "em"
 
-#: ../modules/default/controllers/IndexController.php:358
+#: ../modules/default/controllers/AuthController.php:191
 msgid ". Please contact the administrator for receiver notifications."
 msgstr ""
 ". Entre em contato com o administrador do sistema para receber suas "
@@ -148,17 +148,17 @@ msgstr ""
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
-#: ../modules/queue-manager/controllers/OperatorsController.php:42
-#: ../modules/queue-manager/controllers/OperatorsController.php:78
-#: ../modules/queue-manager/controllers/OperatorsController.php:86
-#: ../modules/queue-manager/controllers/DacController.php:141
-#: ../modules/queue-manager/controllers/OperatorReportController.php:106
+#: ../modules/queue-manager/controllers/OperatorsController.php:41
+#: ../modules/queue-manager/controllers/OperatorsController.php:77
+#: ../modules/queue-manager/controllers/OperatorsController.php:85
+#: ../modules/queue-manager/controllers/DacController.php:155
+#: ../modules/queue-manager/controllers/OperatorReportController.php:104
 #: ../modules/queue-manager/controllers/PausesController.php:41
 #: ../modules/queue-manager/controllers/PausesController.php:78
 msgid ". Please contact the administrator."
 msgstr ". Entre em contato com o administrador do sistema."
 
-#: ../modules/default/controllers/CallsReportController.php:415
+#: ../modules/default/controllers/CallsReportController.php:421
 #: ../modules/default/controllers/ExportDataController.php:68
 #: ../modules/default/controllers/ExportDataController.php:91
 #: ../modules/default/controllers/ExportDataController.php:131
@@ -207,11 +207,11 @@ msgstr "60"
 msgid "88137-300 - Palhoça - SC - Brasil"
 msgstr "88137-300 - Palhoça - SC - Brasil"
 
-#: ../modules/default/controllers/AuthController.php:248
+#: ../modules/default/controllers/AuthController.php:332
 msgid "</b> on PABX <b>"
 msgstr "</b> no PABX <b>"
 
-#: ../modules/default/controllers/AuthController.php:249
+#: ../modules/default/controllers/AuthController.php:333
 msgid ""
 "</b>.<br><br>Need to enter the code below for the redefinition.<br>Access "
 "code : <font color= red><b>"
@@ -219,11 +219,11 @@ msgstr ""
 "</b>.<br><br>É preciso informar o código abaixo para a redefinição."
 "<br>Código de acesso : <font color= red><b>"
 
-#: ../modules/default/controllers/AuthController.php:250
+#: ../modules/default/controllers/AuthController.php:334
 msgid "</b></font><br>Your code will expire on: "
 msgstr "</b></font><br>Seu código expirará em:"
 
-#: ../modules/default/controllers/AuthController.php:251
+#: ../modules/default/controllers/AuthController.php:335
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
@@ -261,7 +261,7 @@ msgstr ""
 msgid "A pausa será excluída. Depois disso, você não terá como recuperá-la."
 msgstr ""
 
-#: ../modules/default/controllers/CallsReportController.php:233
+#: ../modules/default/controllers/CallsReportController.php:239
 msgid "ANSWERED"
 msgstr "Atendida"
 
@@ -309,7 +309,7 @@ msgstr "Ação"
 #: ../modules/default/views/scripts/sound-files/index.phtml:47
 #: ../modules/default/views/scripts/queues/index.phtml:43
 #: ../modules/default/views/scripts/contacts/index.phtml:49
-#: ../modules/default/views/scripts/notifications/index.phtml:39
+#: ../modules/default/views/scripts/notifications/index.phtml:37
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:36
 #: ../modules/default/views/scripts/contact-groups/index.phtml:35
 #: ../modules/queue-manager/views/scripts/operators/index.phtml:48
@@ -496,7 +496,7 @@ msgstr "Endereço"
 msgid "Addressee"
 msgstr "Endereço"
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:58
+#: ../modules/queue-manager/controllers/OperatorsController.php:57
 #: ../modules/queue-manager/controllers/PausesController.php:57
 msgid "Adicionar"
 msgstr ""
@@ -510,7 +510,7 @@ msgid "Adicionar Pausa"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
-#: ../modules/default/views/scripts/trunks/addedit.phtml:358
+#: ../modules/default/views/scripts/trunks/addedit.phtml:370
 msgid "Advanced"
 msgstr "Avançado"
 
@@ -585,13 +585,13 @@ msgstr "Permitir visualização"
 msgid "Allow voicemail"
 msgstr "Permitir voicemail"
 
-#: ../modules/default/controllers/CallsReportController.php:458
+#: ../modules/default/controllers/CallsReportController.php:464
 msgid "Amaflags"
 msgstr "Amaflags"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:219
 #: ../modules/default/views/scripts/khomp-links/index.phtml:38
-#: ../modules/default/controllers/CallsReportController.php:277
+#: ../modules/default/controllers/CallsReportController.php:283
 msgid "Analytic"
 msgstr "Analítico"
 
@@ -618,7 +618,7 @@ msgid "Answered"
 msgstr "Atendida"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:413
-#: ../modules/default/views/scripts/trunks/addedit.phtml:413
+#: ../modules/default/views/scripts/trunks/addedit.phtml:425
 msgid "Anually"
 msgstr "Anual"
 
@@ -701,11 +701,11 @@ msgstr "Áudios"
 msgid "Auth. Sent"
 msgstr "Autent. enviada"
 
-#: ../modules/default/controllers/AuthController.php:116
+#: ../modules/default/controllers/AuthController.php:200
 msgid "Authentication failure"
 msgstr "Falha na Autenticação"
 
-#: ../modules/default/views/scripts/users/bond.phtml:60
+#: ../modules/default/views/scripts/users/bond.phtml:70
 #: ../modules/default/views/scripts/profiles/permission.phtml:45
 #: ../modules/default/views/scripts/profiles/addedit.phtml:44
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:72
@@ -719,7 +719,7 @@ msgstr "Disponí­vel"
 msgid "Available extensions"
 msgstr "Ramais Disponí­veis"
 
-#: ../modules/default/controllers/CallsReportController.php:235
+#: ../modules/default/controllers/CallsReportController.php:241
 msgid "BUSY"
 msgstr "Ocupada"
 
@@ -763,7 +763,7 @@ msgstr "Caminho dos Arquivos de Backup"
 msgid "Block the execution of the action until password is given."
 msgstr "Bloquear a execução de ações até a senha ser informada"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:295
+#: ../modules/default/views/scripts/trunks/addedit.phtml:270
 #: ../modules/default/controllers/TrunksController.php:76
 msgid "Board"
 msgstr "Placa"
@@ -777,7 +777,7 @@ msgstr "Placa : "
 msgid "Boards"
 msgstr "Placas"
 
-#: ../modules/default/views/scripts/users/index.phtml:66
+#: ../modules/default/views/scripts/users/index.phtml:63
 #: ../modules/default/views/scripts/users/bond.phtml:16
 #: ../modules/default/controllers/UsersController.php:364
 msgid "Bond"
@@ -880,7 +880,7 @@ msgid "Call Recording Configuration"
 msgstr "Configuração de Gravação "
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:55
-#: ../modules/default/controllers/CallsReportController.php:452
+#: ../modules/default/controllers/CallsReportController.php:458
 msgid "Call Status"
 msgstr "Status da Ligação"
 
@@ -900,7 +900,7 @@ msgstr "Estratégia de distribuição das chamadas"
 msgid "Call status"
 msgstr "Status da Ligação"
 
-#: ../modules/default/controllers/CallsReportController.php:460
+#: ../modules/default/controllers/CallsReportController.php:466
 msgid "Calldate"
 msgstr "Data das ligações"
 
@@ -921,9 +921,9 @@ msgid "Callerid"
 msgstr "Nome"
 
 #: ../modules/default/controllers/CallsReportController.php:55
-#: ../modules/default/controllers/CallsReportController.php:276
-#: ../modules/default/controllers/CallsReportController.php:344
-#: ../modules/default/controllers/CallsReportController.php:435
+#: ../modules/default/controllers/CallsReportController.php:282
+#: ../modules/default/controllers/CallsReportController.php:350
+#: ../modules/default/controllers/CallsReportController.php:441
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Calls"
@@ -948,7 +948,7 @@ msgstr "Canal"
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:49
 #: ../modules/default/views/scripts/users/permission.phtml:120
 #: ../modules/default/views/scripts/users/addedit.phtml:82
-#: ../modules/default/views/scripts/users/bond.phtml:50
+#: ../modules/default/views/scripts/users/bond.phtml:60
 #: ../modules/default/views/scripts/module-settings/index.phtml:191
 #: ../modules/default/views/scripts/ranking-report/export.phtml:24
 #: ../modules/default/views/scripts/music-on-hold/removefile.phtml:15
@@ -962,7 +962,7 @@ msgstr "Canal"
 #: ../modules/default/views/scripts/remove/remove.phtml:26
 #: ../modules/default/views/scripts/profiles/permission.phtml:35
 #: ../modules/default/views/scripts/profiles/addedit.phtml:35
-#: ../modules/default/views/scripts/trunks/addedit.phtml:432
+#: ../modules/default/views/scripts/trunks/addedit.phtml:444
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:50
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:51
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:33
@@ -1051,7 +1051,7 @@ msgstr "Chamadas por Status"
 #: ../modules/default/views/scripts/extensions/index.phtml:49
 #: ../modules/default/views/scripts/khomp-links/view.phtml:53
 #: ../modules/default/views/scripts/ip-status/index.phtml:61
-#: ../modules/default/controllers/CallsReportController.php:461
+#: ../modules/default/controllers/CallsReportController.php:467
 #: ../modules/default/controllers/TrunksController.php:83
 msgid "Channel"
 msgstr "Canal"
@@ -1066,8 +1066,8 @@ msgstr "Falha de Canal"
 msgid "Channel Free"
 msgstr "Canal Livre"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:243
-#: ../modules/default/views/scripts/trunks/addedit.phtml:245
+#: ../modules/default/views/scripts/trunks/addedit.phtml:218
+#: ../modules/default/views/scripts/trunks/addedit.phtml:220
 msgid "Channel Limit"
 msgstr "Limite de Canais"
 
@@ -1079,8 +1079,8 @@ msgstr "Status do Canal"
 msgid "Channel Status Summary"
 msgstr "Resumo de Status do Canal"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:275
-#: ../modules/default/views/scripts/trunks/addedit.phtml:277
+#: ../modules/default/views/scripts/trunks/addedit.phtml:250
+#: ../modules/default/views/scripts/trunks/addedit.phtml:252
 msgid "Channel Technology"
 msgstr "Tecnologia do Canal"
 
@@ -1111,7 +1111,7 @@ msgstr "Cidade/Estado:"
 msgid "Class"
 msgstr "Classe"
 
-#: ../modules/default/views/scripts/notifications/index.phtml:64
+#: ../modules/default/views/scripts/notifications/index.phtml:55
 msgid "Click to visualize"
 msgstr "Clique para visualizar"
 
@@ -1142,7 +1142,7 @@ msgstr "Atualizar CNL"
 msgid "Code"
 msgstr "Código"
 
-#: ../modules/default/controllers/CallsReportController.php:445
+#: ../modules/default/controllers/CallsReportController.php:451
 msgid "Code Cost Center"
 msgstr "Código do Centro de Custos"
 
@@ -1151,11 +1151,11 @@ msgid "Code already exists"
 msgstr "Código já existe"
 
 #: ../modules/default/controllers/CostCenterController.php:99
-#: ../modules/queue-manager/controllers/OperatorsController.php:83
+#: ../modules/queue-manager/controllers/OperatorsController.php:82
 msgid "Code already exists."
 msgstr "Código já existe"
 
-#: ../modules/default/controllers/AuthController.php:195
+#: ../modules/default/controllers/AuthController.php:279
 msgid "Code invalid"
 msgstr "Código inválido"
 
@@ -1163,27 +1163,31 @@ msgstr "Código inválido"
 msgid "Code sent to your email"
 msgstr "Código enviado para o seu e-mail"
 
-#: ../modules/default/controllers/CallsReportController.php:459
+#: ../modules/default/controllers/CallsReportController.php:465
 msgid "Code unique"
 msgstr "Código Único"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:149
 #: ../modules/default/views/scripts/extensions/addedit.phtml:230
-#: ../modules/default/views/scripts/trunks/addedit.phtml:195
+#: ../modules/default/views/scripts/trunks/addedit.phtml:321
 msgid "Codec 1"
 msgstr "Codec 1"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:158
 #: ../modules/default/views/scripts/extensions/addedit.phtml:239
-#: ../modules/default/views/scripts/trunks/addedit.phtml:204
+#: ../modules/default/views/scripts/trunks/addedit.phtml:330
 msgid "Codec 2"
 msgstr "Codec 2"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:167
 #: ../modules/default/views/scripts/extensions/addedit.phtml:248
-#: ../modules/default/views/scripts/trunks/addedit.phtml:213
+#: ../modules/default/views/scripts/trunks/addedit.phtml:339
 msgid "Codec 3"
 msgstr "Codec 3"
+
+#: ../modules/default/views/scripts/users/bond.phtml:50
+msgid "Comma separated"
+msgstr "Separados por vírgula"
 
 #: ../modules/default/controllers/KhompLinksController.php:90
 #: ../modules/default/controllers/KhompLinksController.php:197
@@ -1260,7 +1264,7 @@ msgstr "Contatos"
 msgid "Contains"
 msgstr "Contem"
 
-#: ../modules/default/controllers/CallsReportController.php:457
+#: ../modules/default/controllers/CallsReportController.php:463
 #: ../modules/default/actions/GoContext.php:92
 msgid "Context"
 msgstr "Contexto"
@@ -1277,7 +1281,7 @@ msgstr "Tipo de Controle"
 msgid "Conversation"
 msgstr "Conversação"
 
-#: ../modules/default/controllers/CallsReportController.php:454
+#: ../modules/default/controllers/CallsReportController.php:460
 msgid "Conversation (seconds)"
 msgstr "Conversação (segundos)"
 
@@ -1304,7 +1308,7 @@ msgstr "Copyright"
 #: ../modules/default/controllers/CostCenterController.php:82
 #: ../modules/default/controllers/CostCenterController.php:125
 #: ../modules/default/controllers/CostCenterController.php:176
-#: ../modules/default/controllers/CallsReportController.php:455
+#: ../modules/default/controllers/CallsReportController.php:461
 #: ../lib/PBX/Rule/ActionConfig.php:248
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
@@ -1368,15 +1372,15 @@ msgstr "DND"
 msgid "DTMF Mode"
 msgstr "Modo DTMF"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:373
+#: ../modules/default/views/scripts/trunks/addedit.phtml:385
 msgid "DTMF dial mode"
 msgstr "Modo de discagem DTMF"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:385
+#: ../modules/default/views/scripts/trunks/addedit.phtml:397
 msgid "DTMF dial mode number"
 msgstr "Número do modo de discagem DTMF"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:387
+#: ../modules/default/views/scripts/trunks/addedit.phtml:399
 msgid "DTML dial mode number"
 msgstr "Número do modo de discagem DTMF"
 
@@ -1389,12 +1393,12 @@ msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr "Daian Conrad [ daian.conrad@opens.com.br ] - Especialista em Asterisk"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:421
-#: ../modules/default/views/scripts/trunks/addedit.phtml:421
+#: ../modules/default/views/scripts/trunks/addedit.phtml:433
 msgid "Daily"
 msgstr "Diariamente"
 
 #: ../modules/default/controllers/IndexController.php:278
-#: ../modules/default/controllers/IndexController.php:381
+#: ../modules/default/controllers/IndexController.php:296
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Dashboard"
@@ -1451,9 +1455,9 @@ msgid "Database username"
 msgstr "Usuário da base de dados"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:177
-#: ../modules/default/views/scripts/notifications/index.phtml:38
+#: ../modules/default/views/scripts/notifications/index.phtml:36
 #: ../modules/default/views/scripts/services-report/view.phtml:36
-#: ../modules/default/controllers/CallsReportController.php:449
+#: ../modules/default/controllers/CallsReportController.php:455
 #: ../modules/default/controllers/ServicesReportController.php:204
 #: ../modules/queue-manager/views/scripts/operator-report/index.phtml:297
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:480
@@ -1461,7 +1465,7 @@ msgstr "Usuário da base de dados"
 msgid "Date"
 msgstr "Data"
 
-#: ../modules/default/controllers/CallsReportController.php:448
+#: ../modules/default/controllers/CallsReportController.php:454
 msgid "Day"
 msgstr "Dia"
 
@@ -1527,7 +1531,7 @@ msgstr "Define o número de dí­gitos par ao cadastro de um ramal"
 msgid "Delay Qualification"
 msgstr "Controle de Qualidade"
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:136
+#: ../modules/queue-manager/controllers/OperatorsController.php:135
 msgid "Deletar Agente."
 msgstr "Deletar Agente."
 
@@ -1537,7 +1541,7 @@ msgstr "Deletar Pausa."
 
 #: ../modules/default/views/scripts/extensions/index.phtml:70
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:20
-#: ../modules/default/views/scripts/users/index.phtml:74
+#: ../modules/default/views/scripts/users/index.phtml:65
 #: ../modules/default/views/scripts/route/index.phtml:123
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:51
 #: ../modules/default/views/scripts/music-on-hold/removefile.phtml:13
@@ -1553,7 +1557,7 @@ msgstr "Deletar Pausa."
 #: ../modules/default/views/scripts/sound-files/index.phtml:94
 #: ../modules/default/views/scripts/queues/index.phtml:64
 #: ../modules/default/views/scripts/contacts/index.phtml:70
-#: ../modules/default/views/scripts/notifications/index.phtml:68
+#: ../modules/default/views/scripts/notifications/index.phtml:57
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:58
 #: ../modules/default/views/scripts/contact-groups/index.phtml:54
 #: ../modules/default/controllers/ContactsController.php:247
@@ -1679,9 +1683,12 @@ msgstr "Negar"
 msgid "Description"
 msgstr "Descrição"
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:197
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Desligadas pelo Agente"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:197
+msgid "Desligadas pelo Cliente"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:196
@@ -1716,7 +1723,7 @@ msgstr "Destino"
 #: ../modules/default/views/scripts/route/index.phtml:92
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
-#: ../modules/default/controllers/CallsReportController.php:451
+#: ../modules/default/controllers/CallsReportController.php:457
 #: ../modules/default/controllers/RankingReportController.php:190
 msgid "Destiny"
 msgstr "Destino"
@@ -1853,8 +1860,8 @@ msgstr "Você tem certeza que deseja apagar este item?"
 msgid "Does a loop in actions."
 msgstr "Faz um laço nas ações."
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:222
-#: ../modules/default/views/scripts/trunks/addedit.phtml:224
+#: ../modules/default/views/scripts/trunks/addedit.phtml:197
+#: ../modules/default/views/scripts/trunks/addedit.phtml:199
 msgid "Domain"
 msgstr "Dominio"
 
@@ -1875,7 +1882,7 @@ msgstr "Duplicar"
 msgid "Duration"
 msgstr "Duração"
 
-#: ../modules/default/controllers/CallsReportController.php:453
+#: ../modules/default/controllers/CallsReportController.php:459
 msgid "Duration (seconds)"
 msgstr "Duração (segundos)"
 
@@ -1884,7 +1891,7 @@ msgid "E-mail of addressee"
 msgstr "Endereço de E-mail"
 
 #: ../modules/default/views/scripts/extensions/index.phtml:68
-#: ../modules/default/views/scripts/users/index.phtml:70
+#: ../modules/default/views/scripts/users/index.phtml:64
 #: ../modules/default/views/scripts/route/index.phtml:119
 #: ../modules/default/views/scripts/music-on-hold/file.phtml:49
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:78
@@ -1901,7 +1908,7 @@ msgstr "Endereço de E-mail"
 #: ../modules/default/views/scripts/contact-groups/index.phtml:51
 #: ../modules/default/controllers/ContactsController.php:158
 #: ../modules/default/controllers/CostCenterController.php:126
-#: ../modules/default/controllers/IndexController.php:382
+#: ../modules/default/controllers/IndexController.php:297
 #: ../modules/default/controllers/UsersController.php:121
 #: ../modules/default/controllers/PickupGroupsController.php:137
 #: ../modules/default/controllers/ExpressionAliasController.php:128
@@ -1934,7 +1941,7 @@ msgstr "Editar Arquivo"
 msgid "Edit trunk"
 msgstr "Editar Tronco "
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:101
+#: ../modules/queue-manager/controllers/OperatorsController.php:100
 #: ../modules/queue-manager/controllers/PausesController.php:94
 msgid "Editar"
 msgstr "Editar"
@@ -1978,9 +1985,9 @@ msgstr "Ativar Gravação"
 #: ../modules/default/views/scripts/calls-report/index.phtml:189
 #: ../modules/default/views/scripts/calls-report/index.phtml:205
 #: ../modules/default/views/scripts/trunks/addedit.phtml:188
-#: ../modules/default/views/scripts/trunks/addedit.phtml:366
 #: ../modules/default/views/scripts/trunks/addedit.phtml:378
-#: ../modules/default/views/scripts/trunks/addedit.phtml:396
+#: ../modules/default/views/scripts/trunks/addedit.phtml:390
+#: ../modules/default/views/scripts/trunks/addedit.phtml:408
 #: ../modules/default/controllers/KhompLinksController.php:97
 #: ../modules/default/controllers/KhompLinksController.php:204
 msgid "Enabled"
@@ -2021,7 +2028,7 @@ msgstr "Igualmente (rrmemory)"
 msgid "Error"
 msgstr "Erro"
 
-#: ../modules/default/controllers/CallsReportController.php:414
+#: ../modules/default/controllers/CallsReportController.php:420
 #: ../modules/default/controllers/ExportDataController.php:67
 #: ../modules/default/controllers/ExportDataController.php:90
 #: ../modules/default/controllers/ExportDataController.php:130
@@ -2030,11 +2037,11 @@ msgstr "Erro"
 msgid "Error "
 msgstr "Erro"
 
-#: ../modules/default/controllers/CallsReportController.php:376
+#: ../modules/default/controllers/CallsReportController.php:382
 msgid "Error generating chart. Check your connection!"
 msgstr "Erro ao gerar gráfico. Verifique sua conexão!"
 
-#: ../modules/default/controllers/IndexController.php:347
+#: ../modules/default/controllers/AuthController.php:180
 msgid ""
 "Error notifications.<br> To receive notifications about new features, "
 "modules and related news Snep you must be connected to an internet network. "
@@ -2077,8 +2084,8 @@ msgstr "Erro! Falha na conexão com o servidor Asterisk"
 msgid "Error! No Khomp board installed"
 msgstr "Erro: Nenhuma placa Khomp instalada."
 
-#: ../modules/queue-manager/controllers/DacController.php:134
-#: ../modules/queue-manager/controllers/OperatorReportController.php:99
+#: ../modules/queue-manager/controllers/DacController.php:148
+#: ../modules/queue-manager/controllers/OperatorReportController.php:97
 msgid "Error: "
 msgstr "Erro:"
 
@@ -2086,12 +2093,12 @@ msgstr "Erro:"
 #: ../modules/default/controllers/IndexController.php:141
 #: ../modules/default/controllers/IndexController.php:191
 #: ../modules/default/controllers/IndexController.php:259
-#: ../modules/default/controllers/IndexController.php:358
-#: ../modules/queue-manager/controllers/OperatorsController.php:42
-#: ../modules/queue-manager/controllers/OperatorsController.php:78
-#: ../modules/queue-manager/controllers/OperatorsController.php:86
-#: ../modules/queue-manager/controllers/DacController.php:141
-#: ../modules/queue-manager/controllers/OperatorReportController.php:106
+#: ../modules/default/controllers/AuthController.php:191
+#: ../modules/queue-manager/controllers/OperatorsController.php:41
+#: ../modules/queue-manager/controllers/OperatorsController.php:77
+#: ../modules/queue-manager/controllers/OperatorsController.php:85
+#: ../modules/queue-manager/controllers/DacController.php:155
+#: ../modules/queue-manager/controllers/OperatorReportController.php:104
 #: ../modules/queue-manager/controllers/PausesController.php:41
 #: ../modules/queue-manager/controllers/PausesController.php:78
 msgid "Error: Code "
@@ -2116,6 +2123,10 @@ msgstr "Ex: 1000-1050;1060;1063;1070-1100"
 msgid "Example"
 msgstr "Exemplo"
 
+#: ../modules/default/views/scripts/users/bond.phtml:48
+msgid "Exceptions Permited"
+msgstr "Exceções Permitidas"
+
 #: ../modules/default/views/layouts/register.phtml:98
 msgid "Exclusive modules"
 msgstr "Módulos Exclusivos"
@@ -2137,7 +2148,7 @@ msgstr "Modo de exibição:"
 msgid "Export"
 msgstr "Exportar"
 
-#: ../modules/default/controllers/CallsReportController.php:436
+#: ../modules/default/controllers/CallsReportController.php:442
 #: ../modules/default/controllers/RankingReportController.php:175
 #: ../modules/default/controllers/ServicesReportController.php:196
 #: /var/www/html/snep-3/configs/titleOptions.xml
@@ -2228,7 +2239,7 @@ msgstr "Grupo de Ramal"
 msgid "Extension Groups"
 msgstr "Grupos de Ramais"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:361
+#: ../modules/default/views/scripts/trunks/addedit.phtml:373
 msgid "Extension Mapping"
 msgstr "Mapeamento de Ramais"
 
@@ -2276,7 +2287,7 @@ msgstr "Grupo de Ramais"
 msgid "Extensions Range"
 msgstr "Range de Ramais"
 
-#: ../modules/default/controllers/CallsReportController.php:236
+#: ../modules/default/controllers/CallsReportController.php:242
 msgid "FAILED"
 msgstr "Falhou"
 
@@ -2323,7 +2334,7 @@ msgstr ""
 msgid "Fila "
 msgstr ""
 
-#: ../modules/queue-manager/controllers/DacController.php:38
+#: ../modules/queue-manager/controllers/DacController.php:37
 msgid "Filas DAC"
 msgstr ""
 
@@ -2419,10 +2430,6 @@ msgstr "Para o agente que atendeu menos chamadas (fewestcalls)"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:184
 msgid "Force reverse authentication"
 msgstr "Forçar Autenticação Reversa"
-
-#: ../modules/default/views/scripts/auth/login.phtml:27
-msgid "Forgot Password?"
-msgstr "Esqueceu sua senha?"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:160
 #: ../modules/default/views/scripts/systemstatus/index.phtml:308
@@ -2585,12 +2592,12 @@ msgstr "Quero me registrar"
 msgid "IAX2"
 msgstr "IAX2"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:257
+#: ../modules/default/views/scripts/trunks/addedit.phtml:232
 msgid "IAX2 Trunking"
 msgstr "IAX2 Trunking"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:282
-#: ../modules/default/views/scripts/trunks/addedit.phtml:284
+#: ../modules/default/views/scripts/trunks/addedit.phtml:257
+#: ../modules/default/views/scripts/trunks/addedit.phtml:259
 msgid "ID Regular Expression"
 msgstr "Expressão de Identificação"
 
@@ -2613,7 +2620,7 @@ msgstr "Servidor de notificações do ITC/Snep"
 msgid "Id"
 msgstr "ID"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:347
+#: ../modules/default/views/scripts/trunks/addedit.phtml:358
 msgid "Identifier"
 msgstr "Identificador"
 
@@ -2699,8 +2706,8 @@ msgstr "Inicializando"
 msgid "Input File"
 msgstr "Arquivo"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:229
-#: ../modules/default/views/scripts/trunks/addedit.phtml:231
+#: ../modules/default/views/scripts/trunks/addedit.phtml:204
+#: ../modules/default/views/scripts/trunks/addedit.phtml:206
 msgid "Insecure"
 msgstr "Insecure"
 
@@ -2726,7 +2733,7 @@ msgstr "Tipo da Interface"
 msgid "Internal Error"
 msgstr "Erro Interno"
 
-#: ../modules/default/controllers/IndexController.php:336
+#: ../modules/default/controllers/AuthController.php:169
 msgid ""
 "Internal Server Error. <br> To receive notifications about new features, "
 "modules and related news Snep you must be connected to an internet network. "
@@ -2848,7 +2855,7 @@ msgstr "Deixe em branco para usar o número do destino."
 msgid "Letters and Numbers only please"
 msgstr "É permitido somente letras e números "
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:522
+#: ../modules/default/views/scripts/trunks/addedit.phtml:538
 #: ../modules/default/views/scripts/contacts/addedit.phtml:225
 msgid "Letters and numbers only please"
 msgstr "É permitido somente letras e números "
@@ -3009,12 +3016,12 @@ msgid "Minute"
 msgstr "Minuto"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:388
-#: ../modules/default/views/scripts/trunks/addedit.phtml:392
+#: ../modules/default/views/scripts/trunks/addedit.phtml:404
 msgid "Minute Control"
 msgstr "Controle de Minutos"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:406
-#: ../modules/default/views/scripts/trunks/addedit.phtml:405
+#: ../modules/default/views/scripts/trunks/addedit.phtml:417
 #: /var/www/html/snep-3/modules/default/strings_extras.xml
 msgid "Minutes"
 msgstr "Minutos"
@@ -3061,7 +3068,7 @@ msgid "Month"
 msgstr "Mês"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:417
-#: ../modules/default/views/scripts/trunks/addedit.phtml:417
+#: ../modules/default/views/scripts/trunks/addedit.phtml:429
 msgid "Monthly"
 msgstr "Mensalmente"
 
@@ -3110,7 +3117,7 @@ msgid "MySQL"
 msgstr "MySQL"
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:188
-msgid "Médias de atendimento"
+msgid "Médias de tempo"
 msgstr ""
 
 #: /var/www/html/snep-3/modules/queue-manager/info.xml
@@ -3122,11 +3129,11 @@ msgstr ""
 msgid "NAT"
 msgstr "NAT"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:310
+#: ../modules/default/views/scripts/trunks/addedit.phtml:285
 msgid "NAT Optimization"
 msgstr "NAT"
 
-#: ../modules/default/controllers/CallsReportController.php:234
+#: ../modules/default/controllers/CallsReportController.php:240
 msgid "NO ANSWER"
 msgstr "Não atendida"
 
@@ -3183,7 +3190,7 @@ msgstr "Não atendida"
 msgid "Name"
 msgstr "Nome"
 
-#: ../modules/default/controllers/CallsReportController.php:447
+#: ../modules/default/controllers/CallsReportController.php:453
 msgid "Name Cost Center"
 msgstr "Nome do Centro de Custos"
 
@@ -3218,7 +3225,7 @@ msgstr "Novo Arquivos de Som adicionado"
 
 #: ../modules/default/views/scripts/khomp-links/index.phtml:56
 #: ../modules/default/views/scripts/trunks/addedit.phtml:149
-#: ../modules/default/views/scripts/trunks/addedit.phtml:261
+#: ../modules/default/views/scripts/trunks/addedit.phtml:236
 #: ../modules/default/views/scripts/queues/addedit.phtml:188
 #: ../modules/default/views/scripts/queues/addedit.phtml:201
 #: ../modules/default/views/scripts/queues/addedit.phtml:218
@@ -3270,7 +3277,7 @@ msgstr "Nenhum registo encontrado!"
 msgid "No entries found!"
 msgstr "Nenhum registo encontrado!"
 
-#: ../modules/default/controllers/CallsReportController.php:407
+#: ../modules/default/controllers/CallsReportController.php:413
 msgid "No entries found."
 msgstr "Nenhum registro encontrado."
 
@@ -3303,7 +3310,7 @@ msgstr "Nenhum módulo instalado."
 msgid "No queues available"
 msgstr "Nenhuma fila cadastrada"
 
-#: ../modules/default/controllers/CallsReportController.php:492
+#: ../modules/default/controllers/CallsReportController.php:498
 #: ../modules/default/controllers/ExportDataController.php:165
 #: ../modules/default/controllers/RankingReportController.php:226
 #: ../modules/default/controllers/ServicesReportController.php:239
@@ -3343,7 +3350,7 @@ msgstr "Não Encontrado"
 msgid "Not configured"
 msgstr "Não configurado"
 
-#: ../modules/default/views/scripts/notifications/index.phtml:37
+#: ../modules/default/views/scripts/notifications/index.phtml:35
 #: ../modules/default/controllers/NotificationsController.php:123
 msgid "Notification"
 msgstr "Notificação"
@@ -3389,7 +3396,7 @@ msgstr ""
 msgid "Não obrigatório"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:137
+#: ../modules/queue-manager/controllers/OperatorsController.php:136
 msgid "O agente será excluído. Depois disso, você não terá como recuperá-lo."
 msgstr ""
 
@@ -3458,10 +3465,10 @@ msgstr ""
 msgid "Operadores"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:37
-#: ../modules/queue-manager/controllers/OperatorsController.php:57
-#: ../modules/queue-manager/controllers/OperatorsController.php:100
-#: ../modules/queue-manager/controllers/OperatorsController.php:130
+#: ../modules/queue-manager/controllers/OperatorsController.php:36
+#: ../modules/queue-manager/controllers/OperatorsController.php:56
+#: ../modules/queue-manager/controllers/OperatorsController.php:99
+#: ../modules/queue-manager/controllers/OperatorsController.php:129
 msgid "Operators"
 msgstr "Operadores"
 
@@ -3587,10 +3594,10 @@ msgstr "Senha"
 msgid "Password Padlock"
 msgstr "Senha do cadeado"
 
-#: ../modules/default/controllers/AuthController.php:160
-#: ../modules/default/controllers/AuthController.php:162
-#: ../modules/default/controllers/AuthController.php:218
-#: ../modules/default/controllers/AuthController.php:220
+#: ../modules/default/controllers/AuthController.php:244
+#: ../modules/default/controllers/AuthController.php:246
+#: ../modules/default/controllers/AuthController.php:302
+#: ../modules/default/controllers/AuthController.php:304
 msgid "Password Recovery"
 msgstr "Recuperar senha"
 
@@ -3602,7 +3609,7 @@ msgstr "Senha para acesso restrito"
 msgid "Password successfully recovered"
 msgstr "Senha recuperada com sucesso"
 
-#: ../modules/default/controllers/AuthController.php:189
+#: ../modules/default/controllers/AuthController.php:273
 msgid "Passwords do not match"
 msgstr "As senhas não coincidem"
 
@@ -3735,7 +3742,7 @@ msgstr "Por favor, informe um valor entre 1 e 9."
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:80
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:86
 #: ../modules/default/views/scripts/profiles/addedit.phtml:67
-#: ../modules/default/views/scripts/trunks/addedit.phtml:520
+#: ../modules/default/views/scripts/trunks/addedit.phtml:536
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:74
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:54
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:77
@@ -3804,7 +3811,7 @@ msgstr "Por favor, somente letras."
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:81
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:87
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
-#: ../modules/default/views/scripts/trunks/addedit.phtml:521
+#: ../modules/default/views/scripts/trunks/addedit.phtml:537
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:55
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:78
@@ -3853,8 +3860,8 @@ msgstr "Por favor, insira um range válido"
 msgid "Please enter with value valid."
 msgstr "Por favor, insira um valor válido"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:236
-#: ../modules/default/views/scripts/trunks/addedit.phtml:238
+#: ../modules/default/views/scripts/trunks/addedit.phtml:211
+#: ../modules/default/views/scripts/trunks/addedit.phtml:213
 msgid "Port"
 msgstr "Porta"
 
@@ -3950,11 +3957,11 @@ msgstr "Fila"
 msgid "Queue Alert"
 msgstr "Alerta da Fila"
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:36
-#: ../modules/queue-manager/controllers/OperatorsController.php:56
-#: ../modules/queue-manager/controllers/OperatorsController.php:99
-#: ../modules/queue-manager/controllers/OperatorsController.php:129
-#: ../modules/queue-manager/controllers/DacController.php:37
+#: ../modules/queue-manager/controllers/OperatorsController.php:35
+#: ../modules/queue-manager/controllers/OperatorsController.php:55
+#: ../modules/queue-manager/controllers/OperatorsController.php:98
+#: ../modules/queue-manager/controllers/OperatorsController.php:128
+#: ../modules/queue-manager/controllers/DacController.php:36
 #: ../modules/queue-manager/controllers/PausesController.php:35
 #: ../modules/queue-manager/controllers/PausesController.php:55
 #: ../modules/queue-manager/controllers/PausesController.php:92
@@ -3964,7 +3971,7 @@ msgstr "Alerta da Fila"
 msgid "Queue Manager"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorReportController.php:39
+#: ../modules/queue-manager/controllers/OperatorReportController.php:37
 msgid "Queue Manager » Estatística do Operador"
 msgstr ""
 
@@ -4081,7 +4088,7 @@ msgstr "Parâmetros de Gravação"
 msgid "Records"
 msgstr "Registros"
 
-#: ../modules/default/controllers/AuthController.php:253
+#: ../modules/default/controllers/AuthController.php:337
 msgid "Redefinition password - SNEP"
 msgstr "Redifinição de Senha - SNEP"
 
@@ -4141,7 +4148,7 @@ msgstr "Host Remoto"
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:47
 #: ../modules/default/views/scripts/contacts/select-multi-remove.phtml:53
 #: ../modules/default/controllers/MusicOnHoldController.php:208
-#: ../modules/queue-manager/controllers/OperatorsController.php:131
+#: ../modules/queue-manager/controllers/OperatorsController.php:130
 #: ../modules/queue-manager/controllers/PausesController.php:123
 #: ../lib/Snep/Form.php:105
 msgid "Remove"
@@ -4196,9 +4203,9 @@ msgid "Report member as busy when in connection"
 msgstr "Reportar membro como ocupado quando estiver em ligação"
 
 #: ../modules/default/controllers/CallsReportController.php:54
-#: ../modules/default/controllers/CallsReportController.php:275
-#: ../modules/default/controllers/CallsReportController.php:343
-#: ../modules/default/controllers/CallsReportController.php:434
+#: ../modules/default/controllers/CallsReportController.php:281
+#: ../modules/default/controllers/CallsReportController.php:349
+#: ../modules/default/controllers/CallsReportController.php:440
 #: ../modules/default/controllers/ExportDataController.php:49
 #: ../modules/default/controllers/ExportDataController.php:111
 #: ../modules/default/controllers/RankingReportController.php:79
@@ -4402,7 +4409,7 @@ msgstr "SNEP - A fila"
 msgid "SNEP - the Queue "
 msgstr "SNEP - A fila"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:349
+#: ../modules/default/views/scripts/trunks/addedit.phtml:360
 msgid "Same on both servers"
 msgstr "O mesmo em ambos os servidores"
 
@@ -4416,7 +4423,7 @@ msgstr "Sabado"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:430
 #: ../modules/default/views/scripts/users/permission.phtml:118
 #: ../modules/default/views/scripts/users/addedit.phtml:80
-#: ../modules/default/views/scripts/users/bond.phtml:48
+#: ../modules/default/views/scripts/users/bond.phtml:58
 #: ../modules/default/views/scripts/module-settings/index.phtml:189
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:47
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:55
@@ -4425,7 +4432,7 @@ msgstr "Sabado"
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:49
 #: ../modules/default/views/scripts/profiles/permission.phtml:33
 #: ../modules/default/views/scripts/profiles/addedit.phtml:33
-#: ../modules/default/views/scripts/trunks/addedit.phtml:430
+#: ../modules/default/views/scripts/trunks/addedit.phtml:442
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:48
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:49
 #: ../modules/default/views/scripts/auth/recuperation.phtml:36
@@ -4558,7 +4565,7 @@ msgstr "Selecione o arquivo"
 msgid "Select the columns you wish to export."
 msgstr "Selecione as colunas que deseja exportar."
 
-#: ../modules/default/views/scripts/users/bond.phtml:59
+#: ../modules/default/views/scripts/users/bond.phtml:69
 #: ../modules/default/views/scripts/profiles/permission.phtml:44
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:71
 #: ../modules/default/views/scripts/queues/members.phtml:40
@@ -4595,7 +4602,7 @@ msgstr "Enviar chamada para uma fila de atendimento"
 msgid "Send to Queue"
 msgstr "Enviar para Fila"
 
-#: ../modules/default/views/scripts/notifications/index.phtml:36
+#: ../modules/default/views/scripts/notifications/index.phtml:34
 msgid "Sender"
 msgstr "Remetente"
 
@@ -4693,7 +4700,7 @@ msgstr "Exibir top classificados por destino"
 msgid "Show top by source ranking"
 msgstr "Exibir top classificados por origem"
 
-#: ../modules/default/views/scripts/users/bond.phtml:61
+#: ../modules/default/views/scripts/users/bond.phtml:71
 #: ../modules/default/views/scripts/profiles/permission.phtml:46
 #: ../modules/default/views/scripts/profiles/addedit.phtml:45
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:93
@@ -4813,7 +4820,7 @@ msgstr "Arquivo de Som atualizado"
 #: ../modules/default/views/scripts/simulator/index.phtml:47
 #: ../modules/default/views/scripts/simulator/index.phtml:77
 #: ../modules/default/views/scripts/simulator/index.phtml:110
-#: ../modules/default/controllers/CallsReportController.php:450
+#: ../modules/default/controllers/CallsReportController.php:456
 #: ../modules/default/controllers/RankingReportController.php:189
 #: ../modules/default/actions/DiscarTronco.php:336
 msgid "Source"
@@ -4831,6 +4838,10 @@ msgstr "Grupo de Origem"
 #, php-format
 msgid "Source: %s"
 msgstr "Origem: %s"
+
+#: ../modules/default/views/scripts/users/bond.phtml:45
+msgid "Special Exceptions"
+msgstr "Exceções Especiais"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:152
 msgid "Specify"
@@ -4939,7 +4950,7 @@ msgstr "Sincronizar arquivos"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:223
 #: ../modules/default/views/scripts/khomp-links/index.phtml:42
-#: ../modules/default/controllers/CallsReportController.php:345
+#: ../modules/default/controllers/CallsReportController.php:351
 msgid "Synthetic"
 msgstr "Sintético"
 
@@ -5081,7 +5092,7 @@ msgstr "O arquivo includes/setup.conf não tem permissão de escrita."
 msgid "The Recorded Files Path is required."
 msgstr "O diretório de arquivos de gravação e obrigatório."
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:525
+#: ../modules/default/views/scripts/trunks/addedit.phtml:541
 msgid "The board is required"
 msgstr "A placa é obrigatória"
 
@@ -5278,7 +5289,7 @@ msgstr ""
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:85
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
-#: ../modules/default/views/scripts/trunks/addedit.phtml:519
+#: ../modules/default/views/scripts/trunks/addedit.phtml:535
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
 #: ../modules/default/views/scripts/queues-groups/addedit.phtml:53
 #: ../modules/default/views/scripts/queues/addedit.phtml:277
@@ -5399,7 +5410,7 @@ msgstr ""
 "Seu apelido possui caracteres inválidos. Não são permitidos, valor vazio, "
 "espaços em branco e caracteres especiais, exceto ( # % | . - _ )"
 
-#: ../modules/default/controllers/CallsReportController.php:261
+#: ../modules/default/controllers/CallsReportController.php:267
 msgid "There are no extensions in the selected group"
 msgstr "Não existem ramais no grupo selecionado"
 
@@ -5431,9 +5442,9 @@ msgstr "Quinta-feira"
 
 #: ../modules/default/views/scripts/information/index.phtml:44
 msgid ""
-"Tiago Zimmemann [ tiago.zimmermann@opens.com.br ] - Developer\n"
+"Tiago Zimmermann [ tiago.zimmermann@opens.com.br ] - Developer\n"
 "                        "
-msgstr "Tiago Zimmemann [ tiago.zimmermann@opens.com.br ] - Desenvolvedor"
+msgstr "Tiago Zimmemann [ tiago.zimmermann@opens.com.br ] - Desenvolvedor\n"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:72
 #: ../modules/default/views/scripts/simulator/index.phtml:112
@@ -5444,12 +5455,12 @@ msgstr "Tempo"
 msgid "Time Credit (h:m:s)"
 msgstr "Saldo de Tempo (h:m:s)"
 
-#: ../modules/default/controllers/AuthController.php:201
+#: ../modules/default/controllers/AuthController.php:285
 msgid "Time of validity of the code was expired"
 msgstr "Tempo de validade do código foi expirado"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:404
-#: ../modules/default/views/scripts/trunks/addedit.phtml:403
+#: ../modules/default/views/scripts/trunks/addedit.phtml:415
 msgid "Time total"
 msgstr "Tempo Total"
 
@@ -5577,11 +5588,11 @@ msgstr "Tipo"
 msgid "Type Call"
 msgstr "Tipo de Chamada"
 
-#: ../modules/default/controllers/CallsReportController.php:446
+#: ../modules/default/controllers/CallsReportController.php:452
 msgid "Type Cost Center"
 msgstr "Tipo de Centro de Custos"
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:410
+#: ../modules/default/views/scripts/trunks/addedit.phtml:422
 msgid "Type of control"
 msgstr "Tipo de controle"
 
@@ -5694,8 +5705,8 @@ msgstr "Definido pelo usuário"
 msgid "User defined string"
 msgstr "Spring definida pelo usuário"
 
-#: ../modules/default/controllers/AuthController.php:184
-#: ../modules/default/controllers/AuthController.php:235
+#: ../modules/default/controllers/AuthController.php:268
+#: ../modules/default/controllers/AuthController.php:319
 msgid "User not registered"
 msgstr "Usuário Não Registrado"
 
@@ -5713,7 +5724,7 @@ msgstr "Usuário ou senha inválido"
 msgid "User permission"
 msgstr "Permissão do usuário"
 
-#: ../modules/default/controllers/CallsReportController.php:456
+#: ../modules/default/controllers/CallsReportController.php:462
 msgid "Userfield"
 msgstr "Userfield"
 
@@ -5793,9 +5804,9 @@ msgstr "Tempo de espera para tocar todos os agentes novamente"
 msgid "Warn agent the time that call waited in queue"
 msgstr "Notificar agente o tempo que a chamada esperou na fila"
 
-#: ../modules/default/controllers/IndexController.php:335
-#: ../modules/default/controllers/IndexController.php:346
-#: ../modules/default/controllers/IndexController.php:357
+#: ../modules/default/controllers/AuthController.php:168
+#: ../modules/default/controllers/AuthController.php:179
+#: ../modules/default/controllers/AuthController.php:190
 msgid "Warning"
 msgstr "Aviso"
 
@@ -5811,7 +5822,7 @@ msgstr "Verificamos recentemente que sua chave da API foi atualizada"
 msgid "We're almost ending"
 msgstr "Estamos quase terminando"
 
-#: ../modules/default/controllers/AuthController.php:170
+#: ../modules/default/controllers/AuthController.php:254
 msgid "We've sent an access code to the email:"
 msgstr "Enviamos um código de acesso ao e-mail:"
 
@@ -5878,7 +5889,7 @@ msgstr "Ano"
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:37
 #: ../modules/default/views/scripts/khomp-links/index.phtml:52
 #: ../modules/default/views/scripts/trunks/addedit.phtml:145
-#: ../modules/default/views/scripts/trunks/addedit.phtml:260
+#: ../modules/default/views/scripts/trunks/addedit.phtml:235
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:33
 #: ../modules/default/views/scripts/queues/addedit.phtml:184
 #: ../modules/default/views/scripts/queues/addedit.phtml:197
@@ -5896,7 +5907,7 @@ msgstr ""
 "Você está removendo uma classe de Musicas em Espera, esta classe tem alguns "
 "arquivos de áudio associados a ela."
 
-#: ../modules/default/controllers/AuthController.php:247
+#: ../modules/default/controllers/AuthController.php:331
 msgid "You asked for resetting your password the user <b>"
 msgstr "Você pediu para redefinir sua senha do usuário <b>"
 
@@ -6060,7 +6071,7 @@ msgstr "[snep] Aviso de uso do tronco"
 msgid "_csv_"
 msgstr "_csv_"
 
-#: ../modules/queue-manager/controllers/DacController.php:55
+#: ../modules/queue-manager/controllers/DacController.php:59
 msgid "abandon"
 msgstr "Abandonada"
 
@@ -6068,15 +6079,15 @@ msgstr "Abandonada"
 msgid "action-configs/index"
 msgstr "action-configs/index"
 
-#: ../modules/queue-manager/controllers/OperatorReportController.php:49
+#: ../modules/queue-manager/controllers/OperatorReportController.php:47
 msgid "answer"
 msgstr "Antedida"
 
-#: ../modules/queue-manager/controllers/DacController.php:57
+#: ../modules/queue-manager/controllers/DacController.php:61
 msgid "answered"
 msgstr "Atendida"
 
-#: ../modules/default/controllers/CallsReportController.php:485
+#: ../modules/default/controllers/CallsReportController.php:491
 msgid "calls"
 msgstr "chamadas"
 
@@ -6132,7 +6143,7 @@ msgstr ""
 msgid "edit_icon.png"
 msgstr "edit_icon.png"
 
-#: ../modules/queue-manager/controllers/DacController.php:56
+#: ../modules/queue-manager/controllers/DacController.php:60
 #: ../modules/queue-manager/lib/QueueManager/Format.php:107
 msgid "enterqueue"
 msgstr "Entrou na Fila"
@@ -6246,8 +6257,8 @@ msgstr "nenhum ramal disponivel"
 msgid "no trunk available"
 msgstr "sem troncos disponí­veis"
 
-#: ../modules/queue-manager/controllers/DacController.php:54
-#: ../modules/queue-manager/controllers/OperatorReportController.php:50
+#: ../modules/queue-manager/controllers/DacController.php:58
+#: ../modules/queue-manager/controllers/OperatorReportController.php:48
 msgid "noanswer"
 msgstr "Não Antedida"
 
@@ -6283,7 +6294,7 @@ msgstr ""
 msgid "profiles/index"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/DacController.php:60
+#: ../modules/queue-manager/controllers/DacController.php:64
 msgid "queueabandon"
 msgstr ""
 
@@ -6303,7 +6314,7 @@ msgstr ""
 msgid "queues/index"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/DacController.php:59
+#: ../modules/queue-manager/controllers/DacController.php:63
 msgid "queuetimeout"
 msgstr "Tempo limite"
 
@@ -6325,7 +6336,7 @@ msgstr "Leitura"
 msgid "report_view_icon.png"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/DacController.php:53
+#: ../modules/queue-manager/controllers/DacController.php:57
 msgid "ringnoanswer"
 msgstr "Não Antedida"
 
@@ -6485,7 +6496,7 @@ msgstr "Tempos"
 msgid "to"
 msgstr "até"
 
-#: ../modules/queue-manager/controllers/DacController.php:58
+#: ../modules/queue-manager/controllers/DacController.php:62
 msgid "transfer"
 msgstr "Trasnferidas"
 
@@ -6541,6 +6552,9 @@ msgstr ""
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:43
 msgid "Últimos 7 dias"
 msgstr ""
+
+#~ msgid "Forgot Password?"
+#~ msgstr "Esqueceu sua senha?"
 
 #~ msgid "Data by Period"
 #~ msgstr "Dados Por Perí­odo"
@@ -6853,9 +6867,6 @@ msgstr ""
 
 #~ msgid "Defines what destinations will be excluded from reports"
 #~ msgstr "Define quais destinos devem ser desprezados por relatÃ³rios"
-
-#~ msgid "Destination Exceptions"
-#~ msgstr "ExceÃ§Ãµes de Destino"
 
 #~ msgid "End with"
 #~ msgstr "Termina com"

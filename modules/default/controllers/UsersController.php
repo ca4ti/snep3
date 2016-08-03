@@ -287,7 +287,7 @@ class UsersController extends Zend_Controller_Action {
         $modulesAll = array();
         $cont = 0;
 
-        // Caso possua dados de permissão do usuário, as permissões passam 
+        // Caso possua dados de permissão do usuário, as permissões passam
         // a ser da tabela users_permission
         foreach ($resources as $key => $res) {
 
@@ -340,7 +340,7 @@ class UsersController extends Zend_Controller_Action {
                 $deleted = array_merge($currentResourcesGroup, $permissionUser);
             }
 
-            // retirar permissão do usuário por id 
+            // retirar permissão do usuário por id
             if (!empty($deleted)) {
                 Snep_Permission_Manager::removePermissionUser($dados['id'], $deleted);
             }
@@ -371,8 +371,16 @@ class UsersController extends Zend_Controller_Action {
 
         $allPeers = Snep_Extensions_Manager::getAll();
 
-        $usersBond = Snep_Binds_Manager::getBond($id);
+        $exceptions = Snep_Binds_Manager::getBondException($id);
+        if(!empty($exceptions)){
+            foreach($exceptions as $x => $excep){
+                (isset($exceptionsAll)) ? $exceptionsAll .= $excep["exception"]."," : $exceptionsAll = $excep["exception"].",";
+            }
+            $exceptions = substr($exceptionsAll, 0,-1);
+            $this->view->exceptions = $exceptions;
+        }
 
+        $usersBond = Snep_Binds_Manager::getBond($id);
         if($usersBond){
 
             // Type bond
@@ -415,6 +423,15 @@ class UsersController extends Zend_Controller_Action {
 
                     Snep_Binds_Manager::addBond($data['id'],$data['bound'],$peer);
 
+                }
+            }
+
+            Snep_Binds_Manager::removeBondException($data['id']);
+            // add bond exceptions
+            if($data["exceptions"] != ""){
+                $exceptions = explode(",", $data["exceptions"]);
+                foreach($exceptions as $x => $exception){
+                    Snep_Binds_Manager::addBondException($data['id'],$exception);
                 }
             }
 

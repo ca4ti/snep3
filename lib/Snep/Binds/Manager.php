@@ -54,6 +54,26 @@ class Snep_Binds_Manager {
         return $peers;
     }
 
+    /**
+     * getBondException - Method to get user bond
+     * @param <int> $id
+     * @return <array> $peers
+     */
+    function getBondException($id) {
+
+        $db = Zend_Registry::get("db");
+
+        $select = $db->select()
+                ->from("core_binds_exceptions")
+                ->where("core_binds_exceptions.user_id = ?", $id);
+
+
+        $stmt = $db->query($select);
+        $exceptions = $stmt->fetchAll();
+
+        return $exceptions;
+    }
+
 
     /**
      * addBond - Method to add bond a user
@@ -72,6 +92,23 @@ class Snep_Binds_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->insert('core_binds', $insert_data);
+    }
+
+    /**
+     * addBond - Method to add bond exception a user
+     * @param <int> $id
+     * @param <int> $exception
+     */
+    public function addBondException($id,$exception) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('user_id' => $id,
+            'exception' => trim($exception),
+            'created' => date('Y-m-d H:i:s'),
+            'updated' => date('Y-m-d H:i:s'));
+
+        $db->insert('core_binds_exceptions', $insert_data);
     }
 
     /**
@@ -102,6 +139,24 @@ class Snep_Binds_Manager {
 
         $db->beginTransaction();
         $db->delete('core_binds', "peer_name = '$peer'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeBond - Method to remove bond exception a user
+     * @param <int> $id
+     */
+    public function removeBondException($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_binds_exceptions', "user_id = '$id'");
 
         try {
             $db->commit();

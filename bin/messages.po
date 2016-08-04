@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-03 10:01-0300\n"
+"POT-Creation-Date: 2016-08-04 11:11-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,33 +51,33 @@ msgstr ""
 msgid " -Kernel + Aplic."
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:96
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:120
-msgid " Data Final"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:87
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:111
-msgid " Data Inicial"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:141
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:140
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:179
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:473
-msgid " Exportar para CSV"
+msgid " Export to CSV"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:95
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:120
+msgid " Final Date"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:86
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:111
+msgid " Initial Date"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:132
-msgid " Número de Origem"
+msgid " Number of origin"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/operator-report/index.phtml:61
-msgid " Operador"
+msgid " Operator"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/operator-report/index.phtml:48
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:40
-msgid " Período"
+msgid " Period"
 msgstr ""
 
 #: ../inspectors/Sounds.php:82
@@ -89,7 +89,7 @@ msgid " The contact "
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:53
-msgid " Tipo"
+msgid " Type"
 msgstr ""
 
 #: ../lib/Snep/CsvIE.php:144
@@ -132,7 +132,7 @@ msgstr ""
 #: ../modules/queue-manager/controllers/OperatorsController.php:77
 #: ../modules/queue-manager/controllers/OperatorsController.php:85
 #: ../modules/queue-manager/controllers/DacController.php:155
-#: ../modules/queue-manager/controllers/OperatorReportController.php:104
+#: ../modules/queue-manager/controllers/OperatorReportController.php:105
 #: ../modules/queue-manager/controllers/PausesController.php:41
 #: ../modules/queue-manager/controllers/PausesController.php:78
 msgid ". Please contact the administrator."
@@ -207,36 +207,6 @@ msgid ""
 "disregard<br><br><i>Team Snep</i>."
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:572
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:628
-msgid "A data é obrigatório final"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:569
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:625
-msgid "A data é obrigatório inicial"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:622
-msgid "A fila é obrigatória"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:231
-msgid "A jornada de trabalho é obrigatória"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:211
-msgid "A jornada final de trabalho é obrigatória"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:208
-msgid "A jornada inicial de trabalho é obrigatória"
-msgstr ""
-
-#: ../modules/queue-manager/controllers/PausesController.php:129
-msgid "A pausa será excluída. Depois disso, você não terá como recuperá-la."
-msgstr ""
-
 #: ../modules/default/controllers/CallsReportController.php:239
 msgid "ANSWERED"
 msgstr ""
@@ -245,15 +215,15 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:193
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:268
-msgid "Abandonada"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:345
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:388
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Abandonadas"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:193
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:268
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:345
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:388
+msgid "Abandoned"
 msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:24
@@ -326,6 +296,8 @@ msgstr ""
 #: ../modules/default/controllers/ExtensionsGroupsController.php:74
 #: ../modules/default/controllers/ProfilesController.php:72
 #: ../modules/default/controllers/TrunksController.php:190
+#: ../modules/queue-manager/controllers/OperatorsController.php:57
+#: ../modules/queue-manager/controllers/PausesController.php:57
 #: ../lib/Snep/Form.php:98 /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Add"
@@ -371,6 +343,14 @@ msgstr ""
 
 #: ../modules/default/controllers/ExtensionsController.php:813
 msgid "Add Multiples Extensions"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/index.phtml:24
+msgid "Add Operator"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/pauses/index.phtml:24
+msgid "Add Pause"
 msgstr ""
 
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:18
@@ -472,19 +452,6 @@ msgstr ""
 msgid "Addressee"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:57
-#: ../modules/queue-manager/controllers/PausesController.php:57
-msgid "Adicionar"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/index.phtml:24
-msgid "Adicionar Operador"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/pauses/index.phtml:24
-msgid "Adicionar Pausa"
-msgstr ""
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
 #: ../modules/default/views/scripts/trunks/addedit.phtml:370
 msgid "Advanced"
@@ -571,9 +538,9 @@ msgstr ""
 msgid "Analytic"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:282
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:281
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:56
-msgid "Analítico"
+msgid "Analytical"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:121
@@ -590,6 +557,12 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:120
 #: ../modules/default/views/scripts/calls-report/view.phtml:155
 #: ../modules/default/views/scripts/calls-report/view.phtml:178
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:148
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:224
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:192
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:270
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:344
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:387
 msgid "Answered"
 msgstr ""
 
@@ -631,16 +604,10 @@ msgstr ""
 msgid "Asterisk Status"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:192
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:270
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Atendida"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:149
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:225
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:344
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:387
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:226
 msgid "Atendidas"
 msgstr ""
@@ -681,6 +648,10 @@ msgstr ""
 msgid "Authentication failure"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:347
+msgid "Availability"
+msgstr ""
+
 #: ../modules/default/views/scripts/users/bond.phtml:70
 #: ../modules/default/views/scripts/profiles/permission.phtml:45
 #: ../modules/default/views/scripts/profiles/addedit.phtml:44
@@ -693,6 +664,10 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:92
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:74
 msgid "Available extensions"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:188
+msgid "Average time"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:241
@@ -858,7 +833,12 @@ msgid "Call Status"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:332
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:302
 msgid "Call Time"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:528
+msgid "Call Time:"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:46
@@ -910,7 +890,10 @@ msgstr ""
 msgid "Calls completed"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:482
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:311
+msgid "Calls per Hour"
+msgstr ""
+
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 msgid "Canal"
 msgstr ""
@@ -988,13 +971,6 @@ msgstr ""
 msgid "Cannot remove. The following routes are using this trunk: "
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/pauses/add.phtml:29
-#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:29
-msgid ""
-"Caso haja mais de uma pausa deste tipo, leve em consideração a soma dos "
-"tempos"
-msgstr ""
-
 #: ../modules/default/views/layouts/register.phtml:217 ../lib/Snep/Cnl.php:191
 msgid "Cell"
 msgstr ""
@@ -1007,20 +983,13 @@ msgstr ""
 msgid "Chamada"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:311
-msgid "Chamadas por Hora"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:350
-msgid "Chamadas por Status"
-msgstr ""
-
 #: ../modules/default/views/scripts/extensions/addedit.phtml:263
 #: ../modules/default/views/scripts/extensions/index.phtml:49
 #: ../modules/default/views/scripts/khomp-links/view.phtml:53
 #: ../modules/default/views/scripts/ip-status/index.phtml:61
 #: ../modules/default/controllers/CallsReportController.php:467
 #: ../modules/default/controllers/TrunksController.php:83
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:482
 msgid "Channel"
 msgstr ""
 
@@ -1104,8 +1073,11 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/index.phtml:42
 #: ../modules/default/views/scripts/pickup-groups/index.phtml:33
 #: ../modules/default/views/scripts/contact-groups/index.phtml:33
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:12
 #: ../modules/queue-manager/views/scripts/operators/index.phtml:42
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:12
 #: ../modules/queue-manager/views/scripts/pauses/add.phtml:13
+#: ../modules/queue-manager/views/scripts/pauses/index.phtml:41
 #: ../modules/queue-manager/views/scripts/pauses/edit.phtml:13
 msgid "Code"
 msgstr ""
@@ -1311,12 +1283,6 @@ msgstr ""
 msgid "Cut on pipe '|'"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:12
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:12
-#: ../modules/queue-manager/views/scripts/pauses/index.phtml:41
-msgid "Código"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsController.php:702
 #: ../modules/default/controllers/ExtensionsController.php:791
 msgid "DB Delete Error: "
@@ -1352,10 +1318,6 @@ msgstr ""
 msgid "DTML dial mode number"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:187
-msgid "Dados das chamadas atendidas"
-msgstr ""
-
 #: ../modules/default/views/scripts/information/index.phtml:48
 msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr ""
@@ -1372,29 +1334,15 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:267
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:226
 msgid "Data"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:98
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:122
-msgid "Data Final"
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:187
+msgid "Data of missed calls"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:89
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:113
-msgid "Data Inicial"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:54
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:46
-msgid "Data específica"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:220
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:360
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:382
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:359
 msgid "Data: "
 msgstr ""
 
@@ -1427,10 +1375,16 @@ msgstr ""
 #: ../modules/default/views/scripts/services-report/view.phtml:36
 #: ../modules/default/controllers/CallsReportController.php:455
 #: ../modules/default/controllers/ServicesReportController.php:204
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:297
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:296
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:267
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:480
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 msgid "Date"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:219
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:382
+msgid "Date: "
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:454
@@ -1497,14 +1451,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:142
 msgid "Delay Qualification"
-msgstr ""
-
-#: ../modules/queue-manager/controllers/OperatorsController.php:135
-msgid "Deletar Agente."
-msgstr ""
-
-#: ../modules/queue-manager/controllers/PausesController.php:128
-msgid "Deletar Pausa."
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/index.phtml:70
@@ -1655,11 +1601,6 @@ msgstr ""
 msgid "Desligadas pelo Agente"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:197
-msgid "Desligadas pelo Cliente"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:196
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Desligadas pelo Operador"
 msgstr ""
@@ -1683,16 +1624,13 @@ msgstr ""
 msgid "Destinity"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:300
-msgid "Destino"
-msgstr ""
-
 #: ../modules/default/views/scripts/route/elements/dst.phtml:2
 #: ../modules/default/views/scripts/route/index.phtml:92
 #: ../modules/default/views/scripts/simulator/index.phtml:84
 #: ../modules/default/views/scripts/simulator/index.phtml:111
 #: ../modules/default/controllers/CallsReportController.php:457
 #: ../modules/default/controllers/RankingReportController.php:190
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:299
 msgid "Destiny"
 msgstr ""
 
@@ -1804,10 +1742,6 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:348
-msgid "Disponibilidade"
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:87
 msgid "Distribution"
 msgstr ""
@@ -1892,6 +1826,8 @@ msgstr ""
 #: ../modules/default/controllers/ProfilesController.php:136
 #: ../modules/queue-manager/views/scripts/operators/index.phtml:62
 #: ../modules/queue-manager/views/scripts/pauses/index.phtml:59
+#: ../modules/queue-manager/controllers/OperatorsController.php:100
+#: ../modules/queue-manager/controllers/PausesController.php:94
 #: /var/www/html/snep-3/configs/titleOptions.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Edit"
@@ -1907,11 +1843,6 @@ msgstr ""
 
 #: ../modules/default/controllers/TrunksController.php:285
 msgid "Edit trunk"
-msgstr ""
-
-#: ../modules/queue-manager/controllers/OperatorsController.php:100
-#: ../modules/queue-manager/controllers/PausesController.php:94
-msgid "Editar"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:339
@@ -2048,7 +1979,7 @@ msgid "Error! No Khomp board installed"
 msgstr ""
 
 #: ../modules/queue-manager/controllers/DacController.php:148
-#: ../modules/queue-manager/controllers/OperatorReportController.php:97
+#: ../modules/queue-manager/controllers/OperatorReportController.php:98
 msgid "Error: "
 msgstr ""
 
@@ -2061,7 +1992,7 @@ msgstr ""
 #: ../modules/queue-manager/controllers/OperatorsController.php:77
 #: ../modules/queue-manager/controllers/OperatorsController.php:85
 #: ../modules/queue-manager/controllers/DacController.php:155
-#: ../modules/queue-manager/controllers/OperatorReportController.php:104
+#: ../modules/queue-manager/controllers/OperatorReportController.php:105
 #: ../modules/queue-manager/controllers/PausesController.php:41
 #: ../modules/queue-manager/controllers/PausesController.php:78
 msgid "Error: Code "
@@ -2071,8 +2002,11 @@ msgstr ""
 msgid "Errors were detected in the configuration of SNEP, click "
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:304
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:303
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:485
+msgid "Event"
+msgstr ""
+
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 msgid "Evento"
 msgstr ""
@@ -2279,26 +2213,9 @@ msgstr ""
 msgid "Failure on trial to dial extension %: non existent extension"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:50
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:101
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:53
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:127
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:298
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:481
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Fila"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:154
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:156
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:448
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:450
-msgid "Fila "
-msgstr ""
-
-#: ../modules/queue-manager/controllers/DacController.php:37
-msgid "Filas DAC"
 msgstr ""
 
 #: ../modules/default/views/scripts/sound-files/index.phtml:45
@@ -2354,7 +2271,16 @@ msgstr ""
 
 #: ../modules/queue-manager/views/scripts/operator-report/index.phtml:40
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:33
-msgid "Filtros"
+msgid "Filters"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:97
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:122
+msgid "Final Date"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/index.phtml:45
+msgid "Final Journey"
 msgstr ""
 
 #: ../modules/default/views/scripts/register/index.phtml:19
@@ -2458,6 +2384,10 @@ msgstr ""
 msgid "Graphic"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:226
+msgid "Graphics"
+msgstr ""
+
 #: ../modules/default/views/scripts/contacts/import.phtml:46
 #: ../modules/default/views/scripts/contacts/addedit.phtml:24
 #: ../modules/default/views/scripts/contacts/index.phtml:44
@@ -2472,10 +2402,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/users/permission.phtml:47
 msgid "Group permission"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:226
-msgid "Gráficos"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:221
@@ -2498,45 +2424,13 @@ msgstr ""
 msgid "High quality support"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:50
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:42
-msgid "Hoje"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:310
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:385
-msgid "Hora"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:324
-msgid "Hora do dia"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:33
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:33
-msgid "Horário do Login"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:40
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:40
-msgid "Horário do Logoff"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:42
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:42
-msgid "Horário do fim da jornada de trabalho diária"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:35
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:35
-msgid "Horário do inicio da jornada de trabalho diária"
-msgstr ""
-
 #: ../modules/default/views/scripts/parameters/index.phtml:105
 #: ../modules/default/views/scripts/parameters/index.phtml:139
 msgid "Hostname"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:310
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:385
 #: /var/www/html/snep-3/modules/default/strings_extras.xml
 msgid "Hour"
 msgstr ""
@@ -2590,6 +2484,11 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/index.phtml:192
 #: ../modules/default/views/scripts/calls-report/index.phtml:208
 msgid "If enabled the query will be slower"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/pauses/add.phtml:29
+#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:29
+msgid "If more than a break of this type, consider the sum of the times"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/import.phtml:26
@@ -2659,6 +2558,15 @@ msgstr ""
 
 #: ../modules/default/views/layouts/layout.phtml:148
 msgid "Information"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:88
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:113
+msgid "Initial Date"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/index.phtml:44
+msgid "Initial Journey "
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:209
@@ -2739,14 +2647,6 @@ msgstr ""
 msgid "Join the network of intercomunexao"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operators/index.phtml:45
-msgid "Jornada Final"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/index.phtml:44
-msgid "Jornada Inicial"
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:91
 msgid "Kernel"
 msgstr ""
@@ -2779,6 +2679,21 @@ msgstr ""
 msgid "Krecord"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:52
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:44
+msgid "Last 15 days"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:53
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:45
+msgid "Last 30 days"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:51
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:43
+msgid "Last 7 days"
+msgstr ""
+
 #: ../modules/default/views/scripts/register/index.phtml:26
 #: ../modules/default/views/layouts/register.phtml:170
 msgid "Last Name"
@@ -2799,6 +2714,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ip-status/index.phtml:63
 #: ../modules/default/views/scripts/ip-status/index.phtml:112
 msgid "Latency"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:519
+msgid "Lead time:"
 msgstr ""
 
 #: ../modules/default/actions/Cadeado.php:99
@@ -2829,7 +2748,14 @@ msgid "Letters only please"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/pauses/index.phtml:43
-msgid "Limite"
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:269
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:346
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:389
+msgid "Limit Time"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:194
+msgid "Limit time"
 msgstr ""
 
 #: ../modules/default/views/scripts/khomp-links/view.phtml:32
@@ -2879,12 +2805,22 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:390
-msgid "Login da Jornada:"
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:33
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:33
+msgid "Login Hour"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:394
-msgid "Logoff da Jornada:"
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:389
+msgid "Login of Journey:"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:40
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:40
+msgid "Logoff Hour"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:393
+msgid "Logoff of Journey:"
 msgstr ""
 
 #: ../modules/default/views/layouts/layout.phtml:164
@@ -3076,10 +3012,6 @@ msgstr ""
 msgid "MySQL"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:188
-msgid "Médias de tempo"
-msgstr ""
-
 #: /var/www/html/snep-3/modules/queue-manager/info.xml
 msgid "Módulo de Gerenciamento de Filas"
 msgstr ""
@@ -3199,6 +3131,7 @@ msgid "No Allow Viewing"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:53
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:225
 msgid "No Answer"
 msgstr ""
 
@@ -3227,6 +3160,15 @@ msgstr ""
 
 #: ../modules/default/controllers/CnlController.php:176
 msgid "No data found in the file"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:132
+msgid "No data from the operator at this time."
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:173
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:467
+msgid "No data from the queue at this time."
 msgstr ""
 
 #: ../modules/default/controllers/RankingReportController.php:140
@@ -3283,6 +3225,7 @@ msgid "No rule found."
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:122
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:149
 msgid "Noanswer"
 msgstr ""
 
@@ -3346,27 +3289,16 @@ msgstr ""
 msgid "Numbers separated by ( . ). EX: 5.04"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:150
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:226
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:226
 msgid "Não Atendidas"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:134
-msgid "Não obrigatório"
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:197
+msgid "Off by Client"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorsController.php:136
-msgid "O agente será excluído. Depois disso, você não terá como recuperá-lo."
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:566
-msgid "O operador é obrigatório"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/pauses/add.phtml:71
-#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:71
-msgid "O tempo máximo de pausa é obrigatório"
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:196
+msgid "Off by Operator"
 msgstr ""
 
 #: ../modules/queue-manager/lib/QueueManager/Format.php:124
@@ -3395,6 +3327,13 @@ msgstr ""
 msgid "On going"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:14
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:28
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:14
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:28
+msgid "Only Numbers"
+msgstr ""
+
 #: ../modules/default/views/scripts/extensions/addedit.phtml:33
 #: ../modules/default/views/scripts/extensions/addedit.phtml:114
 #: ../modules/default/views/scripts/extensions/addedit.phtml:364
@@ -3416,19 +3355,16 @@ msgstr ""
 msgid "Operador"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:114
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:116
-msgid "Operador "
-msgstr ""
-
+#: ../modules/queue-manager/controllers/OperatorReportController.php:38
 #: /var/www/html/snep-3/modules/queue-manager/resources.xml
-msgid "Operadores"
+msgid "Operator Report"
 msgstr ""
 
 #: ../modules/queue-manager/controllers/OperatorsController.php:36
 #: ../modules/queue-manager/controllers/OperatorsController.php:56
 #: ../modules/queue-manager/controllers/OperatorsController.php:99
 #: ../modules/queue-manager/controllers/OperatorsController.php:129
+#: /var/www/html/snep-3/modules/queue-manager/resources.xml
 msgid "Operators"
 msgstr ""
 
@@ -3438,6 +3374,7 @@ msgid "Option"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:162
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:134
 msgid "Optional"
 msgstr ""
 
@@ -3458,14 +3395,15 @@ msgstr ""
 msgid "Order by"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:299
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:483
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 msgid "Origem"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:163
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:238
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:298
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:483
+msgid "Origin"
+msgstr ""
+
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:237
 msgid "Originadas"
 msgstr ""
@@ -3476,6 +3414,11 @@ msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:334
 msgid "Original Source"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:162
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:237
+msgid "Originated"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:81
@@ -3524,9 +3467,9 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:208
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:207
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:370
-msgid "Parciais"
+msgid "Partial"
 msgstr ""
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:306
@@ -3547,6 +3490,8 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:151
 #: ../modules/default/views/layouts/register.phtml:252
 #: ../modules/default/views/layouts/loginregister.phtml:51
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:26
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:26
 msgid "Password"
 msgstr ""
 
@@ -3585,12 +3530,24 @@ msgstr ""
 msgid "Path where to store the backup audio files"
 msgstr ""
 
+#: ../modules/queue-manager/controllers/PausesController.php:122
+msgid "Pausas"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/pauses/add.phtml:27
+#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:27
+msgid "Pause Time per Day"
+msgstr ""
+
 #: ../modules/queue-manager/controllers/PausesController.php:36
 #: ../modules/queue-manager/controllers/PausesController.php:56
 #: ../modules/queue-manager/controllers/PausesController.php:93
-#: ../modules/queue-manager/controllers/PausesController.php:122
 #: /var/www/html/snep-3/modules/queue-manager/resources.xml
-msgid "Pausas"
+msgid "Pauses"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:321
+msgid "Peak connection Queued Hourly"
 msgstr ""
 
 #: ../modules/default/controllers/ServicesReportController.php:205
@@ -3629,10 +3586,6 @@ msgstr ""
 msgid "Permission"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:77
-msgid "Pesquisar Dados"
-msgstr ""
-
 #: ../modules/default/views/scripts/contacts/addedit.phtml:104
 #: ../modules/default/views/scripts/contacts/addedit.phtml:126
 #: ../modules/default/views/scripts/contacts/addedit.phtml:181
@@ -3658,10 +3611,6 @@ msgstr ""
 #: /var/www/html/snep-3/modules/default/resources.xml
 #: /var/www/html/snep-3/configs/dashboard.xml
 msgid "Pickup Groups"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:321
-msgid "Pico de Ligação na Fila por Hora"
 msgstr ""
 
 #: ../modules/default/actions/Playback.php:52
@@ -3841,9 +3790,6 @@ msgstr ""
 #: ../modules/queue-manager/views/scripts/operators/add.phtml:109
 #: ../modules/queue-manager/views/scripts/operators/edit.phtml:67
 #: ../modules/queue-manager/views/scripts/operators/edit.phtml:135
-msgid "Prioridade"
-msgstr ""
-
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Priority"
 msgstr ""
@@ -3891,22 +3837,25 @@ msgstr ""
 msgid "Qualify"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:286
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:328
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:343
-msgid "Quantidade"
-msgstr ""
-
 #: ../modules/default/views/scripts/ranking-report/index.phtml:68
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:51
 #: ../modules/default/views/scripts/calls-report/graphic.phtml:78
 #: ../modules/default/views/scripts/calls-report/view.phtml:206
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:286
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:328
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:343
 msgid "Quantity"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues-groups/members.phtml:11
 #: ../modules/default/controllers/QueuesController.php:275
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:50
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:101
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:53
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:127
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:297
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:65
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:481
 #: ../lib/PBX/Rule/ActionConfig.php:268
 msgid "Queue"
 msgstr ""
@@ -3920,6 +3869,7 @@ msgstr ""
 #: ../modules/queue-manager/controllers/OperatorsController.php:98
 #: ../modules/queue-manager/controllers/OperatorsController.php:128
 #: ../modules/queue-manager/controllers/DacController.php:36
+#: ../modules/queue-manager/controllers/OperatorReportController.php:37
 #: ../modules/queue-manager/controllers/PausesController.php:35
 #: ../modules/queue-manager/controllers/PausesController.php:55
 #: ../modules/queue-manager/controllers/PausesController.php:92
@@ -3929,16 +3879,17 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorReportController.php:37
-msgid "Queue Manager » Estatística do Operador"
-msgstr ""
-
 #: ../modules/default/views/scripts/queues/addedit.phtml:9
 msgid "Queue Name"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:244
 msgid "Queue Priority"
+msgstr ""
+
+#: ../modules/queue-manager/controllers/DacController.php:37
+#: /var/www/html/snep-3/modules/queue-manager/resources.xml
+msgid "Queue Report"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/addedit.phtml:61
@@ -4007,10 +3958,13 @@ msgstr ""
 msgid "Real Time"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:182
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:253
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:252
 msgid "Recebidas"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:181
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:252
+msgid "Received"
 msgstr ""
 
 #: /var/www/html/snep-3/configs/titleOptions.xml
@@ -4090,14 +4044,6 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: /var/www/html/snep-3/modules/queue-manager/resources.xml
-msgid "Relatório de Fila"
-msgstr ""
-
-#: /var/www/html/snep-3/modules/queue-manager/resources.xml
-msgid "Relatório do Operador"
-msgstr ""
-
 #: ../modules/default/views/scripts/trunks/addedit.phtml:66
 #: ../modules/default/views/scripts/trunks/addedit.phtml:68
 msgid "Remote Host"
@@ -4120,6 +4066,14 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/index.phtml:26
 #: /var/www/html/snep-3/configs/titleOptions.xml
 msgid "Remove Multiple"
+msgstr ""
+
+#: ../modules/queue-manager/controllers/OperatorsController.php:135
+msgid "Remove Operator."
+msgstr ""
+
+#: ../modules/queue-manager/controllers/PausesController.php:128
+msgid "Remove Pause."
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/index.phtml:19
@@ -4442,7 +4396,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contact-groups/index.phtml:25
 #: ../modules/queue-manager/views/scripts/operators/index.phtml:31
 #: ../modules/queue-manager/views/scripts/pauses/index.phtml:31
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:291
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:290
 msgid "Search"
 msgstr ""
 
@@ -4531,15 +4485,6 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:173
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:467
-msgid "Sem dados da fila neste período."
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:133
-msgid "Sem dados do operador neste período."
-msgstr ""
-
 #: ../modules/default/views/scripts/auth/redefine.phtml:28
 msgid "Send"
 msgstr ""
@@ -4567,11 +4512,6 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:89
 #: ../modules/default/controllers/KhompLinksController.php:196
 msgid "Sending SMS"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:26
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:26
-msgid "Senha"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:74
@@ -4706,10 +4646,6 @@ msgstr ""
 msgid "Simultaneous Call Limit"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:55
-msgid "Sintético"
-msgstr ""
-
 #: ../modules/default/views/scripts/systemstatus/index.phtml:307
 msgid "Size"
 msgstr ""
@@ -4744,13 +4680,6 @@ msgstr ""
 msgid ""
 "Some internal error occured while processing your request. Please contact "
 "the system administrator and report this incident."
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:14
-#: ../modules/queue-manager/views/scripts/operators/add.phtml:28
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:14
-#: ../modules/queue-manager/views/scripts/operators/edit.phtml:28
-msgid "Somente Números"
 msgstr ""
 
 #: ../modules/default/views/scripts/music-on-hold/addfile.phtml:24
@@ -4799,6 +4728,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/users/bond.phtml:45
 msgid "Special Exceptions"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:54
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:46
+msgid "Specific date"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:152
@@ -4851,12 +4785,16 @@ msgstr ""
 msgid "Status Call"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:350
+msgid "Status by Calls"
+msgstr ""
+
 #: ../modules/default/views/scripts/calls-report/view.phtml:173
 msgid "Status by Period"
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:280
-msgid "Status das Chamadas por Dia"
+msgid "Status of calls per day"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:357
@@ -4909,6 +4847,7 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/index.phtml:223
 #: ../modules/default/views/scripts/khomp-links/index.phtml:42
 #: ../modules/default/controllers/CallsReportController.php:351
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:55
 msgid "Synthetic"
 msgstr ""
 
@@ -4954,8 +4893,8 @@ msgstr ""
 msgid "TDM"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:152
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:228
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:151
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:227
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:199
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:391
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
@@ -4963,8 +4902,8 @@ msgstr ""
 msgid "TMA"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:153
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:229
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:152
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:228
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:200
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:392
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
@@ -4972,8 +4911,8 @@ msgstr ""
 msgid "TMC"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:151
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:227
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:150
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:226
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:198
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:390
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
@@ -4985,45 +4924,20 @@ msgstr ""
 msgid "Table"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:525
+msgid "Talk Time:"
+msgstr ""
+
 #: ../modules/default/views/scripts/information/index.phtml:37
 msgid "Team"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:484
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:160
 msgid "Tempo"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:194
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:269
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:346
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:389
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Tempo Limite"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:303
-msgid "Tempo da Chamada"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:517
-msgid "Tempo da ligação:"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/pauses/add.phtml:27
-msgid "Tempo de Pausa"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:27
-msgid "Tempo de Pausa diária"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:526
-msgid "Tempo de conversação:"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:520
-msgid "Tempo de espera:"
 msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:84
@@ -5162,6 +5076,16 @@ msgstr ""
 msgid "The filename is required"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:571
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:628
+msgid "The final date is required"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:211
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:234
+msgid "The final journey is required"
+msgstr ""
+
 #: ../modules/default/views/layouts/register.phtml:385
 msgid "The first name is required"
 msgstr ""
@@ -5206,6 +5130,16 @@ msgstr ""
 msgid "The hostname is required."
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:568
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:625
+msgid "The initial date is required"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:208
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:231
+msgid "The initial journey is required"
+msgstr ""
+
 #: ../modules/default/views/layouts/register.phtml:391
 msgid "The last name is required"
 msgstr ""
@@ -5216,6 +5150,11 @@ msgstr ""
 
 #: ../modules/default/controllers/LogsController.php:122
 msgid "The log file cannot be open!"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/pauses/add.phtml:71
+#: ../modules/queue-manager/views/scripts/pauses/edit.phtml:71
+msgid "The maximum break time is required"
 msgstr ""
 
 #: ../modules/default/controllers/MusicOnHoldController.php:364
@@ -5253,6 +5192,15 @@ msgid ""
 "The notification will be deleted. After that, you have no way get it back."
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:565
+msgid "The operator is required"
+msgstr ""
+
+#: ../modules/queue-manager/controllers/OperatorsController.php:136
+msgid ""
+"The operator will be deleted. After that, you have no way to recover it."
+msgstr ""
+
 #: ../modules/default/controllers/ErrorController.php:43
 msgid "The page you are looking for was not found or does not exists."
 msgstr ""
@@ -5272,6 +5220,10 @@ msgstr ""
 msgid "The password is required."
 msgstr ""
 
+#: ../modules/queue-manager/controllers/PausesController.php:129
+msgid "The pause will be deleted. After that, you have no way to recover it."
+msgstr ""
+
 #: ../modules/default/views/scripts/parameters/index.phtml:325
 msgid "The peers_digits is required."
 msgstr ""
@@ -5287,6 +5239,10 @@ msgstr ""
 
 #: ../modules/default/controllers/ProfilesController.php:218
 msgid "The profile will be deleted. After that, you have no way get it back."
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:622
+msgid "The queue is required"
 msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:323
@@ -5378,6 +5334,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:72
 #: ../modules/default/views/scripts/simulator/index.phtml:112
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:484
 msgid "Time"
 msgstr ""
 
@@ -5385,8 +5342,22 @@ msgstr ""
 msgid "Time Credit (h:m:s)"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:324
+msgid "Time of Day"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:35
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:35
+msgid "Time of the beginning of the workday"
+msgstr ""
+
 #: ../modules/default/controllers/AuthController.php:285
 msgid "Time of validity of the code was expired"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/operators/add.phtml:42
+#: ../modules/queue-manager/views/scripts/operators/edit.phtml:42
+msgid "Time the end of the workday"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:404
@@ -5402,8 +5373,6 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:147
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:223
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:226
 msgid "Tipo"
 msgstr ""
@@ -5430,11 +5399,16 @@ msgid ""
 "your connection and try again."
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:50
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:42
+msgid "Today"
+msgstr ""
+
 #: ../modules/default/views/scripts/ranking-report/view.phtml:47
 #: ../modules/default/views/scripts/ranking-report/view.phtml:50
 #: ../modules/default/views/scripts/systemstatus/index.phtml:159
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:148
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:224
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:147
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:223
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:191
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:386
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
@@ -5448,7 +5422,7 @@ msgid "Total entries to be exported: "
 msgstr ""
 
 #: ../modules/queue-manager/views/scripts/dac/index.phtml:186
-msgid "Totalizadores"
+msgid "Totalizing"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:159
@@ -5456,9 +5430,12 @@ msgstr ""
 msgid "Totals"
 msgstr ""
 
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:195
 #: ../modules/queue-manager/lib/QueueManager/Functions.php:195
 msgid "Transferidas"
+msgstr ""
+
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:195
+msgid "Transferred"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:184
@@ -5502,6 +5479,8 @@ msgstr ""
 #: ../modules/default/views/scripts/ip-status/index.phtml:110
 #: ../modules/default/views/scripts/systemstatus/index.phtml:158
 #: ../modules/default/views/scripts/logs/index.phtml:26
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:146
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:222
 #: /var/www/html/snep-3/modules/default/forms/route.xml
 msgid "Type"
 msgstr ""
@@ -5704,6 +5683,11 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:76
+#: ../modules/queue-manager/views/scripts/dac/index.phtml:98
+msgid "View Data"
+msgstr ""
+
 #: ../modules/default/views/scripts/khomp-links/index.phtml:49
 msgid "View status of the channel?"
 msgstr ""
@@ -5712,10 +5696,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:95
 #: ../modules/default/views/scripts/trunks/addedit.phtml:54
 msgid "Virtual"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:98
-msgid "Visualizar Dados"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:321
@@ -5979,7 +5959,7 @@ msgstr ""
 msgid "action-configs/index"
 msgstr ""
 
-#: ../modules/queue-manager/controllers/OperatorReportController.php:47
+#: ../modules/queue-manager/controllers/OperatorReportController.php:48
 msgid "answer"
 msgstr ""
 
@@ -6156,7 +6136,7 @@ msgid "no trunk available"
 msgstr ""
 
 #: ../modules/queue-manager/controllers/DacController.php:58
-#: ../modules/queue-manager/controllers/OperatorReportController.php:48
+#: ../modules/queue-manager/controllers/OperatorReportController.php:49
 msgid "noanswer"
 msgstr ""
 
@@ -6434,19 +6414,4 @@ msgstr ""
 
 #: /var/www/html/snep-3/modules/default/info.xml
 msgid "www.sneplivre.com.br"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:52
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:44
-msgid "Últimos 15 dias"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:53
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:45
-msgid "Últimos 30 dias"
-msgstr ""
-
-#: ../modules/queue-manager/views/scripts/operator-report/index.phtml:51
-#: ../modules/queue-manager/views/scripts/dac/index.phtml:43
-msgid "Últimos 7 dias"
 msgstr ""

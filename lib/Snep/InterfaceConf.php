@@ -197,9 +197,9 @@ class Snep_InterfaceConf {
         }
         
         // Forcing asterisk to reload the configs
-        //$asteriskAmi = PBX_Asterisk_AMI::getInstance();
-        //$asteriskAmi->Command("sip reload");
-        //$asteriskAmi->Command("iax2 reload");
+        $asteriskAmi = PBX_Asterisk_AMI::getInstance();
+        $asteriskAmi->Command("sip reload");
+        $asteriskAmi->Command("iax2 reload");
     }
 
 }

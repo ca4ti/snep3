@@ -1,8 +1,8 @@
 <?php
 $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallistbox.css" );
 ?>
-<script type="text/javascript" src="/snep/includes/javascript/jquery.bootstrap-duallistbox.js"></script>  
-   
+<script type="text/javascript" src="/snep/includes/javascript/jquery.bootstrap-duallistbox.js"></script>
+
 <div class="row">
     <form id="selectboxform" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "users", "action" => "bond"), null, false); ?>" METHOD="post">
 
@@ -18,7 +18,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Bond Option")?></label>
             <div class="col-sm-6">
-                
+
                 <label class="radio-inline">
                     <input type="radio" name="bound" id="nobound" value="nobound"  <?php echo $this->typeNobond; ?>><?php echo $this->translate("No Allow Viewing");?>
                 </label>
@@ -26,20 +26,30 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-duallist
                 <label class="radio-inline">
                     <input type="radio" name="bound" id="bound" value="bound" <?php echo $this->typeBond; ?>><?php echo $this->translate("Allow Viewing");?>
                 </label>
-                
+
             </div>
         </div>
-            
+
         <select multiple="multiple" size="10" name="duallistbox_bond[]" id="select">
-               
-                <?php foreach($this->peers as $y => $peer){ ?>      
+
+                <?php foreach($this->peers as $y => $peer){ ?>
                     <option value="<?php echo $peer['exten'];?>"><?php echo $peer['exten'];?></option>
                 <?php }?>
-                
+
                 <?php foreach($this->selected as $x => $select){?>
                     <option value="<?php echo $select['name'];?>" selected="selected"><?php echo $select['name'];?></option>
                 <?php } ?>
         </select>
+        <br>
+        <fieldset>
+            <legend><?php echo $this->translate("Special Exceptions")?></legend>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label"  style="text-align: left !important;" for="name"><?php echo $this->translate("Exceptions Permited");?></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="exceptions"  value="<?php echo $this->exceptions; ?>" placeholder='<?php echo $this->translate("Comma separated")?>'/>
+                </div>
+            </div>
 
         <input type="hidden" name="id" id="id" value="<?php echo $this->id ?>">
 

@@ -41,7 +41,7 @@ class AuthController extends Zend_Controller_Action {
 
 
         $config = Zend_Registry::get('config');
-        
+
         if (isset($_GET["recuperation"])) {
             $this->view->message = $this->view->translate("Password successfully recovered");
             $this->view->msgclass = 'sucess';
@@ -59,9 +59,9 @@ class AuthController extends Zend_Controller_Action {
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
             $password = $this->_request->getPost('password');
-            
+
             $case = Snep_Acl::getCaseSensitive($username);
-            
+
             if (empty($username) || empty($case)) {
                 $this->view->message = $this->view->translate("Please enter a username");
                 $this->view->msgclass = 'failure';
@@ -90,7 +90,7 @@ class AuthController extends Zend_Controller_Action {
 
                         $extension = $db->query("SELECT id, name FROM users WHERE name='$username'")->fetchObject();
 
-                        // Retaining the old verifica.php 
+                        // Retaining the old verifica.php
                         $_SESSION['id_user'] = $extension->id;
                         $_SESSION['name_user'] = $username;
                         $_SESSION['active_user'] = $extension->name;
@@ -101,16 +101,100 @@ class AuthController extends Zend_Controller_Action {
                         $_SESSION['registered'] = $registered['registered_itc'];
                         $_SESSION['uuid'] = $registered['uuid'];
                         $_SESSION['noregister'] = $registered['noregister'];
-                        
+
                         if(!isset($_SESSION['uuid'])){
-                            
+
                             $v4uuid = self::v4();
                             $_SESSION['uuid'] = $v4uuid;
-                            Snep_Auth_Manager::adduuid($v4uuid); 
+                            Snep_Auth_Manager::adduuid($v4uuid);
 
                         }
 
-                        $this->_redirect('/');                        
+                        $configs = Snep_Config::getConfiguration('default','host_notification');
+
+                        // get last_id_notification if exists
+                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
+                        if($idLastNotification){
+
+                            $idLastNotification = $idLastNotification["config_value"];
+                            $url = $configs["config_value"]."/last_id/".$idLastNotification."/UUID/".$_SESSION["uuid"];
+
+                        }else{
+
+                            $dateNotification = date("Y-m-d");
+                            $url = $configs["config_value"]."/date/".$dateNotification."/UUID/".$_SESSION["uuid"];
+                        }
+
+                        // get notification in itc
+                        $http = curl_init($url);
+
+                        curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
+                        $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                        curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+                        $http_response = curl_exec($http);
+                        $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+                        curl_close($http);
+
+                        switch ($httpcode) {
+                            case 200:
+
+                                $notifications = json_decode($http_response);
+                                if(!empty($notifications)){
+
+                                    foreach($notifications as $item => $notification){
+                                        $lastId = $notification->id;
+
+                                        Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
+                                    }
+
+                                    if(isset($lastId)){
+
+                                        // get last_id_notification if exists
+                                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
+                                        if($idLastNotification){
+                                            Snep_Notifications::updateLastNotification($lastId);
+                                        }else{
+                                            Snep_Notifications::addLastNotification($lastId);
+                                        }
+                                    }
+                                }
+
+                                break;
+                            case 500:
+
+                                $notificationWarning = Snep_Notifications::getNotificationWarning();
+                                if($notificationWarning == false){
+
+                                    $title = $this->view->translate('Warning');
+                                    $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
+                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
+                                }
+
+                                break;
+                            case false:
+
+                                $notificationWarning = Snep_Notifications::getNotificationWarning();
+                                if($notificationWarning == false){
+
+                                    $title = $this->view->translate('Warning');
+                                    $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
+                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
+                                }
+
+                                break;
+                            default:
+
+                                $notificationWarning = Snep_Notifications::getNotificationWarning();
+                                if($notificationWarning == false){
+
+                                    $title = $this->view->translate('Warning');
+                                    $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
+                                    Snep_Notifications::addNotification($title,$message,"Snep");
+                                }
+                                break;
+                        }
+
+                        $this->_redirect('/');
                         break;
                     default:
                         $this->view->message = $this->view->translate('Authentication failure');
@@ -120,9 +204,9 @@ class AuthController extends Zend_Controller_Action {
             }
         }
 
-        $layout = Zend_Layout::getMvcInstance();        
+        $layout = Zend_Layout::getMvcInstance();
         $layout->setLayout('login');
-        
+
     }
 
     /**
@@ -162,7 +246,7 @@ class AuthController extends Zend_Controller_Action {
                     $this->view->translate("Password Recovery")));
         $this->view->hideMenu = true;
 
-        $layout = Zend_Layout::getMvcInstance();        
+        $layout = Zend_Layout::getMvcInstance();
         $layout->setLayout('login');
 
         if (isset($_GET['param'])) {
@@ -209,7 +293,7 @@ class AuthController extends Zend_Controller_Action {
             }
         }
     }
-    
+
     /**
      * refefineAction - Redefine password
      */
@@ -221,7 +305,7 @@ class AuthController extends Zend_Controller_Action {
         $this->view->hideMenu = true;
         $this->view->msgclass = 'failure';
 
-        $layout = Zend_Layout::getMvcInstance();        
+        $layout = Zend_Layout::getMvcInstance();
         $layout->setLayout('login');
 
         if ($this->_request->isPost()) {
@@ -249,7 +333,7 @@ class AuthController extends Zend_Controller_Action {
                 $msg .= $this->view->translate("</b>.<br><br>Need to enter the code below for the redefinition.<br>Access code : <font color= red><b>") . $code;
                 $msg .= $this->view->translate("</b></font><br>Your code will expire on: ") . $expiration;
                 $msg .= $this->view->translate("<br><br>If you have not requested a redefinition password, please disregard<br><br><i>Team Snep</i>.");
-                
+
                 $subject = $this->view->translate("Redefinition password - SNEP");
 
                 Snep_Auth_Manager::sendEmail($user, $msg, $subject);
@@ -258,7 +342,7 @@ class AuthController extends Zend_Controller_Action {
             }
         }
     }
-    
+
     /**
      * aleatorio - Riding a random code
      * @return <string>
@@ -272,7 +356,7 @@ class AuthController extends Zend_Controller_Action {
         }
         return $key;
     }
-    
+
     /**
      * logoutAction - Logoff on system
      */

@@ -26,7 +26,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                 </div>
             </div>
 
-            <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
+            <table class="table demo table-hover" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
 
                 <thead>
                     <tr>
@@ -48,12 +48,10 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                 endif; ?>
 
                                 <td align="center">
-                                    <a class="btn btn-edit btn-xs <?php echo $disabled ?>" href="<?php echo $this->url ?>/edit/id/<?php echo $group['id'] ?>" role="button"><?php echo $this->translate('Edit')?>
+                                    <a class="btn btn-edit btn-sm <?php echo $disabled ?>" href="<?php echo $this->url ?>/edit/id/<?php echo $group['id'] ?>" role="button"><?php echo $this->translate('Edit')?>
 
                                     </a>
-                                </td>
-                                <td align="center">
-                                    <a class="btn btn-danger btn-xs <?php echo $disabled ?>" href="<?php echo $this->url ?>/remove/id/<?php echo $group['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
+                                    <a class="btn btn-danger btn-sm <?php echo $disabled ?>" href="<?php echo $this->url ?>/remove/id/<?php echo $group['id'] ?>" role="button"><?php echo $this->translate('Delete')?></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>

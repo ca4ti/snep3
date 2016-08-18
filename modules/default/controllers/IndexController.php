@@ -21,7 +21,7 @@
  * controller index
  */
 class IndexController extends Zend_Controller_Action {
-    
+
     /**
      * indexAction - List dashboard
      */
@@ -29,7 +29,7 @@ class IndexController extends Zend_Controller_Action {
 
         // checked if snep registred in itc
         if( $_SESSION['registered'] != true && $_SESSION['noregister'] != true){
-            
+
             $this->view->headTitle($this->view->translate("Register"));
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                         $this->view->translate("Register")));
@@ -44,7 +44,7 @@ class IndexController extends Zend_Controller_Action {
             if($required_register == "true"){
                 $viewnoregister = true;
             }
-            
+
             $this->view->viewnoregister = $viewnoregister;
 
             // Ping in ITC
@@ -56,14 +56,14 @@ class IndexController extends Zend_Controller_Action {
             curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
             $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-            $http_response = curl_exec($http);          
+            $http_response = curl_exec($http);
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_close($http);
 
             switch ($httpcode) {
                 case 200:
-                    $this->view->country = Snep_Register_Manager::getCountry();                
-                    $this->view->state = Snep_Register_Manager::getState();                                
+                    $this->view->country = Snep_Register_Manager::getCountry();
+                    $this->view->state = Snep_Register_Manager::getState();
                     break;
                 case 500:
                     $this->view->error = $this->view->translate("Internal Server Error. Please try later");
@@ -76,14 +76,14 @@ class IndexController extends Zend_Controller_Action {
                     break;
             }
 
-            $layout = Zend_Layout::getMvcInstance(); 
+            $layout = Zend_Layout::getMvcInstance();
             $layout->setLayout('register');
 
             if ($this->_request->isPost()) {
-                  
-                // register User    
+
+                // register User
                 if($_POST['save'] == 'register'){
-                    
+
                     unset($_POST['save']);
 
                     $data = $_POST;
@@ -92,24 +92,24 @@ class IndexController extends Zend_Controller_Action {
 
                     if($_POST['address']){
                         $data['address'] = $_POST['address'] ;
-                    } 
+                    }
 
                     if($_POST['zipcode']){
                         $data['zipcode'] = $_POST['zipcode'];
-                    } 
+                    }
 
                     if($_POST['phone']){
-                        $data['tel'] = $_POST['phone']; 
-                    } 
+                        $data['tel'] = $_POST['phone'];
+                    }
 
                     if($_POST['cell']){
-                        $data['cel'] = $_POST['cell']; 
-                    } 
-                    
+                        $data['cel'] = $_POST['cell'];
+                    }
+
                     if(isset($distro)){
                         $data['distribution_id'] = $distro;
                     }
-                    
+
                     $content = json_encode($data);
                     $url = trim($config->system->itc_address) . "auth/sign";
                     $curl = curl_init($url);
@@ -126,7 +126,7 @@ class IndexController extends Zend_Controller_Action {
 
                     switch ($httpcode) {
                         case 201:
-                            $this->view->confirm = true;                
+                            $this->view->confirm = true;
                             break;
                         case 500:
                             $this->view->error = $this->view->translate("Internal Server Error. Please try later");
@@ -141,12 +141,12 @@ class IndexController extends Zend_Controller_Action {
                             $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                             break;
                     }
-                     
-                    $layout = Zend_Layout::getMvcInstance(); 
-                    $layout->setLayout('register'); 
-                    
+
+                    $layout = Zend_Layout::getMvcInstance();
+                    $layout->setLayout('register');
+
                 }elseif($_POST['save'] == 'confirm'){
-                
+
                     unset($_POST['save']);
                     $dado = $_POST;
                     $dado['device_uuid'] = $_SESSION["uuid"];
@@ -164,19 +164,19 @@ class IndexController extends Zend_Controller_Action {
                     $json_response = curl_exec($curl);
                     $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                     curl_close($curl);
-                    
+
                     switch ($httpcode) {
                         case 200:
                             $data = json_decode($json_response);
-                            $api_key = $data->details->api_key;               
+                            $api_key = $data->details->api_key;
                             $client_key = $data->details->client_key;
-                            Snep_Register_Manager::registerITC($api_key,$client_key); 
+                            Snep_Register_Manager::registerITC($api_key,$client_key);
 
                             //register distributions
                             $distributions = $data->details->distributions;
                             Snep_Register_Manager::addDistributions($distributions);
-                                
-                            $this->view->registerd = true;              
+
+                            $this->view->registerd = true;
                             break;
                         case 500:
                             $this->view->error = $this->view->translate("Internal Server Error. Please try later");
@@ -192,8 +192,8 @@ class IndexController extends Zend_Controller_Action {
                             break;
                     }
 
-                    $layout = Zend_Layout::getMvcInstance(); 
-                    $layout->setLayout('register'); 
+                    $layout = Zend_Layout::getMvcInstance();
+                    $layout->setLayout('register');
 
                 }elseif($_POST['save'] == 'opensnep'){
 
@@ -206,7 +206,7 @@ class IndexController extends Zend_Controller_Action {
                     $this->_redirect('/');
 
                 }elseif($_POST['save'] == 'login'){
-                    
+
                     // user already registered
                     unset($_POST['save']);
 
@@ -233,18 +233,18 @@ class IndexController extends Zend_Controller_Action {
                     $json_response = curl_exec($curl);
                     $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                     curl_close($curl);
-                    
+
                     switch ($httpcode) {
                         case 200:
                             $data = json_decode($json_response);
 
-                            $api_key = $data->details->api_key;               
+                            $api_key = $data->details->api_key;
                             $client_key = $data->details->client_key;
 
                             $distributions = $data->details->distributions;
                             Snep_Register_Manager::addDistributions($distributions);
-                            Snep_Register_Manager::registerITC($api_key,$client_key); 
-                            $this->view->registerd = true;            
+                            Snep_Register_Manager::registerITC($api_key,$client_key);
+                            $this->view->registerd = true;
                             break;
                         case 500:
                             $this->view->error = $this->view->translate("Internal Server Error. Please try later");
@@ -259,15 +259,15 @@ class IndexController extends Zend_Controller_Action {
                             $this->view->error = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator.");
                             break;
                     }
-                     
-                    $layout = Zend_Layout::getMvcInstance(); 
-                    $layout->setLayout('register'); 
-                    
+
+                    $layout = Zend_Layout::getMvcInstance();
+                    $layout->setLayout('register');
+
                 }elseif($_POST['save'] == 'noregister'){
 
                     // no ITC register in time
                     Snep_Register_Manager::noregister();
-                    $_SESSION['noregister'] = true; 
+                    $_SESSION['noregister'] = true;
                     $this->_redirect('/');
                 }
             }
@@ -276,107 +276,22 @@ class IndexController extends Zend_Controller_Action {
 
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));
-
-            $configs = Snep_Config::getConfiguration('default','host_notification');
-
-            // get last_id_notification if exists
-            $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-            if($idLastNotification){
-
-                $idLastNotification = $idLastNotification["config_value"];
-                $url = $configs["config_value"]."/last_id/".$idLastNotification."/UUID/".$_SESSION["uuid"];        
-            
-            }else{
-            
-                $dateNotification = date("Y-m-d");
-                $url = $configs["config_value"]."/date/".$dateNotification."/UUID/".$_SESSION["uuid"];            
-            }
-            
-            // get notification in itc
-            $http = curl_init($url);
-
-            curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
-            $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-            $http_response = curl_exec($http);          
-            $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            curl_close($http);
-            
-            switch ($httpcode) {
-                case 200:
-                    
-                    $notifications = json_decode($http_response);
-                    if(!empty($notifications)){
-
-                        foreach($notifications as $item => $notification){
-                            $lastId = $notification->id;
-
-                            Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
-                        }
-                    
-                        if(isset($lastId)){
-
-                            // get last_id_notification if exists
-                            $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-                            if($idLastNotification){
-                                Snep_Notifications::updateLastNotification($lastId);
-                            }else{
-                                Snep_Notifications::addLastNotification($lastId);
-                            }
-                        }        
-                    }
-                    
-                    break;
-                case 500:
-                    
-                    $notificationWarning = Snep_Notifications::getNotificationWarning();
-                    if($notificationWarning == false){
-                        
-                        $title = $this->view->translate('Warning');
-                        $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message,1,"Snep");
-                    }    
-                    
-                    break;
-                case false:
-
-                    $notificationWarning = Snep_Notifications::getNotificationWarning();
-                    if($notificationWarning == false){
-
-                        $title = $this->view->translate('Warning');
-                        $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                        Snep_Notifications::addNotification($title,$message,1,"Snep");
-                    }
-                    
-                    break;
-                default:
-
-                    $notificationWarning = Snep_Notifications::getNotificationWarning();
-                    if($notificationWarning == false){
-
-                        $title = $this->view->translate('Warning');
-                        $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
-                        Snep_Notifications::addNotification($title,$message,"Snep");
-                    }
-                    break;
-            }            
-
             $modelos = Snep_Dashboard_Manager::getModelos();
 
             if (isset($_GET['dashboard_add'])) {
                 Snep_Dashboard_Manager::add($_GET['dashboard_add']);
             }
-            
+
             $this->view->dashboard = Snep_Dashboard_Manager::getArray($modelos);
             if(!$this->view->dashboard)$this->_helper->redirector('add', 'index');
-        }       
+        }
     }
-    
+
     /**
      * addAction - Add item in dashboard
      */
     public function addAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Dashboard"),
                     $this->view->translate("Edit")));
@@ -387,7 +302,7 @@ class IndexController extends Zend_Controller_Action {
         $modelos = Snep_Dashboard_Manager::getModelos();
 
         foreach($modelos aS $key=>$value){
-            
+
             $array[$key]['name'] = $value['nome'];
             $array[$key]['desc'] = $value['descricao'];
         }
@@ -400,21 +315,21 @@ class IndexController extends Zend_Controller_Action {
             }
         }
 
-        $this->view->list = $array;        
+        $this->view->list = $array;
         if ($this->_request->getPost()) {
-            
+
             $dados = $this->_request->getParams();
-            
+
             foreach($dados['dash'] as $key => $value){
                 $dashboard[] = $key;
             }
 
             Snep_Dashboard_Manager::set($dashboard);
             $this->_redirect($this->getRequest()->getControllerName());
-            
-        }        
+
+        }
     }
-   
+
 }
 
 ?>

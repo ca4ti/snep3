@@ -19,16 +19,16 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
             <?php if($this->key){ ?>
                 <div class="snep-body-top-buttons">
                     <div class="snep-body-search">
-                        <?php if($this->key){ 
-                            echo ""; 
+                        <?php if($this->key){
+                            echo "";
                             ?>
-                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>
                         <?php } ?>
                     </div>
                 </div>
             <?php } ?>
-            
-            <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
+
+            <table class="table demo table-hover" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
 
                 <thead>
                     <tr>
@@ -39,12 +39,12 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                 </thead>
                 <tbody>
                     <?php foreach ($this->infoAcoes as $value) { ?>
-                    
+
                         <tr>
                             <td><?php echo $this->translate($value['name']) ?></td>
                             <td><?php echo $this->translate($value['description']) ?></td>
                             <td align="center">
-                                <a class="btn btn-default btn-xs"  href='<?php echo $this->baseUrl(); ?>/index.php/action-configs/edit/id/<?php echo $value['id'] ?>' role="button"><?php echo $this->translate('Configure')?>  
+                                <a class="btn btn-add btn-sm"  href='<?php echo $this->baseUrl(); ?>/index.php/action-configs/edit/id/<?php echo $value['id'] ?>' role="button"><?php echo $this->translate('Configure')?>
                                 </a>
                             </td>
                         </tr>

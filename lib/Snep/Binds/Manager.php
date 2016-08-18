@@ -26,18 +26,18 @@
  * @package   Snep
  * @copyright Copyright (c) 2015 OpenS Tecnologia
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
- * 
+ *
  */
 class Snep_Binds_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
      * getBond - Method to get user bond
-     * @param <int> $id 
-     * @return <array> $peers 
+     * @param <int> $id
+     * @return <array> $peers
      */
     function getBond($id) {
 
@@ -50,8 +50,28 @@ class Snep_Binds_Manager {
 
         $stmt = $db->query($select);
         $peers = $stmt->fetchAll();
-        
+
         return $peers;
+    }
+
+    /**
+     * getBondException - Method to get user bond
+     * @param <int> $id
+     * @return <array> $peers
+     */
+    function getBondException($id) {
+
+        $db = Zend_Registry::get("db");
+
+        $select = $db->select()
+                ->from("core_binds_exceptions")
+                ->where("core_binds_exceptions.user_id = ?", $id);
+
+
+        $stmt = $db->query($select);
+        $exceptions = $stmt->fetchAll();
+
+        return $exceptions;
     }
 
 
@@ -74,7 +94,23 @@ class Snep_Binds_Manager {
         $db->insert('core_binds', $insert_data);
     }
 
-    
+    /**
+     * addBond - Method to add bond exception a user
+     * @param <int> $id
+     * @param <int> $exception
+     */
+    public function addBondException($id,$exception) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('user_id' => $id,
+            'exception' => trim($exception),
+            'created' => date('Y-m-d H:i:s'),
+            'updated' => date('Y-m-d H:i:s'));
+
+        $db->insert('core_binds_exceptions', $insert_data);
+    }
+
     /**
      * removeBond - Method to remove bond a user
      * @param <int> $id
@@ -85,6 +121,42 @@ class Snep_Binds_Manager {
 
         $db->beginTransaction();
         $db->delete('core_binds', "user_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeBondByPeer - Method to remove bond a user
+     * @param <int> $id
+     */
+    public function removeBondByPeer($peer) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_binds', "peer_name = '$peer'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeBond - Method to remove bond exception a user
+     * @param <int> $id
+     */
+    public function removeBondException($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('core_binds_exceptions', "user_id = '$id'");
 
         try {
             $db->commit();
@@ -109,18 +181,18 @@ class Snep_Binds_Manager {
             foreach($bond as $key => $peer){
                 $binds[] = $peer["peer_name"];
             }
-        
+
             foreach($row as $key => $call){
                 foreach($binds as $x => $value){
 
                     // Allow
                     if($typeBond == 'bound'){
-                        
+
                         if (!in_array($call['src'], $binds)) {
                             unset($row[$key]);
                         }
-                        
-                    // No allow    
+
+                    // No allow
                     }else{
 
                         if($value == $call['src'] || $value == $call['dst']){

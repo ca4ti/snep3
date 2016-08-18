@@ -645,8 +645,6 @@ class ExtensionsController extends Zend_Controller_Action {
         // Update table core_peer_groups
         Snep_ExtensionsGroups_Manager::updateGroupsExtension($idExten,$extensions_group,$extenGroup) ;
 
-        Snep_InterfaceConf::loadConfFromDb();
-
     }
 
     /**
@@ -662,7 +660,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $exten = $this->_request->getParam("id");
 
-        //checks if the exten is used in the rule 
+        //checks if the exten is used in the rule
         $rules = Snep_Extensions_Manager::getValidation($exten);
         $rulesQuery = Snep_Extensions_Manager::getValidationRules($exten);
         $rules = array_merge($rules, $rulesQuery);
@@ -679,9 +677,9 @@ class ExtensionsController extends Zend_Controller_Action {
         } else {
 
             $this->view->id = $exten;
-            $this->view->remove_title = $this->view->translate('Delete Extension.'); 
-            $this->view->remove_message = $this->view->translate('The extension will be deleted. After that, you have no way get it back.'); 
-            $this->view->remove_form = 'extensions'; 
+            $this->view->remove_title = $this->view->translate('Delete Extension.');
+            $this->view->remove_message = $this->view->translate('The extension will be deleted. After that, you have no way get it back.');
+            $this->view->remove_form = 'extensions';
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
@@ -690,25 +688,19 @@ class ExtensionsController extends Zend_Controller_Action {
                 $db = Zend_Registry::get('db');
                 $sql = "SELECT id from peers where name = '$exten'";
                 $stmt = $db->query($sql);
-                $result = $stmt->fetch();       
+                $result = $stmt->fetch();
                 $idExten = $result['id'];
 
                 try {
-                    
+                    Snep_Binds_Manager::removeBondByPeer($exten);
                     Snep_Extensions_Manager::remove($exten);
                     Snep_Extensions_Manager::removeVoicemail($exten);
-                    Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);             
-                    
+                    Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
+
                 } catch (PDOException $e) {
                     $db->rollBack();
                     $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
                     $this->view->back = $this->view->translate("Back");
-                    $this->renderScript('error/sneperror.phtml');;
-                }
-                $return = Snep_InterfaceConf::loadConfFromDb();
-
-                if ($return != true) {
-                    $this->view->error_message = $return;
                     $this->renderScript('error/sneperror.phtml');;
                 }
 
@@ -800,12 +792,7 @@ class ExtensionsController extends Zend_Controller_Action {
                         $this->view->back = $this->view->translate("Back");
                         $this->renderScript('error/sneperror.phtml');;
                     }
-                    $return = Snep_InterfaceConf::loadConfFromDb();
 
-                    if ($return != true) {
-                        $this->view->error_message = $return;
-                        $this->renderScript('error/sneperror.phtml');;
-                    }
                 }
                 $this->_redirect("default/extensions");
             }

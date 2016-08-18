@@ -54,6 +54,24 @@ class Snep_Queues_Manager {
     }
 
     /**
+     * Method to get all queues
+     * @return <array>
+     */
+    public static function getQueueAll() {
+
+        $db = Zend_registry::get('db');
+
+        $select = $db->select()
+                ->from("queues")
+                ->order("name");
+
+        $stmt = $db->query($select);
+        $queues = $stmt->fetchAll();
+
+        return $queues;
+    }
+
+    /**
      * Add a Queue.
      * @param array $queue
      * @return int

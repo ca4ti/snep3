@@ -38,6 +38,10 @@ body {
     font-size: 14px;
 }
 
+.header_table_info{
+    background-color: #f26c45;
+    color: #fff;
+}
 
 .ip-status > h4 > a {
     color: #f26c45;
@@ -69,7 +73,7 @@ legend {
     border-bottom:1px solid #e5e5e5
 }
 a {
-    background-color:#3b3a3c;
+    /*background-color:#3b3a3c;*/
     color:#868488;
     text-decoration:none;
     /*background-color: #313032;*/
@@ -396,11 +400,11 @@ ul.snep-menu-list{
 }
 
 .sidebar .nav-second-level li a {
-    padding-left: 37px;
+    padding-left: 20px;
 }
 
 .sidebar .nav-third-level li a {
-    padding-left: 52px;
+    padding-left: 30px;
 }
 
 @media(min-width:768px) {

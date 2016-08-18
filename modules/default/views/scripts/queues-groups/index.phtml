@@ -9,26 +9,26 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
 <script src="/snep/includes/javascript/footable/footable.filter.js" type="text/javascript"></script>
 <script src="/snep/includes/javascript/footable/footable.paginate.js" type="text/javascript"></script>
 <script src="/snep/includes/javascript/footable/bootstrap-tab.js" type="text/javascript"></script>
-    
+
 <div class="row">
-    
+
     <div class="tab-content">
         <div class="tab-pane active" id="demo">
-            
+
             <div class="snep-body-top-buttons">
                 <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Queues Group")?></a>
-                
+
                 <div class="snep-body-search">
                     <?php if($this->key){ ?>
                         <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>">
-                        </a> 
-                        &nbsp;|&nbsp; 
+                        </a>
+                        &nbsp;|&nbsp;
                     <?php } ?>
                     <?php echo $this->translate("Search")?> <input id="filter" type="text"/>
                 </div>
             </div>
 
-            <table class="table demo table-bordered" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
+            <table class="table demo table-hover" data-filter="#filter" data-page-size="<?php echo $this->lineNumber?>">
 
                 <thead>
                     <tr>
@@ -46,22 +46,20 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                 <td class="text-center" style="width: 10%;">
                                     <b><?php echo $val['id']; ?></b>
                                 </td>
-                                
-                                <td> 
+
+                                <td>
                                     <?php echo $val['name']; ?>
                                 </td>
 
                                 <?php $disabled = "";?>
-                                <?php if( $val['id'] == 1 ) : 
-                                  $disabled= "disabled"; 
+                                <?php if( $val['id'] == 1 ) :
+                                  $disabled= "disabled";
                                 endif; ?>
 
                                 <td  class="text-center">
-                                    <a class="btn btn-edit btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/edit/id/<?php echo $val['id'] ?>" role="button"><?php echo $this->translate('Edit')?>  
+                                    <a class="btn btn-edit btn-sm <?php echo $disabled ?>"  href="<?php echo $this->url ?>/edit/id/<?php echo $val['id'] ?>" role="button"><?php echo $this->translate('Edit')?>
                                     </a>
-                                </td>
-                                <td  class="text-center">
-                                    <a class="btn btn-danger btn-xs <?php echo $disabled ?>"  href="<?php echo $this->url ?>/remove/id/<?php echo $val['id'] ?>" role="button"><?php echo $this->translate('Delete')?>  
+                                    <a class="btn btn-danger btn-sm <?php echo $disabled ?>"  href="<?php echo $this->url ?>/remove/id/<?php echo $val['id'] ?>" role="button"><?php echo $this->translate('Delete')?>
                                     </a>
                                 </td>
                             </tr>

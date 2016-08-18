@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
  * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_Users_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -50,6 +50,9 @@ class Snep_Users_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->insert('users', $insert_data);
+        $last_id = $db->lastInsertId();
+
+        return $last_id;
     }
 
     /**
@@ -164,7 +167,7 @@ class Snep_Users_Manager {
      * @return \Exception|boolean
      */
     public function addProfileByName($data) {
-        
+
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         $cond = $data['box'];
@@ -217,6 +220,57 @@ class Snep_Users_Manager {
         $user = $stmt->fetch();
 
         return $user;
+    }
+
+    /**
+     * Method to add a permission user if the queue .
+     * @param <int> $queue
+     */
+    public function addQueuesPermission($id,$queue_id) {
+
+        $db = Zend_Registry::get('db');
+
+        $insert_data = array('user_id' => $id,
+            'queue_id' => $queue_id);
+
+        $db->insert('users_queues_permissions', $insert_data);
+    }
+
+    /**
+     * Method to get a user by id
+     * @param <int> $id
+     * @return <Array> $users
+     */
+    public function getQueuesPermission($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('users_queues_permissions')
+                ->where("users_queues_permissions.user_id = ?", $id);
+
+        $stmt = $db->query($select);
+        $queues = $stmt->fetchAll();
+
+        return $queues;
+    }
+
+    /**
+     * removeQueuesPermission - Method to remove permission queues a user
+     * @param <int> $id
+     */
+    public function removeQueuesPermission($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('users_queues_permissions', "user_id = '$id'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
     }
 
 }

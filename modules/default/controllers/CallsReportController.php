@@ -35,13 +35,13 @@ class CallsReportController extends Zend_Controller_Action {
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit; 
-        
+
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
             Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
             Zend_Controller_Front::getInstance()->getRequest()->getControllerName(),
             Zend_Controller_Front::getInstance()->getRequest()->getActionName());
-        
+
 
     }
 
@@ -66,8 +66,8 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->groups = $peer_groups;
 
         // Cost Centers
-        $this->view->costs = Snep_CostCenter_Manager::getAll(); 
-        
+        $this->view->costs = Snep_CostCenter_Manager::getAll();
+
         $locale = Snep_Locale::getInstance()->getLocale();
         $this->view->datepicker_locale =  Snep_Locale::getDatePickerLocale($locale) ;
 
@@ -91,12 +91,12 @@ class CallsReportController extends Zend_Controller_Action {
 
         // Primary select
         if(!isset($formData['page'])){
-            
+
             $param = Snep_Reports::fmt_date($formData['initDay'],$formData['finalDay']);
-            
+
             // Binds
             if($user['id'] != '1'){
-            
+
                 $binds = Snep_Binds_Manager::getBond($user['id']);
                 if($binds){
                     $clausule = $binds[0]["type"];
@@ -109,7 +109,15 @@ class CallsReportController extends Zend_Controller_Action {
                     $param['clausulepeer'] = substr($clausulepeer, 0,-1);
                 }
 
-                
+                $exceptions = Snep_Binds_Manager::getBondException($user['id']);
+                if(!empty($exceptions)){
+                    foreach($exceptions as $x => $excep){
+                        (isset($exceptionsAll)) ? $exceptionsAll .= $excep["exception"]."_" : $exceptionsAll = $excep["exception"]."_";
+                    }
+                    $param['exceptions'] = substr($exceptionsAll, 0,-1);
+                }
+
+
             }
 
             // call status
@@ -124,7 +132,7 @@ class CallsReportController extends Zend_Controller_Action {
 
             if(isset($formData['FAILED']))
                 $param['status_failed'] = true;
-            
+
             // time call
             if($formData['duration_init'] != "")
                 $param['time_call_init'] = $formData['duration_init'];
@@ -179,7 +187,7 @@ class CallsReportController extends Zend_Controller_Action {
                 $report_type = 'synthetic';
                 $type = 'graphic';
             }
-            
+
 
             $service = 'CallsReport';
             $url = Snep_Services::getPathService($service);
@@ -188,7 +196,6 @@ class CallsReportController extends Zend_Controller_Action {
             foreach($param as $key => $value){
                 $link .= '&'.$key.'='.$value;
             }
-
 
             // Limit on select
             $limit = '0,' .$line_limit;
@@ -206,29 +213,27 @@ class CallsReportController extends Zend_Controller_Action {
             $this->view->pagenext = $pagesValue['pagenext'];
             $this->view->page = 1;
 
-            
+
         }else{
 
             $report_type = 'analytic';
             $page = $formData['page'];
 
             $cont = $formData['cont'];
-            
-            $init_value = ($page -1) * $line_limit; 
-            
+
+            $init_value = ($page -1) * $line_limit;
+
             // Limit on select. Ex: 40,20 -> Select data id 40 to 60
             $limit = $init_value .',' .$line_limit;
-            
-            
+
             $service_url = $_SESSION[$user['name']]['report_url'].'&limit='.$limit;
-            
+
             // Pagination
             $pagesValue = Snep_Reports::createPages($page, $line_limit, $cont);
             $this->view->pageprev = $pagesValue['pageprev'];
-            $this->view->pagenext = $pagesValue['pagenext'];          
+            $this->view->pagenext = $pagesValue['pagenext'];
             $this->view->page = $page;
         }
-        
         // events asterisk
         $this->view->translate("ANSWERED");
         $this->view->translate("NO ANSWER");
@@ -236,7 +241,7 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->translate("FAILED");
 
         $this->view->service_url = $service_url;
-        
+
         $http = curl_init($service_url);
         $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
         

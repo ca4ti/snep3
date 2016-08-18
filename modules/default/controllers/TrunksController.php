@@ -590,6 +590,9 @@ class TrunksController extends Zend_Controller_Action {
             $trunk_data['qualify'] = trim($trunk_data['qualify_value']);
         }
 
+        // codecs
+        $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
+
         if ($trunktype == "SIP" || $trunktype == "IAX2") {
          
             $trunk_data['dialmethod'] = strtoupper($trunk_data['dialmethod']);
@@ -601,9 +604,6 @@ class TrunksController extends Zend_Controller_Action {
             }
 
             $trunk_data['id_regex'] = $trunktype . "/" . $trunk_data['username'];
-            $trunk_data['allow'] = trim(sprintf("%s;%s;%s", $trunk_data['codec'], $trunk_data['codec1'], $trunk_data['codec2']), ";");
-
-            
 
         } else if ($trunktype === "SNEPSIP" || $trunktype === "SNEPIAX2") {
 

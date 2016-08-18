@@ -58,8 +58,8 @@ class UsersController extends Zend_Controller_Action {
                 ->join(array("g" => "profiles"), 'n.profile_id = g.id', "name");
 
         $stmt = $db->query($select);
-        $data = $stmt->fetchAll();  
-        
+        $data = $stmt->fetchAll();
+
         $this->view->users = $data;
 
     }
@@ -73,8 +73,9 @@ class UsersController extends Zend_Controller_Action {
                     $this->view->translate("Users"),
                     $this->view->translate("Add")));
 
-        
+
         $this->view->profiles = $this->profiles;
+        $this->view->queues = Snep_Queues_Manager::getQueueAll();
 
         //Define the action and load form
         $this->view->action = "add" ;
@@ -83,45 +84,66 @@ class UsersController extends Zend_Controller_Action {
         if ($this->_request->getPost()) {
 
             $dados = $this->_request->getParams();
-           
+
             $name_exist = Snep_Users_Manager::getName($dados['name']);
-            
+
             if (count($name_exist) > 1) {
-                
+
                 $message = $this->view->translate("Name already exists.");
                 $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
-                
+
             }else{
 
-                Snep_Users_Manager::add($dados);
+                $id = Snep_Users_Manager::add($dados);
+
+                if(isset($dados['queues'])){
+
+                    foreach($dados['queues'] as $x => $queue){
+                        Snep_Users_Manager::addQueuesPermission($id, $queue);
+                    }
+                }
+
                 $this->_redirect($this->getRequest()->getControllerName());
 
             }
 
         }
-        
+
     }
 
     /**
      * editAction - Edit users
      */
     public function editAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Users"),
                     $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
         $user = Snep_Users_Manager::get($id);
+        $queues = Snep_Queues_Manager::getQueueAll();
+        $queuesPermission = Snep_Users_Manager::getQueuesPermission($id);
 
         if($id == 1){
             $this->view->disabled = 'disabled';
         }
-   
-        
+
+        if(!empty($queuesPermission)){
+            foreach($queues as $q => $queue){
+                foreach($queuesPermission as $p => $queueP){
+                   if($queue['id'] == $queueP["queue_id"]){
+                    $queues[$q]['selected'] = true;
+                   }
+                }
+            }
+        }
+
         // Mount the view
         $this->view->profiles = $this->profiles;
         $this->view->user = $user;
+
+        $this->view->queues = $queues;
 
         //Define the action and load form
         $this->view->action = "edit" ;
@@ -144,10 +166,17 @@ class UsersController extends Zend_Controller_Action {
             }
 
             Snep_Users_Manager::edit($dados);
+            Snep_Users_Manager::removeQueuesPermission($id);
+            // add queue permission
+            if(isset($dados['queues'])){
+                foreach($dados['queues'] as $x => $queue){
+                    Snep_Users_Manager::addQueuesPermission($id, $queue);
+                }
+            }
             $this->_redirect($this->getRequest()->getControllerName());
 
         }
-        
+
     }
 
     /**
@@ -162,16 +191,18 @@ class UsersController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         $this->view->id = $id;
-        $this->view->remove_title = $this->view->translate('Delete User.'); 
-        $this->view->remove_message = $this->view->translate('The user will be deleted. After that, you have no way get it back.'); 
-        $this->view->remove_form = 'users'; 
+        $this->view->remove_title = $this->view->translate('Delete User.');
+        $this->view->remove_message = $this->view->translate('The user will be deleted. After that, you have no way get it back.');
+        $this->view->remove_form = 'users';
         $this->renderScript('remove/remove.phtml');
 
         if ($this->_request->getPost()) {
 
-            Snep_Users_Manager::removeRecovery($_POST['id']);
-            Snep_Users_Manager::removePermission($_POST['id']);
-            Snep_Users_Manager::remove($_POST['id']);
+            Snep_Users_Manager::removeRecovery($id);
+            Snep_Users_Manager::removePermission($id);
+            Snep_Users_Manager::removeQueuesPermission($id);
+            Snep_Binds_Manager::removeBond($id);
+            Snep_Users_Manager::remove($id);
             $this->_redirect($this->getRequest()->getControllerName());
         }
     }
@@ -196,7 +227,7 @@ class UsersController extends Zend_Controller_Action {
         //Permissões do grupo
         $currentResourcesGroup = Snep_Permission_Manager::getAllPermissions($idProfile);
 
-        //Permissões individuais do usuário 
+        //Permissões individuais do usuário
         $currentResourcesUsers = Snep_Permission_Manager::getAllPermissionsUser($id);
 
         // Modulos do sistema
@@ -256,7 +287,7 @@ class UsersController extends Zend_Controller_Action {
         $modulesAll = array();
         $cont = 0;
 
-        // Caso possua dados de permissão do usuário, as permissões passam 
+        // Caso possua dados de permissão do usuário, as permissões passam
         // a ser da tabela users_permission
         foreach ($resources as $key => $res) {
 
@@ -309,7 +340,7 @@ class UsersController extends Zend_Controller_Action {
                 $deleted = array_merge($currentResourcesGroup, $permissionUser);
             }
 
-            // retirar permissão do usuário por id 
+            // retirar permissão do usuário por id
             if (!empty($deleted)) {
                 Snep_Permission_Manager::removePermissionUser($dados['id'], $deleted);
             }
@@ -339,10 +370,19 @@ class UsersController extends Zend_Controller_Action {
         $this->view->id = $id;
 
         $allPeers = Snep_Extensions_Manager::getAll();
-        $usersBond = Snep_Binds_Manager::getBond($id);
 
+        $exceptions = Snep_Binds_Manager::getBondException($id);
+        if(!empty($exceptions)){
+            foreach($exceptions as $x => $excep){
+                (isset($exceptionsAll)) ? $exceptionsAll .= $excep["exception"]."," : $exceptionsAll = $excep["exception"].",";
+            }
+            $exceptions = substr($exceptionsAll, 0,-1);
+            $this->view->exceptions = $exceptions;
+        }
+
+        $usersBond = Snep_Binds_Manager::getBond($id);
         if($usersBond){
-            
+
             // Type bond
             if($usersBond[0]["type"] == 'bound'){
                 $this->view->typeBond = 'checked';
@@ -354,7 +394,7 @@ class UsersController extends Zend_Controller_Action {
             foreach($usersBond as $key => $user){
                 $selectedUsers[]['name'] = $user["peer_name"];
                 foreach($allPeers as $x => $peer){
-                    if($user['peer_name'] == $peer['name']){
+                    if($user['peer_name'] == $peer['exten']){
                         unset($allPeers[$x]);
                     }
                 }
@@ -362,7 +402,7 @@ class UsersController extends Zend_Controller_Action {
 
             $this->view->selected = $selectedUsers;
             $this->view->peers = $allPeers;
-        
+
         }else{
 
             $this->view->peers = $allPeers;
@@ -371,21 +411,33 @@ class UsersController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
-            
+
             $data = $_POST;
-            
+
             // removes bond extension
             Snep_Binds_Manager::removeBond($data['id']);
 
             //add bond extension
-            if($data['duallistbox_bond']){
+            if(isset($data['duallistbox_bond'])){
                 foreach($data['duallistbox_bond'] as $key => $peer){
 
                     Snep_Binds_Manager::addBond($data['id'],$data['bound'],$peer);
 
                 }
             }
-            
+
+            Snep_Binds_Manager::removeBondException($data['id']);
+            // add bond exceptions
+            if($data["exceptions"] != ""){
+                $exceptions = explode(",", $data["exceptions"]);
+
+                foreach($exceptions as $x => $exception){
+                    if($exception != ""){
+                        Snep_Binds_Manager::addBondException($data['id'],$exception);
+                    }
+                }
+            }
+
             $this->_redirect("/" . $this->getRequest()->getControllerName() . "/");
         }
     }

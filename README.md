@@ -28,6 +28,24 @@
   - Grupos para destino (ringall)   
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
 ---------------------------------
+**3.04**
+
+- ATUALIZADO - extensions.conf para corrigir Regex descontinuada do asterisk (de _. para _X) (Contribuição: Jean Eduardo - Datasolve Tecnologia)
+- ATUALIZADO - extensions.conf para corrigir ordem de carregamento de .conf's do snep (Contribuição: Daian Conrad - Opens Tecnologia)
+- ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
+- ATUALIZADO - Melhorias no layout das listagens dos cadastros
+- ATUALIZADO - Melhorias nas traduções
+- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
+- ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
+- Adiconados arquivos de som pt_BR, en, es removidos por engano na versão 3.03
+- NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
+- NOVO - Utilização dos gráficos do google no relatório de chamadas do período
+- NOVO - Nova lib bootstrap para selecionar mais de um item no campo select
+- NOVO - Acrescimo de exceções especiais no vinculo do usuário
+- CORRIGIDO - Consulta de hierarquia de centro de custos no relatorio de chamadas do período
+- CORRIGIDO - Adicionado getTech e getHost para chamadas com troncos sem autenticacao ( Contribuição: Renato dos Santos)
+
+---------------------------------
 **3.03**
 - CORRIGIDO - problema de identificação do chamador no display de telefones IP (Heros)
 - NOVO - identificacao do modelo do aparelho autenticado (contribuição: Heros do Amaral)

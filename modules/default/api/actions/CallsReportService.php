@@ -21,7 +21,7 @@ require_once '../../../includes/functions.php';
 
 
 /**
- * Calls Report Service 
+ * Calls Report Service
  *
  * @category  Snep
  * @package   Snep
@@ -34,12 +34,12 @@ class CallsReportService implements SnepService {
      * Executa as ações do serviço
      */
     public function execute() {
-        
+
         $config = Zend_Registry::get('config');
         $db = Zend_registry::get('db');
 
         $prefix_inout = $config->ambiente->prefix_inout;
-        
+
         $start_date = $_GET['start_date'] . " " . $_GET['start_hour'];
         $end_date = $_GET['end_date'] . " " . $_GET['end_hour'];
         $report_type = $_GET['report_type'];
@@ -47,34 +47,60 @@ class CallsReportService implements SnepService {
         if(isset($_GET['limit']))
             $limit = $_GET['limit'];
 
+        // exceptions
+        if(isset($_GET['exceptions'])){
+            $exceptions = explode("_", $_GET['exceptions']);
+
+            foreach($exceptions as $key => $value){
+                (isset($exceptionsAll)) ? $exceptionsAll .= "'".$value."'," : $exceptionsAll = "'".$value."',";
+            }
+            $exceptions = substr($exceptionsAll, 0,-1);
+            //$where_exceptions = " AND (src IN (".$exceptions.") OR dst IN (".$exceptions."))";
+
+        }
+
         // Binds
         if(isset($_GET['clausulepeer']) && isset($_GET['clausule'])){
-            
+
             $clausulepeer = explode("_", $_GET['clausulepeer']);
             $where_binds = '';
-            
+
             foreach( $clausulepeer as $key => $value){
-                $where_binds .= $value.","; 
+                $where_binds .= $value.",";
             }
             $where_binds = substr($where_binds, 0,-1);
 
             // Not permission
-            if($_GET['clausule'] == 'nobound'){ 
+            if($_GET['clausule'] == 'nobound'){
 
-                $where_binds = " AND (src NOT IN (".$where_binds.") AND dst NOT IN (".$where_binds."))";
-                                
+                if(isset($exceptions)){
+                    $where_binds = " AND (src IN (".$exceptions.") OR dst IN (".$exceptions."))"." AND (src NOT IN (".$where_binds.") OR dst NOT IN (".$where_binds."))";
+                }else{
+                    $where_binds = " AND (src NOT IN (".$where_binds.") OR dst NOT IN (".$where_binds."))";
+                }
+
             }else{
 
-                $where_binds = " AND (src IN (".$where_binds.") OR dst IN (".$where_binds."))";
+                if(isset($exceptions)){
+                    $where_binds = " AND (src IN (".$where_binds.",".$exceptions.") OR dst IN (".$where_binds.",".$exceptions."))";
+                }else{
+                    $where_binds = " AND (src IN (".$where_binds.") OR dst IN (".$where_binds."))";
+                }
             }
+
         }
-        
+
+        // when no exits bind and exsts only exception special
+        if(!isset($where_binds) && isset($exceptions)){
+            $where_binds = " AND (src IN (".$exceptions.") OR dst IN (".$exceptions."))";
+        }
+
         // Status call
         $where_options[0] = " disposition != 'ANSWERED'";
         $where_options[1] = " disposition != 'NO ANSWER'";
         $where_options[2] = " disposition != 'BUSY'";
         $where_options[3] = " disposition != 'FAILED'";
-        
+
         if(isset($_GET['status_answered']))
             unset($where_options[0]);
 
@@ -94,7 +120,7 @@ class CallsReportService implements SnepService {
 
             $groupsrc = $_GET['groupsrc'];
             $origens = Snep_ExtensionsGroups_Manager::getExtensionsGroup($groupsrc);
-            
+
             if (count($origens) == 0) {
                 return array("status" => "fail", "message" => "errorgroup");
             } else {
@@ -111,10 +137,10 @@ class CallsReportService implements SnepService {
         }
 
         if (isset($_GET['groupdst'])) {
-            
+
             $groupdst = $_GET['groupdst'];
             $destino = Snep_ExtensionsGroups_Manager::getExtensionsGroup($groupdst);
-            
+
             if (count($destino) == 0) {
                 return array("status" => "fail", "message" => "There are no extensions in the selected group");
             } else {
@@ -129,7 +155,7 @@ class CallsReportService implements SnepService {
                 $ramaisdst = " AND dst in (" . trim($ramaldst, ',') . ") ";
             }
         }
-        
+
         // Src or dst value
         if (isset($_GET['src'])) {
             $src = $_GET['src'];
@@ -140,14 +166,14 @@ class CallsReportService implements SnepService {
                 foreach ($arrSrc as $srcs) {
                     ($_GET['order_src'] == 'equal') ? $where_src .= " OR (src = $srcs)" : $where_src .= " OR (src LIKE '%$srcs%')";
                 }
-                
+
                 $where_src = " AND (" . substr($where_src, 3) . ")";
 
             } else {
                 ($_GET['order_src'] == 'equal') ? $where_src = "AND (src = $src)" : $where_src = "AND (src LIKE '%$src%')";
             }
         }
-        
+
         if (isset($_GET['dst'])) {
             $dst = $_GET['dst'];
             if (strpos($dst, ",")) {
@@ -157,7 +183,7 @@ class CallsReportService implements SnepService {
                 foreach ($arrdst as $dsts) {
                     ($_GET['order_dst'] == 'equal') ? $where_dst .= " OR (dst = $dsts)" : $where_dst .= " OR (dst LIKE '%$dsts%')";
                 }
-                
+
                 $where_dst = " AND (" . substr($where_dst, 3) . ")";
 
             } else {
@@ -166,9 +192,9 @@ class CallsReportService implements SnepService {
         }
 
         // Time call option
-        (isset($_GET['time_call_init'])) ? $where_options[] = ' duration >= '.$_GET['time_call_init'].' ' : null ; 
-        (isset($_GET['time_call_end'])) ? $where_options[] = ' duration <= '.$_GET['time_call_end'].' ' : null ; 
-        
+        (isset($_GET['time_call_init'])) ? $where_options[] = ' duration >= '.$_GET['time_call_init'].' ' : null ;
+        (isset($_GET['time_call_end'])) ? $where_options[] = ' duration <= '.$_GET['time_call_end'].' ' : null ;
+
 
         // Cost center
         if(isset($_GET['cost_center'])){
@@ -178,19 +204,19 @@ class CallsReportService implements SnepService {
             if (count($cost_centers) > 0) {
                 $tmp_cc = "";
                 foreach ($cost_centers as $valor) {
-                    $tmp_cc .= " cdr.accountcode = '" . $valor . "'";
+                    $tmp_cc .= " cdr.accountcode like '" . $valor . "%'";
                     $tmp_cc .= " OR ";
                 }
                 $cost_centers = implode(",", $cost_centers);
                 if($tmp_cc != "")
                     $where_cost_center.= " AND ( " . substr($tmp_cc, 0, strlen($tmp_cc) - 3) . " ) ";
             }else{
-                $where_cost_center = " cdr.accountcode = ".$cost_centers;    
-            }    
+                $where_cost_center = " cdr.accountcode like ".$cost_centers."%";
+            }
         }
 
         /* Where Prefix Login/Logout */
-        $where_prefix = "";                               
+        $where_prefix = "";
         if (strlen($prefix_inout) > 3) {
             $cond_pio = "";
             $array_prefixo = explode(";", $prefix_inout);
@@ -223,7 +249,7 @@ class CallsReportService implements SnepService {
                 $where .= ' AND ('.$option.') ';
             }
         }
-        
+
         if($report_type != 'synthetic'){
 
             // SQL
@@ -240,11 +266,11 @@ class CallsReportService implements SnepService {
             $select .= $where_prefix;
             $select .= " GROUP BY userfield ORDER BY calldate, userfield ";
             $select .= (isset($limit)) ? " LIMIT ".$limit : '';
-            
+
             $stmt = $db->query($select);
 
             while ($dado = $stmt->fetch()) {
-                
+
                 $row[] = $dado;
 
             }
@@ -272,24 +298,23 @@ class CallsReportService implements SnepService {
         $values = array();
         $ccustos = array();
         $calldate = array();
-        
-        
+
         foreach($result as $key => $value){
-            
+
             // Calls number
             if($value['disposition'] == 'ANSWERED'){
                 $totals['TOTALS']++;
                 $totals['ANSWERED']++;
-                                
+
             }elseif($value['disposition'] == 'NO ANSWER'){
                 $totals['TOTALS']++;
                 $totals['NOANSWER']++;
-                                
+
             }elseif($value['disposition'] == 'BUSY'){
                 $totals['TOTALS']++;
                 $totals['BUSY']++;
-                                
-            
+
+
             }elseif($value['disposition'] == 'FAILED'){
                 $totals['TOTALS']++;
                 $totals['FAILED']++;
@@ -299,21 +324,21 @@ class CallsReportService implements SnepService {
             if($report_type == 'synthetic'){
 
                 (isset($ccustos[$value['accountcode']])) ? $ccustos[$value['accountcode']]++ : $ccustos[$value['accountcode']] = 1;
-                
+
                 if($value['disposition'] == 'ANSWERED'){
-                    (isset($calldate[$value['key_dia']]['ANSWERED'])) ? $calldate[$value['key_dia']]['ANSWERED']++ : $calldate[$value['key_dia']]['ANSWERED'] = 0;    
+                    (isset($calldate[$value['key_dia']]['ANSWERED'])) ? $calldate[$value['key_dia']]['ANSWERED']++ : $calldate[$value['key_dia']]['ANSWERED'] = 0;
                 }
 
                 if($value['disposition'] == 'NO ANSWER'){
-                    (isset($calldate[$value['key_dia']]['NOANSWER'])) ? $calldate[$value['key_dia']]['NOANSWER']++ : $calldate[$value['key_dia']]['NOANSWER'] = 0;    
+                    (isset($calldate[$value['key_dia']]['NOANSWER'])) ? $calldate[$value['key_dia']]['NOANSWER']++ : $calldate[$value['key_dia']]['NOANSWER'] = 0;
                 }
 
                 if($value['disposition'] == 'BUSY'){
-                    (isset($calldate[$value['key_dia']]['BUSY'])) ? $calldate[$value['key_dia']]['BUSY']++ : $calldate[$value['key_dia']]['BUSY'] = 0;    
+                    (isset($calldate[$value['key_dia']]['BUSY'])) ? $calldate[$value['key_dia']]['BUSY']++ : $calldate[$value['key_dia']]['BUSY'] = 0;
                 }
 
                 if($value['disposition'] == 'FAILED'){
-                    (isset($calldate[$value['key_dia']]['FAILED'])) ? $calldate[$value['key_dia']]['FAILED']++ : $calldate[$value['key_dia']]['FAILED'] = 0;    
+                    (isset($calldate[$value['key_dia']]['FAILED'])) ? $calldate[$value['key_dia']]['FAILED']++ : $calldate[$value['key_dia']]['FAILED'] = 0;
                 }
 
                 (isset($calldate[$value['key_dia']]['TOTALS'])) ? $calldate[$value['key_dia']]['TOTALS']++ : $calldate[$value['key_dia']]['TOTALS'] = 0;
@@ -325,14 +350,14 @@ class CallsReportService implements SnepService {
                 }else{
                     $type['O']++;
                 }
-                
+
             }
 
         }
-        
+
         if($report_type == 'synthetic'){
             return array("status" => "ok", "quantity" => $cont, "totals" => $totals, "ccustos" => $ccustos, "type" => $type, "calldate" => $calldate);
-        }else{        
+        }else{
             return array("status" => "ok", "data" => $row, "quantity" => $cont, "totals" => $totals, "select" => $select, "selectcont" => $selectcont);
         }
     }

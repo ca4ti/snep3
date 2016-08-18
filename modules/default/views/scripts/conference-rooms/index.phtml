@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
-$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.min.css" ); 
+$this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.min.css" );
 ?>
 <style>
     .toggle.btn-xs {
@@ -27,7 +27,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
     }
 </style>
 <script type="text/javascript" src="/snep/includes/javascript/bootstrap-toggle.min.js"></script>
-<script src="/snep/includes/javascript/password.js"></script> 
+<script src="/snep/includes/javascript/password.js"></script>
 <div class="row">
     <div class="tab-content">
         <div class="tab-pane active" id="demo">
@@ -35,20 +35,19 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                 <div class="snep-body-top-buttons">
                     <div class="snep-body-search">
                         <?php if($this->key){ ?>
-                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>
                         <?php } ?>
                     </div>
-                
                 </div>
             <?php } ?>
             <form id="defaultForm" method="post" class="form-inline" style="margin-top: 0px;" action="<?php echo $this->url(array("controller" => "conference-rooms", "action" => "index"), null, true); ?>" METHOD="post">
-                <table class="table demo table-bordered" data-page-size=15>
+                <table class="table demo table-hover" data-page-size=15>
 
                     <thead>
                         <tr>
                             <th class="text-center"> <?php echo $this->translate('Code') ?> </th>
                             <th class="text-center"> <?php echo $this->translate('Record') ?> </th>
-                            <th class="text-center"> 
+                            <th class="text-center">
                                 <?php echo $this->translate('Password for Restricted Access') ?><br />
                                 (<small><?php echo $this->translate('Only numbers');?></small>)
                             </th>
@@ -63,25 +62,23 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                             foreach ($this->conferenceRooms as $id => $conferenceRooms): ?>
 
                                 <tr>
-                                    <td class="numeric text-center"> 
-                                        <b> <?php echo $conferenceRooms['id'] ?> </b> 
+                                    <td class="numeric text-center">
+                                        <b> <?php echo $conferenceRooms['id'] ?> </b>
                                     </td>
-                                    
+
                                     <td class="action text-center">
                                         <?php ( $conferenceRooms['rec'] ? $chek = 'checked' : $chek = '') ?>
 
                                         <input type="checkbox" class="newcheck" <?php echo $chek ?> value="<?php $conferenceRooms['rec'] ?>"  name="rec[<?php echo $conferenceRooms['id'] ?>]">
                                     </td>
-                                    <td class="password text-center" >                   
-                                        <div>                        
+                                    <td class="password text-center" >
+                                        <div>
                                             <input type="password" id="password<?php echo $conferenceRooms['id'] ?>" name="password[<?php echo $conferenceRooms['id'] ?>]"  onkeypress="return onlyDigit(event)" placeholder="<?php echo ($conferenceRooms['authenticate'] != '') ? $this->translate('Reset') : '' ;?> " size="30">
-
-                                            
                                         </div>
                                     </td>
 
                                     <td class="text-center"  >
-                                        
+
                                         <select style="width: 250px;" class="form-control" name="costCenter[<?php echo $conferenceRooms['id'] ?>]">
                                             <?php foreach ($this->costCenter as $chave => $costCenter): ?>
 
@@ -106,12 +103,11 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
                 </table>
                 <div class="snep-body-footer-buttons">
                     <input type="submit" class="btn btn-add btn-primary" name="conference" value="<?php echo $this->translate('Save') ?>"/>
-                </div>        
+                </div>
             </div> <!-- demo -->
         </div> <!-- tab-content -->
     </form>
-</div> <!-- /.row -->    
-    
+</div> <!-- /.row -->
 
 <script type="text/javascript">
 
@@ -120,29 +116,21 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
         field_view = [] ;
         for (var i=901; i <= 915 ; i++) {
             var field_name='#password'+i;
-            
- 
 
+            jQuery(field_name).password().on('show.bs.password', function(e) {
+                jQuery('#methods').prop('checked', true);
 
+            }).on('hide.bs.password', function(e) {
+                jQuery('#methods').prop('checked', false);
 
-                jQuery(field_name).password().on('show.bs.password', function(e) {
-                    jQuery('#methods').prop('checked', true);
+            });
 
-                }).on('hide.bs.password', function(e) {
-                    jQuery('#methods').prop('checked', false);
-                
-                });
-                
-                jQuery('#methods').click(function() {
-                    jQuery(field_name).password('toggle');
-                });
-
+            jQuery('#methods').click(function() {
+                jQuery(field_name).password('toggle');
+            });
 
         }
-        
     });
-
-    
 
     function pass(id) {
         if (document.getElementById('box_' + id).style.display == '') {
@@ -175,4 +163,4 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-toggle.m
         }
     }
 
-</script> 
+</script>

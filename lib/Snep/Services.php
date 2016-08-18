@@ -28,12 +28,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2015 Opens Tecnologia
  * @author    Opens Tecnologia <desenvolvimentol@opens.com.br>
- * 
+ *
  */
 class Snep_Services {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -45,8 +45,8 @@ class Snep_Services {
 
         $config = Zend_Registry::get('config');
 
-        $url = $config->ambiente->ip_sock.":".$_SERVER['SERVER_PORT'];
-        $url .= '/snep/modules/default/api/?service='.$service;
+        //$url = $config->ambiente->ip_sock.":".$_SERVER['SERVER_PORT'];
+        $url = '127.0.0.1/snep/modules/default/api/?service='.$service;
 
         return $url;
     }

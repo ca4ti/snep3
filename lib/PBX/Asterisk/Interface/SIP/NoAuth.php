@@ -43,7 +43,9 @@ class PBX_Asterisk_Interface_SIP_NoAuth extends PBX_Asterisk_Interface_SIP {
      * getCanal - Eliminando uso de getCanal nessa interface
      */
     public function getCanal() {
-        throw new Exception(get_class($this) . ' dont support channel returning, use $obj->getTech()/$your_exten@$obj->getHost() to dial');
+        //throw new Exception(get_class($this) . ' dont support channel returning, use $obj->getTech()/$your_exten@$obj->getHost() to dial');
+		// Update from Shazaum 29 jul 2016
+		 return $this->getTech() . "/" .  $this->getHost();
     }
 
     /**

@@ -25,8 +25,12 @@
 - Rever/redefinir conceitos/funcionalidades para Grupos de Ramais
   - discar para um grupo de ramais
   - Uso em espionar e sussurrar
-  - Grupos para destino (ringall)   
+  - Grupos para destino (ringall)
   - Asterisk cli> suprimir mensagens de erro: ast_carefulwrite: write() returned error: Broken pipe
+---------------------------------
+**3.05**
+- CORRIGIDO - Erro no permissionamento de usuário
+
 ---------------------------------
 **3.04**
 
@@ -35,7 +39,7 @@
 - ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
 - ATUALIZADO - Melhorias no layout das listagens dos cadastros
 - ATUALIZADO - Melhorias nas traduções
-- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
+- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia)
 - ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
 - Adiconados arquivos de som pt_BR, en, es removidos por engano na versão 3.03
 - NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
@@ -58,7 +62,7 @@
 **3.0 Estável + 3.01, 3.02 **
 
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
-- CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
+- CORRIGIDO - Permitir multipla selecao de NAT para Troncos
 - CORRIGIDO - Erros ao adiconar arquivos de Musicas de espera e removes seçoes de musica de espera
 - CORRIGIDO - Erros de CSS em Rotas >> Configuração padrão
 - CORRIGIDO - AGI DiscarRamal para usar o calleridname da origem ao invés de definir = ao numero

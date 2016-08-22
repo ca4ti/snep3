@@ -296,7 +296,7 @@ class Snep_ExtensionsGroups_Manager {
 
             $value = array('name' => $group['name']);
 
-            $db->update("groups", $value, "id = " . $group['id'] );
+            $db->update("core_groups", $value, "id = " . $group['id'] );
             $db->commit();
 
             return true;

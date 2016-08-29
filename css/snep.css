@@ -70,7 +70,7 @@ legend {
     line-height:inherit;
     color:#f26c45;
     border:0;
-    border-bottom:1px solid #e5e5e5
+    border-bottom:1px solid #e5e5e5;
 }
 a {
     /*background-color:#3b3a3c;*/
@@ -81,7 +81,6 @@ a {
 a:focus,a:hover {
     color:#ffffff;
     text-decoration:underline;
-    background-color: #313032;
 }
 
 a.dash:hover {
@@ -284,11 +283,13 @@ ul.dropdown-user.in {
  * Breadcrumb
  */
  #snep-breadcrumb {
-
     background-color: #f8f9fb;
     height: 34px;
     width: 100%;
-    margin-top: 54px;
+}
+
+.content-body{
+    padding-right: 25px;
 }
 
 @media(min-width:768px) {
@@ -413,7 +414,6 @@ ul.snep-menu-list{
         z-index: 1;
         position: absolute;
         width: 200px;
-        margin-top: 54px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -464,12 +464,12 @@ ul.snep-menu-list{
     border-color:#337ab7
 }
 
-.navbar {
+/*.navbar {
     position:relative;
     min-height:60px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     /*border:1px solid transparent*/
-}
+/*}*/
 
 .navbar-brand {
     float:left;
@@ -484,6 +484,7 @@ ul.snep-menu-list{
     background-color:#ffffff;
     border-color:#e7e7e7
 }
+
 
 
 

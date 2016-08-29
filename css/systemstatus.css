@@ -1,4 +1,4 @@
-/* 
+/*
  *  This file is part of SNEP.
  *  Para território Brasileiro leia LICENCA_BR.txt
  *  All other countries read the following disclaimer
@@ -19,7 +19,7 @@
  *  CSS File for System Status
  */
 
-root { 
+root {
     display: block;
 }
 
@@ -42,7 +42,7 @@ div#statusbar{
     margin-left: auto;
     margin-right: auto;
     width: 970px;
-    height: 330px; 
+    height: 330px;
 }
 
 
@@ -54,10 +54,10 @@ div#statusbar{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     margin: 0 auto;
-     height: 330px; 
+    height: 330px;
 /*    padding-bottom: 1000px;
     margin-bottom: -1000px;*/
-        
+
 }
 
 #statusright_icon {
@@ -79,10 +79,8 @@ div#statusbar{
   padding: 20px 0 10px 0 ;
   height: 25%;
   vertical-align: middle;
-  
-}
 
-    
+}
 
 #containerStatus{
     /*background: #5a5a5a;*/

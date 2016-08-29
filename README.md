@@ -30,6 +30,7 @@
 ---------------------------------
 **3.05**
 - CORRIGIDO - Erro no permissionamento de usuário
+- CORRIGIDO - Menu lateral com scroll quando contém um elevado número de módulos(Implementado novo menu com opção de minimizá-lo)
 
 ---------------------------------
 **3.04**

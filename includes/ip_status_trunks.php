@@ -91,6 +91,7 @@ foreach ($data as $tronco) {
     array_push($troncos, $tronco);
 }
 
+$ami = new AMI ();
 $peer_list = $ami->get_IAXpeerlist() ;
 $reg_list = $ami->get_IAXregistry();
 

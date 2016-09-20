@@ -451,7 +451,7 @@ ul.snep-menu-list{
 .nav>li>a {
     position:relative;
     display:block;
-    padding:10px 12px
+    padding:10px 12px;
 }
 
 .nav>li>a:focus,.nav>li>a:hover {

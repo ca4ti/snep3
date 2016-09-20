@@ -195,9 +195,9 @@ body {
 	border-top: 1px dotted #3b3a3c;
 }
 
-.sidebar .nav-second-level li a {
+/*.sidebar .nav-second-level li a {
 	padding-left: 37px;
-}
+}*/
 
 .sidebar .nav-third-level li a {
 	padding-left: 52px;
@@ -299,6 +299,8 @@ body {
 		z-index: 999;
 		position: absolute;
 		width: 200px;
+		height: 100% !important;
+		background-color: #313032;
 	}
 
 	.navbar-top-links .dropdown-messages,

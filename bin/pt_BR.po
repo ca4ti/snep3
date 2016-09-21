@@ -9,13 +9,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-04 11:07-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
+"Last-Translator: Douglas Conrad <douglas.conrad@opens.com.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
 msgid ""
@@ -5694,7 +5694,7 @@ msgstr "Definido pelo usuário"
 
 #: /var/www/html/snep-3/modules/default/strings_extras.xml
 msgid "User defined string"
-msgstr "Spring definida pelo usuário"
+msgstr "String definida pelo usuário"
 
 #: ../modules/default/controllers/AuthController.php:268
 #: ../modules/default/controllers/AuthController.php:319

@@ -66,7 +66,7 @@ class Snep_InterfaceConf {
             $header .= ";-----------------------------------------------------------------------------------\n";
 
             /* query that gets information of the peers on the DB */
-            $sql = "SELECT * FROM peers WHERE name != 'admin' AND peer_type = 'T' AND canal like '" . strtoupper($tech) . "%'";
+            $sql = "SELECT * FROM peers WHERE name != 'admin' AND canal like '" . strtoupper($tech) . "%'";
             $peer_data = $db->query($sql)->fetchAll();
 
             $peers = "\n";
@@ -161,7 +161,8 @@ class Snep_InterfaceConf {
                         $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "\n" : "");
                         
  
-                    } elseif($tech != 'sip') {
+                    // } elseif($tech != 'sip') {
+                    }else{
                         /* Assemble Extension entries */
                         $peers .= '[' . $peer['name'] . "]\n";
                         $peers .= 'type=' . $peer['type'] . "\n";
@@ -176,7 +177,7 @@ class Snep_InterfaceConf {
                         $peers .= 'allow=' . $allow . "\n";
 
                         $peers .= 'username=' . $peer['name'] . "\n";
-                        $peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
+                        //$peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
 
                         $peers .= 'fromuser=' . $peer['name'] . "\n";
 

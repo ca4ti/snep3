@@ -644,7 +644,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         // Update table core_peer_groups
         Snep_ExtensionsGroups_Manager::updateGroupsExtension($idExten,$extensions_group,$extenGroup) ;
-
+        Snep_InterfaceConf::loadConfFromDb();
     }
 
     /**
@@ -696,6 +696,7 @@ class ExtensionsController extends Zend_Controller_Action {
                     Snep_Extensions_Manager::remove($exten);
                     Snep_Extensions_Manager::removeVoicemail($exten);
                     Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
+                    Snep_InterfaceConf::loadConfFromDb();
 
                 } catch (PDOException $e) {
                     $db->rollBack();

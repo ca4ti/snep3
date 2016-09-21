@@ -19,6 +19,7 @@
 
 
 require_once "AMI.php";
+$ami = new AMI ();
 
 // Connect to database
 $setup = parse_ini_file("setup.conf");
@@ -42,8 +43,7 @@ foreach ($data as $tronco) {
     array_push($troncos, $tronco);
 }
 
-foreach ($troncos as $key => $val) {
-    $ami = new AMI ();
+foreach ($troncos as $key => $val) {    
     $troncos[$key]['status'] = "N.D.";
     $troncos[$key]['latencia'] = "N.D.";
     
@@ -91,12 +91,10 @@ foreach ($data as $tronco) {
     array_push($troncos, $tronco);
 }
 
-$ami = new AMI ();
 $peer_list = $ami->get_IAXpeerlist() ;
 $reg_list = $ami->get_IAXregistry();
 
 foreach ($troncos as $key => $val) {
-    $ami = new AMI ();
     $troncos[$key]['status'] = "N.D.";
     $troncos[$key]['latencia'] = "N.D.";
 

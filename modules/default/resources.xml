@@ -52,7 +52,7 @@
             <resource id="write"></resource>
         </resource>
 
-        <resource id="pickup-groups" label="Pickup Groups" >
+        <resource id="pickup-groups" label="Pickup Groups" font="sn-grupo-captura">
             <resource id="write"></resource>
         </resource>
 
@@ -71,9 +71,9 @@
         <resource id="conference-rooms" label="Conference Rooms" font="sn-conferencia">
             <resource id="write"></resource>
         </resource>
-        
+
     </group>
-    
+
     <group id="reports" label="Reports" font="sn-relatorios">
         <resource id="calls-report" label="Calls" font="sn-chamadas"></resource>
         <resource id="ranking-report" label="Call Ranking" font="sn-ranking"></resource>
@@ -101,9 +101,9 @@
         <resource id="music-on-hold" label="Music on Hold" font="sn-som-espera">
             <resource id="write"></resource>
         </resource>
-        <resource id="cnl" label="Cnl Update"></resource>
-        <resource id="module-settings" label="Module Settings"></resource>
-    </group> 
+        <resource id="cnl" label="Cnl Update" font="sn-busca"></resource>
+        <resource id="module-settings" label="Module Settings" font="sn-modulos"></resource>
+    </group>
 
     <resource id="auth" order="allow">
         <resource id="logout"></resource>

@@ -734,7 +734,7 @@ CREATE TABLE IF NOT EXISTS `core_binds_exceptions` (
 --
 -- Table structure for table `core_groups`
 --
-CREATE TABLE `core_groups` (
+CREATE TABLE IF NOT EXISTS `core_groups` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL,
      PRIMARY KEY (`id`)
@@ -743,7 +743,7 @@ CREATE TABLE `core_groups` (
 --
 -- Table structure for table `core_peer_groups`
 --
-CREATE TABLE `core_peer_groups` (
+CREATE TABLE IF NOT EXISTS `core_peer_groups` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `peer_id` int(11) NOT NULL,
     `group_id` int(11) NOT NULL,

@@ -175,7 +175,7 @@ class Snep_InterfaceConf {
                         $peers .= 'disallow=' . $peer['disallow'] . "\n";
                         $peers .= 'allow=' . $allow . "\n";
 
-                        $peers .= 'username=' . $peer['name'] . "\n";
+                        $peers .= 'defaultuser=' . $peer['name'] . "\n";
                         $peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
 
                         $peers .= 'fromuser=' . $peer['name'] . "\n";

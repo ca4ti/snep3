@@ -175,15 +175,11 @@ class Snep_InterfaceConf {
                         $peers .= 'qualify=' . $peer['qualify'] . "\n";
                         $peers .= 'disallow=' . $peer['disallow'] . "\n";
                         $peers .= 'allow=' . $allow . "\n";
-
-                        $peers .= 'username=' . $peer['name'] . "\n";
-                        //$peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
-
+                        $peers .= 'defaultuser=' . $peer['name'] . "\n";
+                        $peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
                         $peers .= 'fromuser=' . $peer['name'] . "\n";
-
                         $peers .= 'call-limit=' . $peer['call-limit'] . "\n";
                         $peers .= 'directmedia=' . $peer['directmedia'] . "\n";
-                        
                         $peers .= "\n";
                     }
                 }

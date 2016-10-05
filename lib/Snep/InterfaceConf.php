@@ -158,7 +158,7 @@ class Snep_InterfaceConf {
                         if ($peer['port'] != "") {
                             $trunk_port = ':' . $peer['port'] . "\n";
                         }
-                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "\n" : "");
+                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "/" . $peer['defaultuser'] . "\n" : "");
                         
  
                     } elseif($tech != 'sip') {

@@ -177,7 +177,7 @@ class Snep_InterfaceConf {
                         $peers .= 'allow=' . $allow . "\n";
                         $peers .= 'defaultuser=' . $peer['name'] . "\n";
                         $peers .= 'cancallforward=' . $peer['cancallforward'] . "\n";
-                        $peers .= 'fromuser=' . $peer['name'] . "\n";
+                        $peers .= ( $peer['peer_type'] != "R") ? ('fromuser=' . $peer['fromuser'] . "\n") : "";
                         $peers .= 'call-limit=' . $peer['call-limit'] . "\n";
                         $peers .= 'directmedia=' . $peer['directmedia'] . "\n";
                         $peers .= "\n";

@@ -45,8 +45,8 @@ class Snep_Services {
 
         $config = Zend_Registry::get('config');
 
-        //$url = $config->ambiente->ip_sock.":".$_SERVER['SERVER_PORT'];
-        $url = '127.0.0.1/snep/modules/default/api/?service='.$service;
+        $url = $_SERVER["HTTP_HOST"]."/snep/modules/default/api/?service=".$service;
+        //$url = '127.0.0.1/snep/modules/default/api/?service='.$service;
 
         return $url;
     }

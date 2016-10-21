@@ -297,10 +297,10 @@ body {
 @media(min-width:768px) {
 	.sidebar {
 		z-index: 999;
-		position: absolute;
 		width: 200px;
-		height: 100% !important;
+		height: 100%;
 		background-color: #313032;
+		position: absolute;
 	}
 
 	.navbar-top-links .dropdown-messages,

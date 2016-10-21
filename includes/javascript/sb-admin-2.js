@@ -31,7 +31,6 @@ jQuery(function() {
 	handleSidebarToggler();
 });
 
-
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
@@ -136,4 +135,17 @@ var isIE = function() {
 		return v > 4 ? v : undef;
 	}
 }
+
+jQuery(function() {
+	jQuery(document).ready(function () {
+	    var menu    = jQuery('#sidebarmenu').height()
+	    var content = jQuery(document).height();
+
+	    if (menu > content) {
+	        jQuery('.sidebar').height(menu)
+	    } else {
+	        jQuery('#sidebarmenu').height(content-50);
+	    }
+	});
+});
 

@@ -24,20 +24,20 @@
  *
  * @category  Snep
  * @package   Snep
- * @copyright Copyright (c) 2015 OpenS Tecnologia 
+ * @copyright Copyright (c) 2015 OpenS Tecnologia
  */
 class Snep_Register_Manager {
 
     public function __construct() {
-        
+
     }
-    
+
     /**
      * getCountry - Get Country in Database
      * @return <array>
      */
     public function getCountry() {
-        
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
@@ -46,7 +46,7 @@ class Snep_Register_Manager {
 
         $stmt = $db->query($select);
         $countrys = $stmt->fetchAll();
-        
+
         return $countrys;
 
     }
@@ -57,7 +57,7 @@ class Snep_Register_Manager {
      * @return <array>
      */
     public function getState() {
-        
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
@@ -77,7 +77,7 @@ class Snep_Register_Manager {
      * @return <array>
      */
     public function getCity($id_state) {
-        
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
@@ -96,9 +96,9 @@ class Snep_Register_Manager {
      * registerITC - Register Snep in ITC
      */
     public function registerITC($api_key,$client_key) {
-        
+
         $db = Zend_Registry::get('db');
-        $db->update("itc_register", array('registered_itc' => true, 
+        $db->update("itc_register", array('registered_itc' => true,
                     'api_key' => $api_key,
                     'client_key' => $client_key));
     }
@@ -107,7 +107,7 @@ class Snep_Register_Manager {
      * noregister - No Register Snep in ITC
      */
     public function noregister() {
-        
+
         $db = Zend_Registry::get('db');
         $db->update("itc_register", array('noregister' => true));
 
@@ -117,7 +117,7 @@ class Snep_Register_Manager {
      * get - Get register data in the database
      */
     public function get() {
-        
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
@@ -125,7 +125,7 @@ class Snep_Register_Manager {
 
         $stmt = $db->query($select);
         $data = $stmt->fetch();
-        
+
         return $data;
 
     }
@@ -137,16 +137,22 @@ class Snep_Register_Manager {
 
         $db = Zend_Registry::get('db');
 
+        $insert_data = array('id_distro' => 1,
+        'id_service' => 1,
+        'name_service' => 'intercomunexao');
+
+        $db->insert('itc_consumers', $insert_data);
+
         foreach($distributions as $key => $distribution){
-            
+
             $insert_data = array('id_distro' => $distribution->id,
             'id_service' => $distribution->service->id,
             'name_service' => $distribution->service->name);
-            
+
             $db->insert('itc_consumers', $insert_data);
 
         }
-          
+
     }
 
     /**
@@ -170,5 +176,5 @@ class Snep_Register_Manager {
             return $e;
         }
     }
-    
+
 }

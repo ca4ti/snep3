@@ -4,7 +4,7 @@
     Document   : resources.xml
     Created on : March 15, 2011, 5:39 PM
     Author     : Henrique Grolli Bassotto <henrique@opens.com.br>
-    Edited by  : Tiago Zimmermann <tiago.zimmermann@opens.com.br> 
+    Edited by  : Tiago Zimmermann <tiago.zimmermann@opens.com.br>
     Edited in  : February 14, 2014, 10:34 AM
     Description:
         Default modules resources for permission mapping
@@ -13,10 +13,13 @@
 <default>
     <resource id="error" order="allow"></resource>
     <resource id="installer" order="allow"></resource>
+
     <group id="index" label="Dashboard" font="sn-dashboard">
+        <resource id="index" label="Dashboard" font="sn-dashboard"></resource>
     </group>
+
     <group id="status" label="Status" font="sn-status">
-        
+
         <resource id="ip-status" label="IP Status" font="sn-status-ip"></resource>
         <resource id="inspector" label="System Status" font="sn-status-sistema"></resource>
         <resource id="khomp-links" label="Khomp boards" font="sn-links"></resource>
@@ -45,7 +48,7 @@
         <resource id="queues-groups" label="Queues Groups" font="sn-grupo-filas">
             <resource id="write"></resource>
         </resource>
-        
+
          <resource id="extensions" label="Extensions" font="sn-ramal">
             <resource id="write"></resource>
         </resource>
@@ -54,10 +57,10 @@
             <resource id="write"></resource>
         </resource>
 
-        <resource id="pickup-groups" label="Pickup Groups" >
+        <resource id="pickup-groups" label="Pickup Groups" font="sn-grupo-captura">
             <resource id="write"></resource>
         </resource>
-       
+
         <resource id="users" label="Users" font="sn-usuarios">
             <resource id="write"></resource>
         </resource>
@@ -73,9 +76,9 @@
         <resource id="conference-rooms" label="Conference Rooms" font="sn-conferencia">
             <resource id="write"></resource>
         </resource>
-        
+
     </group>
-    
+
     <group id="reports" label="Reports" font="sn-relatorios">
         <resource id="calls-report" label="Calls" font="sn-chamadas"></resource>
         <resource id="ranking-report" label="Call Ranking" font="sn-ranking"></resource>
@@ -87,7 +90,7 @@
         <resource id="route" label="Routes" font="sn-rotas">
             <resource id="write"></resource>
         </resource>
-        <resource id="action-configs" label="Default Config" font="sn-conf-padrao">
+        <resource id="action-configs" label="Default Configs" font="sn-conf-padrao">
             <resource id="write"></resource>
         </resource>
         <resource id="expression-alias" label="Expression Alias" font="sn-alias">
@@ -103,9 +106,9 @@
         <resource id="music-on-hold" label="Music on Hold" font="sn-som-espera">
             <resource id="write"></resource>
         </resource>
-        <resource id="cnl" label="Cnl Update"></resource>
-        <resource id="module-settings" label="Module Settings"></resource>
-    </group> 
+        <resource id="cnl" label="Cnl Update" font="sn-busca"></resource>
+        <resource id="module-settings" label="Module Settings" font="sn-modulos"></resource>
+    </group>
 
     <resource id="auth" order="allow">
         <resource id="logout"></resource>

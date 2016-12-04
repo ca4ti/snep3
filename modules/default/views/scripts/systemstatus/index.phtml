@@ -1,5 +1,5 @@
 
-<div class="row">    
+<div class="row">
     <div id="containerStatus">
         <div id="statusright">
             <div id="statusright_icon">
@@ -26,7 +26,7 @@
                         }else{
                             echo "<div class='sn-status-cpu statusbar-indicator' style='color:#f0625f;' ></div>";
                         }
-                        ?> 
+                        ?>
                         <span><?php echo $this->indexData["usage"] . '%'; ?></span>
                     </li>
                     <li>
@@ -62,7 +62,7 @@
                 </ul>
             </div>
         </div> <!-- /.statusTopo -->
-        
+
         <?php if ($this->error) : ?>
             <div class="error_box" >
                 <?php echo $this->translate("Errors were detected in the configuration of SNEP, click "); ?>
@@ -72,16 +72,16 @@
                 <?php echo $this->translate(" for more information"); ?>
             </div>
         <?php endif ?>
-        
+
         <div id="statusBody">
             <div class="statusColumn">
                 <div class="statusBlock">
                     <div class="iconHolder">
-                        <span class="sn-status-server"> </span> 
+                        <span class="sn-status-server"> </span>
                         <h2> <?php echo $this->translate("Server Status"); ?></h2>
                     </div>
                     <div class="contentHolder">
-                        
+
                         <table>
                             <tr>
                                 <th width=30%><?php echo $this->translate("Distribution"); ?></th>
@@ -122,7 +122,7 @@
                         <h2><?php echo $this->translate("Modules"); ?></h2>
                     </div>
                     <div class="contentHolder">
-                        
+
                         <?php
                         if (count($this->indexData["modules"]) > 0) {
                             foreach ($this->indexData["modules"] as $key => $value) {
@@ -138,7 +138,7 @@
                         }else{
                             ?>
                             <p><?php echo $this->translate("No modules instaled."); ?></p>
-                        <?php 
+                        <?php
                         }
                         ?>
                     </div>
@@ -152,7 +152,7 @@
                         <h2><?php echo $this->translate("Memory Usage"); ?></h2>
                     </div>
                     <div class="contentHolder">
-                        
+
                         <table>
                             <tr>
                                 <th><?php echo $this->translate("Type"); ?></th>
@@ -166,7 +166,7 @@
                                 <td style="text-align: left;"><?php echo $this->indexData["memory"]['ram']["free"]; ?></td>
                                 <td style="text-align: left;" class="graphBar">
                                     <div class="bar_chart">
-                                        <?php 
+                                        <?php
                                         $classColor = '';
                                         if ($this->indexData["memory"]['ram']["percent"] <= 50){
                                             $classColor = "bar_color_green";
@@ -192,7 +192,7 @@
                                 <td style="text-align: left;"></td>
                                 <td style="text-align: left;" class="graphBar">
                                     <div class="bar_chart">
-                                        <?php 
+                                        <?php
                                         $classColor = '';
                                         if ($this->indexData["memory"]['ram']["app_percent"] <= 50){
                                             $classColor = "bar_color_green";
@@ -218,7 +218,7 @@
                                 <td style="text-align: left;" ></td>
                                 <td style="text-align: left;" class="graphBar">
                                     <div class="bar_chart">
-                                        <?php 
+                                        <?php
                                         $classColor = '';
                                         if ($this->indexData["memory"]['ram']["buffers_percent"] <= 50){
                                             $classColor = "bar_color_green";
@@ -244,7 +244,7 @@
                                 <td style="text-align: left;" ></td>
                                 <td  style="text-align: left;" class="graphBar">
                                     <div class="bar_chart">
-                                        <?php 
+                                        <?php
                                         $classColor = '';
                                         if ($this->indexData["memory"]['ram']["cached_percent"] <= 50){
                                             $classColor = "bar_color_green";
@@ -270,7 +270,7 @@
                                 <td style="text-align: left;" ><?php echo $this->indexData["memory"]['swap']["free"] ; ?></td>
                                 <td  style="text-align: left;" class="graphBar">
                                 <div class="bar_chart">
-                                        <?php 
+                                        <?php
                                         $classColor = '';
                                         if ($this->indexData["memory"]['swap']["percent"] <= 50){
                                             $classColor = "bar_color_green";
@@ -300,7 +300,7 @@
                         <h2><?php echo $this->translate("Disk Usage"); ?></h2>
                     </div>
                     <div class="contentHolder">
-                        
+
                         <table>
                             <tr>
                                 <th style="text-align: left;" ><?php echo $this->translate("Partition"); ?></th>
@@ -310,7 +310,7 @@
                             </tr>
                             <?php
                             foreach ($this->indexData["space"] as $key => $value) {
-                                ?>             
+                                ?>
 
                                 <tr>
                                     <th style="text-align: left;" ><?php echo $value["mount_point"]; ?></th>
@@ -318,7 +318,7 @@
                                     <td  style="text-align: left;" ><?php echo $value["free"]; ?></td>
                                     <td style="text-align: left;"  class="graphBar">
                                         <div class="bar_chart">
-                                            <?php 
+                                            <?php
                                             if ($value["percent"] <= 50){
                                                 $classColor = "bar_color_green";
                                             }
@@ -336,7 +336,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr> 
+                                </tr>
 
                             <?php } ?>
                         </table>

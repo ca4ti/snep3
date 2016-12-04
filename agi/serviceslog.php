@@ -41,7 +41,7 @@ try {
     
     if ($funcao == "WHOAMI") {
         // LOG insert
-        $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'WHOAMI', True, 'Ramal {$origem->getNumero()} perguntou que seu numero.')";
+        $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'WHOAMI', True, 'Ramal {$origem->getNumero()} perguntou qual e seu numero.')";
         $db->query($sql);
     }
 

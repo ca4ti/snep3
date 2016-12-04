@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
  * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_Permission_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -58,7 +58,7 @@ class Snep_Permission_Manager {
     }
 
     /**
-     * Method to get permissions of user 
+     * Method to get permissions of user
      * @param <string> $profile
      * @return <array>
      */
@@ -217,6 +217,7 @@ class Snep_Permission_Manager {
         $result = array();
         foreach ($fetch as $value)
             $result[] = $value['permission_id'];
+
         return $result;
     }
 
@@ -269,10 +270,13 @@ class Snep_Permission_Manager {
         $select = $db->select()
                 ->from("profiles_permissions", array("permission_id", "allow"))
                 ->where('profile_id = ?', $group)
-                ->where('permission_id = ?', $resource);
+                ->where('permission_id = ?', $resource)
+                ->order("id DESC");
 
         $stmt = $db->query($select);
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+
+        return $result;
     }
 
     /**
@@ -288,10 +292,12 @@ class Snep_Permission_Manager {
         $select = $db->select()
                 ->from("users_permissions", array("permission_id", "allow"))
                 ->where('user_id = ?', $user)
-                ->where('permission_id = ?', $resource);
+                ->where('permission_id = ?', $resource)
+                ->order("id DESC");
 
         $stmt = $db->query($select);
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        return $result;
     }
 
 }

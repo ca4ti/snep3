@@ -234,7 +234,6 @@ class CallsReportController extends Zend_Controller_Action {
             $this->view->pagenext = $pagesValue['pagenext'];
             $this->view->page = $page;
         }
-
         // events asterisk
         $this->view->translate("ANSWERED");
         $this->view->translate("NO ANSWER");

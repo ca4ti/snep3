@@ -118,7 +118,7 @@ header('Cache-Control: max-age=0' );
 		            	<tr class="header_table_info">
 					       <td><?php echo $this->translate("Subtotal"); ?>: <?php echo $this->totals->TOTALS;?></td>
 							<td><?php echo $this->translate("Answered");?>: <?php echo $this->totals->ANSWERED;?></td>
-						   	<td><?php echo $this->translate("Not Answered"); ?>: <?php echo $this->totals->NOANSWER;?></td>
+						   	<td><?php echo $this->translate("Not Answered"); ?>: <?php echo $this->totals->NOANSWER;?></td>    
 							<td><?php echo $this->translate("Busy");?>: <?php echo $this->totals->BUSY;?></td>
 						    <td><?php echo $this->translate("Failed");?>: <?php echo $this->totals->FAILED;?></td>
 					    </tr>
@@ -126,100 +126,97 @@ header('Cache-Control: max-age=0' );
 
 		        </form>
 	        <?php }else{?>    <!-- Syntetic report -->
-	        	<div class="panel panel-default">
-		            <div class="panel-body">
-		                <div class="table-responsive">
 
-							<h3><?php echo $this->translate("Type Call") ?></h3>
-			                <table class="table table-striped table-bordered table-hover">
-			                    <thead>
-			                        <tr>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Incoming") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Outgoing") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Other") ?></th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
-			                        <tr>
-			                            <td class="text-center"><?php echo $this->type->E; ?></td>
-			                            <td class="text-center"><?php echo $this->type->S; ?></td>
-			                            <td class="text-center"><?php echo $this->type->O; ?></td>
-			                        </tr>
-			                    </tbody>
-			                </table>
+                <div class="table-responsive">
 
-							<h3><?php echo $this->translate("Status Call") ?></h3>
-				        	<table class="table table-striped table-bordered table-hover">
-			                    <thead>
-			                        <tr>
-			                            <th data-sort-ignore="true" class="text-center" ><?php echo $this->translate("Answered") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Not Answered") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Busy") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Failed") ?></th>
-			                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Totals") ?></th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
-			                        <tr>
-			                            <td class="text-center"><?php echo $this->totals->ANSWERED; ?></td>
-			                            <td class="text-center"><?php echo $this->totals->NOANSWER; ?></td>
-			                            <td class="text-center"><?php echo $this->totals->BUSY; ?></td>
-			                            <td class="text-center"><?php echo $this->totals->FAILED; ?></td>
-			                            <td class="text-center"><?php echo $this->totals->TOTALS; ?></td>
-			                        </tr>
-			                    </tbody>
-			                </table>
+					<h3><?php echo $this->translate("Type Call") ?></h3>
+	                <table class="table table-striped table-bordered table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Incoming") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Outgoing") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Other") ?></th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr>
+	                            <td class="text-center"><?php echo $this->type->E; ?></td>
+	                            <td class="text-center"><?php echo $this->type->S; ?></td>
+	                            <td class="text-center"><?php echo $this->type->O; ?></td>
+	                        </tr>
+	                    </tbody>
+	                </table>
 
-			                <h3><?php echo $this->translate("Status by Period") ?></h3>
-			                <table class="table table-striped table-bordered table-hover">
-			                    <thead>
-			                        <tr>
-			                            <th ><?php echo $this->translate("Date") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Answered") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Not Answered") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Busy") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Failed") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Totals") ?></th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
+					<h3><?php echo $this->translate("Status Call") ?></h3>
+		        	<table class="table table-striped table-bordered table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th data-sort-ignore="true" class="text-center" ><?php echo $this->translate("Answered") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Not Answered") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Busy") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Failed") ?></th>
+	                            <th data-sort-ignore="true" class="text-center"><?php echo $this->translate("Totals") ?></th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr>
+	                            <td class="text-center"><?php echo $this->totals->ANSWERED; ?></td>
+	                            <td class="text-center"><?php echo $this->totals->NOANSWER; ?></td>
+	                            <td class="text-center"><?php echo $this->totals->BUSY; ?></td>
+	                            <td class="text-center"><?php echo $this->totals->FAILED; ?></td>
+	                            <td class="text-center"><?php echo $this->totals->TOTALS; ?></td>
+	                        </tr>
+	                    </tbody>
+	                </table>
 
-			                    	<?php foreach($this->calldate as $date => $value){?>
+	                <h3><?php echo $this->translate("Status by Period") ?></h3>
+	                <table class="table table-striped table-bordered table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th ><?php echo $this->translate("Date") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Answered") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Not Answered") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Busy") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Failed") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Totals") ?></th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
 
-			                        	<tr>
-			                            	<td ><?php echo $date; ?></td>
-			                            	<td ><?php echo (isset($value->ANSWERED)) ? $value->ANSWERED : 0 ;?></td>
-			                            	<td ><?php echo (isset($value->NOANSWER)) ? $value->NOANSWER : 0 ;?></td>
-			                            	<td ><?php echo (isset($value->BUSY)) ? $value->BUSY : 0 ;?></td>
-			                            	<td ><?php echo (isset($value->FAILED)) ? $value->FAILED : 0;?></td>
-			                            	<td ><?php echo (isset($value->TOTALS)) ? $value->TOTALS: 0; ?></td>
-			                        	</tr>
-			                        <?php } ?>
-			                    </tbody>
-			                </table>
+	                    	<?php foreach($this->calldate as $date => $value){?>
 
-			                <h3><?php echo $this->translate("Costs Center Call") ?></h3>
-			                <table class="table table-striped table-bordered table-hover">
-			                    <thead>
-			                        <tr>
-			                            <th ><?php echo $this->translate("Cost Center") ?></th>
-			                            <th data-type="numeric"><?php echo $this->translate("Quantity") ?></th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
-			                    	<?php foreach($this->ccustos as $key => $value){?>
-			                        	<tr>
-			                            	<td ><?php echo $key; ?></td>
-			                            	<td ><?php echo $value; ?></td>
-			                        	</tr>
-			                        <?php } ?>
-			                    </tbody>
+	                        	<tr>
+	                            	<td ><?php echo $date; ?></td>
+	                            	<td ><?php echo (isset($value->ANSWERED)) ? $value->ANSWERED : 0 ;?></td>
+	                            	<td ><?php echo (isset($value->NOANSWER)) ? $value->NOANSWER : 0 ;?></td>
+	                            	<td ><?php echo (isset($value->BUSY)) ? $value->BUSY : 0 ;?></td>
+	                            	<td ><?php echo (isset($value->FAILED)) ? $value->FAILED : 0;?></td>
+	                            	<td ><?php echo (isset($value->TOTALS)) ? $value->TOTALS: 0; ?></td>
+	                        	</tr>
+	                        <?php } ?>
+	                    </tbody>
+	                </table>
 
-			                </table>
+	                <h3><?php echo $this->translate("Costs Center Call") ?></h3>
+	                <table class="table table-striped table-bordered table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th ><?php echo $this->translate("Cost Center") ?></th>
+	                            <th data-type="numeric"><?php echo $this->translate("Quantity") ?></th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    	<?php foreach($this->ccustos as $key => $value){?>
+	                        	<tr>
+	                            	<td ><?php echo $key; ?></td>
+	                            	<td ><?php echo $value; ?></td>
+	                        	</tr>
+	                        <?php } ?>
+	                    </tbody>
 
-			            </div>
-			        </div>
-			    </div>
+	                </table>
+
+	            </div>
 			    <!-- /.Syntetic -->
 	        <?php }?>
         </div>

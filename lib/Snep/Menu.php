@@ -205,12 +205,12 @@ class Snep_Menu {
      * @return <string> HTML rendered children
      */
     public function renderChildren() {
-        
+
         $html = "";
         foreach ($this->getChildren() as $child) {
             if (substr($child->id, 0, 7) == 'default') {
                 $html .= $child->render();
-            } 
+            }
         }
 
         return $html;
@@ -227,7 +227,7 @@ class Snep_Menu {
 
             if (substr($child->id, 0, 7) != 'default') {
                 $html .= $child->renderModule();
-            } 
+            }
         }
         return $html;
     }
@@ -255,22 +255,27 @@ class Snep_Menu {
      * @return <string> HTML rendered menu
      */
     public function render() {
-        
+
         $html = "<li id=\"{$this->getId()}\">";
         $font = $this->getFont();
-                    
-        if(count(explode("_", $html)) == 2){
 
-            $html .= "<a href=\"{$this->getUri()}\">" . "<i class='$font fa-fw'></i> " . $this->getLabel() . "<span class='fa arrow'></span></a>";
+        if($font == 'sn-dashboard'){
+            $html .= "<a href='/snep/index.php/default/index'><i class='sn-dashboard fa-fw'></i><span class='side-menu-title'>Dashboard</span></a>";
         }else{
-            $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
-        }   
-        
-        if (count($this->getChildren()) > 0) {
-            $html .= "<ul class=\"snep-menu-list\">";
-            $html .= $this->renderChildren();
-            $html .= "</ul>";
+
+            if(count(explode("_", $html)) == 2){
+                $html .= "<a href=\"{$this->getUri()}\" class='dropdown-collapse'><i class='$font fa-fw'></i><span class='side-menu-title'> " . $this->getLabel()."</span><span class='fa arrow'></span></a>";
+            }else{
+                $html .= "<a href=\"{$this->getUri()}\"><i class='$font fa-fw'></i>" . " " .$this->getLabel() . "</a>";
+            }
+
+            if (count($this->getChildren()) > 0) {
+                $html .= "<ul class=\"nav nav-second-level\">";
+                $html .= $this->renderChildren();
+                $html .= "</ul>";
+            }
         }
+
 
         $html .= "</li>";
 
@@ -289,8 +294,7 @@ class Snep_Menu {
         $font = $this->getFont();
 
         if(count(explode("_", $html)) == 2){
-
-            $html .= "<a href=\"{$this->getUri()}\">" . "<i class='$font fa-fw'></i> " . $this->getLabel() . "<span class='fa arrow'></span></a>";
+            $html .= "<a  class='dropdown-collapse' href=\"{$this->getUri()}\">" . "<i class='$font fa-fw'></i> " . $this->getLabel() . "<span class='fa arrow'></span></a>";
         }else{
             $html .= "<a href=\"{$this->getUri()}\">" . $this->getLabel() . "</a>";
         }

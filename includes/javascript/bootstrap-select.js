@@ -302,8 +302,8 @@
         (numGroup == 1) ? '({n} item no máximo)' : '({n} itens no máximo)'
       ];
     },
-    selectAllText: 'Select All',
-    deselectAllText: 'Deselect All',
+    selectAllText: 'Marcar Todos',
+    deselectAllText: 'Desmarcar Todos',
     doneButton: false,
     doneButtonText: 'Close',
     multipleSeparator: ', ',

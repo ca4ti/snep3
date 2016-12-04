@@ -258,9 +258,9 @@ class UsersController extends Zend_Controller_Action {
 
                         // verifica se arquivo possui opcao de escrita para montar label
                         if (substr($resource, -5) == 'write') {
-                            $resources[$resource] = $label . " - " . $this->view->translate('write');
+                            $resources[$resource] = $this->view->translate($label) . " - " . $this->view->translate('write');
                         } else {
-                            $resources[$resource] = $label . " - " . $this->view->translate('read');
+                            $resources[$resource] = $this->view->translate($label) . " - " . $this->view->translate('read');
                         }
                     }
                 }

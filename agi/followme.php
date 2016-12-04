@@ -22,7 +22,7 @@
 // ImportAGI's configuration
 require_once("agi_base.php");
 
-$origem = $argv['2'];
+$origem = $asterisk->request['agi_callerid'];
 $sql = "SELECT cancallforward FROM peers WHERE name='$origem'";
 $result = $db->query($sql)->fetch();
 
@@ -30,6 +30,20 @@ if ($result['cancallforward'] == 'yes') {
     $hab = true;
 } else {
     $hab = false;
+
+    $asterisk->verbose("Ramal não pode habilitar o siga-me");
+    //Sugestao: trocar audio por algo que indique que nao tem permissao.
+    $asterisk->stream_file("pm-invalid-option");
+    
+    try {
+    	$sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'SIGAME', False, 'Ramal sem Permissao para Ativar o Sigame')";
+    	$db->query($sql);
+    	exit(0);
+    } catch (Exception $ex) {
+    	$asterisk->verbose($ex->getMessage());
+    	exit(1);
+    }
+
 }
 
 if (isset($argv[1]) && is_numeric($argv[1]) && $hab == true) {
@@ -58,11 +72,6 @@ try {
         // LOG insert
         $sql = "INSERT INTO `services_log` VALUES(NOW(), '{$asterisk->request['agi_callerid']}', 'SIGAME', False, 'Sigame desativado')";
         $db->query($sql);
-    }
-
-    if (!$hab) {
-        $asterisk->verbose("Ramal não pode habilitar o siga-me");
-        $asterisk->stream_file("pm-invalid-option");
     }
 } catch (Exception $ex) {
     $asterisk->verbose($ex->getMessage());

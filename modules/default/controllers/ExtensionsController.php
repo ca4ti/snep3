@@ -170,7 +170,6 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             
             $data = $this->_request->getParams();
-            $data['name'] .= " <".$data['exten'].">";
 
             if (key_exists('virtual_error', $data)) {
                 $this->view->error_message = "There's no trunks registered on the system. Try a different technology";
@@ -435,9 +434,9 @@ class ExtensionsController extends Zend_Controller_Action {
             // increment in callerid "Name <exten>"
             $nameValue = explode("<", $postData['name']);
             if(count($nameValue) <= 1){
-                $postData['name'] .= " <".$postData['exten'].">";
+                $postData['name'] = $postData['name'];
             }else{
-                $postData['name'] = $nameValue[0]." <".$postData['exten'].">"; 
+                $postData['name'] = $nameValue[0]."<".$postData['exten'].">"; 
             };
 
 
@@ -644,7 +643,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         // Update table core_peer_groups
         Snep_ExtensionsGroups_Manager::updateGroupsExtension($idExten,$extensions_group,$extenGroup) ;
-
+        Snep_InterfaceConf::loadConfFromDb();
     }
 
     /**
@@ -696,6 +695,7 @@ class ExtensionsController extends Zend_Controller_Action {
                     Snep_Extensions_Manager::remove($exten);
                     Snep_Extensions_Manager::removeVoicemail($exten);
                     Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
+                    Snep_InterfaceConf::loadConfFromDb();
 
                 } catch (PDOException $e) {
                     $db->rollBack();

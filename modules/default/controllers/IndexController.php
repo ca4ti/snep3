@@ -222,7 +222,9 @@ class IndexController extends Zend_Controller_Action {
                     }
 
                     $content = json_encode($data);
-                    $url = trim($config->system->itc_address) . "auth/slogin";
+                    //$url = trim($config->system->itc_address) . "auth/slogin";
+                    $url = trim($config->system->itc_address) . "auth/login";
+
                     $curl = curl_init($url);
                     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                     curl_setopt($curl, CURLOPT_HEADER, false);

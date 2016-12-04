@@ -54,17 +54,18 @@ foreach ($peers as $key => $val) {
     if ($res_peer) {
         $peers[$key]['latencia'] = isset($res_peer['status']) ? $res_peer['status'] : "N.D.";
         if (isset($res_peer['contact'])) {
-            $ip = substr($res_peer['contact'],strpos($res_peer['contact'],'@')+1);
-            $ip = substr($ip,0,strpos($ip,':'));
+            $sub = substr($res_peer['contact'], strpos($res_peer['contact'],"@")+strlen("@"),strlen($res_peer['contact']));
+            $ip = substr($sub,0,strpos($sub,":"));
+            if ( $ip === "" ) {
+                $ip = substr($sub,0,strpos($sub,";"));
+            }
             $peers[$key]['ip'] = $ip;
         }
     }
 }
 
 foreach ($peers as $key => $val) {
-    // if (trim($peers[$key]['latencia']) === "N.D.") {
-    //     unset($peers[$key]['latencia']);
-    // }
+
     if (trim($peers[$key]['ip']) === "") {
         $peers[$key]['ip'] = "N.D.";
     }

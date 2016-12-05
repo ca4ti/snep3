@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `directmedia` varchar(10),
   `lastms` int(11) NOT NULL,
   `callbackextension` VARCHAR(250) default NULL,
-  `useragent` VARCHAR(250) default NULL, 
+  `useragent` VARCHAR(250) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),
@@ -273,16 +273,6 @@ CREATE TABLE IF NOT EXISTS `queue_peers` (
 
 
 --
--- Table structure for table `group_queues`
---
-CREATE TABLE IF NOT EXISTS `group_queues` (
-  `id` integer NOT NULL auto_increment,
-  `name` varchar(120) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-
---
 -- Table structure for table `queues`
 --
 CREATE TABLE IF NOT EXISTS `queues` (
@@ -327,20 +317,6 @@ CREATE TABLE IF NOT EXISTS `queues` (
   `alert_mail` varchar(80) default NULL,
   PRIMARY KEY  (`id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
---
--- Table structure for table `members_group_queues`
---
-CREATE TABLE IF NOT EXISTS `members_group_queues` (
-  `id` integer NOT NULL auto_increment,
-  `id_queue` int NOT NULL,
-  `id_group` int NOT NULL,
-  PRIMARY KEY  (`id`),
-  CONSTRAINT `fk_id_queue` FOREIGN KEY (`id_queue` ) REFERENCES `queues` (`id`),
-  CONSTRAINT `fk_id_group` FOREIGN KEY (`id_group` ) REFERENCES `group_queues` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
 
 --
 -- Table structure for table `queues_agent`
@@ -636,7 +612,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --

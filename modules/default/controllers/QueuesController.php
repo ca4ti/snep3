@@ -33,12 +33,12 @@ class QueuesController extends Zend_Controller_Action {
 
     public function init() {
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-        
+
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
 
         $this->language = Zend_Registry::get('config')->system->language;
         $this->path_sounds = Zend_Registry::get('config')->system->path->asterisk->sounds."/".$this->language ;
-        
+
 
         $sections = new Zend_Config_Ini('/etc/asterisk/snep/snep-musiconhold.conf');
         $_section = array_keys($sections->toArray());
@@ -74,12 +74,12 @@ class QueuesController extends Zend_Controller_Action {
                 ->order("name");
 
         $stmt = $db->query($select);
-        $queues = $stmt->fetchAll();  
+        $queues = $stmt->fetchAll();
 
         if(empty($queues)){
             $this->view->error_message = $this->view->translate("You do not have registered queues. <br><br> Click 'Add Queue' to make the first registration
 ");
-        }   
+        }
 
         $this->view->queues = $queues;
 
@@ -112,14 +112,14 @@ class QueuesController extends Zend_Controller_Action {
         }
         $this->view->strategy = $strategy;
         $this->view->ringinuseTrue = "checked";
-  
+
         //Define the action and others and load form
         $this->view->action = "add" ;
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         // After POST
         if ($this->_request->getPost()) {
-                
+
             $dados = array('name' => $_POST['name'],
                 'musiconhold' => $_POST['musiconhold'],
                 'announce' => $_POST['announce'],
@@ -146,7 +146,7 @@ class QueuesController extends Zend_Controller_Action {
             $form_isValid = true;
 
             $newId = Snep_Queues_Manager::getName($_POST['name']);
-            
+
             if (count($newId) > 1) {
                 $form_isValid = false;
                 $message = $this->view->translate("Name already exists.");
@@ -185,8 +185,9 @@ class QueuesController extends Zend_Controller_Action {
                     $this->view->translate("Edit")));
 
         $queue = Snep_Queues_Manager::get($id);
+
         $this->view->queue = $queue;
-       
+
         $this->view->sounds = Snep_SoundFiles_Manager::getSounds(true);
 
         // Music On Hold available x registered
@@ -194,9 +195,9 @@ class QueuesController extends Zend_Controller_Action {
         foreach($this->section as $key => $session){
             $musiconhold .= ($key == $queue['musiconhold']) ? "<option value='".$key . "' selected >".$session." </option>\n": "<option value='".$key . "'>".$session." </option>\n";
         }
-        
+
         $this->view->musiconhold = $musiconhold;
-       
+
         // Queue strategy available x registered
         $strategy = "";
         foreach($this->strategies as $key => $strateg){
@@ -205,9 +206,15 @@ class QueuesController extends Zend_Controller_Action {
 
         $this->view->strategy = $strategy;
 
-        // Others queue definitions       
-        $this->view->queue['joinempty'] = "checked";
-        
+        // Others queue definitions
+        if($queue['joinempty'] == "no"){
+          $this->view->joinempty_no = "checked";
+        }elseif($queue['joinempty'] == "yes"){
+          $this->view->joinempty_yes = "checked";
+        }else{
+          $this->view->joinempty_strict = "checked";
+        }
+
         if($queue['leavewhenempty'] == "1"){
             $this->view->leavewhenemptyTrue = "checked";
         }else{
@@ -219,7 +226,7 @@ class QueuesController extends Zend_Controller_Action {
         }else{
             $this->view->ringinuseFalse = "checked";
         }
-        
+
         if($queue['reportholdtime'] == "1"){
             $this->view->reportholdtimeTrue = "checked";
         }else{
@@ -234,7 +241,7 @@ class QueuesController extends Zend_Controller_Action {
 
         // After POST
         if ($this->_request->getPost()) {
-            
+
             $dados = array('name' => $queue['name'],
                 'musiconhold' => $_POST['musiconhold'],
                 'announce' => $_POST['announce'],
@@ -258,12 +265,12 @@ class QueuesController extends Zend_Controller_Action {
                 'ringinuse' => $_POST['ringinuse'],
             );
 
-            
+
             Snep_Queues_Manager::edit($dados);
             $this->_redirect($this->getRequest()->getControllerName());
-            
+
         }
-        
+
     }
 
     /**
@@ -277,16 +284,16 @@ class QueuesController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam('id');
 
-        // check if the queues is used in the rule or have members 
+        // check if the queues is used in the rule or have members
         $exten_members = Snep_Queues_Manager::getValidationPeers($id);
         $agent_members = Snep_Queues_Manager::getValidationAgent($id);
         $info = Snep_Queues_Manager::get($id);
-        
+
         if (count($exten_members) > 0 || count($agent_members) > 0) {
             $msg = $this->view->translate("The following members make use of this queue, remove before deleting:") . "<br />\n";
 
             if (count($exten_members) > 0) {
-                
+
                 foreach ($exten_members as $membros) {
                     $member = explode("/", $membros['membername']);
                     $member = $member[1];
@@ -295,7 +302,7 @@ class QueuesController extends Zend_Controller_Action {
             }
 
             if (count($agent_members) > 0) {
-                
+
                 foreach ($agent_members as $member_agent) {
                     $msg .= $this->view->translate("Agent:") . $member_agent['agent_id'] . "<br/>\n";
                 }
@@ -314,18 +321,18 @@ class QueuesController extends Zend_Controller_Action {
                 $this->view->error_message .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
             }
             $this->renderScript('error/sneperror.phtml');
-            
+
         } elseif(!$error) {
 
             $this->view->id = $id;
             $this->view->name = $info['id'];
-            $this->view->remove_title = $this->view->translate('Delete Queue.'); 
-            $this->view->remove_message = $this->view->translate('The queue will be deleted. After that, you have no way get it back.'); 
-            $this->view->remove_form = 'queues'; 
+            $this->view->remove_title = $this->view->translate('Delete Queue.');
+            $this->view->remove_message = $this->view->translate('The queue will be deleted. After that, you have no way get it back.');
+            $this->view->remove_form = 'queues';
             $this->renderScript('remove/remove.phtml');
-            
+
             if ($this->_request->getPost()) {
-                
+
                 //log-user
                 if (class_exists("Loguser_Manager")) {
                     $add = Snep_Queues_Manager::get($_POST['id']);
@@ -348,7 +355,7 @@ class QueuesController extends Zend_Controller_Action {
     }
 
     /**
-     * membersAction - Set member queue 
+     * membersAction - Set member queue
      */
     public function membersAction() {
 
@@ -385,7 +392,7 @@ class QueuesController extends Zend_Controller_Action {
             Snep_Queues_Manager::removeAllMembers($queue);
 
             if (isset($_POST['duallistbox_group'])) {
-                
+
                 foreach ($_POST['duallistbox_group'] as $add) {
                     Snep_Queues_Manager::insertMember($queue, $add);
                 }

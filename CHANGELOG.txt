@@ -1,6 +1,9 @@
 **3.06**
 
+- ATUALIZADO - snep-features.conf retirando chamadas de funções inexistentes(pauseQueueMember e unpauseQueueMember)
 - CORRIGIDO - Layout do botão de login
+- CORRIGIDO - Retirado funcionalidade de grupo de filas
+- CORRIGIDO - Não mostrava valor inserido no campo "Usuários podem entrar na Fila mesmo sem Agentes presentes?" ao editar uma fila
 
 ---------------------------------
 

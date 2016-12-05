@@ -1,7 +1,13 @@
+**3.06**
+
+- CORRIGIDO - Layout do botão de login
+
+---------------------------------
+
 **3.05**
 
 - NOVO - Adicionado monitoramento dos membros para a opcao RINGINUSE funcionar corretamente (Contribuicao:  Willian Mazzardo - Sysvoip)
-- CORRIGIDO - Ajuste em tradução de opção de configuração da fila para pt_BR 
+- CORRIGIDO - Ajuste em tradução de opção de configuração da fila para pt_BR
 - CORRIGIDO - Verifica se o peer SIP é um Tronco ou Ramal. Se for ramal, não adiciona a configuração fromuser , o que acaba dando problema de CallerID no destino, pois seta o cabeçalho SIP FROM igual ao TO . (Contribuicao:  Willian Mazzardo - Sysvoip)
 - CORRIGIDO - Alguns ramais registram com ; depois do IP e outros com :, ajustado para exibir os dois (Contribuicao:  Lucas Peruchi)
 - CORRIGIDO - Alteracao na Adicao e Edicao de Ramais, sem necessidade de ter o Ramal junto com o Nome (Contribuicao:  Lucas Peruchi)
@@ -25,7 +31,7 @@
 - ATUALIZADO - sip.conf para prevenir desconexão de ramais sip (Contribuição: Carlos Eduardo - Opens Tecnologia)
 - ATUALIZADO - Melhorias no layout das listagens dos cadastros
 - ATUALIZADO - Melhorias nas traduções
-- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia) 
+- CORRIGIDO - snep-features.conf para remover tentatva de carregamento do arquivo snep-agentes.conf (Contribuição: Anderson Freitas - Opens Tecnologia)
 - ADICIONADOS - arquivos de som : en,es e pt-BR (removidos por engano na vesão 3.03)
 - Adiconados arquivos de som pt_BR, en, es removidos por engano na versão 3.03
 - NOVO - Troncos tipo SNEPSIP e SNEPIAX agora permite escolha de CODECS preferenciais
@@ -48,7 +54,7 @@
 **3.0 Estável + 3.01, 3.02 **
 
 - CORRIGIDO - Perda de autenticacao dos ramais SIP
-- CORRIGIDO - Permitir multipla selecao de NAT para Troncos 
+- CORRIGIDO - Permitir multipla selecao de NAT para Troncos
 - CORRIGIDO - Erros ao adiconar arquivos de Musicas de espera e removes seçoes de musica de espera
 - CORRIGIDO - Erros de CSS em Rotas >> Configuração padrão
 - CORRIGIDO - AGI DiscarRamal para usar o calleridname da origem ao invés de definir = ao numero
@@ -59,7 +65,7 @@
 - NOVO - Identificação visual para Esconder/Mostrar Regras desabilitadas em Regras de Negocio >> Rotas
 - NOVO - Parametrizado (Configuracoes >> Parametros) o número de dígitos no Cadastro do Ramal
 - NOVO - Filtros para separar Regras de Negócio em Entradas, Saidas, Outras
-- ATUALIZADO - Strings de tradução pt_BR 
+- ATUALIZADO - Strings de tradução pt_BR
 
 ---------------------------------
 **Release - betha-rc3 **
@@ -74,7 +80,7 @@ FEITO - Corrigido Erro na apresentacao do espaço usado em disco para HD's com m
 FEITO - Corrigido erros na exibicao de status e latencia de troncos em Status >> Status IP
 FEITO - Cadastro usuário portal ITC agora permite qualquer caracter para a senha - comaptibilizar com portal ITC
 FEITO - Status do Sistema -  Refatorada toda a rotina usando interações com AMI/Actions do Asterisk
-FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report) 
+FEITO - Removido do Dashboard : Atalho para "buscar gravacoes" (record-report)
 FEITO - Ajustes em strings de tradução
 FEITO - Corrigido ERRO no Cadastro troncos que não obrigava a definir o tipo de tronco (peer,user,friend)
 FEITO - Ajustes para remover diversos Warning e Notices do console do apache

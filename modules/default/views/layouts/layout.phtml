@@ -69,8 +69,9 @@ if($controller != 'auth'){
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
-
+                    <?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?>
                     <li class="dropdown">
+
                         <?php $noView = Snep_Notifications::getNoView();
 
                         if($noView){?>
@@ -227,5 +228,3 @@ if($controller != 'auth'){
     <!-- /#wrapper -->
 </body>
 </html>
-
-

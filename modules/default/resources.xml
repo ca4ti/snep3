@@ -45,10 +45,6 @@
             <resource id="write"></resource>
         </resource>
 
-        <resource id="queues-groups" label="Queues Groups" font="sn-grupo-filas">
-            <resource id="write"></resource>
-        </resource>
-
          <resource id="extensions" label="Extensions" font="sn-ramal">
             <resource id="write"></resource>
         </resource>

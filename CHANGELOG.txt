@@ -1,14 +1,9 @@
-**3.06**
+**3.05**
 
 - ATUALIZADO - snep-features.conf retirando chamadas de funções inexistentes(pauseQueueMember e unpauseQueueMember)
 - CORRIGIDO - Layout do botão de login
 - CORRIGIDO - Retirado funcionalidade de grupo de filas
 - CORRIGIDO - Não mostrava valor inserido no campo "Usuários podem entrar na Fila mesmo sem Agentes presentes?" ao editar uma fila
-
----------------------------------
-
-**3.05**
-
 - NOVO - Adicionado monitoramento dos membros para a opcao RINGINUSE funcionar corretamente (Contribuicao:  Willian Mazzardo - Sysvoip)
 - CORRIGIDO - Ajuste em tradução de opção de configuração da fila para pt_BR
 - CORRIGIDO - Verifica se o peer SIP é um Tronco ou Ramal. Se for ramal, não adiciona a configuração fromuser , o que acaba dando problema de CallerID no destino, pois seta o cabeçalho SIP FROM igual ao TO . (Contribuicao:  Willian Mazzardo - Sysvoip)

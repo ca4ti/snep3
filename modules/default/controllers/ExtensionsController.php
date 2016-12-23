@@ -39,7 +39,7 @@ class ExtensionsController extends Zend_Controller_Action {
      */
     public function preDispatch() {
 
-        // Test Asterisk connection       
+        // Test Asterisk connection
         try {
             $astinfo = new AsteriskInfo();
             // Read Khomp links
@@ -53,7 +53,7 @@ class ExtensionsController extends Zend_Controller_Action {
             $this->view->error_message =  $this->view->translate("Error! Failed to connect to server Asterisk.");
             $this->renderScript('error/sneperror.phtml');
         }
-        
+
     }
 
 
@@ -81,14 +81,14 @@ class ExtensionsController extends Zend_Controller_Action {
     /**
      * indexAction - List extensions
      */
-    
+
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions")));
 
         $extensions = Snep_Extensions_Manager::getAll();
-        
+
         if(empty($extensions)){
             $this->view->error_message = $this->view->translate("You do not have registered extensions. <br><br> Click 'Add Extensions' ou 'Multi Add Extensions' to make the first registration");
         }
@@ -106,11 +106,11 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
-                    $this->view->translate("Add"))); 
+                    $this->view->translate("Add")));
 
         $this->view->pickupGroups = $this->pickupGroups;
         $this->view->extenGroups = $this->extenGroups;
-        // Set ExtensionGroup  "Default" 
+        // Set ExtensionGroup  "Default"
         $this->view->extenInGroup = array('1' => "");
 
         // Mont codec's list and sets the default codec for each option
@@ -126,18 +126,18 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->codec3 = $codec3;
 
         // Mount trunks list
-        $this->view->trunks = Snep_Trunks_Manager::getData(); 
-        
+        $this->view->trunks = Snep_Trunks_Manager::getData();
+
         // Khomp boards
         $boardList = array();
         $khompInfo = new PBX_Khomp_Info();
 
         if ($khompInfo->hasWorkingBoards()) {
-            foreach ($khompInfo->boardInfo() as $board) {   
+            foreach ($khompInfo->boardInfo() as $board) {
                 if (preg_match("/FXS/", $board['model'])) {
                     $channels = range(0, $board['channels']);
                     foreach($channels as $key => $chan){
-                        $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan; 
+                        $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan;
                     }
                 }
             }
@@ -168,7 +168,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         // After POST
         if ($this->getRequest()->isPost()) {
-            
+
             $data = $this->_request->getParams();
 
             if (key_exists('virtual_error', $data)) {
@@ -184,7 +184,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $message = $ret;
                 $this->_helper->redirector('sneperror','error',null,array('error_message'=>$message));
             }
-            
+
         }
     }
 
@@ -205,12 +205,12 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $nameValue = explode("<", $exten['callerid']);
         if(count($nameValue) > 1){
-            $exten['callerid'] = $nameValue[0]; 
+            $exten['callerid'] = $nameValue[0];
         };
-      
+
         $this->view->extension = $exten ;
-            
-        // Groups       
+
+        // Groups
         $this->view->pickupGroups = $this->pickupGroups;
         $this->view->extenGroups = $this->extenGroups;
 
@@ -238,7 +238,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         $timeTotal = $exten["time_total"];
         if (!empty($timeTotal)) {
-        
+
             $this->view->timetotal = $timeTotal / 60;
             $this->view->controltype = $exten["time_chargeby"];
 
@@ -249,9 +249,9 @@ class ExtensionsController extends Zend_Controller_Action {
         }
 
         switch ($techType) {
-            
+
             case "sip":
-            
+
                 $this->view->directmediayes = "";
                 $this->view->directmedianonat = "";
                 $this->view->directmediaupdate = "";
@@ -261,6 +261,9 @@ class ExtensionsController extends Zend_Controller_Action {
                         $this->view->directmediayes = "checked";
                         break;
                     case "nonat":
+                        $this->view->directmedianonat = "checked";
+                        break;
+                    case "no":
                         $this->view->directmedianonat = "checked";
                         break;
                     case "outgoing":
@@ -296,7 +299,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 }else{
                     $this->view->dtmfinfo = "checked";
                 }
-                
+
                 $array_nat = explode(",",$exten['nat']);
                 foreach($array_nat as $key => $val) {
                     $label = "nat_".$val;
@@ -311,13 +314,13 @@ class ExtensionsController extends Zend_Controller_Action {
                 $codec2 = "";
                 $codec3 = "";
                 foreach($codecsDefault as $key => $value){
-                    
+
                     $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
                     $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
                     $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                             
+
                 }
-                
+
                 $this->view->codec1 = $codec1;
                 $this->view->codec2 = $codec2;
                 $this->view->codec3 = $codec3;
@@ -360,13 +363,13 @@ class ExtensionsController extends Zend_Controller_Action {
                 $codec2 = "";
                 $codec3 = "";
                 foreach($codecsDefault as $key => $value){
-                    
+
                     $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
                     $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
                     $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                             
+
                 }
-                
+
                 $this->view->codec1 = $codec1;
                 $this->view->codec2 = $codec2;
                 $this->view->codec3 = $codec3;
@@ -374,25 +377,25 @@ class ExtensionsController extends Zend_Controller_Action {
                 break;
 
             case "khomp":
-                
+
                 $khompInfo = substr($exten["canal"], strpos($exten["canal"], '/') + 1);
                 $khompBoard = substr($khompInfo, strpos($khompInfo, 'b') + 1, strpos($khompInfo, 'c') - 1);
                 $khompChannel = substr($khompInfo, strpos($khompInfo, 'c') + 1);
-                                
+
                 $boardList = array();
 
                 $khompInfo = new PBX_Khomp_Info();
 
                 if ($khompInfo->hasWorkingBoards()) {
                     foreach ($khompInfo->boardInfo() as $board) {
-                        
+
                         if (preg_match("/FXS/", $board['model'])) {
 
                             $channels = range(0, $board['channels']);
-                            
+
                             foreach($channels as $key => $chan){
 
-                                $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan; 
+                                $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan;
                             }
                         }
                     }
@@ -409,7 +412,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $trunks =  Snep_Trunks_Manager::getData();
                 $this->view->trunks = $trunks;
                 $this->view->trunkChecked = $virtualTrunk;
-                
+
                 break;
 
             case "manual":
@@ -421,12 +424,12 @@ class ExtensionsController extends Zend_Controller_Action {
         //Define the action and load form
         $this->view->disabled = 'disabled';
         $this->view->action = "edit" ;
-        
+
         $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
         // After POST
         if ($this->getRequest()->isPost()) {
-            
+
             $postData = $this->_request->getParams();
 
             $postData["exten"] = $this->_request->getParam("id");
@@ -436,7 +439,7 @@ class ExtensionsController extends Zend_Controller_Action {
             if(count($nameValue) <= 1){
                 $postData['name'] = $postData['name'];
             }else{
-                $postData['name'] = $nameValue[0]."<".$postData['exten'].">"; 
+                $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
             };
 
 
@@ -448,7 +451,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $this->view->error_message = $ret;
                 $this->renderScript('error/sneperror.phtml');;
             }
-            
+
         }
 
     }
@@ -482,10 +485,10 @@ class ExtensionsController extends Zend_Controller_Action {
         $extenPickGrp = $formData["pickup_group"] == '' ? "NULL" : $pickup_group["cod_grupo"];
         $peerType = "R";
 
-        $techType = $formData["technology"];    
-        
-        $secret = (isset($formData["password"]))? $formData["password"]: ""; 
-        
+        $techType = $formData["technology"];
+
+        $secret = (isset($formData["password"]))? $formData["password"]: "";
+
 
         $dtmfmode = (isset($formData["dtmf"]))? $formData["dtmf"]: "";
         $directmedia = $formData["directmedia"];
@@ -493,7 +496,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
         if ($techType == 'sip' || $techType == 'iax2') {
             $nat_types = array('no','comedia','force_rport','auto_comedia','auto_force_rport');
-            $nat = "" ; 
+            $nat = "" ;
             foreach ($nat_types as $key => $val) {
                 if (isset($formData['nat_'.$val])) {
                     if ($nat === "") {
@@ -523,10 +526,10 @@ class ExtensionsController extends Zend_Controller_Action {
         if ($channel == "KHOMP") {
 
             $board = explode('c', $formData['channel']);
-            
+
             $khompBoard = substr($board[0], 1);
             $khompChannel = $board[1];
-            
+
             if ($khompBoard == null || $khompBoard == '') {
                 return $this->view->translate('Select a Khomp board from the list');
             }
@@ -714,7 +717,7 @@ class ExtensionsController extends Zend_Controller_Action {
      * multiremoveAction - Delete Extensions
      */
     public function multiremoveAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
                     $this->view->translate("Delete Multiples")));
@@ -723,12 +726,12 @@ class ExtensionsController extends Zend_Controller_Action {
 
             $data = $this->_request->getParams();
             $range = array() ;
-            // Mount extensions list 
+            // Mount extensions list
             if (isset($data['exten'])) {
                 $range = explode(";", $data["exten"]);
                 $data = $data["exten"];
             }
-            
+
             foreach ($range as $exten) {
                 if (is_numeric($exten)) {
                     $extensions[$exten]="" ;
@@ -751,14 +754,14 @@ class ExtensionsController extends Zend_Controller_Action {
             // checks if the exten is used in the rule
             $rules = array();
             foreach ($extensions as $key => $value) {
-                
+
                 $_rules = Snep_Extensions_Manager::getValidation($key);
                 $rulesQuery = Snep_Extensions_Manager::getValidationRules($key);
                 if (count($_rules) > 0 || count($rulesQuery) > 0 ) {
                     $rules[$key] = array_merge($_rules, $rulesQuery);
                 }
             }
-            
+
             if (count($rules) > 0) {
                 $errMsg = $this->view->translate('The following extensions are in use in routes, modify them prior to remove this extension') . ":<br />\n";
                 foreach ($rules as $ext => $regra) {
@@ -771,21 +774,21 @@ class ExtensionsController extends Zend_Controller_Action {
                 $this->view->back = $this->view->translate("Back");
                 $this->renderScript('error/sneperror.phtml');
             } else {
-                
+
                 foreach ($extensions as $key => $value) {
                     $exten = $key;
                     $db = Zend_Registry::get('db');
                     $sql = "SELECT id from peers where name = '$exten'";
                     $stmt = $db->query($sql);
-                    $result = $stmt->fetch();       
+                    $result = $stmt->fetch();
                     $idExten = $result['id'];
 
                     try {
-                        
+
                         Snep_Extensions_Manager::remove($exten);
                         Snep_Extensions_Manager::removeVoicemail($exten);
-                        Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);             
-                        
+                        Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
+
                     } catch (PDOException $e) {
                         $db->rollBack();
                         $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
@@ -796,10 +799,10 @@ class ExtensionsController extends Zend_Controller_Action {
                 }
                 $this->_redirect("default/extensions");
             }
-            
+
         }
     }
-    
+
 
     /**
      * multiaddAction - Add multi extensions
@@ -811,10 +814,10 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Extensions"),
                     $this->view->translate("Add Multiples Extensions")));
-        
+
         $this->view->pickupGroups = $this->pickupGroups;
         $this->view->extenGroups = $this->extenGroups;
-        // Set ExtensionGroup  "Default" 
+        // Set ExtensionGroup  "Default"
         $this->view->extenInGroup = array('1' => "");
 
         $this->view->boardData = $this->boardData;
@@ -826,12 +829,12 @@ class ExtensionsController extends Zend_Controller_Action {
             $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
             $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
             $codec3 .= '<option value="'.$value.'"'.($value==="gsm"  ? " selected " : "").'>'.$value.'</option>\n';
-        }  // END foreach  
+        }  // END foreach
         $this->view->codec1 = $codec1;
         $this->view->codec2 = $codec2;
-        $this->view->codec3 = $codec3;     
- 
-        $this->view->trunks = Snep_Trunks_Manager::getData(); 
+        $this->view->codec3 = $codec3;
+
+        $this->view->trunks = Snep_Trunks_Manager::getData();
 
         if ($this->getRequest()->isPost()) {
 
@@ -839,21 +842,21 @@ class ExtensionsController extends Zend_Controller_Action {
 
             $range = explode(";", $data["exten"]);
             $this->view->error = "";
-            
+
             foreach ($range as $exten) {
 
                 if ($this->view->error)
                     break;
 
                 if (is_numeric($exten)) {
-                    
+
                     $data["exten"] = $exten;
                     $data["password"] = $exten . $exten;
                     $data["name"] = $this->view->translate("Extension ") ." ".$exten . " <" . $exten.">" ;
                     $data["sip"]["password"] = $exten;
                     $data["iax"]["password"] = $exten;
                     $data['type'] = 'friend' ;
-                    
+
                     $ret = $this->execAdd($data);
 
                     if (is_string($ret)) {

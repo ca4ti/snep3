@@ -1,3 +1,7 @@
+**3.06**
+
+- CORRIGIDO - Valor do directmedia do ramal possuia valor 'nonat' ao invés de 'no'
+
 **3.05**
 
 - ATUALIZADO - snep-features.conf retirando chamadas de funções inexistentes(pauseQueueMember e unpauseQueueMember)

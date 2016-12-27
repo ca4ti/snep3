@@ -1,9 +1,7 @@
-**3.06**
-
-- CORRIGIDO - Valor do directmedia do ramal possuia valor 'nonat' ao invés de 'no'
-
 **3.05**
 
+- NOVO - Escolha do Idioma na tela de Login
+- CORRIGIDO - Valor do directmedia do ramal possuia valor 'nonat' ao invés de 'no'
 - ATUALIZADO - snep-features.conf retirando chamadas de funções inexistentes(pauseQueueMember e unpauseQueueMember)
 - CORRIGIDO - Layout do botão de login
 - CORRIGIDO - Retirado funcionalidade de grupo de filas

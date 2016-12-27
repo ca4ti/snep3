@@ -6,6 +6,7 @@
     <?php endif; ?>
 
 
+
     <form  action="<?php echo $this->url(array("controller" => "auth", "action" => "login"), null, true); ?>" METHOD="post">
         <div id="login">
             <dl id="login_form">
@@ -19,6 +20,8 @@
                         <dt><?php echo $this->translate("Password"); ?>:</dt>
                         <input class="form-control" name="password" type="password" value="">
                     </div>
+
+                    
                     <br />
                     
                     <input type="submit" class="btn btn-lg btn-primary btn-block snep-login" value="<?php echo $this->translate("Sign in"); ?>" />
@@ -30,6 +33,31 @@
 
                 </div>
             </dl>
+        </div>
+        <div class="form-group">
+            <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth?indexChooseLanguage=en">
+                <div style="float:left;" >
+                    <i></i>
+                    <img class="img-circle" src="/snep/images/Eua.png" title="Click to change language to english">
+                </div>
+            </a>
+              
+            <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth?indexChooseLanguage=pt_BR">
+                <div style="float:left;" >
+                    <i></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <img class="img-circle" src="/snep/images/Brazil.png" title="Clique para mudar o idioma para português">
+                </div>
+            </a>
+              
+            <a href="<?php echo $this->baseUrl(); ?>/index.php//default/auth?indexChooseLanguage=es">
+                <div style="float:left;" >
+                    <i></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <img class="img-circle" src="/snep/images/es.png" title="Haga clic para cambiar el idioma a español">
+                </div>
+            </a>
+  
         </div>
     </form>
 </div>

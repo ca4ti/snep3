@@ -193,16 +193,13 @@ echo $this->doctype();
 				        	<div class="col-xs-12 form-group">
 				            	<div class="row">
 				                	<div class="col-xs-12 col-sm-6">
-				                		<!--
 				                    		<select class="form-control" name="state" id="state" onchange="carregaCidade(this.value)">
 				                    			<option value="0"><?php echo $this->translate("Select a state");?></option> 
 							    				<?php foreach($this->state as $key => $state){ ?>
 									    			<option value="<?php echo $state['id']?>"><?php echo $state['name'];?></option> 
 									    		<?php } ?>
 											</select>
-										</div> -->
-			                    		<input type="text" class="form-control" name="state" id="state" placeholder='<?php echo $this->translate("State")?>' />
-				                	</div>
+										</div> 
 				                	<div class="col-xs-12 col-sm-6">
 				                		<input type="text" class="form-control" name="phone" placeholder='<?php echo $this->translate("Phone")?>' />
 				                	</div>
@@ -212,12 +209,9 @@ echo $this->doctype();
 				        	<div class="col-xs-12 form-group">
 				            	<div class="row">
 				            		<div class="col-xs-12 col-sm-6">
-				                	<!-- 
 				                		<select class="form-control" name="city" id="city">
     										<option value="0"><?php echo $this->translate("Select a city");?></option>
 										</select>
-				                 	-->
-					                	<input type="text" class="form-control" name="city" id="city" placeholder='<?php echo $this->translate("City")?>' />
 					                </div>
 				                	<div class="col-xs-12 col-sm-6">
 				                		<input type="text" class="form-control" name="cell" placeholder='<?php echo $this->translate("Cell")?>' />
@@ -370,14 +364,10 @@ echo $this->doctype();
 	                lettersOnly: true
 	            },
 	            state: {
-	                required: true,
-	                minlength: 2,
-	                maxlength: 40,
+	                min: 1,
 	            },
 	            city: {
-	                required: true,
-	                minlength: 5,
-	                maxlength: 40,
+	                min: 1,
 	            }
 	        },
 	        messages: {

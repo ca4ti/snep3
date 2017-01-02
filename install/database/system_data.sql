@@ -76,10 +76,6 @@ INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('a
 --
 INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES (1, 'GERAL');
 
---
--- Default queue group
---
-INSERT INTO `group_queues` (name) VALUES ('Default');
 
 --
 -- Default rule

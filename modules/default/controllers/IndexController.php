@@ -110,6 +110,7 @@ class IndexController extends Zend_Controller_Action {
                         $data['distribution_id'] = $distro;
                     }
 
+
                     $content = json_encode($data);
                     $url = trim($config->system->itc_address) . "auth/sign";
                     $curl = curl_init($url);

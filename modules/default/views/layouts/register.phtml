@@ -180,7 +180,9 @@ echo $this->doctype();
 				                	<div class="col-xs-12 col-sm-6">
 				                    	<select class="form-control" name="country" id="country">
 						    				<?php foreach($this->country as $key => $country){ ?>
-								    			<option value="<?php echo $country['id']?>"><?php echo $country['name'];?></option> 
+								    			<option value="<?php echo $country['id']?>" <?php if($country['name'] === 'BRASIL') { echo 'selected' ; } ?> > 
+								    				<?php echo $country['name'];?>
+								    			</option> 
 								    		<?php } ?>
 										</select>
 				                	</div>
@@ -364,10 +366,10 @@ echo $this->doctype();
 	                lettersOnly: true
 	            },
 	            state: {
-	                min: 1,
+	                min: 0,
 	            },
 	            city: {
-	                min: 1,
+	                min: 0,
 	            }
 	        },
 	        messages: {

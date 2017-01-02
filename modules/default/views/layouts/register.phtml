@@ -388,8 +388,7 @@ echo $this->doctype();
 	            password: {
 	                required: "<?php echo $this->translate('The password is required'); ?>",
 	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
-	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-	                lettersAndNumbersOnly: "<?php echo $this->translate('Letters and Numbers only please'); ?>"
+	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>"
 	            },
 	            first_name: {
 	                required: "<?php echo $this->translate('The first name is required'); ?>",
@@ -429,8 +428,7 @@ echo $this->doctype();
 	            password: {
 	                required: true,
 	                minlength: 6,
-	                maxlength: 20,
-	                lettersAndNumbersOnly: true
+	                maxlength: 20
 	            }
 	        },
 	        messages: {
@@ -441,8 +439,7 @@ echo $this->doctype();
 	            password: {
 	                required: "<?php echo $this->translate('The password is required'); ?>",
 	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
-	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-	                lettersAndNumbersOnly: "<?php echo $this->translate('Letters and Numbers only please'); ?>"
+	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>"
 	            }
 	        },
 	        highlight: function(element) {

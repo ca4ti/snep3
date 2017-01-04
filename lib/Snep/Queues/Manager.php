@@ -379,17 +379,6 @@ class Snep_Queues_Manager {
     }
 
     /**
-     * deleteMembers - Remove group members 
-     *
-     * @param int $id
-     */
-    public static function deleteMembersGroup($id) {
-
-        $db = Zend_Registry::get('db');
-        $db->delete("members_group_queues", "id_queue='{$id}'");
-    }
-
-    /**
      * Method to get queue by name
      * @param <string> $id
      * @return Array

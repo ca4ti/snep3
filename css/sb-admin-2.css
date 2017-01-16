@@ -5,6 +5,9 @@
  */
 
 body {
+	/*background-color: #f8f8f8;*/
+}
+.content-body {
 	background-color: #f8f8f8;
 }
 
@@ -185,7 +188,6 @@ body {
 }
 
 .sidebar .sidebar-nav .nav li i {
-	#font-size: 1.3em;
 	font-size: 18px;
 }
 
@@ -298,7 +300,7 @@ body {
 	.sidebar {
 		z-index: 999;
 		width: 200px;
-		height: 100% !important;
+		height: 100%;
 		background-color: #313032;
 		position: absolute;
 	}

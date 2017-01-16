@@ -4803,7 +4803,7 @@ msgstr "Até"
 msgid ""
 "To confirm your registration, an email was sent with the confirmation key."
 msgstr ""
-"Para confirma o seu registro, um e-mail foi enviado com a chave de "
+"Para confirmar o seu registro, um e-mail foi enviado com a chave de "
 "confirmação"
 
 #: ../modules/default/views/layouts/loginregister.phtml:31

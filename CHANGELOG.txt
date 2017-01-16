@@ -1,3 +1,7 @@
+**3.05.1**
+
+- CORRIGIDO - Problemas com menu no ceclular.
+
 **3.05**
 
 - NOVO - Escolha do Idioma na tela de Login

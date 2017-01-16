@@ -77,11 +77,6 @@ INSERT INTO users (name, password,email,profile_id, created, updated) VALUES ('a
 INSERT INTO `grupos` (`cod_grupo`, `nome`) VALUES (1, 'GERAL');
 
 --
--- Default queue group
---
-INSERT INTO `group_queues` (name) VALUES ('Default');
-
---
 -- Default rule
 --
 INSERT INTO `regras_negocio` VALUES ('',0,'Internas - Ramal para Ramal','G:all','G:all','00:00:00-23:59:59','sun,mon,tue,wed,thu,fri,sat',0,1,0,0,'others');

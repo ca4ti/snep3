@@ -32,6 +32,7 @@ class AuthController extends Zend_Controller_Action {
      * loginAction - Login on system
      */
     public function loginAction() {
+     
 
         $this->view->headTitle($this->view->translate("Login"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
@@ -47,6 +48,23 @@ class AuthController extends Zend_Controller_Action {
             $this->view->msgclass = 'sucess';
         }
 
+
+
+         if (isset($_GET["indexChooseLanguage"])) {
+ 
+            $configFile = APPLICATION_PATH . "/includes/setup.conf";
+            $config = new Zend_Config_Ini($configFile, null, true);
+            $config->system->language = $_GET["indexChooseLanguage"];
+            $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+                'filename' => $configFile));
+            $writer->write();
+
+            Snep_Locale::setExtensionsLanguage($_GET["indexChooseLanguage"]) ;
+
+            $this->_redirect('/');
+
+         }
+
         // If you are already logged
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
@@ -54,7 +72,7 @@ class AuthController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
-
+     
             // Filter information of user
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
@@ -370,5 +388,6 @@ class AuthController extends Zend_Controller_Action {
         <?php
         $this->_redirect("auth/login");
     }
+
 
 }

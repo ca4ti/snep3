@@ -22,27 +22,25 @@
 
 $setup = parse_ini_file("setup.conf");
             
-$idestado = $_GET['estado'];
+$idpais = $_GET['pais'];
 
 mysql_connect($setup["db.host"],$setup["db.username"],$setup["db.password"]);
 mysql_selectdb($setup["db.dbname"]);
 
 
 
-if (is_numeric($idestado) ) {  // use core_cnl (connection with ITC)
-    $result = mysql_query("SELECT id,name FROM core_city WHERE state_id = ".$idestado);
+if (is_numeric($idpais) ) {  // use core_cnl (connection with ITC)
+    $result = mysql_query("SELECT id,name FROM core_state WHERE country_id = ".$idpais);
 } else {
-    $result = mysql_query("SELECT id,name FROM core_cnl_city WHERE state = '".$idestado."'");
+    $result = mysql_query("SELECT id,name FROM core_cnl_city WHERE country = '".$idpais."'");
 }
- while($row = mysql_fetch_array($result) ){
-        echo "<option value='".$row['id']."'>".$row['name']."</option>";
-    } 
-/*if (mysql_num_rows($result) == 0) {
-    echo "<option value='5565'>"."Other"."</option>";
+if ($idpais != 1) {
+    echo "<option value=28>Others</option>" ;
 }else {
     while($row = mysql_fetch_array($result) ){
-   	    echo "<option value='".$row['id']."'>".$row['name']."</option>";
-    }   
-}*/
+        echo "<option value='".$row['id']."'>".$row['name']."</option>";
+    } 
+}
+
 
 ?>

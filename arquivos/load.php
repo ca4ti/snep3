@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of SNEP.
- *  Para territÃ³rio Brasileiro leia LICENCA_BR.txt
+ *  Para território Brasileiro leia LICENCA_BR.txt
  *  All other countries read the following disclaimer
  *
  *  SNEP is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ if(!isset($file)){
 }else{
 	$exp_data = preg_match("/^[0-9]+_([0-9]+)_/",$file,$data);
 	$exp_data = $data[1];
-	$pattern = '/(20[12][56])([0-9][0-9])([0-9][0-9])/';
+	$pattern = '/(20[12][0-9])([0-9][0-9])([0-9][0-9])/';
 	$replacement = '$1-$2-$3';
 	$data = preg_replace($pattern,$replacement,$exp_data);
 	if(file_exists("$file.WAV")){

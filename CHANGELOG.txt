@@ -1,6 +1,7 @@
 **3.06**
 
 - NOVO - API para consulta de contatos.
+- CORRIGIDO - Validação ao excluir tronco que é utilizado por alguma regra na origem
 
 **3.05.1**
 

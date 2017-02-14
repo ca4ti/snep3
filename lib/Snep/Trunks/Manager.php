@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
  * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_Trunks_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -51,7 +51,7 @@ class Snep_Trunks_Manager {
     }
 
     /**
-     * getValidation - checks if the queue is used in the rule 
+     * getValidation - checks if the queue is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -61,8 +61,8 @@ class Snep_Trunks_Manager {
 
         $select = $db->select()
                 ->from('regras_negocio', array('id', 'desc'))
-                ->where("regras_negocio.origem LIKE ?", 'T:' . $id)
-                ->orwhere("regras_negocio.destino LIKE ?", 'T:' . $id);
+                ->where("regras_negocio.origem LIKE ?", '%T:' . $id.'%')
+                ->orwhere("regras_negocio.destino LIKE ?", '%T:' . $id.'%');
 
         $stmt = $db->query($select);
         $regras = $stmt->fetchall();
@@ -90,7 +90,7 @@ class Snep_Trunks_Manager {
     }
 
     /**
-     * getRules - checks if the queue is used in the rule 
+     * getRules - checks if the queue is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -142,7 +142,7 @@ class Snep_Trunks_Manager {
 
     /**
      * getTrunk - set array widh data of trunk
-     * @param <int> $id - Trunk code 
+     * @param <int> $id - Trunk code
      * @return <array> $tronco - Data of trunk
      */
     function getTrunkLog($id) {

@@ -1,6 +1,10 @@
+**3.06**
+
+- NOVO - API para consulta de contatos.
+
 **3.05.1**
 
-- CORRIGIDO - Problemas com menu no ceclular.
+- CORRIGIDO - Problemas com menu no celular.
 
 **3.05**
 

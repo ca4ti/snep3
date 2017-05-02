@@ -85,8 +85,7 @@ class SystemstatusController extends Zend_Controller_Action {
         } 
          
         if (file_exists("/etc/redhat-release")) {
-            exec("cat /etc/redhat-release", $linuxVer);
-            var_dump($linuxVer);
+            exec("cat /etc/redhat-release", $linuxVer);            
             $this->systemInfo['linux_ver'] = $linuxVer[0];
         } else {
             exec("cat /etc/issue", $linuxVer);

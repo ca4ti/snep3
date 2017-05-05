@@ -83,7 +83,7 @@ header('Cache-Control: max-age=0' );
 											<?php if ($callsList->userfield != ""): ?>
 				                                <?php if ($callsList->file_path != 'N.D.'): ?>
 													<td class="text-center sound-file-player">
-				                                        <audio  class="player" src='<?php echo $callsList->file_path ?>' type="audio/mpeg"  title="<?php echo $this->translate('Listen');?>" preload="none">
+				                                        <audio  class="player" src='<?php echo $callsList->file_path ?>' type="audio/x-wav"  title="<?php echo $this->translate('Listen');?>" preload="none">
 	                                                		<?php echo $this->translate('Your browser does not support the audio element.') ?>
 			                                            </audio>
 			                                        </td>
@@ -118,7 +118,7 @@ header('Cache-Control: max-age=0' );
 		            	<tr class="header_table_info">
 					       <td><?php echo $this->translate("Subtotal"); ?>: <?php echo $this->totals->TOTALS;?></td>
 							<td><?php echo $this->translate("Answered");?>: <?php echo $this->totals->ANSWERED;?></td>
-						   	<td><?php echo $this->translate("Not Answered"); ?>: <?php echo $this->totals->NOANSWER;?></td>    
+						   	<td><?php echo $this->translate("Not Answered"); ?>: <?php echo $this->totals->NOANSWER;?></td>
 							<td><?php echo $this->translate("Busy");?>: <?php echo $this->totals->BUSY;?></td>
 						    <td><?php echo $this->translate("Failed");?>: <?php echo $this->totals->FAILED;?></td>
 					    </tr>
@@ -269,7 +269,3 @@ jQuery(document).ready(function() {
     jQuery(".player").player(settings);
 });
 </script>
-
-
-
-

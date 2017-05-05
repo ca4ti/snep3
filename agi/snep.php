@@ -18,7 +18,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  *
- * AGI executable that makes the function calls in the Asterisk dialplan. 
+ * AGI executable that makes the function calls in the Asterisk dialplan.
  *
  * This application starts the environment for the Snep library can work in routing connections.
  *
@@ -126,7 +126,7 @@ $src = $request->getOriginalCallerid();
 // IMPORTANT - verify:
 // - lib/Snep/ModuleSettings/Manager.php
 // - modules/default/controllers/ModuleSettingsController.php
-// - modules/default/views/scripts/module-settings/index.phtml 
+// - modules/default/views/scripts/module-settings/index.phtml
 
 $sql = "select config_name,config_value from core_config where config_module = 'default'";
 $data = $db->query($sql)->fetchAll();
@@ -163,7 +163,14 @@ if ($lastuserfield['data'] === "") {
 }
 
 $recordPath = realpath($config->ambiente->path_voz).date("/Y-m-d");
-$regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".wav", $config->general->record->flag));
+
+if($config->general->record->format){
+  $recordFormat = $config->general->record->format;
+}else{
+  $recordFormat = "wav49";
+}
+
+$regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".$recordFormat", $config->general->record->flag));
 
 $regra->setAsteriskInterface($asterisk);
 

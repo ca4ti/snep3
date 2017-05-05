@@ -77,14 +77,20 @@ class SystemstatusController extends Zend_Controller_Action {
 
         // Mysql
         $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
-
+        
+        //Versao do S.O
         if (file_exists("/etc/slackware-version")) {
             exec("cat /etc/slackware-version", $linuxVer);
+            $this->systemInfo['linux_ver'] = $linuxVer[0];
+        } 
+         
+        if (file_exists("/etc/redhat-release")) {
+            exec("cat /etc/redhat-release", $linuxVer);            
             $this->systemInfo['linux_ver'] = $linuxVer[0];
         } else {
             exec("cat /etc/issue", $linuxVer);
             $this->systemInfo['linux_ver'] = substr($linuxVer[0], 0, strpos($linuxVer[0], "\\"));
-        }
+        }       
 
         // Kernel
         $this->systemInfo['linux_kernel'] = exec("uname -sr");

@@ -27,6 +27,9 @@ class IndexController extends Zend_Controller_Action {
      */
     public function indexAction() {
 
+        // Get configuration properties from Zend_Registry
+        $config = Zend_Registry::get('config');
+
         // checked if snep registred in itc
         if( $_SESSION['registered'] != true && $_SESSION['noregister'] != true){
 
@@ -34,8 +37,7 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                         $this->view->translate("Register")));
 
-            // Get configuration properties from Zend_Registry
-            $config = Zend_Registry::get('config');
+;
 
             $distro = $config->system->itc_distro;
             $required_register = $config->system->itc_required;
@@ -276,6 +278,11 @@ class IndexController extends Zend_Controller_Action {
             }
 
         }else{
+
+            // Begining the implementation of send local os informations to ITC Dashboard
+            // $register = Snep_ITCRegister::register(array(
+            //     "uuid" => $_SESSION['uuid'],
+            //     "token" => $config->system->itc_token));
 
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));

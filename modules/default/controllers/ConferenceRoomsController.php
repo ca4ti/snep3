@@ -183,7 +183,7 @@ class ConferenceRoomsController extends Zend_Controller_Action {
                     $contentConfe .= "exten => " . $idActivate . ",n,Authenticate(/etc/asterisk/snep/snep-authconferences.conf,m)\n";
                 }
 
-                // Cost Center
+                // Tag
                 $valueCostCenter = $costCenter[$idActivate]; 
                 $contentConfe .= "exten => " . $idActivate . ",n,Set(CHANNEL(accountcode)=" . $valueCostCenter . ")\n";
                 $contentConfe .= "exten => " . $idActivate . ",n,Answer()\n";

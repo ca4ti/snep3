@@ -245,7 +245,7 @@ class PBX_Rule_ActionConfig {
         $i18n = Zend_Registry::get('i18n');
 
         $form_element = new Zend_Form_Element_Select((string) $element->id);
-        $form_element->setLabel((string) $i18n->translate("Cost Center"));
+        $form_element->setLabel((string) $i18n->translate("Tag"));
 
         foreach (Snep_CentroCustos::getInstance()->getCCustos() as $ccusto) {
             $form_element->addMultiOption($ccusto['codigo'], $ccusto['codigo'] . " - " . $ccusto['nome']);

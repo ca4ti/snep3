@@ -29,7 +29,7 @@
 
     <group id="manage" label="Manage" font="sn-cadastros">
 
-        <resource id="cost-center" label="Cost Center" font="sn-etiqueta">
+        <resource id="cost-center" label="Tags" font="sn-etiqueta">
             <resource id="write"></resource>
         </resource>
 

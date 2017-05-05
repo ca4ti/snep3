@@ -18,7 +18,7 @@
  */
 
 /**
- * Classe to manager a Cost Centers.
+ * Classe to manager a Tags.
  *
  * @see Snep_CostCenter_Manager
  *
@@ -51,7 +51,7 @@ class Snep_CostCenter_Manager {
     }
 
     /**
-     * Method to get Cost Center by id
+     * Method to get Tag by id
      * @param int $id
      * @return Array
      */
@@ -150,7 +150,7 @@ class Snep_CostCenter_Manager {
 
 
     /**
-     * Method to get Cost Center in cdr by id
+     * Method to get Tag in cdr by id
      * @param int $id
      * @return Array
      */

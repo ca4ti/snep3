@@ -19,7 +19,7 @@
 /**
  * Set a cost center to the call
  *
- * Marks the call with a Cost Center for CDR management.
+ * Marks the call with a Tag for CDR management.
  *
  * @category  Snep
  * @package   PBX_Rule_Action
@@ -42,7 +42,7 @@ class Ccustos extends PBX_Rule_Action {
      * @return string
      */
     public function getName() {
-        return $this->i18n->translate("Define Cost Center");
+        return $this->i18n->translate("Define Tag");
     }
 
     /**

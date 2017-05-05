@@ -65,7 +65,7 @@ class CallsReportController extends Zend_Controller_Action {
         array_unshift($peer_groups, array('id' => '0', 'name' => ""));
         $this->view->groups = $peer_groups;
 
-        // Cost Centers
+        // Tags
         $this->view->costs = Snep_CostCenter_Manager::getAll();
 
         $locale = Snep_Locale::getInstance()->getLocale();
@@ -447,9 +447,9 @@ class CallsReportController extends Zend_Controller_Action {
             // substr -> retry limit
             $stmt = $db->query(substr($_SESSION[$user['name']]['select'], 0, -11));
 
-            $header = array($this->view->translate('Code Cost Center'),
-                            $this->view->translate('Type Cost Center'),
-                            $this->view->translate('Name Cost Center'),
+            $header = array($this->view->translate('Code Tag'),
+                            $this->view->translate('Type Tag'),
+                            $this->view->translate('Name Tag'),
                             $this->view->translate('Day'),
                             $this->view->translate('Date'),
                             $this->view->translate('Source'),
@@ -457,7 +457,7 @@ class CallsReportController extends Zend_Controller_Action {
                             $this->view->translate('Call Status'),
                             $this->view->translate('Duration (seconds)'),
                             $this->view->translate('Conversation (seconds)'),
-                            $this->view->translate('Cost Center'),
+                            $this->view->translate('Tag'),
                             $this->view->translate('Userfield'),
                             $this->view->translate('Context'),
                             $this->view->translate('Amaflags'),

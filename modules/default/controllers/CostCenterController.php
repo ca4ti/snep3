@@ -42,12 +42,12 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * List all Cost Center's
+     * List all Tag's
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center")));
+                    $this->view->translate("Tag")));
 
         
         $db = Zend_Registry::get('db');
@@ -74,12 +74,12 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * Add new Cost Center's
+     * Add new Tag's
      */
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Add")));
 
         //Define the action and load form
@@ -117,12 +117,12 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * Edit Cost Center's
+     * Edit Tag's
      */
     public function editAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
@@ -168,12 +168,12 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * Remove Cost Center's
+     * Remove Tag's
      */
     public function removeAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Delete")));
 
         $id = $this->_request->getParam('id');
@@ -188,7 +188,7 @@ class CostCenterController extends Zend_Controller_Action {
         }else{
 
             $this->view->id = $id;
-            $this->view->remove_title = $this->view->translate('Delete Cost Center.'); 
+            $this->view->remove_title = $this->view->translate('Delete Tag.'); 
             $this->view->remove_message = $this->view->translate('The cost center will be deleted. After that, you have no way get it back.'); 
             $this->view->remove_form = 'cost-center'; 
             $this->renderScript('remove/remove.phtml');

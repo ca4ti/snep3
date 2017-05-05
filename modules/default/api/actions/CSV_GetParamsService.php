@@ -63,7 +63,7 @@ class CSV_GetParamsService implements SnepService {
     public static function getAllTables() {
         return array('users' => "Users",
                         'peers' => "Extensions",
-                        'ccustos' => "Cost Center",
+                        'ccustos' => "Tag",
                         'trunks' => "Trunks",
                         'queues' => "Queues");
     }

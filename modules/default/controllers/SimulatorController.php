@@ -132,7 +132,7 @@ class SimulatorController extends Zend_Controller_Action {
                     foreach ($rule->getAcoes() as $action) {
                         $config = $action->getConfigArray();
                         if ($action instanceof CCustos) {
-                            $actions[] = $this->view->translate("Define Cost Center to ") . $config['ccustos'];
+                            $actions[] = $this->view->translate("Define Tag to ") . $config['ccustos'];
                         } else if ($action instanceof DiscarTronco) {
                             $tronco = PBX_Trunks::get($config['tronco']);
                             $actions[] = $this->view->translate("Dial through Trunk ") . $tronco->getName();

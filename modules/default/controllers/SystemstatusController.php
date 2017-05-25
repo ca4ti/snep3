@@ -401,6 +401,7 @@ class SystemstatusController extends Zend_Controller_Action {
         $configs = Snep_Config::getConfiguration('default','host_inspect');
 
         if($configs['config_value']){
+          $tdm['timeout'] = 3;
           $ctx = Snep_Request::http_context($tdm);
           $request = Snep_Request::send_request("{$configs['config_value']}/snep/host/info/{$_SESSION['uuid']}",$ctx);
         }

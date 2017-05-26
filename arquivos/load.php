@@ -26,7 +26,7 @@ if(!isset($file)){
 }else{
 	$exp_data = preg_match("/^[0-9]+_([0-9]+)_/",$file,$data);
 	$exp_data = $data[1];
-	$pattern = '/(20[12][56])([0-9][0-9])([0-9][0-9])/';
+	$pattern = '/(20[12][0-9])([0-9][0-9])([0-9][0-9])/';
 	$replacement = '$1-$2-$3';
 	$data = preg_replace($pattern,$replacement,$exp_data);
 	if(file_exists("$file.WAV")){
@@ -48,6 +48,5 @@ if(!isset($file)){
 	}else{
 		echo "{'status':'error','message':'File $file not found','date':'$data'}";
 	}
-		
-}
 
+}

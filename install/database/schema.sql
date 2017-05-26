@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `setvar` varchar(100) NOT NULL default '',
   `email` varchar(255) default NULL,
   `canal` varchar(255) default NULL,
-  `call-limit` varchar(4) default NULL,
+  `call-limit` varchar(4) default '1',
   `incominglimit` varchar(4) default NULL,
   `outgoinglimit` varchar(4) default NULL,
   `usa_vc` varchar(4) NOT NULL default 'no',

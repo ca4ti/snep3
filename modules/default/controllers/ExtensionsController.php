@@ -176,6 +176,7 @@ class ExtensionsController extends Zend_Controller_Action {
                 $this->renderScript('error/sneperror.phtml');
             }
 
+            $data["name"] = $data["name"] . " <" . $data["exten"].">";
             $ret = $this->execAdd($data);
 
             if (!is_string($ret)) {
@@ -433,14 +434,15 @@ class ExtensionsController extends Zend_Controller_Action {
             $postData = $this->_request->getParams();
 
             $postData["exten"] = $this->_request->getParam("id");
-
+            $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
             // increment in callerid "Name <exten>"
-            $nameValue = explode("<", $postData['name']);
-            if(count($nameValue) <= 1){
-                $postData['name'] = $postData['name'];
-            }else{
-                $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
-            };
+
+            // $nameValue = explode("<", $postData['name']);
+            // if(count($nameValue) <= 1){
+            //     $postData['name'] = $postData['name'];
+            // }else{
+            //     $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
+            // };
 
 
             $ret = $this->execAdd($postData, true);

@@ -29,12 +29,12 @@
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Iago Uilian Berndt <iagouilian@gmail.com>
  * @edited    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -58,9 +58,9 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
                 $type = 'write';
             }
 
-            if($request->getActionName() == 'index' || $request->getActionName() == 'add' || $request->getActionName() == 'remove' || $request->getActionName() == 'edit' 
+            if($request->getActionName() == 'index' || $request->getActionName() == 'add' || $request->getActionName() == 'remove' || $request->getActionName() == 'edit'
                 || $request->getActionName() == 'duplicate' || $request->getActionName() == 'multiremove' || $request->getActionName() == 'remove' || $request->getActionName() == 'multiadd'){
-                
+
                 $result = Snep_Permission_Manager::get($group, ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
 
                 $user = Snep_Permission_Manager::getUser($_SESSION['id_user'], ($request->getModuleName() ? $request->getModuleName() : "default") . '_' . $request->getControllerName() . '_' . $type);
@@ -80,7 +80,7 @@ class Snep_PermissionPlugin extends Zend_Controller_Plugin_Abstract {
                 } elseif (!$result['allow']) {
                     $redirect = new Zend_Controller_Action_Helper_Redirector();
                     $redirect->gotoSimpleAndExit("error", "permission", "default");
-                     
+
                 }
             }
         }

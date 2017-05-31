@@ -1,7 +1,17 @@
 **3.06**
 
 - NOVO - API para consulta de contatos.
-- CORRIGIDO - Validação ao excluir tronco que é utilizado por alguma regra na origem
+- NOVO - Suporte a gravações no formato wav49.
+- CORRIGIDO - Validação ao excluir tronco que é utilizado por alguma regra na origem.
+- CORRIGIDO - Relatório de chamadas do período apresentava algumas chamadas atendidas como não atendidas.
+- CORRIGIDO - Formatação do número de telefone.
+- CORRIGIDO - Permissão de usuário para edição/duplicação de regras de negócio.
+- CORRIGIDO - Melhorias de layout.
+- CORRIGIDO - Ajuste para funcionamento do clicktocall.
+- CORRIGIDO - Melhoria nas notificações do Snep.
+- CORRIGIDO - Correção de erro quando gera relatórios com mudança de porta.
+- CORRIGIDO - Adicionado nono dígito na expressão regular pra celular por default.
+- CORRIGIDO - Não estava mostrando a informação do S.O quando o sistema é baseado em RedHat
 
 **3.05.1**
 

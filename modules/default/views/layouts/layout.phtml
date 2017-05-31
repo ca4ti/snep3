@@ -1,231 +1,209 @@
 <?php
-
 $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
 $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
 
 if($controller != 'auth'){
-    $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/sb-admin-2.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.cookie.js');
+  $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/sb-admin-2.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.cookie.js');
 
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
-    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
+  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
 
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/morris.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/morris.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
+  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <?php echo $this->doctype(); ?>
-    <?php echo $this->headTitle() . "\n"; ?>
-    <?php echo $this->headLink() . "\n"; ?>
-    <?php echo $this->headMeta(); ?>
-    <?php echo $this->headScript() . "\n"; ?>
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <?php echo $this->doctype(); ?>
+  <?php echo $this->headTitle() . "\n"; ?>
+  <?php echo $this->headLink() . "\n"; ?>
+  <?php echo $this->headMeta(); ?>
+  <?php echo $this->headScript() . "\n"; ?>
 </head>
 
 <body>
-    <header>
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+  <header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-                <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/">
-                    <img src="<?php echo $this->baseUrl(); ?>/images/snep-main-logo.png">
-                    <img src="<?php echo $this->baseUrl(); ?>/images/powered-opens.png">
+        <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/">
+          <img src="<?php echo $this->baseUrl(); ?>/images/snep-main-logo.png">
+          <img src="<?php echo $this->baseUrl(); ?>/images/powered-opens.png">
+        </a>
+
+        <div class="menu-toggler sidebar-toggler">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+          <?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?>
+          <li class="dropdown">
+            <?php $noView = Snep_Notifications::getNoView();
+
+            if($noView){?>
+              <a class="dropdown-toggle new-notification"  href="<?php echo $this->baseUrl()."/index.php/notifications?id=all";?>"><?php echo count($noView)?>
+            <?php }else{?>
+              <a class="dropdown-toggle" href="<?php echo $this->baseUrl()."/index.php/notifications?id=all" ?>" >
+            <?php } ?>
+              <i class="fa fa-envelope fa-fw"></i>
+            </a>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-language fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-language">
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=en">
+                  <div>
+                    <i></i>
+                    <img class="img-circle" src="/snep/images/Eua.png" title="Click to change language to english">
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=pt_BR">
+                  <div>
+                    <i></i>
+                    <img class="img-circle" src="/snep/images/Brazil.png" title="Clique para mudar o idioma para português">
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=es">
+                  <div>
+                    <i></i><img class="img-circle" src="/snep/images/es.png" title="Haga clic para cambiar el idioma a español">
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters">
+                  <i class="fa fa-gear fa-fw"></i>
+                  <?php echo $this->translate("Settings"); ?>
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/index">
+                  <i class="fa fa-question-circle fa-fw"></i>
+                  <?php echo $this->translate("Help"); ?>
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/information">
+                  <i class="fa fa-info-circle fa-fw"></i>
+                  <?php echo $this->translate("Information"); ?>
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/register">
+                  <i class="fa fa-check-square fa-fw"></i>
+                  <?php echo $this->translate("Intercomunexão"); ?>
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth/logout">
+                  <i class="fa fa-sign-out fa-fw"></i>
+                  <?php echo $this->translate("Logout"); ?>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div id="wrapper">
+    <nav role="navigation" style="margin-bottom: 0; margin-top: -1px;">
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse" id="sidebar-area">
+          <ul class="nav" id="sidebar">
+            <?php echo Snep_Menu::getMasterInstance()->renderChildren(); ?>
+            <?php if(Snep_Menu::getMasterInstance()->renderChildrenModule()): ?>
+              <li>
+                <a href="#" class="dropdown-collapse"><i class="sn-modulos fa-fw"></i><span class="side-menu-title"><?php echo " ".$this->translate("Modules"); ?></span><span class="fa arrow"></span>
                 </a>
 
-                <div class="menu-toggler sidebar-toggler">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </div>
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?>
-                    <li class="dropdown">
-
-                        <?php $noView = Snep_Notifications::getNoView();
-
-                        if($noView){?>
-
-                            <a class="dropdown-toggle new-notification"  href="<?php echo $this->baseUrl()."/index.php/notifications?id=all";?>"><?php echo count($noView)?>
-
-                        <?php }else{?>
-
-                            <a class="dropdown-toggle" href="<?php echo $this->baseUrl()."/index.php/notifications?id=all" ?>" >
-
-                        <?php } ?>
-
-                            <i class="fa fa-envelope fa-fw"></i>
-                        </a>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-language fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-language">
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=en">
-                                    <div>
-                                        <i></i>
-                                        <img class="img-circle" src="/snep/images/Eua.png" title="Click to change language to english">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=pt_BR">
-                                    <div>
-                                        <i></i>
-                                        <img class="img-circle" src="/snep/images/Brazil.png" title="Clique para mudar o idioma para português">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters/language?language=es">
-                                    <div>
-                                        <i></i><img class="img-circle" src="/snep/images/es.png" title="Haga clic para cambiar el idioma a español">
-                                    </div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/parameters">
-                                    <i class="fa fa-gear fa-fw"></i>
-                                    <?php echo $this->translate("Settings"); ?>
-                                </a>
-                            </li>
-
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/index">
-                                    <i class="fa fa-question-circle fa-fw"></i>
-                                    <?php echo $this->translate("Help"); ?>
-                                </a>
-                            </li>
-
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/information">
-                                    <i class="fa fa-info-circle fa-fw"></i>
-                                    <?php echo $this->translate("Information"); ?>
-                                </a>
-                            </li>
-
-                             <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/register">
-                                    <i class="fa fa-check-square fa-fw"></i>
-                                    <?php echo $this->translate("Intercomunexão"); ?>
-                                </a>
-                            </li>
-
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/auth/logout">
-                                    <i class="fa fa-sign-out fa-fw"></i>
-                                    <?php echo $this->translate("Logout"); ?>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                <ul class="nav nav-second-level">
+                  <?php echo Snep_Menu::getMasterInstance()->renderChildrenModule(); ?>
                 </ul>
-            </div>
-        </nav>
-    </header>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav role="navigation" style="margin-bottom: 0; margin-top: -1px;">
-
-            <!-- <div class="navbar-default sidebar" role="navigation" id="sidebarmenu">  -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse" id="sidebar-area">
-                    <ul class="nav" id="sidebar">
-
-                        <?php
-                            echo Snep_Menu::getMasterInstance()->renderChildren();
-                        ?>
-                        <?php if(Snep_Menu::getMasterInstance()->renderChildrenModule()): ?>
-                            <li>
-                                <a href="#" class="dropdown-collapse"><i class="sn-modulos fa-fw"></i><span class="side-menu-title"><?php echo " ".$this->translate("Modules"); ?></span><span class="fa arrow"></span>
-                                </a>
-
-                                <ul class="nav nav-second-level">
-                                    <?php echo Snep_Menu::getMasterInstance()->renderChildrenModule(); ?>
-                                </ul>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div id="page-wrapper">
-
-            <ol class="breadcrumb">
-                <span><?php echo $this->breadcrumb; ?></span>
-            </ol>
-
-            <div class="col-sm-12">
-
-                <!-- Status Bar -->
-                <div id="statusbar">
-                    <div id="statusbar_content"></div>
-                </div>
-
-                <!-- Content -->
-                <div id="content">
-                    <div class="content-body">
-                        <?php echo $this->layout()->content; ?>
-                        <br>
-                    </div>
-                </div>
-            </div>
-
+              </li>
+            <?php endif; ?>
+          </ul>
         </div>
-        <!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
+      </div>
+    </nav>
+
+    <div id="page-wrapper">
+      <ol class="breadcrumb">
+        <span><?php echo $this->breadcrumb; ?></span>
+      </ol>
+
+      <div class="col-sm-12">
+        <!-- Status Bar -->
+        <div id="statusbar">
+          <div id="statusbar_content"></div>
+        </div>
+
+        <!-- Content -->
+        <div id="content">
+          <div class="content-body">
+            <?php echo $this->layout()->content; ?>
+            <br>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /#page-wrapper -->
+  </div> <!-- /#wrapper -->
 </body>
 </html>

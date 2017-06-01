@@ -250,51 +250,71 @@ class CallsReportService implements SnepService {
       }
     }
 
+    // SQL
+    $select = "SELECT ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,'%d/%m/%Y') AS key_dia, date_format(calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
+    $select .= "src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate, dstchannel FROM cdr, ccustos ";
+    $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
+    $select .= (isset($where_cost_center)) ? $where_cost_center : '';
+    $select .= (isset($where)) ? $where : '';
+    $select .= (isset($where_src)) ? $where_src : '';
+    $select .= (isset($where_dst)) ? $where_dst : '';
+    $select .= (isset($ramaissrc)) ? $ramaissrc : '';
+    $select .= (isset($ramaisdst)) ? $ramaisdst : '';
+    $select .= (isset($where_binds)) ? $where_binds : '';
+    $select .= $where_prefix;
+    //$select .= " GROUP BY userfield ORDER BY calldate, userfield ";
+    $select .= " ORDER BY calldate, userfield ";
+
     if($report_type != 'synthetic'){
-
-      // SQL
-      $select = "SELECT ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,'%d/%m/%Y') AS key_dia, date_format(calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
-      $select .= "src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate, dstchannel FROM cdr, ccustos ";
-      $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
-      $select .= (isset($where_cost_center)) ? $where_cost_center : '';
-      $select .= (isset($where)) ? $where : '';
-      $select .= (isset($where_src)) ? $where_src : '';
-      $select .= (isset($where_dst)) ? $where_dst : '';
-      $select .= (isset($ramaissrc)) ? $ramaissrc : '';
-      $select .= (isset($ramaisdst)) ? $ramaisdst : '';
-      $select .= (isset($where_binds)) ? $where_binds : '';
-      $select .= $where_prefix;
-      //$select .= " GROUP BY userfield ORDER BY calldate, userfield ";
-      $select .= " ORDER BY calldate, userfield ";
       $select .= (isset($limit)) ? " LIMIT ".$limit : '';
-
-      $stmt = $db->query($select);
-
-      while ($dado = $stmt->fetch()) {
-        $row[] = $dado;
-      }
-
-      foreach ($row as $key => $value) {
-        $result[$value['uniqueid']]['disposition'] = 'NO ANSWER';
-        $result[$value['uniqueid']] = $value;
-      }
-      $row = $result;
     }
 
-    $selectcont = "SELECT count(*) as cont,disposition,accountcode,date_format(calldate,'%d/%m/%Y') AS key_dia, ccustos.tipo  FROM cdr, ccustos ";
-    $selectcont .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
-    $selectcont .= (isset($where_cost_center)) ? $where_cost_center : '';
-    $selectcont .= (isset($where)) ? $where : '';
-    $selectcont .= (isset($where_src)) ? $where_src : '';
-    $selectcont .= (isset($where_dst)) ? $where_dst : '';
-    $selectcont .= (isset($ramaissrc)) ? $ramaissrc : '';
-    $selectcont .= (isset($ramaisdst)) ? $ramaisdst : '';
-    $selectcont .= (isset($where_binds)) ? $where_binds : '';
-    $selectcont .= $where_prefix;
-    $selectcont .= " GROUP BY userfield ORDER BY calldate, userfield";
-    
-    $resultCont = $db->query($selectcont)->fetchAll();
-    $cont = count($resultCont);
+    $stmt = $db->query($select);
+
+    while ($dado = $stmt->fetch()) {
+      $row[] = $dado;
+    }
+
+    foreach ($row as $key => $value) {
+
+      if(!$result[$value['uniqueid']]['disposition']){
+        $result[$value['uniqueid']]["disposition"] = $value["disposition"];
+      }
+
+      if($result[$value['uniqueid']]['dia'] == null){
+        $result[$value['uniqueid']]['dia'] = $value["dia"];
+      }
+
+      if($result[$value['uniqueid']]['billsec'] === null){
+        $result[$value['uniqueid']]['billsec'] = 0;
+      }
+
+      if($value['disposition'] == 'ANSWERED'){
+        $result[$value['uniqueid']]['billsec'] = $result[$value['uniqueid']]['billsec'] + $value['billsec'];
+        $result[$value['uniqueid']]["disposition"] = $value["disposition"];
+      }
+
+      $result[$value['uniqueid']]["codigo"] = $value['codigo'];
+      $result[$value['uniqueid']]["tipo"] = $value["tipo"];
+      $result[$value['uniqueid']]["nome"] = $value["nome"];
+      $result[$value['uniqueid']]["key_dia"] = $value["key_dia"];
+      $result[$value['uniqueid']]["src"] = $value["src"];
+      $result[$value['uniqueid']]["dst"] = $value["dst"];
+
+      $result[$value['uniqueid']]["duration"] += $value["duration"];
+      $result[$value['uniqueid']]["accountcode"] = $value["accountcode"];
+      $result[$value['uniqueid']]["userfield"] = $value["userfield"];
+      $result[$value['uniqueid']]["dcontext"] = $value["dcontext"];
+      $result[$value['uniqueid']]["amaflags"] = $value["amaflags"];
+      $result[$value['uniqueid']]["uniqueid"] = $value["uniqueid"];
+      $result[$value['uniqueid']]["calldate"] = $value["calldate"];
+      $result[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
+    }
+
+    $row = $result;
+
+    $cont = count($row);
+
 
     //Totals
     $totals = array("ANSWERED" => 0, "NOANSWER" => 0, "BUSY" => 0, "FAILED" => 0, "TOTALS" => 0);
@@ -303,7 +323,7 @@ class CallsReportService implements SnepService {
     $ccustos = array();
     $calldate = array();
 
-    foreach($resultCont as $key => $value){
+    foreach($row as $key => $value){
 
       // Calls number
       if($value['disposition'] == 'ANSWERED'){
@@ -362,7 +382,7 @@ class CallsReportService implements SnepService {
     if($report_type == 'synthetic'){
       return array("status" => "ok", "quantity" => $cont, "totals" => $totals, "ccustos" => $ccustos, "type" => $type, "calldate" => $calldate);
     }else{
-      return array("status" => "ok", "data" => $row, "quantity" => $cont, "totals" => $totals, "select" => $select, "selectcont" => $selectcont);
+      return array("status" => "ok", "data" => $row, "quantity" => $cont, "totals" => $totals, "select" => $select, "selectcont" => $select);
     }
   }
 

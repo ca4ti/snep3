@@ -267,6 +267,21 @@ class CallsReportService implements SnepService {
 
     if($report_type != 'synthetic'){
       $select .= (isset($limit)) ? " LIMIT ".$limit : '';
+
+      $selectcont = "SELECT count(*) as cont,disposition,accountcode,date_format(calldate,'%d/%m/%Y') AS key_dia, ccustos.tipo  FROM cdr, ccustos ";
+      $selectcont .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
+      $selectcont .= (isset($where_cost_center)) ? $where_cost_center : '';
+      $selectcont .= (isset($where)) ? $where : '';
+      $selectcont .= (isset($where_src)) ? $where_src : '';
+      $selectcont .= (isset($where_dst)) ? $where_dst : '';
+      $selectcont .= (isset($ramaissrc)) ? $ramaissrc : '';
+      $selectcont .= (isset($ramaisdst)) ? $ramaisdst : '';
+      $selectcont .= (isset($where_binds)) ? $where_binds : '';
+      $selectcont .= $where_prefix;
+      $selectcont .= " GROUP BY userfield ORDER BY calldate, userfield";
+
+      $result = $db->query($selectcont)->fetchAll();
+      $cont = count($result);
     }
 
     $stmt = $db->query($select);
@@ -311,9 +326,13 @@ class CallsReportService implements SnepService {
       $result[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
     }
 
-    $row = $result;
+    if($report_type == 'synthetic'){
+      $row = $result;
+    }
 
-    $cont = count($row);
+
+
+    //$cont = count($row);
 
 
     //Totals
@@ -382,7 +401,7 @@ class CallsReportService implements SnepService {
     if($report_type == 'synthetic'){
       return array("status" => "ok", "quantity" => $cont, "totals" => $totals, "ccustos" => $ccustos, "type" => $type, "calldate" => $calldate);
     }else{
-      return array("status" => "ok", "data" => $row, "quantity" => $cont, "totals" => $totals, "select" => $select, "selectcont" => $select);
+      return array("status" => "ok", "data" => $row, "quantity" => $cont, "totals" => $totals, "select" => $select, "selectcont" => $selectcont);
     }
   }
 

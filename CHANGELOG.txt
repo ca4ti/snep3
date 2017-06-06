@@ -11,7 +11,8 @@
 - CORRIGIDO - Melhoria nas notificações do Snep.
 - CORRIGIDO - Correção de erro quando gera relatórios com mudança de porta.
 - CORRIGIDO - Adicionado nono dígito na expressão regular pra celular por default.
-- CORRIGIDO - Não estava mostrando a informação do S.O quando o sistema é baseado em RedHat
+- CORRIGIDO - Não estava mostrando a informação do S.O quando o sistema é baseado em RedHat.
+- CORRIGIDO - Tratamento quando ramal efetuava siga-me para ele próprio.
 
 **3.05.1**
 

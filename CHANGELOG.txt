@@ -1,7 +1,10 @@
 **3.06**
 
+- NOVO - Nova opção no filtro do relatórios de chamadas e ranking para troca do número pelo nome do contato ou ramal.
 - NOVO - API para consulta de contatos.
 - NOVO - Suporte a gravações no formato wav49.
+- NOVO - Opção de escolher o dia do fechamento no controle de minutos no tronco por mês.
+- CORRIGIDO - Controle do minutos no tronco.
 - CORRIGIDO - Validação ao excluir tronco que é utilizado por alguma regra na origem.
 - CORRIGIDO - Relatório de chamadas do período apresentava algumas chamadas atendidas como não atendidas.
 - CORRIGIDO - Formatação do número de telefone.

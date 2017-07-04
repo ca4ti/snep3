@@ -174,6 +174,12 @@ class CallsReportController extends Zend_Controller_Action {
 
           }
 
+          $replace = false;
+          if(isset($formData['replace'])){
+            $param['replace'] = true;
+            $replace = true;
+          }
+
           // cost center
           if(!empty($formData['costs_center'])){
             $param['cost_center'] = implode('_', $formData['costs_center']);
@@ -187,7 +193,6 @@ class CallsReportController extends Zend_Controller_Action {
             $report_type = 'synthetic';
             $type = 'graphic';
           }
-
 
           $service = 'CallsReport';
           $url = Snep_Services::getPathService($service);
@@ -206,13 +211,13 @@ class CallsReportController extends Zend_Controller_Action {
           $_SESSION[$user['name']]['report_url'] = $url.$link;
           $_SESSION[$user['name']]['locale'] = $locale;
           $_SESSION[$user['name']]['record'] = $record;
+          $_SESSION[$user['name']]['replace'] = $replace;
 
           // Pagination
           $pagesValue = Snep_Reports::createPages(1, $line_limit);
           $this->view->pageprev = $pagesValue['pageprev'];
           $this->view->pagenext = $pagesValue['pagenext'];
           $this->view->page = 1;
-
 
         }else{
 
@@ -318,8 +323,9 @@ class CallsReportController extends Zend_Controller_Action {
                     $item->id = $cont;
                     $item->nome = $item->tipo . " : " . $item->codigo . " - " . $item->nome;
                     $item->src = $format->fmt_telefone(array("a" => $item->src));
-                    $item->src = $format->fmt_telefone(array("a" => $item->src));
                     $item->dst = $format->fmt_telefone(array("a" => $item->dst));
+                    $item->src_name = $format->fmt_telefone(array("a" => $item->src_name));
+                    $item->dst_name = $format->fmt_telefone(array("a" => $item->dst_name));
 
                     // Times
                     $item->billsec = $format->fmt_segundos(array("a" => $item->billsec, "b" => 'hms'));
@@ -337,10 +343,9 @@ class CallsReportController extends Zend_Controller_Action {
                     $item->class = $class;
                     $item->disposition = $this->view->translate($item->disposition);
                     $listItems[$cont] = $item;
-
                     $cont++;
                   }
-
+                  $this->view->replace = $replace;
                 }else{
 
                   // Synthetic

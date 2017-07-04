@@ -12,10 +12,10 @@
                 <?php if($this->key){ ?>
                     <div class="snep-body-top-buttons">
                         <div class="snep-body-search">
-                            <?php if($this->key){ 
-                                echo ""; 
+                            <?php if($this->key){
+                                echo "";
                                 ?>
-                                <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                                <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -25,10 +25,10 @@
     </div>
 
     <form id="defaultForm" method="post" class="form-horizontal" style="margin-top: 00px;" action="<?php echo $this->url(array("controller" => "ranking-report", "action" => "index"), null, true); ?>" METHOD="post">
-        
+
         <fieldset>
             <legend><?php echo $this->translate("Period");?></legend>
-            
+
             <div class="form-group">
                 <label class="col-sm-4 control-label"><?php echo $this->translate("From");?></label>
                 <div class="col-sm-3">
@@ -37,11 +37,11 @@
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-sm-4 control-label"><?php echo $this->translate("To");?></label>
                 <div class="col-sm-3">
@@ -50,15 +50,15 @@
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-                        
-                    </div>               
+
+                    </div>
                 </div>
             </div>
 
         </fieldset>
-        
+
         <fieldset>
-            
+
             <legend><?php echo $this->translate("Ranking Options");?></legend>
 
             <div class="form-group">
@@ -67,18 +67,18 @@
                     <label class="radio-inline">
                         <input type="radio" name="type" id="num" value="num" checked><?php echo $this->translate("Quantity");?>
                     </label>
-                    
+
                     <label class="radio-inline">
                         <input type="radio" name="type" id="time" value="time"><?php echo $this->translate("Time");?>
                     </label>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-sm-4 control-label"><?php echo $this->translate("Show top by source ranking");?></label>
                 <div class="col-sm-1">
                     <select class="form-control" name="showsource" id="showsource">
-                        <?php 
+                        <?php
                         for($cont=5; $cont<=20;$cont += 5){ ?>
                             <option><?php echo $cont?></option>
                         <?php } ?>
@@ -90,11 +90,27 @@
                 <label class="col-sm-4 control-label"><?php echo $this->translate("Show top by destiny");?></label>
                 <div class="col-sm-1">
                     <select class="form-control" name="showdestiny" id="showdestiny">
-                        <?php 
+                        <?php
                         for($cont=5; $cont<=20;$cont += 5){ ?>
                             <option><?php echo $cont?></option>
                         <?php } ?>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><?php echo $this->translate("Replace number by contact name/extension")?></label>
+                <div class="col-sm-5">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="replace" id="replace" />
+                            <?php echo $this->translate("Enabled")?>
+                            &nbsp;&nbsp;&nbsp;
+                            <small>
+                                <span style="color: red"><?php echo "( ". $this->translate("If enabled the query will be slower")." )"; ?></span>
+                            </small>
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -104,7 +120,7 @@
                 <label class="radio-inline">
                     <input type="radio" name="out_type" id="lst" value="lst" checked><?php echo $this->translate("Screen");?>
                 </label>
-                
+
                 <label class="radio-inline">
                     <input type="radio" name="out_type" id="csv" value="csv"><?php echo $this->translate("CSV");?>
                 </label>
@@ -115,7 +131,7 @@
             </div>
 
         </fieldset>
-            
+
     </form>
 </div>
 
@@ -123,7 +139,7 @@
 
 jQuery.noConflict();
 jQuery(function () {
-    
+
     jQuery('#init_day,#till_day').datetimepicker({
         locale: "<?php echo $this->datepicker_locale; ?>",
         sideBySide: true,

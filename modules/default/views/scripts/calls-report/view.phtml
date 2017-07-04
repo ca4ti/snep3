@@ -44,7 +44,7 @@ header('Cache-Control: max-age=0' );
                 <th class="text-center"><?php echo $this->translate("Status") ?></th>
                 <th data-hide="phone,tablet" class="text-center"><?php echo $this->translate("Duration") ?></th>
                 <th data-hide="phone,tablet" class="text-center"><?php echo $this->translate("Conversation") ?></th>
-                <th data-hide="phone,tablet" class="text-center"><?php echo $this->translate("Tag") ?></th>
+                <th data-hide="phone,tablet"><?php echo $this->translate("Tag") ?></th>
 
                 <?php if($this->locale){ ?>
                   <th data-hide="phone,tablet" class="text-center"><?php echo $this->translate("City");?> - <?php echo $this->translate("State");?></th>
@@ -62,12 +62,24 @@ header('Cache-Control: max-age=0' );
                 <?php if($id != "status" && $id != "totals" && $id != 'report_type'){ ?>
                   <tr>
                     <td class="text-center"><?php echo $callsList->dia; ?></td>
-                    <td class="text-center"><?php echo $callsList->src; ?></td>
-                    <td class="text-center"><?php echo $callsList->dst; ?></td>
+                    <td class="text-center">
+                      <?php if(!$this->replace){
+                        echo $callsList->src;
+                      }else{
+                        echo $callsList->src_name;
+                      }?>
+                    </td>
+                    <td class="text-center">
+                      <?php if(!$this->replace){
+                        echo $callsList->dst;
+                      }else{
+                        echo $callsList->dst_name;
+                      }?>
+                    </td>
                     <td class="text-center"><h4><span class="<?php echo $callsList->class;?>"><?php echo $this->translate($callsList->disposition); ?></span></h4></td>
                     <td class="text-center"><?php echo $callsList->duration; ?></td>
                     <td class="text-center"><?php echo $callsList->billsec; ?></td>
-                    <td class="text-center"><?php echo $callsList->nome; ?></td>
+                    <td><?php echo $callsList->nome; ?></td>
 
                     <?php if($this->locale){ ?>
                       <td><?php echo $callsList->city; ?></td>

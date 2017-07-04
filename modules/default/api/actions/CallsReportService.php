@@ -47,6 +47,9 @@ class CallsReportService implements SnepService {
     if(isset($_GET['limit']))
     $limit = $_GET['limit'];
 
+    if(isset($_GET['replace']))
+    $replace = true;
+
     // exceptions
     if(isset($_GET['exceptions'])){
       $exceptions = explode("_", $_GET['exceptions']);
@@ -290,6 +293,22 @@ class CallsReportService implements SnepService {
       $row[] = $dado;
     }
 
+    if($replace){
+      $select_contacts = "SELECT `c`.id,`c`.name, `p`.`phone` FROM `contacts_names` AS `c` INNER JOIN `contacts_phone` AS `p` ON c.id = p.contact_id";
+      $stmt = $db->query($select_contacts);
+      $allContacts = $stmt->fetchAll();
+      $select_peers = "SELECT name,callerid FROM `peers` WHERE peer_type = 'R'";
+      $stmt = $db->query($select_peers);
+      $allPeers = $stmt->fetchAll();
+
+      foreach ($allContacts as $key => $value) {
+        $contacts[$value['phone']] = $value['name'];
+      }
+      foreach ($allPeers as $key => $value) {
+        $contacts[$value['name']] = $value['callerid'];
+      }
+    }
+
     foreach ($row as $key => $value) {
 
       if(!$result[$value['uniqueid']]['disposition']){
@@ -316,6 +335,20 @@ class CallsReportService implements SnepService {
       $result[$value['uniqueid']]["src"] = $value["src"];
       $result[$value['uniqueid']]["dst"] = $value["dst"];
 
+      if($replace){
+        if($contacts[$value["src"]]){
+          $row[$key]["src_name"] = $contacts[$value["src"]];
+        }else{
+          $row[$key]["src_name"] = $value["src"];
+        }
+
+        if($contacts[$value["dst"]]){
+          $row[$key]["dst_name"] = $contacts[$value["dst"]];
+        }else{
+          $row[$key]["dst_name"] = $value["dst"];
+        }
+      }
+
       $result[$value['uniqueid']]["duration"] += $value["duration"];
       $result[$value['uniqueid']]["accountcode"] = $value["accountcode"];
       $result[$value['uniqueid']]["userfield"] = $value["userfield"];
@@ -324,17 +357,14 @@ class CallsReportService implements SnepService {
       $result[$value['uniqueid']]["uniqueid"] = $value["uniqueid"];
       $result[$value['uniqueid']]["calldate"] = $value["calldate"];
       $result[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
+
     }
 
     if($report_type == 'synthetic'){
       $row = $result;
     }
 
-
-
     //$cont = count($row);
-
-
     //Totals
     $totals = array("ANSWERED" => 0, "NOANSWER" => 0, "BUSY" => 0, "FAILED" => 0, "TOTALS" => 0);
     $type = array("S" => 0, "E" => 0, "O" => 0);

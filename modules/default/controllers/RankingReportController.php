@@ -63,7 +63,7 @@ class RankingReportController extends Zend_Controller_Action {
             $this->viewAction();
 
         }
-        
+
     }
 
     /**
@@ -72,14 +72,14 @@ class RankingReportController extends Zend_Controller_Action {
     public function viewAction() {
 
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
-        
+
         $formData = $this->_request->getParams();
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                             $this->view->translate("Reports"),
                             $this->view->translate("Ranking"),
                             $formData['init_day'] . ' - ' . $formData['till_day']));
-        
+
         // Check Bond
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
@@ -89,7 +89,7 @@ class RankingReportController extends Zend_Controller_Action {
 
         // Binds
         if($user['id'] != '1'){
-        
+
             $binds = Snep_Binds_Manager::getBond($user['id']);
 
             if($binds){
@@ -101,13 +101,19 @@ class RankingReportController extends Zend_Controller_Action {
 
                 $param['clausule'] = $clausule;
                 $param['clausulepeer'] = substr($clausulepeer, 0,-1);
-            }  
+            }
         }
 
         $param['type'] = $formData['type'];
         $param['showsource'] = $formData['showsource'];
         $param['showdestiny'] = $formData['showdestiny'];
         $out_type = $formData['out_type'];
+
+        $replace = false;
+        if(isset($formData['replace'])){
+          $param['replace'] = true;
+          $replace = true;
+        }
 
         $service = 'RankingReport';
         $url = Snep_Services::getPathService($service);
@@ -118,29 +124,29 @@ class RankingReportController extends Zend_Controller_Action {
         }
 
         $service_url = $url.$link;
-        
+
         $this->view->service_url = $service_url;
-        
+
         $http = curl_init($service_url);
         $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-        
+
         curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-        
+
         $http_response = curl_exec($http);
         $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-        
+
         curl_close($http);
 
         switch ($httpcode) {
             case 200:
 
                 $data = json_decode($http_response);
-                
+
                 if($data->status == 'empty'){
                     $this->view->error_message = $this->view->translate("No entries found");
                     $this->renderScript('error/sneperror.phtml');
                 }else{
-                    
+
                     $this->view->rank = $data->quantity;
                     $this->view->totals = (array) $data->totals;
 
@@ -152,7 +158,7 @@ class RankingReportController extends Zend_Controller_Action {
                         $this->csvAction();
                     }
                 }
-                
+
             break;
             default:
                 $erro = $this->view->translate("Error "). $httpcode;
@@ -174,18 +180,18 @@ class RankingReportController extends Zend_Controller_Action {
                     $this->view->translate("Ranking"),
                     $this->view->translate("Export CSV")));
 
-        
+
         $ranking = (array)$this->view->rank;
         $this->view->quant = count($ranking);
-        
+
         // input hidden
         $rank = htmlentities(json_encode($ranking));
         $this->view->ranking = $rank;
-        
+
         if (isset($_POST['submit'])) {
-            
+
             $ranking = json_decode($_POST['ranking']);
-            
+
             $header = array($this->view->translate('Source'),
                             $this->view->translate('Destiny'),
                             $this->view->translate('Q. Answered'),
@@ -196,23 +202,23 @@ class RankingReportController extends Zend_Controller_Action {
                             $this->view->translate('T. Total'));
 
             $output = implode(",", $header) . "\n";
-            
+
             foreach($ranking as $source => $data){
                 foreach($data as $destiny => $values){
 
                 $values = (array)$values;
-                $output .= $source.','.$destiny.','.$values['QA'].','.$values['QN'].','.$values['QT'].','.$values['TA'].','.$values['TN'].','.$values['TT'];     
+                $output .= $source.','.$destiny.','.$values['QA'].','.$values['QN'].','.$values['QT'].','.$values['TA'].','.$values['TN'].','.$values['TT'];
                 $output .= "\n";
-                   
+
                 }
             }
-             
+
             if ($output) {
-                
+
                 $this->_helper->layout->disableLayout();
                 $this->_helper->viewRenderer->setNoRender();
-                
-                
+
+
                 $csvData = $output;
 
                 $dateNow = new Zend_Date();
@@ -227,11 +233,11 @@ class RankingReportController extends Zend_Controller_Action {
                 $this->renderScript('error/sneperror.phtml');
             }
         } else {
-            
+
             $this->view->title = "Export";
             $this->render('export');
         }
-            
+
     }
 
 }

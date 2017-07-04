@@ -273,7 +273,17 @@ XML;
                 $sql .= "&& year=YEAR(NOW()) && month IS NULL && day IS NULL";
                 break;
             case 'M':
-                $sql .= "&& year=YEAR(NOW()) && month=MONTH(NOW()) && day IS NULL";
+                $day = date('d');
+                $year = date("Y");
+                if($day < $trunk['time_initial_date']){
+                  $month = date('m');
+                }else{
+                  $month = date("m", strtotime("+1 month"));
+                  if($month == '01'){
+                    $year = date("Y", strtotime("+1 year"));
+                  }
+                }
+                $sql .= "&& year='$year' && month='$month' && day IS NULL";
                 break;
             case 'D':
                 $sql .= "&& year=YEAR(NOW()) && month=MONTH(NOW()) && day=DAY(NOW())";

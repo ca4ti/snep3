@@ -94,7 +94,7 @@ class TrunksController extends Zend_Controller_Action {
   * indexAction
   */
   public function indexAction() {
-    
+
     $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array($this->view->translate("Trunks")));
 
     $db = Zend_Registry::get('db');
@@ -134,14 +134,10 @@ class TrunksController extends Zend_Controller_Action {
           }
           break;
           case 'M':
-          if ($callYear == date('Y') && $callMonth == date('m')) {
             $sale = $val['time_total'] - $val['used'];
             if ($val['used'] >= $val['time_total']) {
               $sale = 0;
             }
-          } else {
-            $sale = $val['time_total'];
-          }
           break;
           case 'D':
           if ($callYear == date('Y') && $callMonth == date('m') && $callDay == date('d')) {

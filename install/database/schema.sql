@@ -362,6 +362,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `trunk_redund` int(11) default NULL,
   `time_total` int(11) default NULL,
   `time_chargeby` char(1) default NULL,
+  `time_initial_date` int(11) default NULL,
   `dialmethod` VARCHAR(6) NOT NULL DEFAULT 'NORMAL',
   `id_regex` VARCHAR(255) NULL,
   `map_extensions` BOOLEAN DEFAULT FALSE,

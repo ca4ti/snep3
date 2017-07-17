@@ -311,29 +311,29 @@ class CallsReportService implements SnepService {
 
     foreach ($row as $key => $value) {
 
-      if(!$result[$value['uniqueid']]['disposition']){
-        $result[$value['uniqueid']]["disposition"] = $value["disposition"];
+      if(!$result_data[$value['uniqueid']]['disposition']){
+        $result_data[$value['uniqueid']]["disposition"] = $value["disposition"];
       }
 
-      if($result[$value['uniqueid']]['dia'] == null){
-        $result[$value['uniqueid']]['dia'] = $value["dia"];
+      if($result_data[$value['uniqueid']]['dia'] == null){
+        $result_data[$value['uniqueid']]['dia'] = $value["dia"];
       }
 
-      if($result[$value['uniqueid']]['billsec'] === null){
-        $result[$value['uniqueid']]['billsec'] = 0;
+      if($result_data[$value['uniqueid']]['billsec'] === null){
+        $result_data[$value['uniqueid']]['billsec'] = 0;
       }
 
       if($value['disposition'] == 'ANSWERED'){
-        $result[$value['uniqueid']]['billsec'] = $result[$value['uniqueid']]['billsec'] + $value['billsec'];
-        $result[$value['uniqueid']]["disposition"] = $value["disposition"];
+        $result_data[$value['uniqueid']]['billsec'] = $result_data[$value['uniqueid']]['billsec'] + $value['billsec'];
+        $result_data[$value['uniqueid']]["disposition"] = $value["disposition"];
       }
 
-      $result[$value['uniqueid']]["codigo"] = $value['codigo'];
-      $result[$value['uniqueid']]["tipo"] = $value["tipo"];
-      $result[$value['uniqueid']]["nome"] = $value["nome"];
-      $result[$value['uniqueid']]["key_dia"] = $value["key_dia"];
-      $result[$value['uniqueid']]["src"] = $value["src"];
-      $result[$value['uniqueid']]["dst"] = $value["dst"];
+      $result_data[$value['uniqueid']]["codigo"] = $value['codigo'];
+      $result_data[$value['uniqueid']]["tipo"] = $value["tipo"];
+      $result_data[$value['uniqueid']]["nome"] = $value["nome"];
+      $result_data[$value['uniqueid']]["key_dia"] = $value["key_dia"];
+      $result_data[$value['uniqueid']]["src"] = $value["src"];
+      $result_data[$value['uniqueid']]["dst"] = $value["dst"];
 
       if($replace){
         if($contacts[$value["src"]]){
@@ -349,20 +349,24 @@ class CallsReportService implements SnepService {
         }
       }
 
-      $result[$value['uniqueid']]["duration"] += $value["duration"];
-      $result[$value['uniqueid']]["accountcode"] = $value["accountcode"];
-      $result[$value['uniqueid']]["userfield"] = $value["userfield"];
-      $result[$value['uniqueid']]["dcontext"] = $value["dcontext"];
-      $result[$value['uniqueid']]["amaflags"] = $value["amaflags"];
-      $result[$value['uniqueid']]["uniqueid"] = $value["uniqueid"];
-      $result[$value['uniqueid']]["calldate"] = $value["calldate"];
-      $result[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
+      $result_data[$value['uniqueid']]["duration"] += $value["duration"];
+      $result_data[$value['uniqueid']]["accountcode"] = $value["accountcode"];
+      $result_data[$value['uniqueid']]["userfield"] = $value["userfield"];
+      $result_data[$value['uniqueid']]["dcontext"] = $value["dcontext"];
+      $result_data[$value['uniqueid']]["amaflags"] = $value["amaflags"];
+      $result_data[$value['uniqueid']]["uniqueid"] = $value["uniqueid"];
+      $result_data[$value['uniqueid']]["calldate"] = $value["calldate"];
+      $result_data[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
 
     }
 
-    if($report_type == 'synthetic'){
-      $row = $result;
+    //if($report_type == 'synthetic'){
+    unset($row);
+    $row = array();
+    foreach($result_data as $r => $res){
+      array_push($row,$res);
     }
+    //}
 
     //$cont = count($row);
     //Totals
@@ -393,28 +397,35 @@ class CallsReportService implements SnepService {
         $totals['FAILED']++;
       }
 
-      // // Synthetic
       if($report_type == 'synthetic'){
 
         (isset($ccustos[$value['accountcode']])) ? $ccustos[$value['accountcode']]++ : $ccustos[$value['accountcode']] = 1;
 
+        if(!isset($calldate[$value['key_dia']])){
+          $calldate[$value['key_dia']]['TOTALS'] = 0;
+          $calldate[$value['key_dia']]['ANSWERED'] = 0;
+          $calldate[$value['key_dia']]['NOANSWER'] = 0;
+          $calldate[$value['key_dia']]['BUSY'] = 0;
+          $calldate[$value['key_dia']]['FAILED'] = 0;
+        }
+
         if($value['disposition'] == 'ANSWERED'){
-          (isset($calldate[$value['key_dia']]['ANSWERED'])) ? $calldate[$value['key_dia']]['ANSWERED']++ : $calldate[$value['key_dia']]['ANSWERED'] = 0;
+          $calldate[$value['key_dia']]['ANSWERED']++;
         }
 
         if($value['disposition'] == 'NO ANSWER'){
-          (isset($calldate[$value['key_dia']]['NOANSWER'])) ? $calldate[$value['key_dia']]['NOANSWER']++ : $calldate[$value['key_dia']]['NOANSWER'] = 0;
+          $calldate[$value['key_dia']]['NOANSWER']++;
         }
 
         if($value['disposition'] == 'BUSY'){
-          (isset($calldate[$value['key_dia']]['BUSY'])) ? $calldate[$value['key_dia']]['BUSY']++ : $calldate[$value['key_dia']]['BUSY'] = 0;
+          $calldate[$value['key_dia']]['BUSY']++;
         }
 
         if($value['disposition'] == 'FAILED'){
-          (isset($calldate[$value['key_dia']]['FAILED'])) ? $calldate[$value['key_dia']]['FAILED']++ : $calldate[$value['key_dia']]['FAILED'] = 0;
+          $calldate[$value['key_dia']]['FAILED']++;
         }
 
-        (isset($calldate[$value['key_dia']]['TOTALS'])) ? $calldate[$value['key_dia']]['TOTALS']++ : $calldate[$value['key_dia']]['TOTALS'] = 0;
+        $calldate[$value['key_dia']]['TOTALS']++;
 
         if($value['tipo'] == 'S'){
           $type['S']++;
@@ -423,9 +434,7 @@ class CallsReportService implements SnepService {
         }else{
           $type['O']++;
         }
-
       }
-
     }
 
     if($report_type == 'synthetic'){

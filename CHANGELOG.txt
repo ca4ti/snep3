@@ -1,5 +1,6 @@
 **3.06**
 
+- NOVO - Nova opção no filtro por contatos ou grupo de contatos no relatório de chamadas do período (Contribuicao: Fabio Theodoro - Ipcom)
 - NOVO - Nova opção no filtro do relatórios de chamadas e ranking para troca do número pelo nome do contato ou ramal.
 - NOVO - API para consulta de contatos.
 - NOVO - Suporte a gravações no formato wav49.

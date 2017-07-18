@@ -44,11 +44,9 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                         <thead>
                             <tr>
                                 <th class="text-center" data-type="numeric" data-sort-initial="true"><?php echo $this->translate('Code');?></th>
-                                <th><?php echo $this->translate('Name');?></th>
+                                <th class="text-center"><?php echo $this->translate('Name');?></th>
                                 <th class="text-center"><?php echo $this->translate('Group');?></th>
-                                <th><?php echo $this->translate('City');?></th>
-                                <th class="text-center"><?php echo $this->translate('State');?></th>
-                                <th class="text-center"><?php echo $this->translate('Zip Code');?></th>
+                                <th class="text-center"><?php echo $this->translate('City');?></th>
                                 <th class="text-center"><?php echo $this->translate('Phone');?></th>
                                 <th class="text-center" colspan="2" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
                             </tr>
@@ -62,9 +60,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                         <td class="text-center"> <b> <?php echo $contact['ide'] ?> </b> </td>
                                         <td> <?php echo $contact['nome'] ?> </td>
                                         <td class="text-center"> <?php echo $contact['name'] ?> </td>
-                                        <td> <?php echo $contact['city'] ?> </td>
-                                        <td class="text-center"> <?php echo $contact['state'] ?> </td>
-                                        <td class="text-center"> <?php echo ($contact['cep'] != "")? $this->formatter->fmt_cep($contact['cep']) : " "; ?> </td>
+                                        <td class="text-center"> <?php echo $contact['city'] ?> - <?php echo $contact['state'] ?> </td>
                                         <td class="text-center"><?php echo ($contact['phone'] != "")? $this->formatter->fmt_telefone(array("a" =>$contact['phone'])) : " "; ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-edit btn-sm"  href="<?php echo $this->url ?>/edit/id/<?php echo $contact['ide'] ?>" role="button"><?php echo $this->translate('Edit')?>
@@ -101,4 +97,3 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
         });
     });
 </script>
-

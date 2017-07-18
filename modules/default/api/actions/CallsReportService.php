@@ -116,6 +116,44 @@ class CallsReportService implements SnepService {
     if(isset($_GET['status_failed']))
     unset($where_options[3]);
 
+    if (isset($_GET['contactGroupSrcId'])) {
+      $contactGroupSrcId = $_GET['contactGroupSrcId'];
+      $where_contactGroupSrc = " AND src IN (";
+      $where_contactGroupSrc .= " SELECT phone FROM contacts_names cn ";
+      $where_contactGroupSrc .= " INNER JOIN contacts_phone cp ON cp.contact_id = cn.id ";
+      $where_contactGroupSrc .= " INNER JOIN contacts_group cg on cg.id = cn.group ";
+      $where_contactGroupSrc .= " WHERE cn.group = $contactGroupSrcId ";
+      $where_contactGroupSrc .= ") ";
+    }
+
+    if (isset($_GET['contactSrcId'])) {
+      $contactSrcId = $_GET['contactSrcId'];
+      $where_contactSrc = " AND src IN ( ";
+      $where_contactSrc .= " SELECT phone FROM contacts_names cn ";
+      $where_contactSrc .= " INNER JOIN contacts_phone cp ON cp.contact_id = cn.id ";
+      $where_contactSrc .= " WHERE cn.id = $contactSrcId ";
+      $where_contactSrc .= ") ";
+    }
+
+    if (isset($_GET['contactGroupDstId'])) {
+      $contactGroupDstId = $_GET['contactGroupDstId'];
+      $where_contactGroupDst = " AND dst IN (";
+      $where_contactGroupDst .= " SELECT phone FROM contacts_names cn ";
+      $where_contactGroupDst .= " INNER JOIN contacts_phone cp ON cp.contact_id = cn.id ";
+      $where_contactGroupDst .= " INNER JOIN contacts_group cg on cg.id = cn.group ";
+      $where_contactGroupDst .= " WHERE cn.group = $contactGroupDstId ";
+      $where_contactGroupDst .= ") ";
+    }
+
+    if (isset($_GET['contactDstId'])) {
+      $contactDstId = $_GET['contactDstId'];
+      $where_contactDst = " AND dst IN ( ";
+      $where_contactDst .= " SELECT phone FROM contacts_names cn ";
+      $where_contactDst .= " INNER JOIN contacts_phone cp ON cp.contact_id = cn.id ";
+      $where_contactDst .= " WHERE cn.id = $contactDstId ";
+      $where_contactDst .= ") ";
+    }
+
 
     /* Busca os ramais pertencentes ao grupo de ramal de origem selecionado */
     $ramaissrc = $ramaisdst = "";
@@ -259,6 +297,10 @@ class CallsReportService implements SnepService {
     $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
     $select .= (isset($where_cost_center)) ? $where_cost_center : '';
     $select .= (isset($where)) ? $where : '';
+    $select .= (isset($where_contactGroupSrc)) ? $where_contactGroupSrc : '';
+    $select .= (isset($where_contactSrc)) ? $where_contactSrc : '';
+    $select .= (isset($where_contactGroupDst)) ? $where_contactGroupDst : '';
+    $select .= (isset($where_contactDst)) ? $where_contactDst : '';
     $select .= (isset($where_src)) ? $where_src : '';
     $select .= (isset($where_dst)) ? $where_dst : '';
     $select .= (isset($ramaissrc)) ? $ramaissrc : '';
@@ -275,6 +317,10 @@ class CallsReportService implements SnepService {
       $selectcont .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
       $selectcont .= (isset($where_cost_center)) ? $where_cost_center : '';
       $selectcont .= (isset($where)) ? $where : '';
+      $selectcont .= (isset($where_contactGroupSrc)) ? $where_contactGroupSrc : '';
+      $selectcont .= (isset($where_contactSrc)) ? $where_contactSrc : '';
+      $selectcont .= (isset($where_contactGroupDst)) ? $where_contactGroupDst : '';
+      $selectcont .= (isset($where_contactDst)) ? $where_contactDst : '';
       $selectcont .= (isset($where_src)) ? $where_src : '';
       $selectcont .= (isset($where_dst)) ? $where_dst : '';
       $selectcont .= (isset($ramaissrc)) ? $ramaissrc : '';
@@ -335,17 +381,16 @@ class CallsReportService implements SnepService {
       $result_data[$value['uniqueid']]["src"] = $value["src"];
       $result_data[$value['uniqueid']]["dst"] = $value["dst"];
 
+      $result_data[$value['uniqueid']]["src_name"] = $value["src"];
+      $result_data[$value['uniqueid']]["dst_name"] = $value["dst"];
+
       if($replace){
         if($contacts[$value["src"]]){
-          $row[$key]["src_name"] = $contacts[$value["src"]];
-        }else{
-          $row[$key]["src_name"] = $value["src"];
+          $result_data[$value['uniqueid']]["src_name"] = $contacts[$value["src"]];
         }
 
         if($contacts[$value["dst"]]){
-          $row[$key]["dst_name"] = $contacts[$value["dst"]];
-        }else{
-          $row[$key]["dst_name"] = $value["dst"];
+          $result_data[$value['uniqueid']]["dst_name"] = $contacts[$value["dst"]];
         }
       }
 
@@ -357,7 +402,6 @@ class CallsReportService implements SnepService {
       $result_data[$value['uniqueid']]["uniqueid"] = $value["uniqueid"];
       $result_data[$value['uniqueid']]["calldate"] = $value["calldate"];
       $result_data[$value['uniqueid']]["dstchannel"] = $value["dstchannel"];
-
     }
 
     //if($report_type == 'synthetic'){

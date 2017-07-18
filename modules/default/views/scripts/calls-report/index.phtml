@@ -58,6 +58,28 @@
             <legend><?php echo $this->translate("Source");?></legend>
 
             <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Contact Groups");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="selectContactGroupSrc" id="selectContactGroupSrc">
+                        <?php foreach($this->contact_groups as $key => $group){ ?>
+                            <option value="<?php echo $group['id'];?>"><?php echo $group['name']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Contacts");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="selectContactSrc" id="selectContactSrc">
+                        <?php foreach($this->contacts as $key => $contact){ ?>
+                            <option value="<?php echo $contact['id'];?>"><?php echo $contact['name']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Source Group");?></label>
                 <div class="col-sm-4">
                     <select class="form-control" name="selectSrc" id="selectSrc" onChange="checksrc(this.value);">
@@ -93,6 +115,28 @@
         <fieldset>
 
             <legend><?php echo $this->translate("Destination");?></legend>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Contact Groups");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="selectContactGroupDst" id="selectContactGroupDst">
+                        <?php foreach($this->contact_groups as $key => $group){ ?>
+                            <option value="<?php echo $group['id'];?>"><?php echo $group['name']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Contacts");?></label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="selectContactDst" id="selectContactDst">
+                        <?php foreach($this->contacts as $key => $contact){ ?>
+                            <option value="<?php echo $contact['id'];?>"><?php echo $contact['name']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Destination Group");?></label>

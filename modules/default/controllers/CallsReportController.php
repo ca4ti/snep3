@@ -60,6 +60,20 @@ class CallsReportController extends Zend_Controller_Action {
         $test = new Permissions();
         $response = $test->getTests();
 
+        $expression_aliases = Snep_ExpressionAliases_Manager::getAll();
+        array_unshift($expression_aliases, array('id' => '0', 'name' => ""));
+        $this->view->expression_aliases = $expression_aliases;
+
+        // Contact groups
+        $contact_groups = Snep_ContactGroups_Manager::getAll();
+        array_unshift($contact_groups, array('id' => '0', 'name' => ""));
+        $this->view->contact_groups = $contact_groups;
+
+        // Contact
+        $contacts = Snep_Contacts_Manager::getAll();
+        array_unshift($contacts, array('id' => '0', 'name' => ""));
+        $this->view->contacts = $contacts;
+
         // Peer groups
         $peer_groups = Snep_ExtensionsGroups_Manager::getAll() ;
         array_unshift($peer_groups, array('id' => '0', 'name' => ""));
@@ -139,6 +153,26 @@ class CallsReportController extends Zend_Controller_Action {
 
           if($formData['duration_end'] != "")
           $param['time_call_end'] = $formData['duration_end'];
+
+          // Contact Group Src
+          if($formData['selectContactGroupSrc'] != "0"){
+            $param['contactGroupSrcId'] = $formData['selectContactGroupSrc'];
+          }
+
+          // Contact Src
+          if($formData['selectContactSrc'] != "0"){
+            $param['contactSrcId'] = $formData['selectContactSrc'];
+          }
+
+          // Contact Group Dst
+          if($formData['selectContactGroupDst'] != "0"){
+            $param['contactGroupDstId'] = $formData['selectContactGroupDst'];
+          }
+
+          // Contact Dst
+          if($formData['selectContactDst'] != "0"){
+            $param['contactDstId'] = $formData['selectContactDst'];
+          }
 
           // Peer groups of src and dst
           if($formData['selectSrc'] != "0"){
@@ -396,19 +430,21 @@ class CallsReportController extends Zend_Controller_Action {
 
                   if($type != 'graphic'){
 
-                    $listItems["status"] = "sucess";
-                    $listItems['report_type'] = $report_type;
+                    if($row->quantity == 0){
+                      $this->view->error_message = $this->view->translate("No entries found.");
+                      $this->renderScript('error/sneperror.phtml');
+                    }else{
+                      $listItems["status"] = "sucess";
+                      $listItems['report_type'] = $report_type;
 
-
-                    $this->view->cont = $row->quantity;
-                    $this->view->lineNumber = $line_limit;
-
-                    //number pages
-                    $this->view->pagination = ceil($row->quantity / $line_limit);
-                    $this->view->totals = $row->totals;
-                    $this->view->call_list = $listItems;
-                    $this->renderScript('calls-report/view.phtml');
-
+                      $this->view->cont = $row->quantity;
+                      $this->view->lineNumber = $line_limit;
+                      //number pages
+                      $this->view->pagination = ceil($row->quantity / $line_limit);
+                      $this->view->totals = $row->totals;
+                      $this->view->call_list = $listItems;
+                      $this->renderScript('calls-report/view.phtml');
+                    }
                   }
                 }
 

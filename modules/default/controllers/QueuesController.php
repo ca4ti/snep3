@@ -69,9 +69,8 @@ class QueuesController extends Zend_Controller_Action {
                     $this->view->translate("Queues")));
 
         $db = Zend_Registry::get('db');
-        $select = $db->select()
-                ->from("queues")
-                ->order("name");
+        
+        $select = "SELECT `queues`.*,COALESCE(COUNT(uniqueid),0) as members FROM `queues` left join `queue_members` on queues.name = queue_members.queue_name group by queues.name";
 
         $stmt = $db->query($select);
         $queues = $stmt->fetchAll();

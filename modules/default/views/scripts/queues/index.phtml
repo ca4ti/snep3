@@ -44,6 +44,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                 <th><?php echo $this->translate('Strategy');?></th>
                                 <th class="text-center"data-sort-ignore="true"><?php echo $this->translate('SLA');?></th>
                                 <th class="text-center" data-sort-ignore="true"><?php echo $this->translate('Timeout');?></th>
+                                <th class="text-center" data-sort-ignore="true"><?php echo $this->translate('Static Members');?></th>
                                 <th colspan="3" class="text-center" data-sort-ignore="true"><?php echo $this->translate('Actions');?></th>
                             </tr>
                         </thead>
@@ -58,6 +59,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                                         <td> <?php echo $queue['strategy'] ?> </td>
                                         <td class="text-center"> <?php echo $queue['servicelevel'] ?> </td>
                                         <td class="text-center"> <?php echo $queue['timeout'] ?> </td>
+                                        <td class="text-center"> <?php echo $queue['members'] ?> </td>
                                         <td class="text-center">
                                             <a class="btn btn-default btn-sm"  href="<?php echo $this->url ?>/members/id/<?php echo $queue['name'] ?>" role="button"><?php echo $this->translate('Members')?>
 
@@ -99,5 +101,3 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
         });
     });
 </script>
-
-

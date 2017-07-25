@@ -338,6 +338,7 @@ class QueuesController extends Zend_Controller_Action {
                     $add = Snep_Queues_Manager::get($_POST['id']);
                 }
 
+                Snep_Queues_Manager::removeUserPermission($_POST['name']);
                 Snep_Queues_Manager::removeQueuePeers($_POST['id']);
                 Snep_Queues_Manager::remove($_POST['id']);
                 Snep_Queues_Manager::removeQueues($_POST['id']);

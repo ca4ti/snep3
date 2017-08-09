@@ -21,5 +21,18 @@ CREATE TABLE IF NOT EXISTS `date_alias_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
 ALTER TABLE `peers` CHANGE `call-limit` `call-limit` VARCHAR(4) NULL DEFAULT '1';
 ALTER TABLE `trunks` ADD `time_initial_date` INT NULL AFTER `time_chargeby`;
+
+CREATE TABLE IF NOT EXISTS `logs_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ip` varchar(15) NOT NULL,
+  `user` varchar(30) NOT NULL,
+  `action` varchar(30) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `table` varchar(30) NOT NULL,
+  `registerid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

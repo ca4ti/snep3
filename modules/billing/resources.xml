@@ -1,0 +1,10 @@
+<billing>
+  <group id="modules" label="Billing" font="sn-chamadas">
+      <resource id="billing" label="Billing" font="sn-etiqueta">
+        <resource id="write"></resource>
+      </resource>
+      <resource id="telcos" label="Telcos" font="sn-troncos">
+        <resource id="write"></resource>
+      </resource>
+  </group>
+</billing>

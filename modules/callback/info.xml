@@ -9,9 +9,9 @@
 -->
 
 <module>
-    <name>Módulo Callback</name>
-    <description> Funcionalidade de Callback</description>
-    <author>TheSource</author>
-    <version>2.0-rc1</version>
-    <website>www.snep.com.br</website>
+    <name>Callback Module</name>
+    <description>Call back functionality for SNEP.</description>
+    <author>Opens Tecnology</author>
+    <version>2.1</version>
+    <website>www.sneppbx.com</website>
 </module>

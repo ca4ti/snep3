@@ -1,6 +1,6 @@
 <loguser>
-  <group id="modules" label="User Activities Logs" font="sn-dashboard">
-      <resource id="loguser" label="User Activities Logs" font="sn-dashboard">
+  <group id="modules" label="User Logs" font="sn-logs">
+      <resource id="loguser" label="User Activities Logs" font="sn-logs">
         <resource id="write"></resource>
       </resource>
   </group>

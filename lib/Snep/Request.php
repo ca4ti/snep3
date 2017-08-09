@@ -34,7 +34,7 @@ class Snep_Request {
 		}
         $ctx = stream_context_create(array(
                         'http' => array(
-                                'header'  => $content_type . "\r\n" . $accept_content_type . "\r\n",
+                                'header'  => $content_type . "\r\n" . $accept_content_type . "\r\n" . "Connection: close\r\n",
 																'ignore_errors' => true,
                                 'method'  => $method,
                                 'timeout' => $timeout,

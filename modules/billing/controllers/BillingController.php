@@ -1,6 +1,6 @@
 <?php
 
-class Loguser_LoguserController extends Zend_Controller_Action {
+class Billing_BillingController extends Zend_Controller_Action {
 
     /**
      * getForm - Monta formulário
@@ -11,7 +11,7 @@ class Loguser_LoguserController extends Zend_Controller_Action {
         //$form_config = new Zend_Config_Xml('./modules/loguser/forms/log-user.xml', 'general', true);
         //$form = new Snep_Form_Simple($form_config);
         $form = new Snep_Form_Simple();
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/loguser/log-user');
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/billing/billing');
 
 
         $form->getElement('submit')->setLabel('Enviar');
@@ -28,10 +28,10 @@ class Loguser_LoguserController extends Zend_Controller_Action {
      */
     public function indexAction() {
 
-        $session = new Zend_Session_Namespace("loguser");
+        $session = new Zend_Session_Namespace("billing");
 
-        $this->view->breadcrumb = $this->view->translate("Log de Controle de usuario");
-        $this->view->refs_post = $this->getFrontController()->getBaseUrl() . '/loguser/log-user/';
+        $this->view->breadcrumb = $this->view->translate("Billing");
+        $this->view->url = $this->getFrontController()->getBaseUrl() . '/billing';
 
         $form = $this->getForm();
         $conf = Zend_Registry::get('config');
@@ -47,12 +47,20 @@ class Loguser_LoguserController extends Zend_Controller_Action {
         );
 
 
-        $session = new Zend_Session_Namespace("loguser");
+        $session = new Zend_Session_Namespace("billing");
         if ($this->getRequest()->isPost()) {
-          $this->view->logs = Loguser_Manager::getAll($_POST['initDay'], $_POST['finalDay'], $_POST['selectAct']);
-          $this->renderScript('loguser/view.phtml');
+          $this->view->logs = Billing_Manager::getAll($_POST['initDay'], $_POST['finalDay'], $_POST['selectAct']);
+          $this->renderScript('billing/view.phtml');
         }
         $this->view->form = $form;
+    }
+
+    /**
+    * Add Telco Action
+    */
+    public function addAction(){
+      $db = Zend_Registry::get('db');
+      Zend_Debug::Dump($_POST);exit;
     }
 
 }

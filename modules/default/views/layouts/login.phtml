@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-echo $this->doctype(); 
+echo $this->doctype();
 
 $diretorio = getcwd() . "/images/login_backgrounds/";
 $ponteiro = opendir($diretorio);
@@ -12,6 +12,7 @@ $background = array_rand($itens, 1);
 ?>
 <html>
     <head>
+        <?php echo $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/notifications.js'); ?>
         <?php echo $this->headTitle() . "\n"; ?>
         <?php $this->headLink()->appendStylesheet($this->baseUrl() . "/css/login.css"); ?>
         <?php echo $this->headLink() . "\n"; ?>
@@ -19,7 +20,7 @@ $background = array_rand($itens, 1);
         <?php echo $this->headStyle() . "\n"; ?>
         <?php echo $this->headScript() . "\n"; ?>
     </head>
-    <body style="background: url(<?php echo $this->baseUrl(); ?>/images/login_backgrounds/<?php echo $itens[$background]; ?>) no-repeat center center; background-size: cover ;">
+    <body onload="getAnnounce()" style="background: url(<?php echo $this->baseUrl(); ?>/images/login_backgrounds/<?php echo $itens[$background]; ?>) no-repeat center center; background-size: cover ;">
         <div id="loginLayout">
             <div id="wrapper">
                 <div class="logo"></div>
@@ -28,7 +29,7 @@ $background = array_rand($itens, 1);
                 </div>
                 <div id="powered">
                     <table style="width: 100%">
-                        <tr> 
+                        <tr>
                             <td><?php echo $this->translate("Powered by"); ?></td>
                         </tr>
                         <tr>
@@ -41,8 +42,21 @@ $background = array_rand($itens, 1);
                             </td>
                         </tr>
                     </table>
-                </div>
-            </div>
+                  </div>
+
+
+
+          </div>
         </div>
+        <div class="content col-sm-6">
+          <div id='announce' class="col-sm-2 text-center">
+          </div>
+          <div class="col-sm-2 text-center">
+            <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>:8080" target=_blank>
+              <img src="/snep/images/qmanager-login.png">
+            </a>
+          </div>
+        </div>
+
     </body>
 </html>

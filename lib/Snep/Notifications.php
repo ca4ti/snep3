@@ -31,63 +31,59 @@ class Snep_Notifications {
      * getNotification -
      * @return <string> HTML rendered with notifications
      */
-    public function getNotifications($url) {
+		 public function getNotifications($url) {
 
-        $i18n = Zend_Registry::get("i18n");
-        $html = "";
-        $notifications = self::getAll();
+         $i18n = Zend_Registry::get("i18n");
+         $html = "";
+         $notifications = self::getAll();
 
-        if($notifications){
+         if($notifications){
 
-	        foreach ($notifications as $key => $notification) {
+ 	        foreach ($notifications as $key => $notification) {
 
-                // number of notifications in the top menu
-                if($key < 3){
-    	            $html .= "<li><a href=".$url."/index.php/default/notifications?id=".$notification['id'].">";
-    	            $html .= "<div><strong>".$notification['title']."</strong>";
-    	            $html .= "<span class='pull-right text-muted'><em>".date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</em>";
-    	            $html .= "</spam></div>";
-    	            $html .= "<div>".substr($notification['message'], 0,30).'...</div></a></li>';
+                 // number of notifications in the top menu
+                 if($key < 3){
+     	            $html .= "<li><a href=".$url."/index.php/default/notifications?id=".$notification['id'].">";
+     	            $html .= "<div><strong>".$notification['title']."</strong>";
+     	            $html .= "<span class='pull-right text-muted'><em>".date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</em>";
+     	            $html .= "</spam></div>";
+     	            $html .= "<div>".substr($notification['message'], 0,30).'...</div></a></li>';
 
-    	            if($key < 2){
-    	            	$html .= "<li class='divider'></li>";
-    	            }
-                }
-	        }
+     	            if($key < 2){
+     	            	$html .= "<li class='divider'></li>";
+     	            }
+                 }
+ 	        }
 
-	        $html .= "<li class='divider'></li><li><a class='text-center' ";
-	        $html .= "href='".$url."/index.php/default/notifications?id=all'>";
-	        $html .= "<strong>".$i18n->translate('Read All Messages')."</strong>";
-	        $html .= "</a></li>";
+ 	        $html .= "<li class='divider'></li><li><a class='text-center' ";
+ 	        $html .= "href='".$url."/index.php/default/notifications?id=all'>";
+ 	        $html .= "<strong>".$i18n->translate('Read All Messages')."</strong>";
+ 	        $html .= "</a></li>";
 
 
-	    }else{
+ 	    }else{
 
-	    	$html .= "<li><a class='text-center'>";
-	        $html .= "<strong>".$i18n->translate('You have no notifications')."</strong>";
-	        $html .= "</a></li>";
+ 	    	$html .= "<li><a class='text-center'>";
+        $html .= "<strong>".$i18n->translate('You have no notifications')."</strong>";
+        $html .= "</a></li>";
 
-	    }
+ 	    }
 
-        return $html;
-    }
+      return $html;
+   }
 
-    /**
+		/**
      * Method to get all profiles
      * @return <array> $notifications
      */
     public function getAll() {
 
-        $db = Zend_registry::get('db');
-
-        $select = $db->select()
-                ->from("core_notifications")
-                ->order("creation_date DESC");
-
-        $stmt = $db->query($select);
-        $notifications = $stmt->fetchAll();
-
-        return $notifications;
+				$configs = Snep_Config::getConfiguration('default','host_notification');
+				$url = $configs["config_value"] . '/' . $_SESSION["uuid"];
+				// get notification in itc
+				$ctx = Snep_Request::http_context(array("timeout"=> 1), "GET");
+				$request = Snep_Request::send_request($url, $ctx);
+				return json_decode($request['response']);
     }
 
     /**
@@ -110,24 +106,46 @@ class Snep_Notifications {
     }
 
 
-    /**
+		/**
      * Get notification where not read
      * @return <array> $notification
      */
     public function getNoView() {
 
-        $db = Zend_registry::get('db');
+			$notifications = self::getAll();
+			$notification = array();
+			if($notifications){
+				foreach ($notifications as $key => $value) {
+					if($value->status == 'unread'){
+						array_push($notification, $value);
+					}
+				}
 
-        $select = $db->select()
-                ->from("core_notifications")
-                ->where("core_notifications.read = ?",false);
+			}
 
-        $stmt = $db->query($select);
-        $notification = $stmt->fetchAll();
-
-        return $notification;
+      return $notification;
     }
 
+		/**
+     * Method to get all profiles
+     * @return <array> $notifications
+     */
+    public function getNotification($id) {
+
+				$configs = Snep_Config::getConfiguration('default','host_notification');
+				$url = $configs["config_value"] . '/' . $_SESSION["uuid"];
+				// get notification in itc
+				$ctx = Snep_Request::http_context(array("timeout"=> 1), "GET");
+				$request = Snep_Request::send_request($url, $ctx);
+				$httpcode = $request['response_code'];
+				$response = json_decode($request['response']);
+				foreach ($response as $key) {
+						if("$key->id" == "$id") {
+							return $key;
+						}
+				}
+				return false;
+    }
 
     /**
      * Get notification warning where not read
@@ -155,18 +173,20 @@ class Snep_Notifications {
     }
 
 
-    /**
+		/**
      * setRead - Update core_notifications while user notification read
      * @param <int> $id
      */
     public function setRead($id) {
-
-        $db = Zend_Registry::get('db');
-
-        $update_data = array('read' => true,
-            'reading_date' => date('Y-m-d H:i:s'));
-
-        $db->update("core_notifications", $update_data, "id = '{$id}'");
+				$configs = Snep_Config::getConfiguration('default','host_notification');
+				$url = $configs["config_value"] . '/' . $_SESSION["uuid"] . '/' . $id;
+				// get notification in itc
+				$data = array(
+					"status" => "read"
+				);
+				$ctx = Snep_Request::http_context($data, "PUT");
+				$request = Snep_Request::send_request($url, $ctx);
+				return json_decode($request['response']);
     }
 
     /**
@@ -176,87 +196,24 @@ class Snep_Notifications {
      */
     public function addNotification($title,$message,$id_itc,$from) {
 
-        $db = Zend_Registry::get('db');
-        $i18n = Zend_Registry::get("i18n");
-
-        if(is_int($from)){
-            ($from == 68) ? $from = "Opens" : $from = $i18n->translate('Integrator');
-        }
-
-        $insert_data = array('title' => $title,
-            'message' => $message,
-            'id_itc' => $id_itc,
-            'creation_date' => date('Y-m-d H:i:s'),
-            'from' => $from);
-
-        $db->insert('core_notifications', $insert_data);
 
     }
 
-    /**
-     * Method to add a last notification in core_config.
-     * @param <int> $id
-     */
-    public function addLastNotification($id) {
 
-        $db = Zend_Registry::get('db');
-
-        $insert_data = array('config_module' => "default",
-            'config_name' => "last_id_notification",
-            'config_value' => $id);
-
-        $db->insert('core_config', $insert_data);
-    }
-
-    /**
-     * Method to remove a lastNotification in core_config.
-     * @param <int> $id
-     */
-    public function removeLastNotification() {
-
-        $db = Zend_Registry::get('db');
-
-        $db->beginTransaction();
-        $db->delete('core_config', "config_name = 'last_id_notification'");
-
-        try {
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollBack();
-        }
-    }
-
-    /**
-     * Method to remove a lastNotification
+		/**
+     * Method to remove a Notification
      * @param <int> $id
      */
     public function removeNotification($id) {
 
-        $db = Zend_Registry::get('db');
-
-        $db->beginTransaction();
-        $db->delete('core_notifications', "id = '$id'");
-
-        try {
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollBack();
-        }
+				$configs = Snep_Config::getConfiguration('default','host_notification');
+				$url = $configs["config_value"] . '/' . $_SESSION["uuid"] . '/' . $id;
+				$data = array();
+				$ctx = Snep_Request::http_context($data, "DELETE");
+				$request = Snep_Request::send_request($url, $ctx);
+				return json_decode($request['response']);
     }
 
-    /**
-     * Method to update a lastNotification
-     * @param <int> $id
-     */
-    public function updateLastNotification($id) {
-
-        $db = Zend_Registry::get('db');
-
-        $update_data = array('config_value' => $id);
-
-        $db->update("core_config", $update_data, "config_name = 'last_id_notification'");
-
-    }
 
 }
 ?>

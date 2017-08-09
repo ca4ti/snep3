@@ -231,6 +231,7 @@ class TrunksController extends Zend_Controller_Action {
         try {
 
           $db->insert("trunks", $trunk_data['trunk']);
+          $id = $db->lastInsertId();
 
           if($trunk_data['trunk']['trunktype'] == "I") {
             $trunk_data['ip']["name"] = $trunk_data['trunk']["name"];
@@ -241,6 +242,15 @@ class TrunksController extends Zend_Controller_Action {
         } catch (Exception $ex) {
           $db->rollBack();
           throw $ex;
+        }
+        //log-user
+        if (class_exists("Loguser_Manager")) {
+            $data = array(
+              'table' => 'trunks',
+              'registerid' => $id,
+              'description' => "Added Trunk $id - {$_POST['callerid']}"
+            );
+            Snep_LogUser::log("add", $data);
         }
         Snep_InterfaceConf::loadConfFromDb();
         $this->_redirect("trunks");
@@ -389,6 +399,15 @@ class TrunksController extends Zend_Controller_Action {
             $db->rollBack();
             throw $ex;
           }
+          //log-user
+          if (class_exists("Loguser_Manager")) {
+              $data = array(
+                'table' => 'trunks',
+                'registerid' => $idTrunk,
+                'description' => "Edited Trunk $idTrunk - {$_POST['callerid']}"
+              );
+              Snep_LogUser::log("update", $data);
+          }
           Snep_InterfaceConf::loadConfFromDb();
           $this->_redirect("trunks");
         }
@@ -446,10 +465,13 @@ class TrunksController extends Zend_Controller_Action {
 
           //log-user
           if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Excluiu tronco", $_POST['id'], 2);
-            $add = Snep_Trunks_Manager::getTrunkLog($_POST['id']);
-            Snep_Trunks_Manager::insertLogTronco("DEL", $add);
+              $loguser = Snep_Trunks_Manager::get($id);
+              $data = array(
+                'table' => 'trunks',
+                'registerid' => $id,
+                'description' => "Deleted Trunk $id - {$loguser['callerid']}"
+              );
+              Snep_LogUser::log("delete", $data);
           }
 
           Snep_Trunks_Manager::remove($_POST['id']);

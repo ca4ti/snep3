@@ -92,6 +92,9 @@
         <resource id="expression-alias" label="Expression Alias" font="sn-alias">
             <resource id="write"></resource>
         </resource>
+        <resource id="dates-alias" label="Dates Alias" font="sn-alias">
+            <resource id="write"></resource>
+        </resource>        
     </group>
 
     <group id="configs" label="Configuration" font="sn-configuracao">

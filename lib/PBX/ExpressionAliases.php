@@ -30,11 +30,11 @@ class PBX_ExpressionAliases {
     private static $instance;
 
     protected function __construct() {
-        
+
     }
 
     protected function __clone() {
-        
+
     }
 
     /**
@@ -117,7 +117,7 @@ class PBX_ExpressionAliases {
     }
 
     /**
-     * getValidation - checks if the regular expression is used in the rule 
+     * getValidation - checks if the regular expression is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -169,13 +169,6 @@ class PBX_ExpressionAliases {
     public function update($expression) {
         $id = $expression['id'];
 
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-
-            $add = self::getExpression($id);
-            self::insertLogExpression("OLD", $add);
-        }
-
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         $db->update("expr_alias", array("name" => $expression['name']), "aliasid='$id'");
@@ -206,8 +199,8 @@ class PBX_ExpressionAliases {
 
     /**
      * getExpression - Array with data of expression alias
-     * @param <int> $id 
-     * @return <array> $archive 
+     * @param <int> $id
+     * @return <array> $archive
      */
     function getExpression($id) {
 
@@ -231,31 +224,6 @@ class PBX_ExpressionAliases {
         }
 
         return $archive;
-    }
-
-    /**
-     * insertLogexpression - Insert data of expression on table logs_users 
-     * @param <array> $add
-     * @param <string> $acao
-     */
-    function insertLogExpression($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'cod' => $add["id"],
-            'param1' => $add["name"],
-            'param2' => $add["exp"],
-            'value' => "EXP",
-            'tipo' => $acao);
-
-        $db->insert('logs_users', $insert_data);
     }
 
 }

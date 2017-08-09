@@ -3,24 +3,26 @@ $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerN
 $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
 
 if($controller != 'auth'){
-  $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/sb-admin-2.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.cookie.js');
+    $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/geral.js", 'text/javascript');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.min.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/notifications.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap.min.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/metisMenu.min.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/sb-admin-2.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/jquery.cookie.js');
 
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
-  $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
 
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/morris.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
-  $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/morris.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
+
 }
 ?>
 
@@ -37,6 +39,19 @@ if($controller != 'auth'){
   <?php echo $this->headLink() . "\n"; ?>
   <?php echo $this->headMeta(); ?>
   <?php echo $this->headScript() . "\n"; ?>
+  <?php
+  $configs = Snep_Config::getConfiguration('default','host_notification');
+  $notification_url = $configs["config_value"];
+  ?>
+  <script type="text/javascript">
+  var session = {
+    uuid: "<?php echo $_SESSION['uuid'];?>",
+    active_user: "<?php echo $_SESSION['active_user'];?>",
+    name_user: "<?php echo $_SESSION['name_user'];?>"
+  }
+  var notification_url = "<?php echo $notification_url; ?>";
+
+  </script>
 </head>
 
 <body>
@@ -108,6 +123,7 @@ if($controller != 'auth'){
                 </a>
               </li>
 
+
             </ul>
           </li>
 
@@ -123,6 +139,7 @@ if($controller != 'auth'){
                   <?php echo $this->translate("Settings"); ?>
                 </a>
               </li>
+
 
               <li class="divider"></li>
               <li>

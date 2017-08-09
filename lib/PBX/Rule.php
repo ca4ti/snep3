@@ -258,6 +258,14 @@ class PBX_Rule {
   }
 
   /**
+   * addValidDates- Add a new Date item into Dates List array
+   * @param <string> $time
+   */
+  public function addValidDates($date) {
+      $this->dates[] = $date;
+  }
+
+  /**
   * addValidTime - Adiciona tempo na lista de tempos.
   * @param <string> $time
   */
@@ -400,6 +408,13 @@ class PBX_Rule {
   */
   public function cleanActionsList() {
     $this->acoes = array();
+  }
+
+  /**
+   * cleanValidDatesList - Clean the Dates list array
+   */
+  public function cleanValidDatesList() {
+      $this->dates = array();
   }
 
   /**
@@ -704,6 +719,14 @@ class PBX_Rule {
   }
 
   /**
+   * getValidDatesList - Get the current Dates List on form
+   * @return array string $dates
+   */
+  public function getValidDatesList() {
+      return $this->dates;
+  }
+
+  /**
   * getValidTimeList - Pega a lista de tempos da regra
   * @return array string $time
   */
@@ -718,6 +741,40 @@ class PBX_Rule {
   public function getValidWeekDays() {
     return $this->validWeekDays;
   }
+
+  /**
+   * getValidAliasDates - Return the array with all alias dates
+   * @return array string
+   */
+  public function getValidAliasDates() {
+    $db = Zend_Registry::get('db');
+    $select = $db->select()
+            ->from(array("n" => "date_alias"), array("id","name"))
+            ->join(array("p" => "date_alias_list"), 'n.id = p.dateid', array("date","timerange","list_id" => "id"));
+
+    $stmt = $db->query($select);
+    $dates = $stmt->fetchAll();
+
+    return $dates;
+  }
+
+  /**
+   * getValidAliasDateById - Return the array with all alias dates
+   * @return array string
+   */
+  public function getValidAliasDateById($id) {
+    $db = Zend_Registry::get('db');
+    $select = $db->select()
+            ->from(array("n" => "date_alias"), array("id","name"))
+            ->join(array("p" => "date_alias_list"), 'n.id = p.dateid', array("date","timerange","list_id" => "id"))
+            ->where("n.id = $id");
+
+    $stmt = $db->query($select);
+    $dates = $stmt->fetchAll();
+
+    return $dates;
+  }
+
 
   /**
   * isActive - Checa se a regra gostari de estar ativa ou não
@@ -806,6 +863,58 @@ class PBX_Rule {
           }
         }
       }
+    }
+    return false;
+  }
+
+  /**
+   * isValidAliasTime - Check if the date and time is valid for the rule
+   * @param <string> $exec_time - exact time of rule execution
+   * @param <string> $exec_date - exact date of rule execution
+   * @return <boolean> validity
+   */
+  public function isValidAliasTime($exec_time, $exec_date) {
+    $log = Zend_Registry::get('log');
+    $valid = $this->getValidDatesList();
+    $count = count($valid);
+    $valid_debug = serialize($valid);
+    $log->debug("Current Valid Dates: $valid_debug -> $count -> $exec_date -> $exec_time");
+    if(count($valid) < 0){
+      $log->debug("Rule Valid all days");
+      return true;
+    }
+    foreach ($valid as $validDatesId) {
+      if($validDatesId == "" || $validDatesId == 0){
+        return true;
+      }else{
+        $log->debug("Valid Alias Date Id: $validDatesId");
+        $current = $this->getValidAliasDateById($validDatesId);
+        foreach($current as $validRange){
+          $validTimeRange = explode('-', $validRange['timerange']);
+          $validDate = $validRange['date'];
+          if(preg_match("/^[0-9][0-9]?-[0-9][0-9]?$/",$validDate)){
+            $year = date('Y');
+            $log->debug("Valid Date is a MM-DD format, adding year: $year");
+            $validDate = $year . '-' . $validDate;
+          }
+          $start = $validTimeRange[0];
+          $end = $validTimeRange[1];
+          $debug = serialize($validTimeRange) . " | " . serialize($validRange);
+          $log->debug("Valid Alias Dates: $debug");
+          if($validDate == $exec_date){
+            if ($start > $end) {
+                if ($start < $exec_time OR $exec_time <= $end) {
+                    return true;
+                }
+            } else {
+                if ($start <= $exec_time && $exec_time < $end) {
+                    return true;
+                }
+            }
+          }
+        }
+      }
+
     }
     return false;
   }

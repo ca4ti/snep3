@@ -104,6 +104,7 @@ class Snep_Queues_Manager {
         );
 
         $db->insert('queues', $insert_data);
+        return $db->lastInsertId();
     }
 
     /**

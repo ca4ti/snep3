@@ -32,7 +32,7 @@ class AuthController extends Zend_Controller_Action {
      * loginAction - Login on system
      */
     public function loginAction() {
-     
+
 
         $this->view->headTitle($this->view->translate("Login"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
@@ -51,7 +51,7 @@ class AuthController extends Zend_Controller_Action {
 
 
          if (isset($_GET["indexChooseLanguage"])) {
- 
+
             $configFile = APPLICATION_PATH . "/includes/setup.conf";
             $config = new Zend_Config_Ini($configFile, null, true);
             $config->system->language = $_GET["indexChooseLanguage"];
@@ -72,7 +72,7 @@ class AuthController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
-     
+
             // Filter information of user
             $f = new Zend_Filter_StripTags();
             $username = $f->filter($this->_request->getPost('user'));
@@ -128,89 +128,6 @@ class AuthController extends Zend_Controller_Action {
 
                         }
 
-                        $configs = Snep_Config::getConfiguration('default','host_notification');
-
-                        // get last_id_notification if exists
-                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-                        if($idLastNotification){
-
-                            $idLastNotification = $idLastNotification["config_value"];
-                            $url = $configs["config_value"]."/last_id/".$idLastNotification."/UUID/".$_SESSION["uuid"];
-
-                        }else{
-
-                            $dateNotification = date("Y-m-d");
-                            $url = $configs["config_value"]."/date/".$dateNotification."/UUID/".$_SESSION["uuid"];
-                        }
-
-                        // get notification in itc
-                        $http = curl_init($url);
-
-                        curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
-                        $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-                        curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-                        $http_response = curl_exec($http);
-                        $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-                        curl_close($http);
-
-                        switch ($httpcode) {
-                            case 200:
-
-                                $notifications = json_decode($http_response);
-                                if(!empty($notifications)){
-
-                                    foreach($notifications as $item => $notification){
-                                        $lastId = $notification->id;
-
-                                        Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
-                                    }
-
-                                    if(isset($lastId)){
-
-                                        // get last_id_notification if exists
-                                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-                                        if($idLastNotification){
-                                            Snep_Notifications::updateLastNotification($lastId);
-                                        }else{
-                                            Snep_Notifications::addLastNotification($lastId);
-                                        }
-                                    }
-                                }
-
-                                break;
-                            case 500:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
-                                }
-
-                                break;
-                            case false:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
-                                }
-
-                                break;
-                            default:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
-                                    Snep_Notifications::addNotification($title,$message,"Snep");
-                                }
-                                break;
-                        }
 
                         $this->_redirect('/');
                         break;

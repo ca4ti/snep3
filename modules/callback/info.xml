@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : resources.xml
+    Created on : 9 de Novembro de 2011, 13:43
+    Author     : Rafael Bozzetti <rafael@opens.com.br>
+    Description:
+        Purpose of the document follows.
+-->
+
+<module>
+    <name>Módulo Callback</name>
+    <description> Funcionalidade de Callback</description>
+    <author>TheSource</author>
+    <version>2.0-rc1</version>
+    <website>www.snep.com.br</website>
+</module>

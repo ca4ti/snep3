@@ -90,6 +90,26 @@ class Snep_Trunks_Manager {
     }
 
     /**
+     * get trunk by id
+     * @param <string> $id
+     * @return <array>
+     */
+    public function get($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $select = $db->select()
+                ->from('trunks')
+                ->where("trunks.id = ?", $id);
+
+        $stmt = $db->query($select);
+        $id = $stmt->fetch();
+
+        return $id;
+    }
+
+
+    /**
      * getRules - checks if the queue is used in the rule
      * @param <int> $id
      * @return <array>
@@ -175,76 +195,7 @@ class Snep_Trunks_Manager {
 
         return $tronco;
     }
-
-    /**
-     * insertLogTronco - Insert data in database
-     * @param <string> $acao
-     * @param <array> $add
-     */
-    function insertLogTronco($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hora = date('Y-m-d H:i:s');
-
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        if ($acao == "Adicionou tronco") {
-            $valor = "ADD";
-        } else if ($acao == "Excluiu tronco") {
-            $valor = "DEL";
-        } else {
-            $valor = $acao;
-        }
-
-        if ($add["type"] != "KHOMP" && $add["type"] != "VIRTUAL") {
-
-            $insert_data = array('id_trunk' => $add['id'],
-                'hora' => $hora,
-                'ip' => $ip,
-                'idusuario' => $username,
-                'name' => $add["name"],
-                'callerid' => $add["callerid"],
-                'dtmfmode' => $add["dtmfmode"],
-                'insecure' => $add["insecure"],
-                'username' => $add["username"],
-                'allow' => $add["allow"],
-                'type' => $add["type"],
-                'host' => $add["host"],
-                'map_extensions' => $add["map_extensions"],
-                'reverse_auth' => $add["reverse_auth"],
-                'domain' => $add["domain"],
-                'nat' => $add["nat"],
-                'port' => $add["port"],
-                'qualify' => $add["qualify"],
-                'call_limit' => $add["call_limit"],
-                'tipo' => $valor);
-
-            $db->insert('logs_trunk', $insert_data);
-        } else {
-
-            $insert_data = array('id_trunk' => $add['id'],
-                'hora' => $hora,
-                'ip' => $ip,
-                'idusuario' => $username,
-                'name' => $add["name"],
-                'callerid' => $add["callerid"],
-                'dtmfmode' => $add["dtmfmode"],
-                'insecure' => $add["insecure"],
-                'username' => $add["username"],
-                'allow' => $add["allow"],
-                'type' => $add["type"],
-                'host' => $add["host"],
-                'map_extensions' => $add["map_extensions"],
-                'reverse_auth' => $add["reverse_auth"],
-                'domain' => $add["domain"],
-                'tipo' => $valor);
-
-            $db->insert('logs_trunk', $insert_data);
-        }
-    }
-
+    
     /**
      * Method to get trunks by name
      * @param <string> $id

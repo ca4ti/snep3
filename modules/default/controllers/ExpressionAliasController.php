@@ -46,7 +46,7 @@ class ExpressionAliasController extends Zend_Controller_Action {
      * indexAction
      */
     public function indexAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Expression Alias")));
 
@@ -58,22 +58,22 @@ class ExpressionAliasController extends Zend_Controller_Action {
         }
 
         $this->view->aliases = $expressions;
-        
+
     }
 
-    
+
 
     /**
      * AddAction - Add expression alias
      * @throws PBX_Exception_BadArg
      */
     public function addAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Expression Alias"),
                     $this->view->translate("Add")));
 
-        $this->view->expressions = array();    
+        $this->view->expressions = array();
         $this->view->action = 'add';
         $this->renderScript('expression-alias/addedit.phtml');
 
@@ -103,32 +103,43 @@ class ExpressionAliasController extends Zend_Controller_Action {
                 $this->view->error_message = $this->view->translate("Required value");
                 $this->renderScript('error/sneperror.phtml');
                 $form_isValid = false;
-            } 
+            }
             if ($form_isValid) {
-             
+
                 try {
                     $aliasesPersistency->register($expression);
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+                        $expr = Snep_ExpressionAliases_Manager::get($id);
+                        $data = array(
+                          'table' => 'expr_alias',
+                          'registerid' => $id,
+                          'description' => "Added Regular Express Alias $id - {$_POST['name']}"
+                        );
+                        Snep_LogUser::log('add', $data);
+
+                    }
                     $this->_redirect($this->getRequest()->getControllerName());
                 } catch (Exception $ex) {
                     $this->view->error_message = $ex->getMessage();
                     $this->renderScript('error/sneperror.phtml');
                 }
-                
+
             }
-        } 
+        }
     }
 
     /**
      * editAction - Edit expression alias
      */
     public function editAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Expression Alias"),
                     $this->view->translate("Edit")));
 
         $id = (int) $this->getRequest()->getParam('id');
-        
+
         $aliasesPersistency = PBX_ExpressionAliases::getInstance();
 
         $alias = $aliasesPersistency->get($id);
@@ -140,7 +151,7 @@ class ExpressionAliasController extends Zend_Controller_Action {
         $this->renderScript('expression-alias/addedit.phtml');
 
         if ($this->getRequest()->isPost()) {
-            
+
             $expression = array(
                 "id" => $id,
                 "name" => $_POST['name'],
@@ -163,21 +174,31 @@ class ExpressionAliasController extends Zend_Controller_Action {
                 $this->view->error_message = $this->view->translate("Required value");
                 $this->renderScript('error/sneperror.phtml');
                 $form_isValid = false;
-            } 
+            }
             if ($form_isValid) {
-                    
+
                 try {
                     $aliasesPersistency->update($expression);
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+                        $data = array(
+                          'table' => 'expr_alias',
+                          'registerid' => $id,
+                          'description' => "Edited Regular Express Alias $id - {$_POST['name']}"
+                        );
+                        Snep_LogUser::log("update", $data);
+
+                    }
                     $this->_redirect($this->getRequest()->getControllerName());
                 } catch (Exception $ex) {
                     $this->view->error_message = $ex->getMessage();
                     $this->renderScript('error/sneperror.phtml');
                 }
-                    
+
             }
-            
-        } 
-        
+
+        }
+
     }
 
     /**
@@ -204,16 +225,27 @@ class ExpressionAliasController extends Zend_Controller_Action {
         }else{
 
             $this->view->id = $id;
-            $this->view->remove_title = $this->view->translate('Delete Expression Alias.'); 
-            $this->view->remove_message = $this->view->translate('The expression alias will be deleted. After that, you have no way get it back.'); 
-            $this->view->remove_form = 'expression-alias'; 
+            $this->view->remove_title = $this->view->translate('Delete Expression Alias.');
+            $this->view->remove_message = $this->view->translate('The expression alias will be deleted. After that, you have no way get it back.');
+            $this->view->remove_form = 'expression-alias';
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
-                
+
                 Snep_ExpressionAliases_Manager::delete($_POST['id']);
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    $expr = Snep_ExpressionAliases_Manager::get($id);
+                    $data = array(
+                      'table' => 'expr_alias',
+                      'registerid' => $id,
+                      'description' => "Deleted Regular Express Alias $id - {$expr['name']}"
+                    );
+                    Snep_LogUser::log("delete", $data);
+
+                }                
                 $this->_redirect($this->getRequest()->getControllerName());
-                
+
             }
         }
     }

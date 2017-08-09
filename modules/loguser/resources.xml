@@ -1,0 +1,7 @@
+<loguser>
+  <group id="modules" label="User Activities Logs" font="sn-dashboard">
+      <resource id="loguser" label="User Activities Logs" font="sn-dashboard">
+        <resource id="write"></resource>
+      </resource>
+  </group>
+</loguser>

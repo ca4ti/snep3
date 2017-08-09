@@ -42,6 +42,26 @@ CREATE TABLE IF NOT EXISTS expr_alias_expression (
     FOREIGN KEY (`aliasid`) REFERENCES expr_alias(`aliasid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Table structure for table `date_alias`
+--
+
+CREATE TABLE IF NOT EXISTS `date_alias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `date_alias_list`
+--
+CREATE TABLE IF NOT EXISTS `date_alias_list` (
+  `dateid` int(11) NOT NULL,
+  `date` varchar(10) DEFAULT NULL,
+  `timerange` varchar(11) DEFAULT '00:00-23:59',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `regras_negocio`
@@ -58,7 +78,8 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   ativa boolean NOT NULL default true,
   mailing boolean NOT NULL default false,
   from_dialer boolean NOT NULL default false,
-  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others'
+  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others',
+  dates_alias varchar(20)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

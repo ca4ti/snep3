@@ -180,6 +180,15 @@ class ExtensionsController extends Zend_Controller_Action {
             $ret = $this->execAdd($data);
 
             if (!is_string($ret)) {
+              //log-user
+              if (class_exists("Loguser_Manager")) {
+                  $data = array(
+                    'table' => 'peers',
+                    'registerid' => $data['exten'],
+                    'description' => "Added Peer {$data['name']} - {$data['exten']}"
+                  );
+                  Snep_LogUser::log("add", $data);
+              }
               $this->_redirect('/extensions/');
             } else {
               $message = $ret;
@@ -448,6 +457,15 @@ class ExtensionsController extends Zend_Controller_Action {
               $ret = $this->execAdd($postData, true);
 
               if (!is_string($ret)) {
+                //log-user
+                if (class_exists("Loguser_Manager")) {
+                    $loguser = array(
+                      'table' => 'peers',
+                      'registerid' => $postData['exten'],
+                      'description' => "Edited Peer {$postData['name']} - {$postData['exten']}"
+                    );
+                    Snep_LogUser::log("update", $loguser);
+                }
                 $this->_redirect('/extensions/');
               } else {
                 $this->view->error_message = $ret;
@@ -690,12 +708,21 @@ class ExtensionsController extends Zend_Controller_Action {
 
                   $exten = $_POST['id'];
                   $db = Zend_Registry::get('db');
-                  $sql = "SELECT id from peers where name = '$exten'";
+                  $sql = "SELECT * from peers where name = '$exten'";
                   $stmt = $db->query($sql);
                   $result = $stmt->fetch();
                   $idExten = $result['id'];
 
                   try {
+                    //log-user
+                    if (class_exists("Loguser_Manager")) {
+                        $loguser = array(
+                          'table' => 'peers',
+                          'registerid' => $exten,
+                          'description' => "Deleted Peer {$result['name']} - {$exten}"
+                        );
+                        Snep_LogUser::log("delete", $loguser);
+                    }
                     Snep_Binds_Manager::removeBondByPeer($exten);
                     Snep_Extensions_Manager::remove($exten);
                     Snep_Extensions_Manager::removeVoicemail($exten);
@@ -780,13 +807,21 @@ class ExtensionsController extends Zend_Controller_Action {
                     foreach ($extensions as $key => $value) {
                       $exten = $key;
                       $db = Zend_Registry::get('db');
-                      $sql = "SELECT id from peers where name = '$exten'";
+                      $sql = "SELECT * from peers where name = '$exten'";
                       $stmt = $db->query($sql);
                       $result = $stmt->fetch();
                       $idExten = $result['id'];
 
                       try {
-
+                        //log-user
+                        if (class_exists("Loguser_Manager")) {
+                            $loguser = array(
+                              'table' => 'peers',
+                              'registerid' => $exten,
+                              'description' => "Deleted Peer {$result['name']} - {$exten}"
+                            );
+                            Snep_LogUser::log("delete", $loguser);
+                        }
                         Snep_Extensions_Manager::remove($exten);
                         Snep_Extensions_Manager::removeVoicemail($exten);
                         Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
@@ -889,6 +924,15 @@ class ExtensionsController extends Zend_Controller_Action {
                               if (is_string($ret)) {
                                 $this->view->error .= $i . " - " . $ret;
                                 break;
+                              }
+                              //log-user
+                              if (class_exists("Loguser_Manager")) {
+                                  $loguser = array(
+                                    'table' => 'peers',
+                                    'registerid' => $data['exten'],
+                                    'description' => "Added Peer {$data['name']} - {$data['exten']}"
+                                  );
+                                  Snep_LogUser::log("update", $loguser);
                               }
                               $i++;
                             }

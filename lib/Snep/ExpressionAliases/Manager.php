@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2015 OpenS Tecnologia
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
- * 
+ *
  */
 class Snep_ExpressionAliases_Manager {
 
     public function __construct() {
-        
+
     }
 
      /**
@@ -41,19 +41,11 @@ class Snep_ExpressionAliases_Manager {
     public function delete($id) {
         $db = Zend_Registry::get('db');
 
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-
-            Snep_LogUser::salvaLog("Excluiu expressao regular", $id, 10);
-            $add = self::getExpression($id);
-            self::insertLogExpression("DEL", $add);
-        }
-
         $db->delete("expr_alias", "aliasid='$id'");
     }
 
     /**
-     * getValidation - checks if the regular expression is used in the rule 
+     * getValidation - checks if the regular expression is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -91,7 +83,7 @@ class Snep_ExpressionAliases_Manager {
     }
 
     /**
-     * Method to get all Alias 
+     * Method to get all Alias
      * @return Array
      */
     public function getAll() {

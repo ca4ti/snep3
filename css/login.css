@@ -79,7 +79,7 @@ div.logo{
     width: 400px;
     height: 91px;
     background: url(../images/snep-logo-login.png) transparent no-repeat;
-    margin: 50px 0 50px 50px;
+    margin: 20px 10px 30px 50px;
 }
 
 #content{
@@ -142,4 +142,10 @@ div.form_element{
 
 .powered-icon {
     text-align: center;
+}
+.announce-login{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

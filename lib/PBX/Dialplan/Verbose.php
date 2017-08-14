@@ -86,7 +86,7 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     }
 
     /**
-     * getMAtches - Retorna a lista de regras que foram encontradas para 
+     * getMAtches - Retorna a lista de regras que foram encontradas para
      * a requisição do ultimo parse.
      * @return <array> matches
      */
@@ -95,7 +95,7 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     }
 
     /**
-     * parse - Sobreescreve PBX_Dialplan::parse() fazendo uma análise mais 
+     * parse - Sobreescreve PBX_Dialplan::parse() fazendo uma análise mais
      * detalhada de cada regra de negócio.
      */
     public function parse() {
@@ -103,7 +103,7 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
         if (!isset($this->execution_time)) {
             $this->execution_time = date("H:i");
         }
-        
+
         if (!isset($this->execution_date)) {
             $this->execution_date = null;
         }
@@ -118,27 +118,35 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
 
                 $rule->setRequest($this->request);
 
-                if ($rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isActive()) {
+                if ($rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem)) {
                     // Armazenando a regra válida (parcialmente)
                     $this->matches[] = $rule;
-                    
+
                     // Caso seja a primeira regra válida (e com tempo válido), ela é a que queremos executar
-                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time,$this->execution_date)) {
+                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time,$this->execution_date) && $rule->isActive()) {
                         $this->foundRule = $rule;
                     }
                 }
             }
 
-            if (!is_object($this->foundRule)) { // Caso nenhuma regra tenha sido encontrada
-                throw new PBX_Exception_NotFound("No rule found for this request");
-            }
+            // if (!is_object($this->foundRule)) { // Caso nenhuma regra tenha sido encontrada
+            //     throw new PBX_Exception_NotFound("No rule found for this request");
+            // }
         } else {
             throw new PBX_Exception_NotFound("No rules in database");
         }
     }
 
     /**
-     * setTime - Define manualmente o tempo que será usado em consideração 
+     * getLastRule - Retorna a regra que casou no ultimo parse executado
+     * @return PBX_Rule
+     */
+    public function getLastRule() {
+        return $this->foundRule;
+    }
+
+    /**
+     * setTime - Define manualmente o tempo que será usado em consideração
      * na avaliação da regra. (Execution time)
      * @param <string> $time Tempo de execução da regra
      */
@@ -147,7 +155,7 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     }
 
     /**
-     * setDate - Define manualmente o dia que será usado em consideração 
+     * setDate - Define manualmente o dia que será usado em consideração
      * na avaliação da regra. (Execution date)
      * @param <string> $date Dia de execução da regra
      */

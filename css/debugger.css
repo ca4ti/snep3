@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  CSS File for rule simulator (modules/default/views/scripts/simulator) 
+ *  CSS File for rule simulator (modules/default/views/scripts/simulator)
  */
 .error {
   background-color: #ffeded;
@@ -73,6 +73,12 @@ label {
   border-left: 10px solid #CCBABB;
 }
 
+.inactive {
+  color: #585858;
+  background-color: #F3E2A9;
+  border-left: 10px solid #FF8000;
+}
+
 .torun {
   background-color: #CBFFCB;
   border-left: 10px solid #8BE98A;
@@ -125,4 +131,3 @@ label {
     display: inline;
     padding: 5px;
 }
-

@@ -29,12 +29,12 @@
      *          - Fixed syntax of script to be more streamlined
      *
      */
-    
+
     class AMI
     {
         /* Private variables
          */
-        
+
         private $_host = false;
         private $_port = false;
         private $_username = false;
@@ -47,34 +47,34 @@
         private $_socket_line_buffer = 4096;
         private $_ami_actionid = "";
         private $_ami_actionid_counter = 0;
-        
+
         /* Public variables
          */
-        
+
         public $debug = false; // If true, output debug information - for testing only!
-        
+
         /* Constructors
          */
-        
+
         public function __construct( $host = false, $port = 5038, $username = false, $password = false )
         {
 
             $config = parse_ini_file("setup.conf");
-            
+
             $this->_host = $config['ip_sock'];
             $this->_port = $port;
             $this->_username = $config['user_sock'];
             $this->_password = $config['pass_sock'];
-            
+
             if ( !$this->login() )
             {
                 return false;
             }
-            
+
             $this->_ami_actionid = uniqid();
             $this->_ami_actionid_counter = time(); // start action id counter from time
         }
-        
+
         public function __destruct()
         {
             $_host = false;
@@ -83,7 +83,7 @@
             $_password = false;
             $_socket = false;
         }
-        
+
         /* Public functions
          */
 
@@ -93,16 +93,16 @@
              *
              *  @return values:
              *
-             *      - Array of data on success 
+             *      - Array of data on success
              *      - False on failure.
              *
              */
-            
+
             $cmd = array(
-                 "Action" => "CoreShowChannels" 
+                 "Action" => "CoreShowChannels"
             );
-            
-            $cmd_return = $this->sendrecv( $cmd, "Event: CoreShowChannelsComplete\r\n","CoreShowChannel");           
+
+            $cmd_return = $this->sendrecv( $cmd, "Event: CoreShowChannelsComplete\r\n","CoreShowChannel");
 
             return $cmd_return ;
         }
@@ -116,44 +116,44 @@
              *
              *  @return values:
              *
-             *      - Array of data on success 
+             *      - Array of data on success
              *      - False on failure.
              *
              */
-            
+
             $cmd = array(
-                 "Action" => "BridgeList" 
+                 "Action" => "BridgeList"
             );
-            
-            $cmd_return = $this->sendrecv( $cmd, "Event: BridgeListComplete\r\n","BridgeListItem");           
+
+            $cmd_return = $this->sendrecv( $cmd, "Event: BridgeListComplete\r\n","BridgeListItem");
 
             return $cmd_return ;
         }
-        
+
         public function get_BridgeInfo($bridgeid)
         {
             /* Get information about a bridge
              *
              *  @return values:
              *
-             *      - Array of data on success 
+             *      - Array of data on success
              *      - False on failure.
-             *      
+             *
              *  @params:
              *      - (string) bridgeid: The unique ID of the bridge about which to retrieve information.
              *
              */
-            
+
             $cmd = array(
                  "Action" => "BridgeInfo",
                  "BridgeUniqueid" => $bridgeid
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: BridgeInfoComplete\r\n", "BridgeInfoChannel");
 
             return $cmd_return ;
         }
-        
+
 
         public function get_SIPshowregistry($host = false, $user=false)
         {
@@ -161,19 +161,19 @@
              *
              *  @return values:
              *
-             *      - Array of data on success 
+             *      - Array of data on success
              *      - False on failure.
-             *      
+             *
              *  @params:
              *      - (string) host: Hostname of the SIP peer/trunk.
              *      - (string) user: Username of de SIP peer/trunk.
              *
              */
-            
+
             $cmd = array(
-                 "Action" => "SIPshowregistry" 
+                 "Action" => "SIPshowregistry"
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: RegistrationsComplete\r\n", "RegistryEntry");
 
             $show_registry = array() ;
@@ -190,7 +190,7 @@
 
             return $show_registry ;
         }
-        
+
         public function get_sippeer( $sippeers_name = false )
         {
             /* Get all data about a sip peer.
@@ -204,23 +204,23 @@
              *      - (string) sippeers_name: Name of the peer in asterisk (excl. "SIP/").
              *
              */
-            
+
             if ( $sippeers_name === false )
             {
                 $this->debug( "get_sippeer( sippeer_name ): No SIP peer specified." );
                 return false;
             }
-            
+
             $cmd = array(
                  "Action" => "SIPshowpeer",
-                "Peer" => $sippeers_name 
+                "Peer" => $sippeers_name
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd );
-            
+
             return $cmd_return;
         }
-        
+
         public function get_IAXpeerlist()
         {
             /* Get a list of all iax peers from asterisk
@@ -230,16 +230,16 @@
              *        Instead of an 0-based array, the keys in the array is the peer name, for easier
              *        manipulating the returned array.
              *      - False on failure.
-             *      
+             *
              */
-            
+
             $cmd = array(
-                 "Action" => "IAXpeerlist" 
+                 "Action" => "IAXpeerlist"
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: PeerlistComplete\r\n", "PeerEntry");
 
-            
+
             return $cmd_return;
         }
 
@@ -252,13 +252,13 @@
              *        Instead of an 0-based array, the keys in the array is the peer name, for easier
              *        manipulating the returned array.
              *      - False on failure.
-             *      
+             *
              */
-            
+
             $cmd = array(
-                 "Action" => "IAXregistry" 
+                 "Action" => "IAXregistry"
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: RegistrationsComplete\r\n", "RegistryEntry");
 
             $show_registry = array() ;
@@ -275,7 +275,7 @@
 
             return $show_registry ;
         }
-        
+
         public function get_queues()
         {
             /* Get a list of all queues in asterisk and their associated members
@@ -286,31 +286,31 @@
              *        manipulating the returned array. Only the key "members" is hard-coded and it contains an array
              *        for each member in the queue and all the associated data for the membership.
              *      - False on failure.
-             *      
+             *
              */
-            
+
             $cmd = array(
-                 "Action" => "QueueStatus" 
+                 "Action" => "QueueStatus"
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: QueueStatusComplete\r\n" );
-            
+
             $queues = array(); // holding all the queues and their data
             $queue_members = array(); // holding all queue members
-            
+
             foreach ( $cmd_return as $queue )
             {
                 if ( !isset( $queue["event"] ) )
                 {
                     continue;
                 }
-                
+
                 if ( $queue["event"] == "QueueParams" )
                 {
                     if ( !isset( $queues[$queue["queue"]] ) )
                     {
                         $queues[$queue["queue"]] = array();
-                        
+
                         foreach ( $queue as $queue_data_key => $queue_data_value )
                         {
                             if ( $queue_data_key == "event" || $queue_data_key == "actionid" || $queue_data_key == "queue" )
@@ -326,7 +326,7 @@
                     {
                         $queue_members[$queue["queue"]] = array();
                     }
-                    
+
                     if ( isset( $queue["event"] ) )
                     {
                         unset( $queue["event"] );
@@ -335,32 +335,32 @@
                     {
                         unset( $queue["actionid"] );
                     }
-                    
+
                     $queue_members[$queue["queue"]][$queue["name"]] = $queue;
                 }
             }
-            
+
             // Now we have one array containing all the queues and their data,
             // and one array containing all queue members.
             // Let's add the queue members to the queues array...
-            
+
             foreach ( $queues as $queue => $queue_data )
             {
                 if ( !isset( $queue_members[$queue] ) )
                 {
                     $queue_members[$queue] = array();
                 }
-                
+
                 ksort( $queue_members[$queue] );
-                
+
                 $queues[$queue]["members"] = $queue_members[$queue];
             }
-            
+
             ksort( $queues ); // sort the array, for normal humans...
-            
+
             return $queues;
         }
-        
+
         public function get_db( $family = false, $key = false )
         {
             /* Get value from astdb
@@ -372,38 +372,38 @@
              *  @return values:
              *      - String containing the value from astdb
              *      - False on not items found in astdb or on failure.
-             *      
+             *
              */
-            
+
             if ( $family === false )
             {
                 $this->debug( "get_db( family, key ): No family specified." );
                 return false;
             }
-            
+
             if ( $key === false )
             {
                 $this->debug( "get_db( family, key ): No key specified." );
                 return false;
             }
-            
+
             $cmd = array(
                  "Action" => "DBGet",
                 "Family" => $family,
-                "Key" => $key 
+                "Key" => $key
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "Event: DBGetComplete\r\n", "DBGetResponse", false );
-            
+
             if ( !isset( $cmd_return[0]["val"] ) ) // remove event key if it exists (it really should, but better safe than sorry...)
             {
                 $this->debug( "get_db( family, key ): Action returned no value" );
                 return false;
             }
-            
+
             return $cmd_return[0]["val"];
         }
-        
+
         public function set_db( $family = false, $key = false, $value = false )
         {
             /* Set value in astdb
@@ -414,21 +414,21 @@
              *  @return values:
              *      - True on success
              *      - False on failure
-             *      
+             *
              */
-            
+
             $cmd = array(
                 "Action" => "DBPut",
                 "Family" => $family,
                 "Key" => $key,
-                "Val" => $value 
+                "Val" => $value
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, false, false, false );
-            
+
             return preg_match( "/updated database successfully/i", $cmd_return["message"] ); // if this string is found in the message reply, the operation went OK.
         }
-        
+
         public function command( $command = false )
         {
             /* Execute command to AMI and return the result
@@ -441,26 +441,26 @@
              *      - False on failure
              *
              */
-            
+
             if ( $command === false )
             {
                 $this->debug( "command( command ): No command specified." );
                 return false;
             }
-            
+
             $cmd = array(
                  "Action" => "Command",
-                "Command" => $command 
+                "Command" => $command
             );
-            
+
             $cmd_return = $this->sendrecv( $cmd, "--END COMMAND--\r\n", false, true );
-            
+
             return $cmd_return;
         }
-        
+
         /* Private functions
          */
-        
+
         private function debug( $debugstr = "N/A" )
         {
             /* Output debug information
@@ -469,15 +469,15 @@
              *      - (string) debugstr: String containing the debug message.
              *
              */
-            
+
             if ( $this->debug )
             {
                 printf( "[%s] DEBUG: %s\n", get_class( $this ), $debugstr );
             }
-            
+
             return true;
         }
-        
+
         private function login()
         {
             /* Establish connection to asterisk manager interface and log in
@@ -487,28 +487,28 @@
              *      - False on failure
              *
              */
-            
+
             $this->_socket = @fsockopen( $this->_host, $this->_port, $this->_socket_errno, $this->_socket_errstr, $this->_socket_timeout );
-            
+
             if ( $this->_socket === false ) // Could not connect to AMI
             {
                 $errmsg = sprintf( "ERROR: Could not connect to AMI: (%s) %s", $this->_socket_errno, $this->_socket_errstr );
                 $this->debug( $errmsg );
                 return false;
             }
-            
+
             // Connected to AMI - try to log in:
-            
+
             stream_set_timeout( $this->_socket, $this->_socket_timeout );
-            
+
             $cmd = array(
                  "Action" => "Login",
                 "Username" => $this->_username,
                 "Secret" => $this->_password,
-                "Events" => "Off" 
+                "Events" => "Off"
             );
             $cmd_return = $this->sendrecv( $cmd, false, false, false );
-            
+
             if ( isset( $cmd_return["message"] ) && preg_match( "/authentication accepted/i", $cmd_return["message"] ) )
             {
                 // logged in - success!
@@ -518,13 +518,13 @@
             {
                 $this->debug( "WARNING: Could not login - authentication failed" );
                 fclose( $this->_socket ); // Close the socket, since we cannot use it anyway...
-                
+
                 $this->_socket = false;
-                
+
                 return false;
             }
         }
-        
+
         private function sendrecv( $cmd_query = false, $event_stop = "\r\n", $event_filter = false, $raw = false )
         {
             /* Sends command to AMI and retrieve the reply/replies (in case of events).
@@ -549,51 +549,51 @@
              *      - (bool) raw:             Return as plain text and not as an array
              *
              */
-            
+
             if ( $this->_socket === false )
             {
                 $this->debug( "sendrecv( cmd_query, event_stop, event_filter, raw ): No open socket, cannot send data to AMI." );
                 return false;
             }
-            
+
             if ( $cmd_query === false )
             {
                 $this->debug( "sendrecv( mixed cmd_query, [ string event_stop, [ string event_filter, [ bool raw] ] ] ): No command specified." );
                 return false;
             }
-            
+
             if ( $event_stop === false )
             {
                 $event_stop = "\r\n";
             }
-            
+
             $cmd_return = ""; // cached string containing returned text
-            
+
             if ( is_array( $cmd_query ) ) // if cmd_query is an array, we need to generate a plain text packet if the contents
             {
                 if ( !isset( $cmd_query["ActionID"] ) )
                 {
                     $cmd_query["ActionID"] = $action_id = $this->_ami_actionid . "-" . ( $this->_ami_actionid_counter++ );
                 }
-                
+
                 $tmp_cmd_query = "";
                 foreach ( $cmd_query as $cmd_query_key => $cmd_query_value )
                 {
                     $tmp_cmd_query .= $cmd_query_key . ": " . $cmd_query_value . "\r\n";
                 }
                 $tmp_cmd_query .= "\r\n";
-                
+
                 $cmd_query = $tmp_cmd_query;
             }
             else
             {
                 return false; // we only accept cmd_query to be array, so we can generate ActionID
             }
-            
+
             fputs( $this->_socket, $cmd_query );
-            
+
             $return_events = array();
-            
+
             while ( $line = fgets( $this->_socket, $this->_socket_line_buffer ) )
             {
 
@@ -613,7 +613,7 @@
                         {
                             $tmp_packet_arr = $this->packet2array( $cmd_return );
                         }
-                        
+
                         if ( $event_filter !== false && isset( $tmp_packet_arr["event"] ) && $tmp_packet_arr["event"] == $event_filter )
                         {
                             // event_filter has been set, and this packet contains that filter. We want the packet...
@@ -628,7 +628,7 @@
                         {
                             $this->debug( "sendrecv(): The packet we're received doesn't have the right event value - discard it." );
                         }
-                        
+
                         $cmd_return = ""; // reset the buffer, we got a newline, and have saved the previous data (if packet not dropped due to filter)
                     }
                 }
@@ -640,7 +640,7 @@
                 {
                     $cmd_return .= $line;
                 }
-                
+
                 $info = stream_get_meta_data( $this->_socket );
                 if ( $info["timed_out"] !== false ) // Socket has timed out
                 {
@@ -648,7 +648,7 @@
                     break; // socket timeout, don't proceed
                 }
             }
-            
+
             $this->debug( "sendrecv(): Done getting the reply/replies from AMI. Now process the packets" );
 
             if ( count( $return_events ) > 0 ) // we got some event to return instead of single reply
@@ -656,7 +656,7 @@
 
                 $this->debug( "sendrecv(): We've gathered some event packets, return then as the result." );
                 $this->_socket_last_return = $return_events;
-                
+
                 return $return_events;
             } else
             {
@@ -670,7 +670,7 @@
                     $this->debug( "sendrecv(): Convert the gathered reply into a key/value array" );
                     $cmd_return_str = $cmd_return;
                     $cmd_return = $this->packet2array( $cmd_return );
-                    
+
                     if ( isset( $cmd_return["response"] ) )
                     {
                         unset( $cmd_return["response"] );
@@ -681,12 +681,12 @@
                     }
                 }
                 $this->_socket_last_return = $cmd_return;
-                
+
                 $this->debug( "sendrecv(): Return the final content" );
                 return $cmd_return;
             }
         }
-        
+
         private function packet2array( $packet_str = false )
         {
             /* Convert string to array
@@ -718,30 +718,30 @@
              *            "Key3" => "Value3"
              *          )
              */
-            
+
             if ( $packet_str === false )
             {
                 $this->debug( "packet2array(): No packet string specified, cannot do anything without one" );
                 return false;
             }
-            
+
             $lines = preg_split( "/\r\n/", $packet_str );
-            
+
             $return_arr = array();
-            
+
             foreach ( $lines as $line )
             {
                 if ( preg_match( "/([a-z0-9\s]+):(.*)/i", $line, $matches ) ) // We only want lines containing key-value
                 {
                     $key = trim( $matches[1] );
                     $key = strtolower( $key ); // key is always lowercase - this way we don't have to think about CamelCase etc.
-                    
+
                     $value = trim( $matches[2] );
-                    
+
                     $return_arr[$key] = $value;
                 }
             }
-            
+
             return $return_arr;
         }
     }

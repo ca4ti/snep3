@@ -81,7 +81,7 @@ abstract class Snep_Usuario extends Snep_Channel {
 
         $this->setGroup('users');
         $this->username = $usuario;
-        
+
     }
 
     /**
@@ -130,6 +130,31 @@ abstract class Snep_Usuario extends Snep_Channel {
     }
 
     /**
+     * Returns an encrypted & utf8-encoded
+     */
+    public function encrypt($string, $encryption_key) {
+      $encrypt_method = "AES-256-CBC";
+      $secret_key = $encryption_key;
+      // hash
+      $key = hash('sha256', $secret_key);
+      $iv = substr(hash('sha256', $secret_iv), 0, 16);
+      $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+      return base64_encode($output);
+    }
+
+    /**
+     * Returns decrypted original string
+     */
+    public function decrypt($string, $encryption_key) {
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = $encryption_key;
+        // hash
+        $key = hash('sha256', $secret_key);
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+        return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+
+    /**
      * Define um nome para o usuário. (callerid)
      *
      * @param string $callerid
@@ -151,7 +176,7 @@ abstract class Snep_Usuario extends Snep_Channel {
      * Define um numero para o usuário
      *
      * MUITO CUIDADO: Numeros de usuário devem ser únicos para cada usuário.
-     * 
+     *
      * @param int $number
      */
     public function setNumero($number) {

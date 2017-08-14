@@ -107,11 +107,12 @@ class AuthController extends Zend_Controller_Action {
                         $auth->getStorage()->write($result->getIdentity());
 
                         $extension = $db->query("SELECT id, name FROM users WHERE name='$username'")->fetchObject();
-
+                        $_SESSION["ENCRYPTION_KEY"] = md5($password);
                         // Retaining the old verifica.php
                         $_SESSION['id_user'] = $extension->id;
                         $_SESSION['name_user'] = $username;
                         $_SESSION['active_user'] = $extension->name;
+                        $_SESSION['http_authorization'] = Snep_Usuario::encrypt("{$username}:{$password}", $_SESSION["ENCRYPTION_KEY"]);
                         $_SESSION['vinculos_user'] = "";
 
                         $registered = $db->query("SELECT uuid,registered_itc,noregister FROM itc_register")->fetch();

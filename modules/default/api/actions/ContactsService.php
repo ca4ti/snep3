@@ -42,30 +42,49 @@ class ContactsService implements SnepService {
       // get by phone
       if(isset($_GET["phone"])){
         $phone = $_GET["phone"];
-        $select = "SELECT * from contacts_phone as p, contacts_names as n WHERE p.phone = ".$phone ." AND p.contact_id = n.id";
-        $stmt = $db->query($select);
-        $contact = $stmt->fetchAll();
+      }
 
-        if(!empty($contact)){
-        	return array("status" => "ok", "contact" => $contact);
-      	}elseif(!$_GET["name"]){
-      		return array("status" => "empty", "message" => "No entries found.");
-      	}
+      if(isset($_GET["callerid"])){
+        $phone = $_GET["callerid"];
+      }
+
+      if($phone){
+        $select = "select contacts_phone.phone as phone,
+        contacts_names.name as name, contacts_group.name as group_name
+        from contacts_phone inner join contacts_names
+        on contacts_names.id = contacts_phone.contact_id
+        inner join contacts_group on contacts_names.group = contacts_group.id
+        where contacts_phone.phone like '%{$phone}'";
       }
 
       // get by name
       if(isset($_GET["name"])){
-        $name = $_GET["name"];
-        $select = "SELECT * from contacts_phone as p, contacts_names as n WHERE n.name = '".$name ."' AND p.contact_id = n.id";
-        $stmt = $db->query($select);
-        $contact = $stmt->fetchAll();
-
-        if(!empty($contact)){
-        	return array("status" => "ok", "contact" => $contact);
-      	}else{
-      		return array("status" => "empty", "message" => "No entries found.");
-      	}
+        $select = "select contacts_phone.phone as phone,
+        contacts_names.name as name, contacts_group.name as group_name
+        from contacts_phone inner join contacts_names
+        on contacts_names.id = contacts_phone.contact_id
+        inner join contacts_group on contacts_names.group = contacts_group.id
+        where name like '%{$_GET['name']}'";
       }
+
+      $stmt = $db->query($select);
+      $contact = $stmt->fetch();
+
+      if(!empty($contact)){
+        $result = array(
+          "status" => "ok",
+          "contact" => $contact,
+          "desc" => $contact['name'] . ' - ' . $contact['group_name']
+        );
+        if($_GET['redirect']){
+          $result["return"] = $contact['group_name'];
+        }
+
+      	return $result;
+
+    	}else{
+    		return array("status" => "empty", "message" => "No entries found.");
+    	}
 
     }
 

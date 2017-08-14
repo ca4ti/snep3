@@ -290,7 +290,9 @@ class CallsReportController extends Zend_Controller_Action {
         $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
 
         curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-
+        curl_setopt($http, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
+        $digest = Snep_Usuario::decrypt($_SESSION['http_authorization'], $_SESSION['ENCRYPTION_KEY']);
+        curl_setopt($http, CURLOPT_USERPWD, "$digest");
         $http_response = curl_exec($http);
         $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
 
@@ -463,6 +465,7 @@ class CallsReportController extends Zend_Controller_Action {
               break;
               default:
               $erro = $this->view->translate("Error "). $httpcode;
+              $erro .= " - $http_response - ";
               $erro .= $this->view->translate(". Please contact your system administrator");
               $this->view->error_message = $erro;
               $this->renderScript('error/sneperror.phtml');

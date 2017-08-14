@@ -13,7 +13,33 @@
         </div>
       </div>
     </fieldset>
+<?php
+if($this->telcos){
+  ?>
+  <fieldset>
+        <legend><?php echo $this->translate("Telco");?></legend>
 
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><?php echo $this->translate("Telco");?></label>
+            <div class="col-sm-4">
+                <select class="form-control" name="telco" id="telco">
+                  <option value=""><?php echo $this->translate("No Telco");?></<option>
+                    <?php foreach($this->telcos as $telco){ ?>
+                        <option value="<?php echo $telco['id']; ?>"
+                          <?php
+                        if($telco['id'] === $this->trunk['telco']){
+                          echo " selected";
+                        }
+                        ?>><?php echo $telco['name'];?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+
+  </fieldset>
+  <?php
+}
+ ?>
     <fieldset>
       <legend><?php echo $this->translate('Interface Technology');?></legend>
 

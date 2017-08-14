@@ -1,6 +1,7 @@
 INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('default','host_inspect','http://api.opens.com.br:3003');
 UPDATE `core_config` SET `config_value`='http://api.opens.com.br:3003/v2/notifications' WHERE `config_name`='host_notification' AND `config_module`='default';
 ALTER TABLE `regras_negocio` ADD COLUMN `dates_alias` VARCHAR(20);
+ALTER TABLE `trunks` ADD COLUMN `telco` INT(10) DEFAULT NULL;
 --
 -- Table structure for table `date_alias`
 --

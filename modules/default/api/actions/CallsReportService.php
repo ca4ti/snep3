@@ -154,7 +154,6 @@ class CallsReportService implements SnepService {
       $where_contactDst .= ") ";
     }
 
-
     /* Busca os ramais pertencentes ao grupo de ramal de origem selecionado */
     $ramaissrc = $ramaisdst = "";
     if (isset($_GET['groupsrc'])) {
@@ -292,8 +291,15 @@ class CallsReportService implements SnepService {
     }
 
     // SQL
-    $select = "SELECT ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(calldate,'%d/%m/%Y') AS key_dia, date_format(calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
-    $select .= "src, dst, disposition, duration, billsec, accountcode, userfield, dcontext, amaflags, uniqueid, calldate, dstchannel FROM cdr, ccustos ";
+    $select = "SELECT ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(cdr.calldate,'%d/%m/%Y') AS key_dia, date_format(cdr.calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
+    $select .= "cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.accountcode, cdr.userfield, cdr.dcontext, cdr.amaflags, cdr.uniqueid, cdr.calldate, cdr.dstchannel";
+    if($_GET['rate']){
+      $select .= ", bc.price FROM cdr ";
+      $select .= " LEFT JOIN rated_calls bc ON bc.userfield = cdr.userfield ";
+    }else{
+      $select .= " FROM cdr ";
+    }
+    $select .= " LEFT JOIN ccustos ON accountcode = ccustos.codigo ";
     $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
     $select .= (isset($where_cost_center)) ? $where_cost_center : '';
     $select .= (isset($where)) ? $where : '';
@@ -308,7 +314,7 @@ class CallsReportService implements SnepService {
     $select .= (isset($where_binds)) ? $where_binds : '';
     $select .= $where_prefix;
     //$select .= " GROUP BY userfield ORDER BY calldate, userfield ";
-    $select .= " ORDER BY calldate, userfield ";
+    $select .= " ORDER BY calldate, cdr.userfield ";
 
     if($report_type != 'synthetic'){
       $select .= (isset($limit)) ? " LIMIT ".$limit : '';
@@ -383,6 +389,11 @@ class CallsReportService implements SnepService {
 
       $result_data[$value['uniqueid']]["src_name"] = $value["src"];
       $result_data[$value['uniqueid']]["dst_name"] = $value["dst"];
+
+      if($value['price'] !== ""){
+        //$bill = money_format('%.2n', $value["price"]);
+        $result_data[$value['uniqueid']]["price"] = $value["price"];
+      }
 
       if($replace){
         if($contacts[$value["src"]]){

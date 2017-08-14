@@ -278,6 +278,11 @@ class CallsReportController extends Zend_Controller_Action {
         $this->view->translate("NO ANSWER");
         $this->view->translate("BUSY");
         $this->view->translate("FAILED");
+        if(class_exists("Billing_Manager")){
+            $this->view->bill = true;
+            $service_url .= "&rate=true";
+        }
+
 
         $this->view->service_url = $service_url;
 
@@ -504,9 +509,10 @@ class CallsReportController extends Zend_Controller_Action {
                 $this->view->translate('Amaflags'),
                 $this->view->translate('Code unique'),
                 $this->view->translate('Calldate'),
-                $this->view->translate('Channel'));
+                $this->view->translate('Channel'),
+                $this->view->translate('Rate'));
 
-                $output = implode(",", $header) . "\n";
+                $output = implode(";", $header) . "\n";
 
                 while ($dado = $stmt->fetch()) {
 
@@ -514,7 +520,7 @@ class CallsReportController extends Zend_Controller_Action {
                   $values = null;
 
                   $indexes = array_keys($dado);
-                  $values .= preg_replace("/(\r|\n)+/", "", implode(",", $dado));
+                  $values .= preg_replace("/(\r|\n)+/", "", implode(";", $dado));
                   $values .= "\n";
                   $output .= $values;
                 }

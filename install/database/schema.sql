@@ -392,6 +392,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `dtmf_dial_number` VARCHAR(50) DEFAULT NULL,
   `domain` VARCHAR( 250 ) NOT NULL,
   `technology` VARCHAR( 20 ) NOT NULL,
+  `telco` INT(10) DEFAULT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -24,7 +24,7 @@
  *
  */
 // Processes the signals coming from asterisk
-declare(ticks = 1);
+declare(ticks=1);
 if (function_exists('pcntl_signal')) {
     pcntl_signal(SIGHUP, SIG_IGN);
 }
@@ -177,7 +177,29 @@ $regra->setAsteriskInterface($asterisk);
 try {
     $log->info("Running the rule {$regra->getId()}:$regra");
     $regra->execute($origem);
-    $log->info("End of running the rule {$regra->getId()}:$regra");
+    $billsec = $asterisk->get_variable("CDR(billsec)");
+    $duration = $asterisk->get_variable("CDR(duration)");
+    $dst = $asterisk->get_variable("CDR(dst)");
+    $src = $asterisk->get_variable("CDR(src)");
+    $userfield = $asterisk->get_variable("CDR(userfield)");
+    $uniqueid = $asterisk->get_variable("CDR(uniqueid)");
+    $ch = $asterisk->get_variable("CDR(channel)");
+    $dch = $asterisk->get_variable("CDR(dstchannel)");
+    $bill = array(
+      "billsec" => $billsec['data'],
+      "duration" => $duration['data'],
+      "userfield" => $userfield['data'],
+      "uniqueid" => $uniqueid['data'],
+      "phone" => $dst['data'],
+      "channel" => $ch['data'],
+      "dstchannel" => $dch['data']
+    );
+    $log->info("End of running the rule {$regra->getId()}:$regra -> billsec: {$billsec['data']} -> duration: {$duration['data']}");
+    if (class_exists("Billing_Manager")){
+      $billing = new Billing_Manager();
+      $rate = $billing->rate($bill);
+    }
+
 } catch (PBX_Exception_AuthFail $ex) {
     $log->info("Failed to authenticate the extension.");
 } catch (Exception $ex) {

@@ -29,7 +29,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-datetime
             <label class="col-sm-1 control-label"><?php echo $this->translate("Date");?></label>
             <div class="col-sm-3">
               <div class="input-group">
-                <input type="text" class="snep-datetimepicker form-control" id="date[]" name="date[]" required placeholder="YYYY-MM-DD or MM-DD" />
+                <input type="text" class="snep-datetimepicker form-control" name="date[]" required placeholder="YYYY-MM-DD or MM-DD" />
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </div>
@@ -50,6 +50,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/bootstrap-datetime
               <button id="add" type="button" class="boxadd add_field"></button>
                   <button id="del" type="button" class="boxremove del_field"></button>
             </div>
+          </div>
           </div>
   <?php } else {?>
           <?php

@@ -94,10 +94,10 @@ if (file_exists($filename)) {
 // Carrega o serviç
 $service = new $service;
 // Executa o serviço
-$resultado = $service->execute();
+$resultado = @$service->execute();
 
 // Seta o HTTP header de conteudo de resposta para application/json
-header('Content-Type: application/json'); 
+header('Content-Type: application/json');
 
 // // Imprime resultado
 if ($_GET['service'] == "CallsReport") {

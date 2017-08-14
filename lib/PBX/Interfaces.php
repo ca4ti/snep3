@@ -38,7 +38,7 @@ require_once "PBX/Usuarios.php";
 class PBX_Interfaces {
 
     private $interfaceList;
-    
+
     public function __construct() {
         $this->interfaceList = array();
     }
@@ -67,7 +67,7 @@ class PBX_Interfaces {
     }
 
     /**
-     * get - Retorna uma instancia de interface a partir de sua persistencia 
+     * get - Retorna uma instancia de interface a partir de sua persistencia
      * no banco de dados do Snep
      * @param <int> Id da interface no banco
      * @return PBX_Asterisk_Interface do tipo correspondente ao presente no banco
@@ -88,7 +88,7 @@ class PBX_Interfaces {
     public static function getAll($tipo = 'all') {
         throw new Exception("Not supported by this version of Snep");
     }
-    
+
     /**
      * getChannelOwner - Procura o dono de uma interface baseado em canal.
      *
@@ -119,10 +119,10 @@ class PBX_Interfaces {
             if(preg_match("#^{$interface['canal']}$#i", $channel)
                || preg_match("#^Manual/{$channel}$#i", $interface['canal'])) {
 
-                   
-                 
+
+
                 $exten = PBX_Usuarios::get($interface['name']);
-                
+
                 if(class_exists("Agents_Manager")) {
                     // Identify if user is logged in as agent
                     $agent = Agents_Manager::isExtenLogged($exten->getNumero());
@@ -132,7 +132,7 @@ class PBX_Interfaces {
                         $agent_obj->setExtension($exten);
                         $agent_obj->setCode($agent);
                         $agent_obj->setName($agent_['name']);
-                        
+
                         return $agent_obj;
                     }
                 }
@@ -140,13 +140,13 @@ class PBX_Interfaces {
                 return $exten;
             }
         }
-        
+
         return null;
     }
 
     /**
-     * reconfigure - Força reconfiguração de todas as interfaces. Chama 
-     * as configurações efetivas das interfaces no banco de dados para que 
+     * reconfigure - Força reconfiguração de todas as interfaces. Chama
+     * as configurações efetivas das interfaces no banco de dados para que
      * seja reconstruida a configuração real das mesmas
      */
     public static function reconfigure() {
@@ -154,7 +154,7 @@ class PBX_Interfaces {
     }
 
     /**
-     * register - Faz o armazenamento de uma interface no banco de dados de 
+     * register - Faz o armazenamento de uma interface no banco de dados de
      * interfaces do snep
      *
      * @param <string> Interface a ser registrada no banco de dados.
@@ -181,5 +181,30 @@ class PBX_Interfaces {
      */
     public static function update($interface) {
         throw new Exception("Not supported by this version of Snep");
+    }
+
+    /**
+    * getCodecs - get all codecs available in the asterisk
+    * @return <array> id, name, format, description
+    */
+    public function getCodecs(){
+
+      $asterisk = PBX_Asterisk_AMI::getInstance();
+
+      $codecs_data = $asterisk->Command("core show codecs");
+      $codecs_a = preg_split("/\n/",$codecs_data['data']);
+      $codecs = array();
+      foreach ($codecs_a as $key => $value) {
+        if(preg_match('/^\s+([0-9]+)\s+(\w+)\s+(\w+)\s+(\w+)\s+/', $value, $matches)){
+          array_push($codecs,array(
+            'id' => $matches[1],
+            'name' => $matches[3],
+            'format' => $matches[4],
+            'type' => $matches[2]
+          ));
+        }
+      }
+
+      return $codecs;
     }
 }

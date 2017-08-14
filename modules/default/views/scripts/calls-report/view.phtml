@@ -50,7 +50,10 @@ header('Cache-Control: max-age=0' );
                   <th data-hide="phone,tablet" class="text-center"><?php echo $this->translate("City");?> - <?php echo $this->translate("State");?></th>
                   <?php } ?>
                   <?php if($this->record){ ?>
-                    <th colspan="2" class="text-center" data-sort-ignore="true"><?php echo $this->translate("Records") ?></th>
+                    <th colspan="2" class="text-center" data-sort-ignore="true"><?php echo $this->translate("Call Record") ?></th>
+                  <?php } ?>
+                  <?php if($this->bill){ ?>
+                    <th colspan="2" class="text-center" data-sort-ignore="true"><?php echo $this->translate("Billing") ?></th>
                   <?php } ?>
                 </tr>
               </thead>
@@ -105,6 +108,9 @@ header('Cache-Control: max-age=0' );
                         <?php endif ?>
                       <?php endif ?>
                     <?php } ?>
+                    <?php if($this->bill){ ?>
+                      <td colspan="2" class="text-center"><?php echo $callsList->price; ?></td>
+                      <?php } ?>
                   </tr>
                 <?php } ?>
                 <?php

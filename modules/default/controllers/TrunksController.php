@@ -201,6 +201,12 @@ class TrunksController extends Zend_Controller_Action {
     }
     $this->view->boards = $boards;
 
+    if (class_exists("Telcos_Manager")) {
+      $this->view->telcos = Telcos_Manager::getAll();
+    }else{
+      $this->view->telcos = array();
+    }
+
     //Define the action and load form
     $this->view->action = "add" ;
     $this->view->techType = "snepsip";
@@ -276,7 +282,12 @@ class TrunksController extends Zend_Controller_Action {
       $db = Snep_Db::getInstance();
       $trunk = $db->query("select * from trunks where id='$idTrunk'")->fetch();
       $trunk['qualify_value'] = "";
-
+      if (class_exists("Telcos_Manager")) {
+        $this->view->telcos = Telcos_Manager::getAll();
+      }else{
+        $this->view->telcos = array();
+      }
+      
       if ($trunk['trunktype'] == "I") {
         $ip_info = $db->query("select * from peers where name='{$trunk['name']}'")->fetch();
         $this->view->infoTrunk = $ip_info;
@@ -628,6 +639,8 @@ class TrunksController extends Zend_Controller_Action {
       $nat = 'no';
     }
     $ip_data['nat'] = $nat ;
+
+    $trunk_data['telco'] = $post['telco'];
 
     return array("trunk" => $trunk_data, "ip" => $ip_data);
   }

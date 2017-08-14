@@ -114,12 +114,12 @@ class ExtensionsController extends Zend_Controller_Action {
           $this->view->extenInGroup = array('1' => "");
 
           // Mont codec's list and sets the default codec for each option
-          $codecsDefault = array("alaw","ilbc","g729","gsm","h264","h263","h263p","ulaw","all");
+          $codecsDefault = PBX_Interfaces::getCodecs();
           $codec1 = $codec2 = $codec3 = "";
           foreach($codecsDefault as $key => $value){
-            $codec1 .= '<option value="'.$value.'"'.($value==="alaw" ? " selected " : "").'>'.$value.'</option>\n';
-            $codec2 .= '<option value="'.$value.'"'.($value==="ulaw" ? " selected " : "").'>'.$value.'</option>\n';
-            $codec3 .= '<option value="'.$value.'"'.($value==="gsm"  ? " selected " : "").'>'.$value.'</option>\n';
+            $codec1 .= '<option value="'.$value['format'].'"'.($value['format']==="alaw" ? " selected " : "").'>'.$value['type'].' - '.$value['format'].'</option>\n';
+            $codec2 .= '<option value="'.$value['format'].'"'.($value['format']==="ulaw" ? " selected " : "").'>'.$value['type'].' - '.$value['format'].'</option>\n';
+            $codec3 .= '<option value="'.$value['format'].'"'.($value['format']==="gsm"  ? " selected " : "").'>'.$value['type'].' - '.$value['format'].'</option>\n';
           } // END foreach
           $this->view->codec1 = $codec1;
           $this->view->codec2 = $codec2;
@@ -317,7 +317,9 @@ class ExtensionsController extends Zend_Controller_Action {
               }
 
 
-              $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
+              //$codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
+              $codecsDefault = PBX_Interfaces::getCodecs();
+
               $codecs = explode(";", $exten['allow']);
 
               $codec1 = "";
@@ -325,9 +327,9 @@ class ExtensionsController extends Zend_Controller_Action {
               $codec3 = "";
               foreach($codecsDefault as $key => $value){
 
-                $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                $codec1 .= ($value['format'] == $codecs[0]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
+                $codec2 .= ($value['format'] == $codecs[1]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
+                $codec3 .= ($value['format'] == $codecs[2]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
 
               }
 

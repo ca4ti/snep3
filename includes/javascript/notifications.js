@@ -15,6 +15,11 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var server = window.location.host;
+var qmanager_url = 'http://' + server + ':8080';
+var announce_url = 'http://api.opens.com.br:3003/announce';
+var announce_timeout = 3;
+
 function handler(){
 
   var count = 0;
@@ -51,29 +56,40 @@ function getNotifications(url, session){
 }
 
 function getAnnounce(){
+
+  checkQmanager();
+
   var xmlhttp = new XMLHttpRequest();
-  var url = 'http://172.17.0.1:3000/announce';
+
   if("withCredentials" in xmlhttp){
-    xmlhttp.open("GET",  url);
+    xmlhttp.open("GET",  announce_url);
+    xmlhttp.timeout = announce_timeout * 1000;
     xmlhttp.withCredentials = "true";
-    xmlhttp.addEventListener("error", handlerAnnouce, false);
-    xmlhttp.onload = handlerAnnouce;
+    // xmlhttp.addEventListener("error", handlerAnnounce, false);
+    xmlhttp.onload = handlerAnnounce;
+    xmlhttp.onerror = handlerAnnounce;
+    xmlhttp.ontimeout = handlerAnnounce;
     xmlhttp.send();
   }else{
-    xmlhttp.open("GET",  url);
+    xmlhttp.open("GET",  announce_url);
+    xmlhttp.timeout = announce_timeout * 1000;
     xmlhttp.withCredentials = "true";
-    xmlhttp.onload = handlerAnnouce;
-    xmlhttp.addEventListener("error", handlerAnnouce, false);
+    xmlhttp.onload = handlerAnnounce;
+    xmlhttp.onerror = handlerAnnounce;
+    xmlhttp.ontimeout = handlerAnnounce;
+    // xmlhttp.addEventListener("error", handlerAnnounce, false);
     xmlhttp.send();
   }
 
 }
 
-function handlerAnnouce(){
+function handlerAnnounce(){
 
   var element = document.getElementById("announce");
+  var imageElement = document.getElementById("announce-img");
 
   if(this.responseText) {
+    console.log("Response:", this.responseText);
     try {
       var response = JSON.parse(this.responseText);
     } catch (e) {
@@ -85,29 +101,53 @@ function handlerAnnouce(){
       text: response.text || null
     }
     if(data.image && data.link){
-      element.innerHTML = element.innerHTML + '\
-      <a href="' + data.link + '" target=_blank alt="' + data.text + '">\
-        <img width=600 height=400 align=center src="' + data.image + '">\
-      </a>';
+      element.setAttribute("href",data.link);
+      element.setAttribute("alt",data.text);
+      imageElement.setAttribute("src",data.image);
     }else{
-        useDefaultAnnounce(element);
+        useDefaultAnnounce();
     }
 
   }else{
-    useDefaultAnnounce(element);
+    useDefaultAnnounce();
 
   }
 
 }
 
-function useDefaultAnnounce(element){
+function useDefaultAnnounce(){
 
   console.log('Using default announce');
+  var element = document.getElementById("announce");
+  var imageElement = document.getElementById("announce-img");
+  element.setAttribute("href","http://www.opens.com.br/solutions/qmanager");
+  imageElement.setAttribute("src", "../images/qmanager-banner.png");
 
+}
+
+function handlerQmanager(){
+
+  var element = document.getElementById("announce-qmanager");
+  var imageElement = document.getElementById("announce-login");
+  if(!this.status || this.status !== 200) {
+    console.log("Disabling announce login");
+    element.style.display = 'none';
+  }else{
+    imageElement.setAttribute("src","../images/qmanager-login.png");
+    element.setAttribute("href",qmanager_url);
+
+  }
+
+}
+function checkQmanager(){
   var server = window.location.host;
-  element.innerHTML = element.innerHTML + '\
-  <a href="http://' + server + ':8080" target=_blank>\
-    <img width=600 height=400 align=center src="/snep/images/qmanager-banner.png">\
-  </a>';
+  var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.open("GET",  qmanager_url);
+  xmlhttp.withCredentials = "true";
+  xmlhttp.onload = handlerQmanager;
+  xmlhttp.onerror = handlerQmanager;
+  xmlhttp.send();
+
 
 }

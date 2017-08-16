@@ -15,6 +15,10 @@ if($controller != 'auth'){
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
 
+    // Guide Help
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/introjs.css');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/intro.js');
+
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
@@ -22,6 +26,7 @@ if($controller != 'auth'){
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
+
 
 }
 ?>
@@ -57,7 +62,7 @@ if($controller != 'auth'){
 <body>
   <header>
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <nav id="step1" class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
@@ -143,8 +148,9 @@ if($controller != 'auth'){
 
               <li class="divider"></li>
               <li>
-                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/index">
-                  <i class="fa fa-question-circle fa-fw"></i>
+                <!-- <a href="<?php echo $this->baseUrl(); ?>/index.php/default/index" onclick="startIntro();"> -->
+                  <a href="#" onclick="startIntro();">
+                  <i id="help" class="fa fa-question-circle fa-fw"></i>
                   <?php echo $this->translate("Help"); ?>
                 </a>
               </li>
@@ -161,7 +167,7 @@ if($controller != 'auth'){
               <li>
                 <a href="<?php echo $this->baseUrl(); ?>/index.php/default/register">
                   <i class="fa fa-check-square fa-fw"></i>
-                  <?php echo $this->translate("Intercomunexão"); ?>
+                  <?php echo $this->translate("Cloud Server Informations"); ?>
                 </a>
               </li>
 
@@ -222,5 +228,47 @@ if($controller != 'auth'){
 
     </div> <!-- /#page-wrapper -->
   </div> <!-- /#wrapper -->
+  <script type="text/javascript">
+  // var page_steps = (!page_steps) ? "" : page_steps;
+  var steps = [
+    {
+      intro: "<?php echo $this->translate('Welcome to SNEP!');?>"
+    },
+    {
+      element: '.snep-body-dashboard',
+      intro: "<?php echo $this->translate('This is your Dashboard. <br>\
+      You can customize it as you want, adding, moving or removing elements.');?>"
+    },
+    {
+      element: '#default_status',
+      intro: "<?php echo $this->translate('Here you can access the Status of Peers, Trunks, Board and System in general.');?>",
+      position: 'right'
+    },
+    {
+      element: '#default_manage',
+      intro: "<?php echo $this->translate('Add Peers, Trunks, Contacts and more.');?>",
+      position: 'right'
+    }
+    ,
+    {
+      element: '#default_routing',
+      intro: "<?php echo $this->translate('The SNEP work if Routes to determine what to do with any call. <br>\
+      Here you can manager this routes.');?>",
+      position: 'right'
+    }
+  ]
+
+  function startIntro(){
+    var page = location.pathname.split("/").slice(-1)
+    var intro = introJs();
+    if(page == ""){
+        intro.setOptions({
+          steps: steps
+        });
+    }
+    intro.start()
+  }
+
+  </script>
 </body>
 </html>

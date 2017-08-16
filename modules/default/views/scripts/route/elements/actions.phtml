@@ -5,13 +5,13 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/snep.js
 $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/agi_rules.js", 'text/javascript');
 ?>
 
-<hr>    
-    
-<div class="form-group">
+<hr>
+
+<div class="form-group" data-intro="<?php echo $this->translate('For each Route you can add one or more actions to be executed in a sequence.');?>">
     <label class="col-sm-2 control-label"><?php echo $this->translate("Action");?></label>
-    
+
     <div class="col-sm-8">
-        
+
         <select class="form-control route-sm-5" name="action-name" id="action-name">
             <?php foreach ($this->element->getView()->actions as $class => $label): ?>
                 <option value="<?php echo $class; ?>" label="<?php echo $label; ?>"><?php echo $label; ?></option>
@@ -27,7 +27,7 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/agi_rul
         </button>
 
         &nbsp;
-        <span class="input-group-btn">    
+        <span class="input-group-btn">
             <img src="<?php echo $this->baseUrl(); ?>/images/ajax-loader1.gif" id="loader_icon" alt="<?php echo $this->translate("Loading"); ?>..." />
         </span>
     </div>
@@ -53,4 +53,3 @@ $this->headScript()->appendFile($this->baseUrl() . "/includes/javascript/agi_rul
     </tbody>
 </table>
 <input name="actions_order" type="hidden" id="actions-order" value="" />
-

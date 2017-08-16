@@ -49,6 +49,8 @@ class RegisterController extends Zend_Controller_Action {
             curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
             $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($http, CURLOPT_TIMEOUT,3);
+            curl_setopt($http, CURLOPT_CONNECTTIMEOUT, 3);
             $http_response = curl_exec($http);
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
             curl_close($http);

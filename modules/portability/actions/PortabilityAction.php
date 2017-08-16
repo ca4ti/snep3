@@ -122,6 +122,7 @@ XML;
         $http = curl_init($service_url);
 
         curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($http, CURLOPT_TIMEOUT,3);
 	      curl_setopt($http, CURLOPT_CONNECTTIMEOUT, 3);
         $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
 

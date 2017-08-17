@@ -270,7 +270,7 @@ class Snep_Menu {
             }
 
             if (count($this->getChildren()) > 0) {
-                $html .= "<ul class=\"nav nav-second-level\">";
+                $html .= "<ul id=\"sub-{$this->getId()}\" class=\"nav nav-second-level\">";
                 $html .= $this->renderChildren();
                 $html .= "</ul>";
             }

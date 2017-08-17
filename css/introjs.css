@@ -271,8 +271,8 @@ tr.introjs-showElement > th {
 
 .introjs-skipbutton {
   box-sizing: content-box;
-  margin-right: 5px;
-  color: #7a7a7a;
+  margin-right: 15px;
+  color: #000;
 }
 
 .introjs-prevbutton {

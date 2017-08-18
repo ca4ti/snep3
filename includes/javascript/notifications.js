@@ -16,7 +16,7 @@
  */
 
 var server = window.location.host;
-var qmanager_url = 'http://' + server + ':8080';
+var qmanager_url = 'http://' + server + ':8080/auth/login';
 var announce_url = 'http://api.opens.com.br:3003/announce';
 var announce_timeout = 3;
 
@@ -121,7 +121,7 @@ function useDefaultAnnounce(){
   var element = document.getElementById("announce");
   var imageElement = document.getElementById("announce-img");
   element.setAttribute("href","http://www.opens.com.br/solutions/qmanager");
-  imageElement.setAttribute("src", "../images/qmanager-banner.png");
+  imageElement.setAttribute("src", "/snep/images/qmanager-banner.png");
 
 }
 
@@ -133,7 +133,7 @@ function handlerQmanager(){
     console.log("Disabling announce login");
     element.style.display = 'none';
   }else{
-    imageElement.setAttribute("src","../images/qmanager-login.png");
+    imageElement.setAttribute("src","/snep/images/qmanager-login.png");
     element.setAttribute("href",qmanager_url);
 
   }

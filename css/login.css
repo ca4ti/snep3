@@ -25,7 +25,7 @@ img{max-width:100%;}
 /*--login form start here--*/
 
 body {
-    background: #333333;
+    background: #333333 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 100%;
 }

@@ -304,7 +304,7 @@ class AuthController extends Zend_Controller_Action {
         clearInterval(system_status_interval); // That's 60 seconds
         </script>
         <?php
-        $this->_redirect("auth/login");
+        $this->_redirect("/");
     }
 
 

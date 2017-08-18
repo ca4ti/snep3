@@ -266,9 +266,11 @@ if($controller != 'auth'){
   ]
 
   function startIntro(){
-    var page = location.pathname.split("/").slice(-1)
+    var page = location.pathname.split("/").slice(-1);
     var intro = introJs();
-    if(page === ""){
+    console.log("Starting intro.js on page:", page);
+    if(page == ""){
+      console.log("Setting options");
         intro.setOptions({
           steps: steps
         });

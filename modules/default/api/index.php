@@ -78,24 +78,25 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 	$user = $_SERVER['PHP_AUTH_USER'];
 }
 
-if($user && $passwd){
-        $authAdapter = new Zend_Auth_Adapter_DbTable($db);
-        $authAdapter->setTableName('users');
-        $authAdapter->setIdentityColumn('name');
-        $authAdapter->setCredentialColumn('password');
-        $authAdapter->setIdentity($user);
-        $authAdapter->setCredential($passwd);
+if(($user && $passwd) || ($_GET['service'] == "Signup")){
+  if($_GET["service"] != "Signup"){
+    $authAdapter = new Zend_Auth_Adapter_DbTable($db);
+    $authAdapter->setTableName('users');
+    $authAdapter->setIdentityColumn('name');
+    $authAdapter->setCredentialColumn('password');
+    $authAdapter->setIdentity($user);
+    $authAdapter->setCredential($passwd);
 
-        // Autentication
-        $auth = Zend_Auth::getInstance();
-        $result = $auth->authenticate($authAdapter);
-        switch ($result->getCode()) {
-             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                   error("User or password invalid: {$user}:{$passwd}");
-                   break;
-	}
-
+    // Autentication
+    $auth = Zend_Auth::getInstance();
+    $result = $auth->authenticate($authAdapter);
+    switch ($result->getCode()) {
+         case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+         case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+               error("User or password invalid: {$user}:{$passwd}");
+               break;
+  	}
+  }
   require_once(dirname(__FILE__) . "/actions/SnepService.php");
 
 	if(!isset($_GET['service'])){

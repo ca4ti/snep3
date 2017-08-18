@@ -42,9 +42,9 @@ class IndexController extends Zend_Controller_Action {
             $distro = $config->system->itc_distro;
             $required_register = $config->system->itc_required;
 
-            $viewnoregister = false;
+            $viewnoregister = true;
             if($required_register == "true"){
-                $viewnoregister = true;
+                $viewnoregister = false;
             }
 
             $this->view->viewnoregister = $viewnoregister;

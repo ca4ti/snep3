@@ -27,25 +27,26 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Iago Uilian Berndt <iagouilian@gmail.com>
- * 
+ *
  */
 class Snep_AuthPlugin extends Zend_Controller_Plugin_Abstract{
 
     public function __construct() {}
-    
+
     /**
      * Verifica se o usuaria esta logado
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request){
-    	 
+
     	$auth = Zend_Auth::getInstance();
         $action = $this->getRequest()->getActionName();
-               
-        if (!$auth->hasIdentity() && ($action != "redefine" && $action != "recuperation")) {
-	    	$request->setModuleName("default");
-	    	$request->setControllerName("auth");
-	    	$request->setActionName("login");
-	    }
+        $controller = $this->getRequest()->getControllerName();
+
+        if (!$auth->hasIdentity() && ($action != "redefine" && $action != "recuperation") && $controller != "invite") {
+  	    	$request->setModuleName("default");
+  	    	$request->setControllerName("auth");
+  	    	$request->setActionName("login");
+        }
     }
-    
+
 }

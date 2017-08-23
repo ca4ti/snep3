@@ -19,10 +19,10 @@
 
 /**
  *  Class that  controls  the  persistence  of pickup groups.
- * 
+ *
  *  IMPORTANT - verify:
  *  - agi/snep.php
- *  - modules/default/views/scripts/module-settings/index.phtml 
+ *  - modules/default/views/scripts/module-settings/index.phtml
  *  - modules/default/controllers/ModuleSettingsController.php
  *
  * @category  Snep
@@ -43,7 +43,7 @@ class Snep_ModuleSettings_Manager {
 
     /**
      * Add module configuration in database
-     * 
+     *
      * @param array $result
      */
     public static function addConfig($result) {
@@ -63,7 +63,7 @@ class Snep_ModuleSettings_Manager {
 
     /**
      * Update module configuration in database
-     * 
+     *
      * @param string $module
      * @param string $name
      * @param array $value
@@ -71,8 +71,8 @@ class Snep_ModuleSettings_Manager {
     public static function updateConfig($config_key,$config_value) {
 
         $db = Zend_Registry::get('db');
-        $db->beginTransaction();
 
+        $db->beginTransaction();
         try {
             $db->update('core_config', $config_value, $config_key);
             $db->commit();
@@ -98,7 +98,36 @@ class Snep_ModuleSettings_Manager {
                 ->where("config_module = '$module'");
 
         $stmt = $db->query($select);
-        $data = $stmt->fetchAll();  
+        $data = $stmt->fetchAll();
+
+        foreach ($data as $key => $value) {
+          if($value['config_name'] === 'smtp_password'){
+            $data[$key]['config_value'] = base64_decode($value['config_value']);
+          }
+        }
+
+        return $data;
+    }
+
+    /**
+    * Return a configuration from the database based on his module.
+    *
+    * @param string $module
+    * @return array $data
+    */
+    public static function getConfig($module) {
+
+        $db = Zend_Registry::get('db');
+        $select = $db->select()
+                ->from('core_config')
+                ->where("config_name = '$module'");
+
+        $stmt = $db->query($select);
+        $data = $stmt->fetch();
+
+        if($data['config_name'] === 'smtp_password'){
+          $data['config_value'] = base64_decode($data['config_value']);
+        }
 
         return $data;
     }

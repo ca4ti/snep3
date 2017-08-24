@@ -6,4 +6,11 @@
 "4":{"type":"text_ro","key":"userfield","label":"Userfield result"},
 "5":{"type":"text_ro","key":"userfield_example","label":"Example"},
 "6":{"type":"separator"},
-"7":{"type":"text_ro","key":"host_notification","label":"ITC/Snep host notification"} }
+"7":{"type":"text_ro","key":"host_notification","label":"ITC/Snep host notification"},
+"8":{"type":"text","key":"external_url","label":"External URL Address","placeholder":"External URL Address to your SNEP"},
+"9":{"type":"text","key":"smtp_user","label":"Your SMTP User to send emails"},
+"10":{"type":"password","key":"smtp_password","label":"Your SMTP Password"},
+"11":{"type":"text","key":"smtp_server","default":"smtp.gmail.com","label":"Your STMP Server"},
+"12":{"type":"text","key":"smtp_port","default":"587","label":"Your STMP Server Port"},
+"13":{"type":"select","key":"smtp_ssl","label":"Use SSL", "option":[{"key":"tls","label":"TLS"}, {"key":"ssl", "label":"SSL"}]}
+}

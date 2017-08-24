@@ -23,6 +23,10 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
                         <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Extension")?></a>
 
                         <a class="btn btn-outline btn-add" href="<?php echo $this->url ?>/multiadd/ " role="button"><?php echo $this->translate("Add Multiple")?></a>
+                        <?php if(class_exists("Invite_Signup")){
+                          ?>
+                        <a class="btn btn-outline btn-add" href="<?php echo $this->baseUrl ?>/invite/invite/add" role="button"><?php echo $this->translate("Send Invite")?></a>
+                        <?php } ?>
 
                         <a class="btn btn-outline btn-add" href="<?php echo $this->url ?>/multiremove/ " role="button"><?php echo $this->translate("Remove Multiple")?></a>
 
@@ -38,7 +42,7 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
                 </div>
 
                 <?php if ($this->error_message) {
-                    echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert', 
+                    echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert',
                     'error_title' => $this->translate('Alert'), 'error_message' => $this->error_message, 'error_buttons' => False) );
                 } else { ?>
 
@@ -100,4 +104,3 @@ $this->headScript()->appendFile('/snep/includes/javascript/scriptaculous/src/scr
         });
     });
 </script>
-

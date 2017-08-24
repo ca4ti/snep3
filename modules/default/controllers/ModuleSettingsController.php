@@ -45,12 +45,12 @@ class ModuleSettingsController extends Zend_Controller_Action {
      * indexAction - List parameters
      */
     public function indexAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Module Settings")));
 
         $config = Zend_Registry::get('config');
-        
+
         $path = $config->system->path->base."/modules";
 
         $directory = scandir($path);
@@ -60,10 +60,10 @@ class ModuleSettingsController extends Zend_Controller_Action {
 
         // receives the form parameter through json file of modules
         foreach($directory as $dir => $folder){
-            
+
             if($folder != '.' &&  $folder != '..'){
                 $filename = $path."/".$folder."/configs/config.json";
-                
+
                 if(file_exists($filename)){
                     $data[$dir] = file_get_contents($filename);
                 }
@@ -73,24 +73,24 @@ class ModuleSettingsController extends Zend_Controller_Action {
         if(empty($data)){
             if($cont_modules > 3){
                 // It has modules without setting
-                $this->view->error_message = $this->view->translate("Its modules do not require extra settings"); 
+                $this->view->error_message = $this->view->translate("Its modules do not require extra settings");
             }else{
                 // No modules
                 $this->view->error_message = $this->view->translate("Your Snep not have additional modules");
             }
-            
+
         }else{
 
             // mounts array with form data
             $cont = 0;
             foreach ($data as $module => $json) {
-                
+
                 $values = json_decode($json);
                 $view[$cont]["name"] = $values->nome;
                 $module_name = $values->nome;
                 $all_modules .= "#".$values->nome.",";
                 unset($values->nome);
-            
+
                 foreach($values as $key => $value){
 
                     $view[$cont]["view"][$key]["type"] = $value->type;
@@ -104,25 +104,25 @@ class ModuleSettingsController extends Zend_Controller_Action {
                                 $view[$cont]["view"][$key]["select"][$x]["label"] = $this->view->translate($option->label);
                                 $view[$cont]["view"][$key]["select"][$x]["key"] = $option->key;
                                 if(isset($option->selected)){
-                                    $view[$cont]["view"][$key]["select"][$x]["selected"] = true;    
+                                    $view[$cont]["view"][$key]["select"][$x]["selected"] = true;
                                 }else{
                                     $view[$cont]["view"][$key]["select"][$x]["selected"] = "";
                                 }
                             }
                             break ;
-                  
-                        case 'multi_checkbox': 
+
+                        case 'multi_checkbox':
 
                             $view[$cont]["view"][$key]["fieldset"] = $this->view->translate($value->fieldset);
                             foreach($value->option as $x => $option){
                                 $view[$cont]["view"][$key]["checkbox"][$x]["label"] = $this->view->translate($option->label);
                                 $view[$cont]["view"][$key]["checkbox"][$x]["key"] = $option->key;
-                                $view[$cont]["view"][$key]["checkbox"][$x]["checked"] = $option->checked;    
+                                $view[$cont]["view"][$key]["checkbox"][$x]["checked"] = $option->checked;
                             }
                             break;
 
                         case 'separator' :
-                            $view[$cont]["view"][$key]["type"] = $value->type;    
+                            $view[$cont]["view"][$key]["type"] = $value->type;
                             break ;
 
                         case 'text_ro' :
@@ -130,27 +130,28 @@ class ModuleSettingsController extends Zend_Controller_Action {
                             break;
 
                         default :
-                    
+
                             (isset($value->placeholder))? $view[$cont]["view"][$key]["placeholder"] = $this->view->translate($value->placeholder) : $view[$cont]["view"][$key]["placeholder"] = "";
+                            (isset($value->default))? $view[$cont]["view"][$key]["value"] = $value->default : $view[$cont]["view"][$key]["value"] = "";
                             break;
-                    } 
+                    }
                 }
                 $cont++;
             }
 
-            // get specfic data in database - Userfield 
+            // get specfic data in database - Userfield
             // IMPORTANT - verify:
             // - agi/snep.php
             // - lib/Snep/ModuleSettings/Manager.php
-            // - modules/default/views/scripts/module-settings/index.phtml   
-            $mod_default = Snep_ModuleSettings_Manager::get("default");  
+            // - modules/default/views/scripts/module-settings/index.phtml
+            $mod_default = Snep_ModuleSettings_Manager::get("default");
             foreach ($mod_default as $key => $value) {
                 if ($value['config_name'] === 'userfield') {
                     $userfield = $value["config_value"];
                 } elseif ($value['config_name'] === 'userfield_ud') {
                     $userfield_ud = $value["config_value"];
-                } 
-                
+                }
+
             }
             $subject=array("TS","AA","MM","DD","HH","ii","SR","DS","UD");
             $uf_check = array() ;
@@ -169,7 +170,7 @@ class ModuleSettingsController extends Zend_Controller_Action {
                     }
                 }
             }
-            
+
             //get generic data in database
             foreach($view as $i => $val){
 
@@ -185,38 +186,38 @@ class ModuleSettingsController extends Zend_Controller_Action {
                                 if($exp[1] === $database["config_name"]){
                                     $view[$i]["view"][$x]["value"] = $database["config_value"];
                                 }
-                             
+
                             }elseif($form["type"] === "select"){
                                 if($exp[1] === $database["config_name"]){
-                                    $view[$i]["view"][$x]["selected"] = $database["config_value"];    
+                                    $view[$i]["view"][$x]["selected"] = $database["config_value"];
                                 }
 
-                            }elseif($form["type"] === "checkbox"){                
+                            }elseif($form["type"] === "checkbox"){
                                 if($exp[1] === $database["config_name"]){
-                                
+
                                     if($database["config_value"] == "on"){
-                                        $view[$i]["view"][$x]["checked"] = true;    
+                                        $view[$i]["view"][$x]["checked"] = true;
                                     }
                                 }
                             }elseif($form["type"] === "multi_checkbox"){
                                 if ($exp[1] === "userfield_compose") {
                                     foreach ($form['checkbox'] as $uf_key => $uf_val) {
-                                        
+
                                         if (in_array($uf_val['key'],$uf_check)) {
-                                            $view[$i]['view'][$x]['checkbox'][$uf_key]['checked'] = "true" ; 
+                                            $view[$i]['view'][$x]['checkbox'][$uf_key]['checked'] = "true" ;
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }  
+                }
             }
 
             $this->view->data = $view;
             $this->view->allModules = substr($all_modules,0,-1);
         }
-        
+
         // Verify if the request is a post
         if ($this->_request->getPost()) {
 
@@ -226,30 +227,44 @@ class ModuleSettingsController extends Zend_Controller_Action {
             unset($formData["action"]);
             unset($formData["module"]);
             unset($formData["signup"]);
-            
+
             // capture model name
             foreach($formData as $key => $value){
                 $res = explode("_",$key);
             }
-            
-            
-            // Insert key and value    
+
+
+            // Insert key and value
             foreach($formData as $key => $value){
 
                 $res = explode("_x_",$key);
 
+                if($res[1] === 'smtp_password'){
+                  $value = base64_encode($value);
+                }
                 $config_key = array(
                     'config_module = ? ' => $res[0],
                     'config_name = ? ' => $res[1]
                     );
                 $config_value = array("config_value" => $value);
+                $exist_config = Snep_ModuleSettings_Manager::getConfig($res[1]);
 
-                Snep_ModuleSettings_Manager::updateConfig($config_key,$config_value);
+                if($exist_config != false && count($exist_config) > 0){
+                  Snep_ModuleSettings_Manager::updateConfig($config_key,$config_value);
+                }else if(isset($value) && isset($res[0]) && isset($res[1])){
+                  $config = array(
+                    "config_module" => $res[0],
+                    "config_name" => $res[1],
+                    "config_value" => $value
+                  );
+                  Snep_ModuleSettings_Manager::addConfig($config);
+                }
 
-            } 
+
+            }
 
             // redirect
-            $this->_redirect('/');              
+            $this->_redirect('/');
         }
 
     }

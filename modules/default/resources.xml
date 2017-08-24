@@ -22,8 +22,8 @@
 
         <resource id="ip-status" label="IP Status" font="sn-status-ip"></resource>
         <resource id="inspector" label="System Status" font="sn-status-sistema"></resource>
-        <resource id="khomp-links" label="Khomp boards" font="sn-links"></resource>
-        <resource id="errors-khomp" label="Khomp links errors" font="sn-erros-links"></resource>
+        <resource id="tdm-links" label="TDM boards" font="sn-links"></resource>
+        <resource id="errors-khomp" label="TDM links errors" font="sn-erros-links"></resource>
         <resource id="logs" label="Logs" font="sn-logs"></resource>
     </group>
 
@@ -94,7 +94,7 @@
         </resource>
         <resource id="dates-alias" label="Dates Alias" font="sn-alias">
             <resource id="write"></resource>
-        </resource>        
+        </resource>
     </group>
 
     <group id="configs" label="Configuration" font="sn-configuracao">

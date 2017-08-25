@@ -59,6 +59,7 @@ class Snep_LogUser {
       }
 
       $insert_data = array(
+          'datetime' => date('Y-m-d H:i:s'),
           'ip' => $ip,
           'user' => $username,
           'action' => $action,

@@ -47,7 +47,7 @@ class SystemstatusController extends Zend_Controller_Action {
 
         $db = Zend_Registry::get('db');
 
-        $tdmboards = $this->TDMBoards();
+        $tdmboards = $this->CloudNotice();
 
     		$serverport = $_SERVER['SERVER_PORT'] ;
     		$linfoData = new Zend_Http_Client('http://localhost:'.$serverport . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
@@ -345,7 +345,7 @@ class SystemstatusController extends Zend_Controller_Action {
         return $results;
     }
 
-    private function TDMBoards(){
+    private function CloudNotice(){
         // TDM Board inspect
         $asterisk = PBX_Asterisk_AMI::getInstance();
         $tdm = array();
@@ -404,6 +404,10 @@ class SystemstatusController extends Zend_Controller_Action {
           $tdm['timeout'] = 3;
           $ctx = Snep_Request::http_context($tdm);
           $request = Snep_Request::send_request("{$configs['config_value']}/snep/host/info/{$_SESSION['uuid']}",$ctx);
+          if($request['response_code'] == 401){
+            $ctx = Snep_Request::http_context($tdm,"PUT");
+            $put_request = Snep_Request::send_request("{$configs['config_value']}/snep/host/info/{$_SESSION['uuid']}",$ctx);
+          }
         }
         // TDM Board inspection end
 

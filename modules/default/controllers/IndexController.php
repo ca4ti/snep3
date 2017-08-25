@@ -203,7 +203,7 @@ class IndexController extends Zend_Controller_Action {
                     if(isset($distro)){
                         $data['distribution_id'] = $distro;
                     }
-
+                    $data['timeout'] = 2;
                     $content = json_encode($data);
                     //$url = trim($config->system->itc_address) . "auth/slogin";
                     $url = trim($config->system->itc_address) . "auth/login";

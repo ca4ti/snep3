@@ -112,6 +112,8 @@ class RegisterController extends Zend_Controller_Action {
                     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                     curl_setopt($curl, CURLOPT_HEADER, false);
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($http, CURLOPT_TIMEOUT,3);
+                    curl_setopt($http, CURLOPT_CONNECTTIMEOUT, 3);
                     curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
                     curl_setopt($curl, CURLOPT_POST, true);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
@@ -132,6 +134,7 @@ class RegisterController extends Zend_Controller_Action {
                             Snep_Register_Manager::removeDistributions();
                             Snep_Register_Manager::addDistributions($distributions);
                             Snep_Register_Manager::registerITC($api_key,$client_key);
+                            $_SESSION["first_login"] = true;
                             $this->view->registerd = true;
                             break;
                         case 500:

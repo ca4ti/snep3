@@ -29,6 +29,7 @@ if($controller != 'auth'){
 
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -231,6 +232,8 @@ if($controller != 'auth'){
   <script type="text/javascript">
   //jQuery.noConflict();
 
+  var first_login = '<?php echo $_SESSION["first_login"];?>';
+
   var steps = [
     {
       element: '.snep-body-dashboard',
@@ -287,6 +290,11 @@ if($controller != 'auth'){
       });
 
     intro.start()
+  }
+
+  if(first_login !== ""){
+    console.log("First:",first_login);
+    startIntro();
   }
   // jQuery(document).ready(function(){
   //     jQuery('[data-toggle="tooltip"]').tooltip();

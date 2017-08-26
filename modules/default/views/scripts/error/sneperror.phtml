@@ -1,11 +1,11 @@
-<!-- 
-Parameters: 
+<!--
+Parameters:
  - error_type : Define css class (error or alert)
  - error_title: Define Panel Title
  - error_message: Define Panel Message
  - error_buttons: Define if show or not button
 
-PS: More information in controller 
+PS: More information in controller
 -->
 <?php
 
@@ -37,9 +37,15 @@ PS: More information in controller
         </div>
     </div>
     <?php
-    if ( $this->error_buttons ) { ?>
+    if ( $this->error_buttons ) {
+      if($this->error_back_button){
+        $go_back = $this->error_back_button;
+      }else{
+        $go_back = "javascript: history.go(-1)";
+      }
+      ?>
         <div class="snep-body-footer-buttons">
-            <button type="button" class="btn btn-add btn-primary" onclick="javascript: history.go(-1)" name="submit"><?php echo $this->translate("Back"); ?></button>
+            <button type="button" class="btn btn-add btn-primary" onclick="<?php echo $go_back; ?>" name="submit"><?php echo $this->translate("Back"); ?></button>
         </div>
     <?php } ?>
 </div>

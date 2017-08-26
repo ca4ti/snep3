@@ -129,9 +129,9 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
                 }
             }
 
-            // if (!is_object($this->foundRule)) { // Caso nenhuma regra tenha sido encontrada
-            //     throw new PBX_Exception_NotFound("No rule found for this request");
-            // }
+            if (!is_object($this->foundRule) && count($this->matches) < 1) { // Caso nenhuma regra tenha sido encontrada
+                throw new PBX_Exception_NotFound("No rule found for this request");
+            }
         } else {
             throw new PBX_Exception_NotFound("No rules in database");
         }

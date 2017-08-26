@@ -347,13 +347,15 @@ class SystemstatusController extends Zend_Controller_Action {
 
     private function CloudNotice(){
         // TDM Board inspect
+        $db = Zend_Registry::get('db');
         $asterisk = PBX_Asterisk_AMI::getInstance();
         $tdm = array();
+        $tdm['tdm'] = array();
 
         // Khomp Boards
         $khomp = $asterisk->Command('khomp summary concise');
         $tdmkhomp = str_replace("<K> ","",str_getcsv($khomp['data'],"\n"));
-        $tdm['khomp'] = array("boards"=>array(), "conf"=>array());
+        $tdm['tdm']['khomp'] = array("boards"=>array(), "conf"=>array());
         if(count($tdmkhomp) > 2){
                 foreach($tdmkhomp as $row => $item){
                    if($row > 2){
@@ -367,9 +369,9 @@ class SystemstatusController extends Zend_Controller_Action {
                          "ip"       => $line[5],
                          "status"   => $line[6]
                       );
-                      array_push($tdm['khomp']['boards'],$board);
+                      array_push($tdm['tdm']['khomp']['boards'],$board);
                    }else if($row > 0){
-                      array_push($tdm['khomp']['conf'],$item);
+                      array_push($tdm['tdm']['khomp']['conf'],$item);
                    }
                 }
         }
@@ -378,7 +380,7 @@ class SystemstatusController extends Zend_Controller_Action {
         // Dahdi Boards
         $dahdi = $asterisk->Command('dahdi show status');
         $tdmdahdi = str_getcsv($dahdi['data'],"\n");
-        $tdm['dahdi'] = array("boards"=>array());
+        $tdm['tdm']['dahdi'] = array("boards"=>array());
         if(count($tdmdahdi) > 0){
                 foreach($tdmdahdi as $row => $item){
                    if($row > 1){
@@ -389,7 +391,7 @@ class SystemstatusController extends Zend_Controller_Action {
                          "span"     => $line[3],
                          "status"   => $line[4]
                       );
-                      array_push($tdm['dahdi']['boards'],$board);
+                      array_push($tdm['tdm']['dahdi']['boards'],$board);
                    }
                 }
         }
@@ -398,6 +400,31 @@ class SystemstatusController extends Zend_Controller_Action {
 
 
         $tdm['session'] = $_SESSION;
+        $disk = self::sys_fsinfo();
+        $tdm['os'] = array(
+          "memory" => self::sys_meminfo()['ram']['total'],
+          "disk" => $disk
+        );
+
+        $ast_v = $asterisk->Command('core show version');
+        $asterisk_version = str_getcsv($ast_v['data'],"\n")[1];
+
+        $slt = $db->select()->from('peers')->where('peer_type = ?', 'R');
+        $peers = $db->query($slt)->fetchAll();
+
+        $slt = $db->select()->from('peers')->where('peer_type = ?', 'T');
+        $trunks = $db->query($slt)->fetchAll();
+
+        $slt = $db->select()->from('queues');
+        $queues = $db->query($slt)->fetchAll();
+
+        $tdm['asterisk'] = array(
+          "version" => $asterisk_version,
+          "peers" => count($peers),
+          "trunks" => count($trunks),
+          "queues" => count($queues)
+        );
+
         $configs = Snep_Config::getConfiguration('default','host_inspect');
 
         if($configs['config_value']){

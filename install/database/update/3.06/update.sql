@@ -28,7 +28,7 @@ ALTER TABLE `trunks` ADD `time_initial_date` INT NULL AFTER `time_chargeby`;
 
 CREATE TABLE IF NOT EXISTS `logs_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `datetime` datetime NOT NULL,
   `ip` varchar(15) NOT NULL,
   `user` varchar(30) NOT NULL,
   `action` varchar(30) NOT NULL,

@@ -385,13 +385,16 @@ class SystemstatusController extends Zend_Controller_Action {
                 foreach($tdmdahdi as $row => $item){
                    if($row > 1){
                       preg_match("/([a-zA-Z0-9_-]+)\s+.+(Card\s[0-9]).+(Span\s[0-9])\s+([A-Za-z]+)/", $item, $line);
-                      $board = array(
-                         "board"    => $line[2],
-                         "desc"     => $line[1],
-                         "span"     => $line[3],
-                         "status"   => $line[4]
-                      );
-                      array_push($tdm['tdm']['dahdi']['boards'],$board);
+                      if($line[2] != null){
+                        $board = array(
+                           "board"    => $line[2],
+                           "desc"     => $line[1],
+                           "span"     => $line[3],
+                           "status"   => $line[4]
+                        );
+                        array_push($tdm['tdm']['dahdi']['boards'],$board);                        
+                      }
+
                    }
                 }
         }
@@ -399,7 +402,7 @@ class SystemstatusController extends Zend_Controller_Action {
 
 
 
-        $tdm['session'] = $_SESSION;
+        //$tdm['session'] = $_SESSION;
         $disk = self::sys_fsinfo();
         $tdm['os'] = array(
           "memory" => self::sys_meminfo()['ram']['total'],

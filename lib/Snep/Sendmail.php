@@ -34,7 +34,7 @@ class Snep_Sendmail {
      * Send mail messages
      * @param array $to, $message, $subject
      */
-    public function sendEmail($message) {
+    public static function sendEmail($message) {
 
         $config_smtp = array('ssl' => Snep_ModuleSettings_Manager::getConfig("smtp_ssl")['config_value'],
                     'auth' => 'login',
@@ -54,6 +54,14 @@ class Snep_Sendmail {
         foreach($email as $mail_address) {
             $mail_address = preg_replace('/\s+/', '', $mail_address);
             $mail->addTo( $mail_address );
+        }
+        if($message['attachment']){
+          $at = new Zend_Mime_Part(fopen($message['attachment'], 'r'));
+          $at->type        = 'audio/x-wav';
+          $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
+          $at->encoding    = Zend_Mime::ENCODING_BASE64;
+          $at->filename    = 'record.wav';
+          $mail->addAttachment($at);
         }
         $mail->send($transport);
         return true;

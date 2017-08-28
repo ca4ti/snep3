@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 14:50-0300\n"
+"POT-Creation-Date: 2017-08-28 14:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,6 +185,10 @@ msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:98
 msgid "A Business Support Program"
+msgstr ""
+
+#: ../agi/voicemail-notify.php:77
+msgid "A new voicemail message"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:277
@@ -429,12 +433,9 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:40
 #: ../modules/default/views/scripts/contacts/addedit.phtml:42
+#: ../modules/default/actions/EmailAction.php:66
 #: ../modules/default/controllers/ContactsController.php:345
 msgid "Address"
-msgstr ""
-
-#: ../modules/default/actions/EmailAction.php:66
-msgid "Addressee"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
@@ -817,8 +818,17 @@ msgstr ""
 msgid "Call Date"
 msgstr ""
 
+#: ../modules/default/actions/EmailAction.php:120
+#: ../agi/voicemail-notify.php:71
+msgid "Call Date:"
+msgstr ""
+
 #: ../modules/default/actions/DiscarTronco.php:139
 msgid "Call Duration Limit"
+msgstr ""
+
+#: ../modules/default/actions/EmailAction.php:118
+msgid "Call Information:"
 msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
@@ -1633,6 +1643,10 @@ msgstr ""
 msgid "Destination Group"
 msgstr ""
 
+#: ../modules/default/actions/EmailAction.php:124
+msgid "Destination Number:"
+msgstr ""
+
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Destinity"
 msgstr ""
@@ -1812,12 +1826,16 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
+#: ../agi/voicemail-notify.php:75
+msgid "Duration (in seconds):"
+msgstr ""
+
 #: ../modules/default/controllers/CallsReportController.php:507
 msgid "Duration (seconds)"
 msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:67
-msgid "E-mail of addressee"
+msgid "E-mail address. Split with ',' to use more than one email address."
 msgstr ""
 
 #: ../modules/billing/views/scripts/telcos/index.phtml:64
@@ -1879,7 +1897,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:339
 #: ../modules/default/views/scripts/extensions/addedit.phtml:341
 #: ../modules/default/views/scripts/register/index.phtml:12
-#: ../modules/default/actions/EmailAction.php:34
 msgid "Email"
 msgstr ""
 
@@ -2873,6 +2890,10 @@ msgstr ""
 
 #: ../modules/default/actions/EmailAction.php:68
 msgid "Message"
+msgstr ""
+
+#: ../agi/voicemail-notify.php:69
+msgid "Message Information:"
 msgstr ""
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:280
@@ -4364,6 +4385,10 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#: ../modules/default/actions/EmailAction.php:34
+msgid "Send Email"
+msgstr ""
+
 #: ../modules/default/views/scripts/extensions/index.phtml:28
 msgid "Send Invite"
 msgstr ""
@@ -4607,6 +4632,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:83
 msgid "Source Group"
+msgstr ""
+
+#: ../modules/default/actions/EmailAction.php:122
+#: ../agi/voicemail-notify.php:73
+msgid "Source Number:"
 msgstr ""
 
 #: ../modules/default/views/scripts/route/elements/src.phtml:1
@@ -5804,6 +5834,10 @@ msgstr ""
 
 #: ../lib/Snep/Notifications.php:67
 msgid "You have no notifications"
+msgstr ""
+
+#: ../agi/voicemail-notify.php:67
+msgid "You received a new Call Message from"
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:233

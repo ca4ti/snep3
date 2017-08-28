@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 14:50-0300\n"
+"POT-Creation-Date: 2017-08-28 14:18-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Douglas Conrad <douglas.conrad@opens.com.br>\n"
 "Language-Team: \n"
@@ -201,6 +201,10 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:98
 msgid "A Business Support Program"
 msgstr "Um Programa de Suporte à Negócios"
+
+#: ../agi/voicemail-notify.php:77
+msgid "A new voicemail message"
+msgstr "Um novo recado de voicemail"
 
 #: ../modules/default/controllers/CallsReportController.php:277
 msgid "ANSWERED"
@@ -444,12 +448,9 @@ msgstr "Filtros adicionais"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:40
 #: ../modules/default/views/scripts/contacts/addedit.phtml:42
+#: ../modules/default/actions/EmailAction.php:66
 #: ../modules/default/controllers/ContactsController.php:345
 msgid "Address"
-msgstr "Endereço"
-
-#: ../modules/default/actions/EmailAction.php:66
-msgid "Addressee"
 msgstr "Endereço"
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
@@ -835,9 +836,17 @@ msgstr "Em cache"
 msgid "Call Date"
 msgstr "Data da Ligação"
 
+#: ../modules/default/actions/EmailAction.php:120 ../agi/voicemail-notify.php:71
+msgid "Call Date:"
+msgstr "Data da Ligação:"
+
 #: ../modules/default/actions/DiscarTronco.php:139
 msgid "Call Duration Limit"
 msgstr "Limite de Duração da Chamada"
+
+#: ../modules/default/actions/EmailAction.php:118
+msgid "Call Information:"
+msgstr "Informação da Chamada:"
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
@@ -1656,6 +1665,10 @@ msgstr "Ramais Destino"
 msgid "Destination Group"
 msgstr "Grupo Destino"
 
+#: ../modules/default/actions/EmailAction.php:124
+msgid "Destination Number:"
+msgstr "Número de Destino:"
+
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Destinity"
 msgstr "Destino"
@@ -1838,13 +1851,18 @@ msgstr "Duplicar"
 msgid "Duration"
 msgstr "Duração"
 
+#: ../agi/voicemail-notify.php:75
+msgid "Duration (in seconds):"
+msgstr "Duração (em segundos):"
+
 #: ../modules/default/controllers/CallsReportController.php:507
 msgid "Duration (seconds)"
 msgstr "Duração (segundos)"
 
 #: ../modules/default/actions/EmailAction.php:67
-msgid "E-mail of addressee"
-msgstr "Endereço de E-mail"
+msgid "E-mail address. Split with ',' to use more than one email address."
+msgstr ""
+"Endereço de email: Separe com ',' para usar mais de um endereço de email."
 
 #: ../modules/billing/views/scripts/telcos/index.phtml:64
 #: ../modules/billing/views/scripts/billing/index.phtml:60
@@ -1905,7 +1923,6 @@ msgstr "Editar Tronco "
 #: ../modules/default/views/scripts/extensions/addedit.phtml:339
 #: ../modules/default/views/scripts/extensions/addedit.phtml:341
 #: ../modules/default/views/scripts/register/index.phtml:12
-#: ../modules/default/actions/EmailAction.php:34
 msgid "Email"
 msgstr "E-mail"
 
@@ -2908,6 +2925,10 @@ msgstr "Arquivo de Audio do Menu"
 #: ../modules/default/actions/EmailAction.php:68
 msgid "Message"
 msgstr "Mensagem"
+
+#: ../agi/voicemail-notify.php:69
+msgid "Message Information:"
+msgstr "Informações da Mensagem:"
 
 #: ../modules/default/controllers/ExtensionsGroupsController.php:280
 #: ../modules/default/controllers/ContactGroupsController.php:250
@@ -4400,6 +4421,10 @@ msgstr "Selecionado"
 msgid "Send"
 msgstr "Enviar"
 
+#: ../modules/default/actions/EmailAction.php:34
+msgid "Send Email"
+msgstr "Enviar Email"
+
 #: ../modules/default/views/scripts/extensions/index.phtml:28
 msgid "Send Invite"
 msgstr "Enviar Convite"
@@ -4644,6 +4669,10 @@ msgstr "Ramais de Origem"
 #: ../modules/default/views/scripts/calls-report/index.phtml:83
 msgid "Source Group"
 msgstr "Grupo de Origem"
+
+#: ../modules/default/actions/EmailAction.php:122 ../agi/voicemail-notify.php:73
+msgid "Source Number:"
+msgstr "Número de Origem:"
 
 #: ../modules/default/views/scripts/route/elements/src.phtml:1
 msgid ""
@@ -5905,6 +5934,10 @@ msgstr ""
 msgid "You have no notifications"
 msgstr "Você não possui notificações"
 
+#: ../agi/voicemail-notify.php:67
+msgid "You received a new Call Message from"
+msgstr "Você recebeu uma nova ligação de Recado de"
+
 #: ../modules/default/views/layouts/register.phtml:233
 msgid "You'Re Welcome"
 msgstr "Seja Bem-Vindo"
@@ -6374,6 +6407,12 @@ msgstr "www.sneplivre.com.br"
 #: /home/douglas/Dropbox/Development/snep-3/modules/portability/info.xml
 msgid "www.sneppbx.com"
 msgstr ""
+
+#~ msgid "Addressee"
+#~ msgstr "Endereço"
+
+#~ msgid "E-mail of addressee"
+#~ msgstr "Endereço de E-mail"
 
 #~ msgid "Rate Fractionation"
 #~ msgstr "Fracionamento"

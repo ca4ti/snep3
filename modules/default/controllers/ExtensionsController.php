@@ -655,8 +655,8 @@ class ExtensionsController extends Zend_Controller_Action {
                 $db->delete("voicemail_users", " mailbox='$exten' ");
               }
               $sql = "INSERT INTO voicemail_users ";
-              $sql.= " (fullname, email, mailbox, password, customer_id, `delete`) VALUES ";
-              $sql.= " ('$extenName', '$advEmail','$exten','$extenPass','$exten', 'yes')";
+              $sql.= " (context, fullname, email, mailbox, password, customer_id, `delete`) VALUES ";
+              $sql.= " ('default','$extenName', '$advEmail','$exten','$extenPass','$exten', 'no')";
               $stmt = $db->prepare($sql);
               $stmt->execute();
             }

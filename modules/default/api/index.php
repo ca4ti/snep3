@@ -11,7 +11,7 @@ if (!file_exists($config_file)) {
 };
 $config = parse_ini_file($config_file, true);
 
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 // Adicionando caminho de libs ao include path para autoloader trabalhar:
 set_include_path($config['system']['path.base'] . "/lib" . PATH_SEPARATOR . get_include_path());

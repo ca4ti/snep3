@@ -65,5 +65,7 @@ require_once "Zend/Registry.php";
 Zend_Registry::set("config", $config);
 Zend_Registry::set("db", Snep_Db::getInstance());
 
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 /* Fight! */
 $application->bootstrap()->run();

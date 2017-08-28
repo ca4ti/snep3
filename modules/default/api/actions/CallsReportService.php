@@ -291,8 +291,9 @@ class CallsReportService implements SnepService {
     }
 
     // SQL
-    $select = "SELECT ccustos.codigo,ccustos.tipo,ccustos.nome, date_format(cdr.calldate,'%d/%m/%Y') AS key_dia, date_format(cdr.calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
+    $select = "SELECT date_format(cdr.calldate,'%d/%m/%Y') AS key_dia, date_format(cdr.calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
     $select .= "cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.accountcode, cdr.userfield, cdr.dcontext, cdr.amaflags, cdr.uniqueid, cdr.calldate, cdr.dstchannel";
+    $select .= (isset($where_cost_center)) ? ",ccustos.codigo,ccustos.tipo,ccustos.nome" : "";
     if($_GET['rate']){
       $select .= ", bc.price FROM cdr ";
       $select .= " LEFT JOIN rated_calls bc ON bc.userfield = cdr.userfield ";
@@ -300,7 +301,7 @@ class CallsReportService implements SnepService {
       $select .= " FROM cdr ";
     }
     $select .= " LEFT JOIN ccustos ON accountcode = ccustos.codigo ";
-    $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
+    $select .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date') ";
     $select .= (isset($where_cost_center)) ? $where_cost_center : '';
     $select .= (isset($where)) ? $where : '';
     $select .= (isset($where_contactGroupSrc)) ? $where_contactGroupSrc : '';
@@ -319,8 +320,9 @@ class CallsReportService implements SnepService {
     if($report_type != 'synthetic'){
       $select .= (isset($limit)) ? " LIMIT ".$limit : '';
 
-      $selectcont = "SELECT count(*) as cont,disposition,accountcode,date_format(calldate,'%d/%m/%Y') AS key_dia, ccustos.tipo  FROM cdr, ccustos ";
-      $selectcont .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date' AND ccustos.codigo = accountcode) ";
+      $selectcont = "SELECT count(*) as cont,disposition,accountcode,date_format(calldate,'%d/%m/%Y') AS key_dia ";
+      $selectcont .= (isset($where_cost_center)) ? ", ccustos.tipo  FROM cdr, ccustos " : " FROM cdr";
+      $selectcont .= " WHERE ( calldate >= '$start_date' AND calldate <= '$end_date') ";
       $selectcont .= (isset($where_cost_center)) ? $where_cost_center : '';
       $selectcont .= (isset($where)) ? $where : '';
       $selectcont .= (isset($where_contactGroupSrc)) ? $where_contactGroupSrc : '';

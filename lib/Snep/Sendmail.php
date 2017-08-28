@@ -45,17 +45,17 @@ class Snep_Sendmail {
         $transport = new Zend_Mail_Transport_Smtp(Snep_ModuleSettings_Manager::getConfig("smtp_server")['config_value'], $config_smtp);
 
         $config = Zend_Registry::get('config');
+        $mail = new Zend_Mail("utf8");
+        $mail->setBodyHtml( $message['message'] )
+                    ->setFrom( "{$message['from']}" )
+                    ->setSubject( $message['subject'] );
 
         $email = explode(",", $message['to']);
         foreach($email as $mail_address) {
-
-            $mail = new Zend_Mail();
-            return $mail->setBodyHtml( $message['message'] )
-                        ->setFrom( "{$message['from']}" )
-                        ->addTo( $mail_address )
-                        ->setSubject( $message['subject'] )
-                        ->send($transport);
-
+            $mail_address = preg_replace('/\s+/', '', $mail_address);
+            $mail->addTo( $mail_address );
         }
+        $mail->send($transport);
+        return true;
     }
 }

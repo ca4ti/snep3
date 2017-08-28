@@ -53,7 +53,7 @@ class Snep_Request {
 
     // Send the request to the aditional service
     public function send_request($url,$ctx){
-        $raw_response = file_get_contents($url,0,$ctx);
+        $raw_response = @file_get_contents($url,0,$ctx);
 				$headers = self::parseHeaders($http_response_header);
 				$response = array(
 					"response" => $raw_response,

@@ -29,6 +29,7 @@ class IndexController extends Zend_Controller_Action {
 
         // Get configuration properties from Zend_Registry
         $config = Zend_Registry::get('config');
+        $this->view->show_help = $config->system->show_help;
 
         // checked if snep registred in itc
         if( $_SESSION['registered'] != true && $_SESSION['noregister'] != true){
@@ -37,7 +38,6 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                         $this->view->translate("Register")));
 
-;
 
             $distro = $config->system->itc_distro;
             $required_register = $config->system->itc_required;

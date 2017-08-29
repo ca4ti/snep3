@@ -73,7 +73,7 @@ if($controller != 'auth'){
         </button>
 
         <a href="<?php echo Zend_Registry::get('config')->system->path->web; ?>/index.php/">
-          <img src="<?php echo $this->baseUrl(); ?>/images/snep-main-logo.png">
+          <img id="snep-logo" src="<?php echo $this->baseUrl(); ?>/images/snep-main-logo.png">
           <img src="<?php echo $this->baseUrl(); ?>/images/powered-opens.png">
         </a>
 
@@ -232,9 +232,13 @@ if($controller != 'auth'){
   <script type="text/javascript">
   //jQuery.noConflict();
 
-  var first_login = '<?php echo $_SESSION["first_login"];?>';
 
   var steps = [
+    {
+      element: '#snep-logo',
+      intro: "<?php echo $this->translate('Welcome to SNEP. <br>\
+      Your IP Telephony Plataform.<br>Click Next to understand the basic steps to use SNEP.');?>"
+    },
     {
       element: '.snep-body-dashboard',
       intro: "<?php echo $this->translate('This is your Dashboard. <br>\
@@ -275,7 +279,8 @@ if($controller != 'auth'){
     if(page == ""){
       console.log("Setting options");
         intro.setOptions({
-          steps: steps
+          steps: steps,
+          overlayOpacity: 0.1
         });
     }
     intro.onbeforechange(function(element) {
@@ -291,14 +296,16 @@ if($controller != 'auth'){
 
     intro.start()
   }
-
-  if(first_login !== ""){
-    console.log("First:",first_login);
-    startIntro();
-  }
-  // jQuery(document).ready(function(){
-  //     jQuery('[data-toggle="tooltip"]').tooltip();
-  // });
   </script>
+  <?php
+  if(!isset($this->show_help) || ($this->show_help != false && $this->show_help !== "false")){
+    ?>
+    <script type="text/javascript">
+    startIntro();
+    </script>
+    <?php
+    Snep_Parameters_Manager::change("system","show_help",false);
+  }
+  ?>
 </body>
 </html>

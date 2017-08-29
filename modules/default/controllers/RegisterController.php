@@ -134,7 +134,6 @@ class RegisterController extends Zend_Controller_Action {
                             Snep_Register_Manager::removeDistributions();
                             Snep_Register_Manager::addDistributions($distributions);
                             Snep_Register_Manager::registerITC($api_key,$client_key);
-                            $_SESSION["first_login"] = true;
                             $this->view->registerd = true;
                             break;
                         case 500:

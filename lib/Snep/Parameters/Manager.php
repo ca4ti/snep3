@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
  * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_Parameters_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -113,6 +113,15 @@ class Snep_Parameters_Manager {
         );
 
         $db->insert('logs', $insert_data);
+    }
+
+    function change($section, $param, $value){
+      $configFile = APPLICATION_PATH . "/includes/setup.conf";
+      $config = new Zend_Config_Ini($configFile, null, true);
+      $config->{$section}->{$param} = $value;
+      $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+          'filename' => $configFile));
+      return $writer->write();
     }
 
 }

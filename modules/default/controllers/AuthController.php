@@ -129,7 +129,6 @@ class AuthController extends Zend_Controller_Action {
 
                         }
 
-
                         $this->_redirect('/');
                         break;
                     default:

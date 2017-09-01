@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-01 13:37-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2017-08-28 14:18-0300\n"
+"PO-Revision-Date: 2017-08-29 07:08-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../modules/default/actions/DiscarTronco.php:85
 msgid ""
@@ -163,21 +163,21 @@ msgstr ""
 msgid "88137-300 - Palhoça - SC - Brasil"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:267
+#: ../modules/default/controllers/AuthController.php:268
 msgid "</b> on PABX <b>"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:268
+#: ../modules/default/controllers/AuthController.php:269
 msgid ""
 "</b>.<br><br>Need to enter the code below for the redefinition.<br>Access "
 "code : <font color= red><b>"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:269
+#: ../modules/default/controllers/AuthController.php:270
 msgid "</b></font><br>Your code will expire on: "
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:270
+#: ../modules/default/controllers/AuthController.php:271
 msgid ""
 "<br><br>If you have not requested a redefinition password, please "
 "disregard<br><br><i>Team Snep</i>."
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Add Multiples Extensions"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:254
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Add to dashboard"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:264
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid "Add your External Trunks to make external Calls."
 msgstr ""
 
@@ -622,7 +622,7 @@ msgstr ""
 msgid "Auth. Sent"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:135
+#: ../modules/default/controllers/AuthController.php:136
 msgid "Authentication failure"
 msgstr ""
 
@@ -694,15 +694,15 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/view.phtml:56
 #: /home/douglas/Dropbox/Development/snep-3/modules/billing/resources.xml
 msgid "Billing"
-msgstr ""
+msgstr "Rates"
 
 #: ../modules/billing/controllers/BillingController.php:12
 msgid "Billing >> Billing"
-msgstr ""
+msgstr "Rates >> Rates"
 
 #: ../modules/billing/controllers/TelcosController.php:33
 msgid "Billing >> Telcos"
-msgstr ""
+msgstr "Rates >> Telcos"
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/billing/info.xml
 msgid "Billing Module for SNEP"
@@ -1128,7 +1128,7 @@ msgstr ""
 msgid "Code already exists."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:214
+#: ../modules/default/controllers/AuthController.php:215
 msgid "Code invalid"
 msgstr ""
 
@@ -1279,11 +1279,11 @@ msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
 msgid "Cost Center"
-msgstr ""
+msgstr "Tag"
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:193
 msgid "Costs Center Call"
-msgstr ""
+msgstr "Tags Call"
 
 #: ../modules/default/views/scripts/cnl/index.phtml:17
 msgid "Country"
@@ -1666,11 +1666,14 @@ msgid ""
 "It could be a Trunk, a Callerid(Contact), an Extension or any other option "
 "in the list."
 msgstr ""
+"Destination usually are the Called destination that you trying to filter.\n"
+"It could be a Trunk, a Callerid(Contact), an Extension or any other option "
+"in the list."
 
 #: ../modules/default/views/scripts/simulator/index.phtml:133
 #, php-format
 msgid "Destiny: %s"
-msgstr ""
+msgstr "Destination: %s"
 
 #: ../modules/billing/views/scripts/billing/addedit.phtml:47
 msgid "Details"
@@ -2033,7 +2036,7 @@ msgstr ""
 msgid "Error! No Khomp board installed"
 msgstr ""
 
-#: ../modules/default/controllers/RegisterController.php:149
+#: ../modules/default/controllers/RegisterController.php:150
 msgid "Error: "
 msgstr ""
 
@@ -2444,7 +2447,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contact-groups/migration.phtml:14
 msgid "Group contacts "
-msgstr ""
+msgstr "Contacts Groups"
 
 #: ../modules/default/views/scripts/users/permission.phtml:42
 msgid "Group permission"
@@ -2459,7 +2462,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:249
+#: ../modules/default/views/layouts/layout.phtml:245
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
@@ -2663,7 +2666,7 @@ msgstr ""
 #: ../modules/default/controllers/IndexController.php:122
 #: ../modules/default/controllers/IndexController.php:165
 #: ../modules/default/controllers/IndexController.php:228
-#: ../modules/default/controllers/RegisterController.php:140
+#: ../modules/default/controllers/RegisterController.php:141
 msgid "Internal Server Error. Please try later"
 msgstr ""
 
@@ -2693,7 +2696,7 @@ msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:86
 msgid "Join to the Opens Network"
-msgstr ""
+msgstr "Join to the Network"
 
 #: ../modules/default/views/scripts/systemstatus/index.phtml:91
 msgid "Kernel"
@@ -3140,7 +3143,7 @@ msgstr ""
 #: ../modules/default/views/scripts/route/add_edit.phtml:75
 #: ../modules/default/controllers/RouteController.php:60
 msgid "No Destiny"
-msgstr ""
+msgstr "No Destination"
 
 #: ../modules/default/controllers/KhompLinksController.php:111
 #: ../modules/default/controllers/TdmLinksController.php:69
@@ -3442,10 +3445,10 @@ msgstr ""
 msgid "Password Padlock"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:179
-#: ../modules/default/controllers/AuthController.php:181
-#: ../modules/default/controllers/AuthController.php:237
-#: ../modules/default/controllers/AuthController.php:239
+#: ../modules/default/controllers/AuthController.php:180
+#: ../modules/default/controllers/AuthController.php:182
+#: ../modules/default/controllers/AuthController.php:238
+#: ../modules/default/controllers/AuthController.php:240
 msgid "Password Recovery"
 msgstr ""
 
@@ -3457,7 +3460,7 @@ msgstr ""
 msgid "Password successfully recovered"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:208
+#: ../modules/default/controllers/AuthController.php:209
 msgid "Passwords do not match"
 msgstr ""
 
@@ -3886,7 +3889,7 @@ msgstr ""
 msgid "Recording Parameters"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:272
+#: ../modules/default/controllers/AuthController.php:273
 msgid "Redefinition password - SNEP"
 msgstr ""
 
@@ -3905,8 +3908,8 @@ msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:142
 #: ../modules/default/views/layouts/register.phtml:171
-#: ../modules/default/controllers/IndexController.php:37
-#: ../modules/default/controllers/IndexController.php:39
+#: ../modules/default/controllers/IndexController.php:36
+#: ../modules/default/controllers/IndexController.php:38
 msgid "Register"
 msgstr ""
 
@@ -4884,7 +4887,7 @@ msgstr ""
 
 #: ../modules/billing/controllers/BillingController.php:96
 msgid "The Bill will be deleted. After that, you have no way get it back."
-msgstr ""
+msgstr "The Rate will be deleted. After that, you have no way get it back."
 
 #: ../modules/default/controllers/ParametersController.php:60
 msgid "The File includes/setup.conf does not have permission to be modified."
@@ -4894,15 +4897,17 @@ msgstr ""
 msgid "The Recorded Files Path is required."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:269
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
 msgstr ""
+"The SNEP works with Routes to determine what to do with any call. <br>\\\n"
+"      Here you can manager this routes."
 
 #: ../modules/billing/controllers/TelcosController.php:113
 msgid "The Telco will be deleted. After that, you have no way get it back."
-msgstr ""
+msgstr "The Telco will be deleted. After that, you have no way to get it back."
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:581
 msgid "The board is required"
@@ -5028,7 +5033,7 @@ msgstr ""
 msgid "The first name is required"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:259
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr ""
 
@@ -5232,7 +5237,7 @@ msgid ""
 "another group for these extensions."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:244
+#: ../modules/default/views/layouts/layout.phtml:240
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5274,7 +5279,7 @@ msgstr ""
 msgid "Time Range (HH:MM-HH:MM)"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:220
+#: ../modules/default/controllers/AuthController.php:221
 msgid "Time of validity of the code was expired"
 msgstr ""
 
@@ -5514,13 +5519,13 @@ msgstr ""
 msgid "User defined string"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:203
-#: ../modules/default/controllers/AuthController.php:254
+#: ../modules/default/controllers/AuthController.php:204
+#: ../modules/default/controllers/AuthController.php:255
 msgid "User not registered"
 msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:231
-#: ../modules/default/controllers/RegisterController.php:143
+#: ../modules/default/controllers/RegisterController.php:144
 msgid "User or password incorrect."
 msgstr ""
 
@@ -5639,7 +5644,7 @@ msgstr ""
 msgid "We're almost ending"
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:189
+#: ../modules/default/controllers/AuthController.php:190
 msgid "We've sent an access code to the email:"
 msgstr ""
 
@@ -5659,13 +5664,6 @@ msgstr ""
 
 #: ../modules/default/controllers/IndexController.php:183
 msgid "Welcome to Intercomunexão."
-msgstr ""
-
-#: ../modules/default/views/layouts/layout.phtml:239
-msgid ""
-"Welcome to SNEP. <br>\\\n"
-"      Your IP Telephony Plataform.<br>Click Next to understand the basic "
-"steps to use SNEP."
 msgstr ""
 
 #: ../modules/default/controllers/InformationController.php:39
@@ -5691,7 +5689,7 @@ msgstr ""
 #: ../modules/default/controllers/IndexController.php:171
 #: ../modules/default/controllers/IndexController.php:234
 #: ../modules/default/controllers/RegisterController.php:86
-#: ../modules/default/controllers/RegisterController.php:146
+#: ../modules/default/controllers/RegisterController.php:147
 msgid "Without internet connection."
 msgstr ""
 
@@ -5728,7 +5726,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: ../modules/default/controllers/AuthController.php:266
+#: ../modules/default/controllers/AuthController.php:267
 msgid "You asked for resetting your password the user <b>"
 msgstr ""
 

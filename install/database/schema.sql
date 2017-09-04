@@ -590,6 +590,7 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
 CREATE TABLE IF NOT EXISTS `contacts_names` (
   `id` integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(80) NOT NULL,
+  `email` varchar(80) DEFAULT NULL,
   `address` varchar(100),
   `id_state` char(2),
   `id_city` int(11),

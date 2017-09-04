@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
- * 
+ *
  */
 class Snep_Contacts_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -132,7 +132,7 @@ class Snep_Contacts_Manager {
      * @return <array>
      */
     public function getCity($state) {
-        
+
         $db = Zend_Registry::get('db');
 
         $select = $db->select()
@@ -159,6 +159,7 @@ class Snep_Contacts_Manager {
         $insert_data = array('id' => $contact['id'],
             'name' => $contact['name'],
             'address' => $contact['address'],
+            'email' => $contact['email'],
             'id_city' => $contact['city'],
             'id_state' => $contact['state'],
             'cep' => $contact['zipcode'],
@@ -167,7 +168,7 @@ class Snep_Contacts_Manager {
             'updated' => date('Y-m-d H:i:s'));
 
         $db->insert('contacts_names', $insert_data);
-        
+
         $id = $db->lastInsertId();
 
         return $id;
@@ -252,6 +253,7 @@ class Snep_Contacts_Manager {
 
         $update_data = array('name' => $contact['name'],
             'address' => $contact['address'],
+            'email' => $contact['email'],
             'id_city' => $contact['city'],
             'id_state' => $contact['state'],
             'cep' => $contact['zipcode'],

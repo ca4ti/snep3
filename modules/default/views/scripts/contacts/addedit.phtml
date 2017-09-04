@@ -19,6 +19,12 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 <input type="text" class="form-control" name="name" placeholder='<?php echo $this->translate("Name")?>' value='<?php echo $this->contact['name'];?>'/>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><?php echo $this->translate("Email");?></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="email" placeholder='<?php echo $this->translate("Email")?>' value='<?php echo $this->contact['email'];?>'/>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $this->translate("Group");?></label>
@@ -26,13 +32,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 <select class="form-control" name="group" id="group" value="<?php echo $this->contact['group']; ?>">
 
                     <?php foreach($this->contact_groups as $group){ ?>
-                        
+
                         <option value="<?php echo $group['id'];?>" <?php echo $group['selected'];?>>
                             <?php echo $group['name'];?>
                         </option>
                     <?php } ?>
                 </select>
-                
+
             </div>
         </div>
 
@@ -49,10 +55,10 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 <label class="col-sm-2 control-label"><?php echo $this->translate("State");?></label>
                 <div class="col-sm-6">
                     <select class="form-control" name="state" id="state" onchange="carregaCidade(this.value)">
-                        <option value="0"><?php echo $this->translate("Select state");?></option> 
+                        <option value="0"><?php echo $this->translate("Select state");?></option>
                         <?php foreach($this->states as $key => $state){ ?>
-                            <option value="<?php echo $state['id']?>"><?php echo $state['name'];?></option> 
-                        <?php } ?>   
+                            <option value="<?php echo $state['id']?>"><?php echo $state['name'];?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
@@ -64,7 +70,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                         <option value="0"><?php echo $this->translate("Select city")?></option>
                     </select>
                 </div>
-            </div>  
+            </div>
 
         <?php }else{?>
 
@@ -72,7 +78,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 <label class="col-sm-2 control-label"><?php echo $this->translate("State");?></label>
                 <div class="col-sm-6">
                     <select class="form-control" name="state" id="state" onchange="carregaCidade(this.value)">
-                        <?php echo $this->states;?>                        
+                        <?php echo $this->states;?>
                     </select>
                 </div>
             </div>
@@ -84,7 +90,7 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                         <?php echo $this->citys;?>
                     </select>
                 </div>
-            </div> 
+            </div>
 
         <?php }?>
 
@@ -117,8 +123,8 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
         <?php }else{ ?>
             <table id="tablePhone" class="order-list table">
                 <tbody>
-                    <?php 
-                        $number=count($this->phones); 
+                    <?php
+                        $number=count($this->phones);
                         foreach($this->phones as $key => $phone){?>
                             <tr>
                                 <td class="text-right col-sm-2">
@@ -145,13 +151,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                                 <?php } ?>
 
                             </tr>
-                        <?php } 
+                        <?php }
                     ?>
                 </tbody>
             </table>
         <?php } ?>
 
-       
+
          <div class="snep-body-footer-buttons">
             <button type="submit" class="btn btn-add" name="save" value="save"><?php echo $this->translate("Save");?></button>
             &nbsp;&nbsp;&nbsp;
@@ -164,13 +170,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
 <script type="text/javascript">
 
     jQuery.noConflict();
-    jQuery(document).ready(function(){ 
+    jQuery(document).ready(function(){
 
         // Add lines - phone contact
         jQuery("table.order-list").on("click",".add_field", function(e){ //user click on remove text
             e.preventDefault();
 
-            jQuery(".add_field").hide(); 
+            jQuery(".add_field").hide();
             jQuery(".del_field").show();
 
             // Mount new line
@@ -193,13 +199,13 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
         });
         // Remove lines - phone contact
         jQuery("table.order-list").on("click",".del_field", function(e){ //user click on remove text
-            e.preventDefault(); 
+            e.preventDefault();
             jQuery(this).closest("tr").remove();
             jQuery('#tablePhone tr:last').find(".add_field").show();
             if (jQuery("#tablePhone tr").length == 1) {
                 jQuery('#tablePhone tr:last').find(".del_field").hide();
             }
-            
+
         });
 
 
@@ -209,6 +215,9 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                     required: true,
                     minlength: 5,
                     maxlength: 30
+                },
+                email: {
+                  regex: /^[a-zA-Z0-9]+@[a-z0-9]+\.[a-z0-9]+.+$/
                 },
                 phonebox: {
                     required: true,
@@ -220,15 +229,18 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
             messages: {
                 name: {
                     required: "<?php echo $this->translate('The name is required'); ?>",
-                    minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                    minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
                     maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                    lettersAndNumbersOnly: "<?php echo $this->translate('Letters and numbers only please'); ?>" 
+                    lettersAndNumbersOnly: "<?php echo $this->translate('Letters and numbers only please'); ?>"
+                },
+                email: {
+                    regex: "<?php echo $this->translate('Please enter a valid email.'); ?>"
                 },
                 phonebox: {
                     required: "<?php echo $this->translate('The phone is required'); ?>",
-                    minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                    minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
                     maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                    numbersOnly: "<?php echo $this->translate('Numbers only please'); ?>" 
+                    numbersOnly: "<?php echo $this->translate('Numbers only please'); ?>"
                 }
             },
             highlight: function(element) {
@@ -240,21 +252,17 @@ $this->headLink()->appendStylesheet($this->baseUrl() . '/css/route.css');
                 .closest('.control-group').removeClass('error').addClass('success');
             }
         });
-    }); 
+    });
 
     jQuery(function(jQuery){
        jQuery("#zipcode").mask("99.999-999",{placeholder:"<?php echo $this->translate('XX.XXX-XXX') ?>"});
-    }); 
+    });
 
     function carregaCidade(idstate){
-                    
+
         jQuery.noConflict();
         jQuery('#city').load('/snep/includes/cidades.php?estado='+idstate );
     };
 
 
 </script>
-
-
-
-

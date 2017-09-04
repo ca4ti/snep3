@@ -56,7 +56,21 @@
                     </div>
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Automatic Help Start up")?></label>
+                <div class="col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <?php if($this->show_help){?>
+                                <input type="checkbox" name="show_help" id="show_help" checked/>
+                            <?php }else{?>
+                                <input type="checkbox" name="show_help" id="show_help"/>
+                            <?php } ?>
+                            <?php echo $this->translate("Automatic show Contextualized Help on Pages with it defined.")?>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Default E-mail");?></label>
                 <div class="col-sm-8">

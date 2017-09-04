@@ -50,6 +50,7 @@ if($controller != 'auth'){
   $notification_url = $configs["config_value"];
   ?>
   <script type="text/javascript">
+  var controller = "<?php echo Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>";
   var session = {
     uuid: "<?php echo $_SESSION['uuid'];?>",
     active_user: "<?php echo $_SESSION['active_user'];?>",
@@ -272,11 +273,12 @@ if($controller != 'auth'){
     }
   ]
 
-  function startIntro(){
+  function startFirstIntro(option){
+    if(!option) var option = "no";
     var page = location.pathname.split("/").slice(-1);
     var intro = introJs();
-    console.log("Starting intro.js on page:", page);
-    if(page == ""){
+    console.log("Starting intro.js on page: %s and controller: %s", page, controller);
+    if(controller == "index"){
       console.log("Setting options");
         intro.setOptions({
           steps: steps,
@@ -293,18 +295,66 @@ if($controller != 'auth'){
             jQuery("#sub-default_routing").addClass("in");
         }
       });
+            // add a flag when we're done
+      intro.oncomplete(function() {
+        console.log('First Tour Done');
+        localStorage.setItem('firstTour', 'yes');
+      });
+
+      // add a flag when we exit
+      intro.onexit(function() {
+        console.log('First Tour Exit');
+        localStorage.setItem('firstTour', 'yes');
+      });
+
+      // and check for it when deciding whether to start.
+      window.addEventListener('load', function() {
+        var doneTour = localStorage.getItem('firstTour') === 'yes';
+        if (doneTour) return;
+        intro.start();
+      });
+
+    var doneTour = localStorage.getItem('firstTour') === 'yes';
+    if (doneTour && option !== "force") return;
+    intro.start()
+  }
+
+  function startIntro(){
+    var page = location.pathname.split("/").slice(-1);
+    var intro = introJs();
+    console.log("Starting intro.js on page: %s and controller: %s", page, controller);
+    if(controller == "index"){
+      console.log("Setting options");
+        intro.setOptions({
+          steps: steps,
+          overlayOpacity: 0.1
+        });
+    }
+    intro.onbeforechange(function(element) {
+        console.log('Current Step:', this._currentStep);
+        if (this._currentStep === 3) {
+            jQuery("#default_manage").addClass("active");
+            jQuery("#sub-default_manage").addClass("in");
+        }
+        if (this._currentStep === 5) {
+            jQuery("#default_routing").addClass("active");
+            jQuery("#sub-default_routing").addClass("in");
+        }
+      });
 
     intro.start()
   }
+
   </script>
   <?php
-  if(!isset($this->show_help) || ($this->show_help != false && $this->show_help !== "false")){
+  $config = Zend_Registry::get('config');
+  if(!isset($config->system->show_help) || ($config->system->show_help != false && $config->system->show_help !== "false")){
     ?>
     <script type="text/javascript">
-    startIntro();
+    startFirstIntro("force");
     </script>
     <?php
-    Snep_Parameters_Manager::change("system","show_help",false);
+    //Snep_Parameters_Manager::change("system","show_help",false);
   }
   ?>
 </body>

@@ -15,7 +15,7 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var server = window.location.host;
+var server = window.location.host.split(':')[0];
 var qmanager_url = 'http://' + server + ':8080/auth/login';
 var announce_url = 'http://api.opens.com.br:3003/announce';
 var announce_timeout = 3;
@@ -140,7 +140,6 @@ function handlerQmanager(){
 
 }
 function checkQmanager(){
-  var server = window.location.host;
   var xmlhttp = new XMLHttpRequest();
 
   xmlhttp.open("GET",  qmanager_url);

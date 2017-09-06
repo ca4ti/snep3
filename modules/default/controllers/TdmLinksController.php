@@ -50,6 +50,7 @@ class TdmLinksController extends Zend_Controller_Action {
         $this->view->translate("Status"),
         $this->view->translate("TDM boards"),
         $this->view->translate("Show links / channels")));
+        $this->view->boards = array();
 
         try {
           $astinfo = new AsteriskInfo();
@@ -64,9 +65,9 @@ class TdmLinksController extends Zend_Controller_Action {
         }
 
         $lines = explode("\n", $data);
-
+        $error_message = array();
         if (trim(substr($lines['1'], 10, 16)) === "Error" || strpos($lines['1'], "such command") > 0) {
-          $error_message['khomp'] = $this->view->translate("No Khomp board installed.");;
+          $error_message['khomp'] = $this->view->translate("No Khomp board installed.");
         }else{
           $links = array();
           $boards = array();

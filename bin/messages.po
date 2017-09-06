@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-01 13:37-0300\n"
+"POT-Creation-Date: 2017-09-05 22:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Add Multiples Extensions"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:254
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Add to dashboard"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:264
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid "Add your External Trunks to make external Calls."
 msgstr ""
 
@@ -431,8 +431,8 @@ msgstr ""
 msgid "Additional filters"
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:40
-#: ../modules/default/views/scripts/contacts/addedit.phtml:42
+#: ../modules/default/views/scripts/contacts/addedit.phtml:46
+#: ../modules/default/views/scripts/contacts/addedit.phtml:48
 #: ../modules/default/actions/EmailAction.php:66
 #: ../modules/default/controllers/ContactsController.php:345
 msgid "Address"
@@ -535,6 +535,10 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
+#: ../modules/callback/actions/CallbackAction.php:70
+msgid "Answer and play audio before hangup the call to call back."
+msgstr ""
+
 #: ../modules/default/views/scripts/ranking-report/view.phtml:44
 #: ../modules/default/views/scripts/ranking-report/view.phtml:47
 msgid "Answerd"
@@ -570,19 +574,19 @@ msgstr ""
 msgid "Asterisk"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:102
+#: ../modules/default/views/scripts/parameters/index.phtml:116
 msgid "Asterisk Manager connect"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:107
+#: ../modules/default/views/scripts/parameters/index.phtml:121
 msgid "Asterisk Socket IP"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:121
+#: ../modules/default/views/scripts/parameters/index.phtml:135
 msgid "Asterisk Socket IP password"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:114
+#: ../modules/default/views/scripts/parameters/index.phtml:128
 msgid "Asterisk Socket IP username"
 msgstr ""
 
@@ -624,6 +628,14 @@ msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:135
 msgid "Authentication failure"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:60
+msgid "Automatic Help Start up"
+msgstr ""
+
+#: ../modules/default/views/scripts/parameters/index.phtml:69
+msgid "Automatic show Contextualized Help on Pages with it defined."
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/members.phtml:41
@@ -679,7 +691,7 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:234
+#: ../modules/default/views/scripts/parameters/index.phtml:248
 msgid "Backup Files Path"
 msgstr ""
 
@@ -844,7 +856,7 @@ msgstr ""
 msgid "Call Record"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:199
+#: ../modules/default/views/scripts/parameters/index.phtml:213
 msgid "Call Recording Configuration"
 msgstr ""
 
@@ -859,6 +871,10 @@ msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/callback/info.xml
 msgid "Call back functionality for SNEP."
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:64
+msgid "Call back the Caller number"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/view.phtml:41
@@ -940,7 +956,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/import.phtml:28
 #: ../modules/default/views/scripts/contacts/import.phtml:101
 #: ../modules/default/views/scripts/contacts/select-multi-remove.phtml:55
-#: ../modules/default/views/scripts/contacts/addedit.phtml:158
+#: ../modules/default/views/scripts/contacts/addedit.phtml:164
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:203
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:22
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:49
@@ -962,7 +978,7 @@ msgstr ""
 #: ../modules/default/views/scripts/remove/remove.phtml:26
 #: ../modules/default/views/scripts/action-configs/edit.phtml:42
 #: ../modules/default/views/scripts/module-settings/index.phtml:189
-#: ../modules/default/views/scripts/parameters/index.phtml:258
+#: ../modules/default/views/scripts/parameters/index.phtml:272
 #: ../modules/default/views/scripts/cnl/index.phtml:44
 #: ../lib/Snep/Form/Element/Submit.php:77 ../lib/Snep/CsvIE.php:170
 #: ../lib/Snep/CsvIE.php:295
@@ -1057,8 +1073,8 @@ msgid "Cidade Universitária Pedra Branca"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/index.phtml:49
-#: ../modules/default/views/scripts/contacts/addedit.phtml:61
-#: ../modules/default/views/scripts/contacts/addedit.phtml:81
+#: ../modules/default/views/scripts/contacts/addedit.phtml:67
+#: ../modules/default/views/scripts/contacts/addedit.phtml:87
 #: ../modules/default/views/scripts/calls-report/view.phtml:50
 msgid "City"
 msgstr ""
@@ -1087,7 +1103,7 @@ msgstr ""
 msgid "Closing date"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:171
+#: ../modules/default/views/layouts/layout.phtml:172
 msgid "Cloud Server Informations"
 msgstr ""
 
@@ -1176,7 +1192,7 @@ msgstr ""
 msgid "Composition of the name of the recording file"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:89
+#: ../modules/default/views/scripts/parameters/index.phtml:103
 msgid "Conference Application"
 msgstr ""
 
@@ -1312,7 +1328,7 @@ msgstr ""
 msgid "DB Delete Error: "
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:108
+#: ../modules/default/views/scripts/contacts/addedit.phtml:114
 msgid "DDD + Number"
 msgstr ""
 
@@ -1358,27 +1374,27 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:132
+#: ../modules/default/views/scripts/parameters/index.phtml:146
 msgid "Database"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:129
+#: ../modules/default/views/scripts/parameters/index.phtml:143
 msgid "Database connect"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:141
+#: ../modules/default/views/scripts/parameters/index.phtml:155
 msgid "Database hostname"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:134
+#: ../modules/default/views/scripts/parameters/index.phtml:148
 msgid "Database name"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:155
+#: ../modules/default/views/scripts/parameters/index.phtml:169
 msgid "Database password"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:148
+#: ../modules/default/views/scripts/parameters/index.phtml:162
 msgid "Database username"
 msgstr ""
 
@@ -1426,7 +1442,7 @@ msgstr ""
 msgid "Default Configs"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:61
+#: ../modules/default/views/scripts/parameters/index.phtml:75
 msgid "Default E-mail"
 msgstr ""
 
@@ -1444,7 +1460,7 @@ msgstr ""
 msgid "Default Settings"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:64
+#: ../modules/default/views/scripts/parameters/index.phtml:78
 msgid "Default e-mail where the alerts will be sent to"
 msgstr ""
 
@@ -1456,7 +1472,7 @@ msgstr ""
 msgid "Default path"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:248
+#: ../modules/default/views/scripts/parameters/index.phtml:262
 msgid "Default value for Qualify"
 msgstr ""
 
@@ -1468,16 +1484,20 @@ msgstr ""
 msgid "Define Tag to "
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:74
+#: ../modules/default/views/scripts/parameters/index.phtml:88
 msgid "Defines how many lines you want per page of report"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:84
+#: ../modules/default/views/scripts/parameters/index.phtml:98
 msgid "Defines the number of digits in the configuration of an extension"
 msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:147
 msgid "Delay Qualification"
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:68
+msgid "Delay trying call back"
 msgstr ""
 
 #: ../modules/billing/views/scripts/remove/remove.phtml:17
@@ -1894,6 +1914,8 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:147
 #: ../modules/default/views/layouts/register.phtml:192
 #: ../modules/default/views/layouts/loginregister.phtml:42
+#: ../modules/default/views/scripts/contacts/addedit.phtml:23
+#: ../modules/default/views/scripts/contacts/addedit.phtml:25
 #: ../modules/default/views/scripts/extensions/addedit.phtml:339
 #: ../modules/default/views/scripts/extensions/addedit.phtml:341
 #: ../modules/default/views/scripts/register/index.phtml:12
@@ -2359,7 +2381,7 @@ msgstr ""
 msgid "Force reverse authentication"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:229
+#: ../modules/default/views/scripts/parameters/index.phtml:243
 msgid "Format for the recorded files (wav, wav49)"
 msgstr ""
 
@@ -2437,7 +2459,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/contacts/import.phtml:46
 #: ../modules/default/views/scripts/contacts/index.phtml:48
-#: ../modules/default/views/scripts/contacts/addedit.phtml:24
+#: ../modules/default/views/scripts/contacts/addedit.phtml:30
 #: ../modules/default/views/scripts/services-report/index.phtml:61
 msgid "Group"
 msgstr ""
@@ -2455,11 +2477,11 @@ msgstr ""
 msgid "Hanging Up"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:155
+#: ../modules/default/views/layouts/layout.phtml:156
 msgid "Help"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:249
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
@@ -2476,8 +2498,8 @@ msgstr ""
 msgid "High quality support"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:105
-#: ../modules/default/views/scripts/parameters/index.phtml:139
+#: ../modules/default/views/scripts/parameters/index.phtml:119
+#: ../modules/default/views/scripts/parameters/index.phtml:153
 msgid "Hostname"
 msgstr ""
 
@@ -2627,7 +2649,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:163
+#: ../modules/default/views/layouts/layout.phtml:164
 msgid "Information"
 msgstr ""
 
@@ -2722,7 +2744,7 @@ msgstr ""
 msgid "Khomp links errors"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:207
+#: ../modules/default/views/scripts/parameters/index.phtml:221
 msgid "Krecord"
 msgstr ""
 
@@ -2756,7 +2778,7 @@ msgstr ""
 msgid "Leave blank to use the number from the destination."
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:225
+#: ../modules/default/views/scripts/contacts/addedit.phtml:234
 #: ../modules/default/views/scripts/trunks/addedit.phtml:578
 msgid "Letters and numbers only please"
 msgstr ""
@@ -2793,7 +2815,7 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:161
+#: ../modules/default/views/scripts/parameters/index.phtml:175
 msgid "Locale Configuration"
 msgstr ""
 
@@ -2829,7 +2851,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:179
+#: ../modules/default/views/layouts/layout.phtml:180
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr ""
@@ -2933,7 +2955,7 @@ msgstr ""
 msgid "Minutes"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:205
+#: ../modules/default/views/scripts/parameters/index.phtml:219
 msgid "MixMonitor"
 msgstr ""
 
@@ -2956,7 +2978,7 @@ msgstr ""
 msgid "Module Settings"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:197
+#: ../modules/default/views/layouts/layout.phtml:198
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 msgid "Modules"
 msgstr ""
@@ -2967,7 +2989,7 @@ msgstr ""
 msgid "Monday"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:206
+#: ../modules/default/views/scripts/parameters/index.phtml:220
 msgid "Monitor"
 msgstr ""
 
@@ -3276,11 +3298,11 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:69
+#: ../modules/default/views/scripts/parameters/index.phtml:83
 msgid "Number of Lines"
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:231
+#: ../modules/default/views/scripts/contacts/addedit.phtml:243
 #: ../modules/default/views/scripts/extensions/addedit.phtml:497
 #: ../modules/default/views/scripts/extensions/addedit.phtml:503
 msgid "Numbers only please"
@@ -3344,7 +3366,7 @@ msgstr ""
 msgid "Option"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:216
+#: ../modules/default/views/scripts/parameters/index.phtml:230
 msgid "Options to the recording application"
 msgstr ""
 
@@ -3433,8 +3455,8 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:126
 #: ../modules/default/views/scripts/trunks/addedit.phtml:128
 #: ../modules/default/views/scripts/users/addedit.phtml:34
-#: ../modules/default/views/scripts/parameters/index.phtml:119
-#: ../modules/default/views/scripts/parameters/index.phtml:153
+#: ../modules/default/views/scripts/parameters/index.phtml:133
+#: ../modules/default/views/scripts/parameters/index.phtml:167
 msgid "Password"
 msgstr ""
 
@@ -3465,11 +3487,11 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:223
+#: ../modules/default/views/scripts/parameters/index.phtml:237
 msgid "Path where to store the audio files"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:236
+#: ../modules/default/views/scripts/parameters/index.phtml:250
 msgid "Path where to store the backup audio files"
 msgstr ""
 
@@ -3481,7 +3503,7 @@ msgstr ""
 msgid "Peer Group"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:79
+#: ../modules/default/views/scripts/parameters/index.phtml:93
 msgid "Peers - number of digits"
 msgstr ""
 
@@ -3511,9 +3533,9 @@ msgid "Permission"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/index.phtml:50
-#: ../modules/default/views/scripts/contacts/addedit.phtml:104
-#: ../modules/default/views/scripts/contacts/addedit.phtml:126
-#: ../modules/default/views/scripts/contacts/addedit.phtml:181
+#: ../modules/default/views/scripts/contacts/addedit.phtml:110
+#: ../modules/default/views/scripts/contacts/addedit.phtml:132
+#: ../modules/default/views/scripts/contacts/addedit.phtml:187
 #: ../modules/default/controllers/ContactsController.php:347
 msgid "Phone"
 msgstr ""
@@ -3548,11 +3570,15 @@ msgstr ""
 msgid "Please enter a username"
 msgstr ""
 
+#: ../modules/default/views/scripts/contacts/addedit.phtml:237
+msgid "Please enter a valid email."
+msgstr ""
+
 #: ../modules/default/views/layouts/register.phtml:335
 msgid "Please enter a valide e-mail."
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:332
+#: ../modules/default/views/scripts/parameters/index.phtml:346
 msgid "Please enter a value between 1 and 9."
 msgstr ""
 
@@ -3572,8 +3598,8 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:95
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:69
 #: ../modules/default/views/scripts/profiles/addedit.phtml:67
-#: ../modules/default/views/scripts/contacts/addedit.phtml:223
-#: ../modules/default/views/scripts/contacts/addedit.phtml:229
+#: ../modules/default/views/scripts/contacts/addedit.phtml:232
+#: ../modules/default/views/scripts/contacts/addedit.phtml:241
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:232
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:71
 #: ../modules/default/views/scripts/extensions/addedit.phtml:495
@@ -3591,8 +3617,8 @@ msgstr ""
 #: ../modules/default/views/scripts/users/addedit.phtml:117
 #: ../modules/default/views/scripts/register/index.phtml:85
 #: ../modules/default/views/scripts/register/index.phtml:91
-#: ../modules/default/views/scripts/parameters/index.phtml:306
-#: ../modules/default/views/scripts/parameters/index.phtml:312
+#: ../modules/default/views/scripts/parameters/index.phtml:320
+#: ../modules/default/views/scripts/parameters/index.phtml:326
 msgid "Please enter at least {0} characters."
 msgstr ""
 
@@ -3611,7 +3637,7 @@ msgstr ""
 #: ../modules/default/views/scripts/pickup-groups/addedit.phtml:58
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:76
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:60
-#: ../modules/default/views/scripts/parameters/index.phtml:308
+#: ../modules/default/views/scripts/parameters/index.phtml:322
 msgid "Please enter letters and numbers only."
 msgstr ""
 
@@ -3641,8 +3667,8 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:96
 #: ../modules/default/views/scripts/music-on-hold/editfile.phtml:70
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
-#: ../modules/default/views/scripts/contacts/addedit.phtml:224
-#: ../modules/default/views/scripts/contacts/addedit.phtml:230
+#: ../modules/default/views/scripts/contacts/addedit.phtml:233
+#: ../modules/default/views/scripts/contacts/addedit.phtml:242
 #: ../modules/default/views/scripts/extensions/addedit.phtml:496
 #: ../modules/default/views/scripts/extensions/addedit.phtml:502
 #: ../modules/default/views/scripts/extensions/addedit.phtml:514
@@ -3658,8 +3684,8 @@ msgstr ""
 #: ../modules/default/views/scripts/users/addedit.phtml:118
 #: ../modules/default/views/scripts/register/index.phtml:86
 #: ../modules/default/views/scripts/register/index.phtml:92
-#: ../modules/default/views/scripts/parameters/index.phtml:307
-#: ../modules/default/views/scripts/parameters/index.phtml:313
+#: ../modules/default/views/scripts/parameters/index.phtml:321
+#: ../modules/default/views/scripts/parameters/index.phtml:327
 msgid "Please enter no more than {0} characters."
 msgstr ""
 
@@ -3673,7 +3699,7 @@ msgstr ""
 msgid "Please enter with code valid"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:328
+#: ../modules/default/views/scripts/parameters/index.phtml:342
 msgid "Please enter with numbers only."
 msgstr ""
 
@@ -3682,7 +3708,7 @@ msgstr ""
 msgid "Please enter with range valid"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:314
+#: ../modules/default/views/scripts/parameters/index.phtml:328
 msgid "Please enter with value valid."
 msgstr ""
 
@@ -3760,7 +3786,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:117
 #: ../modules/default/views/scripts/extensions/addedit.phtml:174
-#: ../modules/default/views/scripts/parameters/index.phtml:246
+#: ../modules/default/views/scripts/parameters/index.phtml:260
 msgid "Qualify"
 msgstr ""
 
@@ -3862,7 +3888,7 @@ msgstr ""
 msgid "Record"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:227
+#: ../modules/default/views/scripts/parameters/index.phtml:241
 msgid "Record Format"
 msgstr ""
 
@@ -3870,7 +3896,7 @@ msgstr ""
 msgid "Record Play"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:221
+#: ../modules/default/views/scripts/parameters/index.phtml:235
 msgid "Recorded Files Path"
 msgstr ""
 
@@ -3878,11 +3904,11 @@ msgstr ""
 msgid "Recording"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:202
+#: ../modules/default/views/scripts/parameters/index.phtml:216
 msgid "Recording Application"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:213
+#: ../modules/default/views/scripts/parameters/index.phtml:227
 msgid "Recording Parameters"
 msgstr ""
 
@@ -4247,7 +4273,7 @@ msgstr ""
 #: ../modules/default/views/scripts/index/add.phtml:45
 #: ../modules/default/views/scripts/contacts/csv.phtml:84
 #: ../modules/default/views/scripts/contacts/import.phtml:99
-#: ../modules/default/views/scripts/contacts/addedit.phtml:156
+#: ../modules/default/views/scripts/contacts/addedit.phtml:162
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:201
 #: ../modules/default/views/scripts/extensions/addedit.phtml:430
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:96
@@ -4265,7 +4291,7 @@ msgstr ""
 #: ../modules/default/views/scripts/action-configs/edit.phtml:41
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:105
 #: ../modules/default/views/scripts/module-settings/index.phtml:187
-#: ../modules/default/views/scripts/parameters/index.phtml:256
+#: ../modules/default/views/scripts/parameters/index.phtml:270
 #: ../lib/Snep/Form.php:58
 msgid "Save"
 msgstr ""
@@ -4347,7 +4373,7 @@ msgstr ""
 msgid "Select at least one service"
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:64
+#: ../modules/default/views/scripts/contacts/addedit.phtml:70
 msgid "Select city"
 msgstr ""
 
@@ -4356,7 +4382,7 @@ msgstr ""
 msgid "Select one board."
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:52
+#: ../modules/default/views/scripts/contacts/addedit.phtml:58
 msgid "Select state"
 msgstr ""
 
@@ -4465,7 +4491,7 @@ msgstr ""
 msgid "Set the relationship column x data"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:145
+#: ../modules/default/views/layouts/layout.phtml:146
 msgid "Settings"
 msgstr ""
 
@@ -4659,6 +4685,17 @@ msgstr ""
 msgid "Specify"
 msgstr ""
 
+#: ../modules/callback/actions/CallbackAction.php:66
+msgid "Specify the source call number"
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:67
+msgid ""
+"Specify the source number to make the call back to the caller. This call "
+"will be processed by the Outgoing Routes with this source. Leave blank to "
+"keep here the original Caller number."
+msgstr ""
+
 #: ../modules/default/views/scripts/services-report/index.phtml:103
 msgid "Spy"
 msgstr ""
@@ -4676,8 +4713,8 @@ msgstr ""
 msgid "Start Time Rate (in seconds)"
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:49
-#: ../modules/default/views/scripts/contacts/addedit.phtml:72
+#: ../modules/default/views/scripts/contacts/addedit.phtml:55
+#: ../modules/default/views/scripts/contacts/addedit.phtml:78
 #: ../modules/default/views/scripts/calls-report/view.phtml:50
 #: ../modules/default/controllers/ServicesReportController.php:210
 msgid "State"
@@ -4776,11 +4813,11 @@ msgstr ""
 msgid "System Diagnosis"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:186
+#: ../modules/default/views/scripts/parameters/index.phtml:200
 msgid "System Language"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:175
+#: ../modules/default/views/scripts/parameters/index.phtml:189
 msgid "System Locale"
 msgstr ""
 
@@ -4890,11 +4927,11 @@ msgstr ""
 msgid "The File includes/setup.conf does not have permission to be modified."
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:335
+#: ../modules/default/views/scripts/parameters/index.phtml:349
 msgid "The Recorded Files Path is required."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:269
+#: ../modules/default/views/layouts/layout.phtml:270
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
@@ -4967,7 +5004,7 @@ msgstr ""
 msgid "The email is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:323
+#: ../modules/default/views/scripts/parameters/index.phtml:337
 msgid "The email is required."
 msgstr ""
 
@@ -5028,7 +5065,7 @@ msgstr ""
 msgid "The first name is required"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:259
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr ""
 
@@ -5068,7 +5105,7 @@ msgstr ""
 msgid "The hash is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:311
+#: ../modules/default/views/scripts/parameters/index.phtml:325
 msgid "The hostname is required."
 msgstr ""
 
@@ -5076,7 +5113,7 @@ msgstr ""
 msgid "The last name is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:327
+#: ../modules/default/views/scripts/parameters/index.phtml:341
 msgid "The linelimit is required."
 msgstr ""
 
@@ -5100,7 +5137,7 @@ msgstr ""
 #: ../modules/default/views/scripts/queues/addedit.phtml:277
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:88
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
-#: ../modules/default/views/scripts/contacts/addedit.phtml:222
+#: ../modules/default/views/scripts/contacts/addedit.phtml:231
 #: ../modules/default/views/scripts/extensions/addedit.phtml:512
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:101
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
@@ -5111,7 +5148,7 @@ msgstr ""
 msgid "The name is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:305
+#: ../modules/default/views/scripts/parameters/index.phtml:319
 msgid "The name is required."
 msgstr ""
 
@@ -5133,15 +5170,15 @@ msgstr ""
 msgid "The password is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:320
+#: ../modules/default/views/scripts/parameters/index.phtml:334
 msgid "The password is required."
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:331
+#: ../modules/default/views/scripts/parameters/index.phtml:345
 msgid "The peers_digits is required."
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:228
+#: ../modules/default/views/scripts/contacts/addedit.phtml:240
 msgid "The phone is required"
 msgstr ""
 
@@ -5201,7 +5238,7 @@ msgstr ""
 msgid "The username is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:317
+#: ../modules/default/views/scripts/parameters/index.phtml:331
 msgid "The username is required."
 msgstr ""
 
@@ -5232,7 +5269,11 @@ msgid ""
 "another group for these extensions."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:244
+#: ../modules/callback/actions/CallbackAction.php:69
+msgid "This is the time in seconds the system will try contact the caller"
+msgstr ""
+
+#: ../modules/default/views/layouts/layout.phtml:245
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5241,6 +5282,12 @@ msgstr ""
 #: /home/douglas/Dropbox/Development/snep-3/modules/billing/info.xml
 msgid ""
 "This module make the billing of calls putting price based on trunks and time."
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:65
+msgid ""
+"This will be the Inbound(DID) number which call will be redirected when the "
+"caller answer the call. Could be any Destiny Route Rule."
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:93
@@ -5287,7 +5334,7 @@ msgstr ""
 msgid "Timeout"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:164
+#: ../modules/default/views/scripts/parameters/index.phtml:178
 msgid "Timezone"
 msgstr ""
 
@@ -5354,7 +5401,7 @@ msgstr ""
 msgid "Trunks Actions"
 msgstr ""
 
-#: ../modules/default/views/scripts/parameters/index.phtml:243
+#: ../modules/default/views/scripts/parameters/index.phtml:257
 msgid "Trunks Configuration"
 msgstr ""
 
@@ -5547,8 +5594,8 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:119
 #: ../modules/default/views/scripts/trunks/addedit.phtml:121
 #: ../modules/default/views/scripts/users/addedit.phtml:27
-#: ../modules/default/views/scripts/parameters/index.phtml:112
-#: ../modules/default/views/scripts/parameters/index.phtml:146
+#: ../modules/default/views/scripts/parameters/index.phtml:126
+#: ../modules/default/views/scripts/parameters/index.phtml:160
 msgid "Username"
 msgstr ""
 
@@ -5661,7 +5708,7 @@ msgstr ""
 msgid "Welcome to Intercomunexão."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:239
+#: ../modules/default/views/layouts/layout.phtml:240
 msgid ""
 "Welcome to SNEP. <br>\\\n"
 "      Your IP Telephony Plataform.<br>Click Next to understand the basic "
@@ -5700,7 +5747,7 @@ msgstr ""
 msgid "Would not Like Me registering at this time"
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:246
+#: ../modules/default/views/scripts/contacts/addedit.phtml:258
 msgid "XX.XXX-XXX"
 msgstr ""
 
@@ -5864,7 +5911,7 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:518
 #: ../modules/default/views/scripts/users/addedit.phtml:122
 #: ../modules/default/views/scripts/register/index.phtml:96
-#: ../modules/default/views/scripts/parameters/index.phtml:324
+#: ../modules/default/views/scripts/parameters/index.phtml:338
 msgid "Your email address must be in the format of name@domain.com"
 msgstr ""
 
@@ -5876,8 +5923,8 @@ msgstr ""
 msgid "Your registration is complete, welcome to Snep."
 msgstr ""
 
-#: ../modules/default/views/scripts/contacts/addedit.phtml:92
-#: ../modules/default/views/scripts/contacts/addedit.phtml:94
+#: ../modules/default/views/scripts/contacts/addedit.phtml:98
+#: ../modules/default/views/scripts/contacts/addedit.phtml:100
 #: ../modules/default/controllers/ContactsController.php:346
 msgid "Zip Code"
 msgstr ""

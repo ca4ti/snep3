@@ -61,25 +61,32 @@ class CallbackAction extends PBX_Rule_Action {
         $callerid   = (isset($this->config['callerid']))?"<value>{$this->config['callerid']}</value>":"";
         $play_audio = (isset($this->config['play_audio']))?"<value>{$this->config['play_audio']}</value>":"";
         $audio      = (isset($this->config['audio']))?"<value>{$this->config['audio']}</value>":"<value>astcc-pleasewait</value>";
+        $callback_inbound_number = $trs->translate('Call back the Caller number');
+        $callback_inbound_number_desc = $trs->translate('This will be the Inbound(DID) number which call will be redirected when the caller answer the call. Could be any Destiny Route Rule.');
+        $source_number = $trs->translate('Specify the source call number');
+        $source_number_desc = $trs->translate('Specify the source number to make the call back to the caller. This call will be processed by the Outgoing Routes with this source. Leave blank to keep here the original Caller number.');
+        $callback_delay = $trs->translate('Delay trying call back');
+        $callback_delay_desc = $trs->translate('This is the time in seconds the system will try contact the caller');
+        $play_audio_label = $trs->translate('Answer and play audio before hangup the call to call back.');
 
         return <<<XML
 <params>
     <string>
         <id>extension</id>
-        <label>{$trs->translate('Call back Inbound number')}</label>
-        <description>{$trs->translate('This will be the Inbound(DID) number which call will be redirected when the caller answer the call. Could be any Destiny Route Rule.')}</description>
+        <label>$callback_inbound_number</label>
+        <description>$callback_inbound_number_desc</description>
         $extension
     </string>
     <string>
         <id>callerid</id>
-        <label>{$trs->translate('Specify the source call number')}</label>
-        <description>{$trs->translate('Specify the source number to make the call back to the caller. This call will be processed be the Rules Outgoing Routes with this source. Leave blank to keep here the Caller original number.')}</description>
+        <label>$source_number</label>
+        <description>$source_number_desc</description>
         $callerid
     </string>
     <int>
         <id>callback_delay</id>
-        <label>{$trs->translate('Delay trying call back')}</label>
-        <description>{$trs->translate('This the time in seconds the system will try contact the caller')}</description>
+        <label>$callback_delay</label>
+        <description>$callback_delay_desc</description>
         <default>45</default>
         <unit>seconds</unit>
         <size>2</size>
@@ -87,7 +94,7 @@ class CallbackAction extends PBX_Rule_Action {
     </int>
     <boolean>
         <id>play_audio</id>
-        <label>{$trs->translate('Answer and play audio before hangup the call to call back.')}</label>
+        <label>$play_audio_label</label>
         $play_audio
     </boolean>
     <audio>

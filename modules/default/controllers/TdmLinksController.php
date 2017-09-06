@@ -98,15 +98,15 @@ class TdmLinksController extends Zend_Controller_Action {
 
         $lines = explode("\n", $data);
 
-        if (preg_match("/no dahdi found/i",$lines['1'])) {
-          $error_message['dahdi'] = $this->view->translate("No Dahdi board installed.");;
+        if (preg_match("/no dahdi found/i",$lines[1]) || preg_match("/no such command/i",$lines[1])) {
+          $error_message['dahdi'] = $this->view->translate("No Dahdi board installed.");
         }else{
           $links = array();
           $boards = array();
           $lst = '';
         }
 
-        if($error_message && count($this->view->boards) < 1){
+        if(count($error_message) > 0 && count($this->view->boards) < 1){
           $this->view->error_message = $error_message;
           $this->renderScript('tdm-links/sneperror.phtml');
         }

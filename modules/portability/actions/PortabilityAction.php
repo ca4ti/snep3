@@ -64,27 +64,32 @@ class PortabilityAction extends PBX_Rule_Action {
 
         $prefix = (isset($this->config['prefix']))?"<value>{$this->config['prefix']}</value>":"";
         $type = (isset($this->config['type']))?"<value>{$this->config['type']}</value>":"";
+        $type_desc = $i18n->translate("Invalid number handling");
+        $type_audio_label = $i18n->translate("Play warning audio");
+        $type_audio_label_2 = $i18n->translate("Insert prefix to handling");
+        $prefix_label = $i18n->translate("Prefix to handling invalid numbers");
+        $prefix_desc = $i18n->translate("The value must have 5 digits. You need create a Route rule to handling this Destination.");
 
         return <<<XML
 <params>
     <radio>
         <id>type</id>
-        <label>{$i18n->translate("Tratamento de número inexistente")}</label>
+        <label>$type_desc</label>
         <default>audio</default>
         $type
         <option>
-            <label>{$i18n->translate("Tocar áudio de aviso")}</label>
+            <label>$type_audio_label</label>
             <value>audio</value>
         </option>
         <option>
-            <label>{$i18n->translate("Inserir prefixo para tratamento")}</label>
+            <label>$type_audio_label_2</label>
             <value>prefix</value>
         </option>
     </radio>
     <string>
         <id>prefix</id>
-        <label>{$i18n->translate("Prefixo para tratamento de números inexistentes")}</label>
-        <description>O valor deve possuir 5 dígitos. Deverá ser criada uma nova regra para tratamento do prefixo informado.</description>
+        <label>$prefix_label</label>
+        <description>$prefix_desc</description>
         <size>5</size>
         $prefix
     </string>

@@ -348,13 +348,19 @@ if($controller != 'auth'){
   </script>
   <?php
   $config = Zend_Registry::get('config');
-  if(!isset($config->system->show_help) || ($config->system->show_help != false && $config->system->show_help !== "false")){
+  if($config->system->show_help == true && $config->system->show_help == "true"){
     ?>
     <script type="text/javascript">
     startFirstIntro("force");
     </script>
     <?php
     //Snep_Parameters_Manager::change("system","show_help",false);
+  }else{
+    ?>
+    <script type="text/javascript">
+    startFirstIntro();
+    </script>
+    <?php
   }
   ?>
 </body>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 22:50-0300\n"
+"POT-Creation-Date: 2017-09-06 06:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -244,8 +244,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:63
 #: ../modules/default/controllers/KhompLinksController.php:169
 #: ../modules/default/controllers/KhompLinksController.php:170
-#: ../modules/default/controllers/TdmLinksController.php:149
 #: ../modules/default/controllers/TdmLinksController.php:150
+#: ../modules/default/controllers/TdmLinksController.php:151
 msgid "Activated"
 msgstr ""
 
@@ -769,18 +769,18 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:200
 #: ../modules/default/controllers/KhompLinksController.php:217
 #: ../modules/default/controllers/KhompLinksController.php:228
-#: ../modules/default/controllers/TdmLinksController.php:165
-#: ../modules/default/controllers/TdmLinksController.php:175
-#: ../modules/default/controllers/TdmLinksController.php:179
+#: ../modules/default/controllers/TdmLinksController.php:166
+#: ../modules/default/controllers/TdmLinksController.php:176
 #: ../modules/default/controllers/TdmLinksController.php:180
-#: ../modules/default/controllers/TdmLinksController.php:197
-#: ../modules/default/controllers/TdmLinksController.php:208
+#: ../modules/default/controllers/TdmLinksController.php:181
+#: ../modules/default/controllers/TdmLinksController.php:198
+#: ../modules/default/controllers/TdmLinksController.php:209
 msgid "Busy"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:86
 #: ../modules/default/controllers/KhompLinksController.php:193
-#: ../modules/default/controllers/TdmLinksController.php:173
+#: ../modules/default/controllers/TdmLinksController.php:174
 msgid "Busy Incoming"
 msgstr ""
 
@@ -788,8 +788,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:85
 #: ../modules/default/controllers/KhompLinksController.php:191
 #: ../modules/default/controllers/KhompLinksController.php:192
-#: ../modules/default/controllers/TdmLinksController.php:171
 #: ../modules/default/controllers/TdmLinksController.php:172
+#: ../modules/default/controllers/TdmLinksController.php:173
 msgid "Busy Outgoing"
 msgstr ""
 
@@ -1036,13 +1036,13 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:74
 #: ../modules/default/controllers/KhompLinksController.php:181
-#: ../modules/default/controllers/TdmLinksController.php:161
+#: ../modules/default/controllers/TdmLinksController.php:162
 msgid "Channel Fail"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:73
 #: ../modules/default/controllers/KhompLinksController.php:180
-#: ../modules/default/controllers/TdmLinksController.php:160
+#: ../modules/default/controllers/TdmLinksController.php:161
 msgid "Channel Free"
 msgstr ""
 
@@ -1180,7 +1180,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:90
 #: ../modules/default/controllers/KhompLinksController.php:197
-#: ../modules/default/controllers/TdmLinksController.php:177
+#: ../modules/default/controllers/TdmLinksController.php:178
 msgid "Communication Error"
 msgstr ""
 
@@ -1428,7 +1428,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:67
 #: ../modules/default/controllers/KhompLinksController.php:174
-#: ../modules/default/controllers/TdmLinksController.php:154
+#: ../modules/default/controllers/TdmLinksController.php:155
 msgid "Deactivated"
 msgstr ""
 
@@ -1748,9 +1748,9 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:179
 #: ../modules/default/controllers/KhompLinksController.php:215
 #: ../modules/default/controllers/KhompLinksController.php:226
-#: ../modules/default/controllers/TdmLinksController.php:159
-#: ../modules/default/controllers/TdmLinksController.php:195
-#: ../modules/default/controllers/TdmLinksController.php:206
+#: ../modules/default/controllers/TdmLinksController.php:160
+#: ../modules/default/controllers/TdmLinksController.php:196
+#: ../modules/default/controllers/TdmLinksController.php:207
 msgid "Dialing"
 msgstr ""
 
@@ -1787,7 +1787,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:96
 #: ../modules/default/controllers/KhompLinksController.php:203
-#: ../modules/default/controllers/TdmLinksController.php:183
+#: ../modules/default/controllers/TdmLinksController.php:184
 msgid "Disabled"
 msgstr ""
 
@@ -1958,7 +1958,7 @@ msgstr ""
 #: ../modules/default/views/scripts/calls-report/index.phtml:265
 #: ../modules/default/controllers/KhompLinksController.php:97
 #: ../modules/default/controllers/KhompLinksController.php:204
-#: ../modules/default/controllers/TdmLinksController.php:184
+#: ../modules/default/controllers/TdmLinksController.php:185
 msgid "Enabled"
 msgstr ""
 
@@ -2040,8 +2040,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:245
 #: ../modules/default/controllers/ErrorsTdmController.php:57
 #: ../modules/default/controllers/ErrorsTdmController.php:137
-#: ../modules/default/controllers/TdmLinksController.php:57
-#: ../modules/default/controllers/TdmLinksController.php:225
+#: ../modules/default/controllers/TdmLinksController.php:58
+#: ../modules/default/controllers/TdmLinksController.php:226
 #: ../modules/default/controllers/ExtensionsController.php:53
 #: ../modules/default/controllers/ErrorsKhompController.php:57
 #: ../modules/default/controllers/ErrorsKhompController.php:136
@@ -2265,8 +2265,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:95
 #: ../modules/default/controllers/KhompLinksController.php:190
 #: ../modules/default/controllers/KhompLinksController.php:202
-#: ../modules/default/controllers/TdmLinksController.php:170
-#: ../modules/default/controllers/TdmLinksController.php:182
+#: ../modules/default/controllers/TdmLinksController.php:171
+#: ../modules/default/controllers/TdmLinksController.php:183
 msgid "Fail"
 msgstr ""
 
@@ -2397,9 +2397,9 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:184
 #: ../modules/default/controllers/KhompLinksController.php:194
 #: ../modules/default/controllers/KhompLinksController.php:198
-#: ../modules/default/controllers/TdmLinksController.php:164
-#: ../modules/default/controllers/TdmLinksController.php:174
-#: ../modules/default/controllers/TdmLinksController.php:178
+#: ../modules/default/controllers/TdmLinksController.php:165
+#: ../modules/default/controllers/TdmLinksController.php:175
+#: ../modules/default/controllers/TdmLinksController.php:179
 msgid "Free"
 msgstr ""
 
@@ -2473,7 +2473,7 @@ msgid "Group permission"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:221
-#: ../modules/default/controllers/TdmLinksController.php:201
+#: ../modules/default/controllers/TdmLinksController.php:202
 msgid "Hanging Up"
 msgstr ""
 
@@ -2628,14 +2628,14 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:68
 #: ../modules/default/controllers/KhompLinksController.php:80
 #: ../modules/default/controllers/KhompLinksController.php:187
-#: ../modules/default/controllers/TdmLinksController.php:167
+#: ../modules/default/controllers/TdmLinksController.php:168
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Incoming"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:75
 #: ../modules/default/controllers/KhompLinksController.php:182
-#: ../modules/default/controllers/TdmLinksController.php:162
+#: ../modules/default/controllers/TdmLinksController.php:163
 msgid "Incoming Call"
 msgstr ""
 
@@ -2654,7 +2654,7 @@ msgid "Information"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:209
-#: ../modules/default/controllers/TdmLinksController.php:189
+#: ../modules/default/controllers/TdmLinksController.php:190
 msgid "Initializing"
 msgstr ""
 
@@ -2665,6 +2665,10 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/addedit.phtml:206
 #: ../modules/default/views/scripts/trunks/addedit.phtml:208
 msgid "Insecure"
+msgstr ""
+
+#: ../modules/portability/actions/PortabilityAction.php:69
+msgid "Insert prefix to handling"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:44
@@ -2701,6 +2705,10 @@ msgstr ""
 msgid "Invalid format"
 msgstr ""
 
+#: ../modules/portability/actions/PortabilityAction.php:67
+msgid "Invalid number handling"
+msgstr ""
+
 #: ../modules/default/api/actions/CSV_ExportDataService.php:46
 msgid "Invalid table name."
 msgstr ""
@@ -2727,7 +2735,7 @@ msgid "Khomp"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:369
-#: ../modules/default/controllers/TdmLinksController.php:349
+#: ../modules/default/controllers/TdmLinksController.php:350
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
 msgid "Khomp Links"
 msgstr ""
@@ -2825,7 +2833,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:81
 #: ../modules/default/controllers/KhompLinksController.php:188
-#: ../modules/default/controllers/TdmLinksController.php:168
+#: ../modules/default/controllers/TdmLinksController.php:169
 msgid "Locked"
 msgstr ""
 
@@ -2968,7 +2976,7 @@ msgid "Mode"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:208
-#: ../modules/default/controllers/TdmLinksController.php:188
+#: ../modules/default/controllers/TdmLinksController.php:189
 msgid "Modem Error"
 msgstr ""
 
@@ -3155,7 +3163,7 @@ msgstr ""
 msgid "No Answer"
 msgstr ""
 
-#: ../modules/default/controllers/TdmLinksController.php:101
+#: ../modules/default/controllers/TdmLinksController.php:102
 msgid "No Dahdi board installed."
 msgstr ""
 
@@ -3165,13 +3173,13 @@ msgid "No Destiny"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:111
-#: ../modules/default/controllers/TdmLinksController.php:69
+#: ../modules/default/controllers/TdmLinksController.php:70
 msgid "No Khomp board installed."
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:68
 #: ../modules/default/controllers/KhompLinksController.php:175
-#: ../modules/default/controllers/TdmLinksController.php:155
+#: ../modules/default/controllers/TdmLinksController.php:156
 msgid "No Link Available"
 msgstr ""
 
@@ -3180,7 +3188,7 @@ msgid "No Telco"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:138
-#: ../modules/default/controllers/TdmLinksController.php:118
+#: ../modules/default/controllers/TdmLinksController.php:119
 msgid "No boards selected."
 msgstr ""
 
@@ -3256,7 +3264,7 @@ msgid "Noanswer"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:220
-#: ../modules/default/controllers/TdmLinksController.php:200
+#: ../modules/default/controllers/TdmLinksController.php:201
 msgid "None"
 msgstr ""
 
@@ -3318,8 +3326,8 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:213
 #: ../modules/default/controllers/KhompLinksController.php:224
-#: ../modules/default/controllers/TdmLinksController.php:193
-#: ../modules/default/controllers/TdmLinksController.php:204
+#: ../modules/default/controllers/TdmLinksController.php:194
+#: ../modules/default/controllers/TdmLinksController.php:205
 msgid "On Going"
 msgstr ""
 
@@ -3330,7 +3338,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:70
 #: ../modules/default/controllers/KhompLinksController.php:177
-#: ../modules/default/controllers/TdmLinksController.php:157
+#: ../modules/default/controllers/TdmLinksController.php:158
 msgid "On going"
 msgstr ""
 
@@ -3412,14 +3420,14 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:69
 #: ../modules/default/controllers/KhompLinksController.php:79
 #: ../modules/default/controllers/KhompLinksController.php:186
-#: ../modules/default/controllers/TdmLinksController.php:166
+#: ../modules/default/controllers/TdmLinksController.php:167
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Outgoing"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:76
 #: ../modules/default/controllers/KhompLinksController.php:183
-#: ../modules/default/controllers/TdmLinksController.php:163
+#: ../modules/default/controllers/TdmLinksController.php:164
 msgid "Outgoing Call"
 msgstr ""
 
@@ -3564,6 +3572,10 @@ msgstr ""
 
 #: ../modules/default/actions/Playback.php:78
 msgid "Play an audio file."
+msgstr ""
+
+#: ../modules/portability/actions/PortabilityAction.php:68
+msgid "Play warning audio"
 msgstr ""
 
 #: ../modules/default/controllers/AuthController.php:84
@@ -3728,6 +3740,10 @@ msgstr ""
 
 #: ../modules/default/views/layouts/login-old.phtml:32
 msgid "Powered by"
+msgstr ""
+
+#: ../modules/portability/actions/PortabilityAction.php:70
+msgid "Prefix to handling invalid numbers"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:289
@@ -4060,9 +4076,9 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:205
 #: ../modules/default/controllers/KhompLinksController.php:216
 #: ../modules/default/controllers/KhompLinksController.php:227
-#: ../modules/default/controllers/TdmLinksController.php:185
-#: ../modules/default/controllers/TdmLinksController.php:196
-#: ../modules/default/controllers/TdmLinksController.php:207
+#: ../modules/default/controllers/TdmLinksController.php:186
+#: ../modules/default/controllers/TdmLinksController.php:197
+#: ../modules/default/controllers/TdmLinksController.php:208
 msgid "Reserved"
 msgstr ""
 
@@ -4152,13 +4168,13 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:218
 #: ../modules/default/controllers/KhompLinksController.php:219
 #: ../modules/default/controllers/KhompLinksController.php:225
-#: ../modules/default/controllers/TdmLinksController.php:156
-#: ../modules/default/controllers/TdmLinksController.php:181
-#: ../modules/default/controllers/TdmLinksController.php:186
-#: ../modules/default/controllers/TdmLinksController.php:194
-#: ../modules/default/controllers/TdmLinksController.php:198
+#: ../modules/default/controllers/TdmLinksController.php:157
+#: ../modules/default/controllers/TdmLinksController.php:182
+#: ../modules/default/controllers/TdmLinksController.php:187
+#: ../modules/default/controllers/TdmLinksController.php:195
 #: ../modules/default/controllers/TdmLinksController.php:199
-#: ../modules/default/controllers/TdmLinksController.php:205
+#: ../modules/default/controllers/TdmLinksController.php:200
+#: ../modules/default/controllers/TdmLinksController.php:206
 msgid "Ringing"
 msgstr ""
 
@@ -4441,7 +4457,7 @@ msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:89
 #: ../modules/default/controllers/KhompLinksController.php:196
-#: ../modules/default/controllers/TdmLinksController.php:176
+#: ../modules/default/controllers/TdmLinksController.php:177
 msgid "Sending SMS"
 msgstr ""
 
@@ -4555,10 +4571,10 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:172
 #: ../modules/default/controllers/KhompLinksController.php:173
 #: ../modules/default/controllers/KhompLinksController.php:189
-#: ../modules/default/controllers/TdmLinksController.php:151
 #: ../modules/default/controllers/TdmLinksController.php:152
 #: ../modules/default/controllers/TdmLinksController.php:153
-#: ../modules/default/controllers/TdmLinksController.php:169
+#: ../modules/default/controllers/TdmLinksController.php:154
+#: ../modules/default/controllers/TdmLinksController.php:170
 msgid "Signal Lost"
 msgstr ""
 
@@ -4600,10 +4616,10 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:102
 #: ../modules/default/controllers/KhompLinksController.php:241
 #: ../modules/default/controllers/KhompLinksController.php:270
-#: ../modules/default/controllers/TdmLinksController.php:63
-#: ../modules/default/controllers/TdmLinksController.php:95
-#: ../modules/default/controllers/TdmLinksController.php:221
-#: ../modules/default/controllers/TdmLinksController.php:250
+#: ../modules/default/controllers/TdmLinksController.php:64
+#: ../modules/default/controllers/TdmLinksController.php:96
+#: ../modules/default/controllers/TdmLinksController.php:222
+#: ../modules/default/controllers/TdmLinksController.php:251
 #: ../modules/default/controllers/ExtensionsController.php:49
 #: ../modules/default/controllers/TrunksController.php:48
 #: ../modules/default/controllers/TrunksController.php:441
@@ -4740,7 +4756,7 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:369
 #: ../modules/default/controllers/ErrorsTdmController.php:50
 #: ../modules/default/controllers/TdmLinksController.php:50
-#: ../modules/default/controllers/TdmLinksController.php:349
+#: ../modules/default/controllers/TdmLinksController.php:350
 #: ../modules/default/controllers/ServicesReportController.php:211
 #: ../modules/default/controllers/ErrorsKhompController.php:50
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
@@ -5242,6 +5258,12 @@ msgstr ""
 msgid "The username is required."
 msgstr ""
 
+#: ../modules/portability/actions/PortabilityAction.php:71
+msgid ""
+"The value must have 5 digits. You need create a Route rule to handling this "
+"Destination."
+msgstr ""
+
 #: ../modules/default/controllers/ExpressionAliasController.php:98
 #: ../modules/default/controllers/ExpressionAliasController.php:169
 msgid ""
@@ -5495,7 +5517,7 @@ msgid "Unmonitored"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:207
-#: ../modules/default/controllers/TdmLinksController.php:187
+#: ../modules/default/controllers/TdmLinksController.php:188
 #: ../modules/default/controllers/IpStatusController.php:43
 msgid "Unreachable"
 msgstr ""
@@ -5504,9 +5526,9 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:178
 #: ../modules/default/controllers/KhompLinksController.php:212
 #: ../modules/default/controllers/KhompLinksController.php:223
-#: ../modules/default/controllers/TdmLinksController.php:158
-#: ../modules/default/controllers/TdmLinksController.php:192
-#: ../modules/default/controllers/TdmLinksController.php:203
+#: ../modules/default/controllers/TdmLinksController.php:159
+#: ../modules/default/controllers/TdmLinksController.php:193
+#: ../modules/default/controllers/TdmLinksController.php:204
 msgid "Unused"
 msgstr ""
 

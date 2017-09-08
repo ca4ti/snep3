@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 22:50-0300\n"
-"PO-Revision-Date: 2017-09-05 23:02-0300\n"
+"POT-Creation-Date: 2017-09-08 14:32-0300\n"
+"PO-Revision-Date: 2017-09-08 14:34-0300\n"
 "Last-Translator: Flavio H Somensi <flavio@opens.com.br>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -26,6 +26,16 @@ msgid ""
 msgstr ""
 "\tEsta advertencia se está entregando a usted porque Snep detecta el uso de "
 "un tronco marcado con su correo electrónico.\n"
+
+#: ../modules/default/views/scripts/cost-center/index.phtml:19
+msgid ""
+"\n"
+"                        You can <i>Add Tags</i>\n"
+"                        to mark each call with it, than you can view a "
+"report with the calls tagged.<br>\n"
+"                        The Tags are organized in a three level tree of "
+"codes."
+msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:26
 msgid ""
@@ -198,7 +208,7 @@ msgstr ""
 msgid "A Business Support Program"
 msgstr "Un Programa de Apoyo Empresarial"
 
-#: ../agi/voicemail-notify.php:77
+#: ../agi/voicemail-notify.php:81
 msgid "A new voicemail message"
 msgstr "Un nuevo mensaje de correo de voz"
 
@@ -241,7 +251,7 @@ msgstr "Índice Acción"
 #: ../modules/default/views/scripts/trunks/index.phtml:47
 #: ../modules/default/views/scripts/route/index.phtml:98
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
-#: ../modules/default/views/scripts/cost-center/index.phtml:45
+#: ../modules/default/views/scripts/cost-center/index.phtml:49
 #: ../modules/default/views/scripts/users/index.phtml:45
 #: ../modules/default/views/scripts/action-configs/index.phtml:37
 msgid "Actions"
@@ -255,8 +265,8 @@ msgstr "Acciones a ejecutar"
 #: ../modules/default/controllers/KhompLinksController.php:63
 #: ../modules/default/controllers/KhompLinksController.php:169
 #: ../modules/default/controllers/KhompLinksController.php:170
-#: ../modules/default/controllers/TdmLinksController.php:149
 #: ../modules/default/controllers/TdmLinksController.php:150
+#: ../modules/default/controllers/TdmLinksController.php:151
 msgid "Activated"
 msgstr "Activado"
 
@@ -341,7 +351,7 @@ msgstr "Agregar Múltiple"
 msgid "Add Multiples Extensions"
 msgstr "Agregar Múltiple Extensiones"
 
-#: ../modules/default/views/layouts/layout.phtml:255
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr "Agregar Extensiones, Troncales, Contactos y más."
 
@@ -373,7 +383,7 @@ msgstr "Agregar Sesión"
 msgid "Add Sound File"
 msgstr "Agregar Archivo de Sonido"
 
-#: ../modules/default/views/scripts/cost-center/index.phtml:19
+#: ../modules/default/views/scripts/cost-center/index.phtml:23
 msgid "Add Tag"
 msgstr "Agregar Etiqueta"
 
@@ -421,7 +431,7 @@ msgstr "Agregar la página de Dashboard"
 #: ../modules/default/views/scripts/logs/index.phtml:16
 #: ../modules/default/views/scripts/trunks/index.phtml:24
 #: ../modules/default/views/scripts/route/index.phtml:76
-#: ../modules/default/views/scripts/cost-center/index.phtml:23
+#: ../modules/default/views/scripts/cost-center/index.phtml:27
 #: ../modules/default/views/scripts/users/index.phtml:25
 #: ../modules/default/views/scripts/action-configs/index.phtml:25
 #: ../modules/default/views/scripts/export-data/index.phtml:10
@@ -434,7 +444,7 @@ msgstr "Agregar la página de Dashboard"
 msgid "Add to dashboard"
 msgstr "Añadir al panel"
 
-#: ../modules/default/views/layouts/layout.phtml:265
+#: ../modules/default/views/layouts/layout.phtml:270
 msgid "Add your External Trunks to make external Calls."
 msgstr "Agregue los troncos externos para realizar llamadas externas."
 
@@ -476,7 +486,7 @@ msgstr "Agente:"
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:7
 #: ../modules/default/views/scripts/trunks/index.phtml:35
 #: ../modules/default/views/scripts/route/index.phtml:87
-#: ../modules/default/views/scripts/cost-center/index.phtml:33
+#: ../modules/default/views/scripts/cost-center/index.phtml:37
 #: ../modules/default/views/scripts/module-settings/index.phtml:24
 msgid "Alert"
 msgstr "Alerta"
@@ -527,7 +537,7 @@ msgstr "Permitir"
 msgid "Allow Viewing"
 msgstr "Permitir visionado"
 
-#: ../modules/default/actions/DiscarRamal.php:181
+#: ../modules/default/actions/DiscarRamal.php:184
 msgid "Allow voicemail"
 msgstr "Permitir correo de voz"
 
@@ -783,18 +793,18 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:200
 #: ../modules/default/controllers/KhompLinksController.php:217
 #: ../modules/default/controllers/KhompLinksController.php:228
-#: ../modules/default/controllers/TdmLinksController.php:165
-#: ../modules/default/controllers/TdmLinksController.php:175
-#: ../modules/default/controllers/TdmLinksController.php:179
+#: ../modules/default/controllers/TdmLinksController.php:166
+#: ../modules/default/controllers/TdmLinksController.php:176
 #: ../modules/default/controllers/TdmLinksController.php:180
-#: ../modules/default/controllers/TdmLinksController.php:197
-#: ../modules/default/controllers/TdmLinksController.php:208
+#: ../modules/default/controllers/TdmLinksController.php:181
+#: ../modules/default/controllers/TdmLinksController.php:198
+#: ../modules/default/controllers/TdmLinksController.php:209
 msgid "Busy"
 msgstr "Ocupado"
 
 #: ../modules/default/controllers/KhompLinksController.php:86
 #: ../modules/default/controllers/KhompLinksController.php:193
-#: ../modules/default/controllers/TdmLinksController.php:173
+#: ../modules/default/controllers/TdmLinksController.php:174
 msgid "Busy Incoming"
 msgstr "Ocupado entrante"
 
@@ -802,8 +812,8 @@ msgstr "Ocupado entrante"
 #: ../modules/default/controllers/KhompLinksController.php:85
 #: ../modules/default/controllers/KhompLinksController.php:191
 #: ../modules/default/controllers/KhompLinksController.php:192
-#: ../modules/default/controllers/TdmLinksController.php:171
 #: ../modules/default/controllers/TdmLinksController.php:172
+#: ../modules/default/controllers/TdmLinksController.php:173
 msgid "Busy Outgoing"
 msgstr "Ocupado"
 
@@ -843,22 +853,20 @@ msgstr ""
 msgid "Cached"
 msgstr "En cach"
 
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:212
+#: ../modules/default/views/scripts/route/email_message.phtml:212
 #: ../modules/default/actions/DiscarTronco.php:376
 msgid "Call Date"
 msgstr "Llamada fecha"
-
-#: ../modules/default/actions/EmailAction.php:120
-#: ../agi/voicemail-notify.php:71
-msgid "Call Date:"
-msgstr "Fecha de Llamada:"
 
 #: ../modules/default/actions/DiscarTronco.php:139
 msgid "Call Duration Limit"
 msgstr "Límite de Duración de llamadas"
 
-#: ../modules/default/actions/EmailAction.php:118
-msgid "Call Information:"
-msgstr "Información de llamadas:"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:209
+#: ../modules/default/views/scripts/route/email_message.phtml:209
+msgid "Call Informations"
+msgstr "Información de llamadas"
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
@@ -921,6 +929,11 @@ msgstr "Fecha de la llamada"
 #: ../modules/default/views/scripts/extensions/index.phtml:54
 msgid "Caller ID"
 msgstr "Nombre"
+
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:216
+#: ../modules/default/views/scripts/route/email_message.phtml:216
+msgid "Caller Number"
+msgstr "Número de Origen"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:228
 msgid "Caller location"
@@ -994,7 +1007,7 @@ msgstr "Llamadas completado"
 #: ../modules/default/views/scripts/users/bond.phtml:60
 #: ../modules/default/views/scripts/remove/remove.phtml:26
 #: ../modules/default/views/scripts/action-configs/edit.phtml:42
-#: ../modules/default/views/scripts/module-settings/index.phtml:189
+#: ../modules/default/views/scripts/module-settings/index.phtml:188
 #: ../modules/default/views/scripts/parameters/index.phtml:272
 #: ../modules/default/views/scripts/cnl/index.phtml:44
 #: ../lib/Snep/Form/Element/Submit.php:77 ../lib/Snep/CsvIE.php:170
@@ -1061,13 +1074,13 @@ msgstr "Canal"
 
 #: ../modules/default/controllers/KhompLinksController.php:74
 #: ../modules/default/controllers/KhompLinksController.php:181
-#: ../modules/default/controllers/TdmLinksController.php:161
+#: ../modules/default/controllers/TdmLinksController.php:162
 msgid "Channel Fail"
 msgstr "Canal Falla"
 
 #: ../modules/default/controllers/KhompLinksController.php:73
 #: ../modules/default/controllers/KhompLinksController.php:180
-#: ../modules/default/controllers/TdmLinksController.php:160
+#: ../modules/default/controllers/TdmLinksController.php:161
 msgid "Channel Free"
 msgstr "Canal gratuito"
 
@@ -1128,7 +1141,7 @@ msgstr "Clave de cliente"
 msgid "Closing date"
 msgstr "Día de cierre"
 
-#: ../modules/default/views/layouts/layout.phtml:172
+#: ../modules/default/views/layouts/layout.phtml:177
 msgid "Cloud Server Informations"
 msgstr ""
 
@@ -1146,7 +1159,7 @@ msgstr "Cnl Atualización"
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:34
 #: ../modules/default/views/scripts/contact-groups/index.phtml:37
 #: ../modules/default/views/scripts/trunks/index.phtml:42
-#: ../modules/default/views/scripts/cost-center/index.phtml:41
+#: ../modules/default/views/scripts/cost-center/index.phtml:45
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:10
 #: ../modules/default/views/scripts/users/index.phtml:40
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:48
@@ -1205,7 +1218,7 @@ msgstr "Separado por comas"
 
 #: ../modules/default/controllers/KhompLinksController.php:90
 #: ../modules/default/controllers/KhompLinksController.php:197
-#: ../modules/default/controllers/TdmLinksController.php:177
+#: ../modules/default/controllers/TdmLinksController.php:178
 msgid "Communication Error"
 msgstr "Error de comunicación"
 
@@ -1453,7 +1466,7 @@ msgstr "Día"
 
 #: ../modules/default/controllers/KhompLinksController.php:67
 #: ../modules/default/controllers/KhompLinksController.php:174
-#: ../modules/default/controllers/TdmLinksController.php:154
+#: ../modules/default/controllers/TdmLinksController.php:155
 msgid "Deactivated"
 msgstr "Desactivado"
 
@@ -1547,7 +1560,7 @@ msgstr "Retrasar la devolución de llamada"
 #: ../modules/default/views/scripts/notifications/index.phtml:57
 #: ../modules/default/views/scripts/trunks/index.phtml:73
 #: ../modules/default/views/scripts/route/index.phtml:127
-#: ../modules/default/views/scripts/cost-center/index.phtml:61
+#: ../modules/default/views/scripts/cost-center/index.phtml:65
 #: ../modules/default/views/scripts/users/index.phtml:70
 #: ../modules/default/views/scripts/remove/remove.phtml:24
 #: ../modules/default/controllers/DatesAliasController.php:162
@@ -1665,7 +1678,7 @@ msgstr "Eliminar archivos de música de espera:"
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:22
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:24
 #: ../modules/default/views/scripts/route/index.phtml:97
-#: ../modules/default/views/scripts/cost-center/index.phtml:44
+#: ../modules/default/views/scripts/cost-center/index.phtml:48
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
@@ -1689,9 +1702,10 @@ msgstr "Extensiones Destino"
 msgid "Destination Group"
 msgstr "Destino Grupo"
 
-#: ../modules/default/actions/EmailAction.php:124
-msgid "Destination Number:"
-msgstr "Número de destino:"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:224
+#: ../modules/default/views/scripts/route/email_message.phtml:220
+msgid "Destination Number"
+msgstr "Número de destino"
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Destinity"
@@ -1725,12 +1739,12 @@ msgstr "Destino: %s"
 msgid "Details"
 msgstr "Detalles"
 
-#: ../modules/default/actions/DiscarRamal.php:123
+#: ../modules/default/actions/DiscarRamal.php:124
 msgid "Dial Extension"
 msgstr "Dial Extensión"
 
 #: ../modules/default/actions/DiscarTronco.php:141
-#: ../modules/default/actions/DiscarRamal.php:184
+#: ../modules/default/actions/DiscarRamal.php:188
 msgid "Dial Flags"
 msgstr ""
 
@@ -1740,7 +1754,7 @@ msgstr "Método de marcación"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:7
 #: ../modules/default/actions/DiscarTronco.php:138
-#: ../modules/default/actions/DiscarRamal.php:182
+#: ../modules/default/actions/DiscarRamal.php:186
 msgid "Dial Timeout"
 msgstr "Dial Tiempo de espera"
 
@@ -1764,7 +1778,7 @@ msgstr "Dial a través del tronco"
 msgid "Dial to a Trunk"
 msgstr "Dial a un tronco"
 
-#: ../modules/default/actions/DiscarRamal.php:137
+#: ../modules/default/actions/DiscarRamal.php:138
 msgid "Dial to a snep extension."
 msgstr "Dial para una extensión SNEP."
 
@@ -1777,13 +1791,13 @@ msgstr "Dial através extensión %s"
 #: ../modules/default/controllers/KhompLinksController.php:179
 #: ../modules/default/controllers/KhompLinksController.php:215
 #: ../modules/default/controllers/KhompLinksController.php:226
-#: ../modules/default/controllers/TdmLinksController.php:159
-#: ../modules/default/controllers/TdmLinksController.php:195
-#: ../modules/default/controllers/TdmLinksController.php:206
+#: ../modules/default/controllers/TdmLinksController.php:160
+#: ../modules/default/controllers/TdmLinksController.php:196
+#: ../modules/default/controllers/TdmLinksController.php:207
 msgid "Dialing"
 msgstr "Discando"
 
-#: ../modules/default/actions/DiscarRamal.php:185
+#: ../modules/default/actions/DiscarRamal.php:189
 msgid "Differ ring"
 msgstr "Difieren anillo"
 
@@ -1816,7 +1830,7 @@ msgstr "Nombre de directorio"
 
 #: ../modules/default/controllers/KhompLinksController.php:96
 #: ../modules/default/controllers/KhompLinksController.php:203
-#: ../modules/default/controllers/TdmLinksController.php:183
+#: ../modules/default/controllers/TdmLinksController.php:184
 msgid "Disabled"
 msgstr "Discapacitado"
 
@@ -1841,7 +1855,7 @@ msgstr "Distribución"
 msgid "Do not cut"
 msgstr "No corte"
 
-#: ../modules/default/actions/DiscarRamal.php:186
+#: ../modules/default/actions/DiscarRamal.php:190
 msgid "Do not overflow (busy and no answer)"
 msgstr "No desbordarse (ocupado y sin respuesta)"
 
@@ -1875,9 +1889,9 @@ msgstr "Duplicar"
 msgid "Duration"
 msgstr "Duración"
 
-#: ../agi/voicemail-notify.php:75
-msgid "Duration (in seconds):"
-msgstr "Duración (en segundos):"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:228
+msgid "Duration (in seconds)"
+msgstr "Duración (en segundos)"
 
 #: ../modules/default/controllers/CallsReportController.php:507
 msgid "Duration (seconds)"
@@ -1907,7 +1921,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contact-groups/index.phtml:55
 #: ../modules/default/views/scripts/trunks/index.phtml:71
 #: ../modules/default/views/scripts/route/index.phtml:123
-#: ../modules/default/views/scripts/cost-center/index.phtml:60
+#: ../modules/default/views/scripts/cost-center/index.phtml:64
 #: ../modules/default/views/scripts/users/index.phtml:69
 #: ../modules/default/controllers/DatesAliasController.php:113
 #: ../modules/default/controllers/CostCenterController.php:128
@@ -1989,7 +2003,7 @@ msgstr "Habilitar grabación"
 #: ../modules/default/views/scripts/calls-report/index.phtml:265
 #: ../modules/default/controllers/KhompLinksController.php:97
 #: ../modules/default/controllers/KhompLinksController.php:204
-#: ../modules/default/controllers/TdmLinksController.php:184
+#: ../modules/default/controllers/TdmLinksController.php:185
 msgid "Enabled"
 msgstr "Activado"
 
@@ -2073,8 +2087,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:245
 #: ../modules/default/controllers/ErrorsTdmController.php:57
 #: ../modules/default/controllers/ErrorsTdmController.php:137
-#: ../modules/default/controllers/TdmLinksController.php:57
-#: ../modules/default/controllers/TdmLinksController.php:225
+#: ../modules/default/controllers/TdmLinksController.php:58
+#: ../modules/default/controllers/TdmLinksController.php:226
 #: ../modules/default/controllers/ExtensionsController.php:53
 #: ../modules/default/controllers/ErrorsKhompController.php:57
 #: ../modules/default/controllers/ErrorsKhompController.php:136
@@ -2298,8 +2312,8 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:95
 #: ../modules/default/controllers/KhompLinksController.php:190
 #: ../modules/default/controllers/KhompLinksController.php:202
-#: ../modules/default/controllers/TdmLinksController.php:170
-#: ../modules/default/controllers/TdmLinksController.php:182
+#: ../modules/default/controllers/TdmLinksController.php:171
+#: ../modules/default/controllers/TdmLinksController.php:183
 msgid "Fail"
 msgstr "Fallar"
 
@@ -2432,9 +2446,9 @@ msgstr "Fraccionamiento"
 #: ../modules/default/controllers/KhompLinksController.php:184
 #: ../modules/default/controllers/KhompLinksController.php:194
 #: ../modules/default/controllers/KhompLinksController.php:198
-#: ../modules/default/controllers/TdmLinksController.php:164
-#: ../modules/default/controllers/TdmLinksController.php:174
-#: ../modules/default/controllers/TdmLinksController.php:178
+#: ../modules/default/controllers/TdmLinksController.php:165
+#: ../modules/default/controllers/TdmLinksController.php:175
+#: ../modules/default/controllers/TdmLinksController.php:179
 msgid "Free"
 msgstr "Libre"
 
@@ -2508,15 +2522,20 @@ msgid "Group permission"
 msgstr "Permiso de Grupo"
 
 #: ../modules/default/controllers/KhompLinksController.php:221
-#: ../modules/default/controllers/TdmLinksController.php:201
+#: ../modules/default/controllers/TdmLinksController.php:202
 msgid "Hanging Up"
 msgstr "Suspender"
 
-#: ../modules/default/views/layouts/layout.phtml:156
+#: ../modules/default/actions/DiscarRamal.php:185
+msgid "Hangup the call after voicemail"
+msgstr "Finalizar la llamada después del voicemail"
+
+#: ../modules/default/views/layouts/layout.phtml:93
+#: ../modules/default/views/layouts/layout.phtml:161
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../modules/default/views/layouts/layout.phtml:250
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
@@ -2667,14 +2686,14 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:68
 #: ../modules/default/controllers/KhompLinksController.php:80
 #: ../modules/default/controllers/KhompLinksController.php:187
-#: ../modules/default/controllers/TdmLinksController.php:167
+#: ../modules/default/controllers/TdmLinksController.php:168
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Incoming"
 msgstr "Entrante"
 
 #: ../modules/default/controllers/KhompLinksController.php:75
 #: ../modules/default/controllers/KhompLinksController.php:182
-#: ../modules/default/controllers/TdmLinksController.php:162
+#: ../modules/default/controllers/TdmLinksController.php:163
 msgid "Incoming Call"
 msgstr "llamada entrante"
 
@@ -2688,12 +2707,12 @@ msgstr "Regla entrante solamente"
 msgid "Info"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:164
+#: ../modules/default/views/layouts/layout.phtml:169
 msgid "Information"
 msgstr "Información "
 
 #: ../modules/default/controllers/KhompLinksController.php:209
-#: ../modules/default/controllers/TdmLinksController.php:189
+#: ../modules/default/controllers/TdmLinksController.php:190
 msgid "Initializing"
 msgstr "Inicialización"
 
@@ -2705,6 +2724,10 @@ msgstr "Archivo de entrada"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:208
 msgid "Insecure"
 msgstr ""
+
+#: ../modules/portability/actions/PortabilityAction.php:69
+msgid "Insert prefix to handling"
+msgstr "Insertar prefijo para el manejo"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:44
 #: ../modules/default/views/scripts/extensions/addedit.phtml:81
@@ -2740,6 +2763,10 @@ msgstr "Archivo no válido"
 msgid "Invalid format"
 msgstr "Formato no válido"
 
+#: ../modules/portability/actions/PortabilityAction.php:67
+msgid "Invalid number handling"
+msgstr "Manejo de números no válido"
+
 #: ../modules/default/api/actions/CSV_ExportDataService.php:46
 msgid "Invalid table name."
 msgstr "Nombre de la tabla no es válido."
@@ -2766,7 +2793,7 @@ msgid "Khomp"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:369
-#: ../modules/default/controllers/TdmLinksController.php:349
+#: ../modules/default/controllers/TdmLinksController.php:350
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
 msgid "Khomp Links"
 msgstr "Enlaces Khomp"
@@ -2813,7 +2840,7 @@ msgstr "latence"
 msgid "Leave blank to use extensions password."
 msgstr "Dejar en blanco para usar extensiones contraseña."
 
-#: ../modules/default/actions/DiscarRamal.php:187
+#: ../modules/default/actions/DiscarRamal.php:191
 msgid "Leave blank to use the number from the destination."
 msgstr "Dejar en blanco para usar el número del destino."
 
@@ -2864,7 +2891,7 @@ msgstr "Bloqueado "
 
 #: ../modules/default/controllers/KhompLinksController.php:81
 #: ../modules/default/controllers/KhompLinksController.php:188
-#: ../modules/default/controllers/TdmLinksController.php:168
+#: ../modules/default/controllers/TdmLinksController.php:169
 msgid "Locked"
 msgstr "Bloqueado"
 
@@ -2890,7 +2917,7 @@ msgstr ""
 msgid "Login"
 msgstr "Iniciar Sesión"
 
-#: ../modules/default/views/layouts/layout.phtml:180
+#: ../modules/default/views/layouts/layout.phtml:185
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr "Salir"
@@ -2902,6 +2929,10 @@ msgstr ""
 #: ../modules/default/actions/ActionLoop.php:63
 msgid "Loop"
 msgstr "Lazo"
+
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:220
+msgid "Mailbox"
+msgstr ""
 
 #: ../modules/callback/actions/CallbackAction.php:51
 msgid "Make a Callback to the caller number."
@@ -2953,10 +2984,6 @@ msgstr "Archivo de menú de audio"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../agi/voicemail-notify.php:69
-msgid "Message Information:"
-msgstr "Información del mensaje:"
-
 #: ../modules/default/controllers/ExtensionsGroupsController.php:280
 #: ../modules/default/controllers/ContactGroupsController.php:250
 msgid "Migrate"
@@ -3007,7 +3034,7 @@ msgid "Mode"
 msgstr "Modo"
 
 #: ../modules/default/controllers/KhompLinksController.php:208
-#: ../modules/default/controllers/TdmLinksController.php:188
+#: ../modules/default/controllers/TdmLinksController.php:189
 msgid "Modem Error"
 msgstr ""
 
@@ -3017,7 +3044,7 @@ msgstr ""
 msgid "Module Settings"
 msgstr "Ajustes del módulo"
 
-#: ../modules/default/views/layouts/layout.phtml:198
+#: ../modules/default/views/layouts/layout.phtml:203
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 msgid "Modules"
 msgstr "Módulos"
@@ -3131,7 +3158,7 @@ msgstr "No atendida"
 #: ../modules/default/views/scripts/trunks/index.phtml:43
 #: ../modules/default/views/scripts/trunks/addedit.phtml:10
 #: ../modules/default/views/scripts/trunks/addedit.phtml:12
-#: ../modules/default/views/scripts/cost-center/index.phtml:42
+#: ../modules/default/views/scripts/cost-center/index.phtml:46
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:17
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:19
 #: ../modules/default/views/scripts/users/index.phtml:41
@@ -3194,7 +3221,7 @@ msgstr "No Permitir visionado"
 msgid "No Answer"
 msgstr "Sin respuesta"
 
-#: ../modules/default/controllers/TdmLinksController.php:101
+#: ../modules/default/controllers/TdmLinksController.php:102
 msgid "No Dahdi board installed."
 msgstr ""
 
@@ -3204,13 +3231,13 @@ msgid "No Destiny"
 msgstr "Sin Destino"
 
 #: ../modules/default/controllers/KhompLinksController.php:111
-#: ../modules/default/controllers/TdmLinksController.php:69
+#: ../modules/default/controllers/TdmLinksController.php:70
 msgid "No Khomp board installed."
 msgstr "Ninguna junta Khomp instalada"
 
 #: ../modules/default/controllers/KhompLinksController.php:68
 #: ../modules/default/controllers/KhompLinksController.php:175
-#: ../modules/default/controllers/TdmLinksController.php:155
+#: ../modules/default/controllers/TdmLinksController.php:156
 msgid "No Link Available"
 msgstr "No hay relación Disponible"
 
@@ -3219,7 +3246,7 @@ msgid "No Telco"
 msgstr "Sin Telco"
 
 #: ../modules/default/controllers/KhompLinksController.php:138
-#: ../modules/default/controllers/TdmLinksController.php:118
+#: ../modules/default/controllers/TdmLinksController.php:119
 msgid "No boards selected."
 msgstr "No hay tablas seleccionadas."
 
@@ -3295,7 +3322,7 @@ msgid "Noanswer"
 msgstr "No atendida"
 
 #: ../modules/default/controllers/KhompLinksController.php:220
-#: ../modules/default/controllers/TdmLinksController.php:200
+#: ../modules/default/controllers/TdmLinksController.php:201
 msgid "None"
 msgstr "Nada"
 
@@ -3357,8 +3384,8 @@ msgstr "Origen Ommit (sólo para Khomp KGSM)"
 
 #: ../modules/default/controllers/KhompLinksController.php:213
 #: ../modules/default/controllers/KhompLinksController.php:224
-#: ../modules/default/controllers/TdmLinksController.php:193
-#: ../modules/default/controllers/TdmLinksController.php:204
+#: ../modules/default/controllers/TdmLinksController.php:194
+#: ../modules/default/controllers/TdmLinksController.php:205
 msgid "On Going"
 msgstr "En curso"
 
@@ -3369,7 +3396,7 @@ msgstr "a bordo"
 
 #: ../modules/default/controllers/KhompLinksController.php:70
 #: ../modules/default/controllers/KhompLinksController.php:177
-#: ../modules/default/controllers/TdmLinksController.php:157
+#: ../modules/default/controllers/TdmLinksController.php:158
 msgid "On going"
 msgstr "En curso"
 
@@ -3451,14 +3478,14 @@ msgstr "Sólo otra regla"
 #: ../modules/default/controllers/CostCenterController.php:69
 #: ../modules/default/controllers/KhompLinksController.php:79
 #: ../modules/default/controllers/KhompLinksController.php:186
-#: ../modules/default/controllers/TdmLinksController.php:166
+#: ../modules/default/controllers/TdmLinksController.php:167
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Outgoing"
 msgstr "Saliente"
 
 #: ../modules/default/controllers/KhompLinksController.php:76
 #: ../modules/default/controllers/KhompLinksController.php:183
-#: ../modules/default/controllers/TdmLinksController.php:163
+#: ../modules/default/controllers/TdmLinksController.php:164
 msgid "Outgoing Call"
 msgstr "Llamada Saliente"
 
@@ -3604,6 +3631,10 @@ msgstr "Tocar Audio"
 #: ../modules/default/actions/Playback.php:78
 msgid "Play an audio file."
 msgstr "Reproducir un archivo de audio."
+
+#: ../modules/portability/actions/PortabilityAction.php:68
+msgid "Play warning audio"
+msgstr "Reproducir audio de advertencia"
 
 #: ../modules/default/controllers/AuthController.php:84
 msgid "Please enter a username"
@@ -3768,6 +3799,10 @@ msgstr ""
 #: ../modules/default/views/layouts/login-old.phtml:32
 msgid "Powered by"
 msgstr "Impulsado por"
+
+#: ../modules/portability/actions/PortabilityAction.php:70
+msgid "Prefix to handling invalid numbers"
+msgstr "Prefijo a la manipulación de números no válidos"
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:289
 msgid "Preview"
@@ -4103,9 +4138,9 @@ msgstr "Valor nominal"
 #: ../modules/default/controllers/KhompLinksController.php:205
 #: ../modules/default/controllers/KhompLinksController.php:216
 #: ../modules/default/controllers/KhompLinksController.php:227
-#: ../modules/default/controllers/TdmLinksController.php:185
-#: ../modules/default/controllers/TdmLinksController.php:196
-#: ../modules/default/controllers/TdmLinksController.php:207
+#: ../modules/default/controllers/TdmLinksController.php:186
+#: ../modules/default/controllers/TdmLinksController.php:197
+#: ../modules/default/controllers/TdmLinksController.php:208
 msgid "Reserved"
 msgstr "Reservado"
 
@@ -4195,13 +4230,13 @@ msgstr "Tiempo de llamada por agente"
 #: ../modules/default/controllers/KhompLinksController.php:218
 #: ../modules/default/controllers/KhompLinksController.php:219
 #: ../modules/default/controllers/KhompLinksController.php:225
-#: ../modules/default/controllers/TdmLinksController.php:156
-#: ../modules/default/controllers/TdmLinksController.php:181
-#: ../modules/default/controllers/TdmLinksController.php:186
-#: ../modules/default/controllers/TdmLinksController.php:194
-#: ../modules/default/controllers/TdmLinksController.php:198
+#: ../modules/default/controllers/TdmLinksController.php:157
+#: ../modules/default/controllers/TdmLinksController.php:182
+#: ../modules/default/controllers/TdmLinksController.php:187
+#: ../modules/default/controllers/TdmLinksController.php:195
 #: ../modules/default/controllers/TdmLinksController.php:199
-#: ../modules/default/controllers/TdmLinksController.php:205
+#: ../modules/default/controllers/TdmLinksController.php:200
+#: ../modules/default/controllers/TdmLinksController.php:206
 msgid "Ringing"
 msgstr "Zumbido"
 
@@ -4333,7 +4368,7 @@ msgstr "Sábado"
 #: ../modules/default/views/scripts/users/bond.phtml:58
 #: ../modules/default/views/scripts/action-configs/edit.phtml:41
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:105
-#: ../modules/default/views/scripts/module-settings/index.phtml:187
+#: ../modules/default/views/scripts/module-settings/index.phtml:186
 #: ../modules/default/views/scripts/parameters/index.phtml:270
 #: ../lib/Snep/Form.php:58
 msgid "Save"
@@ -4361,7 +4396,7 @@ msgstr ""
 #: ../modules/default/views/scripts/services-report/view.phtml:24
 #: ../modules/default/views/scripts/trunks/index.phtml:28
 #: ../modules/default/views/scripts/route/index.phtml:80
-#: ../modules/default/views/scripts/cost-center/index.phtml:26
+#: ../modules/default/views/scripts/cost-center/index.phtml:30
 #: ../modules/default/views/scripts/users/index.phtml:29
 #: ../modules/default/views/scripts/calls-report/view.phtml:33
 msgid "Search"
@@ -4484,7 +4519,7 @@ msgstr "Remitente"
 
 #: ../modules/default/controllers/KhompLinksController.php:89
 #: ../modules/default/controllers/KhompLinksController.php:196
-#: ../modules/default/controllers/TdmLinksController.php:176
+#: ../modules/default/controllers/TdmLinksController.php:177
 msgid "Sending SMS"
 msgstr "Envío de SMS"
 
@@ -4534,7 +4569,7 @@ msgstr "Establecer una etiqueta para vincular la clasificación"
 msgid "Set the relationship column x data"
 msgstr "Establecer la relación columna x datos"
 
-#: ../modules/default/views/layouts/layout.phtml:146
+#: ../modules/default/views/layouts/layout.phtml:152
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -4600,10 +4635,10 @@ msgstr "Registrarse"
 #: ../modules/default/controllers/KhompLinksController.php:172
 #: ../modules/default/controllers/KhompLinksController.php:173
 #: ../modules/default/controllers/KhompLinksController.php:189
-#: ../modules/default/controllers/TdmLinksController.php:151
 #: ../modules/default/controllers/TdmLinksController.php:152
 #: ../modules/default/controllers/TdmLinksController.php:153
-#: ../modules/default/controllers/TdmLinksController.php:169
+#: ../modules/default/controllers/TdmLinksController.php:154
+#: ../modules/default/controllers/TdmLinksController.php:170
 msgid "Signal Lost"
 msgstr "señal Perdida"
 
@@ -4645,10 +4680,10 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:102
 #: ../modules/default/controllers/KhompLinksController.php:241
 #: ../modules/default/controllers/KhompLinksController.php:270
-#: ../modules/default/controllers/TdmLinksController.php:63
-#: ../modules/default/controllers/TdmLinksController.php:95
-#: ../modules/default/controllers/TdmLinksController.php:221
-#: ../modules/default/controllers/TdmLinksController.php:250
+#: ../modules/default/controllers/TdmLinksController.php:64
+#: ../modules/default/controllers/TdmLinksController.php:96
+#: ../modules/default/controllers/TdmLinksController.php:222
+#: ../modules/default/controllers/TdmLinksController.php:251
 #: ../modules/default/controllers/ExtensionsController.php:49
 #: ../modules/default/controllers/TrunksController.php:48
 #: ../modules/default/controllers/TrunksController.php:441
@@ -4706,11 +4741,6 @@ msgstr "Extensiones Fuente"
 #: ../modules/default/views/scripts/calls-report/index.phtml:83
 msgid "Source Group"
 msgstr "Grupo fuente"
-
-#: ../modules/default/actions/EmailAction.php:122
-#: ../agi/voicemail-notify.php:73
-msgid "Source Number:"
-msgstr "Número de la persona que llama:"
 
 #: ../modules/default/views/scripts/route/elements/src.phtml:1
 msgid ""
@@ -4793,7 +4823,7 @@ msgstr "Contraseña estática"
 #: ../modules/default/controllers/KhompLinksController.php:369
 #: ../modules/default/controllers/ErrorsTdmController.php:50
 #: ../modules/default/controllers/TdmLinksController.php:50
-#: ../modules/default/controllers/TdmLinksController.php:349
+#: ../modules/default/controllers/TdmLinksController.php:350
 #: ../modules/default/controllers/ServicesReportController.php:211
 #: ../modules/default/controllers/ErrorsKhompController.php:50
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
@@ -4985,7 +5015,7 @@ msgstr "El archivo incluye / setup.conf no tiene permiso para ser modificado."
 msgid "The Recorded Files Path is required."
 msgstr "Se requiere que el destino de los ficheros grabados."
 
-#: ../modules/default/views/layouts/layout.phtml:270
+#: ../modules/default/views/layouts/layout.phtml:275
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
@@ -5135,7 +5165,7 @@ msgstr "Se requiere que el nombre del archivo"
 msgid "The first name is required"
 msgstr "Se requiere que el nombre de pila"
 
-#: ../modules/default/views/layouts/layout.phtml:260
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr "Lo primero que necesita es agregar sus extensiones y sus grupos."
 
@@ -5329,6 +5359,14 @@ msgstr "Se requiere que el nombre de usuario"
 msgid "The username is required."
 msgstr "Se requiere que el nombre de usuario"
 
+#: ../modules/portability/actions/PortabilityAction.php:71
+msgid ""
+"The value must have 5 digits. You need create a Route rule to handling this "
+"Destination."
+msgstr ""
+"El valor debe tener 5 dígitos. Necesita crear una regla de ruta para manejar "
+"este destino."
+
 #: ../modules/default/controllers/ExpressionAliasController.php:98
 #: ../modules/default/controllers/ExpressionAliasController.php:169
 msgid ""
@@ -5369,7 +5407,7 @@ msgstr ""
 msgid "This is the time in seconds the system will try contact the caller"
 msgstr "Este es el tiempo en segundos que el sistema intentará contactar al"
 
-#: ../modules/default/views/layouts/layout.phtml:245
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5529,7 +5567,7 @@ msgstr "Martes"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:47
 #: ../modules/default/views/scripts/trunks/addedit.phtml:170
 #: ../modules/default/views/scripts/systemstatus/index.phtml:158
-#: ../modules/default/views/scripts/cost-center/index.phtml:43
+#: ../modules/default/views/scripts/cost-center/index.phtml:47
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Type"
 msgstr "Tipo"
@@ -5602,7 +5640,7 @@ msgid "Unmonitored"
 msgstr ""
 
 #: ../modules/default/controllers/KhompLinksController.php:207
-#: ../modules/default/controllers/TdmLinksController.php:187
+#: ../modules/default/controllers/TdmLinksController.php:188
 #: ../modules/default/controllers/IpStatusController.php:43
 msgid "Unreachable"
 msgstr ""
@@ -5611,9 +5649,9 @@ msgstr ""
 #: ../modules/default/controllers/KhompLinksController.php:178
 #: ../modules/default/controllers/KhompLinksController.php:212
 #: ../modules/default/controllers/KhompLinksController.php:223
-#: ../modules/default/controllers/TdmLinksController.php:158
-#: ../modules/default/controllers/TdmLinksController.php:192
-#: ../modules/default/controllers/TdmLinksController.php:203
+#: ../modules/default/controllers/TdmLinksController.php:159
+#: ../modules/default/controllers/TdmLinksController.php:193
+#: ../modules/default/controllers/TdmLinksController.php:204
 msgid "Unused"
 msgstr "No usado"
 
@@ -5815,7 +5853,7 @@ msgstr "Días de la semana"
 msgid "Welcome to Intercomunexão."
 msgstr "Bienvenido a la Intercomunexão"
 
-#: ../modules/default/views/layouts/layout.phtml:240
+#: ../modules/default/views/layouts/layout.phtml:245
 msgid ""
 "Welcome to SNEP. <br>\\\n"
 "      Your IP Telephony Plataform.<br>Click Next to understand the basic "
@@ -6032,9 +6070,9 @@ msgstr ""
 msgid "You have no notifications"
 msgstr "No tiene notificaciones"
 
-#: ../agi/voicemail-notify.php:67
-msgid "You received a new Call Message from"
-msgstr "Recibió un nuevo mensaje de llamada de"
+#: ../agi/voicemail-notify.php:69
+msgid "You received a new Call Message from "
+msgstr "Recibió un nuevo mensaje de llamada de "
 
 #: ../modules/default/views/layouts/register.phtml:233
 msgid "You'Re Welcome"
@@ -6133,14 +6171,6 @@ msgstr ""
 msgid "cost-center/index"
 msgstr ""
 
-#: ../modules/default/actions/EmailAction.php:69
-msgid ""
-"display information of source and destination of the call in the body of the "
-"email?"
-msgstr ""
-"mostrar información de origen y destino de la llamada en el cuerpo del "
-"correo electrónico?"
-
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "edit_icon.png"
 msgstr ""
@@ -6210,7 +6240,7 @@ msgid "in milliseconds"
 msgstr "en milisegundos"
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:9
-#: ../modules/default/actions/DiscarRamal.php:183
+#: ../modules/default/actions/DiscarRamal.php:187
 msgid "in seconds"
 msgstr "en segundo"
 
@@ -6508,6 +6538,34 @@ msgstr ""
 #: /home/douglas/Dropbox/Development/snep-3/modules/portability/info.xml
 msgid "www.sneppbx.com"
 msgstr ""
+
+#~ msgid "Call Date:"
+#~ msgstr "Fecha de Llamada:"
+
+#~ msgid "Call Information:"
+#~ msgstr "Información de llamadas:"
+
+#~ msgid "Destination Number:"
+#~ msgstr "Número de destino:"
+
+#~ msgid "Duration (in seconds):"
+#~ msgstr "Duración (en segundos):"
+
+#~ msgid "Message Information:"
+#~ msgstr "Información del mensaje:"
+
+#~ msgid "Source Number:"
+#~ msgstr "Número de la persona que llama:"
+
+#~ msgid "You received a new Call Message from"
+#~ msgstr "Recibió un nuevo mensaje de llamada de"
+
+#~ msgid ""
+#~ "display information of source and destination of the call in the body of "
+#~ "the email?"
+#~ msgstr ""
+#~ "mostrar información de origen y destino de la llamada en el cuerpo del "
+#~ "correo electrónico?"
 
 #~ msgid ". Please contact the administrator for receiver notifications."
 #~ msgstr ""

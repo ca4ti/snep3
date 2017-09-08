@@ -36,11 +36,16 @@ class Snep_Sendmail {
      */
     public static function sendEmail($message) {
 
-        $config_smtp = array('ssl' => Snep_ModuleSettings_Manager::getConfig("smtp_ssl")['config_value'],
+        $config_smtp = array(
                     'auth' => 'login',
                     'port' => Snep_ModuleSettings_Manager::getConfig("smtp_port")['config_value'],
                     'username' => Snep_ModuleSettings_Manager::getConfig("smtp_user")['config_value'],
                     'password' => Snep_ModuleSettings_Manager::getConfig("smtp_password")['config_value']);
+
+        $ssl = Snep_ModuleSettings_Manager::getConfig("smtp_ssl")['config_value'];
+        if($ssl != "no"){
+          $config_smtp['ssl'] = $ssl;
+        }
 
         $transport = new Zend_Mail_Transport_Smtp(Snep_ModuleSettings_Manager::getConfig("smtp_server")['config_value'], $config_smtp);
 

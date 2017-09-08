@@ -14,10 +14,10 @@
       </div>
     </fieldset>
 <?php
-if($this->telcos){
+//if($this->telcos){
   ?>
-  <fieldset>
-        <legend><?php echo $this->translate("Telco");?></legend>
+  <fieldset data-intro='<?php echo $this->translate("You can define a Telco for this Trunk and rate each outgoing call from it.");?>'>
+        <legend><?php echo $this->translate("Telco (used for rate the calls)");?></legend>
 
         <div class="form-group">
             <label class="col-sm-3 control-label"><?php echo $this->translate("Telco");?></label>
@@ -38,12 +38,17 @@ if($this->telcos){
 
   </fieldset>
   <?php
-}
+//}
  ?>
     <fieldset>
-      <legend><?php echo $this->translate('Interface Technology');?></legend>
+    <legend><?php echo $this->translate('Interface Technology');?></legend>
 
-      <div class="form-group">
+      <div class="form-group" data-intro='<?php echo $this->translate("You need define the technology for this trunk.<br>
+      - If you will trunk it with other SNEP, just define the SNEP IP address and do the same in the other side.<br>
+      - If your trunk technology is not listed here, you can use the <i>Virtual</i> option and configure the technology manually at Asterisk.<br>
+      You can configure any Asterisk Supported technology and use it here as <i>Virtual</i> just specifying the technology expression, like:<br>
+      * [Dahdi/g1]<br>
+      * [SIP/account]<br>");?>'>
         <label class="col-sm-3 control-label"><?php echo $this->translate("Type");?></label>
         <div class="col-sm-6">
           <?php if ($this->action === "edit") {
@@ -396,7 +401,8 @@ if($this->telcos){
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" data-intro='<?php echo $this->translate("You can define a total minute control to use this Trunk.<br>
+      After this amount of minutes the <i>Trunk</i> will return <i>CONGESTION</i> and follow the Routes Actions.");?>'>
         <label class="col-sm-3 control-label"><?php echo $this->translate("Minute Control");?></label>
         <div class="col-sm-6">
           <div class="checkbox">

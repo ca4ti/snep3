@@ -66,7 +66,7 @@ class EmailAction extends PBX_Rule_Action {
         $dst = $i18n->translate("Address");
         $dstdesc = $i18n->translate("E-mail address. Split with ',' to use more than one email address.");
         $msg = $i18n->translate("Message");
-        $information = $i18n->translate("display information of source and destination of the call in the body of the email?");
+        //$information = $i18n->translate("display information of source and destination of the call in the body of the email?");
 
         return <<<XML
 <params>
@@ -87,12 +87,6 @@ class EmailAction extends PBX_Rule_Action {
         <label>$msg</label>
         $message
     </text>
-    <boolean>
-    <id>info</id>
-    <default>false</default>
-    <label>$information</label>
-    $info
-    </boolean>
 </params>
 XML;
     }
@@ -106,36 +100,28 @@ XML;
         $log = Zend_Registry::get('log');
         $i18n = $this->i18n;
 
+        $view = new Zend_View();
+        $view->setScriptPath(APPLICATION_PATH . '/modules/default/views/scripts/route');
+
+        $view->content = $this->config['message'];
+        $view->call = array(
+          'source' => $request->getOriginalCallerid(),
+          'destination' => $request->destino,
+          'calldate' => date('Y-m-d H:i:s')
+        );
+
+        $msg_content = $view->render('email_message.phtml');
+
         $message = array(
-          "message" => $this->config['message'],
+          "message" => $msg_content,
           "from" => "SNEP PBX",
           "to" => $this->config['to'],
           "subject" => $this->config['subject']
         );
-        if ($this->config['info'] != 'false') {
-            $message['message'] = $message['message'] . "<br><br>" .
-              "<table bgcolor='#A4A4A4'><thead><tr><th align='center' colspan='2'>" .
-              $i18n->translate('Call Information:') . '</th></tr></thead>' .
-              "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-              $i18n->translate('Call Date:') . "</td><td><b>" . date('Y-m-d H:i:s') . '</b></td></tr>' .
-              "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-              $i18n->translate('Source Number:') . "</td><td><b>" . $request->getOriginalCallerid() . "</b></td></tr>" .
-              "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-              $i18n->translate("Destination Number:") . "</td><td><b>" .$request->destino . "</b></td></tr>" .
-              "</table>";
-        }
 
-        // $mail = new Zend_Mail("utf8");
-        // $mail->setFrom("Snep PBX");
-        // $mail->setSubject($this->config['subject']);
-        // $mail->addTo($this->config['to']);
-        // if ($this->config['info'] != 'false') {
-        //     $mail->setBodyText($this->config['message'] . "\n\nInformações da chamada:\nNúmero de origem: " . $request->getOriginalCallerid() . "\nNúmero de destino: " . $request->destino);
-        // } else {
-        //     $mail->setBodyText($this->config['message']);
-        // }
-        $log->info("Enviando email para " . $this->config['to']);
-        // $mail->send();
+
+        $log->info("Sending email to " . $this->config['to']);
+
         $mail = Snep_Sendmail::sendEmail($message);
     }
 

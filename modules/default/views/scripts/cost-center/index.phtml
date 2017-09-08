@@ -16,7 +16,11 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
 
                 <div class="panel-heading">
                     <div class="snep-body-top-buttons">
-                        <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button"><?php echo $this->translate("Add Tag")?></a>
+                        <a class="btn btn-add" href="<?php echo $this->url ?>/add/ " role="button" data-intro="<?php echo $this->translate('
+                        You can <i>Add Tags</i>
+                        to mark each call with it, than you can view a report with the calls tagged.<br>
+                        The Tags are organized in a three level tree of codes.');
+                        ?>"><?php echo $this->translate("Add Tag")?></a>
 
                         <div class="snep-body-search">
                             <?php if($this->key){ ?>
@@ -29,7 +33,7 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
                 </div>
 
                 <?php if ($this->error_message) {
-                    echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert', 
+                    echo $this->action( 'sneperror', 'error', null, array( 'error_type' => 'alert',
                     'error_title' => $this->translate('Alert'), 'error_message' => $this->error_message, 'error_buttons' => False) );
                 } else { ?>
 
@@ -91,4 +95,3 @@ $this->headLink()->appendStylesheet( $this->baseUrl() . "/css/footable/bootstrap
         });
     });
 </script>
-

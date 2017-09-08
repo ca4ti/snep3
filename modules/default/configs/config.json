@@ -1,5 +1,5 @@
 {"nome":"default",
-"0":{"type":"text","key":"userfield_ud","label":"User defined string"},
+"0":{"type":"text","key":"userfield_ud","label":"User defined string","data_intro":"You can define a specific format for the call records files."},
 "1":{"type":"multi_checkbox","key":"userfield_compose","label":"Composition of the name of the recording file","fieldset":"usrfld","option":[{"label":"Unix timestamp","key":"TS","checked":"false"},{"label":"Year","key":"AA","checked":"false"},{"label":"Month","key":"MM","checked":"false"},{"label":"Day","key":"DD","checked":"false"},{"label":"Hour","key":"HH","checked":"false"},{"label":"Minute","key":"ii","checked":"false"},{"label":"Source","key":"SR","checked":"false"},{"label":"Destinity","key":"DS","checked":"false"},{"label":"User defined","key":"UD","checked":"false"}]},
 "2":{"type":"button_add_rm","key":"hifem","label":"Hifem"},
 "3":{"type":"button_add_rm","key":"underline","label":"Underline"},
@@ -12,5 +12,5 @@
 "10":{"type":"password","key":"smtp_password","label":"Your SMTP Password"},
 "11":{"type":"text","key":"smtp_server","default":"smtp.gmail.com","label":"Your STMP Server"},
 "12":{"type":"text","key":"smtp_port","default":"587","label":"Your STMP Server Port"},
-"13":{"type":"select","key":"smtp_ssl","label":"Use SSL", "option":[{"key":"tls","label":"TLS"}, {"key":"ssl", "label":"SSL"}]}
+"13":{"type":"select","key":"smtp_ssl","label":"Use SSL", "option":[{"key":"no","label":"No SSL"},{"key":"tls","label":"TLS"}, {"key":"ssl", "label":"SSL"}]}
 }

@@ -55,14 +55,14 @@ function getNotifications(url, session){
 
 }
 
-function getAnnounce(){
-
+function getAnnounce(language){
+  var url = announce_url + '/' + language;
   checkQmanager();
-
+  console.log("Language: %s -> %s", JSON.stringify(language), url);
   var xmlhttp = new XMLHttpRequest();
 
   if("withCredentials" in xmlhttp){
-    xmlhttp.open("GET",  announce_url);
+    xmlhttp.open("GET", url );
     xmlhttp.timeout = announce_timeout * 1000;
     xmlhttp.withCredentials = "true";
     // xmlhttp.addEventListener("error", handlerAnnounce, false);
@@ -71,7 +71,7 @@ function getAnnounce(){
     xmlhttp.ontimeout = handlerAnnounce;
     xmlhttp.send();
   }else{
-    xmlhttp.open("GET",  announce_url);
+    xmlhttp.open("GET",  url);
     xmlhttp.timeout = announce_timeout * 1000;
     xmlhttp.withCredentials = "true";
     xmlhttp.onload = handlerAnnounce;

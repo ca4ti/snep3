@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-06 06:40-0300\n"
+"POT-Creation-Date: 2017-09-08 14:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 msgid ""
 "\tThis warning is being delivered to you because Snep detected the usage of "
 "a trunk marked with your email.\n"
+msgstr ""
+
+#: ../modules/default/views/scripts/cost-center/index.phtml:19
+msgid ""
+"\n"
+"                        You can <i>Add Tags</i>\n"
+"                        to mark each call with it, than you can view a "
+"report with the calls tagged.<br>\n"
+"                        The Tags are organized in a three level tree of "
+"codes."
 msgstr ""
 
 #: ../modules/default/views/scripts/information/index.phtml:26
@@ -187,7 +197,7 @@ msgstr ""
 msgid "A Business Support Program"
 msgstr ""
 
-#: ../agi/voicemail-notify.php:77
+#: ../agi/voicemail-notify.php:81
 msgid "A new voicemail message"
 msgstr ""
 
@@ -230,7 +240,7 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/index.phtml:47
 #: ../modules/default/views/scripts/route/index.phtml:98
 #: ../modules/default/views/scripts/route/elements/actions.phtml:40
-#: ../modules/default/views/scripts/cost-center/index.phtml:45
+#: ../modules/default/views/scripts/cost-center/index.phtml:49
 #: ../modules/default/views/scripts/users/index.phtml:45
 #: ../modules/default/views/scripts/action-configs/index.phtml:37
 msgid "Actions"
@@ -330,7 +340,7 @@ msgstr ""
 msgid "Add Multiples Extensions"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:255
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr ""
 
@@ -362,7 +372,7 @@ msgstr ""
 msgid "Add Sound File"
 msgstr ""
 
-#: ../modules/default/views/scripts/cost-center/index.phtml:19
+#: ../modules/default/views/scripts/cost-center/index.phtml:23
 msgid "Add Tag"
 msgstr ""
 
@@ -410,7 +420,7 @@ msgstr ""
 #: ../modules/default/views/scripts/logs/index.phtml:16
 #: ../modules/default/views/scripts/trunks/index.phtml:24
 #: ../modules/default/views/scripts/route/index.phtml:76
-#: ../modules/default/views/scripts/cost-center/index.phtml:23
+#: ../modules/default/views/scripts/cost-center/index.phtml:27
 #: ../modules/default/views/scripts/users/index.phtml:25
 #: ../modules/default/views/scripts/action-configs/index.phtml:25
 #: ../modules/default/views/scripts/export-data/index.phtml:10
@@ -423,7 +433,7 @@ msgstr ""
 msgid "Add to dashboard"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:265
+#: ../modules/default/views/layouts/layout.phtml:270
 msgid "Add your External Trunks to make external Calls."
 msgstr ""
 
@@ -439,7 +449,7 @@ msgid "Address"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:318
-#: ../modules/default/views/scripts/trunks/addedit.phtml:366
+#: ../modules/default/views/scripts/trunks/addedit.phtml:371
 msgid "Advanced"
 msgstr ""
 
@@ -465,7 +475,7 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/migration.phtml:7
 #: ../modules/default/views/scripts/trunks/index.phtml:35
 #: ../modules/default/views/scripts/route/index.phtml:87
-#: ../modules/default/views/scripts/cost-center/index.phtml:33
+#: ../modules/default/views/scripts/cost-center/index.phtml:37
 #: ../modules/default/views/scripts/module-settings/index.phtml:24
 msgid "Alert"
 msgstr ""
@@ -516,7 +526,7 @@ msgstr ""
 msgid "Allow Viewing"
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:181
+#: ../modules/default/actions/DiscarRamal.php:184
 msgid "Allow voicemail"
 msgstr ""
 
@@ -553,7 +563,7 @@ msgid "Answered"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:413
-#: ../modules/default/views/scripts/trunks/addedit.phtml:416
+#: ../modules/default/views/scripts/trunks/addedit.phtml:422
 msgid "Anually"
 msgstr ""
 
@@ -724,7 +734,7 @@ msgstr ""
 msgid "Block the execution of the action until password is given."
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:268
+#: ../modules/default/views/scripts/trunks/addedit.phtml:273
 #: ../modules/default/controllers/TrunksController.php:75
 msgid "Board"
 msgstr ""
@@ -826,21 +836,19 @@ msgstr ""
 msgid "Cached"
 msgstr ""
 
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:212
+#: ../modules/default/views/scripts/route/email_message.phtml:212
 #: ../modules/default/actions/DiscarTronco.php:376
 msgid "Call Date"
-msgstr ""
-
-#: ../modules/default/actions/EmailAction.php:120
-#: ../agi/voicemail-notify.php:71
-msgid "Call Date:"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:139
 msgid "Call Duration Limit"
 msgstr ""
 
-#: ../modules/default/actions/EmailAction.php:118
-msgid "Call Information:"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:209
+#: ../modules/default/views/scripts/route/email_message.phtml:209
+msgid "Call Informations"
 msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
@@ -903,6 +911,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/index.phtml:54
 msgid "Caller ID"
+msgstr ""
+
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:216
+#: ../modules/default/views/scripts/route/email_message.phtml:216
+msgid "Caller Number"
 msgstr ""
 
 #: ../modules/default/views/scripts/calls-report/index.phtml:228
@@ -970,14 +983,14 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:51
 #: ../modules/default/views/scripts/contact-groups/migration.phtml:47
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:34
-#: ../modules/default/views/scripts/trunks/addedit.phtml:452
+#: ../modules/default/views/scripts/trunks/addedit.phtml:458
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:51
 #: ../modules/default/views/scripts/users/addedit.phtml:82
 #: ../modules/default/views/scripts/users/permission.phtml:107
 #: ../modules/default/views/scripts/users/bond.phtml:60
 #: ../modules/default/views/scripts/remove/remove.phtml:26
 #: ../modules/default/views/scripts/action-configs/edit.phtml:42
-#: ../modules/default/views/scripts/module-settings/index.phtml:189
+#: ../modules/default/views/scripts/module-settings/index.phtml:188
 #: ../modules/default/views/scripts/parameters/index.phtml:272
 #: ../modules/default/views/scripts/cnl/index.phtml:44
 #: ../lib/Snep/Form/Element/Submit.php:77 ../lib/Snep/CsvIE.php:170
@@ -1046,8 +1059,8 @@ msgstr ""
 msgid "Channel Free"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:220
-#: ../modules/default/views/scripts/trunks/addedit.phtml:222
+#: ../modules/default/views/scripts/trunks/addedit.phtml:225
+#: ../modules/default/views/scripts/trunks/addedit.phtml:227
 msgid "Channel Limit"
 msgstr ""
 
@@ -1059,8 +1072,8 @@ msgstr ""
 msgid "Channel Status Summary"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:248
-#: ../modules/default/views/scripts/trunks/addedit.phtml:250
+#: ../modules/default/views/scripts/trunks/addedit.phtml:253
+#: ../modules/default/views/scripts/trunks/addedit.phtml:255
 msgid "Channel Technology"
 msgstr ""
 
@@ -1099,11 +1112,11 @@ msgstr ""
 msgid "Client Key"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:438
+#: ../modules/default/views/scripts/trunks/addedit.phtml:444
 msgid "Closing date"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:172
+#: ../modules/default/views/layouts/layout.phtml:177
 msgid "Cloud Server Informations"
 msgstr ""
 
@@ -1121,7 +1134,7 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/index.phtml:34
 #: ../modules/default/views/scripts/contact-groups/index.phtml:37
 #: ../modules/default/views/scripts/trunks/index.phtml:42
-#: ../modules/default/views/scripts/cost-center/index.phtml:41
+#: ../modules/default/views/scripts/cost-center/index.phtml:45
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:10
 #: ../modules/default/views/scripts/users/index.phtml:40
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:48
@@ -1158,19 +1171,19 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:149
 #: ../modules/default/views/scripts/extensions/addedit.phtml:230
-#: ../modules/default/views/scripts/trunks/addedit.phtml:319
+#: ../modules/default/views/scripts/trunks/addedit.phtml:324
 msgid "Codec 1"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:158
 #: ../modules/default/views/scripts/extensions/addedit.phtml:239
-#: ../modules/default/views/scripts/trunks/addedit.phtml:328
+#: ../modules/default/views/scripts/trunks/addedit.phtml:333
 msgid "Codec 2"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:167
 #: ../modules/default/views/scripts/extensions/addedit.phtml:248
-#: ../modules/default/views/scripts/trunks/addedit.phtml:337
+#: ../modules/default/views/scripts/trunks/addedit.phtml:342
 msgid "Codec 3"
 msgstr ""
 
@@ -1342,19 +1355,19 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:131
 #: ../modules/default/views/scripts/extensions/addedit.phtml:213
-#: ../modules/default/views/scripts/trunks/addedit.phtml:84
+#: ../modules/default/views/scripts/trunks/addedit.phtml:89
 msgid "DTMF Mode"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:381
+#: ../modules/default/views/scripts/trunks/addedit.phtml:386
 msgid "DTMF dial mode"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:393
+#: ../modules/default/views/scripts/trunks/addedit.phtml:398
 msgid "DTMF dial mode number"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:395
+#: ../modules/default/views/scripts/trunks/addedit.phtml:400
 msgid "DTML dial mode number"
 msgstr ""
 
@@ -1363,7 +1376,7 @@ msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:421
-#: ../modules/default/views/scripts/trunks/addedit.phtml:424
+#: ../modules/default/views/scripts/trunks/addedit.phtml:430
 msgid "Daily"
 msgstr ""
 
@@ -1421,7 +1434,7 @@ msgstr ""
 msgid "Dates Alias"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:440
+#: ../modules/default/views/scripts/trunks/addedit.phtml:446
 #: ../modules/default/controllers/CallsReportController.php:502
 msgid "Day"
 msgstr ""
@@ -1492,7 +1505,7 @@ msgstr ""
 msgid "Defines the number of digits in the configuration of an extension"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:147
+#: ../modules/default/views/scripts/trunks/addedit.phtml:152
 msgid "Delay Qualification"
 msgstr ""
 
@@ -1521,7 +1534,7 @@ msgstr ""
 #: ../modules/default/views/scripts/notifications/index.phtml:57
 #: ../modules/default/views/scripts/trunks/index.phtml:73
 #: ../modules/default/views/scripts/route/index.phtml:127
-#: ../modules/default/views/scripts/cost-center/index.phtml:61
+#: ../modules/default/views/scripts/cost-center/index.phtml:65
 #: ../modules/default/views/scripts/users/index.phtml:70
 #: ../modules/default/views/scripts/remove/remove.phtml:24
 #: ../modules/default/controllers/DatesAliasController.php:162
@@ -1639,7 +1652,7 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:22
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:24
 #: ../modules/default/views/scripts/route/index.phtml:97
-#: ../modules/default/views/scripts/cost-center/index.phtml:44
+#: ../modules/default/views/scripts/cost-center/index.phtml:48
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:24
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:26
 #: ../modules/default/views/scripts/action-configs/index.phtml:36
@@ -1663,8 +1676,9 @@ msgstr ""
 msgid "Destination Group"
 msgstr ""
 
-#: ../modules/default/actions/EmailAction.php:124
-msgid "Destination Number:"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:224
+#: ../modules/default/views/scripts/route/email_message.phtml:220
+msgid "Destination Number"
 msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
@@ -1696,22 +1710,22 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:123
+#: ../modules/default/actions/DiscarRamal.php:124
 msgid "Dial Extension"
 msgstr ""
 
 #: ../modules/default/actions/DiscarTronco.php:141
-#: ../modules/default/actions/DiscarRamal.php:184
+#: ../modules/default/actions/DiscarRamal.php:188
 msgid "Dial Flags"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:106
+#: ../modules/default/views/scripts/trunks/addedit.phtml:111
 msgid "Dial Method"
 msgstr ""
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:7
 #: ../modules/default/actions/DiscarTronco.php:138
-#: ../modules/default/actions/DiscarRamal.php:182
+#: ../modules/default/actions/DiscarRamal.php:186
 msgid "Dial Timeout"
 msgstr ""
 
@@ -1735,7 +1749,7 @@ msgstr ""
 msgid "Dial to a Trunk"
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:137
+#: ../modules/default/actions/DiscarRamal.php:138
 msgid "Dial to a snep extension."
 msgstr ""
 
@@ -1754,7 +1768,7 @@ msgstr ""
 msgid "Dialing"
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:185
+#: ../modules/default/actions/DiscarRamal.php:189
 msgid "Differ ring"
 msgstr ""
 
@@ -1812,7 +1826,7 @@ msgstr ""
 msgid "Do not cut"
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:186
+#: ../modules/default/actions/DiscarRamal.php:190
 msgid "Do not overflow (busy and no answer)"
 msgstr ""
 
@@ -1824,8 +1838,8 @@ msgstr ""
 msgid "Does a loop in actions."
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:199
-#: ../modules/default/views/scripts/trunks/addedit.phtml:201
+#: ../modules/default/views/scripts/trunks/addedit.phtml:204
+#: ../modules/default/views/scripts/trunks/addedit.phtml:206
 msgid "Domain"
 msgstr ""
 
@@ -1846,8 +1860,8 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: ../agi/voicemail-notify.php:75
-msgid "Duration (in seconds):"
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:228
+msgid "Duration (in seconds)"
 msgstr ""
 
 #: ../modules/default/controllers/CallsReportController.php:507
@@ -1876,7 +1890,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contact-groups/index.phtml:55
 #: ../modules/default/views/scripts/trunks/index.phtml:71
 #: ../modules/default/views/scripts/route/index.phtml:123
-#: ../modules/default/views/scripts/cost-center/index.phtml:60
+#: ../modules/default/views/scripts/cost-center/index.phtml:64
 #: ../modules/default/views/scripts/users/index.phtml:69
 #: ../modules/default/controllers/DatesAliasController.php:113
 #: ../modules/default/controllers/CostCenterController.php:128
@@ -1949,10 +1963,10 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:380
 #: ../modules/default/views/scripts/extensions/addedit.phtml:393
 #: ../modules/default/views/scripts/extensions/addedit.phtml:395
-#: ../modules/default/views/scripts/trunks/addedit.phtml:192
-#: ../modules/default/views/scripts/trunks/addedit.phtml:374
-#: ../modules/default/views/scripts/trunks/addedit.phtml:386
-#: ../modules/default/views/scripts/trunks/addedit.phtml:404
+#: ../modules/default/views/scripts/trunks/addedit.phtml:197
+#: ../modules/default/views/scripts/trunks/addedit.phtml:379
+#: ../modules/default/views/scripts/trunks/addedit.phtml:391
+#: ../modules/default/views/scripts/trunks/addedit.phtml:410
 #: ../modules/default/views/scripts/calls-report/index.phtml:233
 #: ../modules/default/views/scripts/calls-report/index.phtml:249
 #: ../modules/default/views/scripts/calls-report/index.phtml:265
@@ -2205,7 +2219,7 @@ msgstr ""
 msgid "Extension Groups"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:369
+#: ../modules/default/views/scripts/trunks/addedit.phtml:374
 msgid "Extension Mapping"
 msgstr ""
 
@@ -2377,7 +2391,7 @@ msgstr ""
 msgid "For the agent that answerd less calls (fewestcalls)"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:188
+#: ../modules/default/views/scripts/trunks/addedit.phtml:193
 msgid "Force reverse authentication"
 msgstr ""
 
@@ -2417,13 +2431,13 @@ msgstr ""
 msgid "From"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:140
-#: ../modules/default/views/scripts/trunks/addedit.phtml:142
+#: ../modules/default/views/scripts/trunks/addedit.phtml:145
+#: ../modules/default/views/scripts/trunks/addedit.phtml:147
 msgid "From Domain"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:133
-#: ../modules/default/views/scripts/trunks/addedit.phtml:135
+#: ../modules/default/views/scripts/trunks/addedit.phtml:138
+#: ../modules/default/views/scripts/trunks/addedit.phtml:140
 msgid "From User"
 msgstr ""
 
@@ -2477,11 +2491,16 @@ msgstr ""
 msgid "Hanging Up"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:156
+#: ../modules/default/actions/DiscarRamal.php:185
+msgid "Hangup the call after voicemail"
+msgstr ""
+
+#: ../modules/default/views/layouts/layout.phtml:93
+#: ../modules/default/views/layouts/layout.phtml:161
 msgid "Help"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:250
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
@@ -2521,16 +2540,16 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:51
 #: ../modules/default/views/scripts/extensions/addedit.phtml:93
-#: ../modules/default/views/scripts/trunks/addedit.phtml:57
+#: ../modules/default/views/scripts/trunks/addedit.phtml:62
 msgid "IAX2"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:232
+#: ../modules/default/views/scripts/trunks/addedit.phtml:237
 msgid "IAX2 Trunking"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:255
-#: ../modules/default/views/scripts/trunks/addedit.phtml:257
+#: ../modules/default/views/scripts/trunks/addedit.phtml:260
+#: ../modules/default/views/scripts/trunks/addedit.phtml:262
 msgid "ID Regular Expression"
 msgstr ""
 
@@ -2567,7 +2586,7 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:354
+#: ../modules/default/views/scripts/trunks/addedit.phtml:359
 msgid "Identifier"
 msgstr ""
 
@@ -2618,7 +2637,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:138
 #: ../modules/default/views/scripts/extensions/addedit.phtml:220
-#: ../modules/default/views/scripts/trunks/addedit.phtml:91
+#: ../modules/default/views/scripts/trunks/addedit.phtml:96
 msgid "Inband"
 msgstr ""
 
@@ -2645,11 +2664,11 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:142
 #: ../modules/default/views/scripts/extensions/addedit.phtml:224
-#: ../modules/default/views/scripts/trunks/addedit.phtml:95
+#: ../modules/default/views/scripts/trunks/addedit.phtml:100
 msgid "Info"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:164
+#: ../modules/default/views/layouts/layout.phtml:169
 msgid "Information"
 msgstr ""
 
@@ -2662,8 +2681,8 @@ msgstr ""
 msgid "Input File"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:206
-#: ../modules/default/views/scripts/trunks/addedit.phtml:208
+#: ../modules/default/views/scripts/trunks/addedit.phtml:211
+#: ../modules/default/views/scripts/trunks/addedit.phtml:213
 msgid "Insecure"
 msgstr ""
 
@@ -2730,7 +2749,7 @@ msgid "Kernel"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:94
-#: ../modules/default/views/scripts/trunks/addedit.phtml:58
+#: ../modules/default/views/scripts/trunks/addedit.phtml:63
 msgid "Khomp"
 msgstr ""
 
@@ -2782,12 +2801,12 @@ msgstr ""
 msgid "Leave blank to use extensions password."
 msgstr ""
 
-#: ../modules/default/actions/DiscarRamal.php:187
+#: ../modules/default/actions/DiscarRamal.php:191
 msgid "Leave blank to use the number from the destination."
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:234
-#: ../modules/default/views/scripts/trunks/addedit.phtml:578
+#: ../modules/default/views/scripts/trunks/addedit.phtml:584
 msgid "Letters and numbers only please"
 msgstr ""
 
@@ -2859,7 +2878,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:180
+#: ../modules/default/views/layouts/layout.phtml:185
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr ""
@@ -2870,6 +2889,10 @@ msgstr ""
 
 #: ../modules/default/actions/ActionLoop.php:63
 msgid "Loop"
+msgstr ""
+
+#: ../modules/default/views/scripts/voicemail/new_message.phtml:220
+msgid "Mailbox"
 msgstr ""
 
 #: ../modules/callback/actions/CallbackAction.php:51
@@ -2922,10 +2945,6 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: ../agi/voicemail-notify.php:69
-msgid "Message Information:"
-msgstr ""
-
 #: ../modules/default/controllers/ExtensionsGroupsController.php:280
 #: ../modules/default/controllers/ContactGroupsController.php:250
 msgid "Migrate"
@@ -2953,12 +2972,12 @@ msgid "Minute"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:388
-#: ../modules/default/views/scripts/trunks/addedit.phtml:400
+#: ../modules/default/views/scripts/trunks/addedit.phtml:406
 msgid "Minute Control"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:406
-#: ../modules/default/views/scripts/trunks/addedit.phtml:432
+#: ../modules/default/views/scripts/trunks/addedit.phtml:438
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Minutes"
 msgstr ""
@@ -2986,7 +3005,7 @@ msgstr ""
 msgid "Module Settings"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:198
+#: ../modules/default/views/layouts/layout.phtml:203
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 msgid "Modules"
 msgstr ""
@@ -3006,7 +3025,7 @@ msgid "Month"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:417
-#: ../modules/default/views/scripts/trunks/addedit.phtml:420
+#: ../modules/default/views/scripts/trunks/addedit.phtml:426
 msgid "Monthly"
 msgstr ""
 
@@ -3059,7 +3078,7 @@ msgstr ""
 msgid "NAT"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:283
+#: ../modules/default/views/scripts/trunks/addedit.phtml:288
 msgid "NAT Optimization"
 msgstr ""
 
@@ -3100,7 +3119,7 @@ msgstr ""
 #: ../modules/default/views/scripts/trunks/index.phtml:43
 #: ../modules/default/views/scripts/trunks/addedit.phtml:10
 #: ../modules/default/views/scripts/trunks/addedit.phtml:12
-#: ../modules/default/views/scripts/cost-center/index.phtml:42
+#: ../modules/default/views/scripts/cost-center/index.phtml:46
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:17
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:19
 #: ../modules/default/views/scripts/users/index.phtml:41
@@ -3150,8 +3169,8 @@ msgstr ""
 #: ../modules/default/views/scripts/queues/addedit.phtml:231
 #: ../modules/default/views/scripts/khomp-links/index.phtml:56
 #: ../modules/default/views/scripts/logs/index.phtml:34
-#: ../modules/default/views/scripts/trunks/addedit.phtml:154
-#: ../modules/default/views/scripts/trunks/addedit.phtml:236
+#: ../modules/default/views/scripts/trunks/addedit.phtml:159
+#: ../modules/default/views/scripts/trunks/addedit.phtml:241
 msgid "No"
 msgstr ""
 
@@ -3268,7 +3287,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:109
+#: ../modules/default/views/scripts/trunks/addedit.phtml:114
 #: ../modules/default/controllers/LogsController.php:83
 msgid "Normal"
 msgstr ""
@@ -3460,8 +3479,8 @@ msgstr ""
 #: ../modules/default/views/layouts/loginregister.phtml:51
 #: ../modules/default/views/scripts/auth/login.phtml:19
 #: ../modules/default/views/scripts/extensions/addedit.phtml:105
-#: ../modules/default/views/scripts/trunks/addedit.phtml:126
-#: ../modules/default/views/scripts/trunks/addedit.phtml:128
+#: ../modules/default/views/scripts/trunks/addedit.phtml:131
+#: ../modules/default/views/scripts/trunks/addedit.phtml:133
 #: ../modules/default/views/scripts/users/addedit.phtml:34
 #: ../modules/default/views/scripts/parameters/index.phtml:133
 #: ../modules/default/views/scripts/parameters/index.phtml:167
@@ -3622,7 +3641,7 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:77
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:74
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:58
-#: ../modules/default/views/scripts/trunks/addedit.phtml:576
+#: ../modules/default/views/scripts/trunks/addedit.phtml:582
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:80
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:86
 #: ../modules/default/views/scripts/users/addedit.phtml:111
@@ -3689,7 +3708,7 @@ msgstr ""
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:78
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:75
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:59
-#: ../modules/default/views/scripts/trunks/addedit.phtml:577
+#: ../modules/default/views/scripts/trunks/addedit.phtml:583
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:81
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:87
 #: ../modules/default/views/scripts/users/addedit.phtml:112
@@ -3724,8 +3743,8 @@ msgstr ""
 msgid "Please enter with value valid."
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:213
-#: ../modules/default/views/scripts/trunks/addedit.phtml:215
+#: ../modules/default/views/scripts/trunks/addedit.phtml:218
+#: ../modules/default/views/scripts/trunks/addedit.phtml:220
 msgid "Port"
 msgstr ""
 
@@ -3795,8 +3814,8 @@ msgstr ""
 msgid "Q. Total"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:163
-#: ../modules/default/views/scripts/trunks/addedit.phtml:165
+#: ../modules/default/views/scripts/trunks/addedit.phtml:168
+#: ../modules/default/views/scripts/trunks/addedit.phtml:170
 msgid "Qualification time"
 msgstr ""
 
@@ -3858,7 +3877,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:134
 #: ../modules/default/views/scripts/extensions/addedit.phtml:216
-#: ../modules/default/views/scripts/trunks/addedit.phtml:87
+#: ../modules/default/views/scripts/trunks/addedit.phtml:92
 msgid "RFC-2833"
 msgstr ""
 
@@ -3972,8 +3991,8 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:71
-#: ../modules/default/views/scripts/trunks/addedit.phtml:73
+#: ../modules/default/views/scripts/trunks/addedit.phtml:76
+#: ../modules/default/views/scripts/trunks/addedit.phtml:78
 msgid "Remote Host"
 msgstr ""
 
@@ -4245,7 +4264,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:50
 #: ../modules/default/views/scripts/extensions/addedit.phtml:92
-#: ../modules/default/views/scripts/trunks/addedit.phtml:56
+#: ../modules/default/views/scripts/trunks/addedit.phtml:61
 msgid "SIP"
 msgstr ""
 
@@ -4265,7 +4284,7 @@ msgstr ""
 msgid "SNEP - the Queue "
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:356
+#: ../modules/default/views/scripts/trunks/addedit.phtml:361
 msgid "Same on both servers"
 msgstr ""
 
@@ -4299,14 +4318,14 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:49
 #: ../modules/default/views/scripts/contact-groups/migration.phtml:45
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:32
-#: ../modules/default/views/scripts/trunks/addedit.phtml:450
+#: ../modules/default/views/scripts/trunks/addedit.phtml:456
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:49
 #: ../modules/default/views/scripts/users/addedit.phtml:80
 #: ../modules/default/views/scripts/users/permission.phtml:105
 #: ../modules/default/views/scripts/users/bond.phtml:58
 #: ../modules/default/views/scripts/action-configs/edit.phtml:41
 #: ../modules/default/views/scripts/conference-rooms/index.phtml:105
-#: ../modules/default/views/scripts/module-settings/index.phtml:187
+#: ../modules/default/views/scripts/module-settings/index.phtml:186
 #: ../modules/default/views/scripts/parameters/index.phtml:270
 #: ../lib/Snep/Form.php:58
 msgid "Save"
@@ -4334,7 +4353,7 @@ msgstr ""
 #: ../modules/default/views/scripts/services-report/view.phtml:24
 #: ../modules/default/views/scripts/trunks/index.phtml:28
 #: ../modules/default/views/scripts/route/index.phtml:80
-#: ../modules/default/views/scripts/cost-center/index.phtml:26
+#: ../modules/default/views/scripts/cost-center/index.phtml:30
 #: ../modules/default/views/scripts/users/index.phtml:29
 #: ../modules/default/views/scripts/calls-report/view.phtml:33
 msgid "Search"
@@ -4507,7 +4526,7 @@ msgstr ""
 msgid "Set the relationship column x data"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:146
+#: ../modules/default/views/layouts/layout.phtml:152
 msgid "Settings"
 msgstr ""
 
@@ -4601,11 +4620,11 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:61
+#: ../modules/default/views/scripts/trunks/addedit.phtml:66
 msgid "Snep IAX"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:60
+#: ../modules/default/views/scripts/trunks/addedit.phtml:65
 msgid "Snep SIP"
 msgstr ""
 
@@ -4676,11 +4695,6 @@ msgstr ""
 msgid "Source Group"
 msgstr ""
 
-#: ../modules/default/actions/EmailAction.php:122
-#: ../agi/voicemail-notify.php:73
-msgid "Source Number:"
-msgstr ""
-
 #: ../modules/default/views/scripts/route/elements/src.phtml:1
 msgid ""
 "Source usually are the Caller of source that you trying to filter.<br>\n"
@@ -4697,7 +4711,7 @@ msgstr ""
 msgid "Special Exceptions"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:157
+#: ../modules/default/views/scripts/trunks/addedit.phtml:162
 msgid "Specify"
 msgstr ""
 
@@ -4907,9 +4921,12 @@ msgstr ""
 #: ../modules/billing/views/scripts/billing/index.phtml:44
 #: ../modules/billing/views/scripts/billing/addedit.phtml:6
 #: ../modules/billing/views/scripts/billing/addedit.phtml:9
-#: ../modules/default/views/scripts/trunks/addedit.phtml:20
 #: ../modules/default/views/scripts/trunks/addedit.phtml:23
 msgid "Telco"
+msgstr ""
+
+#: ../modules/default/views/scripts/trunks/addedit.phtml:20
+msgid "Telco (used for rate the calls)"
 msgstr ""
 
 #: ../modules/billing/controllers/TelcosController.php:46
@@ -4947,7 +4964,7 @@ msgstr ""
 msgid "The Recorded Files Path is required."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:270
+#: ../modules/default/views/layouts/layout.phtml:275
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
@@ -4957,7 +4974,7 @@ msgstr ""
 msgid "The Telco will be deleted. After that, you have no way get it back."
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:581
+#: ../modules/default/views/scripts/trunks/addedit.phtml:587
 msgid "The board is required"
 msgstr ""
 
@@ -5081,7 +5098,7 @@ msgstr ""
 msgid "The first name is required"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:260
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr ""
 
@@ -5159,7 +5176,7 @@ msgstr ""
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
 #: ../modules/default/views/scripts/contact-groups/addedit.phtml:57
-#: ../modules/default/views/scripts/trunks/addedit.phtml:575
+#: ../modules/default/views/scripts/trunks/addedit.phtml:581
 #: ../modules/default/views/scripts/cost-center/addedit.phtml:85
 msgid "The name is required"
 msgstr ""
@@ -5295,7 +5312,7 @@ msgstr ""
 msgid "This is the time in seconds the system will try contact the caller"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:245
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5348,7 +5365,7 @@ msgid "Time of validity of the code was expired"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/addedit.phtml:404
-#: ../modules/default/views/scripts/trunks/addedit.phtml:430
+#: ../modules/default/views/scripts/trunks/addedit.phtml:436
 msgid "Time total"
 msgstr ""
 
@@ -5441,10 +5458,10 @@ msgstr ""
 #: ../modules/default/views/scripts/ip-status/index.phtml:109
 #: ../modules/default/views/scripts/logs/index.phtml:26
 #: ../modules/default/views/scripts/trunks/index.phtml:44
-#: ../modules/default/views/scripts/trunks/addedit.phtml:47
-#: ../modules/default/views/scripts/trunks/addedit.phtml:170
+#: ../modules/default/views/scripts/trunks/addedit.phtml:52
+#: ../modules/default/views/scripts/trunks/addedit.phtml:175
 #: ../modules/default/views/scripts/systemstatus/index.phtml:158
-#: ../modules/default/views/scripts/cost-center/index.phtml:43
+#: ../modules/default/views/scripts/cost-center/index.phtml:47
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Type"
 msgstr ""
@@ -5461,7 +5478,7 @@ msgstr ""
 msgid "Type Tag"
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:413
+#: ../modules/default/views/scripts/trunks/addedit.phtml:419
 msgid "Type of control"
 msgstr ""
 
@@ -5613,8 +5630,8 @@ msgstr ""
 #: ../modules/default/views/scripts/auth/login.phtml:16
 #: ../modules/default/views/scripts/auth/redefine.phtml:21
 #: ../modules/default/views/scripts/auth/recuperation.phtml:14
-#: ../modules/default/views/scripts/trunks/addedit.phtml:119
-#: ../modules/default/views/scripts/trunks/addedit.phtml:121
+#: ../modules/default/views/scripts/trunks/addedit.phtml:124
+#: ../modules/default/views/scripts/trunks/addedit.phtml:126
 #: ../modules/default/views/scripts/users/addedit.phtml:27
 #: ../modules/default/views/scripts/parameters/index.phtml:126
 #: ../modules/default/views/scripts/parameters/index.phtml:160
@@ -5668,7 +5685,7 @@ msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:52
 #: ../modules/default/views/scripts/extensions/addedit.phtml:95
-#: ../modules/default/views/scripts/trunks/addedit.phtml:59
+#: ../modules/default/views/scripts/trunks/addedit.phtml:64
 msgid "Virtual"
 msgstr ""
 
@@ -5730,7 +5747,7 @@ msgstr ""
 msgid "Welcome to Intercomunexão."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:240
+#: ../modules/default/views/layouts/layout.phtml:245
 msgid ""
 "Welcome to SNEP. <br>\\\n"
 "      Your IP Telephony Plataform.<br>Click Next to understand the basic "
@@ -5752,7 +5769,7 @@ msgid ""
 "and humane communication."
 msgstr ""
 
-#: ../modules/default/views/scripts/trunks/addedit.phtml:113
+#: ../modules/default/views/scripts/trunks/addedit.phtml:118
 msgid "Without Authentication"
 msgstr ""
 
@@ -5786,8 +5803,8 @@ msgstr ""
 #: ../modules/default/views/scripts/khomp-links/index.phtml:52
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:33
 #: ../modules/default/views/scripts/logs/index.phtml:30
-#: ../modules/default/views/scripts/trunks/addedit.phtml:150
-#: ../modules/default/views/scripts/trunks/addedit.phtml:235
+#: ../modules/default/views/scripts/trunks/addedit.phtml:155
+#: ../modules/default/views/scripts/trunks/addedit.phtml:240
 msgid "Yes"
 msgstr ""
 
@@ -5818,6 +5835,18 @@ msgstr ""
 
 #: ../modules/default/views/scripts/route/index.phtml:48
 msgid "You can Simulate what will happen when a call are made!"
+msgstr ""
+
+#: ../modules/default/views/scripts/trunks/addedit.phtml:19
+msgid ""
+"You can define a Telco for this Trunk and rate each outgoing call from it."
+msgstr ""
+
+#: ../modules/default/views/scripts/trunks/addedit.phtml:404
+msgid ""
+"You can define a total minute control to use this Trunk.<br>\n"
+"      After this amount of minutes the <i>Trunk</i> will return "
+"<i>CONGESTION</i> and follow the Routes Actions."
 msgstr ""
 
 #: ../modules/default/controllers/NotificationsController.php:52
@@ -5912,8 +5941,22 @@ msgstr ""
 msgid "You have no notifications"
 msgstr ""
 
-#: ../agi/voicemail-notify.php:67
-msgid "You received a new Call Message from"
+#: ../modules/default/views/scripts/trunks/addedit.phtml:46
+msgid ""
+"You need define the technology for this trunk.<br>\n"
+"      - If you will trunk it with other SNEP, just define the SNEP IP "
+"address and do the same in the other side.<br>\n"
+"      - If your trunk technology is not listed here, you can use the "
+"<i>Virtual</i> option and configure the technology manually at Asterisk."
+"<br>\n"
+"      You can configure any Asterisk Supported technology and use it here as "
+"<i>Virtual</i> just specifying the technology expression, like:<br>\n"
+"      * [Dahdi/g1]<br>\n"
+"      * [SIP/account]<br>"
+msgstr ""
+
+#: ../agi/voicemail-notify.php:69
+msgid "You received a new Call Message from "
 msgstr ""
 
 #: ../modules/default/views/layouts/register.phtml:233
@@ -6011,12 +6054,6 @@ msgstr ""
 msgid "cost-center/index"
 msgstr ""
 
-#: ../modules/default/actions/EmailAction.php:69
-msgid ""
-"display information of source and destination of the call in the body of the "
-"email?"
-msgstr ""
-
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "edit_icon.png"
 msgstr ""
@@ -6086,7 +6123,7 @@ msgid "in milliseconds"
 msgstr ""
 
 #: ../modules/default/views/scripts/action-configs/edit.phtml:9
-#: ../modules/default/actions/DiscarRamal.php:183
+#: ../modules/default/actions/DiscarRamal.php:187
 msgid "in seconds"
 msgstr ""
 

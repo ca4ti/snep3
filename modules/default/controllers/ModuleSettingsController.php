@@ -96,6 +96,10 @@ class ModuleSettingsController extends Zend_Controller_Action {
                     $view[$cont]["view"][$key]["type"] = $value->type;
                     $view[$cont]["view"][$key]["key"] = $module_name."_x_".$value->key;
                     $view[$cont]["view"][$key]["label"] = $this->view->translate($value->label);
+                    if($value->data_intro){
+                        $view[$cont]["view"][$key]["data_intro"] = $this->view->translate($value->data_intro);
+                    }
+
 
                     switch ($value->type) {
                         case 'select':

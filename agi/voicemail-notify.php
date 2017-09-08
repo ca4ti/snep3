@@ -63,17 +63,21 @@ if(isset($mailbox['email'])){
 
   // $mail->addAttachment($at);
   $log->info('Received new voicemail message to:' . $msg['exten'] .  ' ID:' . $msg['newmsg'] . ' Email:' . $mailbox['email']);
+  $view = new Zend_View();
+  $view->setScriptPath(APPLICATION_PATH . '/modules/default/views/scripts/voicemail');
+  $view->translate = $i18n;
+  $view->content = $i18n->translate("You received a new Call Message from ") . "<b>" . $msg_data->callerid . "</b>";
+  $view->call = array(
+    'source' => $msg_data->callerid,
+    'mailbox' => $msg_data->origmailbox,
+    'destination' => $msg['exten'],
+    'duration' => $msg_data->duration,
+    'calldate' => $msg_data->origdate
+  );
+  $msg_content = $view->render('new_message.phtml');
+
   $mail_msg = array(
-    'message' => "<br><br>" . $i18n->translate('You received a new Call Message from') . ' <b>' . $msg_data->callerid . '</b><br><br>' .
-      "<table bgcolor='#A4A4A4'><thead><tr><th align='center' colspan='2'>" .
-      $i18n->translate('Message Information:') . '</th></tr></thead>' .
-      "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-      $i18n->translate('Call Date:') . "</td><td><b>" . $msg_data->origdate . '</b></td></tr>' .
-      "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-      $i18n->translate('Source Number:') . "</td><td><b>" . $msg_data->callerid . "</b></td></tr>" .
-      "<tr bgcolor='#D8D8D8' style='border: 1px solid black'><td>" .
-      $i18n->translate("Duration (in seconds):") . "</td><td><b>" . $msg_data->duration . "</b></td></tr>" .
-      "</table>",
+    'message' => $msg_content,
     'subject' => $i18n->translate("A new voicemail message"),
     'to' => $mailbox['email'],
     'from' => 'SNEP PBX <voicemail>',

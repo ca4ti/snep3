@@ -50,6 +50,7 @@ require_once "Snep/Modules.php";
 // require_once "PBX/Asterisk/AGI.php";
 require_once "PBX/Asterisk/Log/Writer.php";
 require_once 'Zend/Log/Writer/Stream.php';
+require_once 'Zend/View.php';
 
 /**
  * AGI Bootstrap

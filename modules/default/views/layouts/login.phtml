@@ -17,8 +17,8 @@
 <!--script-->
 <?php echo $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/easyResponsiveTabs.js'); ?>
 
-
 <script type="text/javascript">
+var session = "<?php echo $this->language; ?>";
   $(document).ready(function () {
       $('#horizontalTab').easyResponsiveTabs({
           type: 'default', //Types: default, vertical, accordion
@@ -29,7 +29,7 @@
 
 </script>
 </head>
-<body onload="getAnnounce();">
+<body onload="getAnnounce(session);">
 	<div class="head">
 		<div class="login">
 			<div align="center"><img src="<?php echo $this->baseUrl(); ?>/images/logo-snep.png" width="50%"><br>

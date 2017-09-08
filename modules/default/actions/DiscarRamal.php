@@ -71,13 +71,13 @@ class DiscarRamal extends PBX_Rule_Action {
 
     /**
      * Determina se haverá ou não transbordo em não atende e ocupado
-     * 
+     *
      * @var boolean dont_overflow
      */
     private $dont_overflow;
-     
+
      /** Faz com que a regra tente resolver números de agentes.
-     * 
+     *
      * @var boolean
      */
     private $resolv_agent;
@@ -111,6 +111,7 @@ class DiscarRamal extends PBX_Rule_Action {
         $this->dial_limit_warn = ( isset($config['dial_limit_warn']) ) ? $config['dial_limit_warn'] : "0";
         $this->diff_ring       = ( isset($config['diff_ring']) && $config['diff_ring'] == 'true') ? true:false;
         $this->allow_voicemail = ( isset($config['allow_voicemail']) && $config['allow_voicemail'] == 'true') ? true:false;
+        $this->hangup_voicemail = ( isset($config['hangup_voicemail']) && $config['hangup_voicemail'] == 'true') ? true:false;
         $this->dont_overflow   = ( isset($config['dont_overflow']) && $config['dont_overflow'] == 'true') ? true:false;
         $this->ramal           = ( isset($config['ramal']) && $config['ramal'] != "" ) ? PBX_Usuarios::get($config['ramal']) : "";
         $this->resolv_agent    = ( isset($config['resolv_agent']) && $config['resolv_agent'] == 'true') ? true : false;
@@ -150,7 +151,8 @@ class DiscarRamal extends PBX_Rule_Action {
             "diff_ring"       => $this->diff_ring ? 'true' : 'false',
             "dont_overflow"   => $this->dont_overflow ? 'true' : 'false',
             "resolv_agent"    => $this->resolv_agent ? 'true' : 'false',
-            "allow_voicemail" => $this->allow_voicemail ? 'true' : 'false'
+            "allow_voicemail" => $this->allow_voicemail ? 'true' : 'false',
+            "hangup_voicemail" => $this->hangup_voicemail ? 'true' : 'false'
         );
 
         if( $this->ramal != "" ) {
@@ -171,14 +173,16 @@ class DiscarRamal extends PBX_Rule_Action {
         $dial_flags      = (isset($this->config['dial_flags']))?"<value>{$this->config['dial_flags']}</value>":"";
         $diff_ring       = (isset($this->config['diff_ring']))?"<value>{$this->config['diff_ring']}</value>":"";
         $allow_voicemail = (isset($this->config['allow_voicemail']))?"<value>{$this->config['allow_voicemail']}</value>":"";
+        $hangup_voicemail = (isset($this->config['hangup_voicemail']))?"<value>{$this->config['hangup_voicemail']}</value>":"";
         $dont_overflow   = (isset($this->config['dont_overflow']))?"<value>{$this->config['dont_overflow']}</value>":"";
         $resolv_agent    = (isset($this->config['resolv_agent']))?"<value>{$this->config['resolv_agent']}</value>":"";
 
-        
+
 
         $default_dial_timeout = isset($this->defaultConfig['dial_timeout']) ? $this->defaultConfig['dial_timeout'] : 60;
-        
+
         $TAllowVoiceMail = $i18n->translate("Allow voicemail");
+        $EndVoiceMail = $i18n->translate("Hangup the call after voicemail");
         $TDial_timeout = $i18n->translate("Dial Timeout");
         $Tinseconds = $i18n->translate("in seconds");
         $TDial_flags = $i18n->translate("Dial Flags");
@@ -235,6 +239,12 @@ AGENT_CONFIG;
         $allow_voicemail
     </boolean>
     <boolean>
+        <id>hangup_voicemail</id>
+        <default>false</default>
+        <label>$EndVoiceMail</label>
+        $hangup_voicemail
+    </boolean>
+    <boolean>
         <id>dont_overflow</id>
         <default>false</default>
         <label>$TOverflow</label>
@@ -280,7 +290,7 @@ XML;
         if(Agents_Manager::get($agent) !== null) {
             // Verifica se está logado
             $exten = Agents_Manager::isLogged($agent);
-            
+
             if($exten !== null) {
                 return $exten;
             }
@@ -386,7 +396,10 @@ XML;
                     "u"
                 );
                 $asterisk->exec('voicemail', $vm_params);
-                throw new PBX_Rule_Action_Exception_StopExecution("End of call");
+                if($this->hangup_voicemail){
+                    throw new PBX_Rule_Action_Exception_StopExecution("End of call");
+                }
+
             }
 
             switch($dialstatus['data']) {

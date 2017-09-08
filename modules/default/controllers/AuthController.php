@@ -41,7 +41,7 @@ class AuthController extends Zend_Controller_Action {
         $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
         $config = Zend_Registry::get('config');
-
+        $this->view->language = $config->system->language;
         if (isset($_GET["recuperation"])) {
             $this->view->message = $this->view->translate("Password successfully recovered");
             $this->view->msgclass = 'sucess';

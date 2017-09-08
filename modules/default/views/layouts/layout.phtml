@@ -88,6 +88,12 @@ if($controller != 'auth'){
         <ul class="nav navbar-top-links navbar-right">
           <?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?>
           <li class="dropdown">
+            <a href="#" onclick="startIntro();">
+            <i id="help" class="fa fa-question-circle fa-fw"></i>
+            <?php echo $this->translate("Help"); ?>
+            </a>
+          </li>
+          <li class="dropdown">
             <?php $noView = Snep_Notifications::getNoView();
 
             if($noView){?>
@@ -150,11 +156,10 @@ if($controller != 'auth'){
 
               <li class="divider"></li>
               <li>
-                <!-- <a href="<?php echo $this->baseUrl(); ?>/index.php/default/index" onclick="startIntro();"> -->
                   <a href="#" onclick="startIntro();">
                   <i id="help" class="fa fa-question-circle fa-fw"></i>
                   <?php echo $this->translate("Help"); ?>
-                </a>
+                  </a>
               </li>
 
               <li class="divider"></li>

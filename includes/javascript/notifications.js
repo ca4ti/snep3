@@ -42,12 +42,12 @@ function getNotifications(url, session){
   // console.log('UUID:', session.uuid);
   var xmlhttp = new XMLHttpRequest();
   if("withCredentials" in xmlhttp){
-    xmlhttp.open("GET", url + '/' + session.uuid);
+    xmlhttp.open("GET", url + '/notifications/' + session.uuid);
     xmlhttp.withCredentials = "true";
     xmlhttp.onload = handler;
     xmlhttp.send();
   }else{
-    xmlhttp.open("GET", url + '/' + session.uuid);
+    xmlhttp.open("GET", url + '/notifications/' + session.uuid);
     xmlhttp.withCredentials = "true";
     xmlhttp.onload = handler;
     xmlhttp.send();

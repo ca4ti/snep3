@@ -18,13 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  *
- * AGI executable that makes the function calls in the Asterisk dialplan. 
+ * AGI executable that makes the function calls in the Asterisk dialplan.
  *
  * This application starts the environment for the Snep library can work in routing connections.
  *
  */
 // Processes the signals coming from asterisk
-declare(ticks = 1);
+declare(ticks=1);
 if (function_exists('pcntl_signal')) {
     pcntl_signal(SIGHUP, SIG_IGN);
 }
@@ -126,7 +126,7 @@ $src = $request->getOriginalCallerid();
 // IMPORTANT - verify:
 // - lib/Snep/ModuleSettings/Manager.php
 // - modules/default/controllers/ModuleSettingsController.php
-// - modules/default/views/scripts/module-settings/index.phtml 
+// - modules/default/views/scripts/module-settings/index.phtml
 
 $sql = "select config_name,config_value from core_config where config_module = 'default'";
 $data = $db->query($sql)->fetchAll();
@@ -163,14 +163,43 @@ if ($lastuserfield['data'] === "") {
 }
 
 $recordPath = realpath($config->ambiente->path_voz).date("/Y-m-d");
-$regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".wav", $config->general->record->flag));
+
+if($config->general->record->format){
+  $recordFormat = $config->general->record->format;
+}else{
+  $recordFormat = "wav49";
+}
+
+$regra->setRecordApp($config->general->record->application, array($recordPath . "/" . $filename . ".$recordFormat", $config->general->record->flag));
 
 $regra->setAsteriskInterface($asterisk);
 
 try {
     $log->info("Running the rule {$regra->getId()}:$regra");
     $regra->execute($origem);
-    $log->info("End of running the rule {$regra->getId()}:$regra");
+    $billsec = $asterisk->get_variable("CDR(billsec)");
+    $duration = $asterisk->get_variable("CDR(duration)");
+    $dst = $asterisk->get_variable("CDR(dst)");
+    $src = $asterisk->get_variable("CDR(src)");
+    $userfield = $asterisk->get_variable("CDR(userfield)");
+    $uniqueid = $asterisk->get_variable("CDR(uniqueid)");
+    $ch = $asterisk->get_variable("CDR(channel)");
+    $dch = $asterisk->get_variable("CDR(dstchannel)");
+    $bill = array(
+      "billsec" => $billsec['data'],
+      "duration" => $duration['data'],
+      "userfield" => $userfield['data'],
+      "uniqueid" => $uniqueid['data'],
+      "phone" => $dst['data'],
+      "channel" => $ch['data'],
+      "dstchannel" => $dch['data']
+    );
+    $log->info("End of running the rule {$regra->getId()}:$regra -> billsec: {$billsec['data']} -> duration: {$duration['data']}");
+    if (class_exists("Billing_Manager")){
+      $billing = new Billing_Manager();
+      $rate = $billing->rate($bill);
+    }
+
 } catch (PBX_Exception_AuthFail $ex) {
     $log->info("Failed to authenticate the extension.");
 } catch (Exception $ex) {

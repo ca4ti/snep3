@@ -1,8 +1,8 @@
-<?php 
-echo $this->doctype(); 
+<?php
+echo $this->doctype();
 ?>
-<html>    
-    <head>    	
+<html>
+    <head>
     	<link href="/snep/css/font-awesome.min.css" rel="stylesheet">
 		<link href="/snep/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/snep/css/snep.css" rel="stylesheet">
@@ -23,7 +23,7 @@ echo $this->doctype();
         		<form id="hashForm" method="post" class="form-horizontal" autocomplete="off" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
 
             		<div class="register">
-        				
+
         				<br>
 			            <h3><b><?php echo $this->translate("We're almost ending")?></b></h3><br>
 
@@ -55,7 +55,7 @@ echo $this->doctype();
 		    	<form id="registerForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
 
             		<div class="register">
-        				
+
         				<br>
 			            <h3><b><?php echo $this->translate("Congratulations")?></b></h3><br>
 
@@ -77,41 +77,45 @@ echo $this->doctype();
 
             	<?php if(!isset($this->error)){?>
 
-                	<!-- init -->    
+                	<!-- init -->
         			<div id="init" >
-                		
-                		<div class="register">
-        				
-            				<br>
-				            <h3><b><?php echo $this->translate("Join the network of intercomunexao")?></b></h3><br>
 
-				            <?php echo $this->translate("Within seconds you register your Snep and participates in the Intercomunexão, a freer communication network, intelligent and humane.")?>
-				            
+                		<div class="register">Powered By <a href="http://www.opens.com.br">Opens Tecnology</a>
+
+            				<br>
+				            <h3><b><?php echo $this->translate("Join to the Opens Network")?></b></h3><br>
+
+				            <?php echo $this->translate("Within seconds you register your Snep and join, a freer network, intelligent and humane communication.")?>
+
 				            <br><br>
 
 				            <h4><b><?php echo $this->translate("Some Advantages")?></b></h4>
 
 			        	</div><br>
-			        
+
 			            <table align="center">
+                    <tr>
+			            		<td> <i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("A Business Support Program")?></td>
+			            		<td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("Exclusive Partnership Program")?></td>
+			            	</tr>
 			            	<tr>
 			            		<td> <i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("Exclusive modules")?></td>
 			            		<td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right iconregister"> </i>&nbsp;<?php echo $this->translate("Constant technological innovation")?></td>
 			            	</tr>
-			           		<tr>
-			            		<td> <i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("Notifications in real time")?></td>
+                    <tr>
+			            		<td> <i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("Notifications in real time for yours SNEP")?></td>
 			            		<td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right iconregister"></i>&nbsp;<?php echo $this->translate("High quality support")?></td>
 			            	</tr>
 			            </table>
 
 			            <br>
 					    <div class="snep-body-footer-buttons">
-					    	
+
 					        <button type="button" class="btn btn-add" name="login" value="login" onclick='showDiv(this.value)'><?php echo $this->translate("I am already registered");?></button>
 					        &nbsp;&nbsp;&nbsp;
 					        <button type="button" class="btn btn-add" name="register" value="register" onclick='showDiv(this.value)' ><?php echo $this->translate("I want to register");?></button>
 					    </div>
-					    
+
 					    <?php if($this->viewnoregister){?>
 						    <form id="noregisterForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
 						    	<div class="noregister">
@@ -126,7 +130,7 @@ echo $this->doctype();
 
 					<!-- /init -->
 
-					<!-- register -->    
+					<!-- register -->
         			<div id="register" class="invisible">
 
         				<form id="registerForm" method="post" class="form-horizontal" autocomplete="off" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
@@ -158,87 +162,31 @@ echo $this->doctype();
 				                	<div class="col-xs-12 col-sm-6">
 				                    	<input type="text" class="form-control" name="first_name" placeholder='<?php echo $this->translate("First Name")?>' />
 				                	</div>
-				                	<div class="col-xs-12 col-sm-6">
-				                		<?php echo $this->translate("Optional");?>    
-				                	</div>
-				            	</div>
-				        	</div>
-
-				        	<div class="col-xs-12 form-group">
-				            	<div class="row">
-				                	<div class="col-xs-12 col-sm-6">
+                          <div class="col-xs-12 col-sm-6">
 				                    	<input type="text" class="form-control" name="last_name" placeholder='<?php echo $this->translate("Last Name")?>' />
 				                	</div>
-				                	<div class="col-xs-12 col-sm-6">
-				                		<input type="text" class="form-control" name="address" placeholder='<?php echo $this->translate("Address")?>' />
-			                    	</div>
 				            	</div>
 				        	</div>
-
-				        	<div class="col-xs-12 form-group">
-				            	<div class="row">
-				                	<div class="col-xs-12 col-sm-6">
-				                    	<select class="form-control" name="country" id="country">
-						    				<?php foreach($this->country as $key => $country){ ?>
-								    			<option value="<?php echo $country['id']?>"><?php echo $country['name'];?></option> 
-								    		<?php } ?>
-										</select>
-				                	</div>
-				                	<div class="col-xs-12 col-sm-6">
-				                		<input type="text" class="form-control" name="zipcode" placeholder='<?php echo $this->translate("Zipcode")?>' />
-				                	</div>
-				            	</div>
-				        	</div>
-
-				        	<div class="col-xs-12 form-group">
-				            	<div class="row">
-				                	<div class="col-xs-12 col-sm-6">
-				                    	<select class="form-control" name="state" id="state" onchange="carregaCidade(this.value)">
-				                    		<option value="0"><?php echo $this->translate("Select a state");?></option> 
-						    				<?php foreach($this->state as $key => $state){ ?>
-								    			<option value="<?php echo $state['id']?>"><?php echo $state['name'];?></option> 
-								    		<?php } ?>
-										</select>
-				                	</div>
-				                	<div class="col-xs-12 col-sm-6">
-				                		<input type="text" class="form-control" name="phone" placeholder='<?php echo $this->translate("Phone")?>' />
-				                	</div>
-				            	</div>
-				        	</div>
-
-				        	<div class="col-xs-12 form-group">
-				            	<div class="row">
-				                	<div class="col-xs-12 col-sm-6">
-				                		<select class="form-control" name="city" id="city">
-    										<option value="0"><?php echo $this->translate("Select a city");?></option>
-										</select>
-				                	</div>
-				                	<div class="col-xs-12 col-sm-6">
-				                		<input type="text" class="form-control" name="cell" placeholder='<?php echo $this->translate("Cell")?>' />
-				                	</div>
-				            	</div>
-				        	</div>
-
 				        	<div class="snep-body-footer-buttons">
 				            	<button type="submit" class="btn btn-add" name="save" value="register"><?php echo $this->translate("Register");?></button>
 				        	</div>
 						</fieldset>
-					</form>				     
+					</form>
 				    </div>
 				    <!-- /register -->
 
-				    <!-- login -->    
+				    <!-- login -->
         			<div id="login" class="invisible">
 
         				<form id="loginForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
         					<br><br>
-            				
+
         					<fieldset>
             					<div class="col-xs-12">
         							<legend align="center"><?php echo $this->translate('Login');?></legend>
 								</div>
             					<div class="col-xs-12">
-					            
+
 					            	<div class="row" align="center">
 					                	<div class="col-xs-12 col-sm-12">
 					                    	<input type="text" class="form-control" name="email" placeholder='<?php echo $this->translate("Email")?>' />
@@ -246,7 +194,7 @@ echo $this->doctype();
 					            	</div>
 					        	</div>
 					        	<div class="col-xs-12" style="padding-top: 10px;">
-					            
+
 					            	<div class="row">
 					                	<div class="col-xs-12 col-sm-12">
 					                    	<input type="password" class="form-control" name="password" placeholder='<?php echo $this->translate("Password")?>' />
@@ -264,7 +212,7 @@ echo $this->doctype();
         			</div>
 				    <!-- /login -->
 
-				    <!-- noregister -->    
+				    <!-- noregister -->
         			<div id="noregister" class="invisible">
         				<br>
 				        <div class="snep-body-footer-buttons">
@@ -280,7 +228,7 @@ echo $this->doctype();
             		<form id="registerForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
 
             		<div class="register">
-        				
+
         				<br>
 			            <h3><b><?php echo $this->translate("You'Re Welcome")?></b></h3><br>
 
@@ -293,10 +241,10 @@ echo $this->doctype();
 		        	<br>
 
 		        	<div class="snep-body-footer-buttons">
-					    	
+
 				        <button type="submit" class="btn btn-add" name="save" value="error" href="javascript:window.history.go(-1)" role="button"><?php echo $this->translate("Retry");?></button>
 				    </div>
-			        
+
 			        <?php if($this->viewnoregister){?>
 					    <form id="noregisterForm" method="post" class="form-horizontal" action="<?php echo $this->url(array("controller" => "index", "action" => "index"), null, true); ?>" METHOD="post">
 					    	<div class="noregister">
@@ -307,10 +255,10 @@ echo $this->doctype();
 
 				    <br>
 		        </form>
-            	
+
             	<?php } ?>
             <?php } ?>
-             
+
 		</div>
     </body>
 </html>
@@ -325,8 +273,8 @@ echo $this->doctype();
 		document.getElementById("noregister").className = "invisible";
 
 		if(div){
-			document.getElementById(div).className = "visible";    
-		}      
+			document.getElementById(div).className = "visible";
+		}
 	}
 
 	function postform( )
@@ -335,13 +283,24 @@ echo $this->doctype();
 	}
 
 	function carregaCidade(idstate){
-		
+
 		jQuery.noConflict();
 		jQuery('#city').load('/snep/includes/cidades.php?estado='+idstate );
 	};
-	
+	function carregaEstado(idcountry){
+
+		jQuery.noConflict();
+		jQuery('#state').load('/snep/includes/estados.php?pais='+idcountry );
+		// Temporary because not exist State/City tables in database for all countrys
+		if (idcountry != "1") {
+			carregaCidade(28) ;
+		} else {
+			carregaCidade(1) ;
+		}
+	};
+
 	jQuery.noConflict();
-	jQuery(document).ready(function(){ 
+	jQuery(document).ready(function(){
 	    jQuery('#registerForm').validate({
 	        rules: {
 	            email: {
@@ -364,22 +323,21 @@ echo $this->doctype();
 	                lettersOnly: true
 	            },
 	            state: {
-	                min: 1
+	                min: 0,
 	            },
 	            city: {
-	                min: 1
+	                min: 0,
 	            }
 	        },
 	        messages: {
 	            email: {
 	                required: "<?php echo $this->translate('The email is required'); ?>",
-	                email: "<?php echo $this->translate('Please enter a valide e-mail.'); ?>" 
+	                email: "<?php echo $this->translate('Please enter a valide e-mail.'); ?>"
 	            },
 	            password: {
 	                required: "<?php echo $this->translate('The password is required'); ?>",
-	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
-	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-	                lettersAndNumbersOnly: "<?php echo $this->translate('Letters and Numbers only please'); ?>"
+	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
+	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>"
 	            },
 	            first_name: {
 	                required: "<?php echo $this->translate('The first name is required'); ?>",
@@ -408,8 +366,8 @@ echo $this->doctype();
 	        }
 	    });
 	});
-	
-	jQuery(document).ready(function(){ 
+
+	jQuery(document).ready(function(){
 		jQuery('#loginForm').validate({
 	        rules: {
 	            email: {
@@ -419,45 +377,17 @@ echo $this->doctype();
 	            password: {
 	                required: true,
 	                minlength: 6,
-	                maxlength: 20,
-	                lettersAndNumbersOnly: true
+	                maxlength: 20
 	            }
 	        },
 	        messages: {
 	            email: {
 	                required: "<?php echo $this->translate('The email is required'); ?>",
-	                email: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>" 
+	                email: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>"
 	            },
 	            password: {
 	                required: "<?php echo $this->translate('The password is required'); ?>",
-	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
-	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-	                lettersAndNumbersOnly: "<?php echo $this->translate('Letters and Numbers only please'); ?>"
-	            }
-	        },
-	        highlight: function(element) {
-	            jQuery(element).closest('.control-group').removeClass('success').addClass('error');
-	        },
-	        success: function(element) {
-	            element
-	            .closest('.control-group').removeClass('error');
-	        }
-	    });
-	}); 
-
-	jQuery(document).ready(function(){ 
-		jQuery('#hashForm').validate({
-	        rules: {
-	            confirm_hash: {
-	                required: true,
-	                minlength: 36,
-	                maxlength: 36
-	            }
-	        },
-	        messages: {
-	            confirm_hash: {
-	                required: "<?php echo $this->translate('The hash is required'); ?>",
-	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
 	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>"
 	            }
 	        },
@@ -469,12 +399,33 @@ echo $this->doctype();
 	            .closest('.control-group').removeClass('error');
 	        }
 	    });
-	}); 
+	});
+
+	jQuery(document).ready(function(){
+		jQuery('#hashForm').validate({
+	        rules: {
+	            confirm_hash: {
+	                required: true,
+	                minlength: 36,
+	                maxlength: 36
+	            }
+	        },
+	        messages: {
+	            confirm_hash: {
+	                required: "<?php echo $this->translate('The hash is required'); ?>",
+	                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
+	                maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>"
+	            }
+	        },
+	        highlight: function(element) {
+	            jQuery(element).closest('.control-group').removeClass('success').addClass('error');
+	        },
+	        success: function(element) {
+	            element
+	            .closest('.control-group').removeClass('error');
+	        }
+	    });
+	});
 
 
 </script>
-
-
-
-
-

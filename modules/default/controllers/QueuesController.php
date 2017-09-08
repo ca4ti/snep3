@@ -69,9 +69,8 @@ class QueuesController extends Zend_Controller_Action {
                     $this->view->translate("Queues")));
 
         $db = Zend_Registry::get('db');
-        $select = $db->select()
-                ->from("queues")
-                ->order("name");
+
+        $select = "SELECT `queues`.*,COALESCE(COUNT(uniqueid),0) as members FROM `queues` left join `queue_members` on queues.name = queue_members.queue_name group by queues.name";
 
         $stmt = $db->query($select);
         $queues = $stmt->fetchAll();
@@ -155,15 +154,16 @@ class QueuesController extends Zend_Controller_Action {
 
             if ($form_isValid) {
 
-                Snep_Queues_Manager::add($dados);
+                $id = Snep_Queues_Manager::add($dados);
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-
-                    $id = $dados["name"];
-                    Snep_LogUser::salvaLog("Adicionou Fila", $id, 7);
-                    $add = Snep_Queues_Manager::get($id);
-                    Snep_Queues_Manager::insertLogQueue("ADD", $add);
+                    $data = array(
+                      'table' => 'queues',
+                      'registerid' => $id,
+                      'description' => "Added Queue $id - {$_POST['name']}"
+                    );
+                    Snep_LogUser::log("add", $data);
                 }
 
                 $this->_redirect($this->getRequest()->getControllerName());
@@ -267,6 +267,15 @@ class QueuesController extends Zend_Controller_Action {
 
 
             Snep_Queues_Manager::edit($dados);
+            //log-user
+            if (class_exists("Loguser_Manager")) {
+                $data = array(
+                  'table' => 'queues',
+                  'registerid' => $id,
+                  'description' => "Edited Queue $id - {$queue['name']}"
+                );
+                Snep_LogUser::log("update", $data);
+            }
             $this->_redirect($this->getRequest()->getControllerName());
 
         }
@@ -335,18 +344,22 @@ class QueuesController extends Zend_Controller_Action {
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    $add = Snep_Queues_Manager::get($_POST['id']);
+                    $queue = Snep_Queues_Manager::get($_POST['id']);
                 }
 
-                Snep_Queues_Manager::deleteMembersGroup($_POST['name']);
+                Snep_Queues_Manager::removeUserPermission($_POST['name']);
                 Snep_Queues_Manager::removeQueuePeers($_POST['id']);
                 Snep_Queues_Manager::remove($_POST['id']);
                 Snep_Queues_Manager::removeQueues($_POST['id']);
 
+                //log-user
                 if (class_exists("Loguser_Manager")) {
-
-                    Snep_LogUser::salvaLog("Excluiu Fila", $_POST['id'], 7);
-                    Snep_Queues_Manager::insertLogQueue("DEL", $add);
+                    $data = array(
+                      'table' => 'queues',
+                      'registerid' => $id,
+                      'description' => "Added Queue $id - {$queue['name']}"
+                    );
+                    Snep_LogUser::log("add", $data);
                 }
 
                 $this->_redirect($this->getRequest()->getControllerName());

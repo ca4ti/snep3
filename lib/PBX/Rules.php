@@ -31,11 +31,11 @@
 class PBX_Rules {
 
     private function __construct() {
-        
+
     }
 
     private function __clone() {
-        
+
     }
 
     /**
@@ -50,7 +50,7 @@ class PBX_Rules {
     /**
      * get - Obtém Regras de negócio do banco de dados.
      * A REGRA É DEVOLVIDA SEM A CLASSE DE COMUNICAÇÂO COM O ASTERISK
-     * @param <int> $id Numero de identificação da regra de negócio que 
+     * @param <int> $id Numero de identificação da regra de negócio que
      * se deseja obter do banco de dados.
      * @return PBX_Rule  $regra de negócio corresponde ao id da chamada
      */
@@ -101,6 +101,10 @@ class PBX_Rules {
             if ($diaDaSemana != "") {
                 $regra->addWeekDay($diaDaSemana);
             }
+        }
+
+        foreach (explode(',', $regra_raw->dates_alias) as $date) {
+            $regra->addValidDates($date);
         }
 
         foreach (explode(',', $regra_raw->validade) as $time) {
@@ -156,7 +160,7 @@ class PBX_Rules {
     }
 
     /**
-     * getAll - Retorna um array com todas as regras de negócio persistidas 
+     * getAll - Retorna um array com todas as regras de negócio persistidas
      * no snep
      * @param <string> $where
      * @return <array> $regras com todas as regras de negócio
@@ -179,7 +183,7 @@ class PBX_Rules {
         foreach ($result as $regra) {
             $regras[] = self::get($regra['id']);
         }
-        
+
         return $regras;
     }
 
@@ -190,14 +194,6 @@ class PBX_Rules {
      * @param PBX_Rule $rule
      */
     public static function update($rule) {
-
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-            $historico = array();
-            $id_regra = $rule->getId();
-            $historico = Snep_Route::getRegra($id_regra);
-            $exAction = Snep_Route::getActions($id_regra);
-        }
 
         if ($rule->getId() == -1) {
             throw new PBX_Exception_BadArg("Rule does not a valid id.");
@@ -217,6 +213,8 @@ class PBX_Rules {
 
         $validade = implode(",", $rule->getValidTimeList());
 
+        $dates_list = implode(",", $rule->getValidDatesList());
+
         $diasDaSemana = implode(",", $rule->getValidWeekDays());
 
         $update_data = array(
@@ -228,7 +226,8 @@ class PBX_Rules {
             "record" => $rule->isRecording(),
             "diasDaSemana" => $diasDaSemana,
             "type" => $rule->getTypeRule(),
-            "validade" => $validade
+            "validade" => $validade,
+            "dates_alias" => $dates_list
         );
 
 
@@ -275,98 +274,6 @@ class PBX_Rules {
             throw $ex;
         }
 
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-            $regra_update = Snep_Route::getRegra($id_regra);
-            self::insertLogRegra($historico, $regra_update);
-        }
-    }
-
-    /**
-     * insertLogRegra - insere na tabela logs_regra quando é modificada regra
-     * @param <array> $historico
-     * @param <array> $regra_update
-     */
-    function insertLogRegra($historico, $regra_update) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-        $acao = "Editou regra";
-        $actions_hist = $historico['acoes'];
-        $actions_up = $regra_update['acoes'];
-
-        //add historico
-        foreach ($actions_hist as $number => $item) {
-
-            // Pega somente nome da ação. Ex: DiscarRamal de PBX_Rule_Action_DiscarRamal
-            if (strpos($item['action'], "_") !== false) {
-                $action = $item['action'];
-                $action = explode("_", $action);
-                $action = $action[3];
-            } else {
-                // Ação ARS não possui PBX_Rule_Action_ no nome da ação
-                $action = $item['action'];
-            }
-
-            $insert_data = array('id_regra' => $historico["id"],
-                'hora' => date('Y-m-d H:i:s'),
-                'ip' => $ip,
-                'idusuario' => $username,
-                'acao' => $acao,
-                'prio' => $historico["prio"],
-                'desc' => $historico["desc"],
-                'src' => $historico["origem"],
-                'dst' => $historico["destino"],
-                'validade' => $historico["validade"],
-                'days' => $historico["diasDaSemana"],
-                'record' => $historico["record"],
-                'ativa' => $historico["ativa"],
-                'action' => $action,
-                'prio_action' => $item["prio"],
-                'campo' => $item["key"],
-                'valores' => $item["value"],
-                'tipo' => "OLD");
-
-            $db->insert('logs_regra', $insert_data);
-        }
-
-        //add update
-        foreach ($actions_up as $number => $up) {
-
-            // Pega somente nome da ação. Ex: DiscarRamal de PBX_Rule_Action_DiscarRamal
-            if (strpos($up['action'], "_") !== false) {
-                $action = $up['action'];
-                $action = explode("_", $action);
-                $action = $action[3];
-            } else {
-                // Ação ARS não possui PBX_Rule_Action_ no nome da ação
-                $action = $up['action'];
-            }
-
-            $insert_data = array('id_regra' => $regra_update["id"],
-                'hora' => date('Y-m-d H:i:s'),
-                'ip' => $ip,
-                'idusuario' => $username,
-                'acao' => $acao,
-                'prio' => $regra_update["prio"],
-                'desc' => $regra_update["desc"],
-                'src' => $regra_update["origem"],
-                'dst' => $regra_update["destino"],
-                'validade' => $regra_update["validade"],
-                'days' => $regra_update["diasDaSemana"],
-                'record' => $regra_update["record"],
-                'ativa' => $regra_update["ativa"],
-                'action' => $action,
-                'prio_action' => $up["prio"],
-                'campo' => $up["key"],
-                'valores' => $up["value"],
-                'tipo' => "NEW");
-
-            $db->insert('logs_regra', $insert_data);
-        }
     }
 
     /**
@@ -389,6 +296,8 @@ class PBX_Rules {
 
         $validade = implode(",", $rule->getValidTimeList());
 
+        $dates_list = implode(",", $rule->getValidDatesList());
+
         $diasDaSemana = implode(",", $rule->getValidWeekDays());
 
         $insert_data = array(
@@ -397,6 +306,7 @@ class PBX_Rules {
             "origem" => $srcs,
             "destino" => $dsts,
             "validade" => $validade,
+            "dates_alias" => $dates_list,
             "diasDaSemana" => $diasDaSemana,
             "type" => $rule->getTypeRule(),
             "record" => $rule->isRecording()

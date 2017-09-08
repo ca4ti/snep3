@@ -18,7 +18,7 @@
  */
 
 /**
- * Classe to manager a Cost Centers.
+ * Classe to manager a Tags.
  *
  * @see Snep_CostCenter_Manager
  *
@@ -26,12 +26,12 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
- * 
+ *
  */
 class Snep_CostCenter_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
@@ -51,7 +51,7 @@ class Snep_CostCenter_Manager {
     }
 
     /**
-     * Method to get Cost Center by id
+     * Method to get Tag by id
      * @param int $id
      * @return Array
      */
@@ -123,34 +123,7 @@ class Snep_CostCenter_Manager {
     }
 
     /**
-     * insertLogCcustos - insere na tabela logs_users os dados do centro de custo
-     * @param <array> $acao
-     * @param <array> $add
-     */
-    function insertLogCcustos($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'cod' => $add["codigo"],
-            'param1' => $add["tipo"],
-            'param2' => $add["nome"],
-            'param3' => $add["descricao"],
-            'value' => "CCUSTOS",
-            'tipo' => $acao);
-
-        $db->insert('logs_users', $insert_data);
-    }
-
-
-    /**
-     * Method to get Cost Center in cdr by id
+     * Method to get Tag in cdr by id
      * @param int $id
      * @return Array
      */

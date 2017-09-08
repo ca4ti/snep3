@@ -26,14 +26,14 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
- * 
+ *
  */
 class Snep_Queues_Manager {
 
     public function __construct() {
-        
+
     }
-    
+
     /**
      * Get a queue by id
      * @param int $id
@@ -104,6 +104,7 @@ class Snep_Queues_Manager {
         );
 
         $db->insert('queues', $insert_data);
+        return $db->lastInsertId();
     }
 
     /**
@@ -167,6 +168,24 @@ class Snep_Queues_Manager {
 
         $db->beginTransaction();
         $db->delete('queues_agent', "queue = '$name'");
+
+        try {
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+    }
+
+    /**
+     * removeUserPermission
+     * @param <string> $queue
+     */
+    public function removeUserPermission($id) {
+
+        $db = Zend_Registry::get('db');
+
+        $db->beginTransaction();
+        $db->delete('users_queues_permissions', "users_queues_permissions.queue_id = $id");
 
         try {
             $db->commit();
@@ -248,7 +267,7 @@ class Snep_Queues_Manager {
             $db->rollBack();
         }
     }
-    
+
     /**
      * Remove queue member
      * @param string $member
@@ -284,7 +303,7 @@ class Snep_Queues_Manager {
     }
 
     /**
-     * getValidationpeers - checks if the queue have member 
+     * getValidationpeers - checks if the queue have member
      * @param <int> $id
      * @return <array>
      */
@@ -303,7 +322,7 @@ class Snep_Queues_Manager {
     }
 
     /**
-     * getValidation - checks if the queue have member 
+     * getValidation - checks if the queue have member
      * @param <int> $id
      * @return <array>
      */
@@ -322,7 +341,7 @@ class Snep_Queues_Manager {
     }
 
     /**
-     * getValidation - checks if the queue is used in the rule 
+     * getValidation - checks if the queue is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -360,7 +379,7 @@ class Snep_Queues_Manager {
 
         $db->insert('logs_users', $insert_data);
     }
-    
+
     /**
      * Get all queue for csv file
      * @return <array>
@@ -376,17 +395,6 @@ class Snep_Queues_Manager {
         $queues = $stmt->fetchall();
 
         return $queues;
-    }
-
-    /**
-     * deleteMembers - Remove group members 
-     *
-     * @param int $id
-     */
-    public static function deleteMembersGroup($id) {
-
-        $db = Zend_Registry::get('db');
-        $db->delete("members_group_queues", "id_queue='{$id}'");
     }
 
     /**

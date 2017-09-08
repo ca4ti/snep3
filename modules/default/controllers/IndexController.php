@@ -27,6 +27,10 @@ class IndexController extends Zend_Controller_Action {
      */
     public function indexAction() {
 
+        // Get configuration properties from Zend_Registry
+        $config = Zend_Registry::get('config');
+        $this->view->show_help = $config->system->show_help;
+
         // checked if snep registred in itc
         if( $_SESSION['registered'] != true && $_SESSION['noregister'] != true){
 
@@ -34,15 +38,13 @@ class IndexController extends Zend_Controller_Action {
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                         $this->view->translate("Register")));
 
-            // Get configuration properties from Zend_Registry
-            $config = Zend_Registry::get('config');
 
             $distro = $config->system->itc_distro;
             $required_register = $config->system->itc_required;
 
-            $viewnoregister = false;
+            $viewnoregister = true;
             if($required_register == "true"){
-                $viewnoregister = true;
+                $viewnoregister = false;
             }
 
             $this->view->viewnoregister = $viewnoregister;
@@ -51,14 +53,9 @@ class IndexController extends Zend_Controller_Action {
             $url = trim($config->system->itc_address);
             $url .= "devices/ping/".$_SESSION['uuid'];
 
-            $http = curl_init($url);
-
-            curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
-            $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-            $http_response = curl_exec($http);
-            $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            curl_close($http);
+            $ctx = Snep_Request::http_context(array(), "GET");
+            $request = Snep_Request::send_request($url, $ctx);
+            $httpcode = $request['response_code'];
 
             switch ($httpcode) {
                 case 200:
@@ -110,19 +107,12 @@ class IndexController extends Zend_Controller_Action {
                         $data['distribution_id'] = $distro;
                     }
 
-                    $content = json_encode($data);
-                    $url = trim($config->system->itc_address) . "auth/sign";
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($curl, CURLOPT_HEADER, false);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
-                    curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+                    $data['timeout'] = 5;
 
-                    $json_response = curl_exec($curl);
-                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                    curl_close($curl);
+                    $url = trim($config->system->itc_address) . "auth/sign";
+                    $ctx = Snep_Request::http_context($data);
+                    $request = Snep_Request::send_request($url, $ctx);
+                    $httpcode = $request['response_code'];
 
                     switch ($httpcode) {
                         case 201:
@@ -151,23 +141,16 @@ class IndexController extends Zend_Controller_Action {
                     $dado = $_POST;
                     $dado['device_uuid'] = $_SESSION["uuid"];
 
-                    $content = json_encode($dado);
-                    $url = trim($config->system->itc_address) . "auth/confirm_hash";
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($curl, CURLOPT_HEADER, false);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
-                    curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+                    $dado['timeout'] = 5;
 
-                    $json_response = curl_exec($curl);
-                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                    curl_close($curl);
+                    $url = trim($config->system->itc_address) . "auth/confirm_hash";
+                    $ctx = Snep_Request::http_context($dado);
+                    $request = Snep_Request::send_request($url, $ctx);
+                    $httpcode = $request['response_code'];
 
                     switch ($httpcode) {
                         case 200:
-                            $data = json_decode($json_response);
+                            $data = json_decode($request['response']);
                             $api_key = $data->details->api_key;
                             $client_key = $data->details->client_key;
                             Snep_Register_Manager::registerITC($api_key,$client_key);
@@ -220,25 +203,18 @@ class IndexController extends Zend_Controller_Action {
                     if(isset($distro)){
                         $data['distribution_id'] = $distro;
                     }
-
+                    $data['timeout'] = 2;
                     $content = json_encode($data);
                     //$url = trim($config->system->itc_address) . "auth/slogin";
                     $url = trim($config->system->itc_address) . "auth/login";
 
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($curl, CURLOPT_HEADER, false);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json"));
-                    curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-                    $json_response = curl_exec($curl);
-                    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                    curl_close($curl);
+                    $ctx = Snep_Request::http_context($data);
+                    $request = Snep_Request::send_request($url, $ctx);
+                    $httpcode = $request['response_code'];
 
                     switch ($httpcode) {
                         case 200:
-                            $data = json_decode($json_response);
+                            $data = json_decode($request['response']);
 
                             $api_key = $data->details->api_key;
                             $client_key = $data->details->client_key;
@@ -275,6 +251,11 @@ class IndexController extends Zend_Controller_Action {
             }
 
         }else{
+
+            // Begining the implementation of send local os informations to ITC Dashboard
+            // $register = Snep_ITCRegister::register(array(
+            //     "uuid" => $_SESSION['uuid'],
+            //     "token" => $config->system->itc_token));
 
             $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
             $this->view->translate("Dashboard")));

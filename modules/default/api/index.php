@@ -11,7 +11,7 @@ if (!file_exists($config_file)) {
 };
 $config = parse_ini_file($config_file, true);
 
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 // Adicionando caminho de libs ao include path para autoloader trabalhar:
 set_include_path($config['system']['path.base'] . "/lib" . PATH_SEPARATOR . get_include_path());
@@ -56,9 +56,9 @@ $log->addWriter($writer);
 $db = Zend_Db::factory('Pdo_Mysql', $config->ambiente->db->toArray());
 Zend_Db_Table::setDefaultAdapter($db);
 Zend_Registry::set('db', $db);
-unset($db);
+//unset($db);
 
-require_once(dirname(__FILE__) . "/actions/SnepService.php");
+// require_once(dirname(__FILE__) . "/actions/SnepService.php");
 
 /**
  * Função para  os erros
@@ -69,39 +69,71 @@ function error($cause) {
     die('{"status":"error","cause":"' . $cause . '"}');
 }
 
-// Serviço a ser executado
-if (!isset($_GET['service'])) {
-    error("Servico nao específicado");
-} else {
-    if (strtolower($_GET['service']) == "snep")
-        error("Nome de servico invalido");
-    $service = $_GET['service'] . "Service";
+if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        if (strpos(strtolower($_SERVER['HTTP_AUTHORIZATION']),'basic')===0)
+          list($user,$passwd) = explode(':',base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+
+}else if (isset($_SERVER['PHP_AUTH_USER'])) {
+	$passwd = md5($_SERVER['PHP_AUTH_PW']);
+	$user = $_SERVER['PHP_AUTH_USER'];
 }
 
-$filename = dirname(__FILE__) . "/actions/" . $service . ".php";
+if(($user && $passwd) || ($_GET['service'] == "Signup")){
+  if($_GET["service"] != "Signup"){
+    $authAdapter = new Zend_Auth_Adapter_DbTable($db);
+    $authAdapter->setTableName('users');
+    $authAdapter->setIdentityColumn('name');
+    $authAdapter->setCredentialColumn('password');
+    $authAdapter->setIdentity($user);
+    $authAdapter->setCredential($passwd);
+
+    // Autentication
+    $auth = Zend_Auth::getInstance();
+    $result = $auth->authenticate($authAdapter);
+    switch ($result->getCode()) {
+         case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+         case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+               error("User or password invalid: {$user}:{$passwd}");
+               break;
+  	}
+  }
+  require_once(dirname(__FILE__) . "/actions/SnepService.php");
+
+	if(!isset($_GET['service'])){
+		$service_name = "CallsReportService";
+	}else{
+		$service_name = $_GET['service'] . "Service";
+	}
+
+	$filename = dirname(__FILE__) . "/actions/" . $service_name . ".php";
 
 
 
 
-// Verifica a existencia do serviço
-if (file_exists($filename)) {
-	require_once($filename);
-} else {
-    error("Servico nao encontrado; $service") ;
-}
+	// Verifica a existencia do serviço
+	if (file_exists($filename)) {
+		require_once($filename);
+	} else {
+	    error("Servico nao encontrado; $service_name") ;
+	}
 
 
-// Carrega o serviç
-$service = new $service;
-// Executa o serviço
-$resultado = $service->execute();
+	// Carrega o serviç
+	$service = new $service_name;
+	// Executa o serviço
+	$resultado = $service->execute();
 
-// Seta o HTTP header de conteudo de resposta para application/json
-header('Content-Type: application/json'); 
+	// Seta o HTTP header de conteudo de resposta para application/json
+	header('Content-Type: application/json');
 
-// // Imprime resultado
-if ($_GET['service'] == "CallsReport") {
-    echo str_replace('\\/', '/', json_encode($resultado));
-} else {
-    echo json_encode($resultado);
+  // // Imprime resultado
+  if ($_GET['service'] == "CallsReport") {
+      echo str_replace('\\/', '/', json_encode($resultado));
+  } else {
+      echo json_encode($resultado);
+  }
+}else{
+	header('WWW-Authenticate: Basic realm="SNEP Services"');
+	header('HTTP/1.0 401 Unauthorized');
+	error("Unauthorized!");
 }

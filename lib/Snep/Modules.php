@@ -116,7 +116,7 @@ class Snep_Modules {
         if (isset($info->website)) {
             $descriptor->setWebsite((string) $info->website);
         }
-        
+
         return $descriptor;
     }
 
@@ -133,7 +133,7 @@ class Snep_Modules {
         foreach ($resources as $element) {
             $id = (string) $element->attributes()->id;
             $font = (string) $element->attributes()->font;
-            
+
 
             if ($id === null) {
                 throw new Exception("Resource object must contain id attribute.");

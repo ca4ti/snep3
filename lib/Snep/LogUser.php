@@ -21,17 +21,17 @@
 
 /**
  * Class to manage actions Loguser
- * 
+ *
  *
  * @category  Snep
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
- * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br> 
- *            
- * 
+ * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
+ *
+ *
  */
 class Snep_LogUser {
-    
+
     /**
      * salvaLog - Inserts data in the database
      * @param <string> $acao
@@ -39,25 +39,39 @@ class Snep_LogUser {
      * @param <int> $tipo
      * @return boolean
      */
-    function salvaLog($acao, $idAction, $tipo) {
-        $db = Zend_Registry::get("db");
-        $ip = $_SERVER['REMOTE_ADDR'];
-                
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-        $acao = mysql_escape_string($acao);
-        
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'acao' => $acao,
-            'idaction' => $idAction,
-            'tipo' => $tipo);
-       
-       $db->insert('logs', $insert_data);
+    function log($action, $data) {
+      $db = Zend_Registry::get("db");
+
+      $ip = $_SERVER['REMOTE_ADDR'];
+      $auth = Zend_Auth::getInstance();
+      $username = $auth->getIdentity();
+
+      if(!isset($data['table'])){
+        $data['table'] = 'unknown';
+      }
+
+      if(!isset($data['registerid'])){
+        $data['registerid'] = 'unknown';
+      }
+
+      if(!isset($data['description'])){
+        $data['description'] = "Register {$data['registerid']} at table {$data['table']} was $action";
+      }
+
+      $insert_data = array(
+          'datetime' => date('Y-m-d H:i:s'),
+          'ip' => $ip,
+          'user' => $username,
+          'action' => $action,
+          'description' => $data['description'],
+          'table' => $data['table'],
+          'registerid' => $data['registerid']
+        );
+
+      $db->insert('logs_users', $insert_data);
     }
 
-    
+
 
 }
 

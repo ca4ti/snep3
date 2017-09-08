@@ -118,11 +118,13 @@ class SimulatorController extends Zend_Controller_Action {
             if (count($dialplan->getMatches()) > 0) {
                 $found = false;
                 foreach ($dialplan->getMatches() as $index => $rule) {
-                    if ($rule->getId() == $dialplan->getLastRule()->getId()) {
+                    if ($rule->getId() == $dialplan->getLastRule()) {
                         $state = "torun";
                         $found = true;
                     } else if ($found) {
                         $state = "ignored";
+                    } else if (!$rule->isActive()){
+                        $state = "inactive";
                     } else {
                         $state = "outdated";
                     }
@@ -132,7 +134,7 @@ class SimulatorController extends Zend_Controller_Action {
                     foreach ($rule->getAcoes() as $action) {
                         $config = $action->getConfigArray();
                         if ($action instanceof CCustos) {
-                            $actions[] = $this->view->translate("Define Cost Center to ") . $config['ccustos'];
+                            $actions[] = $this->view->translate("Define Tag to ") . $config['ccustos'];
                         } else if ($action instanceof DiscarTronco) {
                             $tronco = PBX_Trunks::get($config['tronco']);
                             $actions[] = $this->view->translate("Dial through Trunk ") . $tronco->getName();
@@ -182,19 +184,19 @@ class SimulatorController extends Zend_Controller_Action {
                 if($date == NULL){
                     $date = $this->view->translate("Current Day");
                 }else{
-                    $table = array('mon'=> $this->view->translate('Monday'), 
-                               'tue'=> $this->view->translate('Tuesday'), 
-                               'wed'=> $this->view->translate('Wednesday'), 
-                               'thu'=> $this->view->translate('Thursday'), 
-                               'fri'=> $this->view->translate('Friday'), 
-                               'sat'=> $this->view->translate('Saturday'), 
+                    $table = array('mon'=> $this->view->translate('Monday'),
+                               'tue'=> $this->view->translate('Tuesday'),
+                               'wed'=> $this->view->translate('Wednesday'),
+                               'thu'=> $this->view->translate('Thursday'),
+                               'fri'=> $this->view->translate('Friday'),
+                               'sat'=> $this->view->translate('Saturday'),
                                'sun'=> $this->view->translate('Sunday'));
 
                     $date = strtr($date, $table);
                 }
 
                 $input = array("caller" => $caller, "dst" => $extension, "time" => $dialplan->getLastExecutionTime(),"date" => $date);
-                
+
                 $this->view->input = $input;
                 $this->view->result = $result;
             }

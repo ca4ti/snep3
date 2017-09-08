@@ -26,15 +26,15 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Rafael Pereira Bozzetti <rafael@opens.com.br>
- * 
+ *
  */
 class Snep_SoundFiles_Manager {
 
     // --------------------------------------------------------------------------------------------
-    // Functions for Sound Files 
+    // Functions for Sound Files
     // --------------------------------------------------------------------------------------------
     /**
-     * Get a sound informations 
+     * Get a sound informations
      * @param <string> $file
      * @param <string> $language
      * @return <array> $sound
@@ -42,7 +42,7 @@ class Snep_SoundFiles_Manager {
     public function get($file,$lang = false) {
         $this->lang = Zend_Registry::get('config')->system->language;
         if (!$lang) {
-            $lang = $this->lang; 
+            $lang = $this->lang;
         }
 
         $db = Zend_Registry::get('db');
@@ -82,7 +82,7 @@ class Snep_SoundFiles_Manager {
         return $db->lastInsertId();
     }
 
-    
+
 
     /**
      * Update a sound file register
@@ -212,10 +212,10 @@ class Snep_SoundFiles_Manager {
             $_section[$class]['directory'] = $info['directory'];
         }
         return $_section;
-    } 
+    }
 
     /**
-     * Get a MOH sound informations 
+     * Get a MOH sound informations
      * @param <string> $file
      * @param <string> $section
      * @return <array> $sound:
@@ -437,7 +437,7 @@ class Snep_SoundFiles_Manager {
         $db = Zend_Registry::get('db');
         $this->lang =  Zend_Registry::get('config')->system->language;
         if ($type === 'moh') {
-            $this->base_dir = Zend_Registry::get('config')->system->path->asterisk->moh;    
+            $this->base_dir = Zend_Registry::get('config')->system->path->asterisk->moh;
         } else {
             $this->base_dir = Zend_Registry::get('config')->system->path->asterisk->sounds;
         }
@@ -463,9 +463,9 @@ class Snep_SoundFiles_Manager {
             }
             if (file_exists($dir."/".$sound['arquivo'])) {
                 if ($type === "moh") {
-                    array_push($_sound,array($sound['secao'] => $sound['arquivo']));  
+                    array_push($_sound,array($sound['secao'] => $sound['arquivo']));
                 } else {
-                    $_sound[$sound['language']] = $sound['arquivo'];  
+                    $_sound[$sound['language']] = $sound['arquivo'];
                 }
             } else {
                 self::remove($sound['arquivo'],$sound['secao']) ;
@@ -481,7 +481,7 @@ class Snep_SoundFiles_Manager {
                 if (is_dir($this->base_dir . '/' . $value)) {
                     $sections[$value] = $this->base_dir.'/'.$value ;
                     continue ;
-                } 
+                }
             }
 
             // Read each directory and your files
@@ -526,7 +526,7 @@ class Snep_SoundFiles_Manager {
         $insert_data = array('arquivo' => $file,
             'descricao' => substr($file, 0, -4),
             'data' => new Zend_Db_Expr('NOW()'),
-            'language' => $this->lang, 
+            'language' => $this->lang,
             'tipo' => 'AST');
 
         try {
@@ -541,7 +541,7 @@ class Snep_SoundFiles_Manager {
 
     /**
      * Get sound files
-     * @param boolean $flag - true = include a null sound in array, false=not include 
+     * @param boolean $flag - true = include a null sound in array, false=not include
      * @return <array>
      */
     public function getSounds($flag=false) {
@@ -561,9 +561,9 @@ class Snep_SoundFiles_Manager {
                 "descricao" => "" ,
                 "data" => "",
                 "tipo" => "" ,
-                "secao" => "", 
+                "secao" => "",
                 "language" => ""));
-        } 
+        }
 
         return $sounds;
     }
@@ -616,7 +616,7 @@ class Snep_SoundFiles_Manager {
             return false ;
          } else {
             return true ;
-        }  
+        }
     }
 
     /**
@@ -625,36 +625,11 @@ class Snep_SoundFiles_Manager {
      * @return <string> $name
      */
     public function parseName($name) {
-    
+
         $invalid = array('â', 'ã', 'á', 'à', 'ẽ', 'é', 'è', 'ê', 'í', 'ì', 'ó', 'õ', 'ò', 'ú', 'ù', 'ç', " ", '@', '!');
         $valid = array('a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'o', 'o', 'o', 'u', 'u', 'c', "_", '_', '_');
 
         return str_replace($invalid, $valid, $name);
     }
     
-    /**
-     * Insert on table logs_users the data of sound files
-     * @param <string> $acao
-     * @param <array> $add
-     */
-    function insertLogSounds($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'cod' => $add["arquivo"],
-            'param1' => $add["descricao"],
-            'param2' => $add["tipo"],
-            'value' => "SOM",
-            'tipo' => $acao);
-
-        $db->insert('logs_users', $insert_data);
-    }
-
 }

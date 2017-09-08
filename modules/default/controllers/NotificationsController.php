@@ -34,12 +34,12 @@ class NotificationsController extends Zend_Controller_Action {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Notifications")));
-        
+
         $this->view->url = $this->getFrontController()->getBaseUrl() . '/' . $this->getRequest()->getControllerName();
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
 
         $options = $this->_request->getParams();
-        
+
         if($options['id'] == 'all'){
 
         	$notifications = Snep_Notifications::getAll();
@@ -47,71 +47,50 @@ class NotificationsController extends Zend_Controller_Action {
         		$this->view->notifications = $notifications;
         		$this->view->options = 'all';
         	}else{
-        		$this->view->error_message = $this->view->translate("You do not have any notifications");
-                $this->renderScript('error/sneperror.phtml');
+            $this->view->error_type = 'alert';
+            $this->view->error_title = 'Warning';
+        		$this->view->error_message = $this->view->translate("You do not have any notifications.");
+            $this->renderScript('error/sneperror.phtml');
         	}
 
         }else{
 
-        	$notifications = Snep_Notifications::getAll();
+        	$notification = Snep_Notifications::getNotification($options['id']);
+
         	$html = array();
         	$cont = 0;
 
-        	Snep_Notifications::setRead($options['id']);
-            
-            $idarray = array();
-            
-            // mounts array with id available
-            foreach($notifications as $ind => $value){
-                array_push($idarray, $value['id']);
-            }
-            
-        	foreach($notifications as $key => $notification){
-        		
-                    if($notification['id'] == $options['id']){
+          $active='active';
+      		$html[$cont]  = "<div class='item ".$active."'>";
+      		$html[$cont] .= "<div class='carousel-content'>";
+      		$html[$cont] .= "<div class='panel panel-default col-sm-12 notification-panel'>";
+      		$html[$cont] .= "<div class='panel-body'>";
+      		$html[$cont] .= "<h2>".$notification->title."</h2>";
+      		$html[$cont] .= "<h5>".$notification->from .' - '.date("d/m/Y G:i:s", strtotime($notification->creation_date))."</h5>";
+      		$html[$cont] .= "<br><p>".$notification->message."</p>";
+      		$html[$cont] .= "<div class='panel-footer clearfix notification-panel'>";
+      		$html[$cont] .= "<a href='/snep/index.php/default/notifications?id=all'><span class='notification fa fa-list fa-3x notification-panel'></span></a>&nbsp";
+      		$html[$cont] .= "<div class='pull-right'>";
 
-                        $active='active';
+              if(isset($prev_id))
+                  $html[$cont] .= "<a href='/snep/index.php/default/notifications?id=".$prev_id . "' data-slide='prev'><span class='notification fa fa-chevron-circle-left fa-3x notification-panel'></span></a>&nbsp";
 
-                        (isset($idarray[$key-1])) ? $prev_id = $idarray[$key-1] : $prev_id = null ;    
-                        (isset($idarray[$key+1])) ? $next_id = $idarray[$key+1] : $next_id = null ;    
-                        
-                        
-                    }else{
-                        $active = '';
-                    }
+              if(isset($next_id))
+                  $html[$cont] .= "<a href='/snep/index.php/default/notifications?id=".$next_id. "' data-slide='next'><span class='notification fa fa-chevron-circle-right fa-3x notification-panel'></span></a>";
 
-            		$html[$cont]  = "<div class='item ".$active."'>";
-            		$html[$cont] .= "<div class='carousel-content'>";
-            		$html[$cont] .= "<div class='panel panel-default col-sm-12 notification-panel'>";
-            		$html[$cont] .= "<div class='panel-body'>";
-            		$html[$cont] .= "<h2>".$notification['title']."</h2>";
-            		$html[$cont] .= "<h5>".$notification['from'] .' - '.date("d/m/Y G:i:s", strtotime($notification['creation_date']))."</h5>";
-            		$html[$cont] .= "<br><p>".$notification['message']."</p>";
-            		$html[$cont] .= "<div class='panel-footer clearfix notification-panel'>";
-            		$html[$cont] .= "<a href='/snep/index.php/default/notifications?id=all'><span class='notification fa fa-list fa-3x notification-panel'></span></a>&nbsp";
-            		$html[$cont] .= "<div class='pull-right'>";
-        			
-                    if(isset($prev_id))
-                        $html[$cont] .= "<a href='/snep/index.php/default/notifications?id=".$prev_id . "' data-slide='prev'><span class='notification fa fa-chevron-circle-left fa-3x notification-panel'></span></a>&nbsp";    
-                    
-                    if(isset($next_id))
-                        $html[$cont] .= "<a href='/snep/index.php/default/notifications?id=".$next_id. "' data-slide='next'><span class='notification fa fa-chevron-circle-right fa-3x notification-panel'></span></a>";
-                    
-            
-            		$html[$cont] .= "</div>";
-            		$html[$cont] .= "</div>";
-            		$html[$cont] .= "</div>";
-            		$html[$cont] .= "</div>";
-            		$html[$cont] .= "</div>";
-            		$html[$cont] .= "</div>";
-            		$cont++;
-        		
-        	}
 
-            $this->view->html = $html;
+      		$html[$cont] .= "</div>";
+      		$html[$cont] .= "</div>";
+      		$html[$cont] .= "</div>";
+      		$html[$cont] .= "</div>";
+      		$html[$cont] .= "</div>";
+      		$html[$cont] .= "</div>";
+          Snep_Notifications::setRead($options['id']);
+          $this->view->html = $html;
+
 
         }
-        
+
     }
 
     /**
@@ -126,15 +105,13 @@ class NotificationsController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         $this->view->id = $id;
-        $this->view->remove_title = $this->view->translate('Delete Notification.'); 
-        $this->view->remove_message = $this->view->translate('The notification will be deleted. After that, you have no way get it back.'); 
-        $this->view->remove_form = 'notifications'; 
+        $this->view->remove_title = $this->view->translate('Delete Notification.');
+        $this->view->remove_message = $this->view->translate('The notification will be deleted. After that, you have no way get it back.');
+        $this->view->remove_form = 'notifications';
         $this->renderScript('remove/remove.phtml');
 
         if ($this->_request->getPost()) {
-            
-            $idLastNotification = Snep_Notifications::getDateLastNotification();
-            
+
             // remove notification
             Snep_Notifications::removeNotification($id);
 

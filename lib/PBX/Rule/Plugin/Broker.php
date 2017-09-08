@@ -218,19 +218,108 @@ class PBX_Rule_Plugin_Broker extends PBX_Rule_Plugin {
      * @param <int> $index Índice da ação que está sendo executada essa chamada
      */
     public function postExecute($index) {
-        foreach ($this->plugins as $plugin) {
-            try {
-                $plugin->postExecute($index);
-            } catch (PBX_Exception_AuthFail $ex) {
-                throw $ex;
-            } catch (PBX_Rule_Action_Exception_StopExecution $ex) {
-                throw $ex;
-            } catch (PBX_Rule_Action_Exception_GoTo $ex) {
-                throw $ex;
-            } catch (Exception $ex) {
-                Zend_Registry::get("log")->err($ex);
+
+      $action = $this->rule->getAction($index);
+      if ($action instanceof DiscarTronco) {
+        $log = Zend_Registry::get('log');
+
+        $asterisk = $this->asterisk;
+        // Tempo que será contabilizado
+        $answered_time = $asterisk->get_variable("ANSWEREDTIME");
+        $answered_time = (int) $answered_time['data'];
+
+        if ($answered_time > 0) {
+
+          //Update
+          $db = Zend_Registry::get("db");
+          $config = $action->getConfigArray();
+          $trunkId = $config['tronco'];
+          $tronco = PBX_Trunks::get($config['tronco']);
+
+          $sql = "SELECT time_total, time_chargeby, time_initial_date FROM trunks WHERE id='$trunkId' AND time_total IS NOT NULL";
+          $owner_info = $db->query($sql)->fetchAll();
+
+          $year = date("Y");
+
+          if (count($owner_info) == 1) {
+            $controlling = true;
+            $ownertype = 'T';
+            // Ver se temos dados, se nao (e for necessario) adicionamos
+            $sql = "SELECT * FROM time_history WHERE owner='$trunkId' && owner_type='$ownertype' ";
+            switch ($owner_info[0]['time_chargeby']) {
+              case 'Y':
+                $sql .= "&& year=YEAR(NOW()) && month IS NULL && day IS NULL";
+                break;
+              case 'M':
+                $day = date('d');
+                if($day < $owner_info[0]['time_initial_date']){
+                  $month = date('m');
+                }else{
+                  $month = date("m", strtotime("+1 month"));
+                  if($month == '01'){
+                    $year = date("Y", strtotime("+1 year"));
+                  }
+                }
+
+                $sql .= "&& year='$year' && month='$month' && day IS NULL";
+                break;
+              case 'D':
+                $sql .= "&& year=YEAR(NOW()) && month=MONTH(NOW()) && day=DAY(NOW())";
+                break;
             }
+
+
+            $query_result = $db->query($sql)->fetchAll();
+
+            if (count($query_result) > 0 ){
+              $asterisk->verbose("Contabilizando {$answered_time} segundos para tronco {$trunkId} - {$tronco}");
+              $queryId = $query_result[0]['id'];
+              try {
+                $sql = "SELECT used FROM time_history WHERE id='$queryId'";
+                $history = $db->query($sql)->fetchAll();
+
+                $used = $query_result[0]['used'] + $answered_time;
+
+                $sql = "UPDATE time_history SET used='$used', changed=NOW() WHERE id='$queryId'";
+                $db->query($sql);
+              } catch (Exception $e) {
+                throw new Exception("Fatal Error while updating the time: " . $e->getMessage());
+              }
+
+            }else{
+              $asterisk->verbose("Inserindo {$answered_time} segundos para tronco {$trunkId} - {$tronco}");
+              $sql = "INSERT INTO time_history VALUES ";
+              switch ($owner_info[0]['time_chargeby']) {
+                case 'Y':
+                  $sql .= "('', '$trunkId', YEAR(NOW()), NULL, NULL, '$answered_time',NOW(), '$ownertype')";
+                  break;
+                case 'M':
+                  $sql .= "('', '$trunkId', '$year', '$month', NULL, '$answered_time', NOW(), '$ownertype')";
+                  break;
+                case 'D':
+                  $sql .= "('', '$trunkId', YEAR(NOW()), MONTH(NOW()), DAY(NOW()), '$answered_time', NOW(), '$ownertype')";
+                  break;
+              }
+              // adicionando
+              $db->query($sql);
+            }
+          }
         }
+      }
+
+      foreach ($this->plugins as $plugin) {
+        try {
+          $plugin->postExecute($index);
+        } catch (PBX_Exception_AuthFail $ex) {
+          throw $ex;
+        } catch (PBX_Rule_Action_Exception_StopExecution $ex) {
+          throw $ex;
+        } catch (PBX_Rule_Action_Exception_GoTo $ex) {
+          throw $ex;
+        } catch (Exception $ex) {
+          Zend_Registry::get("log")->err($ex);
+        }
+      }
     }
 
     /**

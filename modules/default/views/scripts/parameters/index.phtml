@@ -4,10 +4,10 @@
             <?php if($this->key){ ?>
                 <div class="snep-body-top-buttons">
                     <div class="snep-body-search">
-                        <?php if($this->key){ 
-                            echo ""; 
+                        <?php if($this->key){
+                            echo "";
                             ?>
-                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -56,11 +56,25 @@
                     </div>
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Automatic Help Start up")?></label>
+                <div class="col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <?php if($this->show_help){?>
+                                <input type="checkbox" name="show_help" id="show_help" checked/>
+                            <?php }else{?>
+                                <input type="checkbox" name="show_help" id="show_help"/>
+                            <?php } ?>
+                            <?php echo $this->translate("Automatic show Contextualized Help on Pages with it defined.")?>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Default E-mail");?></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="mail" 
+                    <input type="text" class="form-control" name="mail"
                     placeholder='<?php echo $this->translate("Default e-mail where the alerts will be sent to")?>' value='<?php echo $this->config->system->mail;?>' />
                 </div>
             </div>
@@ -99,7 +113,7 @@
     	</fieldset>
 
         <fieldset>
-            <legend><?php echo $this->translate('Asterisk Manager connect');?></legend> 
+            <legend><?php echo $this->translate('Asterisk Manager connect');?></legend>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Hostname");?></label>
@@ -114,19 +128,19 @@
                     <input type="text" class="form-control" name="user_sock" placeholder='<?php echo $this->translate("Asterisk Socket IP username")?>' value='<?php echo $this->config->ambiente->user_sock;?>' />
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Password");?></label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control" name="pass_sock" placeholder='<?php echo $this->translate("Asterisk Socket IP password")?>' value='<?php echo $this->config->ambiente->pass_sock;?>'/>
                 </div>
             </div>
-        </fieldset> 
+        </fieldset>
 
 
 
         <fieldset>
-            <legend><?php echo $this->translate('Database connect');?></legend> 
+            <legend><?php echo $this->translate('Database connect');?></legend>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Database");?></label>
@@ -148,15 +162,15 @@
                     <input type="text" class="form-control" name="db_username" placeholder='<?php echo $this->translate("Database username")?>' value='<?php echo $this->config->ambiente->db->username;?>' />
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Password");?></label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control" name="db_password" placeholder='<?php echo $this->translate("Database password")?>' value='<?php echo $this->config->ambiente->db->password;?>'/>
                 </div>
             </div>
-        </fieldset> 
-	
+        </fieldset>
+
     	<fieldset>
     		<legend><?php echo $this->translate("Locale Configuration");?></legend>
 
@@ -193,7 +207,7 @@
     			</div>
     		</div>
 
-    	</fieldset>	
+    	</fieldset>
 
     	<fieldset>
     		<legend><?php echo $this->translate("Call Recording Configuration");?></legend>
@@ -223,6 +237,12 @@
                     <input type="text" class="form-control" name="path_voz" value='<?php echo $this->config->ambiente->path_voz;?>' placeholder='<?php echo $this->translate("Path where to store the audio files")?>' />
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo $this->translate("Record Format");?></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="record_format" value='<?php echo $this->config->general->record->format;?>' placeholder='<?php echo $this->translate("Format for the recorded files (wav, wav49)")?>' />
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo $this->translate("Backup Files Path");?></label>
@@ -231,7 +251,7 @@
                 </div>
             </div>
 
-    	</fieldset>	
+    	</fieldset>
 
     	<fieldset>
     		<legend><?php echo $this->translate("Trunks Configuration");?></legend>
@@ -257,20 +277,20 @@
 <script type="text/javascript">
 
 jQuery.noConflict();
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
     jQuery('#defaultForm').validate({
         rules: {
             emp_nome: {
                 required: true,
                 minlength: 2,
                 maxlength: 30,
-                lettersAndNumbersOnly: true 
+                lettersAndNumbersOnly: true
             },
             ip_sock: {
                 required: true,
                 minlength: 6,
                 maxlength: 30,
-                regex: /^(([a-zA-Z0-9]\.?)+)$/ 
+                regex: /^(([a-zA-Z0-9]\.?)+)$/
             },
             user_sock: {
                 required: true
@@ -297,36 +317,36 @@ jQuery(document).ready(function(){
         messages: {
             emp_nome: {
                 required: "<?php echo $this->translate('The name is required.'); ?>",
-                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
                 maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only.'); ?>"  
+                lettersAndNumbersOnly: "<?php echo $this->translate('Please enter letters and numbers only.'); ?>"
             },
             ip_sock: {
                 required: "<?php echo $this->translate('The hostname is required.'); ?>",
-                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>", 
+                minlength: "<?php echo $this->translate('Please enter at least {0} characters.'); ?>",
                 maxlength: "<?php echo $this->translate('Please enter no more than {0} characters.'); ?>",
-                regex: "<?php echo $this->translate('Please enter with value valid.'); ?>" 
+                regex: "<?php echo $this->translate('Please enter with value valid.'); ?>"
             },
             user_sock: {
-                required: "<?php echo $this->translate('The username is required.'); ?>" 
+                required: "<?php echo $this->translate('The username is required.'); ?>"
             },
             pass_sock: {
-                required: "<?php echo $this->translate('The password is required.'); ?>" 
+                required: "<?php echo $this->translate('The password is required.'); ?>"
             },
             email: {
                 required: "<?php echo $this->translate('The email is required.'); ?>",
-                email: "<?php echo $this->translate('Your email address must be in the format of name@domain.com'); ?>" 
+                email: "<?php echo $this->translate('Your email address must be in the format of name@domain.com'); ?>"
             },
             linelimit: {
                 required: "<?php echo $this->translate('The linelimit is required.'); ?>",
-                numbersOnly: "<?php echo $this->translate('Please enter with numbers only.'); ?>" 
+                numbersOnly: "<?php echo $this->translate('Please enter with numbers only.'); ?>"
             },
             peers_digits: {
                 required: "<?php echo $this->translate('The peers_digits is required.'); ?>",
-                range: "<?php echo $this->translate('Please enter a value between 1 and 9.'); ?>" 
+                range: "<?php echo $this->translate('Please enter a value between 1 and 9.'); ?>"
             },
             path_voz: {
-                required: "<?php echo $this->translate('The Recorded Files Path is required.'); ?>" 
+                required: "<?php echo $this->translate('The Recorded Files Path is required.'); ?>"
             }
 
 
@@ -341,5 +361,5 @@ jQuery(document).ready(function(){
             .closest('.control-group').removeClass('error').addClass('success');
         }
     });
-}); 
+});
 </script>

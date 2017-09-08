@@ -24,7 +24,7 @@
  * @package   Snep
  * @copyright Copyright (c) 2011 OpenS Tecnologia
  * @author    Lucas Ivan Seidenfus
- * 
+ *
  */
 class Snep_InterfaceConf {
 
@@ -145,22 +145,27 @@ class Snep_InterfaceConf {
                             if ($trunk->domain != "" && $trunk->type == "SIP") {
                                 $peers .= 'domain=' . $trunk->domain . "\n";
                             }
-                            if ($trunk->type == "IAX2") {
-                                $peers .= 'trunk=' . $peer['trunk'] . "\n";
-                            }
-                            if ($trunk->reverse_auth) {
-                                $name_of_user = $trunk->type == "IAX2" ? 'username=' : 'defaultuser=';
-                                $peers .=  $name_of_user . $peer['defaultuser'] . "\n";
-                                $peers .= 'secret=' . $peer['secret'] . "\n";
-                            }
+                            // if ($trunk->type == "IAX2") {
+                            //     $peers .= 'trunk=' . $peer['trunk'] . "\n";
+                            // }
+
+                            $name_of_user = $trunk->type == "IAX2" ? 'username=' : 'defaultuser=';
+                            $peers .=  $name_of_user . $peer['defaultuser'] . "\n";
+                            $peers .= 'secret=' . $peer['secret'] . "\n";
+
                             $peers .= "\n";
                         }
                         if ($peer['port'] != "") {
-                            $trunk_port = ':' . $peer['port'] . "\n";
+                            $trunk_port = ':' . $peer['port'];
                         }
-                        $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "/" . $peer['defaultuser'] . "\n" : "");
-                        
- 
+                        if($trunk->reverse_auth && $trunk->type == 'IAX2'){
+                            $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "\n" : "");
+                        }else if($trunk->reverse_auth){
+                          $trunk_config .= ( $trunk->dialmethod != "NOAUTH" && !preg_match("/SNEP/", $trunk->type) ? "register => " . $peer['defaultuser'] . ":" . $peer['secret'] . "@" . $peer['host'] . $trunk_port . "/" . $peer['defaultuser'] . "\n" : "");
+                        }
+
+
+
                     // } elseif($tech != 'sip') {
                     }else{
                         /* Assemble Extension entries */
@@ -192,7 +197,7 @@ class Snep_InterfaceConf {
 
             file_put_contents($extenFileConf, $content);
         }
-        
+
         // Forcing asterisk to reload the configs
         $asteriskAmi = PBX_Asterisk_AMI::getInstance();
         $asteriskAmi->Command("sip reload");

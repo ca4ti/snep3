@@ -128,6 +128,7 @@ XML;
            $asterisk->set_variable("CALLERID(name)",$calleridnum['data']);
         }
         $asterisk->answer();
+        $asterisk->exec("UserEvent", array("QueueData", "queue: $queue_name", "options: $queue_options", "timeout: $queue_timeout"));
         $result = $asterisk->exec('Queue', array($this->config['queue'],$this->config['options'],'','',$this->config['timeout']));
         if($result['result'] == -1) {
             throw new PBX_Rule_Action_Exception_StopExecution();

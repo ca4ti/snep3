@@ -28,11 +28,11 @@ require_once 'Snep/Inspector.php';
  */
 class SoundFilesController extends Zend_Controller_Action {
 
-    public function init() { 
+    public function init() {
 
         $this->lang = Zend_Registry::get('config')->system->language;
         $this->path_sound = Zend_Registry::get('config')->system->path->asterisk->sounds;
-    
+
         $this->view->baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->view->key = Snep_Dashboard_Manager::getKey(
             Zend_Controller_Front::getInstance()->getRequest()->getModuleName(),
@@ -41,7 +41,7 @@ class SoundFilesController extends Zend_Controller_Action {
         $this->view->url = $this->getFrontController()->getBaseUrl() . "/" . $this->getRequest()->getControllerName();
         $this->view->lineNumber = Zend_Registry::get('config')->ambiente->linelimit;
     }
-    
+
     /**
      * indexAction - List all sound files
      */
@@ -58,7 +58,7 @@ class SoundFilesController extends Zend_Controller_Action {
                 ->order('arquivo');
 
         $stmt = $db->query($select);
-        $files = $stmt->fetchAll(); 
+        $files = $stmt->fetchAll();
 
         if(empty($files)){
             $this->view->error_message = $this->view->translate("You do not have registered sound files. <br><br> Click 'Add Sound File' to make the first registration
@@ -74,7 +74,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $this->view->files = $_files;
 
-        
+
     }
 
     /**
@@ -101,7 +101,7 @@ class SoundFilesController extends Zend_Controller_Action {
             // File Upload data
             $originalName = Snep_SoundFiles_Manager::parseName($_FILES['inputFile']['name']) ;
             $uploadName = $_FILES['inputFile']['tmp_name'];
-            
+
             $language =  ($this->lang === "en" ? $language = "" : $language = $this->lang) ;
 
             // Define files paths
@@ -111,7 +111,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
             // Verify file consistence
             $error = false ;
-            // Verify if file exists into db table 
+            // Verify if file exists into db table
             if (Snep_SoundFiles_Manager::get($originalName)) {
                 $this->view->error_message .= $this->view->translate("File already exists in database for this language.")."<br />";
                 $error = true;
@@ -129,8 +129,8 @@ class SoundFilesController extends Zend_Controller_Action {
             if (!$error) {
 
                 if (!move_uploaded_file($uploadName, $arq_tmp)) {
-                    $this->view->error_message = $this->view->translate('Unable to upload file.');  
-                    $this->renderScript('error/sneperror.phtml');           
+                    $this->view->error_message = $this->view->translate('Unable to upload file.');
+                    $this->renderScript('error/sneperror.phtml');
                 } else {
 
                     // Move from tmp to dst and/or Convert to GSM
@@ -145,9 +145,9 @@ class SoundFilesController extends Zend_Controller_Action {
                     }
                     if (!empty($result)) {
                         $this->view->error_message = $result;
-                        $this->renderScript('error/sneperror.phtml');       
+                        $this->renderScript('error/sneperror.phtml');
                     } else {
-                
+
                         // If upload ok, create table register and log
                         if (file_exists($arq_dst) || file_exists($fileNe)) {
                             Snep_SoundFiles_Manager::add(array('arquivo' => $originalName,
@@ -207,7 +207,7 @@ class SoundFilesController extends Zend_Controller_Action {
             // File Upload data
             $originalName = Snep_SoundFiles_Manager::parseName($_FILES['inputFile']['name']) ;
             $uploadName = $_FILES['inputFile']['tmp_name'];
-            
+
             $language =  ($this->lang === "en" ? $language = "" : $language = $this->lang) ;
 
             $arq_tmp  = $this->path_sound . "/" . $language . "/tmp/" . $originalName;
@@ -217,7 +217,7 @@ class SoundFilesController extends Zend_Controller_Action {
 
             // If change file, verify
             if ($uploadName) {
-                
+
                 if ( !Snep_SoundFiles_Manager::checkType(pathinfo($originalName,PATHINFO_EXTENSION)) ) {
                     $this->view->error_message = $this->view->translate("File extesion is invalid.");
                     $this->renderScript('error/sneperror.phtml');
@@ -225,13 +225,13 @@ class SoundFilesController extends Zend_Controller_Action {
 
                     // Move file and convert
                     if (move_uploaded_file($uploadName, $arq_tmp)) {
-                        $this->view->error_message = $this->view->translate('Unable to upload file.'); 
-                        $this->renderScript('error/sneperror.phtml'); 
+                        $this->view->error_message = $this->view->translate('Unable to upload file.');
+                        $this->renderScript('error/sneperror.phtml');
 
                         // Create backup
                         exec("cp " . $arq_dst   . " " . $arq_bkp,$result);
 
-                        // Move from tmp to dst and/or Convert to GSM 
+                        // Move from tmp to dst and/or Convert to GSM
                         if ($gsmConvert) {
                             $fileNe = $path_sound . '/' . $language . '/' . basename( $arq_dst, '.wav') . '.gsm';
                             exec("sox " . $arq_tmp. " -r 8000 {". $fileNe . "}", $result);
@@ -242,13 +242,13 @@ class SoundFilesController extends Zend_Controller_Action {
 
                         if (!empty($result)) {
                             $this->view->error_message = $result;
-                            $this->renderScript('error/sneperror.phtml'); 
+                            $this->renderScript('error/sneperror.phtml');
                         }
                     } // end move_uploaded_file()
                 } // end : check extension file
             } // end: upload new file
 
-            // Change register file 
+            // Change register file
 
             Snep_SoundFiles_Manager::edit($dados);
 
@@ -260,9 +260,9 @@ class SoundFilesController extends Zend_Controller_Action {
                 Snep_SoundFiles_Manager::insertLogSounds("UPDATE", $add);
             }
 
-         $this->_redirect($this->getRequest()->getControllerName());   
+         $this->_redirect($this->getRequest()->getControllerName());
         }
-    
+
     }
 
     /**
@@ -275,18 +275,18 @@ class SoundFilesController extends Zend_Controller_Action {
                     $this->view->translate("Delete")));
 
         $file = $this->_request->getParam('arquivo');
-        
+
         $this->view->id = $file;
-        $this->view->remove_title = $this->view->translate('Delete Sound Files.'); 
-        $this->view->remove_message = $this->view->translate('The sound files will be deleted. After that, you have no way get it back.'); 
-        $this->view->remove_form = 'sound-files'; 
+        $this->view->remove_title = $this->view->translate('Delete Sound Files.');
+        $this->view->remove_message = $this->view->translate('The sound files will be deleted. After that, you have no way get it back.');
+        $this->view->remove_form = 'sound-files';
         $this->renderScript('remove/remove.phtml');
 
         if ($this->_request->getPost()) {
 
             $id = $_POST['id'];
             Snep_SoundFiles_Manager::remove($id);
-            
+
             if ($file) {
                 if (class_exists("Loguser_Manager")) {
                     Snep_LogUser::salvaLog("Excluiu Arquivo de som", $id, 8);
@@ -295,7 +295,7 @@ class SoundFilesController extends Zend_Controller_Action {
                 }
 
                 $result = Snep_SoundFiles_Manager::verifySoundFiles($file, true);
-                
+
                 if ($result['fullpath']) {
                     try {
                         exec("rm -f {$result['fullpath']} ");
@@ -303,9 +303,9 @@ class SoundFilesController extends Zend_Controller_Action {
                         throw new ErrorException($this->view->translate("Unable to remove file"));
                     }
                 }
-                
+
             } else {
-                $this->view->error_message = $this->view->translate("File not found."); 
+                $this->view->error_message = $this->view->translate("File not found.");
                 $this->renderScript('error/sneperror.phtml');
             }
 
@@ -358,10 +358,10 @@ class SoundFilesController extends Zend_Controller_Action {
         $language =  $this->lang ;
         $pasteSounds = $this->path_sound .'/'.$language.'/';
         $listSounds = new DirectoryIterator($pasteSounds);
-        
+
         $list_sounds = array();
         foreach ($listSounds as $fileInfo) {
-            if($fileInfo->isDot()) 
+            if($fileInfo->isDot())
                 continue;
             $list_sounds[] = ($fileInfo->getFilename());
         }
@@ -420,18 +420,18 @@ class SoundFilesController extends Zend_Controller_Action {
         // After Post
         if ($this->_request->isPost()) {
 
-            
+
 
             foreach ($fileNotExist as $key => $file) {
                 Snep_SoundFiles_Manager::remove($file);
-                
+
             }
             foreach ($array_directory as $cont => $archive) {
                 Snep_SoundFiles_Manager::addSounds($archive);
             }
             $this->_redirect($this->getRequest()->getControllerName());
         }
-        
+
     }
 
 }

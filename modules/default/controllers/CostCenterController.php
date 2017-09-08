@@ -42,44 +42,44 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * List all Cost Center's
+     * List all Tag's
      */
     public function indexAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center")));
+                    $this->view->translate("Tag")));
 
-        
+
         $db = Zend_Registry::get('db');
         $select = $db->select()
                 ->from("ccustos", array("codigo", "tipo", "nome", "descricao"))
                 ->order("codigo");
 
         $stmt = $db->query($select);
-        $data = $stmt->fetchAll(); 
+        $data = $stmt->fetchAll();
 
         if(empty($data)){
             $this->view->error_message = $this->view->translate("You do not have registered cost centers. <br><br> Click 'Add cost center' to make the first registration
 ");
-            
-        }   
+
+        }
 
         $this->view->types = array(
             'E' => $this->view->translate('Incoming'),
             'S' => $this->view->translate('Outgoing'),
             'O' => $this->view->translate('Other'));
-        
+
         $this->view->costcenter = $data;
 
     }
 
     /**
-     * Add new Cost Center's
+     * Add new Tag's
      */
     public function addAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Add")));
 
         //Define the action and load form
@@ -96,20 +96,22 @@ class CostCenterController extends Zend_Controller_Action {
 
             if (count($newId) > 1) {
                 $form_isValid = false;
-                $this->view->error_message = $this->view->translate("Code already exists."); 
+                $this->view->error_message = $this->view->translate("Code already exists.");
                 $this->renderScript('error/sneperror.phtml');
             }
 
             if ($form_isValid) {
-                
+
                 Snep_CostCenter_Manager::add($dados);
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    $id = $dados["id"];
-                    Snep_LogUser::salvaLog("Adicionou Centro de Custos", $id, 6);
-                    $add = Snep_CostCenter_Manager::get($id);
-                    Snep_CostCenter_Manager::insertLogCcustos("ADD", $add);
+                    $loguser = array(
+                      'table' => 'ccustos',
+                      'registerid' => $dados['id'],
+                      'description' => "Added New Tag - {$dados['id']} - {$dados['name']}"
+                    );
+                    Snep_LogUser::log("add", $loguser);
                 }
                 $this->_redirect($this->getRequest()->getControllerName());
             }
@@ -117,17 +119,17 @@ class CostCenterController extends Zend_Controller_Action {
     }
 
     /**
-     * Edit Cost Center's
+     * Edit Tag's
      */
     public function editAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Edit")));
 
         $id = $this->_request->getParam('id');
         $costCenter = Snep_CostCenter_Manager::get($id);
-        
+
         $this->view->E = "";
         $this->view->S = "";
         $this->view->O = "";
@@ -156,24 +158,28 @@ class CostCenterController extends Zend_Controller_Action {
 
                 Snep_CostCenter_Manager::edit($dados);
 
+                //log-user
                 if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvaLog("Editou Centro de Custos", $id, 6);
-                    $add = Snep_CostCenter_Manager::get($id);
-                    Snep_CostCenter_Manager::insertLogCcustos("NEW", $add);
+                    $loguser = array(
+                      'table' => 'ccustos',
+                      'registerid' => $dados['id'],
+                      'description' => "Edited Tag - {$dados['id']} - {$dados['name']}"
+                    );
+                    Snep_LogUser::log("update", $loguser);
                 }
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
-        
+
     }
 
     /**
-     * Remove Cost Center's
+     * Remove Tag's
      */
     public function removeAction() {
 
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Cost Center"),
+                    $this->view->translate("Tag"),
                     $this->view->translate("Delete")));
 
         $id = $this->_request->getParam('id');
@@ -182,25 +188,28 @@ class CostCenterController extends Zend_Controller_Action {
 
         if($cdr_data){
 
-            $this->view->error_message = $this->view->translate("You have data connections with this cost center, so this exclusion is not permitted."); 
+            $this->view->error_message = $this->view->translate("You have data connections with this cost center, so this exclusion is not permitted.");
             $this->renderScript('error/sneperror.phtml');
 
         }else{
 
             $this->view->id = $id;
-            $this->view->remove_title = $this->view->translate('Delete Cost Center.'); 
-            $this->view->remove_message = $this->view->translate('The cost center will be deleted. After that, you have no way get it back.'); 
-            $this->view->remove_form = 'cost-center'; 
+            $this->view->remove_title = $this->view->translate('Delete Tag.');
+            $this->view->remove_message = $this->view->translate('The cost center will be deleted. After that, you have no way get it back.');
+            $this->view->remove_form = 'cost-center';
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-
-                    Snep_LogUser::salvaLog("Excluiu Centro de Custos", $_POST['id'], 6);
-                    $add = Snep_CostCenter_Manager::get($_POST['id']);
-                    Snep_CostCenter_Manager::insertLogCcustos("DEL", $add);
+                    $data = Snep_CostCenter_Manager::get($id);
+                    $loguser = array(
+                      'table' => 'ccustos',
+                      'registerid' => $id,
+                      'description' => "Deleted Tag - {$id} - {$data['nome']}"
+                    );
+                    Snep_LogUser::log("delete", $loguser);
                 }
                 Snep_CostCenter_Manager::remove($_POST['id']);
                 $this->_redirect($this->getRequest()->getControllerName());

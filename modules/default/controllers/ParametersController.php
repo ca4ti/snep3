@@ -60,22 +60,28 @@ class ParametersController extends Zend_Controller_Action {
             $this->view->error_message = $this->view->translate("The File includes/setup.conf does not have permission to be modified.");
             $this->renderScript('error/sneperror.phtml');
         }
-        
-        
+
+
         $this->view->config = $config;
-        
+
         $this->view->debug = false;
-        $this->view->hide_routes = false;    
+        $this->view->hide_routes = false;
         if($config->system->debug == "1"){
             $this->view->debug = true;
         }
+        $this->view->show_help = false;
+        if($config->system->show_help === "true" || $config->system->show_help === true){
+            $this->view->show_help = true;
+        }
+
         if($config->system->hide_routes == "1"){
             $this->view->hide_routes = true;
         }
-
+        
         $old_param = array();
         $old_param["emp_nome"] = $config->ambiente->emp_nome;
         $old_param["debug"] = $config->system->debug;
+        $old_param["show_help"] = $config->system->show_help;
         $old_param["hide_routes"] = $config->system->hide_routes;
         $old_param["ip_sock"] = $config->ambiente->ip_sock;
         $old_param["user_sock"] = $config->ambiente->user_sock;
@@ -88,8 +94,8 @@ class ParametersController extends Zend_Controller_Action {
         $old_param["db.username"] = $config->ambiente->db->username;
         $old_param["db.password"] = $config->ambiente->db->password;
 
-        
-        $conference[$config->ambiente->conference_app] = ""; 
+
+        $conference[$config->ambiente->conference_app] = "";
         if(isset($conference['C'])){
             $conference['C'] = "Conference";
             $conference['M'] = "Meetme";
@@ -97,7 +103,7 @@ class ParametersController extends Zend_Controller_Action {
             $conference['M'] = "Meetme";
             $conference['C'] = "Conference";
         }
-        
+
         $this->view->conference = $conference;
 
         $old_param["conference_app"] = $config->ambiente->conference_app;
@@ -108,8 +114,8 @@ class ParametersController extends Zend_Controller_Action {
             $locales[$country] = $locale->getLocaleToTerritory($ccode);
         }
         ksort($locales, SORT_LOCALE_STRING);
-        
-        $localeDefault = $config->system->locale; 
+
+        $localeDefault = $config->system->locale;
         foreach($locales as $x => $default){
             if($default == $localeDefault){
                 $localeAll[$x] = $localeDefault;
@@ -117,29 +123,29 @@ class ParametersController extends Zend_Controller_Action {
         }
 
         foreach($locales as $key => $locale){
-            
+
             if($localeDefault != $locale){
                 $localeAll[$key] = $locale;
             }else{
                 $localeAll[$localeDefault] = $locale;
             }
         }
-         
+
         $this->view->locales = $localeAll;
 
         $locale = Snep_Locale::getInstance()->getZendLocale();
-     
+
         foreach ($locale->getTranslationList("territorytotimezone", Snep_Locale::getInstance()->getLanguage()) as $timezone => $territory) {
-            $timezones[$timezone] = $timezone;    
+            $timezones[$timezone] = $timezone;
         }
 
         array_unshift($timezones, $config->system->timezone);
         $this->view->timezones = $timezones;
 
         $available_languages = Snep_Locale::getInstance()->getAvailableLanguages();
-      
+
         foreach ($locale->getTranslationList("language", Snep_Locale::getInstance()->getLanguage()) as $lcode => $language) {
-        
+
             if (in_array($lcode, $available_languages)) {
                 $languages[$lcode] = $language;
             }
@@ -152,11 +158,11 @@ class ParametersController extends Zend_Controller_Action {
                 $languageAll[$key] = $language;
             }
         }
-        
+
         foreach($languages as $key => $language){
             $languageAll[$key] = $language;
         }
-  
+
         $this->view->languages = $languageAll;
 
         $this->view->mixmonitor = "";
@@ -167,7 +173,7 @@ class ParametersController extends Zend_Controller_Action {
 
         $old_param["application"] = $config->general->record->application;
         $old_param["flag"] = $config->general->record->flag;
-        
+
         $this->view->true = "";
         $this->view->false = "";
 
@@ -182,7 +188,7 @@ class ParametersController extends Zend_Controller_Action {
 
             $formData = $this->getRequest()->getParams();
 
-            // Get country code 
+            // Get country code
             $db = Snep_Db::getInstance();
             $country_code = $db->query("select id from core_cnl_country where locale='".$formData['language']."'")->fetch();
 
@@ -192,12 +198,17 @@ class ParametersController extends Zend_Controller_Action {
             $config->ambiente->emp_nome = $formData['emp_nome'];
 
             if($formData['debug'] == 'on'){
-                $config->system->debug = 1;    
+                $config->system->debug = 1;
             }else{
                 $config->system->debug = 0;
             }
+            if($formData['show_help'] == 'on'){
+                $config->system->show_help = "true";
+            }else{
+                $config->system->show_help = "false";
+            }
             if($formData['hide_routes'] == 'on'){
-                $config->system->hide_routes = 1;    
+                $config->system->hide_routes = 1;
             }else{
                 $config->system->hide_routes = 0;
             }
@@ -223,6 +234,7 @@ class ParametersController extends Zend_Controller_Action {
             $config->general->record->application = $formData['application'];
             $config->general->record->flag = $formData['flag'];
             $config->general->record_mp3 = $formData['record_mp3'];
+            $config->general->record->format = $formData['record_format'];
 
             $config->ambiente->path_voz = $formData['path_voz'];
             $config->ambiente->path_voz_bkp = $formData['path_voz_bkp'];
@@ -233,17 +245,16 @@ class ParametersController extends Zend_Controller_Action {
                 'filename' => $configFile));
 
             $writer->write();
-
             Snep_Locale::setExtensionsLanguage($formData['language']) ;
 
             // redirect
             $this->_redirect('/');
         }
-        
+
     }
 
     /**
-     * languageAction - Modify language 
+     * languageAction - Modify language
      */
     public function languageAction() {
 
@@ -260,6 +271,6 @@ class ParametersController extends Zend_Controller_Action {
         $this->_redirect($module);
     }
 
-    
+
 
 }

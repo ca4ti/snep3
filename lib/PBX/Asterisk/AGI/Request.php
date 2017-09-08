@@ -119,6 +119,10 @@ class PBX_Asterisk_AGI_Request extends Asterisk_AGI_Request {
         // de TECH/ID-HASH para TECH/ID
         $channel = strpos($channel, '-') ? substr($channel, 0, strpos($channel, '-')) : $channel;
 
+        if ("Local/0000" === substr("$channel", 0, 10)) {
+          $channel = "SIP/".substr("$channel", 10,4);
+        }
+
         $object = PBX_Interfaces::getChannelOwner($channel);
 
         if ($object instanceof Snep_Trunk && $object->allowExtensionMapping()) {

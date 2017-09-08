@@ -16,7 +16,7 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $this->translate('By Type of Cost Center')?>
+                <?php echo $this->translate('By Type of Tag')?>
             </div>
 
             <div id="piechart2" style="height: 300px;"></div>
@@ -75,7 +75,7 @@
   function drawChartType() {
 
     var data = google.visualization.arrayToDataTable([
-      ['<?php echo $this->translate("Cost Center"); ?>', '<?php echo $this->translate("Quantity"); ?>'],
+      ['<?php echo $this->translate("Tag"); ?>', '<?php echo $this->translate("Quantity"); ?>'],
       ['<?php echo $this->translate("Incoming"); ?>', <?php echo $this->type->E ?>],
       ['<?php echo $this->translate("Outgoing"); ?>', <?php echo $this->type->S ?>],
       ['<?php echo $this->translate("Other"); ?>',  <?php echo $this->type->O ?>]

@@ -28,7 +28,7 @@ require_once 'includes/functions.php';;
  * @copyright Copyright (c) 2013 OpenS Tecnologia
  */
 class SystemstatusController extends Zend_Controller_Action {
-    
+
 
     private $systemInfo = array();
     private $sysInfo = array() ;
@@ -40,15 +40,17 @@ class SystemstatusController extends Zend_Controller_Action {
 
         //Disables layout so jQuery .get() can call pure HTML at the index page.
         $this->_helper->layout()->disableLayout();
-        
+
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
         $this->view->breadcrumb = $this->view->translate("Welcome to Snep, ") . $username ;
 
         $db = Zend_Registry::get('db');
 
-		$serverport = $_SERVER['SERVER_PORT'] ;
-		$linfoData = new Zend_Http_Client('http://localhost:'.$serverport . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
+        $tdmboards = $this->CloudNotice();
+
+    		$serverport = $_SERVER['SERVER_PORT'] ;
+    		$linfoData = new Zend_Http_Client('http://localhost:'.$serverport . str_replace("/index.php", "", $this->getFrontController()->getBaseUrl()) . '/lib/linfo/index.php?out=xml');
 
         try {
             $linfoData->request();
@@ -57,11 +59,11 @@ class SystemstatusController extends Zend_Controller_Action {
         } catch (HttpException $ex) {
             echo $ex;
         }
-          
+
         // Server uptime
 
         $uptimeRaw = (array)$this->sysInfo->core->uptime;
-        
+
         //$uptimeRaw = explode(",", $uptimeRaw[0]);
         $uptimeRaw = explode(";", $uptimeRaw[0]);
         $uptimeRaw = $uptimeRaw[0];
@@ -70,16 +72,23 @@ class SystemstatusController extends Zend_Controller_Action {
         foreach ($search as $key => $value) {
             array_push($replace,$this->view->translate($value));
         }
-        
+
         $uptimeRaw = str_replace($search,$replace,$uptimeRaw);
-       
+
         $this->systemInfo['uptime'] = $uptimeRaw;
+
 
         // Mysql
         $this->systemInfo['mysql'] = trim(exec("mysql -V | awk -F, '{ print $1 }' | awk -F'mysql' '{ print $2 }'"));
 
+        //Versao do S.O
         if (file_exists("/etc/slackware-version")) {
             exec("cat /etc/slackware-version", $linuxVer);
+            $this->systemInfo['linux_ver'] = $linuxVer[0];
+        }
+
+        if (file_exists("/etc/redhat-release")) {
+            exec("cat /etc/redhat-release", $linuxVer);
             $this->systemInfo['linux_ver'] = $linuxVer[0];
         } else {
             exec("cat /etc/issue", $linuxVer);
@@ -88,7 +97,7 @@ class SystemstatusController extends Zend_Controller_Action {
 
         // Kernel
         $this->systemInfo['linux_kernel'] = exec("uname -sr");
-        
+
         // Installed Modules
         $this->systemInfo['modules'] = array();
         $modules = Snep_Modules::getInstance()->getRegisteredModules();
@@ -113,10 +122,10 @@ class SystemstatusController extends Zend_Controller_Action {
         $this->statusbar_info();
         $this->view->indexData = $this->systemInfo ;
     }
-    
+
     /**
      * statusbar
-     * 
+     *
      * @return array
      */
     public function statusbar_info () {
@@ -126,7 +135,7 @@ class SystemstatusController extends Zend_Controller_Action {
             $astVersionRaw = explode('@', $astinfo->status_asterisk("core show version", "", True));
             preg_match('/Asterisk (.*) built/', $astVersionRaw[0], $astVersion);
         } catch (Exception $e) {
-            
+
         }
         if (isset($astVersion[1])) {
             $this->systemInfo['asterisk'] = "Asterisk - " . $astVersion[1];
@@ -136,7 +145,7 @@ class SystemstatusController extends Zend_Controller_Action {
 
 		// Snep version
         $config = Zend_Registry::get('config');
-		$this->systemInfo['snep'] = exec('cat '.$config->system->path->base.'/configs/snep_version'); 
+		$this->systemInfo['snep'] = exec('cat '.$config->system->path->base.'/configs/snep_version');
 
         //CPU Info
         $hard1 = exec("cat /proc/cpuinfo | grep name |  awk -F: '{print $2}'");
@@ -185,16 +194,16 @@ class SystemstatusController extends Zend_Controller_Action {
         $repeat = array();
         $cont = 0;
         foreach($this->sys_fsinfo() as $key => $partition){
-            
+
             // verifica valores duplicados de disco
-            isset($repeat[$partition['mount_point']]) ? $repeat[$partition['mount_point']] += 1 : $repeat[$partition['mount_point']] = 1; 
-            
+            isset($repeat[$partition['mount_point']]) ? $repeat[$partition['mount_point']] += 1 : $repeat[$partition['mount_point']] = 1;
+
             foreach($repeat as $x => $value){
                 if($partition['mount_point'] == $x && $value == 1){
                     $this->systemInfo['space'][$cont] = $partition;
                     $cont++;
                 }
-            }  
+            }
         }
     }
 
@@ -278,7 +287,7 @@ class SystemstatusController extends Zend_Controller_Action {
             next($path);
         }
     }
-    
+
     /**
      * sys_meminfo - information of system
      * @return type
@@ -336,5 +345,103 @@ class SystemstatusController extends Zend_Controller_Action {
         return $results;
     }
 
-}
+    private function CloudNotice(){
+        // TDM Board inspect
+        $db = Zend_Registry::get('db');
+        $asterisk = PBX_Asterisk_AMI::getInstance();
+        $tdm = array();
+        $tdm['tdm'] = array();
 
+        // Khomp Boards
+        $khomp = $asterisk->Command('khomp summary concise');
+        $tdmkhomp = str_replace("<K> ","",str_getcsv($khomp['data'],"\n"));
+        $tdm['tdm']['khomp'] = array("boards"=>array(), "conf"=>array());
+        if(count($tdmkhomp) > 2){
+                foreach($tdmkhomp as $row => $item){
+                   if($row > 2){
+                      $line = str_getcsv($item,";");
+                      $board = array(
+                         "board"    => $line[0],
+                         "desc"     => $line[1],
+                         "serial"   => $line[2],
+                         "channels" => $line[3],
+                         "mac"      => $line[4],
+                         "ip"       => $line[5],
+                         "status"   => $line[6]
+                      );
+                      array_push($tdm['tdm']['khomp']['boards'],$board);
+                   }else if($row > 0){
+                      array_push($tdm['tdm']['khomp']['conf'],$item);
+                   }
+                }
+        }
+        // End Khomp Boards
+
+        // Dahdi Boards
+        $dahdi = $asterisk->Command('dahdi show status');
+        $tdmdahdi = str_getcsv($dahdi['data'],"\n");
+        $tdm['tdm']['dahdi'] = array("boards"=>array());
+        if(count($tdmdahdi) > 0){
+                foreach($tdmdahdi as $row => $item){
+                   if($row > 1){
+                      preg_match("/([a-zA-Z0-9_-]+)\s+.+(Card\s[0-9]).+(Span\s[0-9])\s+([A-Za-z]+)/", $item, $line);
+                      if($line[2] != null){
+                        $board = array(
+                           "board"    => $line[2],
+                           "desc"     => $line[1],
+                           "span"     => $line[3],
+                           "status"   => $line[4]
+                        );
+                        array_push($tdm['tdm']['dahdi']['boards'],$board);                        
+                      }
+
+                   }
+                }
+        }
+        // End Dahdi Boards
+
+
+
+        //$tdm['session'] = $_SESSION;
+        $disk = self::sys_fsinfo();
+        $tdm['os'] = array(
+          "memory" => self::sys_meminfo()['ram']['total'],
+          "disk" => $disk
+        );
+
+        $ast_v = $asterisk->Command('core show version');
+        $asterisk_version = str_getcsv($ast_v['data'],"\n")[1];
+
+        $slt = $db->select()->from('peers')->where('peer_type = ?', 'R');
+        $peers = $db->query($slt)->fetchAll();
+
+        $slt = $db->select()->from('peers')->where('peer_type = ?', 'T');
+        $trunks = $db->query($slt)->fetchAll();
+
+        $slt = $db->select()->from('queues');
+        $queues = $db->query($slt)->fetchAll();
+
+        $tdm['asterisk'] = array(
+          "version" => $asterisk_version,
+          "peers" => count($peers),
+          "trunks" => count($trunks),
+          "queues" => count($queues)
+        );
+
+        $configs = Snep_Config::getConfiguration('default','host_inspect');
+
+        if($configs['config_value']){
+          $tdm['timeout'] = 3;
+          $ctx = Snep_Request::http_context($tdm);
+          $request = Snep_Request::send_request("{$configs['config_value']}/snep/host/info/{$_SESSION['uuid']}",$ctx);
+          if($request['response_code'] == 401){
+            $ctx = Snep_Request::http_context($tdm,"PUT");
+            $put_request = Snep_Request::send_request("{$configs['config_value']}/snep/host/info/{$_SESSION['uuid']}",$ctx);
+          }
+        }
+        // TDM Board inspection end
+
+    }
+
+
+}

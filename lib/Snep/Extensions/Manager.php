@@ -26,16 +26,16 @@
  * @package   Snep
  * @copyright Copyright (c) 2014 OpenS Tecnologia
  * @author    Tiago Zimmermann <tiago.zimmermann@opens.com.br>
- * 
+ *
  */
 class Snep_Extensions_Manager {
 
     public function __construct() {
-        
+
     }
 
     /**
-     * getValidation - checks if the exten is used in the rule 
+     * getValidation - checks if the exten is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -55,7 +55,7 @@ class Snep_Extensions_Manager {
     }
 
     /**
-     * getValidation - checks if the exten is used in the rule 
+     * getValidation - checks if the exten is used in the rule
      * @param <int> $id
      * @return <array>
      */
@@ -87,32 +87,6 @@ class Snep_Extensions_Manager {
         $peer = $stmt->fetch();
 
         return $peer;
-    }
-
-    /**
-     * insertLogRamal - insere na tabela logs_users os dados dos ramais
-     * @global <int> $id_user
-     * @param <array> $add
-     */
-    function insertLogRamal($acao, $add) {
-
-        $db = Zend_Registry::get("db");
-
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $auth = Zend_Auth::getInstance();
-        $username = $auth->getIdentity();
-
-        $insert_data = array('hora' => date('Y-m-d H:i:s'),
-            'ip' => $ip,
-            'idusuario' => $username,
-            'cod' => $add["name"],
-            'param1' => $add["canal"],
-            'param2' => $add["allow"],
-            'param3' => $add["dtmfmode"],
-            'value' => "Ramal",
-            'tipo' => $acao);
-
-        $db->insert('logs_users', $insert_data);
     }
 
     /**
@@ -151,7 +125,7 @@ class Snep_Extensions_Manager {
         }
     }
     /**
-     * Method to get all Peers 
+     * Method to get all Peers
      * @return Array
      */
     public function getAll() {
@@ -168,7 +142,7 @@ class Snep_Extensions_Manager {
         $extensions = $stmt->fetchall();
 
         // Append all groups in a single string
-        $exten_groups = array(); 
+        $exten_groups = array();
         foreach ($extensions as $key => $value) {
             if (!isset($exten_groups[$value['id']])) {
                 $exten_groups[$value['id']] =  $value['group_name'] ;

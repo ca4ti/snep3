@@ -101,7 +101,7 @@ class RouteController extends Zend_Controller_Action {
      * indexAction - List all Routes of the system
      */
     public function indexAction() {
-        
+
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Routes")));
 
@@ -117,7 +117,7 @@ class RouteController extends Zend_Controller_Action {
         }else{
             $select = $db->select()->from("regras_negocio");
         }
-        
+
         if ($hide_routes === "1") {
             $select->where("ativa = '1'");
         }
@@ -145,8 +145,8 @@ class RouteController extends Zend_Controller_Action {
         $this->view->lineNumber = $lineNumber;
         $this->view->hide_routes = $hide_routes;
         $this->view->url = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getControllerName()}";
-        
-        
+
+
     }
 
     /**
@@ -177,8 +177,12 @@ class RouteController extends Zend_Controller_Action {
             $dst->setOrder(2);
             $form->addElement($dst);
 
+            $dates = new Snep_Form_Element_Html("route/elements/dates.phtml", "dates", false);
+            $dates->setOrder(4);
+            $form->addElement($dates);
+
             $time = new Snep_Form_Element_Html("route/elements/time.phtml", "time", false);
-            $time->setOrder(4);
+            $time->setOrder(5);
             //$time->setLabel($this->view->translate("Valid times"));
             $form->addElement($time);
 
@@ -186,17 +190,25 @@ class RouteController extends Zend_Controller_Action {
 
             $this->form = $form;
 
-           
+
             $groups = Snep_ExtensionsGroups_Manager::getAll();
             $group_list = "";
             $group_list .= "[\"all\", \"{$this->view->translate('All')}\"],";
             foreach ($groups as $group) {
                 $group_list .= "[\"{$group['id']}\", \"{$group['name']}\"],";
             }
-            
+
             $group_list = "[" . trim($group_list, ",") . "]";
 
             $this->view->group_list = $group_list;
+
+            $dates_list = "";
+            $aliases = PBX_DatesAliases::getInstance();
+            foreach ($aliases->getAll() as $dates) {
+                $dates_list .= "[\"{$dates['id']}\", \"{$dates['name']}\"],";
+            }
+            $dates_list = "[" . trim($dates_list, ",") . "]";
+            $this->view->dates_list = $dates_list;
 
             $alias_list = "";
             foreach (PBX_ExpressionAliases::getInstance()->getAll() as $alias) {
@@ -240,22 +252,26 @@ class RouteController extends Zend_Controller_Action {
 
 
         if ($this->getRequest()->isPost()) {
-            
+
             if ($this->isValidPost()) {
 
                 $rule = $this->parseRuleFromPost();
 
                 PBX_Rules::register($rule);
-                
+
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvalog("Adicionou Regra", $rule->getId(), 1);
-                    $add = Snep_Route::getRegra($rule->getId());
-                    Snep_Route::insertLogRegra("Adicionou Regra", $add);
+                    $id = $rule->getId();
+                    $data = array(
+                      'table' => 'regras_negocio',
+                      'registerid' => $id,
+                      'description' => "Added Rule $id - {$_POST['desc']}"
+                    );
+                    Snep_LogUser::log("add", $data);
                 }
 
                 $this->_redirect("route");
-                
+
             } else {
                 $actions = "";
                 foreach ($this->forms as $id => $form) {
@@ -275,13 +291,14 @@ class RouteController extends Zend_Controller_Action {
                 $this->populateFromRule($rule);
             }
         } else {
-            $this->view->dt_agirules = array(
-                "dst" => "dstObj.addItem();\n",
-                "src" => "origObj.addItem();\n",
-                "time" => "timeObj.addItem();\n",
-            );
+              $this->view->dt_agirules = array(
+                  "dst" => "dstObj.addItem();\n",
+                  "src" => "origObj.addItem();\n",
+                  "dates" => "datesObj.addItem();\n",
+                  "time" => "timeObj.addItem();\n",
+              );
         }
-        
+
         $this->renderScript('route/add_edit.phtml');
     }
 
@@ -309,7 +326,12 @@ class RouteController extends Zend_Controller_Action {
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvalog("Editou Regra", $rule->getId(), 1);
+                  $data = array(
+                    'table' => 'regras_negocio',
+                    'registerid' => $id,
+                    'description' => "Edited Rule $id - {$_POST['desc']}"
+                  );
+                  Snep_LogUser::log("update", $data);
                 }
 
                 $new_rule = $this->parseRuleFromPost();
@@ -370,10 +392,12 @@ class RouteController extends Zend_Controller_Action {
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvalog("Duplicou Regra", $rule->getId(), 1);
-                    $lastId = Snep_Route::getLastId();
-                    $dpl = Snep_Route::getRegra($lastId);
-                    Snep_Route::insertLogRegra("Duplicou Regra", $dpl);
+                  $data = array(
+                    'table' => 'regras_negocio',
+                    'registerid' => $id,
+                    'description' => "Duplicated Rule $id - {$_POST['desc']}"
+                  );
+                  Snep_LogUser::log("duplicate", $data);
                 }
 
                 $this->_redirect("route");
@@ -482,6 +506,12 @@ class RouteController extends Zend_Controller_Action {
             $dst .= "dstObj.widgets[$index].value='{$_dst['value']}';\n";
         }
 
+        $datesList = $rule->getValidDatesList();
+        $dates = "datesObj.addItem(" . count($datesList) . ");";
+        foreach ($datesList as $index => $_date) {
+            $dates .= "datesObj.widgets[$index].value='{$_date}';\n";
+        }
+
         $timeList = $rule->getValidTimeList();
         $time = "timeObj.addItem(" . count($timeList) . ");";
         foreach ($timeList as $index => $_time) {
@@ -497,6 +527,7 @@ class RouteController extends Zend_Controller_Action {
         $this->view->dt_agirules = array(
             "dst" => $dst,
             "src" => $src,
+            "dates" => $dates,
             "time" => $time
         );
 
@@ -519,7 +550,7 @@ class RouteController extends Zend_Controller_Action {
     protected function parseRuleFromPost($post = null) {
 
         $post = $post === null ? $_POST : $post;
-        
+
         $rule = new PBX_Rule();
 
         // Adicionando dias da semana
@@ -575,6 +606,12 @@ class RouteController extends Zend_Controller_Action {
             }
         }
 
+        // Adding dates list
+        $rule->cleanValidDatesList();
+        foreach (explode(',', $post['datesValue']) as $dates_list) {
+            $rule->addValidDates($dates_list);
+        }
+
         // Adding time
         $rule->cleanValidTimeList();
         foreach (explode(',', $post['timeValue']) as $time_period) {
@@ -621,21 +658,25 @@ class RouteController extends Zend_Controller_Action {
         $id = $this->_request->getParam('id');
 
         $this->view->id = $id;
-        $this->view->remove_title = $this->view->translate('Delete Routes.'); 
-        $this->view->remove_message = $this->view->translate('The route will be deleted. After that, you have no way get it back.'); 
-        $this->view->remove_form = 'route'; 
+        $this->view->remove_title = $this->view->translate('Delete Routes.');
+        $this->view->remove_message = $this->view->translate('The route will be deleted. After that, you have no way get it back.');
+        $this->view->remove_form = 'route';
         $this->renderScript('remove/remove.phtml');
 
         if($this->_request->getPost()) {
-          
+
             $del = Snep_Route::getRegra($_POST['id']);
-            
+
             PBX_Rules::delete($_POST['id']);
 
             //log-user
             if (class_exists("Loguser_Manager")) {
-                Snep_LogUser::salvalog("Excluiu Regra", $_POST['id'], 1);
-                Snep_Route::insertLogRegra("Excluiu Regra", $del);
+              $data = array(
+                'table' => 'regras_negocio',
+                'registerid' => $_POST['id'],
+                'description' => "Deleted Rule {$_POST['id']} - {$del['desc']}"
+              );
+              Snep_LogUser::log("delete", $data);
             }
 
             $this->_redirect("route");

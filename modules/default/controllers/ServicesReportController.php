@@ -71,7 +71,7 @@ class ServicesReportController extends Zend_Controller_Action {
             $this->viewAction();
 
         }
-        
+
     }
 
     /**
@@ -87,7 +87,7 @@ class ServicesReportController extends Zend_Controller_Action {
                             $this->view->translate("Reports"),
                             $this->view->translate("Services Use"),
                             $formData['init_day'] . ' - ' . $formData['till_day']));
-        
+
         // Check Bond
         $auth = Zend_Auth::getInstance();
         $username = $auth->getIdentity();
@@ -97,7 +97,7 @@ class ServicesReportController extends Zend_Controller_Action {
 
         // Binds
         if($user['id'] != '1'){
-        
+
             $binds = Snep_Binds_Manager::getBond($user['id']);
 
             if($binds){
@@ -109,7 +109,7 @@ class ServicesReportController extends Zend_Controller_Action {
 
                 $param['clausule'] = $clausule;
                 $param['clausulepeer'] = substr($clausulepeer, 0,-1);
-            }  
+            }
         }
 
         if(!isset($formData['serv_select'])){
@@ -141,21 +141,24 @@ class ServicesReportController extends Zend_Controller_Action {
         $service_url = $url.$link;
 
         $this->view->service_url = $service_url;
-        
+
         $http = curl_init($service_url);
         $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-        
+
         curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-        
+        curl_setopt($http, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
+        $digest = Snep_Usuario::decrypt($_SESSION['http_authorization'], $_SESSION['ENCRYPTION_KEY']);
+        curl_setopt($http, CURLOPT_USERPWD, "$digest");
+
         $http_response = curl_exec($http);
         $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-        
+
         curl_close($http);
 
         switch ($httpcode) {
             case 200:
                 $data = json_decode($http_response);
-        
+
 
                 if($data->status === 'empty' || $data->status === 'fail'){
                     $this->view->error_message = $this->view->translate($data->message);
@@ -168,7 +171,7 @@ class ServicesReportController extends Zend_Controller_Action {
                     $this->view->lineNumber = $line_limit;
                     $this->renderScript('services-report/view.phtml');
                 }
-                
+
             break;
             default:
                 $erro = $this->view->translate("Error "). $httpcode;
@@ -208,24 +211,24 @@ class ServicesReportController extends Zend_Controller_Action {
                             $this->view->translate('Status'));
 
             $output = implode(",", $header) . "\n";
-                
+
             while ($dado = $stmt->fetch()) {
-                
+
                 $indexes = null;
                 $values = null;
-                
+
                 $indexes = array_keys($dado);
                 $values .= preg_replace("/(\r|\n)+/", "", implode(",", $dado));
                 $values .= "\n";
                 $output .= $values;
             }
-            
+
             if ($output) {
-                
+
                 $this->_helper->layout->disableLayout();
                 $this->_helper->viewRenderer->setNoRender();
-                
-                
+
+
                 $csvData = $output;
 
                 $dateNow = new Zend_Date();
@@ -240,13 +243,13 @@ class ServicesReportController extends Zend_Controller_Action {
                 $this->renderScript('error/sneperror.phtml');
             }
         } else {
-            
+
             $ie = new Snep_CsvIE();
             $this->view->form = $ie->exportResultReport($_SESSION[$user['name']]['service_report']['selectcount']);
             $this->view->title = "Export";
             $this->render('export');
         }
-        
+
     }
 
 }

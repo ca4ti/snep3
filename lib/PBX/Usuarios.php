@@ -84,15 +84,15 @@ class PBX_Usuarios {
         }
 
         $user = new Snep_Exten($usuario->name, $usuario->password, $usuario->callerid, $interface);
-	
+
 
         //$user->setGroup($usuario->group);
 
-        if ($usuario->authenticate === 1) {
+        if ($usuario->authenticate) {
             $user->lock();
         }
 
-        if ($usuario->dnd === 1) {
+        if ($usuario->dnd) {
             $user->DNDEnable();
         }
 
@@ -156,7 +156,7 @@ class PBX_Usuarios {
     }
 
     /**
-     * hasGroupInheritance - Verifica se um grupo sofre herança de outro. 
+     * hasGroupInheritance - Verifica se um grupo sofre herança de outro.
      * Se um grupo é filho de outro.
      * A forma mais fácil que encontrei de fazer essa checagem é criar uma
      * instancia do Zend_Acl e colocar as informações todas lá e fazer uma
@@ -202,7 +202,7 @@ class PBX_Usuarios {
 
         $stmt = $db->query($select);
         return  $stmt->fetchAll();
-        
+
     }
 
 }

@@ -48,10 +48,9 @@
                                     switch ($form['type']) {
                                         case 'text':  //form in input text ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
                                                 <div class="col-sm-6">
-
                                                     <?php if(isset($form["value"])){ ?>
                                                         <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" />
                                                     <?php }else{ ?>
@@ -64,7 +63,7 @@
 
                                          case 'text_ro':  //form in input text read only ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control" placeholder="<?php echo $form['placeholder'];?>" name=<?php echo $form['key']; ?> value="<?php echo $form['value']; ?>" id=<?php echo $form['key']; ?> readonly />
@@ -75,7 +74,7 @@
 
                                         case 'password' : //form in input password ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
                                                 <div class="col-sm-6">
 
@@ -90,7 +89,7 @@
                                             break ;
                                         case 'checkbox' : // form in input checkbox ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $this->translate($form['label'])?></label>
                                                 <div class="col-sm-6">
                                                     <div class="checkbox">
@@ -111,7 +110,7 @@
 
                                         case 'select' :  // form in input selectbox ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
                                                 <div class="col-sm-6">
                                                     <select class="form-control" name=<?php echo $form['key']; ?> id=<?php echo $form['key']; ?>>
@@ -131,7 +130,7 @@
 
                                         case 'multi_checkbox' : // form in input multiples selectbox ?>
 
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $form['label'];?></label>
                                                 <div class="col-sm-6">
                                                     <div class="checkbox">
@@ -159,7 +158,7 @@
                                             break ;
 
                                         case 'button_add_rm' : // form in input buttons add/remove ?>
-                                            <div class="form-group">
+                                            <div class="form-group" <?php if($form['data_intro']) echo 'data-intro="' . $form['data_intro'] . '"';?>>
                                                 <label class="col-sm-5 control-label"><?php echo $this->translate($form["label"]);?></label>
                                                 <div class="col-sm-6">
                                                      <button type="button" id="add_<?php echo $form['key'];?>" class="boxadd add_field" ></button>
@@ -291,4 +290,3 @@
     });
 
 </script>
-

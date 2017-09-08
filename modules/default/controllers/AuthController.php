@@ -33,19 +33,37 @@ class AuthController extends Zend_Controller_Action {
      */
     public function loginAction() {
 
+
         $this->view->headTitle($this->view->translate("Login"));
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Login")));
         $this->view->hideMenu = true;
         $this->view->PAGE = "{$this->getFrontController()->getBaseUrl()}/{$this->getRequest()->getModuleName()}/{$this->getRequest()->getControllerName()}/redefine";
 
-
         $config = Zend_Registry::get('config');
-
+        $this->view->language = $config->system->language;
         if (isset($_GET["recuperation"])) {
             $this->view->message = $this->view->translate("Password successfully recovered");
             $this->view->msgclass = 'sucess';
         }
+
+
+
+         if (isset($_GET["indexChooseLanguage"])) {
+
+            $configFile = APPLICATION_PATH . "/includes/setup.conf";
+            $config = new Zend_Config_Ini($configFile, null, true);
+            $config->system->language = $_GET["indexChooseLanguage"];
+            $writer = new Zend_Config_Writer_Ini(array('config' => $config,
+                'filename' => $configFile));
+            $writer->write();
+
+            Snep_Locale::setExtensionsLanguage($_GET["indexChooseLanguage"]) ;
+
+            $this->_redirect('/');
+
+         }
+
 
         // If you are already logged
         $auth = Zend_Auth::getInstance();
@@ -89,11 +107,12 @@ class AuthController extends Zend_Controller_Action {
                         $auth->getStorage()->write($result->getIdentity());
 
                         $extension = $db->query("SELECT id, name FROM users WHERE name='$username'")->fetchObject();
-
+                        $_SESSION["ENCRYPTION_KEY"] = md5($password);
                         // Retaining the old verifica.php
                         $_SESSION['id_user'] = $extension->id;
                         $_SESSION['name_user'] = $username;
                         $_SESSION['active_user'] = $extension->name;
+                        $_SESSION['http_authorization'] = Snep_Usuario::encrypt("{$username}:{$password}", $_SESSION["ENCRYPTION_KEY"]);
                         $_SESSION['vinculos_user'] = "";
 
                         $registered = $db->query("SELECT uuid,registered_itc,noregister FROM itc_register")->fetch();
@@ -108,90 +127,6 @@ class AuthController extends Zend_Controller_Action {
                             $_SESSION['uuid'] = $v4uuid;
                             Snep_Auth_Manager::adduuid($v4uuid);
 
-                        }
-
-                        $configs = Snep_Config::getConfiguration('default','host_notification');
-
-                        // get last_id_notification if exists
-                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-                        if($idLastNotification){
-
-                            $idLastNotification = $idLastNotification["config_value"];
-                            $url = $configs["config_value"]."/last_id/".$idLastNotification."/UUID/".$_SESSION["uuid"];
-
-                        }else{
-
-                            $dateNotification = date("Y-m-d");
-                            $url = $configs["config_value"]."/date/".$dateNotification."/UUID/".$_SESSION["uuid"];
-                        }
-
-                        // get notification in itc
-                        $http = curl_init($url);
-
-                        curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
-                        $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
-                        curl_setopt($http, CURLOPT_RETURNTRANSFER,1);
-                        $http_response = curl_exec($http);
-                        $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-                        curl_close($http);
-
-                        switch ($httpcode) {
-                            case 200:
-
-                                $notifications = json_decode($http_response);
-                                if(!empty($notifications)){
-
-                                    foreach($notifications as $item => $notification){
-                                        $lastId = $notification->id;
-
-                                        Snep_Notifications::addNotification($notification->title,$notification->message,$notification->id,$notification->id_costumer);
-                                    }
-
-                                    if(isset($lastId)){
-
-                                        // get last_id_notification if exists
-                                        $idLastNotification = Snep_Config::getConfiguration("default", "last_id_notification");
-                                        if($idLastNotification){
-                                            Snep_Notifications::updateLastNotification($lastId);
-                                        }else{
-                                            Snep_Notifications::addLastNotification($lastId);
-                                        }
-                                    }
-                                }
-
-                                break;
-                            case 500:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate('Internal Server Error. <br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
-                                }
-
-                                break;
-                            case false:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate('Error notifications.<br> To receive notifications about new features, modules and related news Snep you must be connected to an internet network. Check your connection and try again.');
-                                    Snep_Notifications::addNotification($title,$message,1,"Snep");
-                                }
-
-                                break;
-                            default:
-
-                                $notificationWarning = Snep_Notifications::getNotificationWarning();
-                                if($notificationWarning == false){
-
-                                    $title = $this->view->translate('Warning');
-                                    $message = $this->view->translate("Error: Code ") . $httpcode . $this->view->translate(". Please contact the administrator for receiver notifications.");
-                                    Snep_Notifications::addNotification($title,$message,"Snep");
-                                }
-                                break;
                         }
 
                         $this->_redirect('/');
@@ -368,7 +303,8 @@ class AuthController extends Zend_Controller_Action {
         clearInterval(system_status_interval); // That's 60 seconds
         </script>
         <?php
-        $this->_redirect("auth/login");
+        $this->_redirect("/");
     }
+
 
 }

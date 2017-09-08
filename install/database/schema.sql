@@ -42,6 +42,26 @@ CREATE TABLE IF NOT EXISTS expr_alias_expression (
     FOREIGN KEY (`aliasid`) REFERENCES expr_alias(`aliasid`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Table structure for table `date_alias`
+--
+
+CREATE TABLE IF NOT EXISTS `date_alias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `date_alias_list`
+--
+CREATE TABLE IF NOT EXISTS `date_alias_list` (
+  `dateid` int(11) NOT NULL,
+  `date` varchar(10) DEFAULT NULL,
+  `timerange` varchar(11) DEFAULT '00:00-23:59',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `regras_negocio`
@@ -58,7 +78,8 @@ CREATE TABLE IF NOT EXISTS regras_negocio (
   ativa boolean NOT NULL default true,
   mailing boolean NOT NULL default false,
   from_dialer boolean NOT NULL default false,
-  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others'
+  type enum('incoming','outgoing','others') NOT NULL DEFAULT 'others',
+  dates_alias varchar(20)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -191,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `setvar` varchar(100) NOT NULL default '',
   `email` varchar(255) default NULL,
   `canal` varchar(255) default NULL,
-  `call-limit` varchar(4) default NULL,
+  `call-limit` varchar(4) default '1',
   `incominglimit` varchar(4) default NULL,
   `outgoinglimit` varchar(4) default NULL,
   `usa_vc` varchar(4) NOT NULL default 'no',
@@ -362,6 +383,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `trunk_redund` int(11) default NULL,
   `time_total` int(11) default NULL,
   `time_chargeby` char(1) default NULL,
+  `time_initial_date` int(11) default NULL,
   `dialmethod` VARCHAR(6) NOT NULL DEFAULT 'NORMAL',
   `id_regex` VARCHAR(255) NULL,
   `map_extensions` BOOLEAN DEFAULT FALSE,
@@ -370,6 +392,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `dtmf_dial_number` VARCHAR(50) DEFAULT NULL,
   `domain` VARCHAR( 250 ) NOT NULL,
   `technology` VARCHAR( 20 ) NOT NULL,
+  `telco` INT(10) DEFAULT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -567,6 +590,7 @@ CREATE TABLE IF NOT EXISTS `contacts_group` (
 CREATE TABLE IF NOT EXISTS `contacts_names` (
   `id` integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(80) NOT NULL,
+  `email` varchar(80) DEFAULT NULL,
   `address` varchar(100),
   `id_state` char(2),
   `id_city` int(11),

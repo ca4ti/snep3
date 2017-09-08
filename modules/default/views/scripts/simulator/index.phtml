@@ -27,10 +27,10 @@
             <?php if($this->key){ ?>
                 <div class="snep-body-top-buttons">
                     <div class="snep-body-search">
-                        <?php if($this->key){ 
-                            echo ""; 
+                        <?php if($this->key){
+                            echo "";
                             ?>
-                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>  
+                            <a class='sn-dash-add' href="<?php echo $this->baseUrl ?>/default/index/index?dashboard_add=<?php echo $this->key ?>" title="<?php echo $this->translate('Add to dashboard');?>"></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
         <input type="hidden" name="acao" value="simulate" />
 
         <fieldset>
-        
+
             <div class="form-group">
                 <label for="srcType"><?php echo $this->translate("Source");?></label>
                 <select class="form-control" name="srcType" id="srcType" onChange="showDiv(this.value);">
@@ -59,9 +59,9 @@
                 </select>
             </div>
 
-            <!-- Trunks -->    
-            <div id="trunks" class="invisible">  
-                <div class="form-group">  
+            <!-- Trunks -->
+            <div id="trunks" class="invisible">
+                <div class="form-group">
                     <select class="form-control" name="trunk" id="trunk">
                         <?php foreach ($this->trunks as $key => $value) {
                             echo "<option value='$key' > $value </option>";
@@ -77,10 +77,10 @@
                     <input type="text" class="form-control" name="caller" id="caller"  placeholder="<?php echo $this->translate("Source");?>" value="<?php echo isset($_REQUEST['caller']) ? $_REQUEST['caller'] : ""; ?>"/>
                 </div>
 
-            </div>                
-        
+            </div>
+
             <div class="form-group">
-                <label for="srcType"><?php echo $this->translate("For");?></label> 
+                <label for="srcType"><?php echo $this->translate("For");?></label>
                 <input type="text" class="form-control" name="dst" id="dst"  placeholder="<?php echo $this->translate("Destiny");?>" value="<?php echo isset($_REQUEST['dst']) ? $_REQUEST['dst'] : ""; ?>"/>
             </div>
 
@@ -96,9 +96,9 @@
                     <option value='sun'><?php echo $this->translate("Sunday")?></option>
                 </select>
             </div>
-            
+
             <div class="form-group">
-                <input type="text" class="form-control" size="5" name="time" id="time" class="campos" value="<?php echo isset($_REQUEST['time']) ? $_REQUEST['time'] : ""; ?>" placeholder="hh:mm"/> 
+                <input type="text" class="form-control" size="5" name="time" id="time" class="campos" value="<?php echo isset($_REQUEST['time']) ? $_REQUEST['time'] : ""; ?>" placeholder="hh:mm"/>
             </div>
 
             <br><br>
@@ -138,13 +138,14 @@
                         </ul>
                     </td>
                 </tr>
-        
+
                 <tr>
                     <td>
                         <ul id="legenda">
                             <li class="torun"><?php echo $this->translate('Rule that will be executed')?></li>
                             <li class="outdated"><?php echo $this->translate('Rule invalid because of time')?></li>
                             <li class="ignored"><?php echo $this->translate('Rule ignored by priority')?></li>
+                            <li class="inactive"><?php echo $this->translate('Rule Inactive')?></li>
                         </ul>
                     </td>
                 </tr>
@@ -162,7 +163,7 @@
 <script type="text/javascript">
 
 function showDiv(div){
-    
+
     if(div == 'trunk'){
         document.getElementById("trunks").className = "form-group visible";
         document.getElementById("extension").className = "invisible";

@@ -28,222 +28,171 @@
  * @author    Opens Tecnologia <desenvolvimento@opens.com.br>
  */
 class Formata {
-    
-    /**
-     * fmt_segundos - Formats seconds on a standard outlet
-     * @param <array> $params
-     * @return <string> $marty
-     */
-    function fmt_segundos($params,$smarty = null){
-        
-        $segundos = $params['a'] ;
-        $tipo_ret = (isset($params['b']) && $params['b'] != "") ? $params['b'] : 'hms' ;
-        
-        switch($tipo_ret){
-            case "m":
-                $ret = $segundos/60;
-            break;
-            
-            case "H":
-                $ret = $segundos/3600;
-            break;
-        
-            case "h":
-                $ret = round($segundos/3600);
-            break;
-        
-            case "D":
-                $ret = $segundos/86400;
-            break;
-        
-            case "d":
-                $ret = round($segundos/86400);
-            break;
-        
-            case "hms":
-                $min_t = intval($segundos/60) ;
-                $tsec = sprintf("%02s",intval($segundos%60)) ;
-                $thor = sprintf("%02s",intval($min_t/60)) ;
-                $tmin = sprintf("%02s",intval($min_t%60)) ;
-                $ret = $thor.":".$tmin.":".$tsec;
-            break ;
-        
-            case "ms":
-                $min_t = intval($segundos/60) ;
-                $tsec = sprintf("%02s",intval($segundos%60)) ;
-                $tmin = sprintf("%02s",intval($min_t%60)) ;
-                $ret = $tmin.":".$tsec;
-            break ;
-       }
-       
-       return $ret ;
-   } 
 
-   /**
-     * fmt_telefone - Format Phone Number
-     * @param <array> $params
-     * @return <string> $number
-     */
-    function fmt_telefone($params) {
-        
-        $numero = trim($params['a']);
-        
-        // Get country code 
-        $country = Zend_Registry::get('config')->system->country_code;
-        
-        switch ($country) {
-            case 76 : // Brazil
-                // Number < 8 digits, return same number
-                if (strlen($numero) < 8 || !is_numeric($numero)) {
-                    return $numero;
-                }
-                // Numbers 0300 and 0800
-                if (substr($numero, 0, 4) == "0800" || substr($numero, 0, 4) == "0300") {
-                    $numero = substr($numero, 0, 4) . "-" . substr($numero, 4);
-                }
-                switch (strlen($numero)) {
-                    case 8: 
-                    case 9:
-                        // Local numbers
-                        $num = substr($numero, -4);
-                        $prefixo = substr($numero, 0, strlen($numero)-4);
-                        $numero = "$prefixo-$num" ;
-                        break ; 
-                    case 10 :  
-                        // DDD + Number 8 digits
-                        $num = substr($numero, -4);
-                        $prefixo = substr($numero, 2, 4);
-                        $ddd = substr($numero,0,2);
-                        $numero = "($ddd) $prefixo-$num" ; 
-                        break ;
-                    case 11 : 
-                        $num = substr($numero, -4);
-                        // 0 + DDD + Numer 8 digits 
-                        if (substr($numero,0,1) == 0) {
-                            $prefixo = substr($numero, 3, 4);
-                            $ddd = substr($numero,0,3);
-                        // DDD + Number 9 digits
-                        } else { 
-                            $prefixo = substr($numero, 2, 5);  // 9. digito
-                            $ddd = substr($numero,0,2);
-                        }
-                        $numero = "($ddd) $prefixo-$num" ; 
-                        break ;
-                    case 12 : 
-                        $num = substr($numero, -4);
-                        // 0 + DDD + Number 9 digits 
-                        if (substr($numero,0,1) == 0) {
-                            $prefixo = substr($numero, 3, 5);  // 9. digito
-                            $ddd = substr($numero,0,3);
-                            $ope = "";
-                         // OPER + DDD + number 8 digits
-                        } else {
-                            $prefixo = substr($numero, 4, 4);  
-                            $ddd = substr($numero,2,2);
-                            $ope = substr($numero,0,2);
-                        }
-                        $numero = "$ope ($ddd) $prefixo-$num" ;
-                        break ;
-                    case 13 : 
-                        $num = substr($numero, -4);
-                        // 0 + OPER + DDD + Number 8 digits
-                        if (substr($numero,0,1) == 0) {
-                            $prefixo = substr($numero, 5, 4); 
-                            $ddd = substr($numero,3,2);
-                            $ope = substr($numero,0,3);
-                        // OPER + 0 + DDD + Number 8 Digits
-                        } elseif (substr($numero,2,1) == 0) {
-                            $prefixo = substr($numero, 5, 4); 
-                            $ddd = substr($numero,2,3);
-                            $ope = substr($numero,0,2);
-                        } else {
-                            // OPER + DDD + Number 9 Digits
-                            $prefixo = substr($numero, 4, 5);  // 9. digito  
-                            $ddd = substr($numero,2,2);
-                            $ope = substr($numero,0,2);
-                        }
-                        $numero = "$ope ($ddd) $prefixo-$num" ;
-                        break ;
-                    case 14: 
-                        // 0 + OPER + DDD + Number 9 digits
-                        $num = substr($numero, -4);
-                        $prefixo = substr($numero, 5, 4);
-                        $ddd = substr($numero,3,2);
-                        $ope = substr($numero,0,3);
-                        $numero = "$ope ($ddd) $prefixo-$num" ;
-                        break ;
-                }; 
-                break ;
+/**
+ * fmt_segundos - Formats seconds on a standard outlet
+ * @param <array> $params
+ * @return <string> $marty
+ */
+function fmt_segundos($params,$smarty = null){
+
+  $seconds = $params['a'] ;
+  $type_ret = (isset($params['b']) && $params['b'] != "") ? $params['b'] : 'hms' ;
+
+  switch($type_ret){
+    case "m":
+      $ret = $seconds/60;
+    break;
+    case "H":
+      $ret = $seconds/3600;
+    break;
+    case "h":
+      $ret = round($seconds/3600);
+    break;
+    case "D":
+      $ret = $seconds/86400;
+    break;
+    case "d":
+      $ret = round($seconds/86400);
+    break;
+    case "hms":
+      $min_t = intval($seconds/60) ;
+      $tsec = sprintf("%02s",intval($seconds%60)) ;
+      $thor = sprintf("%02s",intval($min_t/60)) ;
+      $tmin = sprintf("%02s",intval($min_t%60)) ;
+      $ret = $thor.":".$tmin.":".$tsec;
+    break ;
+    case "ms":
+      $min_t = intval($seconds/60) ;
+      $tsec = sprintf("%02s",intval($seconds%60)) ;
+      $tmin = sprintf("%02s",intval($min_t%60)) ;
+      $ret = $tmin.":".$tsec;
+    break ;
+  }
+  return $ret ;
+}
+
+/**
+* fmt_telefone - Format Phone Number
+* @param <array> $params
+* @return <string> $number
+*/
+function fmt_telefone($params) {
+
+  $number = trim($params['a']);
+
+  if(!is_numeric($number)){
+    return $number;
+  }elseif(substr($number, 0, 4) == "0800" || substr($number, 0, 4) == "0300") {
+    $number = substr($number, 0, 4) . "-" . substr($number, 4);
+  }else{
+    switch (strlen($number)) {
+      case '8': //fixed
+        $number = substr($number,0,4)."-".substr($number,4);
+      break;
+      case '9': //celphone
+        $number = substr($number,0,5)."-".substr($number,5);
+      break;
+      case '10': //fixed with ddd
+        $number = "(".substr($number,0,2).")".substr($number,2,4)."-".substr($number,6);
+      break;
+      case '11':
+        if(substr($number,2,1) == 9){//celphone with ddd
+          $number = "(".substr($number,0,2).")".substr($number,2,5)."-".substr($number,7);
+        }else{//fixed with ddd and 0
+          $number = substr($number,0,1)."(".substr($number,1,2).")".substr($number,3,4)."-".substr($number,7);
         }
-        // Return formated number
-        return $numero;
+      break;
+      case '12':
+        if(substr($number,3,1) == 9){//celphone with ddd and 0
+          $number = substr($number,0,1)."(".substr($number,1,2).")".substr($number,3,5)."-".substr($number,8);
+        }else{// fixed with ddd and 55
+          $number = substr($number,0,2)."(".substr($number,2,2).")".substr($number,4,4)."-".substr($number,8);
+        }
+      break;
+      case '13':
+        if(substr($number,4,1) == 9){ //celphone with ddd and 55
+          $number = substr($number,0,2)."(".substr($number,2,2).")".substr($number,4,5)."-".substr($number,9);
+        }else{ // fixed with 0 + 55 + ddd
+          $number = substr($number,0,3)."(".substr($number,3,2).")".substr($number,5,4)."-".substr($number,9);
+        }
+      break;
+      case '14': //celphone with 0 + 55 + ddd
+        $number = substr($number,0,3)."(".substr($number,3,2).")".substr($number,5,5)."-".substr($number,10);
+      break;
+      default:
+        return $number;
+      break;
     }
+  }
+  return $number;
+}
 
-    /**
-     * fmt_cep - Format CEP
-     * @param <string> $number
-     * @return <string> $formated cep number
-     */
-    function fmt_cep($number){
-         // Get country code 
-        $country = Zend_Registry::get('config')->system->country_code;
-        
-        switch ($country) {
-            case 76 : // Brazil
-                $cep = substr($number,0,2).".".substr($number, 2,3)."-".substr($number, 5,3); 
-                break ;
-        }
-        return $cep ;
-   }
-   
-} 
+/**
+* fmt_cep - Format CEP
+* @param <string> $number
+* @return <string> $formated cep number
+*/
+function fmt_cep($number){
+
+  // Get country code
+  $country = Zend_Registry::get('config')->system->country_code;
+
+  switch ($country) {
+    case 76 : // Brazil
+      $cep = substr($number,0,2).".".substr($number, 2,3)."-".substr($number, 5,3);
+    break ;
+  }
+  return $cep ;
+
+}
+}
 
 /**
  * Verifica alguns status do asterisk utilizando a classe phpagi-asmanager
- * @param <String> $comando - comando do asterisk ou Action
+ * @param <String> $comand - comando do asterisk ou Action
  *                          -> Se for Action, incluir a palavra "Action"
- * @param <String> $quebra - linha que retorna o resultado
- * @param <boolean>  $tudo - True/False - Se devolve todo Resultado ou nao
+ * @param <String> $break - linha que retorna o resultado
+ * @param <boolean>  $all - True/False - Se devolve todo Resultado ou nao
  * @return <String>
  */
-function ast_status($comando, $quebra, $tudo = False) {
-    require_once "AsteriskInfo.php";
-    try {
-        $astinfo = new AsteriskInfo();
-        return $astinfo->status_asterisk($comando, $quebra, $tudo);
-    } catch (Exception $e) {
-        return $this->view->translate("Error! Failed to connect to server Asterisk.");
-    }
+function ast_status($comand, $break, $all = False) {
+  require_once "AsteriskInfo.php";
+  try {
+    $astinfo = new AsteriskInfo();
+    return $astinfo->status_asterisk($comand, $break, $all);
+  } catch (Exception $e) {
+    return $this->view->translate("Error! Failed to connect to server Asterisk.");
+  }
 }
 
-
 /**
- * 
+ *
  * Le arquivos do servidor
  * @param <String> $strFileName - Caminho/Nome do Arquivo a ser lido
  * @param <String> $intLines - Numero de linhas a serem retornadas
  * @param <String> $intBytes - Tamanho Maximo em bytes a ser lido por linha
- * @return <array> 
+ * @return <array>
  */
 function rfts($strFileName, $intLines = 0, $intBytes = 4096) {
-    $strFile = "";
-    $intCurLine = 1;
-    if (file_exists($strFileName)) {
-        if ($fd = fopen($strFileName, 'r')) {
-            while (!feof($fd)) {
-                $strFile .= fgets($fd, $intBytes);
-                if ($intLines <= $intCurLine && $intLines != 0) {
-                    break;
-                } else {
-                    $intCurLine++;
-                }
-            }
-            fclose($fd);
+  $strFile = "";
+  $intCurLine = 1;
+  if (file_exists($strFileName)) {
+    if ($fd = fopen($strFileName, 'r')) {
+      while (!feof($fd)) {
+        $strFile .= fgets($fd, $intBytes);
+        if ($intLines <= $intCurLine && $intLines != 0) {
+          break;
         } else {
-            return "ERROR";
+          $intCurLine++;
         }
+      }
+      fclose($fd);
     } else {
-        return "ERROR";
+      return "ERROR";
     }
-    return $strFile;
+  } else {
+    return "ERROR";
+  }
+  return $strFile;
 }

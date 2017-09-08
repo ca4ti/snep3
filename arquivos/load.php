@@ -18,36 +18,54 @@
  *  along with SNEP.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$file = $_GET['id'];
+$id = $_GET['id'];
+$file = $_GET['file'];
 
-if(!isset($file)){
+if(!isset($id) && !isset($file)){
 	echo "{'status':'error','message':'Esperando id como argumento!'}";
 	exit(1);
-}else{
+}elseif(isset($id)){
+	$exp_data = preg_match("/^[0-9]+_([0-9]+)_/",$id,$data);
+	$exp_data = $data[1];
+	$pattern = '/(20[12][0-9])([0-9][0-9])([0-9][0-9])/';
+	$replacement = '$1-$2-$3';
+	$data = preg_replace($pattern,$replacement,$exp_data);
+	if(file_exists("$id.WAV")){
+		header("Location: $id.WAV");
+	}elseif(file_exists("$id.wav")){
+		header("Location: $id.wav");
+	}elseif(file_exists("storage1/$id.WAV")){
+		header("Location: storage1/$id.WAV");
+	}elseif(file_exists("storage1/$id.wav")){
+		header("Location: storage1/$id.wav");
+	}elseif(file_exists("$data/$id.WAV")){
+		header("Location: $data/$id.WAV");
+	}elseif(file_exists("$data/$id.wav")){
+		header("Location: $data/$id.wav");
+	}elseif(file_exists("storage1/$data/$id.WAV")){
+		header("Location: storage1/$data/$id.WAV");
+	}elseif(file_exists("storage1/$data/$id.wav")){
+		header("Location: storage1/$data/$id.wav");
+	}else{
+		echo "{'status':'error','message':'File $id not found','date':'$data'}";
+	}
+
+}elseif(isset($file)){
 	$exp_data = preg_match("/^[0-9]+_([0-9]+)_/",$file,$data);
 	$exp_data = $data[1];
 	$pattern = '/(20[12][0-9])([0-9][0-9])([0-9][0-9])/';
 	$replacement = '$1-$2-$3';
 	$data = preg_replace($pattern,$replacement,$exp_data);
-	if(file_exists("$file.WAV")){
-		header("Location: $file.WAV");
-	}elseif(file_exists("$file.wav")){
-		header("Location: $file.wav");
-	}elseif(file_exists("storage1/$file.WAV")){
-		header("Location: storage1/$file.WAV");
-	}elseif(file_exists("storage1/$file.wav")){
-		header("Location: storage1/$file.wav");
-	}elseif(file_exists("$data/$file.WAV")){
-		header("Location: $data/$file.WAV");
-	}elseif(file_exists("$data/$file.wav")){
-		header("Location: $data/$file.wav");
-	}elseif(file_exists("storage1/$data/$file.WAV")){
-		header("Location: storage1/$data/$file.WAV");
-	}elseif(file_exists("storage1/$data/$file.wav")){
-		header("Location: storage1/$data/$file.wav");
+	if(file_exists("$file")){
+		header("Location: $file");
+	}elseif(file_exists("storage1/$file")){
+		header("Location: storage1/$file");
+	}elseif(file_exists("$data/$file")){
+		header("Location: $data/$file");
+	}elseif(file_exists("storage1/$data/$file")){
+		header("Location: storage1/$data/$file");
 	}else{
 		echo "{'status':'error','message':'File $file not found','date':'$data'}";
 	}
-		
-}
 
+}

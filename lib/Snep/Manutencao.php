@@ -31,15 +31,15 @@
 class Snep_Manutencao {
 
     public function __construct() {
-        
+
     }
 
     public function __destruct() {
-        
+
     }
 
     public function __clone() {
-        
+
     }
 
     public function __get($atributo) {
@@ -123,6 +123,10 @@ class Snep_Manutencao {
                 return "/snep/arquivos/" . $data . "/" . $userfield . ".wav";
             } elseif (file_exists($arquivos . "/" . $data . "/" . $userfield . ".mp3")) {
                 return "/snep/arquivos/" . $data . "/" . $userfield . ".mp3";
+            }elseif (file_exists($arquivos . "/" . $data . "/" . $userfield . ".wav")) {
+                return "/snep/arquivos/" . $data . "/" . $userfield . ".wav";
+            } elseif (file_exists($arquivos . "/" . $data . "/" . $userfield . ".WAV")) {
+                return "/snep/arquivos/" . $data . "/" . $userfield . ".WAV";
             } elseif ($conf == true) {
 
                 if (file_exists($arquivos . "/" . $conference[3] . "/" . $userfield . ".wav")) {
@@ -156,7 +160,7 @@ class Snep_Manutencao {
     /**
      * Remove arquivo de gravação.
      * @param <string> $arquivo
-     * @return <bool> 
+     * @return <bool>
      */
     public function removeBackup($arquivo) {
 
@@ -168,7 +172,7 @@ class Snep_Manutencao {
     /**
      * Compacta lista de arquivos
      * @param <string> $arquivo
-     * @return <string> $file_path 
+     * @return <string> $file_path
      */
     public function compactaArquivos($arquivos) {
 

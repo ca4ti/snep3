@@ -17,19 +17,30 @@
  */
 ?>
 
-<div class="row">  
+<div class="row">
     <div class="tab-content">
-        <div class="tab-pane active">  
+        <div class="tab-pane active">
             <fieldset>
                 <legend><?php echo $this->translate("About");?></legend>
             </fieldset>
             <?php echo $this->translate("
-            SNEP is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
+            SNEP is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
             <br /><br />
             SNEP is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
             <br /><br />
             You should have received a copy of the GNU General Public License along with SNEP.  If not, see http://www.gnu.org/licenses.
-            ") ;?>   
+            ") ;?>
+        </div>
+        <br>
+        <div class="tab-pane active">
+            <fieldset>
+                <legend><?php echo $this->translate("Use terms and Privacy");?></legend>
+            </fieldset>
+            <?php echo $this->translate("
+            Using this free software you agree to share use statistics to improve your use experience.<br>
+            We collect information to provide better services to all of our users – from figuring out basic stuff like which language you speak, to more complex things <br>
+            like which hardwares manufacturer, Extensions and queues quantities you have.
+            ") ;?>
         </div>
         <br />
         <div>
@@ -69,5 +80,3 @@
     </div>
     <br />
 </div> <!-- /.row -->
-
-

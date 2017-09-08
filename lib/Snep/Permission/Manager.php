@@ -248,6 +248,9 @@ class Snep_Permission_Manager {
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
+        if($request->getControllerName() == 'route'){
+          return true;
+        }
         if (!isset($resources[$request->getModuleName()]))
             return false;
         if (!isset($resources[$request->getModuleName()][$request->getControllerName()]))
@@ -301,4 +304,3 @@ class Snep_Permission_Manager {
     }
 
 }
-

@@ -57,18 +57,19 @@ class PBX_Dialplan {
     }
 
     /**
-     * parse - Executa a análise das regras para encontrar a que melhor se 
+     * parse - Executa a análise das regras para encontrar a que melhor se
      * enquadra na requisição
      */
     public function parse() {
         $execution_time = date("H:i");
+        $execution_date = date("Y-m-d");
         $this->foundRule = null;
 
         $rules = PBX_Rules::getAll();
         if(count($rules) > 0) {
             foreach ($rules as $rule) {
                 $rule->setRequest($this->request);
-                if($rule->isActive() && $rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isValidTime($execution_time)) {
+                if($rule->isActive() && $rule->isValidDst($this->request->destino) && $rule->isValidSrc($this->request->origem) && $rule->isValidTime($execution_time) && $rule->isValidAliasTime($execution_time, $execution_date)) {
                     $this->foundRule = $rule;
                     break; // paramos na primeira regra totalmente válida
                 }

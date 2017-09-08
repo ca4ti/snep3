@@ -1,16 +1,18 @@
 # O que é #
 
-O SNEP é um PBX Livre baseado em Software que atende as necessidades de qualquer porte de negócio, com recursos que tornam a comunicação mais livre, flexível e inteligente.
+SNEP is a Soft Free PBX that meet the needs for any size of Business, with features and resources that bring a communication more free, flexible and smart.
 
-Conheça mais no site do Projeto: [SNEP](http://www.snep.com.br/)
+Known more about the project: [SNEP](http://www.snep.com.br/)
 
-# Construido de forma colaborativa #
+# Build in a collaborative way #
 
-O SNEP foi construído com a colaboração de diversos desenvolvedores e usuários. E conta com uma comunidade ativa, que além de realizar correções, são os criadores da evolução da plataforma.
+SNEP was build with the collaboration of many developers and users and it have a active community.
 
-# Um Ecossistema de Oportunidades #
+# A Ecossystem of Opportunities #
 
-Escolha e foque no seu mercado de atuação, que o ecossistema faz o resto para você. 
+Choice and foccus on your business market, that the ecossystem will do the rest for you.
+
+
 Além de um projeto de Software o SNEP se propõe à criar um ecossistema de negócios que possibilite a atuação de diferentes perfis de colaboradores: desenvolvedores, integradores , fabricantes e usuários.
 
 # Como usar #

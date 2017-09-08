@@ -1,8 +1,8 @@
 /*!
- * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+* Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.
+*/
 
 body {
 	background-color: #f8f8f8;
@@ -110,8 +110,8 @@ body {
 }
 
 /*
- * Side menu toggler
- */
+* Side menu toggler
+*/
 .menu-toggler {
 	position: relative;
 	float: left;
@@ -134,8 +134,8 @@ body {
 
 
 /*
- * Sidebar
- */
+* Sidebar
+*/
 #sidebar-area .nav>li>a:hover, #sidebar-area .nav>li>a:focus,
 #sidebar-area .nav>li:hover, #sidebar-area .nav>li:focus,
 #sidebar-area .nav>li.active {
@@ -196,7 +196,7 @@ body {
 }
 
 /*.sidebar .nav-second-level li a {
-	padding-left: 37px;
+padding-left: 37px;
 }*/
 
 .sidebar .nav-third-level li a {
@@ -205,8 +205,8 @@ body {
 
 
 /*
- * Sidebar-closed
- */
+* Sidebar-closed
+*/
 @media(min-width:768px) {
 	body.sidebar-closed #wrapper #sidebar li .nav-second-level,
 	body.sidebar-closed #wrapper #sidebar li a .side-menu-title,
@@ -215,7 +215,7 @@ body {
 	}
 
 	body.sidebar-closed #wrapper .sidebar .nav-second-level li a {
-		padding-left: 20px;
+		padding-left: 15px;
 	}
 
 	body.sidebar-closed #wrapper .sidebar .nav-third-level li a {
@@ -228,7 +228,7 @@ body {
 	}
 
 	body.sidebar-closed #wrapper .sidebar {
-		width: 45px;
+		width: 55px;
 	}
 	body.sidebar-closed #wrapper #sidebar li:hover {
 		width: 200px;
@@ -258,9 +258,9 @@ body {
 		z-index: 1000;
 		height: auto;
 		overflow: visible;
-		top: 41px;
-		left: 47px;
-		width: 203px;
+		top: 42px;
+		left: 55px;
+		width: 200px;
 		background-color: #3b3a3c;
 		border-bottom: 1px solid white;
 	}
@@ -298,7 +298,7 @@ body {
 	.sidebar {
 		z-index: 999;
 		width: 200px;
-		height: 100%;
+		height: 100% !important;
 		background-color: #313032;
 		position: absolute;
 	}

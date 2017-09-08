@@ -5,8 +5,8 @@
         <div class="form-group">
   	        <?php if ($this->mode == 'normal'): ?>
                 <span>
-                    <?php echo $this->period; ?>     
-                    <br />   
+                    <?php echo $this->period; ?>
+                    <br />
                 </span>
             <?php endif ?>
             <?php echo $this->exibition_mode; ?>
@@ -16,8 +16,8 @@
         </div>
     </div>
     <br /><br /><br />
-    <div id="tail" class="normal" >
-        <pre id="data" class="normal" style="height:380px; overflow:auto;">
+    <div id="tail" class="normal">
+        <pre id="data" class="normal" style="height:800px; overflow:auto;">
             <?php
 
             if ($this->mode === 'normal') {
@@ -29,17 +29,17 @@
                         //foreach($buffer as $row) {
                               echo trim($buffer) ;
                               echo "<br /> ";
-                              
+
                         //}
                     }
                     fclose($handle);
                 }
-                
+
             } else { ?>
                 <script type="text/javascript" src="/snep/includes/javascript/logtail.js"></script>
-                
+
             <?php }?>
-        </pre>  
+        </pre>
     </div>
 
    <br>
@@ -47,7 +47,7 @@
       <button type="button" class="btn btn-add btn-primary" onclick="javascript: history.go(-1)">
         <?php echo $this->translate("Back"); ?>
   </button>
-  
+
   </div>
 </div>
 
@@ -59,7 +59,7 @@
         var value = jQuery(this).val() ;
         switch(value) {
             case "normal":
-              
+
               jQuery('#data').removeClass('terminal');
               jQuery('#data').removeClass('contraste');
               jQuery('#data').addClass('normal');
@@ -81,5 +81,3 @@
     });
 
 </script>
-
-

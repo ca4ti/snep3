@@ -46,7 +46,7 @@ class RouteFormController extends Snep_Rest_Controller {
             return $this->get_rule_actions($data);
         }
     }
-    
+
     /**
      * new_action - Add new action in rule
      * @param <object> $data
@@ -54,6 +54,7 @@ class RouteFormController extends Snep_Rest_Controller {
      * @throws Snep_Rest_Exception_BadRequest
      */
     protected function new_action($data) {
+
         if (!isset($data->id)) {
             throw new Snep_Rest_Exception_BadRequest("Missing or wrong parameter 'id'. You must specify an id for the new action form.");
         }
@@ -76,18 +77,39 @@ class RouteFormController extends Snep_Rest_Controller {
         $config = new Snep_Rule_ActionConfig($action->getConfig());
         $config->setActionId($id);
 
-        $form = $config->getForm();
-        $action_type_element = new Zend_Form_Element_Hidden("action_type");
-        $action_type_element->setValue(get_class($action));
-        $action_type_element->setDecorators(array("ViewHelper"));
-        $form->addElement($action_type_element);
+        if(method_exists($action, 'getDemo')){
+          $demo = $action->getDemo();
+          if($demo['message']){
+            $form_html = "<table><tr><td>" . $demo['message'] . "</td></tr></table>";
+          }else{
+            $form_html = "<table><tr><td></td></tr></table>";
+          }
+        }else{
+          $form = $config->getForm();
 
-        $form->setView(new Zend_View());
-        $form->removeDecorator('form');
-        $form->removeElement('submit');
-        $form->removeElement('cancel');
+          $action_type_element = new Zend_Form_Element_Hidden("action_type");
+          $action_type_element->setValue(get_class($action));
+          $action_type_element->setDecorators(array("ViewHelper"));
+          $form->addElement($action_type_element);
 
-        $form_html = $form->render();
+          $form->setView(new Zend_View());
+          $form->removeDecorator('form');
+          $form->removeElement('submit');
+          $form->removeElement('cancel');
+
+          $action_type_element = new Zend_Form_Element_Hidden("action_type");
+          $action_type_element->setValue(get_class($action));
+          $action_type_element->setDecorators(array("ViewHelper"));
+          $form->addElement($action_type_element);
+
+          $form->setView(new Zend_View());
+          $form->removeDecorator('form');
+          $form->removeElement('submit');
+          $form->removeElement('cancel');
+
+          $form_html = $form->render();
+        }
+
 
         return array(
             "id" => $id,
@@ -97,7 +119,7 @@ class RouteFormController extends Snep_Rest_Controller {
             "form" => $form_html
         );
     }
-    
+
     /**
      * get_rule_actions
      * @param <object> $data

@@ -17,7 +17,7 @@
 
 var server = window.location.host.split(':')[0];
 var qmanager_url = 'http://' + server + ':8080/auth/login';
-var announce_url = 'http://api.opens.com.br:3003/announce';
+var announce_url = 'http://api.opens.com.br/announce';
 var announce_timeout = 3;
 
 function handler(){

@@ -42,7 +42,7 @@ class Loguser_LoguserController extends Zend_Controller_Action {
           "regras_negocio" => $this->view->translate('Routes Actions'),
           "peers" => $this->view->translate('Extensions Actions'),
           "expr_alias" => $this->view->translate('Expression Alias Actions'),
-          "date_alias" => $this->view->translate('Expression Alias Actions'),
+          "date_alias" => $this->view->translate('Expression Alias Dates'),
           "queues" => $this->view->translate('Queues Actions')
         );
 

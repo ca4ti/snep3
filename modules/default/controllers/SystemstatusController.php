@@ -352,6 +352,12 @@ class SystemstatusController extends Zend_Controller_Action {
         $tdm = array();
         $tdm['tdm'] = array();
 
+        $register = Snep_Register_Manager::get();
+        
+        $tdm['auth'] = array(
+          'api_key' => $register['api_key'],
+          'client_key' => $register['client_key']
+        );
         // Khomp Boards
         $khomp = $asterisk->Command('khomp summary concise');
         $tdmkhomp = str_replace("<K> ","",str_getcsv($khomp['data'],"\n"));
@@ -392,7 +398,7 @@ class SystemstatusController extends Zend_Controller_Action {
                            "span"     => $line[3],
                            "status"   => $line[4]
                         );
-                        array_push($tdm['tdm']['dahdi']['boards'],$board);                        
+                        array_push($tdm['tdm']['dahdi']['boards'],$board);
                       }
 
                    }

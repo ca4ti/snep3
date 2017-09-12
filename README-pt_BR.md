@@ -18,6 +18,9 @@ Além de um projeto de Software o SNEP se propõe à criar um ecossistema de neg
 Para instalar e utilizar o SNEP você pode seguir este manual de instalação:
 http://www.snep.com.br/download/
 
+Para uma instalação manual a partir dos fontes, use esta documentação:
+[Instalação a partir dos fontes](http://wiki.opens.com.br/pages/viewpage.action?pageId=13631933)
+
 # Como colaborar #
 
 Para colaborar com o Projeto, seja bem vindo! 

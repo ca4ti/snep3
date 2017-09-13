@@ -155,6 +155,7 @@ class PBX_ExpressionAliases {
 
         try {
             $db->commit();
+            return $id;
         } catch (Exception $ex) {
             $db->rollBack();
             throw $ex;

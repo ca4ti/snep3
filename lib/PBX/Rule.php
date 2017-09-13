@@ -874,17 +874,18 @@ class PBX_Rule {
    * @return <boolean> validity
    */
   public function isValidAliasTime($exec_time, $exec_date) {
-    $log = Zend_Registry::get('log');
+    $log = Snep_Logger::getInstance();
     $valid = $this->getValidDatesList();
     $count = count($valid);
     $valid_debug = serialize($valid);
     $log->debug("Current Valid Dates: $valid_debug -> $count -> $exec_date -> $exec_time");
     if(count($valid) < 0){
-      $log->debug("Rule Valid all days");
+      $log->info("Rule Valid all days");
       return true;
     }
     foreach ($valid as $validDatesId) {
       if($validDatesId == "" || $validDatesId == 0){
+        $log->info("Rule Date is Valid");
         return true;
       }else{
         $log->debug("Valid Alias Date Id: $validDatesId");
@@ -904,10 +905,12 @@ class PBX_Rule {
           if($validDate == $exec_date){
             if ($start > $end) {
                 if ($start < $exec_time OR $exec_time <= $end) {
+                    $log->info("Rule Date is Valid");
                     return true;
                 }
             } else {
                 if ($start <= $exec_time && $exec_time < $end) {
+                    $log->info("Rule Date is Valid");
                     return true;
                 }
             }
@@ -916,6 +919,7 @@ class PBX_Rule {
       }
 
     }
+    $log->info("Rule Date is invalid");
     return false;
   }
 

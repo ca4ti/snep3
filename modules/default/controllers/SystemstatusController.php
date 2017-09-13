@@ -108,6 +108,7 @@ class SystemstatusController extends Zend_Controller_Action {
                 "description" => $module->getDescription()
             );
         }
+        // $this->systemInfo['apt'] = self::getNewVersions();
 
         $this->statusbar_info();
 
@@ -353,7 +354,7 @@ class SystemstatusController extends Zend_Controller_Action {
         $tdm['tdm'] = array();
 
         $register = Snep_Register_Manager::get();
-        
+
         $tdm['auth'] = array(
           'api_key' => $register['api_key'],
           'client_key' => $register['client_key']
@@ -446,6 +447,18 @@ class SystemstatusController extends Zend_Controller_Action {
           }
         }
         // TDM Board inspection end
+
+    }
+
+    public function getNewVersions(){
+      $apt_log = shell_exec("sudo apt-cache show snep");
+      preg_match('/Version:(.*)/', $apt_log, $matches);
+
+      if(version_compare(SNEP_VERSION, $matches[1], '<=')){
+        return $matches[1];
+      }else{
+        return SNEP_VERSION;
+      }
 
     }
 

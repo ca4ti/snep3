@@ -123,7 +123,7 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
                     $this->matches[] = $rule;
 
                     // Caso seja a primeira regra válida (e com tempo válido), ela é a que queremos executar
-                    if (is_null($this->foundRule) && $rule->isValidTime($this->execution_time,$this->execution_date) && $rule->isActive()) {
+                    if (is_null($this->foundRule) && ($rule->isValidTime($this->execution_time,$this->execution_day) && $rule->isValidAliasTime($this->execution_time,$this->execution_date)) && $rule->isActive()) {
                         $this->foundRule = $rule;
                     }
                 }
@@ -155,7 +155,16 @@ class PBX_Dialplan_Verbose extends PBX_Dialplan {
     }
 
     /**
-     * setDate - Define manualmente o dia que será usado em consideração
+     * setDay - Define manualmente o dia que será usado em consideração
+     * na avaliação da regra. (Execution date)
+     * @param <string> $date Dia de execução da regra
+     */
+    public function setDay($date) {
+        $this->execution_day = $date;
+    }
+
+    /**
+     * setDate - Define manualmente a data que será usado em consideração
      * na avaliação da regra. (Execution date)
      * @param <string> $date Dia de execução da regra
      */

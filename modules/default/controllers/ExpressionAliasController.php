@@ -107,10 +107,9 @@ class ExpressionAliasController extends Zend_Controller_Action {
             if ($form_isValid) {
 
                 try {
-                    $aliasesPersistency->register($expression);
+                    $id = $aliasesPersistency->register($expression);
                     //log-user
                     if (class_exists("Loguser_Manager")) {
-                        $expr = Snep_ExpressionAliases_Manager::get($id);
                         $data = array(
                           'table' => 'expr_alias',
                           'registerid' => $id,
@@ -243,7 +242,7 @@ class ExpressionAliasController extends Zend_Controller_Action {
                     );
                     Snep_LogUser::log("delete", $data);
 
-                }                
+                }
                 $this->_redirect($this->getRequest()->getControllerName());
 
             }

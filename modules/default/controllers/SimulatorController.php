@@ -66,8 +66,15 @@ class SimulatorController extends Zend_Controller_Action {
             $srcType = isset($formData['srcType']) ? $formData['srcType'] : NULL;
             $trunk = isset($formData['trunk']) ? $formData['trunk'] : NULL;
             $caller = isset($formData['caller']) && $formData['caller'] != "" ? $formData['caller'] : "unknown";
-            $time = isset($formData['time']) ? $formData['time'] : NULL;
-            $date = ($formData['week'] == 'current') ? NULL : $formData['week'];
+            $datetime = isset($formData['ruleDay']) ? $formData['ruleDay'] : NULL;
+            if($datetime){
+              $time = explode(' ',$datetime)[1];
+              $date = explode(' ',$datetime)[0];
+              $day = explode(' ',$datetime)[2];
+            }
+
+            // $time = isset($formData['time']) ? $formData['time'] : NULL;
+            // $date = ($formData['week'] == 'current') ? NULL : $formData['week'];
 
             $dialplan = new PBX_Dialplan_Verbose();
 
@@ -97,12 +104,12 @@ class SimulatorController extends Zend_Controller_Action {
             $dialplan->setRequest($request);
 
             if ($time) {
-                if (preg_match("/^[0-9]:([0-9]{2})$/", $time)) {
-                    $time = "0" . $time;
-                }
                 $dialplan->setTime($time);
             }
 
+            if($day){
+                $dialplan->setDay($day);
+            }
             if($date){
                 $dialplan->setDate($date);
             }
@@ -118,7 +125,8 @@ class SimulatorController extends Zend_Controller_Action {
             if (count($dialplan->getMatches()) > 0) {
                 $found = false;
                 foreach ($dialplan->getMatches() as $index => $rule) {
-                    if ($rule->getId() == $dialplan->getLastRule()) {
+
+                    if ($dialplan->getLastRule()) {
                         $state = "torun";
                         $found = true;
                     } else if ($found) {
@@ -195,7 +203,13 @@ class SimulatorController extends Zend_Controller_Action {
                     $date = strtr($date, $table);
                 }
 
-                $input = array("caller" => $caller, "dst" => $extension, "time" => $dialplan->getLastExecutionTime(),"date" => $date);
+                $input = array(
+                  "caller" => $caller,
+                  "dst" => $extension,
+                  "time" => $dialplan->getLastExecutionTime(),
+                  "date" => $date,
+                  "day" => $day
+                );
 
                 $this->view->input = $input;
                 $this->view->result = $result;

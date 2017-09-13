@@ -60,13 +60,14 @@ class CallbackAction extends PBX_Rule_Action {
         $extension  = (isset($this->config['extension']))?"<value>{$this->config['extension']}</value>":"";
         $callerid   = (isset($this->config['callerid']))?"<value>{$this->config['callerid']}</value>":"";
         $play_audio = (isset($this->config['play_audio']))?"<value>{$this->config['play_audio']}</value>":"";
+        $callback_timeout = (isset($this->config['callback_timeout']))?"<value>{$this->config['callback_timeout']}</value>":"";
         $audio      = (isset($this->config['audio']))?"<value>{$this->config['audio']}</value>":"<value>astcc-pleasewait</value>";
         $callback_inbound_number = $trs->translate('Call back the Caller number');
         $callback_inbound_number_desc = $trs->translate('This will be the Inbound(DID) number which call will be redirected when the caller answer the call. Could be any Destiny Route Rule.');
         $source_number = $trs->translate('Specify the source call number');
         $source_number_desc = $trs->translate('Specify the source number to make the call back to the caller. This call will be processed by the Outgoing Routes with this source. Leave blank to keep here the original Caller number.');
-        $callback_delay = $trs->translate('Delay trying call back');
-        $callback_delay_desc = $trs->translate('This is the time in seconds the system will try contact the caller');
+        $callback_timeout_label = $trs->translate('Timeout to trying call back');
+        $callback_timeout_desc = $trs->translate('This is the time in seconds the system will try contact the caller');
         $play_audio_label = $trs->translate('Answer and play audio before hangup the call to call back.');
 
         return <<<XML
@@ -84,13 +85,13 @@ class CallbackAction extends PBX_Rule_Action {
         $callerid
     </string>
     <int>
-        <id>callback_delay</id>
-        <label>$callback_delay</label>
-        <description>$callback_delay_desc</description>
+        <id>callback_timeout</id>
+        <label>$callback_timeout_label</label>
+        <description>$callback_timeout_desc</description>
         <default>45</default>
         <unit>seconds</unit>
         <size>2</size>
-        $callback_delay
+        $callback_timeout
     </int>
     <boolean>
         <id>play_audio</id>
@@ -110,17 +111,19 @@ XML;
      * @return String XML
      */
     public function getDefaultConfigXML() {
-        $callback_delay  = (isset($this->defaultConfig['callback_delay'])) ? $this->defaultConfig['callback_delay'] : 5;
-        $callback_delay  = "<value>$callback_delay</value>";
+        $i18n = Zend_Registry::get("i18n");
+        $callback_timeout  = (isset($this->defaultConfig['callback_timeout'])) ? $this->defaultConfig['callback_timeout'] : 5;
+        $callback_timeout  = "<value>$callback_timeout</value>";
+        $callback_timeout_Label = $i18n->translate("Timeout to try call back");
 
         return <<<XML
 <params>
     <int>
-        <id>callback_delay</id>
-        <label>Atraso para Retorno da Ligação</label>
+        <id>callback_timeout</id>
+        <label>$callback_timeout_Label</label>
         <unit>segundos</unit>
         <size>2</size>
-        $callback_delay
+        $callback_timeout
     </int>
 </params>
 XML;
@@ -134,7 +137,7 @@ XML;
     public function execute($asterisk, $request) {
         $log = Zend_Registry::get('log');
 
-        $callback_delay = isset($this->defaultConfig['callback_delay']) ? $this->defaultConfig['callback_delay'] : 5;
+        $callback_timeout = isset($this->defaultConfig['callback_timeout']) ? $this->defaultConfig['callback_timeout'] : 5;
         if(isset($this->config['callerid']) && $this->config['callerid'] != "") {
             $callerid = $this->config['callerid'];
         }
@@ -142,20 +145,19 @@ XML;
             $callerid = $request->origem;
         }
 
-        $timeout = $this->config['callback_delay'] * 1000;
+        $timeout = $this->config['callback_timeout'] * 1000;
         if(isset($this->config['play_audio']) && $this->config['play_audio'] == "true") {
             $asterisk->answer();
             $asterisk->stream_file($this->config['audio']);
-           // $asterisk->hangup();
         }
-
+        $log->info("Starting Callback action for: {$request->origem} on channel {$request->channel}");
         $log->info("Making call for {$request->origem}");
         $ami = PBX_Asterisk_AMI::getInstance();
-        $call = $ami->Originate("Local/{$request->origem}", $this->config['extension'], "default",1,NULL,NULL, $timeout,"$callerid");
+        $call = $ami->Originate("Local/{$request->origem}", $this->config['extension'], "default",1,NULL,NULL, $timeout,"$callerid",NULL,NULL,true);
         $status = serialize($call);
         $log->info("Call Status: $status -> {$this->config['extension']}");
 
-
-        throw new PBX_Rule_Action_Exception_StopExecution("Fim da ligacao");
+        $asterisk->hangup($request->channel);
+        throw new PBX_Rule_Action_Exception_StopExecution("Call end");
     }
 }

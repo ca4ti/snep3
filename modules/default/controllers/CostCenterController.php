@@ -107,7 +107,7 @@ class CostCenterController extends Zend_Controller_Action {
                 //log-user
                 if (class_exists("Loguser_Manager")) {
                     $loguser = array(
-                      'table' => 'ccustos',
+                      'table' => 'tags',
                       'registerid' => $dados['id'],
                       'description' => "Added New Tag - {$dados['id']} - {$dados['name']}"
                     );
@@ -152,8 +152,12 @@ class CostCenterController extends Zend_Controller_Action {
 
                 //log-user
                 if (class_exists("Loguser_Manager")) {
-                    $add = Snep_CostCenter_Manager::get($id);
-                    Snep_CostCenter_Manager::insertLogCcustos("OLD", $add);
+                    $loguser = array(
+                      'table' => 'tags',
+                      'registerid' => $id,
+                      'description' => "Edited Tag - $id - {$_POST['name']}"
+                    );
+                    Snep_LogUser::log("update", $loguser);
                 }
 
                 Snep_CostCenter_Manager::edit($dados);
@@ -161,7 +165,7 @@ class CostCenterController extends Zend_Controller_Action {
                 //log-user
                 if (class_exists("Loguser_Manager")) {
                     $loguser = array(
-                      'table' => 'ccustos',
+                      'table' => 'tags',
                       'registerid' => $dados['id'],
                       'description' => "Edited Tag - {$dados['id']} - {$dados['name']}"
                     );
@@ -205,7 +209,7 @@ class CostCenterController extends Zend_Controller_Action {
                 if (class_exists("Loguser_Manager")) {
                     $data = Snep_CostCenter_Manager::get($id);
                     $loguser = array(
-                      'table' => 'ccustos',
+                      'table' => 'tags',
                       'registerid' => $id,
                       'description' => "Deleted Tag - {$id} - {$data['nome']}"
                     );

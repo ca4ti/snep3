@@ -142,15 +142,17 @@ class Snep_Register_Manager {
         'name_service' => 'intercomunexao');
 
         $db->insert('itc_consumers', $insert_data);
+        if(count($distributions) > 0){
+          foreach($distributions as $key => $distribution){
 
-        foreach($distributions as $key => $distribution){
+              $insert_data = array('id_distro' => $distribution->id,
+              'id_service' => $distribution->service->id,
+              'name_service' => $distribution->service->name);
 
-            $insert_data = array('id_distro' => $distribution->id,
-            'id_service' => $distribution->service->id,
-            'name_service' => $distribution->service->name);
+              $db->insert('itc_consumers', $insert_data);
 
-            $db->insert('itc_consumers', $insert_data);
-
+          }
+  
         }
 
     }

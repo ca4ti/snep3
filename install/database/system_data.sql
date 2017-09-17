@@ -83,4 +83,4 @@ INSERT INTO `regras_negocio` VALUES ('',0,'Internas - Ramal para Ramal','G:all',
 INSERT INTO `regras_negocio_actions` VALUES (1,0,'PBX_Rule_Action_CCustos'),(1,1,'PBX_Rule_Action_DiscarRamal');
 INSERT INTO `regras_negocio_actions_config` VALUES (1,0,'ccustos','9'),(1,1,'allow_voicemail','true'),(1,1,'dial_flags','twk'),(1,1,'dial_timeout','60'),(1,1,'diff_ring','false'),(1,1,'dont_overflow','false'),(1,1,'resolv_agent','false'),(1,1,'hangup_voicemail','true');
 
-INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('default', 'host_notification', 'http://api.opens.com.br/v2/notifications'), ("default","userfield","TS_AAMMDD_HHii_SR_DS"),("default","userfield_ud",""), ('default','host_inspect','http://api.opens.com.br/inspect');
+INSERT INTO `core_config` (`config_module`, `config_name`, `config_value`) VALUES ('default', 'host_notification', 'http://api.opens.com.br/v2/notifications'), ("default","userfield","TS_AAMMDD_HHii_SR_DS"),("default","userfield_ud",""), ('default','host_inspect','http://api.opens.com.br/inspect'), ('default','update_server','http://api.opens.com.br/snep');

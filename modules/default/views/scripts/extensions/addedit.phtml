@@ -384,43 +384,45 @@
                                                       </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                      <label class="col-sm-3 control-label"><?php echo $this->translate("Minute Control");?></label>
+                                                    <!-- <div class="form-group">
+                                                      <label class="col-sm-3 control-label"><?php //echo $this->translate("Minute Control");?></label>
                                                       <div class="col-sm-6">
                                                         <div class="checkbox">
                                                           <label>
                                                             <?php if (!empty($this->extension["time_total"])) { ?>
-                                                              <input type="checkbox" name="minute_control" id="minute_control" value="minute_control" checked /> <?php echo $this->translate("Enabled");?>
+                                                              <input type="checkbox" name="minute_control" id="minute_control" value="minute_control" checked /> <?php //echo $this->translate("Enabled");?>
                                                               <?php }else{ ?>
-                                                                <input type="checkbox" name="minute_control" value="minute_control" id="minute_control" /> <?php echo $this->translate("Enabled");?>
-                                                                <?php } ?>
+                                                                <input type="checkbox" name="minute_control" value="minute_control" id="minute_control" /> <?php //echo $this->translate("Enabled");?>
+                                                                <?php }
+                                                                //echo "<i> - (" . $this->translate("Only for external calls") . ")</i>";
+                                                                ?>
                                                               </label>
                                                             </div>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
 
 
-                                                        <div class="form-group">
-                                                          <label class="col-sm-3 control-label"><?php echo $this->translate("Time total");?></label>
+                                                        <!-- <div class="form-group">
+                                                          <label class="col-sm-3 control-label"><?php //echo $this->translate("Time total");?></label>
                                                           <div class="col-sm-6">
-                                                            <input type="text" class="form-control" name="timetotal" id="timetotal" placeholder='<?php echo $this->translate("Minutes")?>' value="<?php echo $this->timetotal;?>" />
+                                                            <input type="text" class="form-control" name="timetotal" id="timetotal" placeholder='<?php //echo $this->translate("Minutes")?>' value="<?php echo $this->timetotal;?>" />
                                                           </div>
                                                         </div>
 
                                                         <div>
-                                                          <label class="col-sm-3 control-label"><?php echo $this->translate("Control Type")?></label>
+                                                          <label class="col-sm-3 control-label"><?php// echo $this->translate("Control Type")?></label>
                                                           <label class="radio-inline">
-                                                            <input type="radio" name="controltype" id="Y" value="Y" <?php echo $this->Y;?>><?php echo $this->translate("Anually");?>
+                                                            <input type="radio" name="controltype" id="Y" value="Y" <?php //echo $this->Y;?>><?php //echo $this->translate("Anually");?>
                                                           </label>
 
                                                           <label class="radio-inline">
-                                                            <input type="radio" name="controltype" id="M" value="M" <?php echo $this->M;?>><?php echo $this->translate("Monthly");?>
+                                                            <input type="radio" name="controltype" id="M" value="M" <?php //echo $this->M;?>><?php //echo $this->translate("Monthly");?>
                                                           </label>
 
                                                           <label class="radio-inline">
-                                                            <input type="radio" name="controltype" id="D" value="D" <?php echo $this->D;?>><?php echo $this->translate("Daily");?>
+                                                            <input type="radio" name="controltype" id="D" value="D" <?php //echo $this->D;?>><?php //echo $this->translate("Daily");?>
                                                           </label>
-                                                        </div>
+                                                        </div> -->
 
 
                                                       </fieldset>

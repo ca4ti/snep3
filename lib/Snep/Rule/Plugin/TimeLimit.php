@@ -37,7 +37,7 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     protected $trunkController;
 
     /**
-     * trunkIsAllowed - Verifica se um tronco tem permissão de efetuar 
+     * trunkIsAllowed - Verifica se um tronco tem permissão de efetuar
      * ligação baseado no seu tempo
      * @param <int> $id
      * @return <boolean>
@@ -52,7 +52,7 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * extensioIsAllowed - Verifica se um ramal tem permissão para efetuar 
+     * extensioIsAllowed - Verifica se um ramal tem permissão para efetuar
      * ligações baseado no seu saldo de tempo
      * @param <int> $id
      * @return <boolean>
@@ -67,7 +67,7 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * preExecute - Verificamos antes de cada ação se um tronco será usado 
+     * preExecute - Verificamos antes de cada ação se um tronco será usado
      * e se o ramal/tronco tem permissão de fazer essa ligação
      * @param <int> $index
      * @throws PBX_Rule_Action_Exception_GoTo
@@ -78,12 +78,13 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
         if ($action instanceof DiscarTronco) {
             $log = Zend_Registry::get('log');
             $config = $action->getConfigArray();
-            $allowed = $this->trunkIsAllowed($config['tronco']);
 
             $requester = $this->asterisk->requestObj->getSrcObj();
             if ($requester instanceof Snep_Exten) {
                 $allowed = $allowed && $this->extensionIsAllowed($requester->getNumero());
             }
+
+            $allowed = $this->trunkIsAllowed($config['tronco']);
 
             if (!$allowed) {
                 throw new PBX_Rule_Action_Exception_GoTo($index + 1);
@@ -92,7 +93,7 @@ class Snep_Rule_Plugin_TimeLimit extends PBX_Rule_Plugin {
     }
 
     /**
-     * posExecute - A cada ação verificamos se alguma atualização nos tempos 
+     * posExecute - A cada ação verificamos se alguma atualização nos tempos
      * deve ser computada e se o bloqueio deve ser feito
      * @param <int> $index
      */

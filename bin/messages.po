@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 14:53-0300\n"
+"POT-Creation-Date: 2017-09-17 08:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -340,7 +340,7 @@ msgstr ""
 msgid "Add Multiples Extensions"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:260
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr ""
 
@@ -404,7 +404,7 @@ msgstr ""
 #: ../modules/default/views/scripts/tdm-links/index.phtml:9
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:9
 #: ../modules/default/views/scripts/queues/index.phtml:24
-#: ../modules/default/views/scripts/simulator/index.phtml:33
+#: ../modules/default/views/scripts/simulator/index.phtml:36
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:43
 #: ../modules/default/views/scripts/profiles/index.phtml:25
 #: ../modules/default/views/scripts/contacts/index.phtml:28
@@ -433,7 +433,7 @@ msgstr ""
 msgid "Add to dashboard"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:270
+#: ../modules/default/views/layouts/layout.phtml:275
 msgid "Add your External Trunks to make external Calls."
 msgstr ""
 
@@ -545,7 +545,7 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:70
+#: ../modules/callback/actions/CallbackAction.php:71
 msgid "Answer and play audio before hangup the call to call back."
 msgstr ""
 
@@ -562,7 +562,6 @@ msgstr ""
 msgid "Answered"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:413
 #: ../modules/default/views/scripts/trunks/addedit.phtml:422
 msgid "Anually"
 msgstr ""
@@ -881,7 +880,7 @@ msgstr ""
 msgid "Call back functionality for SNEP."
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:64
+#: ../modules/callback/actions/CallbackAction.php:65
 msgid "Call back the Caller number"
 msgstr ""
 
@@ -973,7 +972,7 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:203
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:22
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:49
-#: ../modules/default/views/scripts/extensions/addedit.phtml:432
+#: ../modules/default/views/scripts/extensions/addedit.phtml:434
 #: ../modules/default/views/scripts/khomp-links/index.phtml:66
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:98
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:74
@@ -1006,7 +1005,7 @@ msgstr ""
 msgid "Cannot remove. The following routes are using this dates alias: "
 msgstr ""
 
-#: ../modules/default/controllers/ExpressionAliasController.php:219
+#: ../modules/default/controllers/ExpressionAliasController.php:218
 msgid "Cannot remove. The following routes are using this expression alias: "
 msgstr ""
 
@@ -1036,6 +1035,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/cnl/index.phtml:28
 msgid "Central type "
+msgstr ""
+
+#: ../modules/default/views/scripts/newversion/index.phtml:5
+msgid "Changelog and Howto update"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/index.phtml:55
@@ -1116,7 +1119,7 @@ msgstr ""
 msgid "Closing date"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:177
+#: ../modules/default/views/layouts/layout.phtml:182
 msgid "Cloud Server Informations"
 msgstr ""
 
@@ -1280,10 +1283,6 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:411
-msgid "Control Type"
-msgstr ""
-
 #: ../modules/default/views/scripts/calls-report/view.phtml:46
 msgid "Conversation"
 msgstr ""
@@ -1323,8 +1322,7 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:89
-#: ../modules/default/controllers/SimulatorController.php:185
+#: ../modules/default/controllers/SimulatorController.php:193
 msgid "Current Day"
 msgstr ""
 
@@ -1375,7 +1373,6 @@ msgstr ""
 msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:421
 #: ../modules/default/views/scripts/trunks/addedit.phtml:430
 msgid "Daily"
 msgstr ""
@@ -1411,6 +1408,7 @@ msgstr ""
 msgid "Database username"
 msgstr ""
 
+#: ../modules/default/views/scripts/simulator/index.phtml:113
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:29
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:60
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:160
@@ -1424,6 +1422,10 @@ msgstr ""
 
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:63
 msgid "Date (YYYY-MM-DD)"
+msgstr ""
+
+#: ../modules/default/views/scripts/simulator/index.phtml:91
+msgid "Date and Time"
 msgstr ""
 
 #: ../modules/default/controllers/DatesAliasController.php:51
@@ -1493,7 +1495,7 @@ msgstr ""
 msgid "Define Tag"
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:137
+#: ../modules/default/controllers/SimulatorController.php:145
 msgid "Define Tag to "
 msgstr ""
 
@@ -1507,10 +1509,6 @@ msgstr ""
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:152
 msgid "Delay Qualification"
-msgstr ""
-
-#: ../modules/callback/actions/CallbackAction.php:68
-msgid "Delay trying call back"
 msgstr ""
 
 #: ../modules/billing/views/scripts/remove/remove.phtml:17
@@ -1538,14 +1536,14 @@ msgstr ""
 #: ../modules/default/views/scripts/users/index.phtml:70
 #: ../modules/default/views/scripts/remove/remove.phtml:24
 #: ../modules/default/controllers/DatesAliasController.php:162
-#: ../modules/default/controllers/CostCenterController.php:183
+#: ../modules/default/controllers/CostCenterController.php:187
 #: ../modules/default/controllers/SoundFilesController.php:275
 #: ../modules/default/controllers/ExtensionsController.php:683
 #: ../modules/default/controllers/ProfilesController.php:213
 #: ../modules/default/controllers/PickupGroupsController.php:217
 #: ../modules/default/controllers/RouteController.php:656
 #: ../modules/default/controllers/NotificationsController.php:103
-#: ../modules/default/controllers/ExpressionAliasController.php:211
+#: ../modules/default/controllers/ExpressionAliasController.php:210
 #: ../modules/default/controllers/ExtensionsGroupsController.php:231
 #: ../modules/default/controllers/ContactGroupsController.php:200
 #: ../modules/default/controllers/UsersController.php:189
@@ -1567,7 +1565,7 @@ msgstr ""
 msgid "Delete Dates Alias."
 msgstr ""
 
-#: ../modules/default/controllers/ExpressionAliasController.php:228
+#: ../modules/default/controllers/ExpressionAliasController.php:227
 msgid "Delete Expression Alias."
 msgstr ""
 
@@ -1619,7 +1617,7 @@ msgstr ""
 msgid "Delete Sound Files?"
 msgstr ""
 
-#: ../modules/default/controllers/CostCenterController.php:197
+#: ../modules/default/controllers/CostCenterController.php:201
 msgid "Delete Tag."
 msgstr ""
 
@@ -1685,8 +1683,8 @@ msgstr ""
 msgid "Destinity"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:84
-#: ../modules/default/views/scripts/simulator/index.phtml:111
+#: ../modules/default/views/scripts/simulator/index.phtml:87
+#: ../modules/default/views/scripts/simulator/index.phtml:110
 #: ../modules/default/views/scripts/route/index.phtml:96
 #: ../modules/default/views/scripts/route/elements/dst.phtml:3
 #: ../modules/default/controllers/CallsReportController.php:505
@@ -1741,7 +1739,7 @@ msgstr ""
 msgid "Dial extension"
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:140
+#: ../modules/default/controllers/SimulatorController.php:148
 msgid "Dial through Trunk "
 msgstr ""
 
@@ -1753,7 +1751,7 @@ msgstr ""
 msgid "Dial to a snep extension."
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:150
+#: ../modules/default/controllers/SimulatorController.php:158
 #, php-format
 msgid "Dial to extension %s"
 msgstr ""
@@ -1781,7 +1779,7 @@ msgstr ""
 msgid "Direct Media"
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:155
+#: ../modules/default/controllers/SimulatorController.php:163
 #, php-format
 msgid "Direct to queue %s"
 msgstr ""
@@ -1901,7 +1899,7 @@ msgstr ""
 #: ../modules/default/controllers/RouteController.php:313
 #: ../modules/default/controllers/ActionConfigsController.php:107
 #: ../modules/default/controllers/MusicOnHoldController.php:157
-#: ../modules/default/controllers/ExpressionAliasController.php:139
+#: ../modules/default/controllers/ExpressionAliasController.php:138
 #: ../modules/default/controllers/ExtensionsGroupsController.php:140
 #: ../modules/default/controllers/ContactGroupsController.php:127
 #: ../modules/default/controllers/IndexController.php:280
@@ -1961,8 +1959,6 @@ msgstr ""
 #: ../modules/default/views/scripts/extensions/addedit.phtml:353
 #: ../modules/default/views/scripts/extensions/addedit.phtml:378
 #: ../modules/default/views/scripts/extensions/addedit.phtml:380
-#: ../modules/default/views/scripts/extensions/addedit.phtml:393
-#: ../modules/default/views/scripts/extensions/addedit.phtml:395
 #: ../modules/default/views/scripts/trunks/addedit.phtml:197
 #: ../modules/default/views/scripts/trunks/addedit.phtml:379
 #: ../modules/default/views/scripts/trunks/addedit.phtml:391
@@ -2172,22 +2168,25 @@ msgstr ""
 #: ../modules/default/views/scripts/route/add_edit.phtml:76
 #: ../modules/default/controllers/ExpressionAliasController.php:51
 #: ../modules/default/controllers/ExpressionAliasController.php:73
-#: ../modules/default/controllers/ExpressionAliasController.php:138
-#: ../modules/default/controllers/ExpressionAliasController.php:210
+#: ../modules/default/controllers/ExpressionAliasController.php:137
+#: ../modules/default/controllers/ExpressionAliasController.php:209
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
 msgid "Expression Alias"
 msgstr ""
 
 #: ../modules/loguser/controllers/LoguserController.php:44
-#: ../modules/loguser/controllers/LoguserController.php:45
 msgid "Expression Alias Actions"
+msgstr ""
+
+#: ../modules/loguser/controllers/LoguserController.php:45
+msgid "Expression Alias Dates"
 msgstr ""
 
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
 msgid "Expression Aliases"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:49
+#: ../modules/default/views/scripts/simulator/index.phtml:52
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:6
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:34
 #: ../modules/default/views/scripts/extensions/index.phtml:53
@@ -2298,7 +2297,7 @@ msgstr ""
 msgid "Failed to open file %s with write permission."
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:152
+#: ../modules/default/controllers/SimulatorController.php:160
 msgid "Failure on trial to dial extension %: non existent extension"
 msgstr ""
 
@@ -2370,7 +2369,7 @@ msgstr ""
 msgid "Flavio H. Somensi [ flavio@opens.com.br ]- Developer"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:83
+#: ../modules/default/views/scripts/simulator/index.phtml:86
 msgid "For"
 msgstr ""
 
@@ -2417,8 +2416,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:94
-#: ../modules/default/controllers/SimulatorController.php:191
+#: ../modules/default/controllers/SimulatorController.php:199
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Friday"
 msgstr ""
@@ -2495,12 +2493,12 @@ msgstr ""
 msgid "Hangup the call after voicemail"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:93
-#: ../modules/default/views/layouts/layout.phtml:161
+#: ../modules/default/views/layouts/layout.phtml:98
+#: ../modules/default/views/layouts/layout.phtml:166
 msgid "Help"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:255
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
@@ -2522,6 +2520,7 @@ msgstr ""
 msgid "Hostname"
 msgstr ""
 
+#: ../modules/default/views/scripts/simulator/index.phtml:111
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Hour"
 msgstr ""
@@ -2668,7 +2667,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:169
+#: ../modules/default/views/layouts/layout.phtml:174
 msgid "Information"
 msgstr ""
 
@@ -2878,7 +2877,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:185
+#: ../modules/default/views/layouts/layout.phtml:190
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr ""
@@ -2971,12 +2970,10 @@ msgstr ""
 msgid "Minute"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:388
 #: ../modules/default/views/scripts/trunks/addedit.phtml:406
 msgid "Minute Control"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:406
 #: ../modules/default/views/scripts/trunks/addedit.phtml:438
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Minutes"
@@ -3005,13 +3002,12 @@ msgstr ""
 msgid "Module Settings"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:203
+#: ../modules/default/views/layouts/layout.phtml:208
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 msgid "Modules"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:90
-#: ../modules/default/controllers/SimulatorController.php:187
+#: ../modules/default/controllers/SimulatorController.php:195
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Monday"
 msgstr ""
@@ -3024,7 +3020,6 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:417
 #: ../modules/default/views/scripts/trunks/addedit.phtml:426
 msgid "Monthly"
 msgstr ""
@@ -3158,6 +3153,14 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
+#: ../modules/default/views/scripts/systemstatus/index.phtml:364
+msgid "New Version Available:"
+msgstr ""
+
+#: ../modules/default/controllers/NewversionController.php:36
+msgid "New Version Updates"
+msgstr ""
+
 #: ../modules/default/controllers/SoundFilesController.php:161
 msgid "New sound file added"
 msgstr ""
@@ -3274,7 +3277,7 @@ msgstr ""
 msgid "No records found."
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:113
+#: ../modules/default/controllers/SimulatorController.php:120
 msgid "No rule found."
 msgstr ""
 
@@ -3330,8 +3333,8 @@ msgid "Number of Lines"
 msgstr ""
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:243
-#: ../modules/default/views/scripts/extensions/addedit.phtml:497
-#: ../modules/default/views/scripts/extensions/addedit.phtml:503
+#: ../modules/default/views/scripts/extensions/addedit.phtml:499
+#: ../modules/default/views/scripts/extensions/addedit.phtml:505
 msgid "Numbers only please"
 msgstr ""
 
@@ -3633,9 +3636,9 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/addedit.phtml:241
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:232
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:71
-#: ../modules/default/views/scripts/extensions/addedit.phtml:495
-#: ../modules/default/views/scripts/extensions/addedit.phtml:501
-#: ../modules/default/views/scripts/extensions/addedit.phtml:513
+#: ../modules/default/views/scripts/extensions/addedit.phtml:497
+#: ../modules/default/views/scripts/extensions/addedit.phtml:503
+#: ../modules/default/views/scripts/extensions/addedit.phtml:515
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:131
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:102
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:77
@@ -3700,9 +3703,9 @@ msgstr ""
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
 #: ../modules/default/views/scripts/contacts/addedit.phtml:233
 #: ../modules/default/views/scripts/contacts/addedit.phtml:242
-#: ../modules/default/views/scripts/extensions/addedit.phtml:496
-#: ../modules/default/views/scripts/extensions/addedit.phtml:502
-#: ../modules/default/views/scripts/extensions/addedit.phtml:514
+#: ../modules/default/views/scripts/extensions/addedit.phtml:498
+#: ../modules/default/views/scripts/extensions/addedit.phtml:504
+#: ../modules/default/views/scripts/extensions/addedit.phtml:516
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:132
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:103
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:78
@@ -3955,7 +3958,7 @@ msgstr ""
 msgid "Redial"
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:159
+#: ../modules/default/controllers/SimulatorController.php:167
 #, php-format
 msgid "Redirect to context %s"
 msgstr ""
@@ -4082,12 +4085,12 @@ msgstr ""
 msgid "Request Sent"
 msgstr ""
 
-#: ../modules/default/controllers/SimulatorController.php:157
+#: ../modules/default/controllers/SimulatorController.php:165
 msgid "Request password"
 msgstr ""
 
 #: ../modules/default/controllers/ExpressionAliasController.php:103
-#: ../modules/default/controllers/ExpressionAliasController.php:174
+#: ../modules/default/controllers/ExpressionAliasController.php:173
 msgid "Required value"
 msgstr ""
 
@@ -4242,7 +4245,7 @@ msgid "Rule ignored by priority"
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:146
-msgid "Rule invalid because of time"
+msgid "Rule invalid because of date and time"
 msgstr ""
 
 #: ../modules/default/views/scripts/simulator/index.phtml:145
@@ -4284,12 +4287,15 @@ msgstr ""
 msgid "SNEP - the Queue "
 msgstr ""
 
+#: ../modules/default/views/scripts/systemstatus/index.phtml:348
+msgid "SNEP Version"
+msgstr ""
+
 #: ../modules/default/views/scripts/trunks/addedit.phtml:361
 msgid "Same on both servers"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:95
-#: ../modules/default/controllers/SimulatorController.php:192
+#: ../modules/default/controllers/SimulatorController.php:200
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Saturday"
 msgstr ""
@@ -4310,7 +4316,7 @@ msgstr ""
 #: ../modules/default/views/scripts/contacts/import.phtml:99
 #: ../modules/default/views/scripts/contacts/addedit.phtml:162
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:201
-#: ../modules/default/views/scripts/extensions/addedit.phtml:430
+#: ../modules/default/views/scripts/extensions/addedit.phtml:432
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:96
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:72
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:46
@@ -4526,7 +4532,7 @@ msgstr ""
 msgid "Set the relationship column x data"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:152
+#: ../modules/default/views/layouts/layout.phtml:157
 msgid "Settings"
 msgstr ""
 
@@ -4674,9 +4680,9 @@ msgstr ""
 msgid "Sound file updated"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:47
-#: ../modules/default/views/scripts/simulator/index.phtml:77
-#: ../modules/default/views/scripts/simulator/index.phtml:110
+#: ../modules/default/views/scripts/simulator/index.phtml:50
+#: ../modules/default/views/scripts/simulator/index.phtml:80
+#: ../modules/default/views/scripts/simulator/index.phtml:109
 #: ../modules/default/views/scripts/route/index.phtml:95
 #: ../modules/default/views/scripts/route/elements/src.phtml:3
 #: ../modules/default/views/scripts/calls-report/view.phtml:42
@@ -4715,11 +4721,11 @@ msgstr ""
 msgid "Specify"
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:66
+#: ../modules/callback/actions/CallbackAction.php:67
 msgid "Specify the source call number"
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:67
+#: ../modules/callback/actions/CallbackAction.php:68
 msgid ""
 "Specify the source number to make the call back to the caller. This call "
 "will be processed by the Outgoing Routes with this source. Leave blank to "
@@ -4810,8 +4816,7 @@ msgstr ""
 msgid "Suffix"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:96
-#: ../modules/default/controllers/SimulatorController.php:193
+#: ../modules/default/controllers/SimulatorController.php:201
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Sunday"
 msgstr ""
@@ -4905,7 +4910,7 @@ msgstr ""
 #: ../modules/default/controllers/CostCenterController.php:50
 #: ../modules/default/controllers/CostCenterController.php:82
 #: ../modules/default/controllers/CostCenterController.php:127
-#: ../modules/default/controllers/CostCenterController.php:182
+#: ../modules/default/controllers/CostCenterController.php:186
 #: ../lib/PBX/Rule/ActionConfig.php:248
 msgid "Tag"
 msgstr ""
@@ -4964,7 +4969,7 @@ msgstr ""
 msgid "The Recorded Files Path is required."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:275
+#: ../modules/default/views/layouts/layout.phtml:280
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
@@ -4978,7 +4983,7 @@ msgstr ""
 msgid "The board is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:509
+#: ../modules/default/views/scripts/extensions/addedit.phtml:511
 msgid "The channel is required"
 msgstr ""
 
@@ -4995,7 +5000,7 @@ msgid ""
 "The contacts group will be deleted. After that, you have no way get it back."
 msgstr ""
 
-#: ../modules/default/controllers/CostCenterController.php:198
+#: ../modules/default/controllers/CostCenterController.php:202
 msgid ""
 "The cost center will be deleted. After that, you have no way get it back."
 msgstr ""
@@ -5025,7 +5030,7 @@ msgstr ""
 msgid "The directory name is required"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:517
+#: ../modules/default/views/scripts/extensions/addedit.phtml:519
 #: ../modules/default/views/scripts/users/addedit.phtml:121
 #: ../modules/default/views/scripts/register/index.phtml:95
 msgid "The e-mail is required"
@@ -5045,14 +5050,14 @@ msgstr ""
 msgid "The excluded group has associated contacts."
 msgstr ""
 
-#: ../modules/default/controllers/ExpressionAliasController.php:229
+#: ../modules/default/controllers/ExpressionAliasController.php:228
 msgid ""
 "The expression alias will be deleted. After that, you have no way get it "
 "back."
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:228
-#: ../modules/default/views/scripts/extensions/addedit.phtml:491
+#: ../modules/default/views/scripts/extensions/addedit.phtml:493
 msgid "The extension group is required"
 msgstr ""
 
@@ -5067,7 +5072,7 @@ msgid "The extension group will be deleted. Are you sure?."
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:231
-#: ../modules/default/views/scripts/extensions/addedit.phtml:494
+#: ../modules/default/views/scripts/extensions/addedit.phtml:496
 msgid "The extension is required"
 msgstr ""
 
@@ -5098,7 +5103,7 @@ msgstr ""
 msgid "The first name is required"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:265
+#: ../modules/default/views/layouts/layout.phtml:270
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr ""
 
@@ -5171,7 +5176,7 @@ msgstr ""
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:88
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
 #: ../modules/default/views/scripts/contacts/addedit.phtml:231
-#: ../modules/default/views/scripts/extensions/addedit.phtml:512
+#: ../modules/default/views/scripts/extensions/addedit.phtml:514
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:101
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
@@ -5197,7 +5202,7 @@ msgstr ""
 #: ../modules/default/views/layouts/register.phtml:338
 #: ../modules/default/views/layouts/register.phtml:389
 #: ../modules/default/views/layouts/loginregister.phtml:87
-#: ../modules/default/views/scripts/extensions/addedit.phtml:500
+#: ../modules/default/views/scripts/extensions/addedit.phtml:502
 #: ../modules/default/views/scripts/users/addedit.phtml:116
 #: ../modules/default/views/scripts/register/index.phtml:90
 msgid "The password is required"
@@ -5250,7 +5255,7 @@ msgid "The time range need to be in the formats: HH:MM-HH:MM"
 msgstr ""
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:236
-#: ../modules/default/views/scripts/extensions/addedit.phtml:506
+#: ../modules/default/views/scripts/extensions/addedit.phtml:508
 msgid "The trunk is required"
 msgstr ""
 
@@ -5282,7 +5287,7 @@ msgid ""
 msgstr ""
 
 #: ../modules/default/controllers/ExpressionAliasController.php:98
-#: ../modules/default/controllers/ExpressionAliasController.php:169
+#: ../modules/default/controllers/ExpressionAliasController.php:168
 msgid ""
 "Their alias has invalid character. Accents are not allowed, empty value "
 "between the keys, blanks and special characters except( # % | . - _ )"
@@ -5308,11 +5313,11 @@ msgid ""
 "another group for these extensions."
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:69
+#: ../modules/callback/actions/CallbackAction.php:70
 msgid "This is the time in seconds the system will try contact the caller"
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:250
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5323,14 +5328,13 @@ msgid ""
 "This module make the billing of calls putting price based on trunks and time."
 msgstr ""
 
-#: ../modules/callback/actions/CallbackAction.php:65
+#: ../modules/callback/actions/CallbackAction.php:66
 msgid ""
 "This will be the Inbound(DID) number which call will be redirected when the "
 "caller answer the call. Could be any Destiny Route Rule."
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:93
-#: ../modules/default/controllers/SimulatorController.php:190
+#: ../modules/default/controllers/SimulatorController.php:198
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Thursday"
 msgstr ""
@@ -5342,7 +5346,6 @@ msgid ""
 msgstr ""
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:72
-#: ../modules/default/views/scripts/simulator/index.phtml:112
 msgid "Time"
 msgstr ""
 
@@ -5364,13 +5367,20 @@ msgstr ""
 msgid "Time of validity of the code was expired"
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:404
 #: ../modules/default/views/scripts/trunks/addedit.phtml:436
 msgid "Time total"
 msgstr ""
 
 #: ../modules/default/views/scripts/queues/index.phtml:46
 msgid "Timeout"
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:117
+msgid "Timeout to try call back"
+msgstr ""
+
+#: ../modules/callback/actions/CallbackAction.php:69
+msgid "Timeout to trying call back"
 msgstr ""
 
 #: ../modules/default/views/scripts/parameters/index.phtml:178
@@ -5400,6 +5410,10 @@ msgid ""
 "your connection and try again."
 msgstr ""
 
+#: ../modules/default/views/scripts/newversion/index.phtml:13
+msgid "To update your version just run in a terminal:"
+msgstr ""
+
 #: ../modules/default/views/scripts/ranking-report/view.phtml:46
 #: ../modules/default/views/scripts/ranking-report/view.phtml:49
 #: ../modules/default/views/scripts/systemstatus/index.phtml:159
@@ -5416,7 +5430,7 @@ msgstr ""
 msgid "Totals"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:50
+#: ../modules/default/views/scripts/simulator/index.phtml:53
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:184
 #: ../modules/default/views/scripts/extensions/addedit.phtml:284
 #: ../modules/default/views/scripts/trunks/addedit.phtml:7
@@ -5444,8 +5458,7 @@ msgstr ""
 msgid "Trunks Configuration"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:91
-#: ../modules/default/controllers/SimulatorController.php:188
+#: ../modules/default/controllers/SimulatorController.php:196
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Tuesday"
 msgstr ""
@@ -5516,7 +5529,7 @@ msgstr ""
 msgid "Unanswerd"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:51
+#: ../modules/default/views/scripts/simulator/index.phtml:54
 msgid "Undefined"
 msgstr ""
 
@@ -5729,13 +5742,12 @@ msgstr ""
 msgid "We've sent an access code to the email:"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:92
-#: ../modules/default/controllers/SimulatorController.php:189
+#: ../modules/default/controllers/SimulatorController.php:197
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Wednesday"
 msgstr ""
 
-#: ../modules/default/views/scripts/simulator/index.phtml:113
+#: ../modules/default/views/scripts/simulator/index.phtml:112
 msgid "Week Day"
 msgstr ""
 
@@ -5747,7 +5759,7 @@ msgstr ""
 msgid "Welcome to Intercomunexão."
 msgstr ""
 
-#: ../modules/default/views/layouts/layout.phtml:245
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid ""
 "Welcome to SNEP. <br>\\\n"
 "      Your IP Telephony Plataform.<br>Click Next to understand the basic "
@@ -5849,6 +5861,10 @@ msgid ""
 "<i>CONGESTION</i> and follow the Routes Actions."
 msgstr ""
 
+#: ../modules/default/views/scripts/newversion/index.phtml:21
+msgid "You can get it <a target=_blank href='http://www.sneppbx.com'>here</a>."
+msgstr ""
+
 #: ../modules/default/controllers/NotificationsController.php:52
 msgid "You do not have any notifications."
 msgstr ""
@@ -5931,7 +5947,7 @@ msgstr ""
 msgid "You don't have trunks registered in your system."
 msgstr ""
 
-#: ../modules/default/controllers/CostCenterController.php:191
+#: ../modules/default/controllers/CostCenterController.php:195
 msgid ""
 "You have data connections with this cost center, so this exclusion is not "
 "permitted."
@@ -5973,7 +5989,7 @@ msgstr ""
 msgid "Your browser does not support the audio element."
 msgstr ""
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:518
+#: ../modules/default/views/scripts/extensions/addedit.phtml:520
 #: ../modules/default/views/scripts/users/addedit.phtml:122
 #: ../modules/default/views/scripts/register/index.phtml:96
 #: ../modules/default/views/scripts/parameters/index.phtml:338

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 14:53-0300\n"
+"POT-Creation-Date: 2017-09-17 08:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Douglas Conrad <douglas.conrad@opens.com.br>\n"
 "Language-Team: \n"
@@ -42,9 +42,9 @@ msgid ""
 "Software Foundation, either version 3 of the License, or (at your option) any "
 "later version.\n"
 "            <br /><br />\n"
-"            SNEP is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"            SNEP is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details.\n"
 "            <br /><br />\n"
 "            You should have received a copy of the GNU General Public License "
@@ -60,8 +60,8 @@ msgid ""
 "            We collect information to provide better services to all of our "
 "users – from figuring out basic stuff like which language you speak, to more "
 "complex things <br>\n"
-"            like which hardwares manufacturer, Extensions and queues quantities "
-"you have.\n"
+"            like which hardwares manufacturer, Extensions and queues "
+"quantities you have.\n"
 "            "
 msgstr ""
 "\n"
@@ -69,8 +69,8 @@ msgstr ""
 "uso para melhorar sua experiência.<br>\n"
 "            Nós coletamos informações para prover melhores serviços para todos "
 "os usuários – desde estatísticas básicas como o idioma que você fala até mais "
-"complexas como fabricantes de hardware utilizados, quantidade de ramais e filas "
-"que você utiliza."
+"complexas como fabricantes de hardware utilizados, quantidade de ramais e "
+"filas que você utiliza."
 
 #: ../modules/default/actions/DiscarTronco.php:398
 msgid ""
@@ -354,7 +354,7 @@ msgstr "Adicionar Múltiplos"
 msgid "Add Multiples Extensions"
 msgstr "Adicionar Múltiplos Ramais"
 
-#: ../modules/default/views/layouts/layout.phtml:260
+#: ../modules/default/views/layouts/layout.phtml:265
 msgid "Add Peers, Trunks, Contacts and more."
 msgstr "Adicionar Ramais, Troncos, Contatos e mais"
 
@@ -418,7 +418,7 @@ msgstr "Adicionar página ao Dashboard"
 #: ../modules/default/views/scripts/tdm-links/index.phtml:9
 #: ../modules/default/views/scripts/errors-khomp/index.phtml:9
 #: ../modules/default/views/scripts/queues/index.phtml:24
-#: ../modules/default/views/scripts/simulator/index.phtml:33
+#: ../modules/default/views/scripts/simulator/index.phtml:36
 #: ../modules/default/views/scripts/music-on-hold/index.phtml:43
 #: ../modules/default/views/scripts/profiles/index.phtml:25
 #: ../modules/default/views/scripts/contacts/index.phtml:28
@@ -447,7 +447,7 @@ msgstr "Adicionar página ao Dashboard"
 msgid "Add to dashboard"
 msgstr "Adicionar a dashboard"
 
-#: ../modules/default/views/layouts/layout.phtml:270
+#: ../modules/default/views/layouts/layout.phtml:275
 msgid "Add your External Trunks to make external Calls."
 msgstr "Adicionar um Tronco Externo para fazer ligações à distância"
 
@@ -559,7 +559,7 @@ msgstr "Analítico"
 msgid "Answer"
 msgstr "Atendida"
 
-#: ../modules/callback/actions/CallbackAction.php:70
+#: ../modules/callback/actions/CallbackAction.php:71
 msgid "Answer and play audio before hangup the call to call back."
 msgstr ""
 "Antenda e toque o audio antes de desligar para fazer a ligação de retorno."
@@ -577,7 +577,6 @@ msgstr "Atendida"
 msgid "Answered"
 msgstr "Atendida"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:413
 #: ../modules/default/views/scripts/trunks/addedit.phtml:422
 msgid "Anually"
 msgstr "Anual"
@@ -833,8 +832,8 @@ msgid ""
 "where you will have access to exclusive solutions, high-quality support and a "
 "constantly evolving technology. <br>Access: itc.opens.com.br"
 msgstr ""
-"Ao registrar seu SNEP, você se conecta ao portal de Intercomunexão. Portal onde "
-"você terá acesso a soluções exclusivas, suporte de alta qualidade e uma "
+"Ao registrar seu SNEP, você se conecta ao portal de Intercomunexão. Portal "
+"onde você terá acesso a soluções exclusivas, suporte de alta qualidade e uma "
 "tecnologia em constante evolução. <br> Acesse: itc.opens.com.br"
 
 #: ../modules/default/controllers/CnlController.php:40
@@ -900,7 +899,7 @@ msgstr "Tempo de Ligação"
 msgid "Call back functionality for SNEP."
 msgstr "Funcionalidade de Callback para o SNEP"
 
-#: ../modules/callback/actions/CallbackAction.php:64
+#: ../modules/callback/actions/CallbackAction.php:65
 msgid "Call back the Caller number"
 msgstr "Liga de volta para o Número Chamador"
 
@@ -992,7 +991,7 @@ msgstr "Chamadas completadas"
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:203
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:22
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:49
-#: ../modules/default/views/scripts/extensions/addedit.phtml:432
+#: ../modules/default/views/scripts/extensions/addedit.phtml:434
 #: ../modules/default/views/scripts/khomp-links/index.phtml:66
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:98
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:74
@@ -1027,7 +1026,7 @@ msgid "Cannot remove. The following routes are using this dates alias: "
 msgstr ""
 "Não foi possível remover. As seguintes rotas estão usando este alias de data:"
 
-#: ../modules/default/controllers/ExpressionAliasController.php:219
+#: ../modules/default/controllers/ExpressionAliasController.php:218
 msgid "Cannot remove. The following routes are using this expression alias: "
 msgstr ""
 "Não é possível apagar. As seguinte rotas estão utilizando esta alias de "
@@ -1061,6 +1060,10 @@ msgstr "Celular"
 #: ../modules/default/views/scripts/cnl/index.phtml:28
 msgid "Central type "
 msgstr "Tipo de central"
+
+#: ../modules/default/views/scripts/newversion/index.phtml:5
+msgid "Changelog and Howto update"
+msgstr ""
 
 #: ../modules/default/views/scripts/extensions/index.phtml:55
 #: ../modules/default/views/scripts/extensions/addedit.phtml:263
@@ -1140,7 +1143,7 @@ msgstr "Chave do Cliente"
 msgid "Closing date"
 msgstr "Dia de Fechamento"
 
-#: ../modules/default/views/layouts/layout.phtml:177
+#: ../modules/default/views/layouts/layout.phtml:182
 msgid "Cloud Server Informations"
 msgstr ""
 
@@ -1304,10 +1307,6 @@ msgstr "Contexto"
 msgid "Contrast"
 msgstr "Contraste"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:411
-msgid "Control Type"
-msgstr "Tipo de Controle"
-
 #: ../modules/default/views/scripts/calls-report/view.phtml:46
 msgid "Conversation"
 msgstr "Conversação"
@@ -1347,8 +1346,7 @@ msgstr "País"
 msgid "Created"
 msgstr "Criado em"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:89
-#: ../modules/default/controllers/SimulatorController.php:185
+#: ../modules/default/controllers/SimulatorController.php:193
 msgid "Current Day"
 msgstr "Dia Atual"
 
@@ -1399,7 +1397,6 @@ msgstr "Número do modo de discagem DTMF"
 msgid "Daian Conrad [ daian.conrad@opens.com.br ] - Asterisk specialist"
 msgstr "Daian Conrad [ daian.conrad@opens.com.br ] - Especialista em Asterisk"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:421
 #: ../modules/default/views/scripts/trunks/addedit.phtml:430
 msgid "Daily"
 msgstr "Diariamente"
@@ -1435,6 +1432,7 @@ msgstr "Senha da base de dados"
 msgid "Database username"
 msgstr "Usuário da base de dados"
 
+#: ../modules/default/views/scripts/simulator/index.phtml:113
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:29
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:60
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:160
@@ -1449,6 +1447,10 @@ msgstr "Data"
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:63
 msgid "Date (YYYY-MM-DD)"
 msgstr "Data (YYYY-MM-DD)"
+
+#: ../modules/default/views/scripts/simulator/index.phtml:91
+msgid "Date and Time"
+msgstr "Data e Hora"
 
 #: ../modules/default/controllers/DatesAliasController.php:51
 #: ../modules/default/controllers/DatesAliasController.php:73
@@ -1517,7 +1519,7 @@ msgstr "Valor padrão para o Controle de Qualidade"
 msgid "Define Tag"
 msgstr "Definir Tag"
 
-#: ../modules/default/controllers/SimulatorController.php:137
+#: ../modules/default/controllers/SimulatorController.php:145
 msgid "Define Tag to "
 msgstr "Definir Tag para"
 
@@ -1532,10 +1534,6 @@ msgstr "Define o número de dí­gitos par ao cadastro de um ramal"
 #: ../modules/default/views/scripts/trunks/addedit.phtml:152
 msgid "Delay Qualification"
 msgstr "Controle de Qualidade"
-
-#: ../modules/callback/actions/CallbackAction.php:68
-msgid "Delay trying call back"
-msgstr "Atraso para ligar de volta"
 
 #: ../modules/billing/views/scripts/remove/remove.phtml:17
 #: ../modules/billing/views/scripts/telcos/index.phtml:66
@@ -1562,14 +1560,14 @@ msgstr "Atraso para ligar de volta"
 #: ../modules/default/views/scripts/users/index.phtml:70
 #: ../modules/default/views/scripts/remove/remove.phtml:24
 #: ../modules/default/controllers/DatesAliasController.php:162
-#: ../modules/default/controllers/CostCenterController.php:183
+#: ../modules/default/controllers/CostCenterController.php:187
 #: ../modules/default/controllers/SoundFilesController.php:275
 #: ../modules/default/controllers/ExtensionsController.php:683
 #: ../modules/default/controllers/ProfilesController.php:213
 #: ../modules/default/controllers/PickupGroupsController.php:217
 #: ../modules/default/controllers/RouteController.php:656
 #: ../modules/default/controllers/NotificationsController.php:103
-#: ../modules/default/controllers/ExpressionAliasController.php:211
+#: ../modules/default/controllers/ExpressionAliasController.php:210
 #: ../modules/default/controllers/ExtensionsGroupsController.php:231
 #: ../modules/default/controllers/ContactGroupsController.php:200
 #: ../modules/default/controllers/UsersController.php:189
@@ -1591,7 +1589,7 @@ msgstr "Deletar Grupo de Contato"
 msgid "Delete Dates Alias."
 msgstr "Remover Alias de Datas"
 
-#: ../modules/default/controllers/ExpressionAliasController.php:228
+#: ../modules/default/controllers/ExpressionAliasController.php:227
 msgid "Delete Expression Alias."
 msgstr "Deletar Alias de Expressão Regular"
 
@@ -1643,7 +1641,7 @@ msgstr "Deletar Arquivos de Som."
 msgid "Delete Sound Files?"
 msgstr "Apagar Arquivos de Som?"
 
-#: ../modules/default/controllers/CostCenterController.php:197
+#: ../modules/default/controllers/CostCenterController.php:201
 msgid "Delete Tag."
 msgstr "Apagar Tag"
 
@@ -1709,8 +1707,8 @@ msgstr "Número de Destino"
 msgid "Destinity"
 msgstr "Destino"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:84
-#: ../modules/default/views/scripts/simulator/index.phtml:111
+#: ../modules/default/views/scripts/simulator/index.phtml:87
+#: ../modules/default/views/scripts/simulator/index.phtml:110
 #: ../modules/default/views/scripts/route/index.phtml:96
 #: ../modules/default/views/scripts/route/elements/dst.phtml:3
 #: ../modules/default/controllers/CallsReportController.php:505
@@ -1768,7 +1766,7 @@ msgstr "Discar para um ramal registrado no SNEP"
 msgid "Dial extension"
 msgstr "Discar para Ramal"
 
-#: ../modules/default/controllers/SimulatorController.php:140
+#: ../modules/default/controllers/SimulatorController.php:148
 msgid "Dial through Trunk "
 msgstr "Discar através do Tronco"
 
@@ -1780,7 +1778,7 @@ msgstr "Discar através do Tronco"
 msgid "Dial to a snep extension."
 msgstr "Discar para um ramal snep."
 
-#: ../modules/default/controllers/SimulatorController.php:150
+#: ../modules/default/controllers/SimulatorController.php:158
 #, php-format
 msgid "Dial to extension %s"
 msgstr "Discar para o ramal  %s"
@@ -1808,7 +1806,7 @@ msgstr "Dina Jumann [ dina.jumann@opens.com.br ] - Web designer "
 msgid "Direct Media"
 msgstr "Direct Media"
 
-#: ../modules/default/controllers/SimulatorController.php:155
+#: ../modules/default/controllers/SimulatorController.php:163
 #, php-format
 msgid "Direct to queue %s"
 msgstr "Direcionar para fila %s"
@@ -1897,7 +1895,8 @@ msgstr "Duração (segundos)"
 
 #: ../modules/default/actions/EmailAction.php:67
 msgid "E-mail address. Split with ',' to use more than one email address."
-msgstr "Endereço de email: Separe com ',' para usar mais de um endereço de email."
+msgstr ""
+"Endereço de email: Separe com ',' para usar mais de um endereço de email."
 
 #: ../modules/billing/views/scripts/telcos/index.phtml:64
 #: ../modules/billing/views/scripts/billing/index.phtml:60
@@ -1928,7 +1927,7 @@ msgstr "Endereço de email: Separe com ',' para usar mais de um endereço de ema
 #: ../modules/default/controllers/RouteController.php:313
 #: ../modules/default/controllers/ActionConfigsController.php:107
 #: ../modules/default/controllers/MusicOnHoldController.php:157
-#: ../modules/default/controllers/ExpressionAliasController.php:139
+#: ../modules/default/controllers/ExpressionAliasController.php:138
 #: ../modules/default/controllers/ExtensionsGroupsController.php:140
 #: ../modules/default/controllers/ContactGroupsController.php:127
 #: ../modules/default/controllers/IndexController.php:280
@@ -1988,8 +1987,6 @@ msgstr "Ativar Gravação"
 #: ../modules/default/views/scripts/extensions/addedit.phtml:353
 #: ../modules/default/views/scripts/extensions/addedit.phtml:378
 #: ../modules/default/views/scripts/extensions/addedit.phtml:380
-#: ../modules/default/views/scripts/extensions/addedit.phtml:393
-#: ../modules/default/views/scripts/extensions/addedit.phtml:395
 #: ../modules/default/views/scripts/trunks/addedit.phtml:197
 #: ../modules/default/views/scripts/trunks/addedit.phtml:379
 #: ../modules/default/views/scripts/trunks/addedit.phtml:391
@@ -2014,7 +2011,8 @@ msgstr "Entre com a chave de confirmação"
 
 #: ../modules/default/views/scripts/auth/redefine.phtml:15
 msgid ""
-"Enter your user to send a redefinition of the password to your registered email "
+"Enter your user to send a redefinition of the password to your registered "
+"email "
 msgstr ""
 "Digite seu usuário para enviarmos uma redefinição da senha para o seu e-mail "
 "cadastrado"
@@ -2200,22 +2198,25 @@ msgstr "Expressão"
 #: ../modules/default/views/scripts/route/add_edit.phtml:76
 #: ../modules/default/controllers/ExpressionAliasController.php:51
 #: ../modules/default/controllers/ExpressionAliasController.php:73
-#: ../modules/default/controllers/ExpressionAliasController.php:138
-#: ../modules/default/controllers/ExpressionAliasController.php:210
+#: ../modules/default/controllers/ExpressionAliasController.php:137
+#: ../modules/default/controllers/ExpressionAliasController.php:209
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/resources.xml
 msgid "Expression Alias"
 msgstr "Alias de Expressão Regular"
 
 #: ../modules/loguser/controllers/LoguserController.php:44
-#: ../modules/loguser/controllers/LoguserController.php:45
 msgid "Expression Alias Actions"
 msgstr "Ações de Expressões Regulares"
+
+#: ../modules/loguser/controllers/LoguserController.php:45
+msgid "Expression Alias Dates"
+msgstr "Alias de Datas"
 
 #: /home/douglas/Dropbox/Development/snep-3/configs/dashboard.xml
 msgid "Expression Aliases"
 msgstr "Aliasse de Expressão Regular"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:49
+#: ../modules/default/views/scripts/simulator/index.phtml:52
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:6
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:34
 #: ../modules/default/views/scripts/extensions/index.phtml:53
@@ -2326,7 +2327,7 @@ msgstr "Falhada"
 msgid "Failed to open file %s with write permission."
 msgstr "Falha ao abrir arquivo %s com permissão de escrita."
 
-#: ../modules/default/controllers/SimulatorController.php:152
+#: ../modules/default/controllers/SimulatorController.php:160
 msgid "Failure on trial to dial extension %: non existent extension"
 msgstr "Falha na tentativa de discar para ramal %: ramal não existente"
 
@@ -2398,7 +2399,7 @@ msgstr "Fixo"
 msgid "Flavio H. Somensi [ flavio@opens.com.br ]- Developer"
 msgstr "Flavio H. Somensi [ flavio@opens.com.br ]- Desenvolvedor"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:83
+#: ../modules/default/views/scripts/simulator/index.phtml:86
 msgid "For"
 msgstr "Para"
 
@@ -2447,8 +2448,7 @@ msgstr "Fracionamento"
 msgid "Free"
 msgstr "Livre"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:94
-#: ../modules/default/controllers/SimulatorController.php:191
+#: ../modules/default/controllers/SimulatorController.php:199
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Friday"
 msgstr "Sexta-Feira"
@@ -2525,16 +2525,17 @@ msgstr "Desligando"
 msgid "Hangup the call after voicemail"
 msgstr "Desligar a ligação após Voicemail"
 
-#: ../modules/default/views/layouts/layout.phtml:93
-#: ../modules/default/views/layouts/layout.phtml:161
+#: ../modules/default/views/layouts/layout.phtml:98
+#: ../modules/default/views/layouts/layout.phtml:166
 msgid "Help"
 msgstr "Ajuda"
 
-#: ../modules/default/views/layouts/layout.phtml:255
+#: ../modules/default/views/layouts/layout.phtml:260
 msgid ""
 "Here you can access the Status of Peers, Trunks, Board and System in general."
 msgstr ""
-"Aqui você pode acessar o Status de Ramais, Troncos, Placas e o Sistema em geral."
+"Aqui você pode acessar o Status de Ramais, Troncos, Placas e o Sistema em "
+"geral."
 
 #: ../modules/default/views/scripts/parameters/index.phtml:30
 msgid "Hidden Routes"
@@ -2553,6 +2554,7 @@ msgstr "Suporte de alta qualidade"
 msgid "Hostname"
 msgstr "Hostname"
 
+#: ../modules/default/views/scripts/simulator/index.phtml:111
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Hour"
 msgstr "Hora"
@@ -2612,8 +2614,8 @@ msgstr "Modulo de URA para o SNEP"
 #: ../modules/ivr/actions/IVR.php:89
 msgid "IVR Prefix String - used to identify the next steps on IVR process"
 msgstr ""
-"String de Prefixo do menu da URA - usado para identificar os próximos passos do "
-"processo da URA"
+"String de Prefixo do menu da URA - usado para identificar os próximos passos "
+"do processo da URA"
 
 #: ../modules/default/views/scripts/route/index.phtml:93
 msgid "Id"
@@ -2701,7 +2703,7 @@ msgstr "Somente Regras de Entrada"
 msgid "Info"
 msgstr "Info"
 
-#: ../modules/default/views/layouts/layout.phtml:169
+#: ../modules/default/views/layouts/layout.phtml:174
 msgid "Information"
 msgstr "Informações"
 
@@ -2911,7 +2913,7 @@ msgstr ""
 msgid "Login"
 msgstr "Login"
 
-#: ../modules/default/views/layouts/layout.phtml:185
+#: ../modules/default/views/layouts/layout.phtml:190
 #: /home/douglas/Dropbox/Development/snep-3/configs/titleOptions.xml
 msgid "Logout"
 msgstr "Sair"
@@ -3004,12 +3006,10 @@ msgstr "Tempo Mí­nimo da Ligação"
 msgid "Minute"
 msgstr "Minuto"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:388
 #: ../modules/default/views/scripts/trunks/addedit.phtml:406
 msgid "Minute Control"
 msgstr "Controle de Minutos"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:406
 #: ../modules/default/views/scripts/trunks/addedit.phtml:438
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/strings_extras.xml
 msgid "Minutes"
@@ -3038,13 +3038,12 @@ msgstr "Erro de modem"
 msgid "Module Settings"
 msgstr "Configuração de Módulos"
 
-#: ../modules/default/views/layouts/layout.phtml:203
+#: ../modules/default/views/layouts/layout.phtml:208
 #: ../modules/default/views/scripts/systemstatus/index.phtml:122
 msgid "Modules"
 msgstr "Módulos"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:90
-#: ../modules/default/controllers/SimulatorController.php:187
+#: ../modules/default/controllers/SimulatorController.php:195
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Monday"
 msgstr "Segunda-feira"
@@ -3057,7 +3056,6 @@ msgstr "Monitor"
 msgid "Month"
 msgstr "Mês"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:417
 #: ../modules/default/views/scripts/trunks/addedit.phtml:426
 msgid "Monthly"
 msgstr "Mensalmente"
@@ -3191,6 +3189,14 @@ msgstr "O nome e telefone são obrigatórios"
 msgid "New Password"
 msgstr "Nova Senha"
 
+#: ../modules/default/views/scripts/systemstatus/index.phtml:364
+msgid "New Version Available:"
+msgstr "Nova Versão Disponível:"
+
+#: ../modules/default/controllers/NewversionController.php:36
+msgid "New Version Updates"
+msgstr "Atualizações da nova versão"
+
 #: ../modules/default/controllers/SoundFilesController.php:161
 msgid "New sound file added"
 msgstr "Novo Arquivos de Som adicionado"
@@ -3307,7 +3313,7 @@ msgstr "Nenhuma fila cadastrada"
 msgid "No records found."
 msgstr "Nenhum registro encontrado."
 
-#: ../modules/default/controllers/SimulatorController.php:113
+#: ../modules/default/controllers/SimulatorController.php:120
 msgid "No rule found."
 msgstr "Nenhuma regra encontrada."
 
@@ -3363,8 +3369,8 @@ msgid "Number of Lines"
 msgstr "Número de Linhas"
 
 #: ../modules/default/views/scripts/contacts/addedit.phtml:243
-#: ../modules/default/views/scripts/extensions/addedit.phtml:497
-#: ../modules/default/views/scripts/extensions/addedit.phtml:503
+#: ../modules/default/views/scripts/extensions/addedit.phtml:499
+#: ../modules/default/views/scripts/extensions/addedit.phtml:505
 msgid "Numbers only please"
 msgstr "Apenas Números"
 
@@ -3666,9 +3672,9 @@ msgstr "Por favor, informe um valor entre 1 e 9."
 #: ../modules/default/views/scripts/contacts/addedit.phtml:241
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:232
 #: ../modules/default/views/scripts/extensions/multiremove.phtml:71
-#: ../modules/default/views/scripts/extensions/addedit.phtml:495
-#: ../modules/default/views/scripts/extensions/addedit.phtml:501
-#: ../modules/default/views/scripts/extensions/addedit.phtml:513
+#: ../modules/default/views/scripts/extensions/addedit.phtml:497
+#: ../modules/default/views/scripts/extensions/addedit.phtml:503
+#: ../modules/default/views/scripts/extensions/addedit.phtml:515
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:131
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:102
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:77
@@ -3733,9 +3739,9 @@ msgstr "Por favor, somente letras."
 #: ../modules/default/views/scripts/profiles/addedit.phtml:68
 #: ../modules/default/views/scripts/contacts/addedit.phtml:233
 #: ../modules/default/views/scripts/contacts/addedit.phtml:242
-#: ../modules/default/views/scripts/extensions/addedit.phtml:496
-#: ../modules/default/views/scripts/extensions/addedit.phtml:502
-#: ../modules/default/views/scripts/extensions/addedit.phtml:514
+#: ../modules/default/views/scripts/extensions/addedit.phtml:498
+#: ../modules/default/views/scripts/extensions/addedit.phtml:504
+#: ../modules/default/views/scripts/extensions/addedit.phtml:516
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:132
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:103
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:78
@@ -3990,7 +3996,7 @@ msgstr "Redifinição de Senha - SNEP"
 msgid "Redial"
 msgstr "Rediscar"
 
-#: ../modules/default/controllers/SimulatorController.php:159
+#: ../modules/default/controllers/SimulatorController.php:167
 #, php-format
 msgid "Redirect to context %s"
 msgstr "Redirecionar para contexto %s"
@@ -4117,12 +4123,12 @@ msgstr "Pedir Senha"
 msgid "Request Sent"
 msgstr "Requisição enviada"
 
-#: ../modules/default/controllers/SimulatorController.php:157
+#: ../modules/default/controllers/SimulatorController.php:165
 msgid "Request password"
 msgstr "Pedir Senha"
 
 #: ../modules/default/controllers/ExpressionAliasController.php:103
-#: ../modules/default/controllers/ExpressionAliasController.php:174
+#: ../modules/default/controllers/ExpressionAliasController.php:173
 msgid "Required value"
 msgstr "Valor obrigatório"
 
@@ -4277,8 +4283,8 @@ msgid "Rule ignored by priority"
 msgstr "Regra ignorada por prioridade"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:146
-msgid "Rule invalid because of time"
-msgstr "Regra inválida por causa do horário"
+msgid "Rule invalid because of date and time"
+msgstr "Regra inválida por causa da data e horário"
 
 #: ../modules/default/views/scripts/simulator/index.phtml:145
 msgid "Rule that will be executed"
@@ -4319,12 +4325,15 @@ msgstr "SNEP - A fila"
 msgid "SNEP - the Queue "
 msgstr "SNEP - A fila"
 
+#: ../modules/default/views/scripts/systemstatus/index.phtml:348
+msgid "SNEP Version"
+msgstr "Versão do SNEP"
+
 #: ../modules/default/views/scripts/trunks/addedit.phtml:361
 msgid "Same on both servers"
 msgstr "O mesmo em ambos os servidores"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:95
-#: ../modules/default/controllers/SimulatorController.php:192
+#: ../modules/default/controllers/SimulatorController.php:200
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Saturday"
 msgstr "Sabado"
@@ -4345,7 +4354,7 @@ msgstr "Sabado"
 #: ../modules/default/views/scripts/contacts/import.phtml:99
 #: ../modules/default/views/scripts/contacts/addedit.phtml:162
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:201
-#: ../modules/default/views/scripts/extensions/addedit.phtml:430
+#: ../modules/default/views/scripts/extensions/addedit.phtml:432
 #: ../modules/default/views/scripts/dates-alias/addedit.phtml:96
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:72
 #: ../modules/default/views/scripts/sound-files/addedit.phtml:46
@@ -4561,7 +4570,7 @@ msgstr "Define uma tag para classificar a chamada"
 msgid "Set the relationship column x data"
 msgstr "Defina a relação ente da coluna e o dado"
 
-#: ../modules/default/views/layouts/layout.phtml:152
+#: ../modules/default/views/layouts/layout.phtml:157
 msgid "Settings"
 msgstr "Configurações"
 
@@ -4709,9 +4718,9 @@ msgstr "Arquivos de Som"
 msgid "Sound file updated"
 msgstr "Arquivo de Som atualizado"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:47
-#: ../modules/default/views/scripts/simulator/index.phtml:77
-#: ../modules/default/views/scripts/simulator/index.phtml:110
+#: ../modules/default/views/scripts/simulator/index.phtml:50
+#: ../modules/default/views/scripts/simulator/index.phtml:80
+#: ../modules/default/views/scripts/simulator/index.phtml:109
 #: ../modules/default/views/scripts/route/index.phtml:95
 #: ../modules/default/views/scripts/route/elements/src.phtml:3
 #: ../modules/default/views/scripts/calls-report/view.phtml:42
@@ -4736,7 +4745,8 @@ msgid ""
 "It could be a Trunk, a Callerid(Contact), an Extension or any other option in "
 "the list."
 msgstr ""
-"Origem geralmente é o Callerid do Chamador que você está tentando filtrar.<br>\n"
+"Origem geralmente é o Callerid do Chamador que você está tentando filtrar."
+"<br>\n"
 "Ela pode ser um Tronco, um Callerid(Contato), um Ramal ou qualquer outra opção "
 "na Lista."
 
@@ -4753,11 +4763,11 @@ msgstr "Exceções Especiais"
 msgid "Specify"
 msgstr "Especificar"
 
-#: ../modules/callback/actions/CallbackAction.php:66
+#: ../modules/callback/actions/CallbackAction.php:67
 msgid "Specify the source call number"
 msgstr "Especifique o número de origem"
 
-#: ../modules/callback/actions/CallbackAction.php:67
+#: ../modules/callback/actions/CallbackAction.php:68
 msgid ""
 "Specify the source number to make the call back to the caller. This call will "
 "be processed by the Outgoing Routes with this source. Leave blank to keep here "
@@ -4851,8 +4861,7 @@ msgstr "Subtotal"
 msgid "Suffix"
 msgstr "Sufixo"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:96
-#: ../modules/default/controllers/SimulatorController.php:193
+#: ../modules/default/controllers/SimulatorController.php:201
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Sunday"
 msgstr "Domingo"
@@ -4946,7 +4955,7 @@ msgstr "Tabela"
 #: ../modules/default/controllers/CostCenterController.php:50
 #: ../modules/default/controllers/CostCenterController.php:82
 #: ../modules/default/controllers/CostCenterController.php:127
-#: ../modules/default/controllers/CostCenterController.php:182
+#: ../modules/default/controllers/CostCenterController.php:186
 #: ../lib/PBX/Rule/ActionConfig.php:248
 msgid "Tag"
 msgstr "Tag"
@@ -5005,7 +5014,7 @@ msgstr "O arquivo includes/setup.conf não tem permissão de escrita."
 msgid "The Recorded Files Path is required."
 msgstr "O diretório de arquivos de gravação e obrigatório."
 
-#: ../modules/default/views/layouts/layout.phtml:275
+#: ../modules/default/views/layouts/layout.phtml:280
 msgid ""
 "The SNEP work if Routes to determine what to do with any call. <br>\\\n"
 "      Here you can manager this routes."
@@ -5021,7 +5030,7 @@ msgstr "A Operadora será removida. Depois daqui, você não poderá voltar atr�
 msgid "The board is required"
 msgstr "A placa é obrigatória"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:509
+#: ../modules/default/views/scripts/extensions/addedit.phtml:511
 msgid "The channel is required"
 msgstr "O canal é obrigatório"
 
@@ -5039,7 +5048,7 @@ msgid ""
 msgstr ""
 "O grupo de contatos será excluí­do. Depois disso, você não tem como recuperá-lo."
 
-#: ../modules/default/controllers/CostCenterController.php:198
+#: ../modules/default/controllers/CostCenterController.php:202
 msgid "The cost center will be deleted. After that, you have no way get it back."
 msgstr "A tag será excluída. Depois disso, você não tem como recuperá-la."
 
@@ -5068,7 +5077,7 @@ msgstr "A descrição é obrigatória"
 msgid "The directory name is required"
 msgstr "O nome do diretório é obrigatário"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:517
+#: ../modules/default/views/scripts/extensions/addedit.phtml:519
 #: ../modules/default/views/scripts/users/addedit.phtml:121
 #: ../modules/default/views/scripts/register/index.phtml:95
 msgid "The e-mail is required"
@@ -5088,14 +5097,15 @@ msgstr "O e-mail é obrigatório."
 msgid "The excluded group has associated contacts."
 msgstr "O grupo apagado tem contatos associados."
 
-#: ../modules/default/controllers/ExpressionAliasController.php:229
+#: ../modules/default/controllers/ExpressionAliasController.php:228
 msgid ""
 "The expression alias will be deleted. After that, you have no way get it back."
 msgstr ""
-"A aliás de expressão será excluí­da. Depois disso, você não tem como recuperá-la."
+"A aliás de expressão será excluí­da. Depois disso, você não tem como recuperá-"
+"la."
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:228
-#: ../modules/default/views/scripts/extensions/addedit.phtml:491
+#: ../modules/default/views/scripts/extensions/addedit.phtml:493
 msgid "The extension group is required"
 msgstr "O grupo de ramal é obrigatório"
 
@@ -5111,7 +5121,7 @@ msgid "The extension group will be deleted. Are you sure?."
 msgstr "O grupo de ramais será apagado. Deseja continuar?"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:231
-#: ../modules/default/views/scripts/extensions/addedit.phtml:494
+#: ../modules/default/views/scripts/extensions/addedit.phtml:496
 msgid "The extension is required"
 msgstr "O ramal é obrigatário"
 
@@ -5130,8 +5140,8 @@ msgstr "O arquivo é obrigatório"
 
 #: ../modules/default/controllers/ContactsController.php:314
 msgid ""
-"The file must be separated by commas. The columns can be associated in the next "
-"screen."
+"The file must be separated by commas. The columns can be associated in the "
+"next screen."
 msgstr ""
 "O arquivo deve ser separados por ví­rgulas. As colunas podem ser associados na "
 "próxima tela."
@@ -5144,22 +5154,22 @@ msgstr "O nome do arquivo é obrigatório"
 msgid "The first name is required"
 msgstr "O nome é obrigatório"
 
-#: ../modules/default/views/layouts/layout.phtml:265
+#: ../modules/default/views/layouts/layout.phtml:270
 msgid "The first think you need is Add your Extensions and their Groups."
 msgstr "A Primeira coisa que você precisa é Adicionar seus Ramais e seus Grupos."
 
 #: ../modules/default/controllers/ExtensionsController.php:797
 msgid ""
-"The following extensions are in use in routes, modify them prior to remove this "
-"extension"
+"The following extensions are in use in routes, modify them prior to remove "
+"this extension"
 msgstr ""
-"As seguintes extensões estão em uso nesta rota, ajuste primeiro ou então remova "
-"a extensão"
+"As seguintes extensões estão em uso nesta rota, ajuste primeiro ou então "
+"remova a extensão"
 
 #: ../modules/default/controllers/SoundFilesController.php:405
 msgid ""
-"The following files do not exist in the directory and will be excluded from the "
-"database."
+"The following files do not exist in the directory and will be excluded from "
+"the database."
 msgstr ""
 "Os seguintes arquivos não existem no diretório e serão excluí­dos do banco de "
 "dados."
@@ -5224,7 +5234,7 @@ msgstr "O campo name é necessário."
 #: ../modules/default/views/scripts/music-on-hold/addedit.phtml:88
 #: ../modules/default/views/scripts/profiles/addedit.phtml:66
 #: ../modules/default/views/scripts/contacts/addedit.phtml:231
-#: ../modules/default/views/scripts/extensions/addedit.phtml:512
+#: ../modules/default/views/scripts/extensions/addedit.phtml:514
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:101
 #: ../modules/default/views/scripts/expression-alias/addedit.phtml:107
 #: ../modules/default/views/scripts/extensions-groups/addedit.phtml:73
@@ -5239,7 +5249,8 @@ msgid "The name is required."
 msgstr "O nome é obrigatório."
 
 #: ../modules/default/controllers/NotificationsController.php:109
-msgid "The notification will be deleted. After that, you have no way get it back."
+msgid ""
+"The notification will be deleted. After that, you have no way get it back."
 msgstr "A notificação será excluída. Depois disso,você não tem como recuperá-la."
 
 #: ../modules/default/controllers/ErrorController.php:43
@@ -5249,7 +5260,7 @@ msgstr "A página que você está procurando não foi encontrada ou não existe.
 #: ../modules/default/views/layouts/register.phtml:338
 #: ../modules/default/views/layouts/register.phtml:389
 #: ../modules/default/views/layouts/loginregister.phtml:87
-#: ../modules/default/views/scripts/extensions/addedit.phtml:500
+#: ../modules/default/views/scripts/extensions/addedit.phtml:502
 #: ../modules/default/views/scripts/users/addedit.phtml:116
 #: ../modules/default/views/scripts/register/index.phtml:90
 msgid "The password is required"
@@ -5268,7 +5279,8 @@ msgid "The phone is required"
 msgstr "O telefone é obrigatório"
 
 #: ../modules/default/controllers/PickupGroupsController.php:223
-msgid "The pickup group will be deleted. After that, you have no way get it back."
+msgid ""
+"The pickup group will be deleted. After that, you have no way get it back."
 msgstr ""
 "O grupo de captura será excluí­do. Depois disso, você não tem como recuperá-lo."
 
@@ -5302,7 +5314,7 @@ msgid "The time range need to be in the formats: HH:MM-HH:MM"
 msgstr "A faixa de horário precisa estar no formato:  HH:MM-HH:MM"
 
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:236
-#: ../modules/default/views/scripts/extensions/addedit.phtml:506
+#: ../modules/default/views/scripts/extensions/addedit.phtml:508
 msgid "The trunk is required"
 msgstr "O tronco é obrigatório"
 
@@ -5336,10 +5348,10 @@ msgstr ""
 "Destino."
 
 #: ../modules/default/controllers/ExpressionAliasController.php:98
-#: ../modules/default/controllers/ExpressionAliasController.php:169
+#: ../modules/default/controllers/ExpressionAliasController.php:168
 msgid ""
-"Their alias has invalid character. Accents are not allowed, empty value between "
-"the keys, blanks and special characters except( # % | . - _ )"
+"Their alias has invalid character. Accents are not allowed, empty value "
+"between the keys, blanks and special characters except( # % | . - _ )"
 msgstr ""
 "Seu apelido possui caracteres inválidos. Não são permitidos, valor vazio, "
 "espaços em branco e caracteres especiais, exceto ( # % | . - _ )"
@@ -5368,13 +5380,13 @@ msgstr ""
 "Este grupo tem ramais associados exclusivamente a ele. Selecione outro grupo "
 "para estes ramais."
 
-#: ../modules/callback/actions/CallbackAction.php:69
+#: ../modules/callback/actions/CallbackAction.php:70
 msgid "This is the time in seconds the system will try contact the caller"
 msgstr ""
 "Este é o tempo em segundos que o sistema esperará para tentar contatar o "
 "chamador."
 
-#: ../modules/default/views/layouts/layout.phtml:250
+#: ../modules/default/views/layouts/layout.phtml:255
 msgid ""
 "This is your Dashboard. <br>\\\n"
 "      You can customize it as you want, adding, moving or removing elements."
@@ -5390,7 +5402,7 @@ msgstr ""
 "Este módulo faz a tarifação de ligações, colocando preços baseado no Troncos "
 "utilizados e tempo."
 
-#: ../modules/callback/actions/CallbackAction.php:65
+#: ../modules/callback/actions/CallbackAction.php:66
 msgid ""
 "This will be the Inbound(DID) number which call will be redirected when the "
 "caller answer the call. Could be any Destiny Route Rule."
@@ -5399,8 +5411,7 @@ msgstr ""
 "chamador atender a ligação de retorno. Pode ser qualquer Destino de Rota nas "
 "Regras."
 
-#: ../modules/default/views/scripts/simulator/index.phtml:93
-#: ../modules/default/controllers/SimulatorController.php:190
+#: ../modules/default/controllers/SimulatorController.php:198
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Thursday"
 msgstr "Quinta-feira"
@@ -5412,7 +5423,6 @@ msgid ""
 msgstr "Tiago Zimmemann [ tiago.zimmermann@opens.com.br ] - Desenvolvedor"
 
 #: ../modules/default/views/scripts/ranking-report/index.phtml:72
-#: ../modules/default/views/scripts/simulator/index.phtml:112
 msgid "Time"
 msgstr "Tempo"
 
@@ -5434,7 +5444,6 @@ msgstr "Faixa de Horário (HH:MM-HH:MM)"
 msgid "Time of validity of the code was expired"
 msgstr "Tempo de validade do código foi expirado"
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:404
 #: ../modules/default/views/scripts/trunks/addedit.phtml:436
 msgid "Time total"
 msgstr "Tempo Total"
@@ -5442,6 +5451,14 @@ msgstr "Tempo Total"
 #: ../modules/default/views/scripts/queues/index.phtml:46
 msgid "Timeout"
 msgstr "Tempo limite"
+
+#: ../modules/callback/actions/CallbackAction.php:117
+msgid "Timeout to try call back"
+msgstr "Tempo máximo de tentativa de Callback"
+
+#: ../modules/callback/actions/CallbackAction.php:69
+msgid "Timeout to trying call back"
+msgstr "Tempo máximo de tentativa para fazer Chamada de Retorno"
 
 #: ../modules/default/views/scripts/parameters/index.phtml:178
 msgid "Timezone"
@@ -5456,7 +5473,8 @@ msgid "To"
 msgstr "Até"
 
 #: ../modules/default/views/layouts/register.phtml:30
-msgid "To confirm your registration, an email was sent with the confirmation key."
+msgid ""
+"To confirm your registration, an email was sent with the confirmation key."
 msgstr ""
 "Para confirmar o seu registro, um e-mail foi enviado com a chave de confirmação"
 
@@ -5471,6 +5489,10 @@ msgid ""
 msgstr ""
 "Para registrar seu Snep você deve estar conectado a uma rede de internet. "
 "Verifique sua conexão e tente novamente."
+
+#: ../modules/default/views/scripts/newversion/index.phtml:13
+msgid "To update your version just run in a terminal:"
+msgstr "Para atualizar sua versão basta executar em um terminal:"
 
 #: ../modules/default/views/scripts/ranking-report/view.phtml:46
 #: ../modules/default/views/scripts/ranking-report/view.phtml:49
@@ -5488,7 +5510,7 @@ msgstr "Total de dados a serem exportados:"
 msgid "Totals"
 msgstr "Totais"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:50
+#: ../modules/default/views/scripts/simulator/index.phtml:53
 #: ../modules/default/views/scripts/extensions/multiadd.phtml:184
 #: ../modules/default/views/scripts/extensions/addedit.phtml:284
 #: ../modules/default/views/scripts/trunks/addedit.phtml:7
@@ -5516,8 +5538,7 @@ msgstr "Ações de Troncos"
 msgid "Trunks Configuration"
 msgstr "Configuração dos Troncos"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:91
-#: ../modules/default/controllers/SimulatorController.php:188
+#: ../modules/default/controllers/SimulatorController.php:196
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Tuesday"
 msgstr "Terça-feira"
@@ -5588,7 +5609,7 @@ msgstr "Não é possí­vel fazer o upload do arquivo."
 msgid "Unanswerd"
 msgstr "Não Atendida"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:51
+#: ../modules/default/views/scripts/simulator/index.phtml:54
 msgid "Undefined"
 msgstr "Indefinido"
 
@@ -5801,13 +5822,12 @@ msgstr "Estamos quase terminando"
 msgid "We've sent an access code to the email:"
 msgstr "Enviamos um código de acesso ao e-mail:"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:92
-#: ../modules/default/controllers/SimulatorController.php:189
+#: ../modules/default/controllers/SimulatorController.php:197
 #: /home/douglas/Dropbox/Development/snep-3/modules/default/forms/route.xml
 msgid "Wednesday"
 msgstr "Quarta-feira"
 
-#: ../modules/default/views/scripts/simulator/index.phtml:113
+#: ../modules/default/views/scripts/simulator/index.phtml:112
 msgid "Week Day"
 msgstr "Dias da Semana"
 
@@ -5819,7 +5839,7 @@ msgstr "Dias da Semana"
 msgid "Welcome to Intercomunexão."
 msgstr "Bem-vindo a Intercomunexão."
 
-#: ../modules/default/views/layouts/layout.phtml:245
+#: ../modules/default/views/layouts/layout.phtml:250
 msgid ""
 "Welcome to SNEP. <br>\\\n"
 "      Your IP Telephony Plataform.<br>Click Next to understand the basic steps "
@@ -5843,8 +5863,8 @@ msgid ""
 "Within seconds you register your Snep and join, a freer network, intelligent "
 "and humane communication."
 msgstr ""
-"Em alguns segundos você registra seu SNEP e se junta à uma rede  de comunicação "
-"aberta, inteligente e humana."
+"Em alguns segundos você registra seu SNEP e se junta à uma rede  de "
+"comunicação aberta, inteligente e humana."
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:118
 msgid "Without Authentication"
@@ -5903,13 +5923,13 @@ msgstr "Você pode Ativar e Desativar Rotas"
 #: ../modules/default/views/scripts/route/elements/dates.phtml:1
 msgid ""
 "You can Add a set of special Dates in the Date Alias menu to use here.<br>\n"
-"It is useful for holidays or special work dates where you want have a different "
-"call flow."
+"It is useful for holidays or special work dates where you want have a "
+"different call flow."
 msgstr ""
 "Você pode Adicionar um conjunto de Datas Especiais no menu de Alias de Datas "
 "para usar aqui.<br>\n"
-"Elas são úteis para feriados e dias especiais de trabalho onde você precisa ter "
-"um controle diferente de chamadas."
+"Elas são úteis para feriados e dias especiais de trabalho onde você precisa "
+"ter um controle diferente de chamadas."
 
 #: ../modules/default/views/scripts/route/index.phtml:76
 msgid "You can Add a shortcut of this screen to your Dashboard"
@@ -5920,7 +5940,8 @@ msgid "You can Simulate what will happen when a call are made!"
 msgstr "Você pode Simular o que irá acontecer quando uma ligação é feita!"
 
 #: ../modules/default/views/scripts/trunks/addedit.phtml:19
-msgid "You can define a Telco for this Trunk and rate each outgoing call from it."
+msgid ""
+"You can define a Telco for this Trunk and rate each outgoing call from it."
 msgstr ""
 "Você pode definir uma Operadora para este Tronco e tarifar cada ligação saindo "
 "por ele."
@@ -5932,8 +5953,13 @@ msgid ""
 "i> and follow the Routes Actions."
 msgstr ""
 "Você pode definir um total de minutos para controlar este Tronco.<br\n"
-"      Depois deste total de minutos o <i>Tronco</i> irá retornar <i>CONGESTION</"
-"i> e seguir as Ações da Rota."
+"      Depois deste total de minutos o <i>Tronco</i> irá retornar "
+"<i>CONGESTION</i> e seguir as Ações da Rota."
+
+#: ../modules/default/views/scripts/newversion/index.phtml:21
+msgid "You can get it <a target=_blank href='http://www.sneppbx.com'>here</a>."
+msgstr ""
+"Você pode baixá-la <a target=_blank href='http://www.sneppbx.com'>aqui</a>."
 
 #: ../modules/default/controllers/NotificationsController.php:52
 msgid "You do not have any notifications."
@@ -5948,8 +5974,8 @@ msgid ""
 "You do not have registered contacts. <br><br> Click 'Add Contact' to make the "
 "first registration\n"
 msgstr ""
-"Você não possui contatos registrados. <br> Clique em \"Adicionar contato\" para "
-"fazer seu primeiro registro \n"
+"Você não possui contatos registrados. <br> Clique em \"Adicionar contato\" "
+"para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/CostCenterController.php:62
 msgid ""
@@ -5993,11 +6019,11 @@ msgstr ""
 
 #: ../modules/default/controllers/QueuesController.php:79
 msgid ""
-"You do not have registered queues. <br><br> Click 'Add Queue' to make the first "
-"registration\n"
+"You do not have registered queues. <br><br> Click 'Add Queue' to make the "
+"first registration\n"
 msgstr ""
-"Você não possui filas registradas. <br> Clique em \"Adicionar Fila\" para fazer "
-"seu primeiro registro \n"
+"Você não possui filas registradas. <br> Clique em \"Adicionar Fila\" para "
+"fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/MusicOnHoldController.php:85
 msgid ""
@@ -6009,16 +6035,16 @@ msgstr ""
 
 #: ../modules/default/controllers/SoundFilesController.php:64
 msgid ""
-"You do not have registered sound files. <br><br> Click 'Add Sound File' to make "
-"the first registration\n"
+"You do not have registered sound files. <br><br> Click 'Add Sound File' to "
+"make the first registration\n"
 msgstr ""
-"Você não possui arquivos de som registrados. <br> Clique em \"Adicionar Arquivo "
-"de Som\" para fazer seu primeiro registro \n"
+"Você não possui arquivos de som registrados. <br> Clique em \"Adicionar "
+"Arquivo de Som\" para fazer seu primeiro registro \n"
 
 #: ../modules/default/controllers/TrunksController.php:109
 msgid ""
-"You do not have registered trunks. <br><br> Click 'Add Trunk' to make the first "
-"registration"
+"You do not have registered trunks. <br><br> Click 'Add Trunk' to make the "
+"first registration"
 msgstr ""
 "Você não possui troncos registrados. <br> Clique em \"Adicionar Tronco\" para "
 "fazer seu primeiro registro"
@@ -6039,7 +6065,7 @@ msgstr "Você não possui placas Khomp configurados no sistema."
 msgid "You don't have trunks registered in your system."
 msgstr "Você não possui tronco registrados no sistema."
 
-#: ../modules/default/controllers/CostCenterController.php:191
+#: ../modules/default/controllers/CostCenterController.php:195
 msgid ""
 "You have data connections with this cost center, so this exclusion is not "
 "permitted."
@@ -6069,9 +6095,9 @@ msgstr ""
 "    - Se a sua tecnologia de tronco não estiver listada aqui, você pode "
 "utilizar a opção <i>Virtual</i> e configurar a tecnologia de canal manualmente "
 "no Asterisk.<br>\n"
-"      Você pode configurar qualquer tecnologia de canal Suportada pelo Asterisk "
-"e usá-la aqui como <i>Virtual</i> somente especificando a expressão da "
-"tecnologia, como:<br>\n"
+"      Você pode configurar qualquer tecnologia de canal Suportada pelo "
+"Asterisk e usá-la aqui como <i>Virtual</i> somente especificando a expressão "
+"da tecnologia, como:<br>\n"
 "      * [Dahdi/g1]<br>\n"
 "      * [SIP/account]<br>"
 
@@ -6093,7 +6119,7 @@ msgstr "Seu Snep não possui módulos adicionais"
 msgid "Your browser does not support the audio element."
 msgstr "Seu navegador não suporta o elemento de áudio."
 
-#: ../modules/default/views/scripts/extensions/addedit.phtml:518
+#: ../modules/default/views/scripts/extensions/addedit.phtml:520
 #: ../modules/default/views/scripts/users/addedit.phtml:122
 #: ../modules/default/views/scripts/register/index.phtml:96
 #: ../modules/default/views/scripts/parameters/index.phtml:338
@@ -6542,6 +6568,15 @@ msgstr "www.sneplivre.com.br"
 msgid "www.sneppbx.com"
 msgstr ""
 
+#~ msgid "Control Type"
+#~ msgstr "Tipo de Controle"
+
+#~ msgid "Delay trying call back"
+#~ msgstr "Atraso para ligar de volta"
+
+#~ msgid "Rule invalid because of time"
+#~ msgstr "Regra inválida por causa do horário"
+
 #~ msgid "Call Date:"
 #~ msgstr "Data da Ligação:"
 
@@ -6564,8 +6599,8 @@ msgstr ""
 #~ msgstr "Você recebeu uma nova ligação de Recado de"
 
 #~ msgid ""
-#~ "display information of source and destination of the call in the body of the "
-#~ "email?"
+#~ "display information of source and destination of the call in the body of "
+#~ "the email?"
 #~ msgstr ""
 #~ "Deseja exibir informações de origem e de destino da chamada no corpo do e-"
 #~ "mail?"
@@ -6591,8 +6626,8 @@ msgstr ""
 #~ "            <br /><br />\n"
 #~ "            SNEP is distributed in the hope that it will be useful, but "
 #~ "WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
-#~ "or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-#~ "more details.\n"
+#~ "or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License "
+#~ "for more details.\n"
 #~ "            <br /><br />\n"
 #~ "            You should have received a copy of the GNU General Public "
 #~ "License along with SNEP.  If not, see http://www.gnu.org/licenses.\n"
@@ -7092,8 +7127,8 @@ msgstr ""
 #~ msgstr "Regras&nbsp;de&nbsp;Saí­da"
 
 #~ msgid ""
-#~ "You do not have registered incoming rules. <br> Click 'Add Rule' to make the "
-#~ "first registration"
+#~ "You do not have registered incoming rules. <br> Click 'Add Rule' to make "
+#~ "the first registration"
 #~ msgstr ""
 #~ "Você não possui regras de entrada registradas. <br> Clique em 'Adicionar "
 #~ "Regras' para fazer seu primeiro registro"
@@ -7102,12 +7137,12 @@ msgstr ""
 #~ "You do not have registered others rules. <br> Click 'Add Rule' to make the "
 #~ "first registration"
 #~ msgstr ""
-#~ "Você não possui regras do tipo outras registradas. <br> Clique em 'Adicionar "
-#~ "Regras' para fazer seu primeiro registro"
+#~ "Você não possui regras do tipo outras registradas. <br> Clique em "
+#~ "'Adicionar Regras' para fazer seu primeiro registro"
 
 #~ msgid ""
-#~ "You do not have registered outgoing rules. <br> Click 'Add Rule' to make the "
-#~ "first registration"
+#~ "You do not have registered outgoing rules. <br> Click 'Add Rule' to make "
+#~ "the first registration"
 #~ msgstr ""
 #~ "Você não possui regras de saí­da registradas. <br> Clique em 'Adicionar "
 #~ "Regras' para fazer seu primeiro registro"
@@ -7256,18 +7291,18 @@ msgstr ""
 #~ msgstr "Sem buffer silencioso"
 
 #~ msgid ""
-#~ "You do not have registered file. <br><br> Click 'Add File' to make the first "
-#~ "registration\n"
-#~ msgstr ""
-#~ "VocÃª nÃ£o possui arquivos registrados. <br> Clique em \"Adicionar Arquivo\" "
-#~ "para fazer seu primeiro registro \n"
-
-#~ msgid ""
-#~ "You do not have registered session. <br><br> Click 'Add Session' to make the "
+#~ "You do not have registered file. <br><br> Click 'Add File' to make the "
 #~ "first registration\n"
 #~ msgstr ""
-#~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o\" "
-#~ "para fazer seu primeiro registro \n"
+#~ "VocÃª nÃ£o possui arquivos registrados. <br> Clique em \"Adicionar Arquivo"
+#~ "\" para fazer seu primeiro registro \n"
+
+#~ msgid ""
+#~ "You do not have registered session. <br><br> Click 'Add Session' to make "
+#~ "the first registration\n"
+#~ msgstr ""
+#~ "VocÃª nÃ£o possui sessÃµes registradas. <br> Clique em \"Adicionar SessÃ£o"
+#~ "\" para fazer seu primeiro registro \n"
 
 #~ msgid "Discard header"
 #~ msgstr "Descartar cabeÃ§alho"
@@ -7335,7 +7370,8 @@ msgstr ""
 #~ msgstr "Nenhum registo encontrado!"
 
 #~ msgid "The files were compressed successfully! Wait for the download start."
-#~ msgstr "Os arquivos foram comprimidos com sucesso! Espere o download comeÃ§ar."
+#~ msgstr ""
+#~ "Os arquivos foram comprimidos com sucesso! Espere o download comeÃ§ar."
 
 #~ msgid "You do not have permission to perform this action"
 #~ msgstr "VocÃª nÃ£o possui permissÃ£o para esta aÃ§Ã£o"
@@ -7357,9 +7393,6 @@ msgstr ""
 
 #~ msgid "DESTINATION"
 #~ msgstr "DESTINO"
-
-#~ msgid "Date and Time"
-#~ msgstr "Data e Hora"
 
 #~ msgid "Defines what destinations will be excluded from reports"
 #~ msgstr "Define quais destinos devem ser desprezados por relatÃ³rios"
@@ -7616,15 +7649,17 @@ msgstr ""
 #~ msgstr "Os seguintes dados do CSV tem dados nulos:<br/>"
 
 #~ msgid ""
-#~ "The password for the Admin user has been reset in the installation, store it "
-#~ "safely."
+#~ "The password for the Admin user has been reset in the installation, store "
+#~ "it safely."
 #~ msgstr ""
 #~ "A senha do admin foi redefinida na instalaÃ§Ã£o, mantenha esta informaÃ§Ã£o "
 #~ "segura."
 
-#~ msgid "The user must have permission to create tables in the informed database"
+#~ msgid ""
+#~ "The user must have permission to create tables in the informed database"
 #~ msgstr ""
-#~ "O usuÃ¡rio deve ter permissÃ£o para criar tabelas no banco de dados informado"
+#~ "O usuÃ¡rio deve ter permissÃ£o para criar tabelas no banco de dados "
+#~ "informado"
 
 #~ msgid "This email is not valid"
 #~ msgstr "Este e-mail nÃ£o Ã© vÃ¡lido"
@@ -7676,9 +7711,9 @@ msgstr ""
 #~ "VocÃª deve corrigir possÃ­veis erros destacados em vermelho neste passo da "
 #~ "instalaÃ§Ã£o. Ã importante que todos os erros sejam corrigidos para que o "
 #~ "SNEP funcione corretamente. UsuÃ¡rios avanÃ§ados podem pular essa parte da "
-#~ "instalaÃ§Ã£o se desejarem e este diagnÃ³stico pode ser acessado pelo sistema "
-#~ "atravÃ©s do menu <strong>ConfiguraÃ§Ãµes</strong> > <strong>DiagnÃ³stico </"
-#~ "strong>."
+#~ "instalaÃ§Ã£o se desejarem e este diagnÃ³stico pode ser acessado pelo "
+#~ "sistema atravÃ©s do menu <strong>ConfiguraÃ§Ãµes</strong> > "
+#~ "<strong>DiagnÃ³stico </strong>."
 
 #~ msgid "You must select at least one column."
 #~ msgstr "VocÃª deve selecionar pelo menos uma coluna."
@@ -7855,8 +7890,8 @@ msgstr ""
 #~ msgstr "Actualizado con Ã©xito"
 
 #~ msgid ""
-#~ "Users who do not have individual permissions are listed. To change the group "
-#~ "of users with these permissions is necessary to make editing user."
+#~ "Users who do not have individual permissions are listed. To change the "
+#~ "group of users with these permissions is necessary to make editing user."
 #~ msgstr ""
 #~ "Los usuarios que no tienen permisos individuales se enumeran. Para cambiar "
 #~ "el grupo de usuarios con estos permisos es necesario para que la ediciÃ³n "
@@ -7866,8 +7901,8 @@ msgstr ""
 #~ "We sent an email to you containing the code for the redefinition of your "
 #~ "password"
 #~ msgstr ""
-#~ "Hemos enviado un correo electrÃ³nico a usted que contiene el cÃ³digo para la "
-#~ "redefiniciÃ³n de la contraseÃ±a"
+#~ "Hemos enviado un correo electrÃ³nico a usted que contiene el cÃ³digo para "
+#~ "la redefiniciÃ³n de la contraseÃ±a"
 
 #~ msgid "ZIP Code"
 #~ msgstr "CÃ³digo postal"

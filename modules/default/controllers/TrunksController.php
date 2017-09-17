@@ -209,8 +209,8 @@ class TrunksController extends Zend_Controller_Action {
 
     //Define the action and load form
     $this->view->action = "add" ;
-    $this->view->techType = "snepsip";
-    $this->view->snepsip = 'selected' ;
+    $this->view->techType = "sip";
+    $this->view->sip = 'selected' ;
     $this->renderScript( $this->getRequest()->getControllerName().'/addedit.phtml' );
 
     //After POSt
@@ -287,7 +287,7 @@ class TrunksController extends Zend_Controller_Action {
       }else{
         $this->view->telcos = array();
       }
-      
+
       if ($trunk['trunktype'] == "I") {
         $ip_info = $db->query("select * from peers where name='{$trunk['name']}'")->fetch();
         $this->view->infoTrunk = $ip_info;

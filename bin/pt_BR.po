@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Snep-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-17 08:01-0300\n"
+"POT-Creation-Date: 2017-09-18 12:57-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Douglas Conrad <douglas.conrad@opens.com.br>\n"
 "Language-Team: \n"
@@ -2883,7 +2883,7 @@ msgstr "Configuração de Localização"
 
 #: ../modules/default/views/scripts/services-report/index.phtml:99
 msgid "Lock"
-msgstr "Cadeado"
+msgstr "Bloquear"
 
 #: ../modules/default/controllers/KhompLinksController.php:81
 #: ../modules/default/controllers/KhompLinksController.php:188

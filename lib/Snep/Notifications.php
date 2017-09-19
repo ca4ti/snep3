@@ -81,7 +81,7 @@ class Snep_Notifications {
 				$configs = Snep_Config::getConfiguration('default','host_notification');
 				$url = $configs["config_value"] . '/' . $_SESSION["uuid"];
 				// get notification in itc
-				$ctx = Snep_Request::http_context(array("timeout"=> 1), "GET");
+				$ctx = Snep_Request::http_context(array("timeout"=> 5), "GET");
 				$request = Snep_Request::send_request($url, $ctx);
 				return json_decode($request['response']);
     }
@@ -133,18 +133,14 @@ class Snep_Notifications {
     public function getNotification($id) {
 
 				$configs = Snep_Config::getConfiguration('default','host_notification');
-				$url = $configs["config_value"] . '/' . $_SESSION["uuid"];
+				$url = $configs["config_value"] . '/' . $_SESSION["uuid"] . "/$id";
 				// get notification in itc
 				$ctx = Snep_Request::http_context(array("timeout"=> 1), "GET");
 				$request = Snep_Request::send_request($url, $ctx);
 				$httpcode = $request['response_code'];
 				$response = json_decode($request['response']);
-				foreach ($response as $key) {
-						if("$key->id" == "$id") {
-							return $key;
-						}
-				}
-				return false;
+
+				return $response;
     }
 
     /**

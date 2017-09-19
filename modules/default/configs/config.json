@@ -12,5 +12,5 @@
 "10":{"type":"password","key":"smtp_password","label":"Your SMTP Password"},
 "11":{"type":"text","key":"smtp_server","default":"smtp.gmail.com","label":"Your STMP Server"},
 "12":{"type":"text","key":"smtp_port","default":"587","label":"Your STMP Server Port"},
-"13":{"type":"select","key":"smtp_ssl","label":"Use SSL", "option":[{"key":"no","label":"No SSL"},{"key":"tls","label":"TLS"}, {"key":"ssl", "label":"SSL"}]}
+"13":{"type":"select","key":"smtp_ssl","label":"Use SSL", "option":[{"key":"tls","label":"TLS"}, {"key":"ssl", "label":"SSL"},{"key":"no","label":"No SSL"}]}
 }

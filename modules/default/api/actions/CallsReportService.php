@@ -19,7 +19,6 @@
 
 require_once '../../../includes/functions.php';
 
-
 /**
 * Calls Report Service
 *
@@ -58,8 +57,6 @@ class CallsReportService implements SnepService {
         (isset($exceptionsAll)) ? $exceptionsAll .= "'".$value."'," : $exceptionsAll = "'".$value."',";
       }
       $exceptions = substr($exceptionsAll, 0,-1);
-      //$where_exceptions = " AND (src IN (".$exceptions.") OR dst IN (".$exceptions."))";
-
     }
 
     // Binds
@@ -292,8 +289,9 @@ class CallsReportService implements SnepService {
 
     // SQL
     $select = "SELECT date_format(cdr.calldate,'%d/%m/%Y') AS key_dia, date_format(cdr.calldate,'%d/%m/%Y %H:%i:%s') AS dia, ";
-    $select .= "cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.accountcode, cdr.userfield, cdr.dcontext, cdr.amaflags, cdr.uniqueid, cdr.calldate, cdr.dstchannel";
-    $select .= (isset($where_cost_center)) ? ",ccustos.codigo,ccustos.tipo,ccustos.nome" : "";
+    $select .= "cdr.src, cdr.dst, cdr.disposition, cdr.duration, cdr.billsec, cdr.accountcode,";
+    $select .= "cdr.userfield, cdr.dcontext, cdr.amaflags, cdr.uniqueid, cdr.calldate, cdr.dstchannel";
+    $select .= ",ccustos.codigo,ccustos.tipo,ccustos.nome";
     if($_GET['rate']){
       $select .= ", bc.price FROM cdr ";
       $select .= " LEFT JOIN rated_calls bc ON bc.userfield = cdr.userfield ";
@@ -342,6 +340,7 @@ class CallsReportService implements SnepService {
     }
 
     $stmt = $db->query($select);
+    $cont = count($stmt);
 
     while ($dado = $stmt->fetch()) {
       $row[] = $dado;

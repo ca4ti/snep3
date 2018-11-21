@@ -113,14 +113,10 @@ class PickupGroupsController extends Zend_Controller_Action {
                         Snep_PickupGroups_Manager::addExtensionsGroup($extensionsGroup);
                     }
                 }
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    // $nome = $dados['name'];
-                    // Snep_LogUser::salvaLog("Adicionou Grupo de Captura", $nome, 11);
-                    // $add = Snep_ExtensionsGroups_Manager::getGroupLog($nome);
-                    // Snep_ExtensionsGroups_Manager::insertLogGroup("ADD", $add);
-                }
 
+                //audit
+                Snep_Audit_Manager::SaveLog("Added", 'grupos', $groupId, $this->view->translate("Pickup Group") . " {$groupId} " . $dados['name']);
+                    
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -199,6 +195,9 @@ class PickupGroupsController extends Zend_Controller_Action {
                     }
                 }
 
+                //audit
+                Snep_Audit_Manager::SaveLog("Updated", 'grupos', $dados['id'], $this->view->translate("Pickup Group") . " {$dados['id']} " . $dados['name']);
+
                 $this->_redirect($this->getRequest()->getControllerName());
 
             }
@@ -212,28 +211,43 @@ class PickupGroupsController extends Zend_Controller_Action {
      */
     public function removeAction() {
 
-        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
-                    $this->view->translate("Pickup Group"),
-                    $this->view->translate("Delete")));
+        $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array($this->view->translate("Pickup Group"),$this->view->translate("Delete")));
 
         $id = mysql_escape_string($this->getRequest()->getParam('id'));
-
         $this->view->id = $id;
-        $this->view->remove_title = $this->view->translate('Delete Pickup Group.'); 
-        $this->view->remove_message = $this->view->translate('The pickup group will be deleted. After that, you have no way get it back.'); 
-        $this->view->remove_form = 'pickup-groups'; 
-        $this->renderScript('remove/remove.phtml');
+        $rules = Snep_PickupGroups_Manager::getValidation($id);
 
-        if ($this->_request->getPost()) {
-
-            try {
-                $pickugroups = Snep_PickupGroups_Manager::get($_POST['id']);
-            } catch (PBX_Exception_NotFound $ex) {
-                throw new Zend_Controller_Action_Exception('Page not found.', 404);
+        if (count($rules) > 0) {
+            $error = true;
+            $this->view->error_message = $this->view->translate("Cannot remove. The following routes are using this pickup group: ") . "<br />";
+            foreach ($rules as $rule) {
+                $this->view->error_message .= $rule['id'] . " - " . $rule['desc'] . "<br />\n";
             }
+            $this->renderScript('error/sneperror.phtml');
+        }elseif(!$error){
 
-            Snep_PickupGroups_Manager::delete($_POST['id']);
-            $this->_redirect($this->getRequest()->getControllerName());
+            $this->view->remove_title = $this->view->translate('Delete Pickup Group.'); 
+            $this->view->remove_message = $this->view->translate('The pickup group will be deleted. After that, you have no way get it back.'); 
+            $this->view->remove_form = 'pickup-groups'; 
+            $this->renderScript('remove/remove.phtml');
+
+            if ($this->_request->getPost()) {
+
+                try {
+                    $pickugroups = Snep_PickupGroups_Manager::get($_POST['id']);
+                } catch (PBX_Exception_NotFound $ex) {
+                    throw new Zend_Controller_Action_Exception('Page not found.', 404);
+                }
+
+                $dados = Snep_PickupGroups_Manager::get($_POST['id']);
+                Snep_PickupGroups_Manager::delete($_POST['id']);
+
+                //audit
+                Snep_Audit_Manager::SaveLog("Deleted", 'grupos', $dados['cod_grupo'], $this->view->translate("Pickup Group") . " {$dados['cod_grupo']} " . $dados['nome']);
+
+                $this->_redirect($this->getRequest()->getControllerName());
+    
+            }
         }
     }
 

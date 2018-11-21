@@ -88,13 +88,75 @@ class ExtensionsController extends Zend_Controller_Action {
         $this->view->translate("Extensions")));
 
         $extensions = Snep_Extensions_Manager::getAll();
-
-        if(empty($extensions)){
-          $this->view->error_message = $this->view->translate("You do not have registered extensions. <br><br> Click 'Add Extensions' ou 'Multi Add Extensions' to make the first registration");
+        
+        // verify security password
+        $passwordValidate = true;
+        $passwordValidateExten = null;
+        foreach($extensions as $key => $exten){
+          $secure = self::securityPassword($exten["password"]);
+          
+          if($secure <= 40){
+            $passwordValidate = false;
+            $passwordValidateExten .= $exten['exten']." ";
+          }
         }
-
+        if(!$passwordValidate){
+          $this->view->alert_message = $this->view->translate("You have extensions with weak passwords. For security measures it is important to update them.")."(".$passwordValidateExten.")";
+        }
+        
         $this->view->extensions = $extensions;
 
+      }
+
+      /**
+       * Verify security password
+       * @param int $password
+       * @return int $force
+       */
+      public function securityPassword($password){
+
+        $force = 0;
+        
+        if(count(password) >= 8) $force += 10;
+        if(count(password) >= 16) $force += 10;
+        if(preg_match('/[A-Z]/', $password)) $force += 20;
+        if(preg_match('/[a-z]/', $password)) $force += 20;
+        if(preg_match('/[0-9]/', $password)) $force += 20;
+        if(preg_match('/[@?!%#]/', $password)) $force += 20;
+                
+        return $force;
+
+      }
+
+      /**
+      * Generator of complex passwords
+      * @param int $size
+      * @param bolean $uppercase
+      * @param bolean $numbers
+      * @param bolean $symbols
+      * @return string
+      */
+      public function generatorPassword($size = 16, $uppercase = true, $numbers = true, $symbols = true) {
+        
+        $lmin = 'abcdefghijklmnopqrstuvwxyz';
+        $lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $num = '0123456789';
+        $simb = '@?!%#';
+        $retorno = '';
+        $caracteres = '';
+
+        $caracteres .= $lmin;
+          
+        if ($numbers) $caracteres .= $num;
+        if ($symbols) $caracteres .= $simb;
+        if ($uppercase) $caracteres .= $lmai;
+
+        $len = strlen($caracteres);
+        for ($n = 1; $n <= $size; $n++) {
+          $rand = mt_rand(1, $len);
+          $retorno .= $caracteres[$rand-1];
+        }
+        return $retorno;
       }
 
       /**
@@ -135,7 +197,7 @@ class ExtensionsController extends Zend_Controller_Action {
           if ($khompInfo->hasWorkingBoards()) {
             foreach ($khompInfo->boardInfo() as $board) {
               if (preg_match("/FXS/", $board['model'])) {
-                $channels = range(0, $board['channels']);
+                $channels = range(0, $board['channels']-1);
                 foreach($channels as $key => $chan){
                   $boardList['b'.$board['id'].'c'.$chan] =  $board['model'] . ' - b' .$board['id'].'c'.$chan;
                 }
@@ -151,7 +213,9 @@ class ExtensionsController extends Zend_Controller_Action {
           $this->view->directmedianonat = "checked";
           $this->view->typeFriend = "checked";
           $this->view->dtmfrf = "checked";
-          $this->view->nat_no = 'checked' ;
+          $this->view->nat_force_rport = 'checked' ;
+          $this->view->nat_comedia = 'checked' ;
+          $this->view->blf = '';
           $extension = array("name" => "",
           "callerid" => "",
           "secret" => "",
@@ -180,15 +244,9 @@ class ExtensionsController extends Zend_Controller_Action {
             $ret = $this->execAdd($data);
 
             if (!is_string($ret)) {
-              //log-user
-              if (class_exists("Loguser_Manager")) {
-                  $data = array(
-                    'table' => 'peers',
-                    'registerid' => $data['exten'],
-                    'description' => "Added Peer {$data['name']} - {$data['exten']}"
-                  );
-                  Snep_LogUser::log("add", $data);
-              }
+              //audit
+              Snep_Audit_Manager::SaveLog("Added", 'peers', $data['exten'], $this->view->translate("Extension") . " {$data['name']} " . $data['exten']);
+              
               $this->_redirect('/extensions/');
             } else {
               $message = $ret;
@@ -309,6 +367,9 @@ class ExtensionsController extends Zend_Controller_Action {
               }else{
                 $this->view->dtmfinfo = "checked";
               }
+              if($exten['blf'] == "yes"){
+                $this->view->blf = "checked";
+              }
 
               $array_nat = explode(",",$exten['nat']);
               foreach($array_nat as $key => $val) {
@@ -317,7 +378,7 @@ class ExtensionsController extends Zend_Controller_Action {
               }
 
 
-              //$codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
+              $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
               $codecsDefault = PBX_Interfaces::getCodecs();
 
               $codecs = explode(";", $exten['allow']);
@@ -333,9 +394,11 @@ class ExtensionsController extends Zend_Controller_Action {
 
               }
 
+
               $this->view->codec1 = $codec1;
               $this->view->codec2 = $codec2;
               $this->view->codec3 = $codec3;
+
 
               break;
 
@@ -368,7 +431,8 @@ class ExtensionsController extends Zend_Controller_Action {
                 $this->view->dtmfinfo = "checked";
               }
 
-              $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
+              // $codecsDefault = array("ulaw","alaw","ilbc","g729","gsm","h264","h263","h263p","all");
+              $codecsDefault = PBX_Interfaces::getCodecs();
               $codecs = explode(";", $exten['allow']);
 
               $codec1 = "";
@@ -376,9 +440,9 @@ class ExtensionsController extends Zend_Controller_Action {
               $codec3 = "";
               foreach($codecsDefault as $key => $value){
 
-                $codec1 .= ($value == $codecs[0]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                $codec2 .= ($value == $codecs[1]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
-                $codec3 .= ($value == $codecs[2]) ? '<option value="'.$value.'" selected>'.$value.'</option>\n' : '<option value="'.$value.'">'.$value.'</option>\n';
+                  $codec1 .= ($value['format'] == $codecs[0]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
+                  $codec2 .= ($value['format'] == $codecs[1]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
+                  $codec3 .= ($value['format'] == $codecs[2]) ? '<option value="'.$value['format'].'" selected>'.$value['type'].' - '.$value['format'].'</option>\n' : '<option value="'.$value['format'].'">'.$value['type'].' - '.$value['format'].'</option>\n';
 
               }
 
@@ -403,7 +467,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
                   if (preg_match("/FXS/", $board['model'])) {
 
-                    $channels = range(0, $board['channels']);
+                    $channels = range(0, $board['channels']-1);
 
                     foreach($channels as $key => $chan){
 
@@ -445,29 +509,15 @@ class ExtensionsController extends Zend_Controller_Action {
               $postData = $this->_request->getParams();
 
               $postData["exten"] = $this->_request->getParam("id");
-              $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
-              // increment in callerid "Name <exten>"
-
-              // $nameValue = explode("<", $postData['name']);
-              // if(count($nameValue) <= 1){
-              //     $postData['name'] = $postData['name'];
-              // }else{
-              //     $postData['name'] = $nameValue[0]."<".$postData['exten'].">";
-              // };
+              $postData['name'] = $postData['name']."<".$postData['exten'].">";
 
 
               $ret = $this->execAdd($postData, true);
 
               if (!is_string($ret)) {
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $loguser = array(
-                      'table' => 'peers',
-                      'registerid' => $postData['exten'],
-                      'description' => "Edited Peer {$postData['name']} - {$postData['exten']}"
-                    );
-                    Snep_LogUser::log("update", $loguser);
-                }
+                  //audit
+                  Snep_Audit_Manager::SaveLog("Updated", 'peers', $postData['exten'], $this->view->translate("Extension") . " {$postData['name']} " . $postData['exten']);
+
                 $this->_redirect('/extensions/');
               } else {
                 $this->view->error_message = $ret;
@@ -511,7 +561,7 @@ class ExtensionsController extends Zend_Controller_Action {
 
             $secret = (isset($formData["password"]))? $formData["password"]: "";
 
-
+            $blf = (isset($formData["blf"]))? $formData["blf"]: "";
             $dtmfmode = (isset($formData["dtmf"]))? $formData["dtmf"]: "";
             $directmedia = $formData["directmedia"];
             $callLimit = $formData["calllimit"];
@@ -598,7 +648,27 @@ class ExtensionsController extends Zend_Controller_Action {
               $advCtrlType = 'N';
             }
 
-            $defFielsExten = array("accountcode" => "''", "amaflags" => "''", "defaultip" => "''", "host" => "'dynamic'", "insecure" => "''", "language" => "'pt_BR'", "deny" => "''", "permit" => "''", "mask" => "''", "port" => "''", "restrictcid" => "''", "rtptimeout" => "''", "rtpholdtimeout" => "''", "musiconhold" => "'cliente'", "regseconds" => 0, "ipaddr" => "''", "regexten" => "''", "setvar" => "''", "disallow" => "'all'");
+            $defFielsExten = array(
+              "accountcode" => "''",
+              "amaflags" => "''",
+              "defaultip" => "''",
+              "host" => "'dynamic'",
+              "insecure" => "''",
+              "language" => "'pt_BR'",
+              "deny" => "''",
+              "permit" => "''",
+              "mask" => "''",
+              "port" => "''",
+              "restrictcid" => "''",
+              "rtptimeout" => "''",
+              "rtpholdtimeout" => "''",
+              "musiconhold" => "'cliente'",
+              "regseconds" => 0,
+              "ipaddr" => "''",
+              "regexten" => "''",
+              "setvar" => "''",
+              "disallow" => "'all'"
+            );
 
             $sqlFieldsExten = $sqlDefaultValues = "";
             foreach ($defFielsExten as $key => $value) {
@@ -625,7 +695,7 @@ class ExtensionsController extends Zend_Controller_Action {
               $sql.= "usa_vc='$advVoiceMail',pickupgroup=$extenPickGrp,callgroup='$extenPickGrp',";
               $sql.= "nat='$nat',canal='$channel', authenticate=$advPadLock, ";
               $sql.= "`directmedia`='$directmedia',";
-              $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType', cancallforward='$advCancallforward'";
+              $sql.= "time_total=$advTimeTotal, time_chargeby='$advCtrlType', cancallforward='$advCancallforward', blf='$blf'";
               $sql.= "  WHERE id=$idExten";
             } else {
               $sql = "INSERT INTO peers (";
@@ -634,14 +704,14 @@ class ExtensionsController extends Zend_Controller_Action {
               $sql.= "dtmfmode,email,`call-limit`,incominglimit,";
               $sql.= "outgoinglimit, usa_vc, pickupgroup, canal,nat,peer_type, authenticate,";
               $sql.= "trunk, callgroup, time_total, cancallforward, directmedia, ";
-              $sql.= "time_chargeby " . $sqlFieldsExten;
+              $sql.= "time_chargeby, blf " . $sqlFieldsExten;
               $sql.= ") values (";
               $sql.= "'$exten','$extenPass','$extenName','$context','$exten','$qualify',";
               $sql.= "'$secret','$type','$allow','$exten','$fullcontact',";
               $sql.= "'$dtmfmode','$advEmail','$callLimit','1',";
               $sql.= "'1', '$advVoiceMail', $extenPickGrp ,'$channel','$nat', '$peerType',$advPadLock,";
               $sql.= "'no','$extenPickGrp', $advTimeTotal, '$advCancallforward', '$directmedia', ";
-              $sql.= "'$advCtrlType' " . $sqlDefaultValues;
+              $sql.= "'$advCtrlType', '$blf' " . $sqlDefaultValues;
               $sql.= ")";
             }
 
@@ -716,15 +786,9 @@ class ExtensionsController extends Zend_Controller_Action {
                   $idExten = $result['id'];
 
                   try {
-                    //log-user
-                    if (class_exists("Loguser_Manager")) {
-                        $loguser = array(
-                          'table' => 'peers',
-                          'registerid' => $exten,
-                          'description' => "Deleted Peer {$result['name']} - {$exten}"
-                        );
-                        Snep_LogUser::log("delete", $loguser);
-                    }
+                    //audit
+                    Snep_Audit_Manager::SaveLog("Deleted", 'peers', $exten, $this->view->translate("Extension") . " {$result['name']} ". $exten);
+                    
                     Snep_Binds_Manager::removeBondByPeer($exten);
                     Snep_Extensions_Manager::remove($exten);
                     Snep_Extensions_Manager::removeVoicemail($exten);
@@ -743,6 +807,87 @@ class ExtensionsController extends Zend_Controller_Action {
               }
             }
 
+          /**
+          * disableAction - Disable exetension
+          * @return type
+          * @throws ErrorException
+          */
+          public function disableAction() {
+
+            $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
+              $this->view->translate("Extensions"),
+              $this->view->translate("Disable")));
+
+              $exten = $this->_request->getParam("id");
+
+              //checks if the exten is used in the rule
+              $rules = Snep_Extensions_Manager::getValidation($exten);
+              $rulesQuery = Snep_Extensions_Manager::getValidationRules($exten);
+              $rules = array_merge($rules, $rulesQuery);
+
+              if (count($rules) > 0) {
+                $errMsg = $this->view->translate('The following routes use this extension, modify them prior to remove this extension') . ":<br />\n";
+                foreach ($rules as $regra) {
+                  $errMsg .= $regra['id'] . " - " . $regra['desc'] . "<br />\n";
+                }
+                $this->view->error_message = $errMsg;
+                $this->view->back = $this->view->translate("Back");
+                $this->renderScript('error/sneperror.phtml');
+
+              } else {
+
+                $this->view->id = $exten;
+                $this->view->remove_title = $this->view->translate('Disabled Extension.');
+                $this->view->remove_message = $this->view->translate('Are you sure you want to deactivate the extension? You can turn it on again later.');
+                $this->view->remove_form = 'extensions';
+                $this->renderScript('remove/disable.phtml');
+
+                if ($this->_request->getPost()) {
+
+                  try {
+                    //audit
+                    Snep_Audit_Manager::SaveLog("Disabled", 'peers', $exten, $this->view->translate("Extension") . " {$result['name']} ". $exten);
+                    
+                    Snep_Extensions_Manager::disable($exten);
+                    Snep_InterfaceConf::loadConfFromDb();
+
+                  } catch (PDOException $e) {
+                    $db->rollBack();
+                    $this->view->error_message = $this->view->translate("DB Delete Error: ") . $e->getMessage();
+                    $this->view->back = $this->view->translate("Back");
+                    $this->renderScript('error/sneperror.phtml');;
+                  }
+
+                  $this->_redirect("default/extensions");
+                }
+              }
+            }
+
+            /**
+            * enableAction - Enable exetension
+            * @return type
+            * @throws ErrorException
+            */
+            public function enableAction() {
+
+              $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array($this->view->translate("Extensions"),$this->view->translate("Enable")));
+
+              $exten = $this->_request->getParam("id");
+
+              $this->view->id = $exten;
+              $this->view->remove_title = $this->view->translate('Enabled Extension.');
+              $this->view->remove_message = $this->view->translate('Are you sure you want to activate the extension?');
+              $this->view->remove_form = 'extensions';
+              $this->renderScript('remove/enable.phtml');
+
+              if ($this->_request->getPost()) {
+
+                Snep_Audit_Manager::SaveLog("Enabled", 'peers', $exten, $this->view->translate("Extension") . " {$result['name']} ". $exten);
+                Snep_Extensions_Manager::enable($exten);
+                Snep_InterfaceConf::loadConfFromDb();
+                $this->_redirect("default/extensions");
+              }
+            }
 
             /**
             * multiremoveAction - Delete Extensions
@@ -815,15 +960,9 @@ class ExtensionsController extends Zend_Controller_Action {
                       $idExten = $result['id'];
 
                       try {
-                        //log-user
-                        if (class_exists("Loguser_Manager")) {
-                            $loguser = array(
-                              'table' => 'peers',
-                              'registerid' => $exten,
-                              'description' => "Deleted Peer {$result['name']} - {$exten}"
-                            );
-                            Snep_LogUser::log("delete", $loguser);
-                        }
+                        //audit
+                        Snep_Audit_Manager::SaveLog("Deleted", 'peers', $exten, $this->view->translate("Extension") . " {$result['name']} " . $exten);
+
                         Snep_Extensions_Manager::remove($exten);
                         Snep_Extensions_Manager::removeVoicemail($exten);
                         Snep_ExtensionsGroups_Manager::deleteExtensionGroups($idExten);
@@ -890,13 +1029,17 @@ class ExtensionsController extends Zend_Controller_Action {
                       if (is_numeric($exten)) {
 
                         $data["exten"] = $exten;
-                        $data["password"] = $exten . $exten;
+                        $data["password"] = self::generatorPassword();
                         $data["name"] = $this->view->translate("Extension ") ." ".$exten . " <" . $exten.">" ;
                         $data["sip"]["password"] = $exten;
                         $data["iax"]["password"] = $exten;
+                        $data["calllimit"] = '1';
                         $data['type'] = 'friend' ;
 
                         $ret = $this->execAdd($data);
+
+                        //audit
+                        Snep_Audit_Manager::SaveLog("Added", 'peers', $data['exten'], $this->view->translate("Extension") . " {$data['name']} " . $data['exten']);
 
                         if (is_string($ret)) {
                           $this->view->error .= $exten . " - " . $ret;
@@ -915,10 +1058,11 @@ class ExtensionsController extends Zend_Controller_Action {
 
                               $data["id"] = $i;
                               $data["exten"] = $i;
-                              $data["password"] = $i . $i;
+                              $data["password"] = self::generatorPassword();;
                               $data["name"] = $this->view->translate("Extension ") ." ".$i . " <" . $i.">" ;
                               $data["sip"]["password"] = $i . $i;
                               $data["iax2"]["password"] = $i . $i;
+                              $data["calllimit"] = '1';
                               $data['type'] = 'friend' ;
 
                               $ret = $this->execAdd($data);
@@ -927,15 +1071,8 @@ class ExtensionsController extends Zend_Controller_Action {
                                 $this->view->error .= $i . " - " . $ret;
                                 break;
                               }
-                              //log-user
-                              if (class_exists("Loguser_Manager")) {
-                                  $loguser = array(
-                                    'table' => 'peers',
-                                    'registerid' => $data['exten'],
-                                    'description' => "Added Peer {$data['name']} - {$data['exten']}"
-                                  );
-                                  Snep_LogUser::log("update", $loguser);
-                              }
+                              //audit
+                              Snep_Audit_Manager::SaveLog("Added", 'peers', $data['exten'], $this->view->translate("Extension") . " {$data['name']} " . $data['exten']);
                               $i++;
                             }
                           }

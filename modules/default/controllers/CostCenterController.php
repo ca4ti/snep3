@@ -45,10 +45,9 @@ class CostCenterController extends Zend_Controller_Action {
      * List all Tag's
      */
     public function indexAction() {
-
+        
         $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array(
                     $this->view->translate("Tag")));
-
 
         $db = Zend_Registry::get('db');
         $select = $db->select()
@@ -58,16 +57,15 @@ class CostCenterController extends Zend_Controller_Action {
         $stmt = $db->query($select);
         $data = $stmt->fetchAll();
 
-        if(empty($data)){
-            $this->view->error_message = $this->view->translate("You do not have registered cost centers. <br><br> Click 'Add cost center' to make the first registration
-");
-
-        }
-
         $this->view->types = array(
             'E' => $this->view->translate('Incoming'),
             'S' => $this->view->translate('Outgoing'),
             'O' => $this->view->translate('Other'));
+
+        $this->view->spanTypes = array(
+            'E' => "label-success",
+            'S' => "label-danger",
+            'O' => "label-info");
 
         $this->view->costcenter = $data;
 
@@ -104,15 +102,8 @@ class CostCenterController extends Zend_Controller_Action {
 
                 Snep_CostCenter_Manager::add($dados);
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $loguser = array(
-                      'table' => 'tags',
-                      'registerid' => $dados['id'],
-                      'description' => "Added New Tag - {$dados['id']} - {$dados['name']}"
-                    );
-                    Snep_LogUser::log("add", $loguser);
-                }
+                //audit
+                Snep_Audit_Manager::SaveLog("Added", 'ccustos', $dados['id'], $this->view->translate("Tag") . " {$dados['id']} " . $dados['name']);
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -150,27 +141,10 @@ class CostCenterController extends Zend_Controller_Action {
 
             if ($form_isValid) {
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $loguser = array(
-                      'table' => 'tags',
-                      'registerid' => $id,
-                      'description' => "Edited Tag - $id - {$_POST['name']}"
-                    );
-                    Snep_LogUser::log("update", $loguser);
-                }
-
                 Snep_CostCenter_Manager::edit($dados);
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $loguser = array(
-                      'table' => 'tags',
-                      'registerid' => $dados['id'],
-                      'description' => "Edited Tag - {$dados['id']} - {$dados['name']}"
-                    );
-                    Snep_LogUser::log("update", $loguser);
-                }
+                
+                // audit
+                Snep_Audit_Manager::SaveLog("Updated", 'ccustos', $dados['id'], $this->view->translate("Tag") . " {$dados['id']} " . $dados['name']);
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -205,17 +179,12 @@ class CostCenterController extends Zend_Controller_Action {
 
             if ($this->_request->getPost()) {
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $data = Snep_CostCenter_Manager::get($id);
-                    $loguser = array(
-                      'table' => 'tags',
-                      'registerid' => $id,
-                      'description' => "Deleted Tag - {$id} - {$data['nome']}"
-                    );
-                    Snep_LogUser::log("delete", $loguser);
-                }
+                $tag = Snep_CostCenter_Manager::get($_POST['id']);
                 Snep_CostCenter_Manager::remove($_POST['id']);
+                
+                // audit
+                Snep_Audit_Manager::SaveLog("Deleted", 'ccustos', $_POST['id'], $this->view->translate("Tag") . " {$_POST['id']} " . $tag['nome']);
+                
                 $this->_redirect($this->getRequest()->getControllerName());
             }
 

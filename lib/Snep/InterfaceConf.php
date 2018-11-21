@@ -42,6 +42,7 @@ class Snep_InterfaceConf {
 
             $extenFileConf = "$asteriskDirectory/snep/snep-$tech.conf";
             $trunkFileConf = "$asteriskDirectory/snep/snep-$tech-trunks.conf";
+            $hintFileConf = "$asteriskDirectory/snep/snep-$tech-hints.conf";
 
             if (!is_writable($extenFileConf)) {
                 throw new PBX_Exception_IO($view->translate("Failed to open file %s with write permission.", $extenFileConf));
@@ -49,16 +50,19 @@ class Snep_InterfaceConf {
             if (!is_writable($trunkFileConf)) {
                 throw new PBX_Exception_IO($view->translate("Failed to open file %s with write permission.", $trunkFileConf));
             }
+            if (file_exists($hintFileConf) && !is_writable($hintFileConf)) {
+                throw new PBX_Exception_IO($view->translate("Failed to open file %s with write permission.", $hintFileConf));
+            }
             /* clean snep-sip.conf file */
             file_put_contents($extenFileConf, '');
 
             /* Register header on output string of the file */
             $todayDate = date("d/m/Y H:m:s");
-            $header = ";-----------------------------------------------------------------------------------\n";
+            $header = ";------------------------------------------------------------------------------------\n";
             $header .= "; Arquivo: snep-$tech.conf - Cadastro de ramais e Troncos                           \n";
             $header .= ";                                                                                   \n";
             $header .= "; Atualizado em: $todayDate                                                         \n";
-            $header .= "; Copyright(c) 2008-2014 Opens Tecnologia                                           \n";
+            $header .= "; Copyright(c) 2008-".date("Y")." Opens Tecnologia                                  \n";
             $header .= ";-----------------------------------------------------------------------------------\n";
             $header .= "; Os registros a Seguir sao gerados pelo Software SNEP.                             \n";
             $header .= "; Este Arquivo NAO DEVE ser editado Manualmente sob riscos de                       \n";
@@ -66,10 +70,11 @@ class Snep_InterfaceConf {
             $header .= ";-----------------------------------------------------------------------------------\n";
 
             /* query that gets information of the peers on the DB */
-            $sql = "SELECT * FROM peers WHERE name != 'admin' AND canal like '" . strtoupper($tech) . "%'";
+            $sql = "SELECT * FROM peers WHERE name != 'admin' AND disabled != true AND canal like '" . strtoupper($tech) . "%'";
             $peer_data = $db->query($sql)->fetchAll();
 
             $peers = "\n";
+            $peers_hint = "\n[hints]\n";
             $trunk_config = "\n";
 
             if (count($peer_data) > 0) {
@@ -186,6 +191,10 @@ class Snep_InterfaceConf {
                         $peers .= 'call-limit=' . $peer['call-limit'] . "\n";
                         $peers .= 'directmedia=' . $peer['directmedia'] . "\n";
                         $peers .= "\n";
+
+                        if($peer['blf'] == 'yes'){
+                          $peers_hint .= "exten => {$peer['name']},hint,{$peer['canal']}\n";
+                        }
                     }
                 }
             }
@@ -196,11 +205,14 @@ class Snep_InterfaceConf {
             $content = $header . $peers;
 
             file_put_contents($extenFileConf, $content);
+
+            file_put_contents($hintFileConf, $peers_hint);
         }
 
         // Forcing asterisk to reload the configs
         $asteriskAmi = PBX_Asterisk_AMI::getInstance();
         $asteriskAmi->Command("sip reload");
+        $asteriskAmi->Command("dialplan reload");
         $asteriskAmi->Command("iax2 reload");
     }
 

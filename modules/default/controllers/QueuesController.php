@@ -74,12 +74,7 @@ class QueuesController extends Zend_Controller_Action {
 
         $stmt = $db->query($select);
         $queues = $stmt->fetchAll();
-
-        if(empty($queues)){
-            $this->view->error_message = $this->view->translate("You do not have registered queues. <br><br> Click 'Add Queue' to make the first registration
-");
-        }
-
+        
         $this->view->queues = $queues;
 
     }
@@ -110,7 +105,7 @@ class QueuesController extends Zend_Controller_Action {
 
         }
         $this->view->strategy = $strategy;
-        $this->view->ringinuseTrue = "checked";
+        $this->view->ringinuseFalse = "checked";
 
         //Define the action and others and load form
         $this->view->action = "add" ;
@@ -156,16 +151,9 @@ class QueuesController extends Zend_Controller_Action {
 
                 $id = Snep_Queues_Manager::add($dados);
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $data = array(
-                      'table' => 'queues',
-                      'registerid' => $id,
-                      'description' => "Added Queue $id - {$_POST['name']}"
-                    );
-                    Snep_LogUser::log("add", $data);
-                }
-
+                //audit
+                Snep_Audit_Manager::SaveLog("Added", 'queues', $id, $this->view->translate("Queues") . " " . $_POST['name']);
+                
                 $this->_redirect($this->getRequest()->getControllerName());
             }
         }
@@ -267,15 +255,10 @@ class QueuesController extends Zend_Controller_Action {
 
 
             Snep_Queues_Manager::edit($dados);
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-                $data = array(
-                  'table' => 'queues',
-                  'registerid' => $id,
-                  'description' => "Edited Queue $id - {$queue['name']}"
-                );
-                Snep_LogUser::log("update", $data);
-            }
+            
+            //audit
+            Snep_Audit_Manager::SaveLog("Updated", 'queues', $dados['id'], $this->view->translate("Queue") . " " . $queue['name']);
+            
             $this->_redirect($this->getRequest()->getControllerName());
 
         }
@@ -341,26 +324,19 @@ class QueuesController extends Zend_Controller_Action {
             $this->renderScript('remove/remove.phtml');
 
             if ($this->_request->getPost()) {
-
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $queue = Snep_Queues_Manager::get($_POST['id']);
-                }
-
+                
+                $queue = Snep_Queues_Manager::get($_POST['id']);
+                
                 Snep_Queues_Manager::removeUserPermission($_POST['name']);
                 Snep_Queues_Manager::removeQueuePeers($_POST['id']);
                 Snep_Queues_Manager::remove($_POST['id']);
                 Snep_Queues_Manager::removeQueues($_POST['id']);
 
-                //log-user
-                if (class_exists("Loguser_Manager")) {
-                    $data = array(
-                      'table' => 'queues',
-                      'registerid' => $id,
-                      'description' => "Added Queue $id - {$queue['name']}"
-                    );
-                    Snep_LogUser::log("add", $data);
-                }
+                 
+                
+
+                //audit
+                Snep_Audit_Manager::SaveLog("Deleted", 'queues', $id, $this->view->translate("Queues") . " " . $queue['name']);
 
                 $this->_redirect($this->getRequest()->getControllerName());
             }

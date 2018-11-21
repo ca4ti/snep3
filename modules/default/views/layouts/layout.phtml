@@ -13,18 +13,27 @@ if($controller != 'auth'){
 
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.validate.js');
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/validate-snep.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/bootstrap-toggle.min.js');
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/validate/jquery.maskedinput.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/daterangepicker/moment.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/daterangepicker/daterangepicker.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/datatables/media/js/jquery.dataTables.js');
+    $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/datatables/media/js/dataTables.bootstrap.js');
+
 
     // Guide Help
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/introjs.css');
     $this->headScript()->appendFile($this->baseUrl() . '/includes/javascript/intro.js');
 
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.min.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap-toggle.min.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/metisMenu.min.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/includes/javascript/daterangepicker/daterangepicker.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/snep.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/morris.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.min.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/timeline.css');
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/includes/javascript/datatables/media/css/dataTables.bootstrap.css');
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/sb-admin-2.css');
 
 
@@ -86,7 +95,7 @@ if($controller != 'auth'){
         </div>
 
         <ul class="nav navbar-top-links navbar-right">
-          <?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?>
+          <span class="badge badge-danger"><?php echo Zend_Registry::get('config')->ambiente->emp_nome; ?></span>
           <li id="version_div" class="dropdown hidden">
               <a id="version" class="dropdown-toggle"  href="<?php echo $this->baseUrl()."/index.php/newversion";?>"><?php echo $this->new_version; ?>
               <i class="fa fa-fw"></i>
@@ -161,10 +170,10 @@ if($controller != 'auth'){
 
               <li class="divider"></li>
               <li>
-                  <a href="#" onclick="startIntro();">
-                  <i id="help" class="fa fa-question-circle fa-fw"></i>
-                  <?php echo $this->translate("Help"); ?>
-                  </a>
+                <a href="<?php echo $this->baseUrl(); ?>/index.php/default/docs">
+                  <i id="help" class="fa fa-book fa-fw"></i>
+                  <?php echo $this->translate("Documentation"); ?>
+                </a>
               </li>
 
               <li class="divider"></li>
@@ -241,12 +250,10 @@ if($controller != 'auth'){
     </div> <!-- /#page-wrapper -->
   </div> <!-- /#wrapper -->
   <script type="text/javascript">
-  //jQuery.noConflict();
-
-
+  
   var steps = [
     {
-      element: '#snep-logo',
+      element: '.navbar-header',
       intro: "<?php echo $this->translate('Welcome to SNEP. <br>\
       Your IP Telephony Plataform.<br>Click Next to understand the basic steps to use SNEP.');?>"
     },
@@ -341,7 +348,7 @@ if($controller != 'auth'){
         });
     }
     intro.onbeforechange(function(element) {
-        console.log('Current Step:', this._currentStep);
+        
         if (this._currentStep === 3) {
             jQuery("#default_manage").addClass("active");
             jQuery("#sub-default_manage").addClass("in");
@@ -374,5 +381,6 @@ if($controller != 'auth'){
     <?php
   }
   ?>
+
 </body>
 </html>

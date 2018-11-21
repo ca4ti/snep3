@@ -98,19 +98,15 @@ class TrunksController extends Zend_Controller_Action {
     $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array($this->view->translate("Trunks")));
 
     $db = Zend_Registry::get('db');
-    $select = "SELECT t.id, t.callerid, t.name, t.technology, t.trunktype, t.time_chargeby, t.time_total,
+    $select = "SELECT t.id, t.callerid, t.name, t.technology, t.trunktype, t.time_chargeby, t.time_total,t.disabled,
     (SELECT th.used FROM time_history AS th WHERE th.owner = t.id AND th.owner_type='T' ORDER BY th.changed DESC limit 1) as used,
     (SELECT th.changed FROM time_history AS th WHERE th.owner = t.id AND th.owner_type='T' ORDER BY th.changed DESC limit 1) as changed FROM trunks as t ";
 
     $datasql = $db->query($select);
     $trunks = $datasql->fetchAll();
 
-    if(empty($trunks)){
-      $this->view->error_message = $this->view->translate("You do not have registered trunks. <br><br> Click 'Add Trunk' to make the first registration");
-    }
-
     foreach ($trunks as $id => $val) {
-
+      
       $trunks[$id]['saldo'] = null;
 
       if (!is_null($val['time_total'] )) {
@@ -120,8 +116,8 @@ class TrunksController extends Zend_Controller_Action {
         $callDay = substr($call, 8, 2);
 
         $sale = 0;
-        $val['time_total'] = $val['time_total']*60;
-
+        $val['time_total'] = $val['time_total']*60; // converter minutos for seconds
+        
         switch ($val['time_chargeby']) {
           case 'Y':
           if ($callYear == date('Y')) {
@@ -149,10 +145,11 @@ class TrunksController extends Zend_Controller_Action {
 
           break;
         }
+
         if($sale < 0){
-          $trunks[$id]['saldo'] = gmdate("H:i:s", 0);
+          $trunks[$id]['saldo'] = 0;
         }else{
-          $trunks[$id]['saldo'] = gmdate("H:i:s", $sale);
+          $trunks[$id]['saldo'] = round($sale/60); // converter seconds for minutos
         }
       }
     }
@@ -231,6 +228,9 @@ class TrunksController extends Zend_Controller_Action {
 
         // Mount array whith trunk data
         $trunk_data = $this->preparePost();
+        if(isset($_POST['trunk_disabled'])){
+          $trunk_data['trunk']["disabled"] = true;
+        }
 
         $db = Snep_Db::getInstance();
         $db->beginTransaction();
@@ -249,20 +249,44 @@ class TrunksController extends Zend_Controller_Action {
           $db->rollBack();
           throw $ex;
         }
-        //log-user
-        if (class_exists("Loguser_Manager")) {
-            $data = array(
-              'table' => 'trunks',
-              'registerid' => $id,
-              'description' => "Added Trunk $id - {$_POST['callerid']}"
-            );
-            Snep_LogUser::log("add", $data);
+        
+        // audit
+        Snep_Audit_Manager::SaveLog("Added", 'trunks', $id, $this->view->translate("Trunk") . " {$id} ". $_POST['callerid']);
+        
+        if(!isset($_POST['trunk_disabled'])){
+          Snep_InterfaceConf::loadConfFromDb();
         }
-        Snep_InterfaceConf::loadConfFromDb();
+        
         $this->_redirect("trunks");
       }
     }
 
+  }
+
+  /**
+  * enableAction - Enable trunk
+  * @return type
+  * @throws ErrorException
+  */
+  public function enableAction() {
+
+    $this->view->breadcrumb = Snep_Breadcrumb::renderPath(array($this->view->translate("Trunks"),$this->view->translate("Enable")));
+
+    $exten = $this->_request->getParam("id");
+
+    $this->view->id = $exten;
+    $this->view->remove_title = $this->view->translate('Enabled Trunk.');
+    $this->view->remove_message = $this->view->translate('Are you sure you want to activate the trunk?');
+    $this->view->remove_form = 'trunks';
+    $this->renderScript('remove/enable.phtml');
+
+    if ($this->_request->getPost()) {
+
+      Snep_Audit_Manager::SaveLog("Enabled", 'trunks', $exten, $this->view->translate("Trunk") ." ". $exten);
+      Snep_Trunks_Manager::enable($exten);
+      Snep_InterfaceConf::loadConfFromDb();
+      $this->_redirect("trunks");
+    }
   }
 
   /**
@@ -372,6 +396,10 @@ class TrunksController extends Zend_Controller_Action {
         }
       }
 
+      if($trunk['disabled']){
+        $this->view->trunk_disabled = "checked";
+      }
+
       $this->view->boards = $boards;
       $this->view->trunk = $trunk;
 
@@ -410,16 +438,13 @@ class TrunksController extends Zend_Controller_Action {
             $db->rollBack();
             throw $ex;
           }
-          //log-user
-          if (class_exists("Loguser_Manager")) {
-              $data = array(
-                'table' => 'trunks',
-                'registerid' => $idTrunk,
-                'description' => "Edited Trunk $idTrunk - {$_POST['callerid']}"
-              );
-              Snep_LogUser::log("update", $data);
+          //audit
+          Snep_Audit_Manager::SaveLog("Updated", 'trunks', $idTrunk, $this->view->translate("Trunk") . " {$idTrunk} ". $_POST['callerid']);
+          
+          if(!isset($_POST['trunk_disabled'])){
+            Snep_InterfaceConf::loadConfFromDb();
           }
-          Snep_InterfaceConf::loadConfFromDb();
+          
           $this->_redirect("trunks");
         }
       }
@@ -474,16 +499,9 @@ class TrunksController extends Zend_Controller_Action {
 
         if ($this->_request->getPost()) {
 
-          //log-user
-          if (class_exists("Loguser_Manager")) {
-              $loguser = Snep_Trunks_Manager::get($id);
-              $data = array(
-                'table' => 'trunks',
-                'registerid' => $id,
-                'description' => "Deleted Trunk $id - {$loguser['callerid']}"
-              );
-              Snep_LogUser::log("delete", $data);
-          }
+          //audit
+          $loguser = Snep_Trunks_Manager::get($id);
+          Snep_Audit_Manager::SaveLog("Deleted", 'trunks', $id, $this->view->translate("Trunk") . " {$id} ". $loguser['callerid']);     
 
           Snep_Trunks_Manager::remove($_POST['id']);
           Snep_Trunks_Manager::removePeers($_POST['name']);

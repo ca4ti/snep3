@@ -59,12 +59,8 @@ class SoundFilesController extends Zend_Controller_Action {
 
         $stmt = $db->query($select);
         $files = $stmt->fetchAll();
-
-        if(empty($files)){
-            $this->view->error_message = $this->view->translate("You do not have registered sound files. <br><br> Click 'Add Sound File' to make the first registration
-");
-        } else {
-
+        
+        if(!empty($files)){
             // Mount file list and verify if exists file in directory
             foreach ($files as $id => $file) {
                 $info = Snep_SoundFiles_Manager::verifySoundFiles($file['arquivo']);
@@ -121,6 +117,11 @@ class SoundFilesController extends Zend_Controller_Action {
                 $this->view->error_message .= $this->view->translate("File extesion is invalid.")."<br />" ;
                 $error = true;
             }
+
+            if(!file_exists('/usr/bin/sox') && !file_exists('/usr/local/bin/sox')){
+              $this->view->error_message .= "<br />".$this->view->translate("The 'sox' package is not installed!") ."<br />" ;
+              $error = true;
+            }
             // Verify if file exists into  directory
             if (file_exists($arq_dst)) {
                 $this->view->error_message .= "<br />".$this->view->translate("The file %s already exists in directory.", $arq_dst) ."<br />" ;
@@ -155,13 +156,8 @@ class SoundFilesController extends Zend_Controller_Action {
                                 'language' => $this->lang,
                                 'tipo' => 'AST'));
 
-                            //log-user
-                            if (class_exists("Loguser_Manager")) {
-                                $id = $originalName;
-                                Snep_LogUser::salvaLog($this->view->translate("New sound file added"), $id, 8);
-                                $add = Snep_SoundFiles_Manager::get($id);
-                                Snep_SoundFiles_Manager::insertLogSounds("ADD", $add);
-                            }
+                            //audit
+                            Snep_Audit_Manager::SaveLog("Added", 'sounds', $id, $this->view->translate("Sound") . " {$id} " . $originalName);
 
                             $this->_redirect($this->getRequest()->getControllerName());
                         } else {
@@ -251,16 +247,11 @@ class SoundFilesController extends Zend_Controller_Action {
             // Change register file
 
             Snep_SoundFiles_Manager::edit($dados);
-
-            //log-user
-            if (class_exists("Loguser_Manager")) {
-                $id = $originalName;
-                Snep_LogUser::salvaLog($this->view->translate("Sound file updated"), $id, 8);
-                $add = Snep_SoundFiles_Manager::get($id);
-                Snep_SoundFiles_Manager::insertLogSounds("UPDATE", $add);
-            }
-
-         $this->_redirect($this->getRequest()->getControllerName());
+            
+            //audit
+            Snep_Audit_Manager::SaveLog("Updated", 'sounds', $id, $this->view->translate("Sound") ." ". $dados["arquivo"]);
+            
+            $this->_redirect($this->getRequest()->getControllerName());
         }
 
     }
@@ -283,22 +274,19 @@ class SoundFilesController extends Zend_Controller_Action {
         $this->renderScript('remove/remove.phtml');
 
         if ($this->_request->getPost()) {
-
             $id = $_POST['id'];
-            Snep_SoundFiles_Manager::remove($id);
+            $file = Snep_SoundFiles_Manager::remove($id);
 
             if ($file) {
-                if (class_exists("Loguser_Manager")) {
-                    Snep_LogUser::salvaLog("Excluiu Arquivo de som", $id, 8);
-                    $add = Snep_SoundFiles_Manager::get($id);
-                    Snep_SoundFiles_Manager::insertLogSounds("DEL", $add);
-                }
 
-                $result = Snep_SoundFiles_Manager::verifySoundFiles($file, true);
+                $result = Snep_SoundFiles_Manager::verifySoundFiles($id, true);
 
                 if ($result['fullpath']) {
                     try {
+                        //audit
+                        Snep_Audit_Manager::SaveLog("Deleted", 'sounds', $id, $this->view->translate("Sound") . " {$id} " . $result['fullpath']);
                         exec("rm -f {$result['fullpath']} ");
+
                     } catch (Exception $e) {
                         throw new ErrorException($this->view->translate("Unable to remove file"));
                     }

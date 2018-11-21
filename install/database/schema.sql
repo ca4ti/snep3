@@ -230,6 +230,8 @@ CREATE TABLE IF NOT EXISTS `peers` (
   `lastms` int(11) NOT NULL,
   `callbackextension` VARCHAR(250) default NULL,
   `useragent` VARCHAR(250) default NULL,
+  `blf` VARCHAR(3) default NULL,
+  `disabled` BOOLEAN DEFAULT false,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`),
@@ -393,6 +395,7 @@ CREATE TABLE IF NOT EXISTS `trunks` (
   `domain` VARCHAR( 250 ) NOT NULL,
   `technology` VARCHAR( 20 ) NOT NULL,
   `telco` INT(10) DEFAULT NULL,
+  `disabled` BOOLEAN DEFAULT false,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -818,6 +821,21 @@ CREATE TABLE IF NOT EXISTS `itc_consumers` (
   `id_distro` int NOT NULL,
   `id_service` int NOT NULL,
   `name_service` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `logs_users`
+--
+CREATE TABLE IF NOT EXISTS `logs_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `datetime` datetime NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  `user` varchar(30) NOT NULL,
+  `action` varchar(30) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `table` varchar(30) NOT NULL,
+  `registerid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
